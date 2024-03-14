@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "755511053610",
+    "project_id": "tennis-stats-ededc",
+    "storage_bucket": "tennis-stats-ededc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:755511053610:android:3c5afc35e9fa29b8346253",
+        "android_client_info": {
+          "package_name": "com.anw.tenistats"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCD_AOrhp-A5z4Z271wvcNz5z8PEi-BlSs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
