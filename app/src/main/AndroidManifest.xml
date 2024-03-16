@@ -13,6 +13,9 @@
         android:theme="@style/Theme.TenniStats"
         tools:targetApi="31">
         <activity
+            android:name=".ActivityStartPoint"
+            android:exported="false" />
+        <activity
             android:name=".ActivityServe"
             android:exported="false" />
         <activity
