@@ -13,7 +13,6 @@ class StartNewActivity : AppCompatActivity() {
     private lateinit var binding: ActivityStartNewBinding
     private lateinit var firebaseAuth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
-
         // Initialize Firebase Auth
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -25,8 +24,6 @@ class StartNewActivity : AppCompatActivity() {
             insets
         }
         firebaseAuth = FirebaseAuth.getInstance()
-        binding.textView2.text = firebaseAuth.currentUser?.email.toString()
-
+        //binding.textView2.text = firebaseAuth.currentUser?.email.toString()
     }
-
 }

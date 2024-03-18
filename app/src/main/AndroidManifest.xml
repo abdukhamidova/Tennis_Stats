@@ -23,9 +23,9 @@
             android:exported="true">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
-
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
+        </activity>
         <activity
             android:name=".SignInActivity"
             android:exported="false" />
@@ -33,18 +33,11 @@
             android:name=".ActivityMenu"
             android:exported="false" />
         <activity
-            android:name=".activity_start_new"
-            android:exported="false" />
-        <activity
             android:name=".MainActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true"/>
         <activity
             android:name=".StartNewActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="true"></activity>
+            android:exported="false"/>
     </application>
 
 </manifest>
