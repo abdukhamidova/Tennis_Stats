@@ -81,11 +81,11 @@
                 android:textSize="15sp" />
 
             <TextView
+                android:id="@+id/textviewPlayer1"
                 android:layout_width="65dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="15dp"
-                android:text="Player 1 name"
                 android:textSize="15sp" />
 
             <TextView
@@ -132,11 +132,11 @@
                 android:textSize="15sp" />
 
             <TextView
+                android:id="@+id/textviewPlayer2"
                 android:layout_width="1dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="15dp"
-                android:text="Player 2 name"
                 android:textSize="15sp" />
 
             <TextView

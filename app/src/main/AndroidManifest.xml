@@ -21,7 +21,8 @@
             android:parentActivityName=".StartNewActivity"/>
         <activity
             android:name=".SignUpActivity"
-            android:exported="true">
+            android:exported="true"
+            android:noHistory="true">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.LAUNCHER" />
@@ -29,7 +30,8 @@
         </activity>
         <activity
             android:name=".SignInActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:noHistory="true"/>
         <activity
             android:name=".ActivityMenu"
             android:exported="false" />
