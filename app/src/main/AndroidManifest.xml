@@ -17,7 +17,8 @@
             android:exported="false" />
         <activity
             android:name=".ActivityServe"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".StartNewActivity"/>
         <activity
             android:name=".SignUpActivity"
             android:exported="true">
@@ -37,7 +38,8 @@
             android:exported="true"/>
         <activity
             android:name=".StartNewActivity"
-            android:exported="false"/>
+            android:exported="false"
+            android:parentActivityName=".ActivityMenu"/>
     </application>
 
 </manifest>
