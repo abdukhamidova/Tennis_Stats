@@ -13,35 +13,42 @@
         android:theme="@style/Theme.TenniStats"
         tools:targetApi="31">
         <activity
+            android:name=".DetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ActivityBallInPlay"
+            android:exported="false" />
+        <activity
             android:name=".ActivityStartPoint"
             android:exported="false" />
         <activity
             android:name=".ActivityServe"
             android:exported="false"
-            android:parentActivityName=".StartNewActivity"/>
+            android:parentActivityName=".StartNewActivity" />
         <activity
             android:name=".SignUpActivity"
             android:exported="true"
-            android:noHistory="true">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-        </activity>
+            android:noHistory="true"/>
         <activity
             android:name=".SignInActivity"
             android:exported="false"
-            android:noHistory="true"/>
+            android:noHistory="true" />
         <activity
             android:name=".ActivityMenu"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true"/>
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".StartNewActivity"
             android:exported="false"
-            android:parentActivityName=".ActivityMenu"/>
+            android:parentActivityName=".ActivityMenu" />
     </application>
 
 </manifest>
