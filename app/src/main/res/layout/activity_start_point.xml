@@ -74,10 +74,13 @@
         <TableRow>
 
             <TextView
+                android:id="@+id/textViewBallPl1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="0.2"
+                android:background="#FFF3D5D5"
                 android:padding="15dp"
+                android:text="1"
                 android:textSize="15sp" />
 
             <TextView
@@ -89,35 +92,42 @@
                 android:textSize="15sp" />
 
             <TextView
+                android:id="@+id/textViewSet1Pl1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="#FFF3D5D5"
                 android:padding="15dp"
-                android:text="set1"
+                android:text="5"
                 android:textSize="15sp" />
 
             <TextView
+                android:id="@+id/textViewSet2Pl1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="#D1E8FA"
                 android:padding="15dp"
-                android:text="set2"
+                android:text=""
                 android:textSize="15sp" />
 
             <TextView
+                android:id="@+id/textViewSet3Pl1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="#E4EF9F"
                 android:padding="15dp"
-                android:text="set3"
+                android:text=""
                 android:textSize="15sp" />
 
             <TextView
+                android:id="@+id/textViewPktPl1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="15dp"
-                android:text="wyn"
+                android:text="0"
                 android:textSize="15sp" />
 
         </TableRow>
@@ -125,10 +135,13 @@
         <TableRow>
 
             <TextView
+                android:id="@+id/textViewBallPl2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="0.2"
+                android:background="#FFF3D5D5"
                 android:padding="15dp"
+                android:text=""
                 android:textSize="15sp" />
 
             <TextView
@@ -140,35 +153,42 @@
                 android:textSize="15sp" />
 
             <TextView
+                android:id="@+id/textViewSet1Pl2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="#FFF3D5D5"
                 android:padding="15dp"
-                android:text="set1"
+                android:text="5"
                 android:textSize="15sp" />
 
             <TextView
+                android:id="@+id/textViewSet2Pl2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="#FFD1E8FA"
                 android:padding="15dp"
-                android:text="set2"
+                android:text=""
                 android:textSize="15sp" />
 
             <TextView
+                android:id="@+id/textViewSet3Pl2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="#FFE4EF9F"
                 android:padding="15dp"
-                android:text="set3"
+                android:text=""
                 android:textSize="15sp" />
 
             <TextView
+                android:id="@+id/textViewPktPl2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="15dp"
-                android:text="wyn"
+                android:text="0"
                 android:textSize="15sp" />
 
 
@@ -198,7 +218,8 @@
         app:layout_constraintHorizontal_bias="0.132"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.569" />
+        app:layout_constraintVertical_bias="0.569"
+        />
 
     <Button
         android:id="@+id/buttonRWF"
@@ -210,7 +231,8 @@
         app:layout_constraintHorizontal_bias="0.096"
         app:layout_constraintStart_toEndOf="@+id/buttonAce"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.569" />
+        app:layout_constraintVertical_bias="0.569"
+        />
 
     <Button
         android:id="@+id/buttonREF"
@@ -222,7 +244,8 @@
         app:layout_constraintHorizontal_bias="0.096"
         app:layout_constraintStart_toEndOf="@+id/buttonFault"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.739" />
+        app:layout_constraintVertical_bias="0.739"
+        />
 
     <Button
         android:id="@+id/buttonREB"
@@ -234,7 +257,8 @@
         app:layout_constraintHorizontal_bias="0.354"
         app:layout_constraintStart_toEndOf="@+id/buttonREF"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.739" />
+        app:layout_constraintVertical_bias="0.739"
+        />
 
     <Button
         android:id="@+id/buttonRWB"
@@ -246,7 +270,8 @@
         app:layout_constraintHorizontal_bias="0.354"
         app:layout_constraintStart_toEndOf="@+id/buttonRWF"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.569" />
+        app:layout_constraintVertical_bias="0.569"
+        />
 
     <Button
         android:id="@+id/buttonFault"
@@ -258,7 +283,8 @@
         app:layout_constraintHorizontal_bias="0.132"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonAce"
-        app:layout_constraintVertical_bias="0.062" />
+        app:layout_constraintVertical_bias="0.062"
+        />
 
     <Button
         android:id="@+id/buttonBIP"
@@ -270,6 +296,7 @@
         app:layout_constraintHorizontal_bias="0.569"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonREF"
-        app:layout_constraintVertical_bias="0.173" />
+        app:layout_constraintVertical_bias="0.173"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

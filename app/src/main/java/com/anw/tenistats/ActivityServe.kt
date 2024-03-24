@@ -23,7 +23,7 @@ class ActivityServe : AppCompatActivity() {
         }
         val player2 = intent.getStringExtra("DanePlayer2")
         findViewById<Button>(R.id.buttonPlayer2).apply {
-            text=player2
+            text = player2
         }
         findViewById<Button>(R.id.buttonPlayer1).setOnClickListener{
             callActivity()
@@ -47,8 +47,6 @@ class ActivityServe : AppCompatActivity() {
             it.putExtra("DanePlayer1",player1)
             it.putExtra("DanePlayer2",player2)
             startActivity(it)
-
         }
-
     }
 }
