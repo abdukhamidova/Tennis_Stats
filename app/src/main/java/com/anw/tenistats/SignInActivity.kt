@@ -2,13 +2,13 @@ package com.anw.tenistats
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.anw.tenistats.databinding.ActivitySignInBinding
-import com.anw.tenistats.databinding.ActivitySignUpBinding
 import com.google.firebase.auth.FirebaseAuth
 
 class SignInActivity : AppCompatActivity() {
@@ -18,15 +18,15 @@ class SignInActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //enableEdgeToEdge()
+        enableEdgeToEdge()
         binding = ActivitySignInBinding.inflate(layoutInflater)
         //setContentView(R.layout.activity_sign_in)
         setContentView(binding.root)
-        /*ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
-        }*/
+        }
         firebaseAuth = FirebaseAuth.getInstance()
         //tekst, że jestem już zalogawany
         /*binding.textView.setOnClickListener {
@@ -53,12 +53,5 @@ class SignInActivity : AppCompatActivity() {
         }
 
     }
-    /*override fun onStart() {
-        super.onStart()
 
-        if(firebaseAuth.currentUser!=null){
-            val intent = Intent(this,StartNewActivity::class.java)
-            startActivity(intent)
-        }
-    }*/
 }

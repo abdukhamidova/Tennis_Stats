@@ -3,6 +3,7 @@ package com.anw.tenistats
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -21,7 +22,15 @@ class ActivityMenu : AppCompatActivity() {
             auth.signOut()
             startActivity(Intent(this,MainActivity::class.java))
         }
-
+        val user = FirebaseAuth.getInstance().currentUser?.email.toString()
+        if(user.isNotEmpty())
+        {
+            findViewById<TextView>(R.id.textUser).text = user
+        }
+        else
+        {
+            findViewById<TextView>(R.id.textUser).text = "Tu powinien byc email zalogowanego usera."
+        }
         findViewById<Button>(R.id.buttonStartNewGame).setOnClickListener{
             startActivity(Intent(this,StartNewActivity::class.java))
         }
@@ -33,3 +42,4 @@ class ActivityMenu : AppCompatActivity() {
         }
     }
 }
+

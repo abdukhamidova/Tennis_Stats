@@ -11,7 +11,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.anw.tenistats.databinding.ActivitySignUpBinding
 import com.anw.tenistats.databinding.ActivityStartNewBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.ValueEventListener
@@ -146,6 +145,11 @@ class StartNewActivity : AppCompatActivity() {
         val intent = Intent(this, ActivityServe::class.java).apply {
             putExtra("DanePlayer1", player1)
             putExtra("DanePlayer2", player2)
+            if(player1.isNotEmpty() && player2.isNotEmpty()) {
+                startActivity(it)
+            }else {
+                Toast.makeText(this,"Don't leave empty fields", Toast.LENGTH_SHORT).show()
+            }
         }
         startActivity(intent)
     }

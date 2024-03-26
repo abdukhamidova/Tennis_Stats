@@ -2,6 +2,7 @@ package com.anw.tenistats
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -16,17 +17,16 @@ class SignUpActivity : AppCompatActivity() {
     private lateinit var firebaseAuth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //bedę komentować część kodu, którego nie było na video, a tu się tworzy automatycznie
-        //enableEdgeToEdge()
+        enableEdgeToEdge()
 
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         //setContentView(R.layout.activity_signup)
         setContentView(binding.root)
-        /*ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
-        }*/
+        }
         firebaseAuth = FirebaseAuth.getInstance()
         binding.textAlreadySignIn.setOnClickListener {
             val intent = Intent(this, SignInActivity::class.java)

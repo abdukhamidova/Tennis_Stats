@@ -10,11 +10,20 @@ import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var firebaseAuth: FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
            super.onCreate(savedInstanceState)
-        //auth = Firebase.auth
+        firebaseAuth = FirebaseAuth.getInstance()
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
 
         findViewById<Button>(R.id.buttonLogIn).setOnClickListener {
             startActivity(Intent(this,SignInActivity::class.java))
@@ -23,12 +32,12 @@ class MainActivity : AppCompatActivity() {
         findViewById<Button>(R.id.buttonSignUp).setOnClickListener {
             startActivity(Intent(this,SignUpActivity::class.java))
         }
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-        val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-        v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-        insets
+    }
+    override fun onStart() {
+        super.onStart()
+        if(firebaseAuth.currentUser!=null){
+            val intent = Intent(this,ActivityMenu::class.java)
+            startActivity(intent)
         }
-
     }
 }
