@@ -145,12 +145,13 @@ class StartNewActivity : AppCompatActivity() {
         val intent = Intent(this, ActivityServe::class.java).apply {
             putExtra("DanePlayer1", player1)
             putExtra("DanePlayer2", player2)
-            if(player1.isNotEmpty() && player2.isNotEmpty()) {
-                startActivity(it)
-            }else {
-                Toast.makeText(this,"Don't leave empty fields", Toast.LENGTH_SHORT).show()
-            }
         }
-        startActivity(intent)
+        if(player1.isNotEmpty() && player2.isNotEmpty()) {
+            startActivity(intent)
+        }else {
+            Toast.makeText(this,"Don't leave empty fields.",Toast.LENGTH_SHORT).show()
+        }
+        //nie jestem pewno co do komentowania tego ~ru
+        //startActivity(intent)
     }
 }
