@@ -25,10 +25,17 @@ class ActivityServe : AppCompatActivity() {
         findViewById<Button>(R.id.buttonPlayer2).apply {
             text = player2
         }
+
+        val app = application as Stats
+        app.player1 = findViewById<Button>(R.id.buttonPlayer1).text.toString()
+        app.player2 = findViewById<Button>(R.id.buttonPlayer2).text.toString()
+
         findViewById<Button>(R.id.buttonPlayer1).setOnClickListener{
+            app.serve1="1"
             callActivity()
         }
         findViewById<Button>(R.id.buttonPlayer2).setOnClickListener{
+            app.serve2="1"
             callActivity()
         }
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->

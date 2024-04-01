@@ -49,6 +49,7 @@
         <TableRow>
 
             <TextView
+                android:id="@+id/textViewServe1EOM"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="0.2"
@@ -64,27 +65,30 @@
                 android:textSize="15sp" />
 
             <TextView
+                android:id="@+id/textViewP1Set1EOM"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="15dp"
-                android:text="set1"
+                android:text=""
                 android:textSize="15sp" />
 
             <TextView
+                android:id="@+id/textViewP1Set2EOM"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="15dp"
-                android:text="set2"
+                android:text=""
                 android:textSize="15sp" />
 
             <TextView
+                android:id="@+id/textViewP1Set3EOM"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="15dp"
-                android:text="set3"
+                android:text=""
                 android:textSize="15sp" />
 
         </TableRow>
@@ -92,6 +96,7 @@
         <TableRow>
 
             <TextView
+                android:id="@+id/textViewServe2EOM"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="0.2"
@@ -107,29 +112,31 @@
                 android:textSize="15sp" />
 
             <TextView
+                android:id="@+id/textViewP2Set1EOM"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="15dp"
-                android:text="set1"
+                android:text=""
                 android:textSize="15sp" />
 
             <TextView
+                android:id="@+id/textViewP2Set2EOM"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="15dp"
-                android:text="set2"
+                android:text=""
                 android:textSize="15sp" />
 
             <TextView
+                android:id="@+id/textViewP2Set3EOM"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="15dp"
-                android:text="set3"
+                android:text=""
                 android:textSize="15sp" />
-
 
         </TableRow>
 

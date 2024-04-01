@@ -122,4 +122,20 @@ class Stats : Application() {
     var unforcederrordropshotFH2: Int = 0
     var unforcederrordropshotBH1: Int = 0
     var unforcederrordropshotBH2: Int = 0
+
+    //dane
+    var player1: String = ""
+    var player2: String = ""
+
+    //wynik
+    var serve1: String = ""
+    var serve2: String = ""
+    var pkt1: String = "0"
+    var pkt2: String = "0"
+    var set1p1: String = "0"
+    var set1p2: String = "0"
+    var set2p1: String = ""
+    var set2p2: String = ""
+    var set3p1: String = ""
+    var set3p2: String = ""
 }

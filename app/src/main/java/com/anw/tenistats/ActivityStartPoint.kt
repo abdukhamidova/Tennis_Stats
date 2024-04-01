@@ -1,10 +1,9 @@
 package com.anw.tenistats
 
+import android.app.Application
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
-import android.widget.TableLayout
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -16,14 +15,14 @@ class ActivityStartPoint : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_start_point)
-        val player1 = intent.getStringExtra("DanePlayer1")
+        /*val player1 = intent.getStringExtra("DanePlayer1") //to juz chyba niepotrzebne, ale juz boje sie cokolwiek usuwac
         findViewById<TextView>(R.id.textviewPlayer1).apply {
             text = player1
         }
         val player2 = intent.getStringExtra("DanePlayer2")
         findViewById<TextView>(R.id.textviewPlayer2).apply {
             text = player2
-        }
+        }*/
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -31,6 +30,8 @@ class ActivityStartPoint : AppCompatActivity() {
         }
 
         val app = application as Stats
+        val player1 = findViewById<TextView>(R.id.textviewPlayer1)
+        val player2 = findViewById<TextView>(R.id.textviewPlayer2)
         val serve1 = findViewById<TextView>(R.id.textViewBallPl1)
         val serve2 = findViewById<TextView>(R.id.textViewBallPl2)
         val pkt1 = findViewById<TextView>(R.id.textViewPktPl1)
@@ -41,6 +42,12 @@ class ActivityStartPoint : AppCompatActivity() {
         val set1p2 = findViewById<TextView>(R.id.textViewSet1Pl2)
         val set2p2 = findViewById<TextView>(R.id.textViewSet2Pl2)
         val set3p2 = findViewById<TextView>(R.id.textViewSet3Pl2)
+
+        fillUpScoreInActivity(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
+
+        findViewById<Button>(R.id.buttonMenuSP).setOnClickListener {
+            startActivity(Intent(this,ActivityMenu::class.java))
+        }
 
         findViewById<Button>(R.id.buttonAce).setOnClickListener {
             if (serve1.text != "") { //serwuje player 1
@@ -53,7 +60,7 @@ class ActivityStartPoint : AppCompatActivity() {
                     findViewById<TextView>(R.id.textViewFS).text = "1st Serve"
                 }
                 app.ace1++
-                score(app,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
+                score(this,app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
             }
             else {
                 app.totalpoints2++
@@ -65,7 +72,7 @@ class ActivityStartPoint : AppCompatActivity() {
                     findViewById<TextView>(R.id.textViewFS).text = "1st Serve"
                 }
                 app.ace2++
-                score(app,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
+                score(this,app,player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
             }
         }
 
@@ -80,12 +87,12 @@ class ActivityStartPoint : AppCompatActivity() {
                 if (serve1.text != "") {
                     app.totalpoints2++
                     app.doublefault1++
-                    score(app,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
+                    score(this,app,player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
                 }
                 else {
                     app.totalpoints1++
                     app.doublefault2++
-                    score(app,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
+                    score(this,app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
                 }
             }
         }
@@ -102,7 +109,7 @@ class ActivityStartPoint : AppCompatActivity() {
                     findViewById<TextView>(R.id.textViewFS).text = "1st Serve"
                 }
                 app.returnwinnerFH2++
-                score(app,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
+                score(this,app,player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
             }
             else {
                 app.totalpoints1++
@@ -115,7 +122,7 @@ class ActivityStartPoint : AppCompatActivity() {
                     findViewById<TextView>(R.id.textViewFS).text = "1st Serve"
                 }
                 app.returnwinnerFH1++
-                score(app,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
+                score(this,app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
             }
         }
 
@@ -131,7 +138,7 @@ class ActivityStartPoint : AppCompatActivity() {
                     findViewById<TextView>(R.id.textViewFS).text = "1st Serve"
                 }
                 app.returnwinnerBH2++
-                score(app,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
+                score(this,app,player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
             }
             else {
                 app.totalpoints1++
@@ -144,7 +151,7 @@ class ActivityStartPoint : AppCompatActivity() {
                     findViewById<TextView>(R.id.textViewFS).text = "1st Serve"
                 }
                 app.returnwinnerBH1++
-                score(app,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
+                score(this,app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
             }
         }
 
@@ -160,7 +167,7 @@ class ActivityStartPoint : AppCompatActivity() {
                     findViewById<TextView>(R.id.textViewFS).text = "1st Serve"
                 }
                 app.returnerrorFH2++
-                score(app,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
+                score(this,app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
             }
             else {
                 app.totalpoints2++
@@ -173,7 +180,7 @@ class ActivityStartPoint : AppCompatActivity() {
                     findViewById<TextView>(R.id.textViewFS).text = "1st Serve"
                 }
                 app.returnerrorFH1++
-                score(app,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
+                score(this,app,player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
             }
         }
 
@@ -189,7 +196,7 @@ class ActivityStartPoint : AppCompatActivity() {
                     findViewById<TextView>(R.id.textViewFS).text = "1st Serve"
                 }
                 app.returnerrorBH2++
-                score(app,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
+                score(this,app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
             }
             else {
                 app.totalpoints2++
@@ -202,7 +209,7 @@ class ActivityStartPoint : AppCompatActivity() {
                     findViewById<TextView>(R.id.textViewFS).text = "1st Serve"
                 }
                 app.returnerrorBH1++
-                score(app,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
+                score(this,app,player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
             }
         }
 
@@ -218,7 +225,7 @@ class ActivityStartPoint : AppCompatActivity() {
                 }
             }
             else {
-                app.totalpoints2++
+                //app.totalpoints2++
                 if (findViewById<Button>(R.id.buttonFault).text == "Fault") { //trafiony 1 serwis
                     app.firstservein2++
                 }
@@ -228,11 +235,11 @@ class ActivityStartPoint : AppCompatActivity() {
                     findViewById<TextView>(R.id.textViewFS).text = "1st Serve"
                 }
             }
-            //zmiana aktywnosci na DetailsActivity
+            callActivity() //zmiana aktywnosci na ActivityBallInPlay
         }
     }
-
-    fun score(app: Stats,serve1: TextView,serve2: TextView,pkt1: TextView,pkt2: TextView,set1p1: TextView,set1p2: TextView,set2p1: TextView,set2p2: TextView,set3p1: TextView,set3p2: TextView) {
+/*
+    fun score(app: Stats, serve1: TextView, serve2: TextView, pkt1: TextView, pkt2: TextView, set1p1: TextView, set1p2: TextView, set2p1: TextView, set2p2: TextView, set3p1: TextView, set3p2: TextView) {
         if (app.czyTiebreak) { //gramy tiebreaka
             if (scoreTiebreak(pkt1, pkt2)) { //jesli prawda to koniec tiebreaka
                 if (set2p1.text == "" && set2p2.text == "") { //jesli prawda to jestesmy w secie 1
@@ -247,7 +254,8 @@ class ActivityStartPoint : AppCompatActivity() {
                 }
                 else{
                     set3p1.text = "7"
-                    //koniec meczu
+                    fillUpScore(app,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
+                    startActivity(Intent(this,EndOfMatchActivity::class.java)) //koniec meczu -> zmiana aktywnosci na EndOfMatch
                 }
                 pkt1.text = "0"
                 pkt2.text = "0"
@@ -285,8 +293,11 @@ class ActivityStartPoint : AppCompatActivity() {
             }
             else if(set3p1.text == "" && set3p2.text == ""){ //jesli prawda to jestesmy w secie 2
                 if (scoreSet(set2p1, set2p2)) { //jesli prawda to skonczyl sie 2 set
-                    if(isEnd(set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)){ //koniec meczu
-
+                    if(isEnd(set1p1,set1p2,set2p1,set2p2)){ //jesli prawda to koniec meczu
+                        serve1.text = "W" //medal/laur przy zawodniku ktory wygral
+                        serve2.text = ""
+                        fillUpScore(app,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
+                        startActivity(Intent(this,EndOfMatchActivity::class.java)) //zmiana aktywnosci na EndOfMatch
                     }
                     else {
                         set3p1.text = "0"
@@ -301,7 +312,10 @@ class ActivityStartPoint : AppCompatActivity() {
             }
             else{ //jestesmy w secie 3.
                 if (scoreSet(set3p1, set3p2)) { //jesli prawda to skonczyl sie 3 set
-                    //koniec meczu
+                    serve1.text = "W" //medal/laur przy zawodniku ktory wygral
+                    serve2.text = ""
+                    fillUpScore(app,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
+                    startActivity(Intent(this,EndOfMatchActivity::class.java)) //zmiana aktywnosci na EndOfMatch
                 }
                 else {
                     if (set3p1.text == "6" && set3p2.text == "6") { //jesli prawda to bedzie tiebreak
@@ -325,6 +339,7 @@ class ActivityStartPoint : AppCompatActivity() {
                 }
             }
         }
+        fillUpScore(app,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2) //tutaj nie wiem czy potrzebne, ale niech narazie zostanie
     }
 
     fun scorePkt(pkt1: TextView, pkt2: TextView): Boolean {
@@ -380,8 +395,42 @@ class ActivityStartPoint : AppCompatActivity() {
         return false
     }
 
-    fun isEnd(set1p1: TextView, set1p2: TextView,set2p1: TextView, set2p2: TextView,set3p1: TextView, set3p2: TextView): Boolean{
-        //warunki na koniec meczu
+    fun isEnd(set1p1: TextView, set1p2: TextView,set2p1: TextView, set2p2: TextView): Boolean{
+        var s1p1: Int = set1p1.text.toString().toInt()
+        var s1p2: Int = set1p2.text.toString().toInt()
+        var s2p1: Int = set2p1.text.toString().toInt()
+        var s2p2: Int = set2p2.text.toString().toInt()
+
+        if(s1p1>s1p2)
+        {
+            if((s2p1==6 && s2p1-s2p2>1) || s2p1==7){
+                return true
+            }
+        }
         return false
+    }
+
+    fun fillUpScore(app: Stats, serve1: TextView, serve2: TextView, pkt1: TextView, pkt2: TextView, set1p1: TextView, set1p2: TextView, set2p1: TextView, set2p2: TextView, set3p1: TextView, set3p2: TextView): Unit {
+        app.serve1 = serve1.text.toString()
+        app.serve2 = serve2.text.toString()
+        app.pkt1 = pkt1.text.toString()
+        app.pkt2 = pkt2.text.toString()
+        app.set1p1 = set1p1.text.toString()
+        app.set1p2 = set1p2.text.toString()
+        app.set2p1 = set2p1.text.toString()
+        app.set2p2 = set2p2.text.toString()
+        app.set3p1 = set3p1.text.toString()
+        app.set3p2 = set3p2.text.toString()
+    }
+*/
+    fun callActivity() {
+        val player1=findViewById<TextView>(R.id.textviewPlayer1).text.toString()
+        val player2=findViewById<TextView>(R.id.textviewPlayer2).text.toString()
+
+        val intent=Intent(this,ActivityBallInPlay::class.java).also{
+            it.putExtra("DanePlayer1",player1)
+            it.putExtra("DanePlayer2",player2)
+            startActivity(it)
+        }
     }
 }

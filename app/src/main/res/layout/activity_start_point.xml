@@ -8,7 +8,7 @@
     tools:context=".ActivityStartPoint">
 
     <Button
-        android:id="@+id/buttonMenu"
+        android:id="@+id/buttonMenuSP"
         android:layout_width="92dp"
         android:layout_height="40dp"
         android:layout_marginTop="0.5dp"
@@ -80,7 +80,7 @@
                 android:layout_weight="0.2"
                 android:background="#FFF3D5D5"
                 android:padding="15dp"
-                android:text="1"
+                android:text=""
                 android:textSize="15sp" />
 
             <TextView
@@ -98,7 +98,7 @@
                 android:layout_weight="1"
                 android:background="#FFF3D5D5"
                 android:padding="15dp"
-                android:text="5"
+                android:text=""
                 android:textSize="15sp" />
 
             <TextView
@@ -127,7 +127,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="15dp"
-                android:text="0"
+                android:text=""
                 android:textSize="15sp" />
 
         </TableRow>
@@ -159,7 +159,7 @@
                 android:layout_weight="1"
                 android:background="#FFF3D5D5"
                 android:padding="15dp"
-                android:text="5"
+                android:text=""
                 android:textSize="15sp" />
 
             <TextView
@@ -188,7 +188,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="15dp"
-                android:text="0"
+                android:text=""
                 android:textSize="15sp" />
 
 
