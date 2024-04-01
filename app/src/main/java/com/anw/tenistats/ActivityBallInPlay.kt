@@ -21,19 +21,6 @@ class ActivityBallInPlay : AppCompatActivity() {
             insets
         }
 
-        /*findViewById<TextView>(R.id.textviewPlayer1).apply {
-            text = intent.getStringExtra("DanePlayer1")
-        }
-        findViewById<TextView>(R.id.textPL1).apply {
-            text = intent.getStringExtra("DanePlayer1")
-        }
-        findViewById<TextView>(R.id.textviewPlayer2).apply {
-            text = intent.getStringExtra("DanePlayer2")
-        }
-        findViewById<TextView>(R.id.textPL2).apply {
-            text = intent.getStringExtra("DanePlayer2")
-        }*/
-
         val app = application as Stats
         val serve1 = findViewById<TextView>(R.id.textViewServe1BIP)
         val serve2 = findViewById<TextView>(R.id.textViewServe2BIP)

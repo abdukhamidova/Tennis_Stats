@@ -22,15 +22,6 @@ class DetailsActivity : AppCompatActivity() {
         }
         var czyPlayer1: Boolean = false
 
-        /*findViewById<TextView>(R.id.textviewPlayer1Details).apply {
-            text = intent.getStringExtra("DanePlayer1")
-            if(text==intent.getStringExtra("Text name")){
-                czyPlayer1 = true
-            }
-        }
-        findViewById<TextView>(R.id.textviewPlayer2Details).apply {
-            text = intent.getStringExtra("DanePlayer2")
-        }*/
         findViewById<TextView>(R.id.textPlayerName).apply {
             text = intent.getStringExtra("Text name")
         }
