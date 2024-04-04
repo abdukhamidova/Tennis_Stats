@@ -138,10 +138,16 @@ class StartNewActivity : AppCompatActivity() {
                             val newDuplicate = currentDuplicate + 1
                             database.child(playerName).child("duplicate").setValue(newDuplicate)
                                 .addOnSuccessListener {
-                                    val playerNameWithDuplicate = if (newDuplicate == 1) playerName+newDuplicate.toString() else playerName.dropLast(1) + newDuplicate.toString()
+                                    val playerNameWithDuplicate = if (newDuplicate == 1) {
+                                        playerName + newDuplicate.toString()
+                                    } else if (playerName.lastOrNull()?.isDigit() == true) {
+                                        playerName.dropLast(1) + newDuplicate.toString()
+                                    } else {
+                                        playerName + newDuplicate.toString()
+                                    }
                                     val player = Player1(
                                         firstName,
-                                        lastName+newDuplicate.toString(),
+                                        lastName,
                                         newDuplicate
                                     ) // Dodanie wartości pola duplicate przy tworzeniu obiektu Player1
                                     database.child(playerNameWithDuplicate).setValue(player)
@@ -171,8 +177,14 @@ class StartNewActivity : AppCompatActivity() {
                             val newDuplicate = currentDuplicate + 1
                             database.child(playerName).child("duplicate").setValue(newDuplicate)
                                 .addOnSuccessListener {
-                                    val playerNameWithDuplicate =if (newDuplicate == 1) playerName+newDuplicate.toString() else playerName.dropLast(1) + newDuplicate.toString()
-                                    val player = Player2(firstName, lastName+newDuplicate.toString(), newDuplicate)
+                                    val playerNameWithDuplicate = if (newDuplicate == 1) {
+                                        playerName + newDuplicate.toString()
+                                    } else if (playerName.lastOrNull()?.isDigit() == true) {
+                                        playerName.dropLast(1) + newDuplicate.toString()
+                                    } else {
+                                        playerName + newDuplicate.toString()
+                                    }
+                                    val player = Player2(firstName, lastName, newDuplicate)
                                     database.child(playerNameWithDuplicate).setValue(player)
                                         .addOnSuccessListener {
                                             binding.autoNamePlayer2.text.clear()
