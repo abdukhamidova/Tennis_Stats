@@ -5,29 +5,35 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ActivityStartPoint">
+    tools:context=".ActivityStartPoint"
+    android:background="#073159">
 
     <Button
         android:id="@+id/buttonMenuSP"
         android:layout_width="92dp"
         android:layout_height="40dp"
         android:layout_marginTop="0.5dp"
+        android:backgroundTint="#65BECA"
+        android:fontFamily="@font/aldrich"
         android:text="MENU"
-        android:textSize="15sp"
+        android:textSize="13sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.041" />
+        app:layout_constraintVertical_bias="0.041"
+        app:shapeAppearance="@style/CardView" />
 
     <TextView
-        android:id="@+id/textMatchTime"
+        android:id="@+id/textMatchTimeSP"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="0.5dp"
+        android:fontFamily="@font/aldrich"
         android:text="MATCH TIME: "
-        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:textSize="19sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.353"
@@ -36,7 +42,7 @@
         app:layout_constraintVertical_bias="0.059" />
 
     <ImageButton
-        android:id="@+id/imageButtonBack"
+        android:id="@+id/imageButtonBackSP"
         android:layout_width="77dp"
         android:layout_height="45dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -53,6 +59,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:layout_marginBottom="662dp"
+        android:fontFamily="@font/aldrich"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.688"
@@ -64,6 +71,7 @@
         android:id="@+id/tableLayout"
         android:layout_width="370dp"
         android:layout_height="wrap_content"
+        android:background="#D8D85D"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.54"
@@ -73,12 +81,13 @@
 
         <TableRow>
 
+
             <TextView
                 android:id="@+id/textViewBallPl1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="0.2"
-                android:background="#FFF3D5D5"
+                android:fontFamily="@font/aldrich"
                 android:padding="15dp"
                 android:text=""
                 android:textSize="15sp" />
@@ -88,6 +97,7 @@
                 android:layout_width="65dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="@font/aldrich"
                 android:padding="15dp"
                 android:textSize="15sp" />
 
@@ -96,7 +106,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#FFF3D5D5"
+                android:fontFamily="@font/aldrich"
                 android:padding="15dp"
                 android:text=""
                 android:textSize="15sp" />
@@ -106,7 +116,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#D1E8FA"
+                android:fontFamily="@font/aldrich"
                 android:padding="15dp"
                 android:text=""
                 android:textSize="15sp" />
@@ -116,7 +126,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#E4EF9F"
+                android:fontFamily="@font/aldrich"
                 android:padding="15dp"
                 android:text=""
                 android:textSize="15sp" />
@@ -126,6 +136,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="@font/aldrich"
                 android:padding="15dp"
                 android:text=""
                 android:textSize="15sp" />
@@ -139,7 +150,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="0.2"
-                android:background="#FFF3D5D5"
+                android:fontFamily="@font/aldrich"
                 android:padding="15dp"
                 android:text=""
                 android:textSize="15sp" />
@@ -149,6 +160,7 @@
                 android:layout_width="1dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="@font/aldrich"
                 android:padding="15dp"
                 android:textSize="15sp" />
 
@@ -157,7 +169,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#FFF3D5D5"
+                android:fontFamily="@font/aldrich"
                 android:padding="15dp"
                 android:text=""
                 android:textSize="15sp" />
@@ -167,7 +179,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#FFD1E8FA"
+                android:fontFamily="@font/aldrich"
                 android:padding="15dp"
                 android:text=""
                 android:textSize="15sp" />
@@ -177,7 +189,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#FFE4EF9F"
+                android:fontFamily="@font/aldrich"
                 android:padding="15dp"
                 android:text=""
                 android:textSize="15sp" />
@@ -187,6 +199,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="@font/aldrich"
                 android:padding="15dp"
                 android:text=""
                 android:textSize="15sp" />
@@ -200,103 +213,131 @@
         android:id="@+id/textViewFS"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/aldrich"
         android:text="1st Serve"
+        android:textColor="@color/white"
         android:textSize="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.531"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tableLayout"
-        app:layout_constraintVertical_bias="0.088" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.411" />
 
     <Button
         android:id="@+id/buttonAce"
         android:layout_width="102dp"
         android:layout_height="97dp"
+        android:backgroundTint="#5FBCC4"
+        android:backgroundTintMode="add"
+        android:fontFamily="@font/aldrich"
+        android:rotation="0"
+        android:rotationX="0"
+        android:rotationY="0"
         android:text="Ace"
+        android:textSize="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.132"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.569"
-        />
+        app:shapeAppearance="@style/CardView" />
 
     <Button
         android:id="@+id/buttonRWF"
         android:layout_width="102dp"
         android:layout_height="97dp"
+        android:backgroundTint="#65BECA"
+        android:fontFamily="@font/aldrich"
         android:text="Return Winner FH"
+        android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.096"
         app:layout_constraintStart_toEndOf="@+id/buttonAce"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.569"
-        />
+        app:shapeAppearance="@style/CardView" />
 
     <Button
         android:id="@+id/buttonREF"
         android:layout_width="102dp"
         android:layout_height="97dp"
+        android:backgroundTint="#65BECA"
+        android:fontFamily="@font/aldrich"
         android:text="Return Error FH"
+        android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.096"
         app:layout_constraintStart_toEndOf="@+id/buttonFault"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.739"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/buttonRWF"
+        app:layout_constraintVertical_bias="0.062"
+        app:shapeAppearance="@style/CardView" />
 
     <Button
         android:id="@+id/buttonREB"
         android:layout_width="102dp"
         android:layout_height="97dp"
+        android:backgroundTint="#65BECA"
+        android:fontFamily="@font/aldrich"
         android:text="Return Error BH"
+        android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.354"
         app:layout_constraintStart_toEndOf="@+id/buttonREF"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.739"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/buttonRWB"
+        app:layout_constraintVertical_bias="0.062"
+        app:shapeAppearance="@style/CardView" />
 
     <Button
         android:id="@+id/buttonRWB"
         android:layout_width="102dp"
         android:layout_height="97dp"
+        android:backgroundTint="#65BECA"
+        android:fontFamily="@font/aldrich"
         android:text="Return Winner BH"
+        android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.354"
         app:layout_constraintStart_toEndOf="@+id/buttonRWF"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.569"
-        />
+        app:shapeAppearance="@style/CardView" />
 
     <Button
         android:id="@+id/buttonFault"
         android:layout_width="102dp"
         android:layout_height="97dp"
+        android:backgroundTint="#65BECA"
+        android:fontFamily="@font/aldrich"
         android:text="Fault"
+        android:textSize="19.9dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.132"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonAce"
         app:layout_constraintVertical_bias="0.062"
-        />
+        app:shapeAppearance="@style/CardView" />
 
     <Button
         android:id="@+id/buttonBIP"
         android:layout_width="339dp"
         android:layout_height="50dp"
+        android:backgroundTint="#65BECA"
+        android:fontFamily="@font/aldrich"
         android:text="Ball In Play"
+        android:textSize="23dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.569"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonREF"
-        app:layout_constraintVertical_bias="0.173"
-        />
+        app:layout_constraintVertical_bias="0.104"
+        app:shapeAppearance="@style/CardView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

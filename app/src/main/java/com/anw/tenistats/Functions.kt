@@ -20,6 +20,7 @@ fun fillUpScoreInActivity(app: Stats,player1: TextView, player2: TextView, serve
     set3p2.text = app.set3p2
 }
 
+//wyliczenie wyniku
 fun score(context: Context,app: Stats,player1: TextView, player2: TextView, serve1: TextView, serve2: TextView, pkt1: TextView, pkt2: TextView, set1p1: TextView, set1p2: TextView, set2p1: TextView, set2p2: TextView, set3p1: TextView, set3p2: TextView) {
     if (app.czyTiebreak) { //gramy tiebreaka
         if (scoreTiebreak(pkt1, pkt2)) { //jesli prawda to koniec tiebreaka
@@ -175,6 +176,7 @@ fun scoreTiebreak(pkt1: TextView, pkt2: TextView): Boolean {
     return false
 }
 
+//spr czy koniec meczu
 fun isEnd(set1p1: TextView, set1p2: TextView,set2p1: TextView, set2p2: TextView): Boolean{
     var s1p1: Int = set1p1.text.toString().toInt()
     var s1p2: Int = set1p2.text.toString().toInt()
@@ -190,6 +192,7 @@ fun isEnd(set1p1: TextView, set1p2: TextView,set2p1: TextView, set2p2: TextView)
     return false
 }
 
+//aktualizuje wynik w klasie Stats
 fun fillUpScore(app: Stats,player1: TextView, player2: TextView, serve1: TextView, serve2: TextView, pkt1: TextView, pkt2: TextView, set1p1: TextView, set1p2: TextView, set2p1: TextView, set2p2: TextView, set3p1: TextView, set3p2: TextView): Unit {
     if(player1.text == app.player1) {
         app.serve1 = serve1.text.toString()

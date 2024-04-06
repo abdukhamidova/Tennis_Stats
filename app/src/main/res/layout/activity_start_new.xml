@@ -5,28 +5,31 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".StartNewActivity">
+    tools:context=".StartNewActivity"
+    android:background="#073159">
 
     <TextView
         android:id="@+id/textStartNew"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:fontFamily="@font/aldrich"
         android:text="START NEW"
-        android:textSize="34sp"
+        android:textColor="#D8D85D"
+        android:textSize="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.037" />
+        app:layout_constraintVertical_bias="0.108" />
 
     <TextView
         android:id="@+id/textPlayer1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
+        android:fontFamily="@font/aldrich"
         android:text="Player 1"
+        android:textColor="#D8D85D"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/autoNamePlayer1"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,59 +38,68 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.897" />
 
+
     <AutoCompleteTextView
         android:id="@+id/autoNamePlayer2"
         android:layout_width="256dp"
         android:layout_height="54dp"
         android:layout_marginStart="24dp"
-        android:layout_marginEnd="332dp"
+        android:fontFamily="@font/aldrich"
         android:hint="Name"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.434" />
+        app:layout_constraintVertical_bias="0.599" />
 
     <AutoCompleteTextView
         android:id="@+id/autoNamePlayer1"
         android:layout_width="256dp"
         android:layout_height="54dp"
         android:layout_marginStart="24dp"
-        android:layout_marginEnd="332dp"
+        android:fontFamily="@font/aldrich"
         android:hint="Name"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.24" />
+        app:layout_constraintVertical_bias="0.338" />
 
     <RadioButton
         android:id="@+id/radioButtonPlayer1New"
         android:layout_width="wrap_content"
-        android:text="Dodaj"
-        android:textColor="@color/white"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="168dp"
+        android:fontFamily="@font/aldrich"
+        android:text="Dodaj"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.121"
         app:layout_constraintStart_toEndOf="@+id/autoNamePlayer1"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.344" />
 
     <RadioButton
         android:id="@+id/radioButtonPlayer2New"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="300dp"
+        android:fontFamily="@font/aldrich"
         android:text="Dodaj"
-        android:textColor="@color/white"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintHorizontal_bias="0.121"
         app:layout_constraintStart_toEndOf="@+id/autoNamePlayer2"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.603" />
 
     <TextView
         android:id="@+id/textPlayer2"
@@ -96,46 +108,16 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="200dp"
         android:layout_marginEnd="329dp"
-        android:layout_marginBottom="300dp"
+        android:fontFamily="@font/aldrich"
         android:text="Player 2"
+        android:textColor="#D8D85D"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/autoNamePlayer2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.23" />
-
-    <TextView
-        android:id="@+id/textVenue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="200dp"
-        android:layout_marginEnd="329dp"
-        android:layout_marginBottom="300dp"
-        android:text="Venue"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.975" />
-
-    <EditText
-        android:id="@+id/autoVenue"
-        android:layout_width="256dp"
-        android:layout_height="54dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="332dp"
-        android:hint="City, Country"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.655" />
+        app:layout_constraintVertical_bias="0.807" />
 
     <Button
         android:id="@+id/buttonStartGame"
@@ -144,14 +126,17 @@
         android:layout_marginStart="143dp"
         android:layout_marginTop="72dp"
         android:layout_marginEnd="177dp"
-        android:layout_marginBottom="160dp"
+        android:backgroundTint="#65BECA"
+        android:fontFamily="@font/aldrich"
         android:text="START GAME"
+        android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.027"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/autoVenue"
-        app:layout_constraintVertical_bias="0.043" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.83"
+        app:shapeAppearance="@style/CardView"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

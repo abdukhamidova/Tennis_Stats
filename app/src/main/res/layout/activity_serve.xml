@@ -5,21 +5,26 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ActivityServe">
+    tools:context=".ActivityServe"
+    android:background="#073159">
 
     <Button
         android:id="@+id/buttonMenu"
         android:layout_width="92dp"
         android:layout_height="40dp"
         android:layout_marginTop="5dp"
+        android:backgroundTint="#65BECA"
+        android:fontFamily="@font/aldrich"
         android:text="MENU"
-        android:textSize="15sp"
+        android:textSize="13sp"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.054"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.032" />
+        app:layout_constraintVertical_bias="0.032"
+        app:shapeAppearance="@style/CardView"/>
 
     <ImageButton
         android:id="@+id/imageButtonBack"
@@ -37,8 +42,10 @@
         android:id="@+id/textViewServe"
         android:layout_width="343dp"
         android:layout_height="116dp"
+        android:fontFamily="@font/aldrich"
         android:text="Who serves first?"
         android:textAlignment="center"
+        android:textColor="#D8D85D"
         android:textSize="45sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -51,22 +58,30 @@
         android:id="@+id/buttonPlayer1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="#65BECA"
+        android:fontFamily="@font/aldrich"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.663" />
+        app:layout_constraintVertical_bias="0.663"
+        app:shapeAppearance="@style/CardView"/>
 
     <Button
         android:id="@+id/buttonPlayer2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="#65BECA"
+        android:fontFamily="@font/aldrich"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonPlayer1"
-        app:layout_constraintVertical_bias="0.082" />
+        app:layout_constraintVertical_bias="0.082"
+        app:shapeAppearance="@style/CardView"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

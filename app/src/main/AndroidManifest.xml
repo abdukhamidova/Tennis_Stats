@@ -4,7 +4,6 @@
 
     <application
         android:name=".Stats"
-
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -17,7 +16,7 @@
         tools:targetApi="31">
         <activity
             android:name=".EndOfMatchActivity"
-            android:exported="false" />
+            android:exported="false"/>
         <activity
             android:name=".DetailsActivity"
             android:exported="false" />
@@ -55,6 +54,10 @@
             android:name=".StartNewActivity"
             android:exported="false"
             android:parentActivityName=".ActivityMenu" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

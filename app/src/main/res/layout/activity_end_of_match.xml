@@ -5,28 +5,34 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EndOfMatchActivity">
+    tools:context=".EndOfMatchActivity"
+    android:background="#073159">
 
     <Button
         android:id="@+id/buttonMenuEnd"
         android:layout_width="92dp"
         android:layout_height="40dp"
         android:layout_marginTop="0.5dp"
+        android:backgroundTint="#65BECA"
+        android:fontFamily="@font/aldrich"
         android:text="MENU"
-        android:textSize="15sp"
+        android:textSize="13sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.041" />
+        app:layout_constraintVertical_bias="0.041"
+        app:shapeAppearance="@style/CardView" />
 
     <TextView
         android:id="@+id/textViewEnd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/aldrich"
         android:text="END OF MATCH"
         android:textAlignment="center"
+        android:textColor="#FFFFFF"
         android:textSize="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -39,6 +45,7 @@
         android:id="@+id/tableLayoutEnd"
         android:layout_width="370dp"
         android:layout_height="wrap_content"
+        android:background="#D8D85D"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.54"
@@ -53,7 +60,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="0.2"
+                android:fontFamily="@font/aldrich"
                 android:padding="15dp"
+                android:textColor="#000000"
                 android:textSize="15sp" />
 
             <TextView
@@ -61,7 +70,9 @@
                 android:layout_width="65dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="@font/aldrich"
                 android:padding="15dp"
+                android:textColor="#000000"
                 android:textSize="15sp" />
 
             <TextView
@@ -69,8 +80,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="@font/aldrich"
                 android:padding="15dp"
                 android:text=""
+                android:textColor="#000000"
                 android:textSize="15sp" />
 
             <TextView
@@ -78,8 +91,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="@font/aldrich"
                 android:padding="15dp"
                 android:text=""
+                android:textColor="#000000"
                 android:textSize="15sp" />
 
             <TextView
@@ -87,8 +102,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="@font/aldrich"
                 android:padding="15dp"
                 android:text=""
+                android:textColor="#000000"
                 android:textSize="15sp" />
 
         </TableRow>
@@ -100,7 +117,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="0.2"
+                android:fontFamily="@font/aldrich"
                 android:padding="15dp"
+                android:textColor="#000000"
                 android:textSize="15sp" />
 
             <TextView
@@ -108,7 +127,9 @@
                 android:layout_width="1dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="@font/aldrich"
                 android:padding="15dp"
+                android:textColor="#000000"
                 android:textSize="15sp" />
 
             <TextView
@@ -116,8 +137,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="@font/aldrich"
                 android:padding="15dp"
                 android:text=""
+                android:textColor="#000000"
                 android:textSize="15sp" />
 
             <TextView
@@ -125,8 +148,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="@font/aldrich"
                 android:padding="15dp"
                 android:text=""
+                android:textColor="#000000"
                 android:textSize="15sp" />
 
             <TextView
@@ -134,8 +159,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="@font/aldrich"
                 android:padding="15dp"
                 android:text=""
+                android:textColor="#000000"
                 android:textSize="15sp" />
 
         </TableRow>
@@ -147,7 +174,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="0.5dp"
+        android:fontFamily="@font/aldrich"
         android:text="MATCH TIME: "
+        android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -161,6 +190,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
+        android:fontFamily="@font/aldrich"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.732"
@@ -171,6 +202,7 @@
     <Button
         android:layout_width="200dp"
         android:layout_height="wrap_content"
+        android:backgroundTint="#65BECA"
         android:text="View Stats"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -178,6 +210,8 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.843" />
+        app:layout_constraintVertical_bias="0.843"
+        android:fontFamily="@font/aldrich"
+        app:shapeAppearance="@style/CardView"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

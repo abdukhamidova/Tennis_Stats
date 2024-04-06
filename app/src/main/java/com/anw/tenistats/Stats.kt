@@ -5,17 +5,17 @@ import android.app.Application
 class Stats : Application() {
     var czyTiebreak: Boolean = false
     //zmienne globalne do liczenia statystyk
-    var totalpoints1: Int = 0
+    var totalpoints1: Int = 0   //ostatecznie kto ile wygrał punktów
     var totalpoints2: Int = 0
 
-    var firstserve1: Int = 0 //ilosc ogolnie zagranych 1 serwisow
+    var firstserve1: Int = 0 //ilosc ogolnie zagranych 1 serwisow (firstservein1 + secondserve1)
     var firstserve2: Int = 0
-    var firstservein1: Int = 0 //ilosc trafionych 1 serwisow
+    var firstservein1: Int = 0 //ilosc trafionych 1 serwisow (w procentach: firstservein1/firstserve1 * 100%)
     var firstservein2: Int = 0
 
-    var secondserve1: Int = 0 //ilosc ogolnie zagranych 2 serwisow
+    var secondserve1: Int = 0 //ilosc ogolnie zagranych 2 serwisow (secondservein1 + doublefault1)
     var secondserve2: Int = 0
-    var secondservein1: Int = 0 //ilosc trafionych 2 serwisow
+    var secondservein1: Int = 0 //ilosc trafionych 2 serwisow (w procentach: secondservein1/secondserve1 * 100%)
     var secondservein2: Int = 0
 
     var ace1: Int = 0 //ilosc zagranych asow playera 1

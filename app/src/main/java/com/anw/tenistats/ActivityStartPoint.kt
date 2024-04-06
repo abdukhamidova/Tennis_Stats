@@ -72,10 +72,12 @@ class ActivityStartPoint : AppCompatActivity() {
         findViewById<Button>(R.id.buttonFault).setOnClickListener {
             if (findViewById<Button>(R.id.buttonFault).text == "Fault") {
                 findViewById<Button>(R.id.buttonFault).text = "Double Fault"
+                findViewById<Button>(R.id.buttonFault).textSize = 15.4f
                 findViewById<TextView>(R.id.textViewFS).text = "2nd Serve"
             }
             else if (findViewById<Button>(R.id.buttonFault).text == "Double Fault") {
                 findViewById<Button>(R.id.buttonFault).text = "Fault"
+                findViewById<Button>(R.id.buttonFault).textSize = 19.9f
                 findViewById<TextView>(R.id.textViewFS).text = "1st Serve"
                 if (serve1.text != "") {
                     app.totalpoints2++

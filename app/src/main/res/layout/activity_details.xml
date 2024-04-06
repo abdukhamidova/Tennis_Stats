@@ -5,38 +5,44 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetailsActivity">
+    tools:context=".DetailsActivity"
+    android:background="#073159">
 
     <Button
         android:id="@+id/buttonMenuDetails"
         android:layout_width="92dp"
         android:layout_height="40dp"
         android:layout_marginTop="0.5dp"
+        android:backgroundTint="#65BECA"
+        android:fontFamily="@font/aldrich"
         android:text="MENU"
-        android:textSize="15sp"
+        android:textSize="13sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.041" />
+        app:layout_constraintVertical_bias="0.041"
+        app:shapeAppearance="@style/CardView" />
 
     <TextView
-        android:id="@+id/textMatchTime"
+        android:id="@+id/textMatchTimeD"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="0.5dp"
+        android:fontFamily="@font/aldrich"
         android:text="MATCH TIME: "
-        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:textSize="19sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.353"
+        app:layout_constraintHorizontal_bias="0.079"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.059" />
+        app:layout_constraintVertical_bias="0.119" />
 
     <ImageButton
-        android:id="@+id/imageButtonBack"
+        android:id="@+id/imageButtonBackD"
         android:layout_width="77dp"
         android:layout_height="45dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -51,22 +57,23 @@
         android:id="@+id/textViewTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="662dp"
+        android:layout_marginTop="84dp"
+        android:layout_marginBottom="626dp"
+        android:fontFamily="@font/aldrich"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.688"
+        app:layout_constraintHorizontal_bias="0.559"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TableLayout
         android:id="@+id/tableLayoutDetails"
         android:layout_width="370dp"
         android:layout_height="wrap_content"
+        android:background="#D8D85D"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.54"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.19">
@@ -78,7 +85,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="0.2"
+                android:fontFamily="@font/aldrich"
                 android:padding="15dp"
+                android:textColor="#000000"
                 android:textSize="15sp" />
 
             <TextView
@@ -86,7 +95,9 @@
                 android:layout_width="65dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="@font/aldrich"
                 android:padding="15dp"
+                android:textColor="#000000"
                 android:textSize="15sp" />
 
             <TextView
@@ -94,8 +105,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="@font/aldrich"
                 android:padding="15dp"
                 android:text=""
+                android:textColor="#000000"
                 android:textSize="15sp" />
 
             <TextView
@@ -103,8 +116,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="@font/aldrich"
                 android:padding="15dp"
                 android:text=""
+                android:textColor="#000000"
                 android:textSize="15sp" />
 
             <TextView
@@ -112,8 +127,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="@font/aldrich"
                 android:padding="15dp"
                 android:text=""
+                android:textColor="#000000"
                 android:textSize="15sp" />
 
             <TextView
@@ -121,8 +138,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="@font/aldrich"
                 android:padding="15dp"
                 android:text=""
+                android:textColor="#000000"
                 android:textSize="15sp" />
 
         </TableRow>
@@ -134,7 +153,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="0.2"
+                android:fontFamily="@font/aldrich"
                 android:padding="15dp"
+                android:textColor="#000000"
                 android:textSize="15sp" />
 
             <TextView
@@ -142,7 +163,9 @@
                 android:layout_width="1dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="@font/aldrich"
                 android:padding="15dp"
+                android:textColor="#000000"
                 android:textSize="15sp" />
 
             <TextView
@@ -150,8 +173,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="@font/aldrich"
                 android:padding="15dp"
                 android:text=""
+                android:textColor="#000000"
                 android:textSize="15sp" />
 
             <TextView
@@ -159,8 +184,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="@font/aldrich"
                 android:padding="15dp"
                 android:text=""
+                android:textColor="#000000"
                 android:textSize="15sp" />
 
             <TextView
@@ -168,8 +195,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="@font/aldrich"
                 android:padding="15dp"
                 android:text=""
+                android:textColor="#000000"
                 android:textSize="15sp" />
 
             <TextView
@@ -177,8 +206,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="@font/aldrich"
                 android:padding="15dp"
                 android:text=""
+                android:textColor="#000000"
                 android:textSize="15sp" />
 
 
@@ -190,14 +221,17 @@
         android:id="@+id/textPlayerName"
         android:layout_width="180dp"
         android:layout_height="45dp"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/aldrich"
         android:padding="15dp"
         android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/radioGroup"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.93"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textShot"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.402">
+        app:layout_constraintVertical_bias="1.0">
 
     </TextView>
 
@@ -205,14 +239,17 @@
         android:id="@+id/textShot"
         android:layout_width="180dp"
         android:layout_height="45dp"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/aldrich"
         android:padding="15dp"
         android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/radioGroup"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.095"
+        app:layout_constraintHorizontal_bias="0.134"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.402">
+        app:layout_constraintVertical_bias="1.0">
 
     </TextView>
 
@@ -220,72 +257,92 @@
         android:id="@+id/buttonGround"
         android:layout_width="143dp"
         android:layout_height="71dp"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="#65BECA"
+        android:fontFamily="@font/aldrich"
         android:text="Ground"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.152"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.612" />
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup"
+        app:layout_constraintVertical_bias="0.0"
+        app:shapeAppearance="@style/CardView" />
 
     <Button
         android:id="@+id/buttonDropshot"
         android:layout_width="143dp"
         android:layout_height="71dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#65BECA"
+        android:fontFamily="@font/aldrich"
         android:text="Dropshot"
-        android:textSize="20dp"
+        android:textSize="19.2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.858"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.904" />
+        app:layout_constraintHorizontal_bias="0.547"
+        app:layout_constraintStart_toEndOf="@+id/buttonLob"
+        app:layout_constraintTop_toBottomOf="@+id/buttonSmash"
+        app:layout_constraintVertical_bias="0.0"
+        app:shapeAppearance="@style/CardView" />
 
     <Button
         android:id="@+id/buttonSmash"
         android:layout_width="143dp"
         android:layout_height="71dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#65BECA"
+        android:fontFamily="@font/aldrich"
         android:text="Smash"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.858"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.759" />
+        app:layout_constraintHorizontal_bias="0.547"
+        app:layout_constraintStart_toEndOf="@+id/buttonVolley"
+        app:layout_constraintTop_toBottomOf="@+id/buttonSlice"
+        app:layout_constraintVertical_bias="0.0"
+        app:shapeAppearance="@style/CardView" />
 
     <Button
         android:id="@+id/buttonLob"
         android:layout_width="143dp"
         android:layout_height="71dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#65BECA"
+        android:fontFamily="@font/aldrich"
         android:text="Lob"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.152"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.904" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonVolley"
+        app:layout_constraintVertical_bias="0.0"
+        app:shapeAppearance="@style/CardView" />
 
     <RadioGroup
         android:id="@+id/radioGroup"
         android:layout_width="360dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="82dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.53"
+        app:layout_constraintHorizontal_bias="0.7"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.49">
+        app:layout_constraintTop_toBottomOf="@+id/tableLayoutDetails"
+        app:layout_constraintVertical_bias="0.0">
 
         <RadioButton
             android:id="@+id/radioButtonFH"
             android:layout_width="183dp"
             android:layout_height="40dp"
             android:checked="true"
+            android:fontFamily="@font/aldrich"
             android:text="Forehand"
+            android:textColor="@color/white"
+            android:textColorLink="#D7D75D"
             android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/view"
@@ -298,7 +355,9 @@
             android:id="@+id/radioButtonBH"
             android:layout_width="183dp"
             android:layout_height="40dp"
+            android:fontFamily="@font/aldrich"
             android:text="Backhand"
+            android:textColor="@color/white"
             android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -313,44 +372,35 @@
         android:id="@+id/buttonSlice"
         android:layout_width="143dp"
         android:layout_height="71dp"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="#65BECA"
+        android:fontFamily="@font/aldrich"
         android:text="Slice"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.858"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.612" />
-
-    <View
-        android:id="@+id/view"
-        android:layout_width="1dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="289dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="16dp"
-        android:background="@android:color/darker_gray"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.518"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.137" />
+        app:layout_constraintHorizontal_bias="0.547"
+        app:layout_constraintStart_toEndOf="@+id/buttonGround"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup"
+        app:layout_constraintVertical_bias="0.0"
+        app:shapeAppearance="@style/CardView" />
 
     <Button
         android:id="@+id/buttonVolley"
         android:layout_width="143dp"
         android:layout_height="71dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#65BECA"
+        android:fontFamily="@font/aldrich"
         android:text="Volley"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.152"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.759" />
-
-
+        app:layout_constraintTop_toBottomOf="@+id/buttonGround"
+        app:layout_constraintVertical_bias="0.0"
+        app:shapeAppearance="@style/CardView" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
