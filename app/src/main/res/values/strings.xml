@@ -1,4 +1,40 @@
 <resources>
     <string name="app_name">tenniStats</string>
+    <string name="start_new">START NEW</string>
+    <string name="player_1">Player 1</string>
+    <string name="name">Enter First and Last Name</string>
+    <string name="name_p2">Enter First and Last Name</string>
+    <string name="dodaj_p1">Create dispite repetition</string>
+    <string name="player_2">Player 2</string>
+    <string name="start_game">START GAME</string>
+    <string name="dodaj_p2">Create despite repetition</string>
+    <string name="menu">MENU</string>
+    <string name="_1st_serve">1st Serve</string>
+    <string name="ace">Ace</string>
+    <string name="return_winner_fh">Return Winner FH</string>
+    <string name="return_error_fh">Return Error FH</string>
+    <string name="return_error_bh">Return Error BH</string>
+    <string name="return_winner_bh">Return Winner BH</string>
+    <string name="fault">Fault</string>
+    <string name="ball_in_play">Ball In Play</string>
+    <string name="i_m_already_signed_in">I\'m already signed in</string>
+    <string name="tennis_stats">TENNIS STATS</string>
+    <string name="sign_up">Sign up</string>
+    <string name="enter_e_mail">Enter e-mail</string>
+    <string name="enter_password">Enter password</string>
+    <string name="login">LOGIN</string>
+    <string name="log_in">Log in</string>
+    <string name="i_m_not_signed_up">I\'m not signed up</string>
+    <string name="who_serves_first">Who serves first?</string>
+    <string name="log_out">LOG OUT</string>
+    <string name="start_new_game">Start New Game</string>
+    <string name="view_matches">View Matches</string>
+    <string name="exit">Exit</string>
+    <string name="options">OPTIONS</string>
+    <string name="end_of_match">END OF MATCH</string>
+    <string name="view_stats">View Stats</string>
+    <string name="winner">Winner</string>
+    <string name="forced_error">Forced Error</string>
+    <string name="unforced_error">Unforced Error</string>
 
 </resources>

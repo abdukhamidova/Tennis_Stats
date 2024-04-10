@@ -5,82 +5,48 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ActivityStartPoint"
-    android:background="#073159">
+    tools:context=".ActivityStartPoint">
 
     <Button
         android:id="@+id/buttonMenuSP"
         android:layout_width="92dp"
         android:layout_height="40dp"
         android:layout_marginTop="0.5dp"
-        android:backgroundTint="#65BECA"
-        android:fontFamily="@font/aldrich"
-        android:text="MENU"
-        android:textSize="13sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="@string/menu"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/tableLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.068"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.041"
+        app:layout_constraintVertical_bias="0.386"
         app:shapeAppearance="@style/CardView" />
-
-    <TextView
-        android:id="@+id/textMatchTimeSP"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="0.5dp"
-        android:fontFamily="@font/aldrich"
-        android:text="MATCH TIME: "
-        android:textColor="@color/white"
-        android:textSize="19sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.353"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.059" />
 
     <ImageButton
         android:id="@+id/imageButtonBackSP"
-        android:layout_width="77dp"
-        android:layout_height="45dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="92dp"
+        android:layout_height="40dp"
+        android:background="@drawable/rounded_button"
+        app:layout_constraintBottom_toTopOf="@+id/tableLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.952"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.043"
+        app:layout_constraintVertical_bias="0.386"
         app:srcCompat="@android:drawable/ic_menu_revert" />
-
-    <TextView
-        android:id="@+id/textViewTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="662dp"
-        android:fontFamily="@font/aldrich"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.688"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
 
     <TableLayout
         android:id="@+id/tableLayout"
         android:layout_width="370dp"
         android:layout_height="wrap_content"
-        android:background="#D8D85D"
+        android:background="@color/kolor_tabeli"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.54"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.19">
 
         <TableRow>
-
 
             <TextView
                 android:id="@+id/textViewBallPl1"
@@ -90,6 +56,7 @@
                 android:fontFamily="@font/aldrich"
                 android:padding="15dp"
                 android:text=""
+                android:textColor="@color/kolor_tekstu_tabeli"
                 android:textSize="15sp" />
 
             <TextView
@@ -99,6 +66,7 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/aldrich"
                 android:padding="15dp"
+                android:textColor="@color/kolor_tekstu_tabeli"
                 android:textSize="15sp" />
 
             <TextView
@@ -109,6 +77,7 @@
                 android:fontFamily="@font/aldrich"
                 android:padding="15dp"
                 android:text=""
+                android:textColor="@color/kolor_tekstu_tabeli"
                 android:textSize="15sp" />
 
             <TextView
@@ -119,6 +88,7 @@
                 android:fontFamily="@font/aldrich"
                 android:padding="15dp"
                 android:text=""
+                android:textColor="@color/kolor_tekstu_tabeli"
                 android:textSize="15sp" />
 
             <TextView
@@ -129,6 +99,7 @@
                 android:fontFamily="@font/aldrich"
                 android:padding="15dp"
                 android:text=""
+                android:textColor="@color/kolor_tekstu_tabeli"
                 android:textSize="15sp" />
 
             <TextView
@@ -139,6 +110,7 @@
                 android:fontFamily="@font/aldrich"
                 android:padding="15dp"
                 android:text=""
+                android:textColor="@color/kolor_tekstu_tabeli"
                 android:textSize="15sp" />
 
         </TableRow>
@@ -153,6 +125,7 @@
                 android:fontFamily="@font/aldrich"
                 android:padding="15dp"
                 android:text=""
+                android:textColor="@color/kolor_tekstu_tabeli"
                 android:textSize="15sp" />
 
             <TextView
@@ -162,6 +135,7 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/aldrich"
                 android:padding="15dp"
+                android:textColor="@color/kolor_tekstu_tabeli"
                 android:textSize="15sp" />
 
             <TextView
@@ -172,6 +146,7 @@
                 android:fontFamily="@font/aldrich"
                 android:padding="15dp"
                 android:text=""
+                android:textColor="@color/kolor_tekstu_tabeli"
                 android:textSize="15sp" />
 
             <TextView
@@ -182,6 +157,7 @@
                 android:fontFamily="@font/aldrich"
                 android:padding="15dp"
                 android:text=""
+                android:textColor="@color/kolor_tekstu_tabeli"
                 android:textSize="15sp" />
 
             <TextView
@@ -192,6 +168,7 @@
                 android:fontFamily="@font/aldrich"
                 android:padding="15dp"
                 android:text=""
+                android:textColor="@color/kolor_tekstu_tabeli"
                 android:textSize="15sp" />
 
             <TextView
@@ -202,6 +179,7 @@
                 android:fontFamily="@font/aldrich"
                 android:padding="15dp"
                 android:text=""
+                android:textColor="@color/kolor_tekstu_tabeli"
                 android:textSize="15sp" />
 
 
@@ -214,12 +192,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/aldrich"
-        android:text="1st Serve"
+        android:text="@string/_1st_serve"
         android:textColor="@color/white"
-        android:textSize="30dp"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.531"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.411" />
@@ -228,17 +205,18 @@
         android:id="@+id/buttonAce"
         android:layout_width="102dp"
         android:layout_height="97dp"
-        android:backgroundTint="#5FBCC4"
-        android:backgroundTintMode="add"
+        android:background="@drawable/rounded_button"
         android:fontFamily="@font/aldrich"
         android:rotation="0"
         android:rotationX="0"
         android:rotationY="0"
-        android:text="Ace"
-        android:textSize="25dp"
+        android:text="@string/ace"
+        android:textSize="25sp"
+        android:textColor="@color/kolor_tekstu"
+        app:backgroundTint="@color/kolor_guziku"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.132"
+        app:layout_constraintHorizontal_bias="0.106"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.569"
@@ -248,10 +226,12 @@
         android:id="@+id/buttonRWF"
         android:layout_width="102dp"
         android:layout_height="97dp"
-        android:backgroundTint="#65BECA"
+        android:background="@drawable/rounded_button"
+        app:backgroundTint="@color/kolor_guziku"
         android:fontFamily="@font/aldrich"
-        android:text="Return Winner FH"
-        android:textSize="15dp"
+        android:text="@string/return_winner_fh"
+        android:textSize="15sp"
+        android:textColor="@color/kolor_tekstu"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.096"
@@ -264,26 +244,22 @@
         android:id="@+id/buttonREF"
         android:layout_width="102dp"
         android:layout_height="97dp"
-        android:backgroundTint="#65BECA"
-        android:fontFamily="@font/aldrich"
-        android:text="Return Error FH"
-        android:textSize="15dp"
+        android:text="@string/return_error_fh"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.096"
         app:layout_constraintStart_toEndOf="@+id/buttonFault"
         app:layout_constraintTop_toBottomOf="@+id/buttonRWF"
         app:layout_constraintVertical_bias="0.062"
-        app:shapeAppearance="@style/CardView" />
+        app:shapeAppearance="@style/CardView"/>
 
     <Button
         android:id="@+id/buttonREB"
         android:layout_width="102dp"
         android:layout_height="97dp"
-        android:backgroundTint="#65BECA"
-        android:fontFamily="@font/aldrich"
-        android:text="Return Error BH"
-        android:textSize="15dp"
+        android:text="@string/return_error_bh"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.354"
@@ -296,10 +272,8 @@
         android:id="@+id/buttonRWB"
         android:layout_width="102dp"
         android:layout_height="97dp"
-        android:backgroundTint="#65BECA"
-        android:fontFamily="@font/aldrich"
-        android:text="Return Winner BH"
-        android:textSize="15dp"
+        android:text="@string/return_winner_bh"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.354"
@@ -312,13 +286,11 @@
         android:id="@+id/buttonFault"
         android:layout_width="102dp"
         android:layout_height="97dp"
-        android:backgroundTint="#65BECA"
-        android:fontFamily="@font/aldrich"
-        android:text="Fault"
-        android:textSize="19.9dp"
+        android:text="@string/fault"
+        android:textSize="19.9sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.132"
+        app:layout_constraintHorizontal_bias="0.106"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonAce"
         app:layout_constraintVertical_bias="0.062"
@@ -326,15 +298,12 @@
 
     <Button
         android:id="@+id/buttonBIP"
-        android:layout_width="339dp"
-        android:layout_height="50dp"
-        android:backgroundTint="#65BECA"
-        android:fontFamily="@font/aldrich"
-        android:text="Ball In Play"
-        android:textSize="23dp"
+        android:layout_width="342dp"
+        android:layout_height="51dp"
+        android:text="@string/ball_in_play"
+        android:textSize="23sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.569"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonREF"
         app:layout_constraintVertical_bias="0.104"

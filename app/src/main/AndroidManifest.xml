@@ -19,7 +19,7 @@
             android:exported="false" />
         <activity
             android:name=".EndOfMatchActivity"
-            android:exported="false" />
+            android:exported="false"/>
         <activity
             android:name=".DetailsActivity"
             android:exported="false" />
@@ -36,11 +36,11 @@
         <activity
             android:name=".SignUpActivity"
             android:exported="true"
-            android:noHistory="true" />
+            android:noHistory="true"/>
         <activity
             android:name=".SignInActivity"
             android:exported="false"
-            android:noHistory="true" />
+            android:noHistory="true"/>
         <activity
             android:name=".ActivityMenu"
             android:exported="false" />

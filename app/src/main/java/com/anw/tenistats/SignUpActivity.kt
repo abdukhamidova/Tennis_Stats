@@ -35,9 +35,9 @@ class SignUpActivity : AppCompatActivity() {
         binding.buttonSignUp.setOnClickListener{
             val email = binding.textEmailSignUp.text.toString()
             val pass = binding.textPasswordSignUp.text.toString()
-
+            //jeżeli pola email i hasło nie są puste
             if(email.isNotEmpty() && pass.isNotEmpty()) {
-
+                //dodaj użytkownika do bazy & przejdź do strony logowania
                 firebaseAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener {
                     if (it.isSuccessful) {
                         val intent = Intent(this, SignInActivity::class.java)

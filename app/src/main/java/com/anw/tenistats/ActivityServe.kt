@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -16,7 +17,18 @@ class ActivityServe : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_serve)
-
+        //link do menu
+        findViewById<Button>(R.id.buttonMenu).setOnClickListener {
+        val intent = Intent(this, ActivityMenu::class.java)
+        startActivity(intent)
+        }
+        //link do poprzedniego activity (StartNew)
+        findViewById<ImageButton>(R.id.imageButtonBack).setOnClickListener {
+            val intent = Intent(this, StartNewActivity::class.java)
+            startActivity(intent)
+        }
+        //pobranie nazw graczy z activity, skąd nastąpiło przekierowanie
+        //& przypisanie do tekstu na buttonach
         val player1 = intent.getStringExtra("DanePlayer1")
         findViewById<Button>(R.id.buttonPlayer1).apply {
             text=player1
@@ -25,11 +37,13 @@ class ActivityServe : AppCompatActivity() {
         findViewById<Button>(R.id.buttonPlayer2).apply {
             text = player2
         }
-
+        //niech ktoś napisze co to robi ~R
         val app = application as Stats
         app.player1 = findViewById<Button>(R.id.buttonPlayer1).text.toString()
         app.player2 = findViewById<Button>(R.id.buttonPlayer2).text.toString()
 
+        //kliknięcie na gracza, który serwuje jako pierwsze
+        //& przekierowanie do kolejnej aktywności
         findViewById<Button>(R.id.buttonPlayer1).setOnClickListener{
             app.serve1="1"
             callActivity()
@@ -44,6 +58,7 @@ class ActivityServe : AppCompatActivity() {
             insets
         }
     }
+    //przesłanie informacji o garczach do następnego activity (StartPoint)
     private fun callActivity() {
         val buttonPlayer1=findViewById<Button>(R.id.buttonPlayer1)
         val player1=buttonPlayer1.text.toString()

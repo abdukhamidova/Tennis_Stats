@@ -33,10 +33,14 @@ class SignInActivity : AppCompatActivity() {
             val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
         }*/
+        binding.textNotSignUp.setOnClickListener {
+            val intent = Intent(this, SignUpActivity::class.java)
+            startActivity(intent)
+        }
         binding.buttonSignIn.setOnClickListener{
             val email = binding.textEmailSignIn.text.toString()
             val pass = binding.textPasswordSignIn.text.toString()
-
+            //jeżeli pola nie są puste - zaloguj się
             if(email.isNotEmpty() && pass.isNotEmpty()) {
 
                 firebaseAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener {
@@ -47,8 +51,8 @@ class SignInActivity : AppCompatActivity() {
                         Toast.makeText(this, it.exception.toString(), Toast.LENGTH_LONG).show()
                     }
                 }
-            }else{
-                Toast.makeText(this,"Don't leave empty fields.", Toast.LENGTH_SHORT).show()
+            }else {
+                Toast.makeText(this, "Don't leave empty fields.", Toast.LENGTH_SHORT).show()
             }
         }
 

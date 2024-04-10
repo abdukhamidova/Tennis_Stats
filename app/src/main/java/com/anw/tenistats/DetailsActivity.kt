@@ -3,6 +3,7 @@ package com.anw.tenistats
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.RadioButton
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
@@ -73,7 +74,17 @@ class DetailsActivity : AppCompatActivity() {
         findViewById<Button>(R.id.buttonMenuDetails).setOnClickListener {
             startActivity(Intent(this,ActivityMenu::class.java))
         }
+        //link do poprzedniego activity (BallInPlay)
+        findViewById<ImageButton>(R.id.imageButtonBack).setOnClickListener {
+            val player1=findViewById<TextView>(R.id.textviewPlayer1).text.toString()
+            val player2=findViewById<TextView>(R.id.textviewPlayer2).text.toString()
 
+            val intent=Intent(this,ActivityBallInPlay::class.java).also{
+                it.putExtra("DanePlayer1",player1)
+                it.putExtra("DanePlayer2",player2)
+                startActivity(it)
+            }
+        }
         findViewById<Button>(R.id.buttonGround).setOnClickListener {
             historia.gdzie.add("Ground")
             database.child("gdzie").push().setValue("Ground")

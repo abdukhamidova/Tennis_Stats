@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SignUpActivity"
-    android:background="#073159"
+    android:background="@color/kolor_tla"
     >
 
     <TextView
@@ -16,25 +16,21 @@
         android:layout_marginStart="181dp"
         android:layout_marginEnd="173dp"
         android:layout_marginBottom="120dp"
-        android:fontFamily="@font/aldrich"
-        android:text="I am already signed in"
-        android:textColor="#FFFFFF"
+        android:text="@string/i_m_already_signed_in"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.541"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonSignUp"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.195" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/aldrich"
-        android:textSize="40dp"
-        android:text="TENNIS STATS"
-        android:textColor="#D8D85D"
-        android:textColorHint="#FFFFFF"
+        android:textSize="40sp"
+        android:text="@string/tennis_stats"
+        android:textColor="@color/kolor_nazw_tytul"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,30 +43,27 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="152.5dp"
         android:layout_marginEnd="152.5dp"
-        android:backgroundTint="#65BECA"
-        android:fontFamily="@font/aldrich"
-        android:text="SIGN UP"
+        android:text="@string/sign_up"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textPasswordSignUp"
-        app:layout_constraintVertical_bias="0.452"
-        app:shapeAppearance="@style/CardView"/>
+        app:layout_constraintVertical_bias="0.278"
+        app:shapeAppearance="@style/CardView" />
 
     <EditText
         android:id="@+id/textEmailSignUp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="302dp"
+        android:layout_height="48dp"
         android:layout_marginStart="101dp"
         android:layout_marginTop="41dp"
         android:layout_marginEnd="101dp"
+        android:autofillHints="emailAddress"
         android:ems="10"
-        android:fontFamily="@font/aldrich"
-        android:hint="E-mail"
+        android:hint="@string/enter_e_mail"
         android:inputType="textEmailAddress"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#FFFFFF"
+        android:textColor="@color/white"
+        android:textColorHint="@color/kolor_hint"
         app:flow_verticalAlign="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -80,21 +73,20 @@
 
     <EditText
         android:id="@+id/textPasswordSignUp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="302dp"
+        android:layout_height="47dp"
         android:layout_marginStart="100dp"
         android:layout_marginEnd="101dp"
         android:layout_marginBottom="127dp"
         android:ems="10"
-        android:fontFamily="@font/aldrich"
-        android:hint="Password"
+        android:hint="@string/enter_password"
         android:inputType="textPassword"
-        android:textColorHint="#FFFFFF"
+        android:textColorHint="@color/kolor_hint"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.514"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textEmailSignUp"
-        app:layout_constraintVertical_bias="0.194" />
+        app:layout_constraintVertical_bias="0.135"
+        android:autofillHints="password" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

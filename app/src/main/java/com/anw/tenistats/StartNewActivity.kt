@@ -42,8 +42,7 @@ class StartNewActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        //Rushana to Twoje?? ~W
-        //ActivityStartNewBin=binding
+
         firebaseAuth = FirebaseAuth.getInstance()
         database =
             FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")

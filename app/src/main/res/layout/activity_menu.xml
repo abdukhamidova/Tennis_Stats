@@ -6,51 +6,47 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ActivityMenu"
-    android:background="#073159">
+    android:background="@color/kolor_tla">
 
     <Button
         android:id="@+id/buttonLogOut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="#65BECA"
-        android:fontFamily="@font/aldrich"
-        android:text="LOG OUT"
+        android:text="@string/log_out"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.098"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.055"
-        app:shapeAppearance="@style/CardView"/>
+        app:layout_constraintVertical_bias="0.060000002"
+        app:shapeAppearance="@style/CardView" />
 
     <Button
         android:id="@+id/buttonStartNewGame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="#65BECA"
-        android:fontFamily="@font/aldrich"
-        android:text="Start New Game"
+        android:text="@string/start_new_game"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.638"
-        app:shapeAppearance="@style/CardView"/>
+        app:layout_constraintVertical_bias="0.55"
+        app:shapeAppearance="@style/CardView" />
 
     <Button
         android:id="@+id/buttonViewMatches"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:backgroundTint="#65BECA"
-        android:fontFamily="@font/aldrich"
-        android:text="View Matches"
+        android:text="@string/view_matches"
         android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonStartNewGame"
+        app:layout_constraintVertical_bias="0.004"
         app:shapeAppearance="@style/CardView" />
 
     <Button
@@ -58,13 +54,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:backgroundTint="#65BECA"
-        android:fontFamily="@font/aldrich"
-        android:text="Exit"
+        android:text="@string/exit"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonViewMatches"
         app:layout_constraintVertical_bias="0.0"
@@ -74,17 +67,15 @@
         android:id="@+id/buttonOptions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="#65BECA"
-        android:fontFamily="@font/aldrich"
-        android:text="OPTIONS"
+        android:text="@string/options"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.904"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.055"
-        app:shapeAppearance="@style/CardView"/>
+        app:layout_constraintVertical_bias="0.060000002"
+        app:shapeAppearance="@style/CardView" />
 
     <TextView
         android:id="@+id/textUser"
@@ -92,28 +83,24 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="163dp"
         android:layout_marginEnd="163dp"
-        android:fontFamily="@font/aldrich"
         android:text="Username"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/buttonStartNewGame"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.476"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:layout_constraintVertical_bias="0.598" />
+        app:layout_constraintVertical_bias="0.247" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/aldrich"
-        android:text="TENNIS STATS"
+        android:text="@string/tennis_stats"
         android:textAlignment="center"
-        android:textColor="#D8D85D"
-        android:textSize="80dp"
+        android:textColor="@color/kolor_nazw_tytul"
+        android:textSize="80sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.216" />
