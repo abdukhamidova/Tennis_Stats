@@ -32,6 +32,7 @@ class EndOfMatchActivity : AppCompatActivity() {
         val set3p2 = findViewById<TextView>(R.id.textViewP2Set3EOM)
         fillUpScoreInActivityEnd(app,player1, player2, serve1, serve2, set1p1, set1p2, set2p1, set2p2, set3p1, set3p2)
 
+        clear(app,serve1, serve2, set1p1, set1p2, set2p1, set2p2, set3p1, set3p2)
         findViewById<Button>(R.id.buttonMenuEnd).setOnClickListener {
             startActivity(Intent(this,ActivityMenu::class.java))
         }
@@ -49,4 +50,15 @@ fun fillUpScoreInActivityEnd(app: Stats,player1: TextView, player2: TextView, se
     set2p2.text = app.set2p2
     set3p1.text = app.set3p1
     set3p2.text = app.set3p2
+}
+
+fun clear(app: Stats,serve1: TextView, serve2: TextView,set1p1: TextView, set1p2: TextView, set2p1: TextView, set2p2: TextView, set3p1: TextView, set3p2: TextView):Unit{
+    app.serve1 = ""
+    app.serve2 = ""
+    app.set1p1 = "0"
+    app.set1p2 = "0"
+    app.set2p1 = ""
+    app.set2p2 = ""
+    app.set3p1 = ""
+    app.set3p2 = ""
 }
