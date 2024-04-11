@@ -21,12 +21,14 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.getValue
 import com.google.firebase.ktx.Firebase
+import java.util.*
 
 class StartNewActivity : AppCompatActivity() {
     private lateinit var binding: ActivityStartNewBinding
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var database: DatabaseReference
     private val playersList = mutableListOf<String>()
+    var matchId: String?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         // Initialize Firebase Auth
         super.onCreate(savedInstanceState)
@@ -36,17 +38,24 @@ class StartNewActivity : AppCompatActivity() {
         //Weronika 23 marca ~ zapisywanie danych do bazy
         //setContentView(R.layout.activity_start_new)
 
-
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
+        //11.04 ~u
         firebaseAuth = FirebaseAuth.getInstance()
+        val user = firebaseAuth.currentUser?.uid
         database =
             FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
-                .getReference("Player")
+                .getReference(user.toString()).child("Players")
+
+        //to skomentowalam dla bezpieczenstwa, na 99,(9)% mozna usunac ~u
+        /*firebaseAuth = FirebaseAuth.getInstance()
+        database =
+            FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
+                .getReference("Player")*/
 
         // Pobierz listę graczy z bazy danych
         database.addValueEventListener(object : ValueEventListener {
@@ -81,6 +90,20 @@ class StartNewActivity : AppCompatActivity() {
 
             // Sprawdzenie istnienia gracza dla player2
             checkPlayerExistence(player2, player2FirstName, player2LastName, 1)
+
+            //~u
+            // Generowanie unikalnego identyfikatora dla meczu
+            matchId = database.parent?.child("Matches")?.push()?.key
+            // Pobieranie bieżącego czasu
+            val currentDate = Calendar.getInstance().timeInMillis
+            // Tworzenie danych meczu
+            val matchData = mapOf<String, Any>(
+                "data" to currentDate,
+                "player1" to player1,
+                "player2" to player2
+            )
+            // Zapisywanie danych meczu do bazy danych pod unikalnym identyfikatorem meczu
+            database.parent?.child("Matches")?.child(matchId!!)?.setValue(matchData)
 
             callActivity()
         }
@@ -241,6 +264,8 @@ class StartNewActivity : AppCompatActivity() {
         val intent = Intent(this, ActivityServe::class.java).apply {
             putExtra("DanePlayer1", player1)
             putExtra("DanePlayer2", player2)
+            //~u
+            putExtra("matchID",matchId)
         }
         startActivity(intent)
     }

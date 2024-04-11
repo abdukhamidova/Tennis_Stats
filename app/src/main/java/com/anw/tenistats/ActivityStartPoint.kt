@@ -17,6 +17,10 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.database
 
 class ActivityStartPoint : AppCompatActivity() {
+    private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var database: DatabaseReference
+    var matchId: String ?=null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -27,6 +31,15 @@ class ActivityStartPoint : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        //~u
+        firebaseAuth = FirebaseAuth.getInstance()
+        val user = firebaseAuth.currentUser?.uid
+        matchId = intent.getStringExtra("matchID")
+        //adres meczu
+        database =
+            FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
+                .getReference(user.toString()).child("Matches").child(matchId.toString())
 
         val app = application as Stats
         val player1 = findViewById<TextView>(R.id.textviewPlayer1)
@@ -261,6 +274,7 @@ class ActivityStartPoint : AppCompatActivity() {
         val intent=Intent(this,ActivityBallInPlay::class.java).also{
             it.putExtra("DanePlayer1",player1)
             it.putExtra("DanePlayer2",player2)
+            it.putExtra("matchID",matchId)
             startActivity(it)
         }
     }
