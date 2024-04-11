@@ -2,10 +2,10 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.TenniStats" parent="Theme.AppCompat.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <item name="android:windowBackground">@color/kolor_tla</item>
         <item name="buttonStyle">@style/our_button</item>
         <item name="android:fontFamily">@font/aldrich</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:windowBackground">@color/kolor_tla</item>
     </style>
 
     <style name="Theme.TenniStats" parent="Base.Theme.TenniStats" />

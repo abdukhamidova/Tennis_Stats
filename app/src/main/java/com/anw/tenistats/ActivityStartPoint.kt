@@ -66,7 +66,7 @@ class ActivityStartPoint : AppCompatActivity() {
             startActivity(Intent(this,ActivityMenu::class.java))
         }
         //link do poprzedniego activity (Serve)
-        findViewById<ImageButton>(R.id.imageButtonBack).setOnClickListener {
+        /*findViewById<ImageButton>(R.id.imageButtonBack).setOnClickListener {
             val player1=findViewById<TextView>(R.id.textviewPlayer1).text.toString()
             val player2=findViewById<TextView>(R.id.textviewPlayer2).text.toString()
 
@@ -75,7 +75,7 @@ class ActivityStartPoint : AppCompatActivity() {
                 it.putExtra("DanePlayer2",player2)
                 startActivity(it)
             }
-        }
+        }*/
 
         findViewById<Button>(R.id.buttonAce).setOnClickListener {
             setScoreInDatabse(historia, match,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2,pkt1,pkt2)

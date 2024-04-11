@@ -37,7 +37,6 @@ class ActivityServe : AppCompatActivity() {
         findViewById<Button>(R.id.buttonPlayer2).apply {
             text = player2
         }
-        //niech ktoś napisze co to robi ~R
         val app = application as Stats
         app.player1 = findViewById<Button>(R.id.buttonPlayer1).text.toString()
         app.player2 = findViewById<Button>(R.id.buttonPlayer2).text.toString()
