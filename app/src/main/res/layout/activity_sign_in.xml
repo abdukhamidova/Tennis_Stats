@@ -34,6 +34,7 @@
         android:inputType="textEmailAddress"
         android:textColor="@color/white"
         android:textColorHint="@color/kolor_hint"
+        app:flow_verticalAlign="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.505"
@@ -58,25 +59,28 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textEmailSignIn"
-        app:layout_constraintVertical_bias="0.064" />
+        app:layout_constraintVertical_bias="0.13" />
 
     <Button
         android:id="@+id/buttonSignIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="152.5dp"
+        android:layout_marginEnd="152.5dp"
         android:text="@string/log_in"
-        android:textSize="16sp"
+        android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textPasswordSignIn"
-        app:layout_constraintVertical_bias="0.146"
+        app:layout_constraintVertical_bias="0.110000014"
         app:shapeAppearance="@style/CardView" />
 
     <TextView
         android:id="@+id/textNotSignUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="120dp"
         android:text="@string/i_m_not_signed_up"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"

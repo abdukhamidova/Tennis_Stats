@@ -9,6 +9,6 @@
     <color name="kolor_nazw_tytul">#D8D85D</color>
     <color name="kolor_hint">#c9cbb6</color>
     <color name="kolor_tabeli">#e1e184</color>
-    <color name="kolor_tekstu">#073159</color>
+    <color name="kolor_tekstu_guzik">#073159</color>
     <color name="kolor_tekstu_tabeli">#000000</color>
 </resources>

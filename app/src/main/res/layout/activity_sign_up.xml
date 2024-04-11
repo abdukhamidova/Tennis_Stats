@@ -22,20 +22,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonSignUp"
-        app:layout_constraintVertical_bias="0.195" />
+        app:layout_constraintVertical_bias="0.050000012" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="40sp"
         android:text="@string/tennis_stats"
         android:textColor="@color/kolor_nazw_tytul"
+        android:textSize="40sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.108" />
+        app:layout_constraintVertical_bias="0.19" />
 
     <Button
         android:id="@+id/buttonSignUp"
@@ -44,11 +44,12 @@
         android:layout_marginStart="152.5dp"
         android:layout_marginEnd="152.5dp"
         android:text="@string/sign_up"
+        android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textPasswordSignUp"
-        app:layout_constraintVertical_bias="0.278"
+        app:layout_constraintVertical_bias="0.110000014"
         app:shapeAppearance="@style/CardView" />
 
     <EditText
@@ -69,7 +70,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.14" />
+        app:layout_constraintVertical_bias="0.01999998" />
 
     <EditText
         android:id="@+id/textPasswordSignUp"

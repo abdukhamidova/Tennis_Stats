@@ -29,12 +29,20 @@
     <string name="log_out">LOG OUT</string>
     <string name="start_new_game">Start New Game</string>
     <string name="view_matches">View Matches</string>
-    <string name="exit">Exit</string>
     <string name="options">OPTIONS</string>
     <string name="end_of_match">END OF MATCH</string>
     <string name="view_stats">View Stats</string>
     <string name="winner">Winner</string>
     <string name="forced_error">Forced Error</string>
     <string name="unforced_error">Unforced Error</string>
+    <string name="ground">Ground</string>
+    <string name="dropshot">Dropshot</string>
+    <string name="smash">Smash</string>
+    <string name="lob">Lob</string>
+    <string name="forehand">Forehand</string>
+    <string name="backhand">Backhand</string>
+    <string name="slice">Slice</string>
+    <string name="volley">Volley</string>
+    <string name="back_button">Back button</string>
 
 </resources>

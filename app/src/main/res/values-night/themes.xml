@@ -13,7 +13,7 @@
 
     <style name="our_button" parent="Widget.AppCompat.Button">
         <item name="android:background">@drawable/rounded_button</item>
-        <item name="android:textColor">@color/kolor_tekstu</item>
+        <item name="android:textColor">@color/kolor_tekstu_guzik</item>
         <item name="android:fontFamily">@font/aldrich</item>
         <item name="android:textAllCaps">false</item>
     </style>
