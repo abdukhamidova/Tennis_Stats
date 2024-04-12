@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">tenniStats</string>
+    <string name="app_name">Tennis Stats</string>
     <string name="start_new">START NEW</string>
     <string name="player_1">Player 1</string>
     <string name="name">Enter First and Last Name</string>
