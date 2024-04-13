@@ -41,10 +41,12 @@ class ActivityBallInPlay : AppCompatActivity() {
 
         val player1 = findViewById<TextView>(R.id.textviewPlayer1)
         val player2 = findViewById<TextView>(R.id.textviewPlayer2)
+
         //link do Menu
         findViewById<Button>(R.id.buttonMenuBIP).setOnClickListener {
             startActivity(Intent(this,ActivityMenu::class.java))
         }
+
         //link do poprzedniego activity (StartPoint)
         /*findViewById<ImageButton>(R.id.imageButtonBack).setOnClickListener {
             val player1=findViewById<TextView>(R.id.textviewPlayer1).text.toString()
@@ -56,52 +58,86 @@ class ActivityBallInPlay : AppCompatActivity() {
                 startActivity(it)
             }
         }*/
+
         findViewById<TextView>(R.id.textPL1).text = player1.text
         findViewById<TextView>(R.id.textPL2).text = player2.text
 
-        var tekst: String = ""
         findViewById<Button>(R.id.buttonWinner1).setOnClickListener {
-            val player = player1
-            tekst = "Winner"
-            callActivity(tekst,player)
+            val intent=Intent(this,DetailsActivity::class.java).also{
+                it.putExtra("Pkt1",intent.getStringExtra("Pkt1"))
+                it.putExtra("Pkt2",intent.getStringExtra("Pkt2"))
+                it.putExtra("matchID",intent.getStringExtra("matchID"))
+                it.putExtra("gameID",intent.getStringExtra("gameID"))
+                it.putExtra("setID",intent.getStringExtra("setID"))
+                it.putExtra("Kto",player1.text)
+                it.putExtra("Co","Winner")
+                startActivity(it)
+            }
         }
 
         findViewById<Button>(R.id.buttonWinner2).setOnClickListener {
-            val player = player2
-            tekst = "Winner"
-            callActivity(tekst,player)
+            val intent=Intent(this,DetailsActivity::class.java).also{
+                it.putExtra("Pkt1",intent.getStringExtra("Pkt1"))
+                it.putExtra("Pkt2",intent.getStringExtra("Pkt2"))
+                it.putExtra("matchID",intent.getStringExtra("matchID"))
+                it.putExtra("gameID",intent.getStringExtra("gameID"))
+                it.putExtra("setID",intent.getStringExtra("setID"))
+                it.putExtra("Kto",player2.text)
+                it.putExtra("Co","Winner")
+                startActivity(it)
+            }
         }
 
         findViewById<Button>(R.id.buttonForcedError1).setOnClickListener {
-            val player = player1
-            tekst = "Forced Error"
-            callActivity(tekst,player)
+            val intent=Intent(this,DetailsActivity::class.java).also{
+                it.putExtra("Pkt1",intent.getStringExtra("Pkt1"))
+                it.putExtra("Pkt2",intent.getStringExtra("Pkt2"))
+                it.putExtra("matchID",intent.getStringExtra("matchID"))
+                it.putExtra("gameID",intent.getStringExtra("gameID"))
+                it.putExtra("setID",intent.getStringExtra("setID"))
+                it.putExtra("Kto",player1.text)
+                it.putExtra("Co","Forced Error")
+                startActivity(it)
+            }
         }
 
         findViewById<Button>(R.id.buttonForcedError2).setOnClickListener {
-            val player = player2
-            tekst = "Forced Error"
-            callActivity(tekst,player)
+            val intent=Intent(this,DetailsActivity::class.java).also{
+                it.putExtra("Pkt1",intent.getStringExtra("Pkt1"))
+                it.putExtra("Pkt2",intent.getStringExtra("Pkt2"))
+                it.putExtra("matchID",intent.getStringExtra("matchID"))
+                it.putExtra("gameID",intent.getStringExtra("gameID"))
+                it.putExtra("setID",intent.getStringExtra("setID"))
+                it.putExtra("Kto",player2.text)
+                it.putExtra("Co","Forced Error")
+                startActivity(it)
+            }
         }
 
         findViewById<Button>(R.id.buttonUnforcedError1).setOnClickListener {
-            val player = player1
-            tekst = "Unforced Error"
-            callActivity(tekst,player)
+            val intent=Intent(this,DetailsActivity::class.java).also{
+                it.putExtra("Pkt1",intent.getStringExtra("Pkt1"))
+                it.putExtra("Pkt2",intent.getStringExtra("Pkt2"))
+                it.putExtra("matchID",intent.getStringExtra("matchID"))
+                it.putExtra("gameID",intent.getStringExtra("gameID"))
+                it.putExtra("setID",intent.getStringExtra("setID"))
+                it.putExtra("Kto",player1.text)
+                it.putExtra("Co","Unforced Error")
+                startActivity(it)
+            }
         }
 
         findViewById<Button>(R.id.buttonUnforcedError2).setOnClickListener {
-            val player = player2
-            tekst = "Unforced Error"
-            callActivity(tekst,player)
-        }
-    }
-
-    fun callActivity(tekst: String, player: TextView) {
-        val intent= Intent(this,DetailsActivity::class.java).also{
-            it.putExtra("Text name",player.text)
-            it.putExtra("Text shot",tekst)
-            startActivity(it)
+            val intent=Intent(this,DetailsActivity::class.java).also{
+                it.putExtra("Pkt1",intent.getStringExtra("Pkt1"))
+                it.putExtra("Pkt2",intent.getStringExtra("Pkt2"))
+                it.putExtra("matchID",intent.getStringExtra("matchID"))
+                it.putExtra("gameID",intent.getStringExtra("gameID"))
+                it.putExtra("setID",intent.getStringExtra("setID"))
+                it.putExtra("Kto",player2.text)
+                it.putExtra("Co","Unforced Error")
+                startActivity(it)
+            }
         }
     }
 }

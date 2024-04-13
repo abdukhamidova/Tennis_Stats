@@ -112,6 +112,10 @@ class StartNewActivity : AppCompatActivity() {
         )
         // Zapisywanie danych meczu do bazy danych pod unikalnym identyfikatorem meczu
         database.parent?.child("Matches")?.child(matchId!!)?.setValue(matchData)
+        //kasowanie usawien
+        val app = application as Stats
+        app.pktId=1
+        app.serwis=1
     }
 
     private fun setupAutoCompleteTextViews() {
@@ -220,6 +224,8 @@ class StartNewActivity : AppCompatActivity() {
                 .show()
         }
     }
+
+
     private fun callActivity(player1:String, player2:String) {
         val intent = Intent(this, ActivityServe::class.java).apply {
             putExtra("DanePlayer1", player1)

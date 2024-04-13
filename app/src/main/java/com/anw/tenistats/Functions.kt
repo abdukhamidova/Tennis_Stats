@@ -1,8 +1,6 @@
 package com.anw.tenistats
 
-import android.content.Intent
 import android.widget.TextView
-import android.content.Context
 
 //poczatkowe ustawienie wyniku dla kazdej z aktywnosci z wynikiem
 fun fillUpScoreInActivity(app: Stats,player1: TextView, player2: TextView, serve1: TextView, serve2: TextView, pkt1: TextView, pkt2: TextView, set1p1: TextView, set1p2: TextView, set2p1: TextView, set2p2: TextView, set3p1: TextView, set3p2: TextView): Unit {
@@ -21,23 +19,25 @@ fun fillUpScoreInActivity(app: Stats,player1: TextView, player2: TextView, serve
 }
 
 //wyliczenie wyniku
-fun score(context: Context,app: Stats,player1: TextView, player2: TextView, serve1: TextView, serve2: TextView, pkt1: TextView, pkt2: TextView, set1p1: TextView, set1p2: TextView, set2p1: TextView, set2p2: TextView, set3p1: TextView, set3p2: TextView) {
+fun score(app: Stats,player1: TextView, player2: TextView, serve1: TextView, serve2: TextView, pkt1: TextView, pkt2: TextView, set1p1: TextView, set1p2: TextView, set2p1: TextView, set2p2: TextView, set3p1: TextView, set3p2: TextView) {
     if (app.czyTiebreak) { //gramy tiebreaka
         if (scoreTiebreak(pkt1, pkt2)) { //jesli prawda to koniec tiebreaka
             if (set2p1.text == "" && set2p2.text == "") { //jesli prawda to jestesmy w secie 1
                 set1p1.text = "7"
                 set2p1.text = "0"
                 set2p2.text = "0"
+                app.pktId=1
             }
             else if(set3p1.text == "" && set3p2.text == ""){//jesli prawda to jestesmy w secie 2
                 set2p1.text = "7"
                 set3p1.text = "0"
                 set3p2.text = "0"
+                app.pktId=1
             }
             else{
                 set3p1.text = "7"
                 fillUpScore(app,player1, player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
-                context.startActivity(Intent(context,EndOfMatchActivity::class.java)) //koniec meczu -> zmiana aktywnosci na EndOfMatch
+                app.isEnd=true
             }
             pkt1.text = "0"
             pkt2.text = "0"
@@ -63,6 +63,7 @@ fun score(context: Context,app: Stats,player1: TextView, player2: TextView, serv
         }
         if (set2p1.text == "" && set2p2.text == "") { //jesli prawda to jestesmy w secie 1
             if (scoreSet(set1p1, set1p2)) { //jesli prawda to skonczyl sie 1 set
+                app.pktId=1
                 set2p1.text = "0"
                 set2p2.text = "0"
             }
@@ -78,9 +79,10 @@ fun score(context: Context,app: Stats,player1: TextView, player2: TextView, serv
                     serve1.text = "W" //medal/laur przy zawodniku ktory wygral
                     serve2.text = ""
                     fillUpScore(app,player1, player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
-                    context.startActivity(Intent(context,EndOfMatchActivity::class.java)) //zmiana aktywnosci na EndOfMatch
+                    app.isEnd=true
                 }
                 else {
+                    app.pktId=1
                     set3p1.text = "0"
                     set3p2.text = "0"
                 }
@@ -96,7 +98,7 @@ fun score(context: Context,app: Stats,player1: TextView, player2: TextView, serv
                 serve1.text = "W" //medal/laur przy zawodniku ktory wygral
                 serve2.text = ""
                 fillUpScore(app,player1, player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
-                context.startActivity(Intent(context,EndOfMatchActivity::class.java)) //zmiana aktywnosci na EndOfMatch
+                app.isEnd=true
             }
             else {
                 if (set3p1.text == "6" && set3p2.text == "6") { //jesli prawda to bedzie tiebreak
@@ -129,10 +131,10 @@ fun scorePkt(pkt1: TextView, pkt2: TextView): Boolean {
     } else if (pkt1.text == "15") {
         pkt1.text = "30"
     } else if (pkt1.text == "30" || pkt1.text == "") {
-        pkt1.text = "40"
         if (pkt1.text == "") {
             pkt2.text = "40"
         }
+        pkt1.text = "40"
     } else if (pkt1.text == "40" && pkt2.text == "40") {
         pkt1.text = "A"
         pkt2.text = ""

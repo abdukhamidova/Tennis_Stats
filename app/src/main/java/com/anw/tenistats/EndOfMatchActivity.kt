@@ -8,8 +8,13 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 class EndOfMatchActivity : AppCompatActivity() {
+    private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var database: DatabaseReference
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -32,7 +37,26 @@ class EndOfMatchActivity : AppCompatActivity() {
         val set3p2 = findViewById<TextView>(R.id.textViewP2Set3EOM)
         fillUpScoreInActivityEnd(app,player1, player2, serve1, serve2, set1p1, set1p2, set2p1, set2p2, set3p1, set3p2)
 
-        clear(app,serve1, serve2, set1p1, set1p2, set2p1, set2p2, set3p1, set3p2)
+        firebaseAuth = FirebaseAuth.getInstance()
+        val user = firebaseAuth.currentUser?.uid
+        var matchId = intent.getStringExtra("matchID")
+        var winner: String ?=null
+        //sprawdzenie kto wygral
+        if(serve1.text==""){
+            winner=player2.text.toString()
+        } //wygral player2
+        else{
+            winner=player1.text.toString()
+        }
+
+        database =
+            FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
+                .getReference(user.toString()).child("Matches").child(matchId.toString()).child("winner")
+        database.setValue(winner)
+
+        app.isEnd=false
+
+        clear(app)
         findViewById<Button>(R.id.buttonMenuEnd).setOnClickListener {
             startActivity(Intent(this,ActivityMenu::class.java))
         }
@@ -52,7 +76,7 @@ fun fillUpScoreInActivityEnd(app: Stats,player1: TextView, player2: TextView, se
     set3p2.text = app.set3p2
 }
 
-fun clear(app: Stats,serve1: TextView, serve2: TextView,set1p1: TextView, set1p2: TextView, set2p1: TextView, set2p2: TextView, set3p1: TextView, set3p2: TextView):Unit{
+fun clear(app: Stats):Unit{
     app.serve1 = ""
     app.serve2 = ""
     app.set1p1 = "0"

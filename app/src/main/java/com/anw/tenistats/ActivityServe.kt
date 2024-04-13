@@ -13,25 +13,23 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 class ActivityServe : AppCompatActivity() {
-    private lateinit var firebaseAuth: FirebaseAuth
-    private lateinit var database: DatabaseReference
     var matchId: String?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_serve)
 
-        firebaseAuth = FirebaseAuth.getInstance()
-        val user = firebaseAuth.currentUser?.uid
-        matchId = intent.getStringExtra("matchID")
-
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        val app = application as Stats
+        matchId = intent.getStringExtra("matchID")
 
         //link do menu
         findViewById<Button>(R.id.buttonMenu).setOnClickListener {
@@ -57,7 +55,7 @@ class ActivityServe : AppCompatActivity() {
         }
 
         //dodaje imiona playerow do statystyk ~u
-        val app = application as Stats
+        //val app = application as Stats
         app.player1 = findViewById<Button>(R.id.buttonPlayer1).text.toString()
         app.player2 = findViewById<Button>(R.id.buttonPlayer2).text.toString()
 

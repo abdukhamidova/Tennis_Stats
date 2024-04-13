@@ -33,8 +33,8 @@ data class Game(
 )
 
 data class Point(
-    val pkt1: Int, //ilosc punktow playera 1 w danym gemie
-    val pkt2: Int, //ilosc punktow playera 2 w danym gemie
+    val pkt1: String, //ilosc punktow playera 1 w danym gemie
+    val pkt2: String, //ilosc punktow playera 2 w danym gemie
     val kto: String, //player, ktory cos zagral
     val co: String, //np. ace, winner, forced error itp
     val gdzie: String, //np. return, ground, slice itp
