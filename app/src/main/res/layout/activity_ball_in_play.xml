@@ -64,7 +64,7 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/aldrich"
                 android:padding="15dp"
-                android:textSize="15sp" />
+                android:textSize="17sp" />
 
             <TextView
                 android:id="@+id/textViewPlayer1Set1BIP"
@@ -74,7 +74,7 @@
                 android:fontFamily="@font/aldrich"
                 android:padding="15dp"
                 android:text=""
-                android:textSize="15sp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/textViewPlayer1Set2BIP"
@@ -84,7 +84,7 @@
                 android:fontFamily="@font/aldrich"
                 android:padding="15dp"
                 android:text=""
-                android:textSize="15sp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/textViewPlayer1Set3BIP"
@@ -176,13 +176,14 @@
     <TextView
         android:id="@+id/textPL2"
         android:layout_width="171dp"
-        android:layout_height="42dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="20dp"
         android:fontFamily="@font/aldrich"
         android:padding="10dp"
         android:textAlignment="center"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/white"
+        android:textSize="17sp"
         app:layout_constraintBottom_toTopOf="@+id/view3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.111"
@@ -199,103 +200,108 @@
         android:background="@android:color/darker_gray"
         android:backgroundTint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/buttonWinner2"
-        app:layout_constraintHorizontal_bias="0.511"
-        app:layout_constraintStart_toEndOf="@+id/buttonWinner1"
+        app:layout_constraintEnd_toStartOf="@+id/linearLayoutRight"
+        app:layout_constraintHorizontal_bias="0.547"
+        app:layout_constraintStart_toEndOf="@+id/linearLayoutLeft"
         app:layout_constraintTop_toBottomOf="@+id/tableLayout"
-        app:layout_constraintVertical_bias="0.327" />
+        app:layout_constraintVertical_bias="0.481" />
 
-    <Button
-        android:id="@+id/buttonWinner2"
-        android:layout_width="143dp"
-        android:layout_height="71dp"
-        android:layout_marginTop="20dp"
-        android:text="@string/winner"
-        android:textSize="20sp"
+    <LinearLayout
+        android:id="@+id/linearLayoutRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.865"
+        app:layout_constraintHorizontal_bias="0.858"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/view3"
-        app:layout_constraintVertical_bias="0.0"
-        app:shapeAppearance="@style/CardView" />
+        app:layout_constraintTop_toBottomOf="@+id/view3"
+        app:layout_constraintVertical_bias="0.0">
 
-    <Button
-        android:id="@+id/buttonUnforcedError2"
-        android:layout_width="143dp"
-        android:layout_height="71dp"
-        android:layout_marginTop="20dp"
-        android:text="@string/unforced_error"
-        android:textSize="19.2sp"
+        <Button
+            android:id="@+id/buttonWinner2"
+            android:layout_width="143dp"
+            android:layout_height="71dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/winner"
+            android:textSize="20sp"
+            app:shapeAppearance="@style/CardView" />
+
+        <Button
+            android:id="@+id/buttonUnforcedError2"
+            android:layout_width="143dp"
+            android:layout_height="71dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/unforced_error"
+            android:textSize="19.2sp"
+            app:shapeAppearance="@style/CardView" />
+
+        <Button
+            android:id="@+id/buttonForcedError2"
+            android:layout_width="143dp"
+            android:layout_height="71dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/forced_error"
+            android:textSize="20sp"
+            app:shapeAppearance="@style/CardView" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayoutLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.865"
+        app:layout_constraintHorizontal_bias="0.12"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonForcedError2"
-        app:layout_constraintVertical_bias="0.0"
-        app:shapeAppearance="@style/CardView" />
+        app:layout_constraintTop_toBottomOf="@+id/view3"
+        app:layout_constraintVertical_bias="0.0">
 
-    <Button
-        android:id="@+id/buttonWinner1"
-        android:layout_width="143dp"
-        android:layout_height="71dp"
-        android:layout_marginTop="20dp"
-        android:text="@string/winner"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.156"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/view3"
-        app:layout_constraintVertical_bias="0.0"
-        app:shapeAppearance="@style/CardView" />
+        <Button
+            android:id="@+id/buttonWinner1"
+            android:layout_width="143dp"
+            android:layout_height="71dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/winner"
+            android:textSize="20sp"
+            app:shapeAppearance="@style/CardView" />
 
-    <Button
-        android:id="@+id/buttonForcedError2"
-        android:layout_width="143dp"
-        android:layout_height="71dp"
-        android:layout_marginTop="20dp"
-        android:text="@string/forced_error"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.865"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonWinner2"
-        app:layout_constraintVertical_bias="0.0"
-        app:shapeAppearance="@style/CardView" />
+        <Button
+            android:id="@+id/buttonForcedError1"
+            android:layout_width="143dp"
+            android:layout_height="71dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/forced_error"
+            android:textSize="20sp"
+            app:shapeAppearance="@style/CardView" />
 
-    <Button
-        android:id="@+id/buttonForcedError1"
-        android:layout_width="143dp"
-        android:layout_height="71dp"
-        android:layout_marginTop="20dp"
-        android:text="@string/forced_error"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.156"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonWinner1"
-        app:layout_constraintVertical_bias="0.0"
-        app:shapeAppearance="@style/CardView" />
+        <Button
+            android:id="@+id/buttonUnforcedError1"
+            android:layout_width="143dp"
+            android:layout_height="71dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/unforced_error"
+            android:textSize="19.2sp"
+            app:shapeAppearance="@style/CardView" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/textPL1"
         android:layout_width="171dp"
-        android:layout_height="42dp"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="20dp"
         android:padding="10dp"
         android:textAlignment="center"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/white"
+        android:textSize="17sp"
         app:layout_constraintBottom_toTopOf="@+id/view3"
         app:layout_constraintEnd_toStartOf="@+id/view2"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0">
-
     </TextView>
 
     <View
@@ -313,19 +319,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.46" />
 
-    <Button
-        android:id="@+id/buttonUnforcedError1"
-        android:layout_width="143dp"
-        android:layout_height="71dp"
-        android:layout_marginTop="20dp"
-        android:text="@string/unforced_error"
-        android:textSize="19.2sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.156"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonForcedError1"
-        app:layout_constraintVertical_bias="0.0"
-        app:shapeAppearance="@style/CardView" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

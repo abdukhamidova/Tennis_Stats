@@ -24,14 +24,14 @@ class StartNewActivity : AppCompatActivity() {
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var database: DatabaseReference
     private val playersList = mutableListOf<String>()
-    var matchId: String?=null
+    private var matchId: String?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         // Initialize Firebase Auth
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         binding = ActivityStartNewBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        //Weronika 23 marca ~ zapisywanie danych do bazy
+        //Weronika 23 marca ~ zapisywanie danych playera do bazy
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -45,12 +45,6 @@ class StartNewActivity : AppCompatActivity() {
         database =
             FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
                 .getReference(user.toString()).child("Players")
-
-        //to skomentowalam dla bezpieczenstwa, na 99,(9)% mozna usunac ~u
-        /*firebaseAuth = FirebaseAuth.getInstance()
-        database =
-            FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
-                .getReference("Player")*/
 
         // Pobierz listę graczy z bazy danych
         database.addValueEventListener(object : ValueEventListener {
@@ -81,35 +75,43 @@ class StartNewActivity : AppCompatActivity() {
             val (player2FirstName, player2LastName) = splitNameToFirstAndLastName(player2)
             val btn1 = binding.checkBoxPlayer1New
             val btn2 = binding.checkBoxPlayer2New
-
-            // Sprawdzenie istnienia gracza dla player1 & jego dodanie
-            checkPlayerExistence(player1, player1FirstName, player1LastName, btn1) { updatedPlayerName ->
-                player1 = updatedPlayerName
+            //~ru 14.04 optymalizacja i poprawa dodawania playera do bazy
+            //tak, aby w kolejnym activity obowiązywało nazewnictwo z bazy
+            if (player1.isEmpty() || player2.isEmpty()) {
+                Toast.makeText(this, "Don't leave empty fields.", Toast.LENGTH_SHORT).show()
+            }else{
+                //sprawdzenie istnienia player1, jego ewentualne dodanie/duplikowanie
+                checkPlayerExistence(player1,player1FirstName, player1LastName, btn1) {updatedPlayer1 ->
+                    player1 = updatedPlayer1
+                    //sprawdzenie istnienia player2, jego ewentualne dodanie/duplikowanie
+                    checkPlayerExistence(player2, player2FirstName, player2LastName, btn2) { updatedPlayer2 ->
+                        player2 = updatedPlayer2
+                        //zapisanie meczu do bazy
+                        createAndSaveMatchData(player1, player2)
+                        binding.autoNamePlayer1.text.clear()
+                        binding.autoNamePlayer2.text.clear()
+                        //w nastepnym Activity zachowuje się nazewnictwo z bazy :)
+                        callActivity(player1, player2)
+                    }
+                }
             }
-
-            // Sprawdzenie istnienia gracza dla player2 & jego dodanie
-            checkPlayerExistence(player2, player2FirstName, player2LastName, btn2){ updatedPlayerName ->
-                player2 = updatedPlayerName
-            }
-            //jeżeli zawodnik istnieje w bazie i nie jest oznaczony jako do duplikacji to nic się z nim nie dzieje
-            Toast.makeText(this, "Player1 = $player1", Toast.LENGTH_SHORT).show()
-            Toast.makeText(this, "Player2 = $player2", Toast.LENGTH_SHORT).show()
-            //~u
-            // Generowanie unikalnego identyfikatora dla meczu
-            matchId = database.parent?.child("Matches")?.push()?.key
-            // Pobieranie bieżącego czasu
-            val currentDate = Calendar.getInstance().timeInMillis
-            // Tworzenie danych meczu
-            val matchData = mapOf<String, Any>(
-                "data" to currentDate,
-                "player1" to player1,
-                "player2" to player2
-            )
-            // Zapisywanie danych meczu do bazy danych pod unikalnym identyfikatorem meczu
-            database.parent?.child("Matches")?.child(matchId!!)?.setValue(matchData)
-
-            callActivity()
         }
+    }
+
+    private fun createAndSaveMatchData(player1: String, player2: String) {
+        //~u
+        // Generowanie unikalnego identyfikatora dla meczu
+        matchId = database.parent?.child("Matches")?.push()?.key
+        // Pobieranie bieżącego czasu
+        val currentDate = Calendar.getInstance().timeInMillis
+        // Tworzenie danych meczu
+        val matchData = mapOf<String, Any>(
+            "data" to currentDate,
+            "player1" to player1,
+            "player2" to player2
+        )
+        // Zapisywanie danych meczu do bazy danych pod unikalnym identyfikatorem meczu
+        database.parent?.child("Matches")?.child(matchId!!)?.setValue(matchData)
     }
 
     private fun setupAutoCompleteTextViews() {
@@ -118,13 +120,13 @@ class StartNewActivity : AppCompatActivity() {
         binding.autoNamePlayer1.apply {
             setAdapter(adapter)
             threshold = 0
-            onFocusChangeListener = View.OnFocusChangeListener { view, b -> if (b) showDropDown() }
+            onFocusChangeListener = View.OnFocusChangeListener { _, b -> if (b) showDropDown() }
         }
 
         binding.autoNamePlayer2.apply {
             setAdapter(adapter)
             threshold = 0
-            onFocusChangeListener = View.OnFocusChangeListener { view, b -> if (b) showDropDown() }
+            onFocusChangeListener = View.OnFocusChangeListener { _, b -> if (b) showDropDown() }
         }
     }
 
@@ -150,10 +152,7 @@ class StartNewActivity : AppCompatActivity() {
         lastName: String?, //dana atomowa: Nazwisko
         btn: CheckBox,
         callback: (String) -> Unit
-         //dana atomowa: numer duplikacji
     ){
-        var playerToReturn = playerName
-        var updated = false
         database.child(playerName).get().addOnSuccessListener { snapshot ->
             if (snapshot.exists()) {
                 if (btn.isChecked) {
@@ -166,8 +165,8 @@ class StartNewActivity : AppCompatActivity() {
                             database.child(playerName).child("duplicate").setValue(newDuplicate)
                                 .addOnSuccessListener {
                                     //dodanie numeru duplikatu do Nazwiska
-                                    playerToReturn =  playerName + newDuplicate.toString()
-                                    updated = true
+                                    val playerToReturn =  playerName + newDuplicate.toString()
+
                                     val player = Player(
                                         firstName,
                                         lastName,
@@ -176,11 +175,6 @@ class StartNewActivity : AppCompatActivity() {
                                     // dodanie gracza do bazy (jako obiekt klasy Player)
                                     database.child(playerToReturn).setValue(player)
                                         .addOnSuccessListener {
-                                            if (playerName == binding.autoNamePlayer1.text.toString()) {
-                                                binding.autoNamePlayer1.text.clear()
-                                            } else {
-                                                binding.autoNamePlayer2.text.clear()
-                                            }
                                             Toast.makeText(
                                                 this,
                                                 "Player $playerName Successfully Saved",
@@ -203,23 +197,19 @@ class StartNewActivity : AppCompatActivity() {
                             ).show()
                         }
                     btn.isChecked=false
-                }
+                } else { callback(playerName) }
             } else {
                 //jeżeli player nie istnieje, stwórz obiekt klasy Player
                 val player = Player(firstName, lastName, 1)
                 //dodaj taki węzeł
                 database.child(playerName).setValue(player)
                     .addOnSuccessListener {
-                        if (playerName == binding.autoNamePlayer1.text.toString()) {
-                            binding.autoNamePlayer1.text.clear()
-                        } else {
-                            binding.autoNamePlayer2.text.clear()
-                        }
                         Toast.makeText(
                             this,
                             "Player $playerName Successfully Saved",
                             Toast.LENGTH_SHORT
                         ).show()
+                        callback(playerName)
                 }.addOnFailureListener {
                     Toast.makeText(this, "Failed to save player $playerName", Toast.LENGTH_SHORT)
                         .show()
@@ -228,22 +218,9 @@ class StartNewActivity : AppCompatActivity() {
         }.addOnFailureListener{
             Toast.makeText(this, "Failed to get player $playerName", Toast.LENGTH_SHORT)
                 .show()
-        }.addOnCompleteListener {
-            if (!updated) { // Jeśli zmienna nie została zaktualizowana, zwróć początkową wartość
-                callback(playerName)
-            }
         }
     }
-
-    fun callActivity() {
-        val player1 = binding.autoNamePlayer1.text.toString()
-        val player2 = binding.autoNamePlayer2.text.toString()
-
-        if (player1.isEmpty() || player2.isEmpty()) {
-            Toast.makeText(this, "Don't leave empty fields.", Toast.LENGTH_SHORT).show()
-            return
-        }
-
+    private fun callActivity(player1:String, player2:String) {
         val intent = Intent(this, ActivityServe::class.java).apply {
             putExtra("DanePlayer1", player1)
             putExtra("DanePlayer2", player2)
