@@ -3,7 +3,28 @@ package com.anw.tenistats
 import android.app.Application
 
 class Stats : Application() {
+    var isEnd: Boolean = false //czy koniec meczu
+    var serwis: Int = 1 //1-wszedl 1 serwis; 2-wszedl drugi serwis; 0-podwojny blad
+    var pktId: Int = 1 //liczba zagranych punktow w meczu
+
     var czyTiebreak: Boolean = false
+    //dane
+    var player1: String = ""
+    var player2: String = ""
+    //wynik
+    var serve1: String = ""
+    var serve2: String = ""
+    var pkt1: String = "0"
+    var pkt2: String = "0"
+    var set1p1: String = "0"
+    var set1p2: String = "0"
+    var set2p1: String = ""
+    var set2p2: String = ""
+    var set3p1: String = ""
+    var set3p2: String = ""
+
+    //--reszta raczej nie bedzie uzywana
+
     //zmienne globalne do liczenia statystyk
     var totalpoints1: Int = 0   //ostatecznie kto ile wygrał punktów
     var totalpoints2: Int = 0
@@ -122,20 +143,4 @@ class Stats : Application() {
     var unforcederrordropshotFH2: Int = 0
     var unforcederrordropshotBH1: Int = 0
     var unforcederrordropshotBH2: Int = 0
-
-    //dane
-    var player1: String = ""
-    var player2: String = ""
-
-    //wynik
-    var serve1: String = ""
-    var serve2: String = ""
-    var pkt1: String = "0"
-    var pkt2: String = "0"
-    var set1p1: String = "0"
-    var set1p2: String = "0"
-    var set2p1: String = ""
-    var set2p2: String = ""
-    var set3p1: String = ""
-    var set3p2: String = ""
 }

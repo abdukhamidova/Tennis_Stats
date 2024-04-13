@@ -17,10 +17,6 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.database
 
 class ActivityStartPoint : AppCompatActivity() {
-    private lateinit var firebaseAuth: FirebaseAuth
-    private lateinit var database: DatabaseReference
-    var matchId: String ?=null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -32,16 +28,11 @@ class ActivityStartPoint : AppCompatActivity() {
             insets
         }
 
-        //~u
-        firebaseAuth = FirebaseAuth.getInstance()
-        val user = firebaseAuth.currentUser?.uid
-        matchId = intent.getStringExtra("matchID")
-        //adres meczu
-        database =
-            FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
-                .getReference(user.toString()).child("Matches").child(matchId.toString())
+        var matchId = intent.getStringExtra("matchID")
 
         val app = application as Stats
+
+        //val app = application as Stats
         val player1 = findViewById<TextView>(R.id.textviewPlayer1)
         val player2 = findViewById<TextView>(R.id.textviewPlayer2)
         val serve1 = findViewById<TextView>(R.id.textViewBallPl1)
@@ -73,6 +64,26 @@ class ActivityStartPoint : AppCompatActivity() {
             }
         }*/
 
+        var game: Int
+        var set = 1
+        if(set2p1.text=="") {
+            val game1=set1p1.text.toString()
+            val game2=set1p2.text.toString()
+            game = game1.toInt() + game2.toInt() + 1
+        }//jest set 1
+        else if(set3p1.text==""){
+            set=2
+            val game1=set2p1.text.toString()
+            val game2=set2p2.text.toString()
+            game = game1.toInt() + game2.toInt() + 1
+        }//jest set 2
+        else{
+            set=3
+            val game1=set3p1.text.toString()
+            val game2=set3p2.text.toString()
+            game = game1.toInt() + game2.toInt() + 1
+        }//jest set 3
+
         findViewById<Button>(R.id.buttonAce).setOnClickListener {
             if (serve1.text != "") { //serwuje player 1
                 app.totalpoints1++
@@ -85,7 +96,19 @@ class ActivityStartPoint : AppCompatActivity() {
                     findViewById<TextView>(R.id.textViewFS).text = "1st Serve"
                 }
                 app.ace1++
-                score(this,app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
+                val intent=Intent(this,AddActivity::class.java).also{
+                    it.putExtra("Pkt1",pkt1.text)
+                    it.putExtra("Pkt2",pkt2.text)
+                    it.putExtra("Kto",player1.text)
+                    it.putExtra("Co","Ace")
+                    it.putExtra("Gdzie","")
+                    it.putExtra("Czym","")
+                    it.putExtra("matchID",matchId)
+                    it.putExtra("gameID",game.toString())
+                    it.putExtra("setID",set.toString())
+                    startActivity(it)
+                }
+                score(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
             }
             else { //serwuje player2
                 app.totalpoints2++
@@ -98,29 +121,67 @@ class ActivityStartPoint : AppCompatActivity() {
                     findViewById<TextView>(R.id.textViewFS).text = "1st Serve"
                 }
                 app.ace2++
-                score(this,app,player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
+                val intent=Intent(this,AddActivity::class.java).also{
+                    it.putExtra("Pkt1",pkt1.text)
+                    it.putExtra("Pkt2",pkt2.text)
+                    it.putExtra("Kto",player2.text)
+                    it.putExtra("Co","Ace")
+                    it.putExtra("Gdzie","")
+                    it.putExtra("Czym","")
+                    it.putExtra("matchID",matchId)
+                    it.putExtra("gameID",game.toString())
+                    it.putExtra("setID",set.toString())
+                    startActivity(it)
+                }
+                score(app,player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
             }
         }
 
         findViewById<Button>(R.id.buttonFault).setOnClickListener {
             if (findViewById<Button>(R.id.buttonFault).text == "Fault") {
+                app.serwis=2
                 findViewById<Button>(R.id.buttonFault).text = "Double Fault"
                 findViewById<Button>(R.id.buttonFault).textSize = 15.4f
                 findViewById<TextView>(R.id.textViewFS).text = "2nd Serve"
             }
             else if (findViewById<Button>(R.id.buttonFault).text == "Double Fault") {
+                app.serwis=0
                 findViewById<Button>(R.id.buttonFault).text = "Fault"
                 findViewById<Button>(R.id.buttonFault).textSize = 19.9f
                 findViewById<TextView>(R.id.textViewFS).text = "1st Serve"
                 if (serve1.text != "") {
                     app.totalpoints2++
                     app.doublefault1++
-                    score(this,app,player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
+                    val intent=Intent(this,AddActivity::class.java).also{
+                        it.putExtra("Pkt1",pkt1.text)
+                        it.putExtra("Pkt2",pkt2.text)
+                        it.putExtra("Kto",player1.text)
+                        it.putExtra("Co","Double Fault")
+                        it.putExtra("Gdzie","")
+                        it.putExtra("Czym","")
+                        it.putExtra("matchID",matchId)
+                        it.putExtra("gameID",game.toString())
+                        it.putExtra("setID",set.toString())
+                        startActivity(it)
+                    }
+                    score(app,player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
                 }
                 else {
                     app.totalpoints1++
                     app.doublefault2++
-                    score(this,app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
+                    val intent=Intent(this,AddActivity::class.java).also{
+                        it.putExtra("Pkt1",pkt1.text)
+                        it.putExtra("Pkt2",pkt2.text)
+                        it.putExtra("Kto",player2.text)
+                        it.putExtra("Co","Double Fault")
+                        it.putExtra("Gdzie","")
+                        it.putExtra("Czym","")
+                        it.putExtra("matchID",matchId)
+                        it.putExtra("gameID",game.toString())
+                        it.putExtra("setID",set.toString())
+                        startActivity(it)
+                    }
+                    score(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
                 }
             }
         }
@@ -137,7 +198,19 @@ class ActivityStartPoint : AppCompatActivity() {
                     findViewById<TextView>(R.id.textViewFS).text = "1st Serve"
                 }
                 app.returnwinnerFH2++
-                score(this,app,player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
+                val intent=Intent(this,AddActivity::class.java).also{
+                    it.putExtra("Pkt1",pkt1.text)
+                    it.putExtra("Pkt2",pkt2.text)
+                    it.putExtra("Kto",player2.text)
+                    it.putExtra("Co","Winner")
+                    it.putExtra("Gdzie","Return")
+                    it.putExtra("Czym","Forehand")
+                    it.putExtra("matchID",matchId)
+                    it.putExtra("gameID",game.toString())
+                    it.putExtra("setID",set.toString())
+                    startActivity(it)
+                }
+                score(app,player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
             }
             else {
                 app.totalpoints1++
@@ -150,7 +223,19 @@ class ActivityStartPoint : AppCompatActivity() {
                     findViewById<TextView>(R.id.textViewFS).text = "1st Serve"
                 }
                 app.returnwinnerFH1++
-                score(this,app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
+                val intent=Intent(this,AddActivity::class.java).also{
+                    it.putExtra("Pkt1",pkt1.text)
+                    it.putExtra("Pkt2",pkt2.text)
+                    it.putExtra("Kto",player1.text)
+                    it.putExtra("Co","Winner")
+                    it.putExtra("Gdzie","Return")
+                    it.putExtra("Czym","Forehand")
+                    it.putExtra("matchID",matchId)
+                    it.putExtra("gameID",game.toString())
+                    it.putExtra("setID",set.toString())
+                    startActivity(it)
+                }
+                score(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
             }
         }
 
@@ -166,7 +251,19 @@ class ActivityStartPoint : AppCompatActivity() {
                     findViewById<TextView>(R.id.textViewFS).text = "1st Serve"
                 }
                 app.returnwinnerBH2++
-                score(this,app,player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
+                val intent=Intent(this,AddActivity::class.java).also{
+                    it.putExtra("Pkt1",pkt1.text)
+                    it.putExtra("Pkt2",pkt2.text)
+                    it.putExtra("Kto",player2.text)
+                    it.putExtra("Co","Winner")
+                    it.putExtra("Gdzie","Return")
+                    it.putExtra("Czym","Backhand")
+                    it.putExtra("matchID",matchId)
+                    it.putExtra("gameID",game.toString())
+                    it.putExtra("setID",set.toString())
+                    startActivity(it)
+                }
+                score(app,player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
             }
             else {
                 app.totalpoints1++
@@ -179,7 +276,19 @@ class ActivityStartPoint : AppCompatActivity() {
                     findViewById<TextView>(R.id.textViewFS).text = "1st Serve"
                 }
                 app.returnwinnerBH1++
-                score(this,app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
+                val intent=Intent(this,AddActivity::class.java).also{
+                    it.putExtra("Pkt1",pkt1.text)
+                    it.putExtra("Pkt2",pkt2.text)
+                    it.putExtra("Kto",player1.text)
+                    it.putExtra("Co","Winner")
+                    it.putExtra("Gdzie","Return")
+                    it.putExtra("Czym","Backhand")
+                    it.putExtra("matchID",matchId)
+                    it.putExtra("gameID",game.toString())
+                    it.putExtra("setID",set.toString())
+                    startActivity(it)
+                }
+                score(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
             }
         }
 
@@ -195,7 +304,19 @@ class ActivityStartPoint : AppCompatActivity() {
                     findViewById<TextView>(R.id.textViewFS).text = "1st Serve"
                 }
                 app.returnerrorFH2++
-                score(this,app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
+                val intent=Intent(this,AddActivity::class.java).also{
+                    it.putExtra("Pkt1",pkt1.text)
+                    it.putExtra("Pkt2",pkt2.text)
+                    it.putExtra("Kto",player2.text)
+                    it.putExtra("Co","Winner")
+                    it.putExtra("Gdzie","Return")
+                    it.putExtra("Czym","Forehand")
+                    it.putExtra("matchID",matchId)
+                    it.putExtra("gameID",game.toString())
+                    it.putExtra("setID",set.toString())
+                    startActivity(it)
+                }
+                score(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
             }
             else {
                 app.totalpoints2++
@@ -208,7 +329,19 @@ class ActivityStartPoint : AppCompatActivity() {
                     findViewById<TextView>(R.id.textViewFS).text = "1st Serve"
                 }
                 app.returnerrorFH1++
-                score(this,app,player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
+                val intent=Intent(this,AddActivity::class.java).also{
+                    it.putExtra("Pkt1",pkt1.text)
+                    it.putExtra("Pkt2",pkt2.text)
+                    it.putExtra("Kto",player1.text)
+                    it.putExtra("Co","Winner")
+                    it.putExtra("Gdzie","Return")
+                    it.putExtra("Czym","Forehand")
+                    it.putExtra("matchID",matchId)
+                    it.putExtra("gameID",game.toString())
+                    it.putExtra("setID",set.toString())
+                    startActivity(it)
+                }
+                score(app,player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
             }
         }
 
@@ -224,7 +357,19 @@ class ActivityStartPoint : AppCompatActivity() {
                     findViewById<TextView>(R.id.textViewFS).text = "1st Serve"
                 }
                 app.returnerrorBH2++
-                score(this,app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
+                val intent=Intent(this,AddActivity::class.java).also{
+                    it.putExtra("Pkt1",pkt1.text)
+                    it.putExtra("Pkt2",pkt2.text)
+                    it.putExtra("Kto",player2.text)
+                    it.putExtra("Co","Error")
+                    it.putExtra("Gdzie","Return")
+                    it.putExtra("Czym","Backhand")
+                    it.putExtra("matchID",matchId)
+                    it.putExtra("gameID",game.toString())
+                    it.putExtra("setID",set.toString())
+                    startActivity(it)
+                }
+                score(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
             }
             else {
                 app.totalpoints2++
@@ -237,7 +382,19 @@ class ActivityStartPoint : AppCompatActivity() {
                     findViewById<TextView>(R.id.textViewFS).text = "1st Serve"
                 }
                 app.returnerrorBH1++
-                score(this,app,player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
+                val intent=Intent(this,AddActivity::class.java).also{
+                    it.putExtra("Pkt1",pkt1.text)
+                    it.putExtra("Pkt2",pkt2.text)
+                    it.putExtra("Kto",player1.text)
+                    it.putExtra("Co","Error")
+                    it.putExtra("Gdzie","Return")
+                    it.putExtra("Czym","Backhand")
+                    it.putExtra("matchID",matchId)
+                    it.putExtra("gameID",game.toString())
+                    it.putExtra("setID",set.toString())
+                    startActivity(it)
+                }
+                score(app,player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
             }
         }
 
@@ -263,19 +420,17 @@ class ActivityStartPoint : AppCompatActivity() {
                     findViewById<TextView>(R.id.textViewFS).text = "1st Serve"
                 }
             }
-            callActivity() //zmiana aktywnosci na ActivityBallInPlay
-        }
-    }
-
-    fun callActivity() {
-        val player1=findViewById<TextView>(R.id.textviewPlayer1).text.toString()
-        val player2=findViewById<TextView>(R.id.textviewPlayer2).text.toString()
-
-        val intent=Intent(this,ActivityBallInPlay::class.java).also{
-            it.putExtra("DanePlayer1",player1)
-            it.putExtra("DanePlayer2",player2)
-            it.putExtra("matchID",matchId)
-            startActivity(it)
+            val intent=Intent(this,ActivityBallInPlay::class.java).also{
+                it.putExtra("Pkt1",pkt1.text)
+                it.putExtra("Pkt2",pkt2.text)
+                it.putExtra("matchID",matchId)
+                it.putExtra("gameID",game.toString())
+                it.putExtra("setID",set.toString())
+                it.putExtra("DanePlayer1",player1.text)
+                it.putExtra("DanePlayer2",player2.text)
+            }
+            startActivity(intent)
+            //callActivity() //zmiana aktywnosci na ActivityBallInPlay
         }
     }
 }
