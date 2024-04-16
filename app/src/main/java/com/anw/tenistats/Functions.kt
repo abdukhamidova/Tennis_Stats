@@ -3,6 +3,29 @@ package com.anw.tenistats
 import android.widget.TextView
 
 //poczatkowe ustawienie wyniku dla kazdej z aktywnosci z wynikiem
+fun clearScore(app: Stats)
+{
+    app.isEnd = false //czy koniec meczu
+    app.serwis = 1 //1-wszedl 1 serwis; 2-wszedl drugi serwis; 0-podwojny blad
+    app.pktId = 1 //liczba zagranych punktow w meczu
+
+    app.czyTiebreak = false
+    //dane
+    app.player1 = ""
+    app.player2 = ""
+    //wynik
+    app.serve1 = ""
+    app.serve2 = ""
+    app.pkt1 = "0"
+    app.pkt2 = "0"
+    app.set1p1 = "0"
+    app.set1p2 = "0"
+    app.set2p1 = ""
+    app.set2p2 = ""
+    app.set3p1 = ""
+    app.set3p2 = ""
+}
+
 fun fillUpScoreInActivity(app: Stats,player1: TextView, player2: TextView, serve1: TextView, serve2: TextView, pkt1: TextView, pkt2: TextView, set1p1: TextView, set1p2: TextView, set2p1: TextView, set2p2: TextView, set3p1: TextView, set3p2: TextView): Unit {
     player1.text = app.player1
     player2.text = app.player2

@@ -114,8 +114,7 @@ class StartNewActivity : AppCompatActivity() {
         database.parent?.child("Matches")?.child(matchId!!)?.setValue(matchData)
         //kasowanie usawien
         val app = application as Stats
-        app.pktId=1
-        app.serwis=1
+        clearScore(app)
     }
 
     private fun setupAutoCompleteTextViews() {
