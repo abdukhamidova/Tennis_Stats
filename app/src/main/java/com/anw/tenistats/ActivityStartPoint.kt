@@ -85,7 +85,7 @@ class ActivityStartPoint : AppCompatActivity() {
         }//jest set 3
 
         findViewById<Button>(R.id.buttonAce).setOnClickListener {
-            if (serve1.text != "") { //serwuje player 1
+            if (app.serve1 != "") { //serwuje player 1
                 app.totalpoints1++
                 if (findViewById<Button>(R.id.buttonFault).text == "Fault") { //trafiony 1 serwis
                     app.firstservein1++
@@ -149,7 +149,7 @@ class ActivityStartPoint : AppCompatActivity() {
                 findViewById<Button>(R.id.buttonFault).text = "Fault"
                 findViewById<Button>(R.id.buttonFault).textSize = 19.9f
                 findViewById<TextView>(R.id.textViewFS).text = "1st Serve"
-                if (serve1.text != "") {
+                if (app.serve1 != "") {
                     app.totalpoints2++
                     app.doublefault1++
                     val intent=Intent(this,AddActivity::class.java).also{
@@ -187,7 +187,7 @@ class ActivityStartPoint : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.buttonRWF).setOnClickListener{
-            if (serve1.text != "") { //serwuje player 1
+            if (app.serve1 != "") { //serwuje player 1
                 app.totalpoints2++
                 if (findViewById<Button>(R.id.buttonFault).text == "Fault") { //trafiony 1 serwis
                     app.firstservein1++
@@ -240,7 +240,7 @@ class ActivityStartPoint : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.buttonRWB).setOnClickListener {
-            if (serve1.text != "") { //serwuje player 1
+            if (app.serve1 != "") { //serwuje player 1
                 app.totalpoints2++
                 if (findViewById<Button>(R.id.buttonFault).text == "Fault") { //trafiony 1 serwis
                     app.firstservein1++
@@ -293,7 +293,7 @@ class ActivityStartPoint : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.buttonREF).setOnClickListener {
-            if (serve1.text != "") { //serwuje player 1
+            if (app.serve1 != "") { //serwuje player 1
                 app.totalpoints1++
                 if (findViewById<Button>(R.id.buttonFault).text == "Fault") { //trafiony 1 serwis
                     app.firstservein1++
@@ -346,7 +346,7 @@ class ActivityStartPoint : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.buttonREB).setOnClickListener {
-            if (serve1.text != "") { //serwuje player 1
+            if (app.serve1 != "") { //serwuje player 1
                 app.totalpoints1++
                 if (findViewById<Button>(R.id.buttonFault).text == "Fault") { //trafiony 1 serwis
                     app.firstservein1++
@@ -399,7 +399,7 @@ class ActivityStartPoint : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.buttonBIP).setOnClickListener {
-            if(serve1.text != ""){
+            if(app.serve1 != ""){
                 if (findViewById<Button>(R.id.buttonFault).text == "Fault") { //trafiony 1 serwis
                     app.firstservein1++
                 }

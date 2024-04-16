@@ -63,9 +63,11 @@ class ActivityServe : AppCompatActivity() {
         //& przekierowanie do kolejnej aktywności
         findViewById<Button>(R.id.buttonPlayer1).setOnClickListener{
             app.serve1="1" //do statysyk
+            app.serve2=""
             callActivity()
         }
         findViewById<Button>(R.id.buttonPlayer2).setOnClickListener{
+            app.serve1=""
             app.serve2="1" //do statysyk
             callActivity()
         }

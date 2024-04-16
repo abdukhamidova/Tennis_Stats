@@ -1,5 +1,6 @@
 package com.anw.tenistats
 
+import android.view.View
 import android.widget.TextView
 
 //poczatkowe ustawienie wyniku dla kazdej z aktywnosci z wynikiem
@@ -29,8 +30,16 @@ fun clearScore(app: Stats)
 fun fillUpScoreInActivity(app: Stats,player1: TextView, player2: TextView, serve1: TextView, serve2: TextView, pkt1: TextView, pkt2: TextView, set1p1: TextView, set1p2: TextView, set2p1: TextView, set2p2: TextView, set3p1: TextView, set3p2: TextView): Unit {
     player1.text = app.player1
     player2.text = app.player2
-    serve1.text = app.serve1
-    serve2.text = app.serve2
+    if(app.serve1=="1"){
+        serve1.visibility = View.VISIBLE
+        serve2.visibility = View.INVISIBLE
+    }
+    else{
+        serve1.visibility = View.INVISIBLE
+        serve2.visibility = View.VISIBLE
+    }
+    //serve1.text = app.serve1
+    //serve2.text = app.serve2
     pkt1.text = app.pkt1
     pkt2.text = app.pkt2
     set1p1.text = app.set1p1
@@ -43,6 +52,16 @@ fun fillUpScoreInActivity(app: Stats,player1: TextView, player2: TextView, serve
 
 //wyliczenie wyniku
 fun score(app: Stats,player1: TextView, player2: TextView, serve1: TextView, serve2: TextView, pkt1: TextView, pkt2: TextView, set1p1: TextView, set1p2: TextView, set2p1: TextView, set2p2: TextView, set3p1: TextView, set3p2: TextView) {
+    var serwis1: String
+    var serwis2: String
+    if(app.player1 == player1.text){
+        serwis1 = app.serve1
+        serwis2 = app.serve2
+    }
+    else{
+        serwis1 = app.serve2
+        serwis2 = app.serve1
+    }
     if (app.czyTiebreak) { //gramy tiebreaka
         if (scoreTiebreak(pkt1, pkt2)) { //jesli prawda to koniec tiebreaka
             if (set2p1.text == "" && set2p2.text == "") { //jesli prawda to jestesmy w secie 1
@@ -64,25 +83,33 @@ fun score(app: Stats,player1: TextView, player2: TextView, serve1: TextView, ser
             }
             pkt1.text = "0"
             pkt2.text = "0"
-            if(serve1.text != ""){//zmiana serwujacego
-                serve1.text = ""
-                serve2.text = "1"
+            if(serwis1 != ""){//zmiana serwujacego
+                serve1.visibility = View.INVISIBLE
+                serve2.visibility = View.VISIBLE
+                serwis1 = ""
+                serwis2 = "1"
             }
             else{
-                serve1.text = "1"
-                serve2.text = ""
+                serve1.visibility = View.VISIBLE
+                serve2.visibility = View.INVISIBLE
+                serwis1 = "1"
+                serwis2 = ""
             }
             app.czyTiebreak=false
         }
     }
     else if (scorePkt(pkt1, pkt2)) { //jesli prawda to koniec gema
-        if(serve1.text != ""){//zmiana serwujacego
-            serve1.text = ""
-            serve2.text = "1"
+        if(serwis1 != ""){//zmiana serwujacego
+            serve1.visibility = View.INVISIBLE
+            serve2.visibility = View.VISIBLE
+            serwis1 = ""
+            serwis2 = "1"
         }
         else{
-            serve1.text = "1"
-            serve2.text = ""
+            serve1.visibility = View.VISIBLE
+            serve2.visibility = View.INVISIBLE
+            serwis1 = "1"
+            serwis2 = ""
         }
         if (set2p1.text == "" && set2p2.text == "") { //jesli prawda to jestesmy w secie 1
             if (scoreSet(set1p1, set1p2)) { //jesli prawda to skonczyl sie 1 set
@@ -99,8 +126,10 @@ fun score(app: Stats,player1: TextView, player2: TextView, serve1: TextView, ser
         else if(set3p1.text == "" && set3p2.text == ""){ //jesli prawda to jestesmy w secie 2
             if (scoreSet(set2p1, set2p2)) { //jesli prawda to skonczyl sie 2 set
                 if(isEnd(set1p1,set1p2,set2p1,set2p2)){ //jesli prawda to koniec meczu
-                    serve1.text = "W" //medal/laur przy zawodniku ktory wygral
-                    serve2.text = ""
+                    serwis1 = "W" //medal/laur przy zawodniku ktory wygral
+                    serwis2 = ""
+                    serve1.visibility = View.VISIBLE
+                    serve2.visibility = View.INVISIBLE
                     fillUpScore(app,player1, player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
                     app.isEnd=true
                 }
@@ -118,8 +147,10 @@ fun score(app: Stats,player1: TextView, player2: TextView, serve1: TextView, ser
         }
         else{ //jestesmy w secie 3.
             if (scoreSet(set3p1, set3p2)) { //jesli prawda to skonczyl sie 3 set
-                serve1.text = "W" //medal/laur przy zawodniku ktory wygral
-                serve2.text = ""
+                serwis1 = "W" //medal/laur przy zawodniku ktory wygral
+                serwis2 = ""
+                serve1.visibility = View.VISIBLE
+                serve2.visibility = View.INVISIBLE
                 fillUpScore(app,player1, player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
                 app.isEnd=true
             }
@@ -136,14 +167,26 @@ fun score(app: Stats,player1: TextView, player2: TextView, serve1: TextView, ser
         val p2_string: String = pkt2.text.toString()
         val p2: Int = p2_string.toInt()
         if ((p1 + p2) % 2 != 0) { //zmiana serwujacego w tiebreaku przy nieparzystym wyniku
-            if (serve1.text == "") {
-                serve1.text = "1"
-                serve2.text = ""
+            if (serwis1 == "") {
+                serwis1 = "1"
+                serwis2 = ""
+                serve1.visibility = View.VISIBLE
+                serve2.visibility = View.INVISIBLE
             } else {
-                serve2.text = "1"
-                serve1.text = ""
+                serwis1 = ""
+                serwis2 = "1"
+                serve1.visibility = View.INVISIBLE
+                serve2.visibility = View.VISIBLE
             }
         }
+    }
+    if(app.player1 == player1.text){
+        app.serve1 = serwis1
+        app.serve2 = serwis2
+    }
+    else{
+        app.serve2 = serwis1
+        app.serve1 = serwis2
     }
     fillUpScore(app,player1, player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2) //tutaj nie wiem czy potrzebne, ale niech narazie zostanie
 }
@@ -220,8 +263,8 @@ fun isEnd(set1p1: TextView, set1p2: TextView,set2p1: TextView, set2p2: TextView)
 //aktualizuje wynik w klasie Stats
 fun fillUpScore(app: Stats,player1: TextView, player2: TextView, serve1: TextView, serve2: TextView, pkt1: TextView, pkt2: TextView, set1p1: TextView, set1p2: TextView, set2p1: TextView, set2p2: TextView, set3p1: TextView, set3p2: TextView): Unit {
     if(player1.text == app.player1) {
-        app.serve1 = serve1.text.toString()
-        app.serve2 = serve2.text.toString()
+        //app.serve1 = serve1.text.toString()
+        //app.serve2 = serve2.text.toString()
         app.pkt1 = pkt1.text.toString()
         app.pkt2 = pkt2.text.toString()
         app.set1p1 = set1p1.text.toString()
@@ -233,8 +276,8 @@ fun fillUpScore(app: Stats,player1: TextView, player2: TextView, serve1: TextVie
     }
     else
     {
-        app.serve2 = serve1.text.toString()
-        app.serve1 = serve2.text.toString()
+        //app.serve2 = serve1.text.toString()
+        //app.serve1 = serve2.text.toString()
         app.pkt2 = pkt1.text.toString()
         app.pkt1 = pkt2.text.toString()
         app.set1p2 = set1p1.text.toString()

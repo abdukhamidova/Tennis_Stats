@@ -3,6 +3,7 @@ package com.anw.tenistats
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
@@ -10,11 +11,14 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.anw.tenistats.databinding.ActivityBallInPlayBinding
+import com.anw.tenistats.databinding.ActivitySignUpBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
 class ActivityBallInPlay : AppCompatActivity() {
+    //private lateinit var binding: ActivityBallInPlayBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -25,9 +29,13 @@ class ActivityBallInPlay : AppCompatActivity() {
             insets
         }
 
+        //serve1.visibility = View.VISIBLE
+
         val app = application as Stats
         val serve1 = findViewById<TextView>(R.id.textViewServe1BIP)
+        //val serve1 = binding.textViewServe1BIP
         val serve2 = findViewById<TextView>(R.id.textViewServe2BIP)
+        //val serve2 = binding.textViewServe2BIP
         val pkt1 = findViewById<TextView>(R.id.textViewPlayer1PktBIP)
         val set1p1 = findViewById<TextView>(R.id.textViewPlayer1Set1BIP)
         val set2p1 = findViewById<TextView>(R.id.textViewPlayer1Set2BIP)
@@ -36,6 +44,7 @@ class ActivityBallInPlay : AppCompatActivity() {
         val set1p2 = findViewById<TextView>(R.id.textViewPlayer2Set1BIP)
         val set2p2 = findViewById<TextView>(R.id.textViewPlayer2Set2BIP)
         val set3p2 = findViewById<TextView>(R.id.textViewPlayer2Set3BIP)
+
 
         fillUpScoreInActivity(app,findViewById<TextView>(R.id.textviewPlayer1),findViewById<TextView>(R.id.textviewPlayer2),serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2) //ustawienie poczatkowe wyniku
 
