@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#2A89AE">
+
+        <TextView
+            android:id="@+id/textViewConfirm"
+            android:layout_width="230dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center"
+            android:text="@string/confirm_to_add"
+            android:textColor="@color/kolor_nazw_tytul"
+            android:textSize="35sp"
+            android:textAlignment="center"/>
+
+    <TextView
+        android:id="@+id/textViewPointData"
+        android:layout_width="209dp"
+        android:layout_height="165dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:padding="15dp"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+
+    <LinearLayout
+            android:id="@+id/linearLayoutAddCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="32dp"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+
+            <Button
+                android:id="@+id/buttonCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/border_button"
+                android:text="@string/cancel"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/buttonAdd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/kolor_tabeli"
+                android:text="@string/add"
+                android:textSize="22sp" />
+        </LinearLayout>
+</LinearLayout>

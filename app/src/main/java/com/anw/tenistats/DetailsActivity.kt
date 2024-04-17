@@ -3,16 +3,13 @@ package com.anw.tenistats
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
-import android.widget.ImageButton
 import android.widget.RadioButton
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.anw.tenistats.com.anw.tenistats.AddPointDialog
 
 class DetailsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,7 +41,7 @@ class DetailsActivity : AppCompatActivity() {
         val set1p2 = findViewById<TextView>(R.id.textviewPlayer2Set1Details)
         val set2p2 = findViewById<TextView>(R.id.textviewPlayer2Set2Details)
         val set3p2 = findViewById<TextView>(R.id.textviewPlayer2Set3Details)
-
+        val addPointDialog = AddPointDialog(this,false)
         fillUpScoreInActivity(app,findViewById<TextView>(R.id.textviewPlayer1Details),findViewById<TextView>(R.id.textviewPlayer2Details),serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
 
         val player1 = findViewById<TextView>(R.id.textviewPlayer1Details)
@@ -74,32 +71,28 @@ class DetailsActivity : AppCompatActivity() {
         findViewById<Button>(R.id.buttonGround).setOnClickListener {
             if(findViewById<RadioButton>(R.id.radioButtonFH).isChecked)
             {
-                val intent=Intent(this,AddActivity::class.java).also{
-                    it.putExtra("Pkt1",intent.getStringExtra("Pkt1"))
-                    it.putExtra("Pkt2",intent.getStringExtra("Pkt2"))
-                    it.putExtra("matchID",intent.getStringExtra("matchID"))
-                    it.putExtra("gameID",intent.getStringExtra("gameID"))
-                    it.putExtra("setID",intent.getStringExtra("setID"))
-                    it.putExtra("Gdzie","Ground")
-                    it.putExtra("Czym","Forehand")
-                    it.putExtra("Kto",intent.getStringExtra("Kto"))
-                    it.putExtra("Co",intent.getStringExtra("Co"))
-                    startActivity(it)
-                }
+                addPointDialog.show(
+                    intent.getStringExtra("Pkt1").toString(),
+                    intent.getStringExtra("Pkt2").toString(),
+                    intent.getStringExtra("Kto").toString(),
+                    intent.getStringExtra("Co").toString(),
+                    "Ground",
+                    "Forehand",
+                    intent.getStringExtra("matchID").toString(),
+                    intent.getStringExtra("gameID").toString(),
+                    intent.getStringExtra("setID").toString())
             }
             else{
-                val intent=Intent(this,AddActivity::class.java).also{
-                    it.putExtra("Pkt1",intent.getStringExtra("Pkt1"))
-                    it.putExtra("Pkt2",intent.getStringExtra("Pkt2"))
-                    it.putExtra("matchID",intent.getStringExtra("matchID"))
-                    it.putExtra("gameID",intent.getStringExtra("gameID"))
-                    it.putExtra("setID",intent.getStringExtra("setID"))
-                    it.putExtra("Gdzie","Ground")
-                    it.putExtra("Czym","Backhand")
-                    it.putExtra("Kto",intent.getStringExtra("Kto"))
-                    it.putExtra("Co",intent.getStringExtra("Co"))
-                    startActivity(it)
-                }
+                addPointDialog.show(
+                    intent.getStringExtra("Pkt1").toString(),
+                    intent.getStringExtra("Pkt2").toString(),
+                    intent.getStringExtra("Kto").toString(),
+                    intent.getStringExtra("Co").toString(),
+                    "Ground",
+                    "Backhand",
+                    intent.getStringExtra("matchID").toString(),
+                    intent.getStringExtra("gameID").toString(),
+                    intent.getStringExtra("setID").toString())
             }
             if(intent.getStringExtra("Co")=="Winner") {
                 if(czyPlayer1) {
@@ -122,32 +115,28 @@ class DetailsActivity : AppCompatActivity() {
         findViewById<Button>(R.id.buttonVolley).setOnClickListener {
             if(findViewById<RadioButton>(R.id.radioButtonFH).isChecked)
             {
-                val intent=Intent(this,AddActivity::class.java).also{
-                    it.putExtra("Pkt1",intent.getStringExtra("Pkt1"))
-                    it.putExtra("Pkt2",intent.getStringExtra("Pkt2"))
-                    it.putExtra("matchID",intent.getStringExtra("matchID"))
-                    it.putExtra("gameID",intent.getStringExtra("gameID"))
-                    it.putExtra("setID",intent.getStringExtra("setID"))
-                    it.putExtra("Gdzie","Volley")
-                    it.putExtra("Czym","Forehand")
-                    it.putExtra("Kto",intent.getStringExtra("Kto"))
-                    it.putExtra("Co",intent.getStringExtra("Co"))
-                    startActivity(it)
-                }
+                addPointDialog.show(
+                    intent.getStringExtra("Pkt1").toString(),
+                    intent.getStringExtra("Pkt2").toString(),
+                    intent.getStringExtra("Kto").toString(),
+                    intent.getStringExtra("Co").toString(),
+                    "Volley",
+                    "Forehand",
+                    intent.getStringExtra("matchID").toString(),
+                    intent.getStringExtra("gameID").toString(),
+                    intent.getStringExtra("setID").toString())
             }
             else{
-                val intent=Intent(this,AddActivity::class.java).also{
-                    it.putExtra("Pkt1",intent.getStringExtra("Pkt1"))
-                    it.putExtra("Pkt2",intent.getStringExtra("Pkt2"))
-                    it.putExtra("matchID",intent.getStringExtra("matchID"))
-                    it.putExtra("gameID",intent.getStringExtra("gameID"))
-                    it.putExtra("setID",intent.getStringExtra("setID"))
-                    it.putExtra("Gdzie","Volley")
-                    it.putExtra("Czym","Backhand")
-                    it.putExtra("Kto",intent.getStringExtra("Kto"))
-                    it.putExtra("Co",intent.getStringExtra("Co"))
-                    startActivity(it)
-                }
+                addPointDialog.show(
+                    intent.getStringExtra("Pkt1").toString(),
+                    intent.getStringExtra("Pkt2").toString(),
+                    intent.getStringExtra("Kto").toString(),
+                    intent.getStringExtra("Co").toString(),
+                    "Volley",
+                    "Backhand",
+                    intent.getStringExtra("matchID").toString(),
+                    intent.getStringExtra("gameID").toString(),
+                    intent.getStringExtra("setID").toString())
             }
             if(intent.getStringExtra("Co")=="Winner") {
                 if(czyPlayer1) {
@@ -170,32 +159,28 @@ class DetailsActivity : AppCompatActivity() {
         findViewById<Button>(R.id.buttonLob).setOnClickListener {
             if(findViewById<RadioButton>(R.id.radioButtonFH).isChecked)
             {
-                val intent=Intent(this,AddActivity::class.java).also{
-                    it.putExtra("Pkt1",intent.getStringExtra("Pkt1"))
-                    it.putExtra("Pkt2",intent.getStringExtra("Pkt2"))
-                    it.putExtra("matchID",intent.getStringExtra("matchID"))
-                    it.putExtra("gameID",intent.getStringExtra("gameID"))
-                    it.putExtra("setID",intent.getStringExtra("setID"))
-                    it.putExtra("Gdzie","Lob")
-                    it.putExtra("Czym","Forehand")
-                    it.putExtra("Kto",intent.getStringExtra("Kto"))
-                    it.putExtra("Co",intent.getStringExtra("Co"))
-                    startActivity(it)
-                }
+                addPointDialog.show(
+                    intent.getStringExtra("Pkt1").toString(),
+                    intent.getStringExtra("Pkt2").toString(),
+                    intent.getStringExtra("Kto").toString(),
+                    intent.getStringExtra("Co").toString(),
+                    "Lob",
+                    "Forehand",
+                    intent.getStringExtra("matchID").toString(),
+                    intent.getStringExtra("gameID").toString(),
+                    intent.getStringExtra("setID").toString())
             }
             else{
-                val intent=Intent(this,AddActivity::class.java).also{
-                    it.putExtra("Pkt1",intent.getStringExtra("Pkt1"))
-                    it.putExtra("Pkt2",intent.getStringExtra("Pkt2"))
-                    it.putExtra("matchID",intent.getStringExtra("matchID"))
-                    it.putExtra("gameID",intent.getStringExtra("gameID"))
-                    it.putExtra("setID",intent.getStringExtra("setID"))
-                    it.putExtra("Gdzie","Lob")
-                    it.putExtra("Czym","Backhand")
-                    it.putExtra("Kto",intent.getStringExtra("Kto"))
-                    it.putExtra("Co",intent.getStringExtra("Co"))
-                    startActivity(it)
-                }
+                addPointDialog.show(
+                    intent.getStringExtra("Pkt1").toString(),
+                    intent.getStringExtra("Pkt2").toString(),
+                    intent.getStringExtra("Kto").toString(),
+                    intent.getStringExtra("Co").toString(),
+                    "Lob",
+                    "Backhand",
+                    intent.getStringExtra("matchID").toString(),
+                    intent.getStringExtra("gameID").toString(),
+                    intent.getStringExtra("setID").toString())
             }
             if(intent.getStringExtra("Co")=="Winner") {
                 if(czyPlayer1) {
@@ -218,32 +203,28 @@ class DetailsActivity : AppCompatActivity() {
         findViewById<Button>(R.id.buttonSlice).setOnClickListener {
             if(findViewById<RadioButton>(R.id.radioButtonFH).isChecked)
             {
-                val intent=Intent(this,AddActivity::class.java).also{
-                    it.putExtra("Pkt1",intent.getStringExtra("Pkt1"))
-                    it.putExtra("Pkt2",intent.getStringExtra("Pkt2"))
-                    it.putExtra("matchID",intent.getStringExtra("matchID"))
-                    it.putExtra("gameID",intent.getStringExtra("gameID"))
-                    it.putExtra("setID",intent.getStringExtra("setID"))
-                    it.putExtra("Gdzie","Slice")
-                    it.putExtra("Czym","Forehand")
-                    it.putExtra("Kto",intent.getStringExtra("Kto"))
-                    it.putExtra("Co",intent.getStringExtra("Co"))
-                    startActivity(it)
-                }
+                addPointDialog.show(
+                    intent.getStringExtra("Pkt1").toString(),
+                    intent.getStringExtra("Pkt2").toString(),
+                    intent.getStringExtra("Kto").toString(),
+                    intent.getStringExtra("Co").toString(),
+                    "Slice",
+                    "Forehand",
+                    intent.getStringExtra("matchID").toString(),
+                    intent.getStringExtra("gameID").toString(),
+                    intent.getStringExtra("setID").toString())
             }
             else{
-                val intent=Intent(this,AddActivity::class.java).also{
-                    it.putExtra("Pkt1",intent.getStringExtra("Pkt1"))
-                    it.putExtra("Pkt2",intent.getStringExtra("Pkt2"))
-                    it.putExtra("matchID",intent.getStringExtra("matchID"))
-                    it.putExtra("gameID",intent.getStringExtra("gameID"))
-                    it.putExtra("setID",intent.getStringExtra("setID"))
-                    it.putExtra("Gdzie","Slice")
-                    it.putExtra("Czym","Backhand")
-                    it.putExtra("Kto",intent.getStringExtra("Kto"))
-                    it.putExtra("Co",intent.getStringExtra("Co"))
-                    startActivity(it)
-                }
+                addPointDialog.show(
+                    intent.getStringExtra("Pkt1").toString(),
+                    intent.getStringExtra("Pkt2").toString(),
+                    intent.getStringExtra("Kto").toString(),
+                    intent.getStringExtra("Co").toString(),
+                    "Slice",
+                    "Backhand",
+                    intent.getStringExtra("matchID").toString(),
+                    intent.getStringExtra("gameID").toString(),
+                    intent.getStringExtra("setID").toString())
             }
             if(intent.getStringExtra("Co")=="Winner") {
                 if(czyPlayer1) {
@@ -266,32 +247,28 @@ class DetailsActivity : AppCompatActivity() {
         findViewById<Button>(R.id.buttonSmash).setOnClickListener {
             if(findViewById<RadioButton>(R.id.radioButtonFH).isChecked)
             {
-                val intent=Intent(this,AddActivity::class.java).also{
-                    it.putExtra("Pkt1",intent.getStringExtra("Pkt1"))
-                    it.putExtra("Pkt2",intent.getStringExtra("Pkt2"))
-                    it.putExtra("matchID",intent.getStringExtra("matchID"))
-                    it.putExtra("gameID",intent.getStringExtra("gameID"))
-                    it.putExtra("setID",intent.getStringExtra("setID"))
-                    it.putExtra("Gdzie","Smash")
-                    it.putExtra("Czym","Forehand")
-                    it.putExtra("Kto",intent.getStringExtra("Kto"))
-                    it.putExtra("Co",intent.getStringExtra("Co"))
-                    startActivity(it)
-                }
+                addPointDialog.show(
+                    intent.getStringExtra("Pkt1").toString(),
+                    intent.getStringExtra("Pkt2").toString(),
+                    intent.getStringExtra("Kto").toString(),
+                    intent.getStringExtra("Co").toString(),
+                    "Smash",
+                    "Forehand",
+                    intent.getStringExtra("matchID").toString(),
+                    intent.getStringExtra("gameID").toString(),
+                    intent.getStringExtra("setID").toString())
             }
             else{
-                val intent=Intent(this,AddActivity::class.java).also{
-                    it.putExtra("Pkt1",intent.getStringExtra("Pkt1"))
-                    it.putExtra("Pkt2",intent.getStringExtra("Pkt2"))
-                    it.putExtra("matchID",intent.getStringExtra("matchID"))
-                    it.putExtra("gameID",intent.getStringExtra("gameID"))
-                    it.putExtra("setID",intent.getStringExtra("setID"))
-                    it.putExtra("Gdzie","Smash")
-                    it.putExtra("Czym","Backhand")
-                    it.putExtra("Kto",intent.getStringExtra("Kto"))
-                    it.putExtra("Co",intent.getStringExtra("Co"))
-                    startActivity(it)
-                }
+                addPointDialog.show(
+                    intent.getStringExtra("Pkt1").toString(),
+                    intent.getStringExtra("Pkt2").toString(),
+                    intent.getStringExtra("Kto").toString(),
+                    intent.getStringExtra("Co").toString(),
+                    "Smash",
+                    "Backhand",
+                    intent.getStringExtra("matchID").toString(),
+                    intent.getStringExtra("gameID").toString(),
+                    intent.getStringExtra("setID").toString())
             }
             if(intent.getStringExtra("Co")=="Winner") {
                 if(czyPlayer1) {
@@ -314,32 +291,28 @@ class DetailsActivity : AppCompatActivity() {
         findViewById<Button>(R.id.buttonDropshot).setOnClickListener {
             if(findViewById<RadioButton>(R.id.radioButtonFH).isChecked)
             {
-                val intent=Intent(this,AddActivity::class.java).also{
-                    it.putExtra("Pkt1",intent.getStringExtra("Pkt1"))
-                    it.putExtra("Pkt2",intent.getStringExtra("Pkt2"))
-                    it.putExtra("matchID",intent.getStringExtra("matchID"))
-                    it.putExtra("gameID",intent.getStringExtra("gameID"))
-                    it.putExtra("setID",intent.getStringExtra("setID"))
-                    it.putExtra("Gdzie","Dropshot")
-                    it.putExtra("Czym","Forehand")
-                    it.putExtra("Kto",intent.getStringExtra("Kto"))
-                    it.putExtra("Co",intent.getStringExtra("Co"))
-                    startActivity(it)
-                }
+                addPointDialog.show(
+                    intent.getStringExtra("Pkt1").toString(),
+                    intent.getStringExtra("Pkt2").toString(),
+                    intent.getStringExtra("Kto").toString(),
+                    intent.getStringExtra("Co").toString(),
+                    "Dropshot",
+                    "Forehand",
+                    intent.getStringExtra("matchID").toString(),
+                    intent.getStringExtra("gameID").toString(),
+                    intent.getStringExtra("setID").toString())
             }
             else{
-                val intent=Intent(this,AddActivity::class.java).also{
-                    it.putExtra("Pkt1",intent.getStringExtra("Pkt1"))
-                    it.putExtra("Pkt2",intent.getStringExtra("Pkt2"))
-                    it.putExtra("matchID",intent.getStringExtra("matchID"))
-                    it.putExtra("gameID",intent.getStringExtra("gameID"))
-                    it.putExtra("setID",intent.getStringExtra("setID"))
-                    it.putExtra("Gdzie","Dropshot")
-                    it.putExtra("Czym","Backhand")
-                    it.putExtra("Kto",intent.getStringExtra("Kto"))
-                    it.putExtra("Co",intent.getStringExtra("Co"))
-                    startActivity(it)
-                }
+                addPointDialog.show(
+                    intent.getStringExtra("Pkt1").toString(),
+                    intent.getStringExtra("Pkt2").toString(),
+                    intent.getStringExtra("Kto").toString(),
+                    intent.getStringExtra("Co").toString(),
+                    "Dropshot",
+                    "Backhand",
+                    intent.getStringExtra("matchID").toString(),
+                    intent.getStringExtra("gameID").toString(),
+                    intent.getStringExtra("setID").toString())
             }
             if(intent.getStringExtra("Co")=="Winner") {
                 if(czyPlayer1) {
