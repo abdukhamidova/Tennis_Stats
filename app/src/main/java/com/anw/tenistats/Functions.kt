@@ -68,13 +68,11 @@ fun score(app: Stats,player1: TextView, player2: TextView, serve1: TextView, ser
                 set1p1.text = "7"
                 set2p1.text = "0"
                 set2p2.text = "0"
-                app.pktId=1
             }
             else if(set3p1.text == "" && set3p2.text == ""){//jesli prawda to jestesmy w secie 2
                 set2p1.text = "7"
                 set3p1.text = "0"
                 set3p2.text = "0"
-                app.pktId=1
             }
             else{
                 set3p1.text = "7"
@@ -113,7 +111,6 @@ fun score(app: Stats,player1: TextView, player2: TextView, serve1: TextView, ser
         }
         if (set2p1.text == "" && set2p2.text == "") { //jesli prawda to jestesmy w secie 1
             if (scoreSet(set1p1, set1p2)) { //jesli prawda to skonczyl sie 1 set
-                app.pktId=1
                 set2p1.text = "0"
                 set2p2.text = "0"
             }
@@ -134,7 +131,6 @@ fun score(app: Stats,player1: TextView, player2: TextView, serve1: TextView, ser
                     app.isEnd=true
                 }
                 else {
-                    app.pktId=1
                     set3p1.text = "0"
                     set3p2.text = "0"
                 }
