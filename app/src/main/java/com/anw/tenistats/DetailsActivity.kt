@@ -94,20 +94,22 @@ class DetailsActivity : AppCompatActivity() {
                     intent.getStringExtra("gameID").toString(),
                     intent.getStringExtra("setID").toString())
             }
-            if(intent.getStringExtra("Co")=="Winner") {
-                if(czyPlayer1) {
-                    score(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
-                }
+            if(!app.isCanceled){
+                if(intent.getStringExtra("Co")=="Winner") {
+                    if(czyPlayer1) {
+                        score(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
+                    }
+                    else{
+                        score(app,player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
+                    }
+                }//przyznanie punktu
                 else{
-                    score(app,player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
-                }
-            }//przyznanie punktu
-            else{
-                if(czyPlayer1) {
-                    score(app,player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
-                }
-                else{
-                    score(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
+                    if(czyPlayer1) {
+                        score(app,player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
+                    }
+                    else{
+                        score(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
+                    }
                 }
             }
         }
@@ -138,20 +140,22 @@ class DetailsActivity : AppCompatActivity() {
                     intent.getStringExtra("gameID").toString(),
                     intent.getStringExtra("setID").toString())
             }
-            if(intent.getStringExtra("Co")=="Winner") {
-                if(czyPlayer1) {
-                    score(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
-                }
+            if(!app.isCanceled){
+                if(intent.getStringExtra("Co")=="Winner") {
+                    if(czyPlayer1) {
+                        score(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
+                    }
+                    else{
+                        score(app,player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
+                    }
+                }//przyznanie punktu
                 else{
-                    score(app,player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
-                }
-            }//przyznanie punktu
-            else{
-                if(czyPlayer1) {
-                    score(app,player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
-                }
-                else{
-                    score(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
+                    if(czyPlayer1) {
+                        score(app,player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
+                    }
+                    else{
+                        score(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
+                    }
                 }
             }
         }
@@ -182,20 +186,22 @@ class DetailsActivity : AppCompatActivity() {
                     intent.getStringExtra("gameID").toString(),
                     intent.getStringExtra("setID").toString())
             }
-            if(intent.getStringExtra("Co")=="Winner") {
-                if(czyPlayer1) {
-                    score(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
-                }
+            if(!app.isCanceled){
+                if(intent.getStringExtra("Co")=="Winner") {
+                    if(czyPlayer1) {
+                        score(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
+                    }
+                    else{
+                        score(app,player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
+                    }
+                }//przyznanie punktu
                 else{
-                    score(app,player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
-                }
-            }//przyznanie punktu
-            else{
-                if(czyPlayer1) {
-                    score(app,player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
-                }
-                else{
-                    score(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
+                    if(czyPlayer1) {
+                        score(app,player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
+                    }
+                    else{
+                        score(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
+                    }
                 }
             }
         }
@@ -226,20 +232,22 @@ class DetailsActivity : AppCompatActivity() {
                     intent.getStringExtra("gameID").toString(),
                     intent.getStringExtra("setID").toString())
             }
-            if(intent.getStringExtra("Co")=="Winner") {
-                if(czyPlayer1) {
-                    score(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
-                }
+            if(!app.isCanceled){
+                if(intent.getStringExtra("Co")=="Winner") {
+                    if(czyPlayer1) {
+                        score(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
+                    }
+                    else{
+                        score(app,player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
+                    }
+                }//przyznanie punktu
                 else{
-                    score(app,player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
-                }
-            }//przyznanie punktu
-            else{
-                if(czyPlayer1) {
-                    score(app,player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
-                }
-                else{
-                    score(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
+                    if(czyPlayer1) {
+                        score(app,player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
+                    }
+                    else{
+                        score(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
+                    }
                 }
             }
         }
@@ -270,20 +278,22 @@ class DetailsActivity : AppCompatActivity() {
                     intent.getStringExtra("gameID").toString(),
                     intent.getStringExtra("setID").toString())
             }
-            if(intent.getStringExtra("Co")=="Winner") {
-                if(czyPlayer1) {
-                    score(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
-                }
+            if(!app.isCanceled){
+                if(intent.getStringExtra("Co")=="Winner") {
+                    if(czyPlayer1) {
+                        score(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
+                    }
+                    else{
+                        score(app,player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
+                    }
+                }//przyznanie punktu
                 else{
-                    score(app,player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
-                }
-            }//przyznanie punktu
-            else{
-                if(czyPlayer1) {
-                    score(app,player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
-                }
-                else{
-                    score(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
+                    if(czyPlayer1) {
+                        score(app,player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
+                    }
+                    else{
+                        score(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
+                    }
                 }
             }
         }
@@ -314,20 +324,22 @@ class DetailsActivity : AppCompatActivity() {
                     intent.getStringExtra("gameID").toString(),
                     intent.getStringExtra("setID").toString())
             }
-            if(intent.getStringExtra("Co")=="Winner") {
-                if(czyPlayer1) {
-                    score(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
-                }
+            if(!app.isCanceled){
+                if(intent.getStringExtra("Co")=="Winner") {
+                    if(czyPlayer1) {
+                        score(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
+                    }
+                    else{
+                        score(app,player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
+                    }
+                }//przyznanie punktu
                 else{
-                    score(app,player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
-                }
-            }//przyznanie punktu
-            else{
-                if(czyPlayer1) {
-                    score(app,player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
-                }
-                else{
-                    score(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
+                    if(czyPlayer1) {
+                        score(app,player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
+                    }
+                    else{
+                        score(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
+                    }
                 }
             }
         }

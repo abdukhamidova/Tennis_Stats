@@ -20,8 +20,8 @@ class AddPointDialog(private val context: Context, private val openedFromStartPo
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var database: DatabaseReference
     private lateinit var alertDialog: AlertDialog
-
-    fun show(pkt1: String, pkt2: String, kto: String, co: String, gdzie: String, czym: String, matchId: String, gameId: String, setId: String) {
+    val app = (context.applicationContext as? Stats)
+    fun show(pkt1: String, pkt2: String, kto: String, co: String, gdzie: String, czym: String, matchId: String, gameId: String, setId: String){
         //przygotowanie zmiennych
         val dialogView = LayoutInflater.from(context).inflate(R.layout.add_dialog, null)
         alertDialog = AlertDialog.Builder(context)
@@ -37,9 +37,9 @@ class AddPointDialog(private val context: Context, private val openedFromStartPo
             // Dodaj punkt do bazy danych
             firebaseAuth=FirebaseAuth.getInstance()
             val user = firebaseAuth.currentUser?.uid
-            val app = (context.applicationContext as? Stats)
 
             if (app != null) {
+                app.isCanceled = false
                 database = FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
                     .getReference(user.toString()).child("Matches").child(matchId).child(("set "+ setId)).child(("game "+gameId)).child(("point "+app.pktId))
 
@@ -67,6 +67,12 @@ class AddPointDialog(private val context: Context, private val openedFromStartPo
         }
 
         btnCancel.setOnClickListener {
+            if(app!=null) {
+                app.isCanceled = true
+            }
+            val intent = Intent(context, ActivityStartPoint::class.java)
+            intent.putExtra("matchID", matchId)
+            context.startActivity(intent)
             alertDialog.dismiss()
         }
         alertDialog.show()

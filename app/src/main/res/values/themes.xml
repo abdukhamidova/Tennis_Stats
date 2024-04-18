@@ -6,6 +6,7 @@
         <item name="android:fontFamily">@font/aldrich</item>
         <item name="android:textStyle">bold</item>
         <item name="android:windowBackground">@color/kolor_tla</item>
+        <item name="android:textAppearance">@style/MyTextAppearance</item>
     </style>
 
     <style name="Theme.TenniStats" parent="Base.Theme.TenniStats" />
@@ -15,5 +16,13 @@
         <item name="android:textColor">@color/kolor_tekstu_guzik</item>
         <item name="android:fontFamily">@font/aldrich</item>
         <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="MyTextAppearance">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:layout_weight">0.9</item>
     </style>
 </resources>
