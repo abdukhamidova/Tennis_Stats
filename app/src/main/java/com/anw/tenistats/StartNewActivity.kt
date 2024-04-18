@@ -229,7 +229,7 @@ class StartNewActivity : AppCompatActivity() {
         val intent = Intent(this, ActivityServe::class.java).apply {
             putExtra("DanePlayer1", player1)
             putExtra("DanePlayer2", player2)
-            //~u
+            //~u //hej ~w
             putExtra("matchID",matchId)
         }
         startActivity(intent)

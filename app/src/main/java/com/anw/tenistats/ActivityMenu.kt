@@ -41,6 +41,9 @@ class ActivityMenu : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        findViewById<Button>(R.id.buttonViewMatches).setOnClickListener{
+            startActivity(Intent(this,ViewMatchesActivity::class.java))
+        }
     }
 }
 

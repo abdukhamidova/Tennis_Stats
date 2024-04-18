@@ -18,7 +18,6 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
 class ActivityBallInPlay : AppCompatActivity() {
-    //private lateinit var binding: ActivityBallInPlayBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
