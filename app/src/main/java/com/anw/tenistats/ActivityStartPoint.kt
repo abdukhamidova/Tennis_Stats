@@ -58,27 +58,10 @@ class ActivityStartPoint : AppCompatActivity() {
             }
         }*/
 
-        var game: Int
-        var set = 1
-        if(set2p1.text=="") {
-            val game1=set1p1.text.toString()
-            val game2=set1p2.text.toString()
-            game = game1.toInt() + game2.toInt() + 1
-        }//jest set 1
-        else if(set3p1.text==""){
-            set=2
-            val game1=set2p1.text.toString()
-            val game2=set2p2.text.toString()
-            game = game1.toInt() + game2.toInt() + 1
-        }//jest set 2
-        else{
-            set=3
-            val game1=set3p1.text.toString()
-            val game2=set3p2.text.toString()
-            game = game1.toInt() + game2.toInt() + 1
-        }//jest set 3
+        val (game,set) = calculateGame(set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
 
         findViewById<Button>(R.id.buttonAce).setOnClickListener {
+            val (game,set) = calculateGame(set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
             if (app.serve1 != "") { //serwuje player 1
                 app.totalpoints1++
                 if (findViewById<Button>(R.id.buttonFault).text == "Fault") { //trafiony 1 serwis
@@ -130,6 +113,7 @@ class ActivityStartPoint : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.buttonFault).setOnClickListener {
+            val (game,set) = calculateGame(set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
             if (findViewById<Button>(R.id.buttonFault).text == "Fault") {
                 app.serwis=2
                 findViewById<Button>(R.id.buttonFault).text = "Double Fault"
@@ -176,6 +160,7 @@ class ActivityStartPoint : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.buttonRWF).setOnClickListener{
+            val (game,set) = calculateGame(set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
             if (app.serve1 != "") { //serwuje player 1
                 app.totalpoints2++
                 if (findViewById<Button>(R.id.buttonFault).text == "Fault") { //trafiony 1 serwis
@@ -227,6 +212,7 @@ class ActivityStartPoint : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.buttonRWB).setOnClickListener {
+            val (game,set) = calculateGame(set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
             if (app.serve1 != "") { //serwuje player 1
                 app.totalpoints2++
                 if (findViewById<Button>(R.id.buttonFault).text == "Fault") { //trafiony 1 serwis
@@ -277,6 +263,7 @@ class ActivityStartPoint : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.buttonREF).setOnClickListener {
+            val (game,set) = calculateGame(set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
             if (app.serve1 != "") { //serwuje player 1
                 app.totalpoints1++
                 if (findViewById<Button>(R.id.buttonFault).text == "Fault") { //trafiony 1 serwis
@@ -327,6 +314,7 @@ class ActivityStartPoint : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.buttonREB).setOnClickListener {
+            val (game,set) = calculateGame(set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
             if (app.serve1 != "") { //serwuje player 1
                 app.totalpoints1++
                 if (findViewById<Button>(R.id.buttonFault).text == "Fault") { //trafiony 1 serwis
@@ -378,6 +366,7 @@ class ActivityStartPoint : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.buttonBIP).setOnClickListener {
+            val (game,set) = calculateGame(set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
             if(app.serve1 != ""){
                 if (findViewById<Button>(R.id.buttonFault).text == "Fault") { //trafiony 1 serwis
                     app.firstservein1++
@@ -412,5 +401,27 @@ class ActivityStartPoint : AppCompatActivity() {
             startActivity(intent)
             //callActivity() //zmiana aktywnosci na ActivityBallInPlay
         }
+    }
+    fun calculateGame(set1p1: TextView, set1p2: TextView, set2p1: TextView, set2p2: TextView, set3p1: TextView, set3p2: TextView): Pair<Int, Int> {
+        var game = 1
+        var set = 1
+
+        if (set2p1.text == "") {
+            val game1 = set1p1.text.toString().toInt()
+            val game2 = set1p2.text.toString().toInt()
+            game = game1 + game2 + 1
+        } else if (set3p1.text == "") {
+            set = 2
+            val game1 = set2p1.text.toString().toInt()
+            val game2 = set2p2.text.toString().toInt()
+            game = game1 + game2 + 1
+        } else {
+            set = 3
+            val game1 = set3p1.text.toString().toInt()
+            val game2 = set3p2.text.toString().toInt()
+            game = game1 + game2 + 1
+        }
+
+        return Pair(game, set)
     }
 }
