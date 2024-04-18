@@ -48,5 +48,11 @@
     <string name="add">Add</string>
     <string name="title_activity_view_show_more">ViewShowMoreActivity</string>
     <string name="title_activity_view_player">ViewPlayerActivity</string>
+    <string name="player1_item">Player 1:</string>
+    <string name="date_item">Date:</string>
+    <string name="player2_item">Player 2:</string>
+    <string name="player">Player</string>
+    <string name="matches">Matches</string>
+    <string name="search">Search</string>
 
 </resources>

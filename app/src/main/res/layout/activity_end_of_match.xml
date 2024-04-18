@@ -39,9 +39,10 @@
 
     <TableLayout
         android:id="@+id/tableLayoutEnd"
-        android:layout_width="364dp"
-        android:layout_height="104dp"
+        android:layout_width="370dp"
+        android:layout_height="wrap_content"
         android:background="@color/kolor_tabeli"
+        android:theme="@style/MyTextAppearance"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,57 +53,37 @@
         <TableRow>
 
             <TextView
-                android:id="@+id/textViewServe1EOM"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="0.2"
-                android:fontFamily="@font/aldrich"
-                android:padding="15dp"
-                android:textColor="#000000"
-                android:textSize="15sp" />
+                android:id="@+id/textViewServe1BIP"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="4dp"
+                android:layout_weight="0"
+                android:visibility="invisible"
+                app:drawableStartCompat="@drawable/ball" />
 
             <TextView
                 android:id="@+id/textviewPlayer1"
-                android:layout_width="65dp"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="6dp"
                 android:layout_weight="1"
-                android:fontFamily="@font/aldrich"
-                android:padding="15dp"
-                android:textColor="#000000"
-                android:textSize="15sp" />
+                android:textAlignment="textStart" />
 
             <TextView
                 android:id="@+id/textViewP1Set1EOM"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/aldrich"
-                android:padding="15dp"
-                android:text=""
-                android:textColor="#000000"
-                android:textSize="15sp" />
+                android:layout_height="match_parent"
+                android:text="" />
 
             <TextView
                 android:id="@+id/textViewP1Set2EOM"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/aldrich"
-                android:padding="15dp"
-                android:text=""
-                android:textColor="#000000"
-                android:textSize="15sp" />
+                android:layout_height="match_parent"
+                android:text="" />
 
             <TextView
                 android:id="@+id/textViewP1Set3EOM"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/aldrich"
-                android:padding="15dp"
-                android:text=""
-                android:textColor="#000000"
-                android:textSize="15sp" />
+                android:layout_height="match_parent"
+                android:text="" />
 
         </TableRow>
 
@@ -110,59 +91,37 @@
 
             <TextView
                 android:id="@+id/textViewServe2EOM"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="0.2"
-                android:fontFamily="@font/aldrich"
-                android:padding="15dp"
-                android:textColor="#000000"
-                android:textSize="15sp" />
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="4dp"
+                android:layout_weight="0"
+                android:visibility="invisible"
+                app:drawableStartCompat="@drawable/ball" />
 
             <TextView
                 android:id="@+id/textviewPlayer2"
-                android:layout_width="1dp"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="6dp"
                 android:layout_weight="1"
-                android:fontFamily="@font/aldrich"
-                android:padding="15dp"
-                android:textColor="#000000"
-                android:textSize="15sp" />
+                android:textAlignment="textStart" />
 
             <TextView
                 android:id="@+id/textViewP2Set1EOM"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/aldrich"
-                android:padding="15dp"
-                android:text=""
-                android:textColor="#000000"
-                android:textSize="15sp" />
+                android:layout_height="match_parent"
+                android:text="" />
 
             <TextView
                 android:id="@+id/textViewP2Set2EOM"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/aldrich"
-                android:padding="15dp"
-                android:text=""
-                android:textColor="#000000"
-                android:textSize="15sp" />
+                android:layout_height="match_parent"
+                android:text="" />
 
             <TextView
                 android:id="@+id/textViewP2Set3EOM"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/aldrich"
-                android:padding="15dp"
-                android:text=""
-                android:textColor="#000000"
-                android:textSize="15sp" />
-
+                android:layout_height="match_parent"
+                android:text="" />
         </TableRow>
-
     </TableLayout>
 
     <Button
@@ -171,8 +130,8 @@
         android:text="@string/view_stats"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/tableLayoutEnd"
+        app:layout_constraintStart_toStartOf="@+id/tableLayoutEnd"
         app:layout_constraintTop_toBottomOf="@+id/tableLayoutEnd"
         app:layout_constraintVertical_bias="0.07999998"
         app:shapeAppearance="@style/CardView" />

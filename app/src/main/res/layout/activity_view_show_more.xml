@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".ViewShowMoreActivity"
     android:background="@color/kolor_tla">
+
     <Button
         android:id="@+id/buttonMenuSHM"
         android:layout_width="92dp"
@@ -21,6 +22,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.032"
         app:shapeAppearance="@style/CardView"/>
+
     <ImageButton
         android:id="@+id/imageButtonBack"
         android:layout_width="92dp"
@@ -41,6 +43,7 @@
         android:layout_width="370dp"
         android:layout_height="wrap_content"
         android:background="@color/kolor_tabeli"
+        android:theme="@style/MyTextAppearance"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,128 +54,74 @@
 
             <TextView
                 android:id="@+id/textViewBallPl1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="0.2"
-                android:fontFamily="@font/aldrich"
-                android:padding="15dp"
-                android:text=""
-                android:textColor="@color/kolor_tekstu_tabeli"
-                android:textSize="15sp"
-                android:drawableStart="@drawable/ball"
-                android:visibility="invisible"/>
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_weight="0"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="4dp"
+                android:visibility="invisible"
+                app:drawableStartCompat="@drawable/ball" />
 
             <TextView
                 android:id="@+id/textviewPlayer1"
-                android:layout_width="65dp"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:fontFamily="@font/aldrich"
-                android:padding="15dp"
-                android:textColor="@color/kolor_tekstu_tabeli"
-                android:textSize="15sp" />
+                android:textAlignment="textStart"
+                android:layout_marginStart="6dp"/>
 
             <TextView
                 android:id="@+id/textViewSet1Pl1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/aldrich"
-                android:padding="15dp"
-                android:text=""
-                android:textColor="@color/kolor_tekstu_tabeli"
-                android:textSize="15sp" />
+                android:layout_height="match_parent"
+                android:text=""  />
 
             <TextView
                 android:id="@+id/textViewSet2Pl1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/aldrich"
-                android:padding="15dp"
-                android:text=""
-                android:textColor="@color/kolor_tekstu_tabeli"
-                android:textSize="15sp" />
+                android:layout_height="match_parent"
+                android:text="" />
 
             <TextView
                 android:id="@+id/textViewSet3Pl1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/aldrich"
-                android:padding="15dp"
-                android:text=""
-                android:textColor="@color/kolor_tekstu_tabeli"
-                android:textSize="15sp" />
-
-
-
+                android:layout_height="match_parent"
+                android:text="" />
         </TableRow>
 
         <TableRow>
-
             <TextView
                 android:id="@+id/textViewBallPl2"
-                android:layout_width="30dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.2"
-                android:fontFamily="@font/aldrich"
-                android:padding="15dp"
-                android:text=""
-                android:textColor="@color/kolor_tekstu_tabeli"
-                android:textSize="15sp"
-                android:drawableStart="@drawable/ball"
-                android:visibility="invisible"/>
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_weight="0"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="4dp"
+                android:visibility="invisible"
+                app:drawableStartCompat="@drawable/ball"/>
 
             <TextView
                 android:id="@+id/textviewPlayer2"
-                android:layout_width="1dp"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:fontFamily="@font/aldrich"
-                android:padding="15dp"
-                android:textColor="@color/kolor_tekstu_tabeli"
-                android:textSize="15sp" />
+                android:textAlignment="textStart"
+                android:layout_marginStart="6dp"/>
 
             <TextView
                 android:id="@+id/textViewSet1Pl2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/aldrich"
-                android:padding="15dp"
-                android:text=""
-                android:textColor="@color/kolor_tekstu_tabeli"
-                android:textSize="15sp" />
+                android:layout_height="match_parent"
+                android:text=""/>
 
             <TextView
                 android:id="@+id/textViewSet2Pl2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/aldrich"
-                android:padding="15dp"
-                android:text=""
-                android:textColor="@color/kolor_tekstu_tabeli"
-                android:textSize="15sp" />
+                android:layout_height="match_parent"
+                android:text=""/>
 
             <TextView
                 android:id="@+id/textViewSet3Pl2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/aldrich"
-                android:padding="15dp"
-                android:text=""
-                android:textColor="@color/kolor_tekstu_tabeli"
-                android:textSize="15sp" />
-
-
-
-
+                android:layout_height="match_parent"
+                android:text=""/>
         </TableRow>
-
     </TableLayout>
+
     <ListView
         android:id="@+id/listViewHistoriaMeczu"
         android:layout_width="0dp"
