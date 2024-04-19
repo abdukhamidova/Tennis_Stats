@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SignInActivity"
-    android:background="@color/kolor_tla">
+    android:background="@color/app_bg_color">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -24,7 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/login"
-            android:textColor="@color/kolor_nazw_tytul"
+            android:textColor="@color/app_mainTitles_color"
             android:textSize="40sp"
             android:gravity="center"/> <!--Login-->
 
@@ -39,7 +39,7 @@
             android:hint="@string/enter_e_mail"
             android:inputType="textEmailAddress"
             android:textColor="@color/white"
-            android:textColorHint="@color/kolor_hint"/> <!--e-mail-->
+            android:textColorHint="@color/app_hint_color"/> <!--e-mail-->
 
         <EditText
             android:id="@+id/textPasswordSignIn"
@@ -50,7 +50,7 @@
             android:ems="10"
             android:hint="@string/enter_password"
             android:inputType="textPassword"
-            android:textColorHint="@color/kolor_hint" /> <!--password-->
+            android:textColorHint="@color/app_hint_color" /> <!--password-->
 
         <Button
             android:id="@+id/buttonLogIn"

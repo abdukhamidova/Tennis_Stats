@@ -5,39 +5,39 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ActivityServe"
-    android:background="@color/kolor_tla">
+    tools:context=".ActivityServe">
 
     <Button
         android:id="@+id/buttonMenu"
-        android:layout_width="92dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="5dp"
+        android:layout_width="105dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rectangle_button"
         android:text="@string/menu"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.054"
+        app:layout_constraintHorizontal_bias="0.052"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.032"
-        app:shapeAppearance="@style/CardView" /> <!--menu-->
+        app:layout_constraintVertical_bias="0.039"
+        app:shapeAppearance="@style/CardView"/>
 
     <ImageButton
         android:id="@+id/imageButtonBack"
-        android:layout_width="92dp"
-        android:layout_height="40dp"
-        android:background="@drawable/rounded_button"
+        android:layout_width="105dp"
+        android:layout_height="48dp"
+        android:background="@drawable/rectangle_button"
+        android:contentDescription="@string/back_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.952"
+        app:layout_constraintHorizontal_bias="0.947"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.032"
-        app:srcCompat="@android:drawable/ic_menu_revert"
-        android:contentDescription="@string/back_button" /> <!--backbutton-->
+        app:layout_constraintVertical_bias="0.039"
+        app:srcCompat="@android:drawable/ic_menu_revert" />
 
     <LinearLayout
+        android:id="@+id/linearLayoutServe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal|center_vertical"
@@ -50,12 +50,12 @@
 
         <TextView
             android:id="@+id/textViewServe"
-            android:layout_width="343dp"
-            android:layout_height="116dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="@string/who_serves_first"
             android:textAlignment="center"
-            android:textColor="@color/kolor_nazw_tytul"
-            android:textSize="45sp"/> <!--who serves?-->
+            android:textColor="@color/app_mainTitles_color"
+            android:textSize="45sp"/>
 
         <Button
             android:id="@+id/buttonPlayer1"
@@ -63,14 +63,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
             android:textSize="17sp"
-            android:text="@string/imie_nazwisko_player1"/> <!--player1-->
-
+            android:text="@string/imie_nazwisko_player1"/>
         <Button
             android:id="@+id/buttonPlayer2"
             android:layout_width="210dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:textSize="17sp"
-            android:text="@string/imie_nazwisko_player2"/> <!--player2-->
-    </LinearLayout> <!--content-->
+            android:text="@string/imie_nazwisko_player2"/>
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

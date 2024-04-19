@@ -12,7 +12,7 @@
             android:layout_marginTop="5dp"
             android:layout_gravity="center"
             android:text="@string/confirm_to_add"
-            android:textColor="@color/kolor_nazw_tytul"
+            android:textColor="@color/app_mainTitles_color"
             android:textSize="35sp"
             android:textAlignment="center"/>
 
@@ -48,7 +48,7 @@
                 android:id="@+id/buttonAdd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/kolor_tabeli"
+                android:backgroundTint="@color/app_tableBg_color"
                 android:text="@string/add"
                 android:textSize="22sp" />
         </LinearLayout>

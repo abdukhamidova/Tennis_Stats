@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".EndOfMatchActivity"
-    android:background="@color/kolor_tla">
+    android:background="@color/app_bg_color">
 
     <Button
         android:id="@+id/buttonMenuEnd"
@@ -41,7 +41,7 @@
         android:id="@+id/tableLayoutEnd"
         android:layout_width="370dp"
         android:layout_height="wrap_content"
-        android:background="@color/kolor_tabeli"
+        android:background="@color/app_tableBg_color"
         android:theme="@style/MyTextAppearance"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

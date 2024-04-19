@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ActivityMenu"
-    android:background="@color/kolor_tla">
+    android:background="@color/app_bg_color">
 
     <Button
         android:id="@+id/buttonLogOut"
@@ -53,7 +53,7 @@
             android:layout_height="wrap_content"
             android:text="@string/tennis_stats"
             android:textAlignment="center"
-            android:textColor="@color/kolor_nazw_tytul"
+            android:textColor="@color/app_mainTitles_color"
             android:textSize="80sp" /> <!--tennis stats-->
 
         <TextView
@@ -61,7 +61,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="Username"
+            android:text="@string/username"
             android:textColor="@color/white" /> <!--(tmp) username-->
 
         <LinearLayout
@@ -88,5 +88,6 @@
                 android:text="@string/view_matches"
                 android:textSize="19sp" /> <!--view matches-->
         </LinearLayout> <!--button layout-->
-    </LinearLayout> <!--content-->
+    </LinearLayout>
+    <!--content-->
 </androidx.constraintlayout.widget.ConstraintLayout>

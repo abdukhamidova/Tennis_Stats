@@ -5,7 +5,7 @@
         <item name="buttonStyle">@style/our_button</item>
         <item name="android:fontFamily">@font/aldrich</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:windowBackground">@color/kolor_tla</item>
+        <item name="android:windowBackground">@color/app_bg_color</item>
         <item name="android:textAppearance">@style/MyTextAppearance</item>
     </style>
 
@@ -13,7 +13,7 @@
 
     <style name="our_button" parent="Widget.AppCompat.Button">
         <item name="android:background">@drawable/rounded_button</item>
-        <item name="android:textColor">@color/kolor_tekstu_guzik</item>
+        <item name="android:textColor">@color/app_btnText_color</item>
         <item name="android:fontFamily">@font/aldrich</item>
         <item name="android:textAllCaps">false</item>
     </style>

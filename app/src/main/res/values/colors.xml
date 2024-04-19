@@ -3,12 +3,12 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="transparent">#00FFFFFF</color>
-    <color name="kolor_tla">#073159</color>
-    <color name="kolor_guziku">#65BECA</color>
-    <color name="kolor_guziku_click">#5FB2BD</color>
-    <color name="kolor_nazw_tytul">#D8D85D</color>
-    <color name="kolor_hint">#c9cbb6</color>
-    <color name="kolor_tabeli">#e1e184</color>
-    <color name="kolor_tekstu_guzik">#073159</color>
-    <color name="kolor_tekstu_tabeli">#000000</color>
+    <color name="app_bg_color">#073159</color>
+    <color name="app_btn_color">#65BECA</color>
+    <color name="app_btnClick_color">#5FB2BD</color>
+    <color name="app_mainTitles_color">#D8D85D</color>
+    <color name="app_hint_color">#c9cbb6</color>
+    <color name="app_tableBg_color">#e1e184</color>
+    <color name="app_btnText_color">#073159</color>
+    <color name="app_tableText_color">#000000</color>
 </resources>

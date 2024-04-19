@@ -24,7 +24,7 @@
     <string name="login">LOGIN</string>
     <string name="log_in">Log in</string>
     <string name="i_m_not_signed_up">I\'m not signed up</string>
-    <string name="who_serves_first">Who serves first?</string>
+    <string name="who_serves_first">Who serves\nfirst?</string>
     <string name="log_out">LOG OUT</string>
     <string name="start_new_game">Start New Game</string>
     <string name="view_matches">View Matches</string>
@@ -56,5 +56,6 @@
     <string name="search">Search</string>
     <string name="imie_nazwisko_player1">Imie Nazwisko Player1</string>
     <string name="imie_nazwisko_player2">Imie Nazwisko Player2</string>
+    <string name="username">Username</string>
 
 </resources>

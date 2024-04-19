@@ -53,18 +53,20 @@
             android:layout_weight="1"
             android:enabled="false"
             android:text="@string/matches"
-            android:textSize="14sp"/>
+            android:textSize="16sp"
+            android:background="@drawable/rectangle_button"
+            app:shapeAppearance="@style/CardView" />
 
         <Button
             android:id="@+id/buttonPlayerP"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:text="@string/player"
-            android:textSize="14sp"
             android:enabled="false"
-            app:shapeAppearance="@style/CardView" />
-
+            android:text="@string/player"
+            android:textSize="16sp"
+            android:background="@drawable/rectangle_button"
+            app:shapeAppearance="@style/CardView"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
