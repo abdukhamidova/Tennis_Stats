@@ -8,86 +8,68 @@
     tools:context=".SignInActivity"
     android:background="@color/kolor_tla">
 
-    <TextView
-        android:id="@+id/textSignIn"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/login"
-        android:textColor="@color/kolor_nazw_tytul"
-        android:textSize="40sp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.19999999" />
+        app:layout_constraintVertical_bias="0.32">
 
-    <EditText
-        android:id="@+id/textEmailSignIn"
-        android:layout_width="302dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="101dp"
-        android:layout_marginTop="41dp"
-        android:layout_marginEnd="101dp"
-        android:autofillHints="emailAddress"
-        android:ems="10"
-        android:hint="@string/enter_e_mail"
-        android:inputType="textEmailAddress"
-        android:textColor="@color/white"
-        android:textColorHint="@color/kolor_hint"
-        app:flow_verticalAlign="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textSignIn"
-        app:layout_constraintVertical_bias="0.025" />
+        <TextView
+            android:id="@+id/textLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/login"
+            android:textColor="@color/kolor_nazw_tytul"
+            android:textSize="40sp"
+            android:gravity="center"/> <!--Login-->
 
-    <EditText
-        android:id="@+id/textPasswordSignIn"
-        android:layout_width="302dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginEnd="101dp"
-        android:layout_marginBottom="127dp"
-        android:autofillHints="password"
-        android:ems="10"
-        android:hint="@string/enter_password"
-        android:inputType="textPassword"
-        android:textColor="@color/white"
-        android:textColorHint="@color/kolor_hint"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textEmailSignIn"
-        app:layout_constraintVertical_bias="0.13" />
+        <EditText
+            android:id="@+id/textEmailSignIn"
+            android:layout_width="302dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="60dp"
+            android:autofillHints="emailAddress"
+            android:backgroundTint="@color/white"
+            android:ems="10"
+            android:hint="@string/enter_e_mail"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/white"
+            android:textColorHint="@color/kolor_hint"/> <!--e-mail-->
 
-    <Button
-        android:id="@+id/buttonSignIn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="152.5dp"
-        android:layout_marginEnd="152.5dp"
-        android:text="@string/log_in"
-        android:textSize="17sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textPasswordSignIn"
-        app:layout_constraintVertical_bias="0.110000014"
-        app:shapeAppearance="@style/CardView" />
+        <EditText
+            android:id="@+id/textPasswordSignIn"
+            android:layout_width="302dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/white"
+            android:ems="10"
+            android:hint="@string/enter_password"
+            android:inputType="textPassword"
+            android:textColorHint="@color/kolor_hint" /> <!--password-->
 
-    <TextView
-        android:id="@+id/textNotSignUp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="120dp"
-        android:text="@string/i_m_not_signed_up"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonSignIn"
-        app:layout_constraintVertical_bias="0.056" />
+        <Button
+            android:id="@+id/buttonLogIn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/log_in"
+            android:textSize="19sp" /> <!--log in-->
+
+        <TextView
+            android:id="@+id/textNotSignUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:text="@string/i_m_not_signed_up"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            app:layout_constraintVertical_bias="0" /> <!--sign up-->
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

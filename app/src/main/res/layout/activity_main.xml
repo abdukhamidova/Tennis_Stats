@@ -21,7 +21,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.212" />
+        app:layout_constraintVertical_bias="0.212" /> <!--tennis stats-->
 
     <Button
         android:id="@+id/buttonLogIn"
@@ -37,7 +37,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2"
         app:layout_constraintVertical_bias="0.16000003"
-        app:shapeAppearance="@style/CardView" />
+        app:shapeAppearance="@style/CardView" /> <!--log in-->
 
     <Button
         android:id="@+id/buttonSignUp"
@@ -51,7 +51,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonLogIn"
         app:layout_constraintVertical_bias="0.060000002"
-        app:shapeAppearance="@style/CardView" />
+        app:shapeAppearance="@style/CardView" /> <!--sign up-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

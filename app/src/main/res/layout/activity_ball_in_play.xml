@@ -64,7 +64,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:textAlignment="textStart"
-                android:layout_marginStart="6dp"/>
+                android:layout_marginStart="6dp"
+                android:text="@string/imie_nazwisko_player1"/>
 
             <TextView
                 android:id="@+id/textViewPlayer1Set1BIP"
@@ -104,7 +105,8 @@
                 android:layout_height="match_parent"
                 android:layout_marginStart="6dp"
                 android:layout_weight="1"
-                android:textAlignment="textStart" />
+                android:textAlignment="textStart"
+                android:text="@string/imie_nazwisko_player2"/>
 
             <TextView
                 android:id="@+id/textViewPlayer2Set1BIP"
@@ -133,11 +135,12 @@
         android:layout_width="374dp"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
+        android:layout_marginTop="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/tableLayout"
         app:layout_constraintStart_toStartOf="@+id/tableLayout"
         app:layout_constraintTop_toBottomOf="@+id/tableLayout"
-        app:layout_constraintVertical_bias="0.272">
+        app:layout_constraintVertical_bias="0.0">
 
         <TextView
             android:id="@+id/textPL1"
@@ -147,10 +150,10 @@
             android:layout_alignParentStart="true"
             android:layout_marginBottom="10dp"
             android:padding="10dp"
-            android:text="Player1"
+            android:text="@string/imie_nazwisko_player1"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="17sp" />
+            android:textSize="17sp"/>
 
         <TextView
             android:id="@+id/textPL2"
@@ -160,7 +163,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginBottom="10dp"
             android:padding="10dp"
-            android:text="Player2"
+            android:text="@string/imie_nazwisko_player2"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="17sp" />
@@ -170,7 +173,7 @@
             android:layout_width="2dp"
             android:layout_height="310dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="40dp"
             android:background="@android:color/darker_gray"
             android:backgroundTint="@color/white" />
 

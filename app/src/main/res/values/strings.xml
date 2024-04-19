@@ -54,5 +54,7 @@
     <string name="player">Player</string>
     <string name="matches">Matches</string>
     <string name="search">Search</string>
+    <string name="imie_nazwisko_player1">Imie Nazwisko Player1</string>
+    <string name="imie_nazwisko_player2">Imie Nazwisko Player2</string>
 
 </resources>

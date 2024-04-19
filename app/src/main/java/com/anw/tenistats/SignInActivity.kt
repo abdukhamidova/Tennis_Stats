@@ -37,7 +37,7 @@ class SignInActivity : AppCompatActivity() {
             val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
         }
-        binding.buttonSignIn.setOnClickListener{
+        binding.buttonLogIn.setOnClickListener{
             val email = binding.textEmailSignIn.text.toString()
             val pass = binding.textPasswordSignIn.text.toString()
             //jeżeli pola nie są puste - zaloguj się

@@ -65,7 +65,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:textAlignment="textStart"
-                android:layout_marginStart="6dp"/>
+                android:layout_marginStart="6dp"
+                android:text="@string/imie_nazwisko_player1"/>
 
             <TextView
                 android:id="@+id/textViewSet1Pl1"
@@ -107,7 +108,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:textAlignment="textStart"
-                android:layout_marginStart="6dp" />
+                android:layout_marginStart="6dp"
+                android:text="@string/imie_nazwisko_player2"/>
 
             <TextView
                 android:id="@+id/textViewSet1Pl2"
@@ -137,114 +139,94 @@
     <TextView
         android:id="@+id/textViewFS"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="43dp"
+        android:layout_marginTop="20dp"
         android:text="@string/_1st_serve"
         android:textColor="@color/white"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.411" />
+        app:layout_constraintEnd_toEndOf="@+id/tableLayout"
+        app:layout_constraintStart_toStartOf="@+id/tableLayout"
+        app:layout_constraintTop_toBottomOf="@+id/tableLayout"
+        app:layout_constraintVertical_bias="0.0" />
 
-    <Button
-        android:id="@+id/buttonAce"
-        android:layout_width="102dp"
-        android:layout_height="97dp"
-        android:rotation="0"
-        android:rotationX="0"
-        android:rotationY="0"
-        android:text="@string/ace"
-        android:textSize="25sp"
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.106"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.569"
-        app:shapeAppearance="@style/CardView" />
+        app:layout_constraintEnd_toEndOf="@+id/textViewFS"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="@+id/textViewFS"
+        app:layout_constraintTop_toBottomOf="@+id/textViewFS"
+        app:layout_constraintVertical_bias="0.0">
 
-    <Button
-        android:id="@+id/buttonRWF"
-        android:layout_width="102dp"
-        android:layout_height="97dp"
-        android:text="@string/return_winner_fh"
-        android:textSize="17sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.096"
-        app:layout_constraintStart_toEndOf="@+id/buttonAce"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.569"
-        app:shapeAppearance="@style/CardView" />
+        <Button
+            android:id="@+id/buttonAce"
+            android:layout_width="102dp"
+            android:layout_height="97dp"
+            android:layout_alignParentStart="true"
+            android:text="@string/ace"
+            android:textSize="25sp" /> <!--Ace-->
 
-    <Button
-        android:id="@+id/buttonREF"
-        android:layout_width="102dp"
-        android:layout_height="97dp"
-        android:text="@string/return_error_fh"
-        android:textSize="17sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.096"
-        app:layout_constraintStart_toEndOf="@+id/buttonFault"
-        app:layout_constraintTop_toBottomOf="@+id/buttonRWF"
-        app:layout_constraintVertical_bias="0.062"
-        app:shapeAppearance="@style/CardView"/>
+        <Button
+            android:id="@+id/buttonRWF"
+            android:layout_width="102dp"
+            android:layout_height="97dp"
+            android:layout_marginStart="15dp"
+            android:layout_toEndOf="@+id/buttonAce"
+            android:text="@string/return_winner_fh"
+            android:textSize="17sp" /> <!--Return Winner FH-->
 
-    <Button
-        android:id="@+id/buttonREB"
-        android:layout_width="102dp"
-        android:layout_height="97dp"
-        android:text="@string/return_error_bh"
-        android:textSize="17sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.354"
-        app:layout_constraintStart_toEndOf="@+id/buttonREF"
-        app:layout_constraintTop_toBottomOf="@+id/buttonRWB"
-        app:layout_constraintVertical_bias="0.062"
-        app:shapeAppearance="@style/CardView" />
+        <Button
+            android:id="@+id/buttonRWB"
+            android:layout_width="102dp"
+            android:layout_height="97dp"
+            android:layout_marginStart="15dp"
+            android:layout_toEndOf="@+id/buttonRWF"
+            android:text="@string/return_winner_bh"
+            android:textSize="17sp" /> <!--Return Winner BH-->
 
-    <Button
-        android:id="@+id/buttonRWB"
-        android:layout_width="102dp"
-        android:layout_height="97dp"
-        android:text="@string/return_winner_bh"
-        android:textSize="17sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.354"
-        app:layout_constraintStart_toEndOf="@+id/buttonRWF"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.569"
-        app:shapeAppearance="@style/CardView" />
+        <Button
+            android:id="@+id/buttonFault"
+            android:layout_width="102dp"
+            android:layout_height="97dp"
+            android:layout_below="@+id/buttonAce"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="20dp"
+            android:text="@string/fault"
+            android:textSize="21sp" /> <!--Fault-->
 
-    <Button
-        android:id="@+id/buttonFault"
-        android:layout_width="102dp"
-        android:layout_height="97dp"
-        android:text="@string/fault"
-        android:textSize="21sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.106"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonAce"
-        app:layout_constraintVertical_bias="0.062"
-        app:shapeAppearance="@style/CardView" />
+        <Button
+            android:id="@+id/buttonREF"
+            android:layout_width="102dp"
+            android:layout_height="97dp"
+            android:layout_below="@id/buttonRWF"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_toEndOf="@+id/buttonFault"
+            android:text="@string/return_error_fh"
+            android:textSize="17sp" /> <!--Return Error FH-->
 
-    <Button
-        android:id="@+id/buttonBIP"
-        android:layout_width="342dp"
-        android:layout_height="51dp"
-        android:text="@string/ball_in_play"
-        android:textSize="23sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonREF"
-        app:layout_constraintVertical_bias="0.104"
-        app:shapeAppearance="@style/CardView" />
+        <Button
+            android:id="@+id/buttonREB"
+            android:layout_width="102dp"
+            android:layout_height="97dp"
+            android:layout_below="@+id/buttonRWB"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_toEndOf="@+id/buttonREF"
+            android:text="@string/return_error_bh"
+            android:textSize="17sp" /> <!--Return Error BH-->
 
+        <Button
+            android:id="@+id/buttonBIP"
+            android:layout_width="336dp"
+            android:layout_height="51dp"
+            android:layout_below="@+id/buttonFault"
+            android:layout_marginTop="15dp"
+            android:text="@string/ball_in_play"
+            android:textSize="23sp" /> <!--Ball in play-->
+    </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
