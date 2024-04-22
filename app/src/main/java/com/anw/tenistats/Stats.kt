@@ -3,7 +3,7 @@ package com.anw.tenistats
 import android.app.Application
 
 class Stats : Application() {
-    var isCanceled : Boolean = false
+    var isCanceled: Boolean = false
     var isEnd: Boolean = false //czy koniec meczu
     var serwis: Int = 1 //1-wszedl 1 serwis; 2-wszedl drugi serwis; 0-podwojny blad
     var pktId: Int = 1 //liczba zagranych punktow w meczu

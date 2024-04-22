@@ -15,6 +15,12 @@
         android:theme="@style/Theme.TenniStats"
         tools:targetApi="31">
         <activity
+            android:name=".ViewHistoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ViewStatsActivity"
+            android:exported="false" />
+        <activity
             android:name=".ViewPlayerActivity"
             android:exported="false"
             android:label="@string/title_activity_view_player"

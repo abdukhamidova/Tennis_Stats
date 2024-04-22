@@ -83,9 +83,9 @@ class ActivityStartPoint : AppCompatActivity() {
                     matchId.toString(),
                     game.toString(),
                     set.toString())
-                if(!app.isCanceled){
-                    score(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
-                    }
+                if (!app.isCanceled) {
+                    score(app, player1, player2, serve1, serve2, pkt1, pkt2, set1p1, set1p2, set2p1, set2p2, set3p1, set3p2)
+                }
             }
             else { //serwuje player2
                 app.totalpoints2++
