@@ -6,9 +6,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
-import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -23,13 +21,15 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-class ViewMatchesActivity : AppCompatActivity() {
+class ViewMatchesActivity : AppCompatActivity(), MyAdapter.OnItemClickListener {
 
     private lateinit var dbref : DatabaseReference
     private lateinit var matchRecyclerView: RecyclerView
     private lateinit var matchArrayList: ArrayList<MatchView>
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var adapter: MyAdapter
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -40,11 +40,7 @@ class ViewMatchesActivity : AppCompatActivity() {
             insets
         }
 
-        val playerView = findViewById<Button>(R.id.buttonPlayer)
-        playerView.isEnabled=true
-        playerView.setOnClickListener{
-            startActivity(Intent(this,ViewPlayerActivity::class.java))
-        }
+
 
         firebaseAuth = FirebaseAuth.getInstance()
         matchRecyclerView = findViewById(R.id.matchList)
@@ -52,9 +48,12 @@ class ViewMatchesActivity : AppCompatActivity() {
         matchRecyclerView.setHasFixedSize(true)
 
         matchArrayList = arrayListOf<MatchView>()
-        adapter = MyAdapter(matchArrayList) // Inicjalizacja adaptera jako zmienna składowa klasy
+        val adapter = MyAdapter(matchArrayList, firebaseAuth)
+        // Inicjalizacja adaptera jako zmienna składowa klasy
         matchRecyclerView.adapter = adapter // Podpięcie adaptera do RecyclerView
         getMatchData()
+
+        matchRecyclerView.isEnabled = true
 
         val searchEditText = findViewById<EditText>(R.id.searchEditText)
         searchEditText.addTextChangedListener(object : TextWatcher {
@@ -68,6 +67,7 @@ class ViewMatchesActivity : AppCompatActivity() {
             override fun afterTextChanged(s: Editable?) {}
         })
     }
+
     fun onTextClicked(view: View) {
         // Obsługa kliknięcia w tekście
         Toast.makeText(this, "Tekst został kliknięty!", Toast.LENGTH_SHORT).show()
@@ -75,7 +75,7 @@ class ViewMatchesActivity : AppCompatActivity() {
 
     private fun getMatchData() {
         val user = firebaseAuth.currentUser?.uid
-        dbref= FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
+        dbref = FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
             .getReference(user.toString())
             .child("Matches")
 
@@ -88,6 +88,10 @@ class ViewMatchesActivity : AppCompatActivity() {
                             matchArrayList.add(match)
                         }
                     }
+                    // Inicjalizacja adaptera
+                    adapter = MyAdapter(matchArrayList, firebaseAuth)
+                    // Podpięcie adaptera do RecyclerView
+                    matchRecyclerView.adapter = adapter
                     // Poinformuj adapter o zmianach w danych
                     adapter.notifyDataSetChanged()
                 }
@@ -98,4 +102,13 @@ class ViewMatchesActivity : AppCompatActivity() {
             }
         })
     }
+    override fun onItemClick(matchView: MatchView) {
+        // Tu umieść logikę obsługi kliknięcia na element listy
+        // Na przykład, możesz uruchomić nową aktywność lub wykonać inne czynności
+        val intent = Intent(this, ViewHistoryActivity::class.java)
+        startActivity(intent)
+    }
+
+
+
 }

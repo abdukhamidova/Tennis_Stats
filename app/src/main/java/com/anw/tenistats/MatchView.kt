@@ -1,15 +1,28 @@
 package com.anw.tenistats
 
-import java.util.Calendar
+import java.util.Date
 
-class MatchView() {
+class MatchView {
     var data: Long = 0
     var player1: String = ""
     var player2: String = ""
 
-    constructor(data: Long, player1: String, player2: String) : this() {
+    // Konstruktor główny
+    constructor()
+
+    // Konstruktor wtórny, umożliwiający tworzenie obiektu bez podawania wszystkich parametrów
+    constructor(data: Long, player1: String, player2: String) {
         this.data = data
         this.player1 = player1
         this.player2 = player2
     }
+
+    // Metoda do konwersji daty w formacie long na obiekt typu Date
+    fun getDateAsMilliseconds(): Long {
+        return data
+    }
 }
+
+
+
+

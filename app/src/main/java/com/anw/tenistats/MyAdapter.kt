@@ -1,23 +1,37 @@
+import android.content.Context
+import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
 import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
-import java.text.SimpleDateFormat
 import com.anw.tenistats.MatchView
 import com.anw.tenistats.R
-
+import com.anw.tenistats.ViewHistoryActivity
+import com.anw.tenistats.ViewMatchesActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
+import java.text.SimpleDateFormat
 import java.util.*
 
-class MyAdapter(private val originalList: List<MatchView>) :
+class MyAdapter(private val originalList: List<MatchView>, private val firebaseAuth: FirebaseAuth) :
     RecyclerView.Adapter<MyAdapter.MyViewHolder>(), Filterable {
 
     private var filteredList: List<MatchView> = originalList
+    private lateinit var context: Context
+    private var listener: OnItemClickListener? = null
+
+    fun setOnItemClickListener(listener: OnItemClickListener) {
+        this.listener = listener
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.match_item, parent, false)
+        context = parent.context
+        val itemView = LayoutInflater.from(context).inflate(R.layout.match_item, parent, false)
         return MyViewHolder(itemView)
     }
 
@@ -32,9 +46,23 @@ class MyAdapter(private val originalList: List<MatchView>) :
         val date = Date(currentItem.data.toLong())
         val formattedDate = dateFormat.format(date)
 
-        holder.data.text = formattedDate
+        Log.d("MyAdapter", "onBindViewHolder - date: $formattedDate, player1: ${currentItem.player1}, player2: ${currentItem.player2}")
+
+        holder.date.text = formattedDate
         holder.player1.text = currentItem.player1
         holder.player2.text = currentItem.player2
+        holder.itemView.setOnClickListener {
+            val match = filteredList[position]
+            listener?.onItemClick(match)
+
+            // Pobierz datę meczu w formacie milisekund
+            val dateInMillis = currentItem.data
+            Log.d("MyAdapter", "Date in milliseconds: $dateInMillis")
+            // Otwórz ViewHistoryActivity i przekaż datę meczu
+            val intent = Intent(context, ViewHistoryActivity::class.java)
+            intent.putExtra("matchDateInMillis", dateInMillis)
+            context.startActivity(intent)
+        }
     }
 
     override fun getFilter(): Filter {
@@ -65,8 +93,12 @@ class MyAdapter(private val originalList: List<MatchView>) :
     }
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val data: TextView = itemView.findViewById(R.id.textviewDateVM)
+        val date: TextView = itemView.findViewById(R.id.textviewDateVM)
         val player1: TextView = itemView.findViewById(R.id.textviewPlayer1VM)
         val player2: TextView = itemView.findViewById(R.id.textviewPlayer2VM)
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(matchView: MatchView)
     }
 }
