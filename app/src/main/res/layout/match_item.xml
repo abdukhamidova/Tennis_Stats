@@ -87,18 +87,6 @@
                 android:textColor="@color/black"
                 android:textSize="20sp"/>
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/clickableTextShowMore"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Show more"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:clickable="true"
-            android:onClick="onTextClicked" />
-
-
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>
