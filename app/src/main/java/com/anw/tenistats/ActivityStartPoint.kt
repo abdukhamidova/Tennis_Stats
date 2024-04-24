@@ -9,8 +9,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.anw.tenistats.com.anw.tenistats.AddPointDialog
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 class ActivityStartPoint : AppCompatActivity() {
+    private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var database: DatabaseReference
+    var matchId: String?=null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -435,6 +442,19 @@ class ActivityStartPoint : AppCompatActivity() {
             val game2 = set3p2.text.toString().toInt()
             game = game1 + game2 + 1
         }
+
+        firebaseAuth = FirebaseAuth.getInstance()
+        val user = firebaseAuth.currentUser?.uid
+        matchId = intent.getStringExtra("matchID")
+        database =
+            FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
+                .getReference(user.toString()).child("Matches").child(matchId.toString())
+        database.child("set1p1").setValue((set1p1.text.toString()))
+        database.child("set2p1").setValue((set2p1.text.toString()))
+        database.child("set3p1").setValue((set3p1.text.toString()))
+        database.child("set1p2").setValue((set1p2.text.toString()))
+        database.child("set2p2").setValue((set2p2.text.toString()))
+        database.child("set3p2").setValue((set3p2.text.toString()))
 
         return Pair(game, set)
     }

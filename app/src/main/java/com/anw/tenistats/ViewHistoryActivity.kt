@@ -1,6 +1,7 @@
 package com.anw.tenistats
 
 import android.content.ContentValues.TAG
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.ArrayAdapter
@@ -42,6 +43,13 @@ class ViewHistoryActivity : AppCompatActivity() {
 
         // Pobierz mecz na podstawie daty z bazy danych
         fetchMatchByDate(matchDateInMillis)
+
+        findViewById<TextView>(R.id.test).setOnClickListener {
+            val intent= Intent(this,ViewStatsActivity::class.java).also{
+                it.putExtra("matchID",matchId)
+                startActivity(it)
+            }
+        }
     }
 
     private fun fetchMatchByDate(matchDateInMillis: Long) {
