@@ -131,6 +131,7 @@
                 android:textColor="@color/white" />
 
             <TextView
+                android:id="@+id/textViewHistory"
                 android:layout_width="185dp"
                 android:layout_height="40dp"
                 android:gravity="center"
@@ -229,7 +230,7 @@
 
     <ScrollView
         android:layout_width="370dp"
-        android:layout_height="360dp"
+        android:layout_height="390dp"
         android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

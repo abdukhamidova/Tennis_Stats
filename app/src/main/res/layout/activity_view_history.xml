@@ -8,7 +8,7 @@
     tools:context=".ViewHistoryActivity">
 
     <Button
-        android:id="@+id/buttonMenuStats"
+        android:id="@+id/buttonMenuHis"
         android:layout_width="92dp"
         android:layout_height="40dp"
         android:layout_marginTop="0.5dp"
@@ -23,7 +23,7 @@
         app:shapeAppearance="@style/CardView" />
 
     <TableLayout
-        android:id="@+id/tableLayoutStats"
+        android:id="@+id/tableLayoutHis"
         android:layout_width="370dp"
         android:layout_height="wrap_content"
         android:background="@color/app_tableBg_color"
@@ -37,7 +37,7 @@
         <TableRow>
 
             <TextView
-                android:id="@+id/textViewServe1Stats"
+                android:id="@+id/textViewServe1His"
                 android:layout_width="wrap_content"
                 android:layout_height="45dp"
                 android:layout_marginStart="3dp"
@@ -47,7 +47,7 @@
                 app:drawableStartCompat="@drawable/ball" />
 
             <TextView
-                android:id="@+id/textviewPlayer1Stats"
+                android:id="@+id/textviewPlayer1His"
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="6dp"
@@ -55,17 +55,17 @@
                 android:textAlignment="textStart" />
 
             <TextView
-                android:id="@+id/textViewP1Set1Stats"
+                android:id="@+id/textViewP1Set1His"
                 android:layout_height="match_parent"
                 android:text="" />
 
             <TextView
-                android:id="@+id/textViewP1Set2Stats"
+                android:id="@+id/textViewP1Set2His"
                 android:layout_height="match_parent"
                 android:text="" />
 
             <TextView
-                android:id="@+id/textViewP1Set3Stats"
+                android:id="@+id/textViewP1Set3His"
                 android:layout_height="match_parent"
                 android:text="" />
 
@@ -74,7 +74,7 @@
         <TableRow>
 
             <TextView
-                android:id="@+id/textViewServe2Stats"
+                android:id="@+id/textViewServe2His"
                 android:layout_width="wrap_content"
                 android:layout_height="45dp"
                 android:layout_marginStart="3dp"
@@ -84,7 +84,7 @@
                 app:drawableStartCompat="@drawable/ball" />
 
             <TextView
-                android:id="@+id/textviewPlayer2Stats"
+                android:id="@+id/textviewPlayer2His"
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="6dp"
@@ -92,17 +92,17 @@
                 android:textAlignment="textStart" />
 
             <TextView
-                android:id="@+id/textViewP2Set1Stats"
+                android:id="@+id/textViewP2Set1His"
                 android:layout_height="match_parent"
                 android:text="" />
 
             <TextView
-                android:id="@+id/textViewP2Set2Stats"
+                android:id="@+id/textViewP2Set2His"
                 android:layout_height="match_parent"
                 android:text="" />
 
             <TextView
-                android:id="@+id/textViewP2Set3Stats"
+                android:id="@+id/textViewP2Set3His"
                 android:layout_height="match_parent"
                 android:text="" />
         </TableRow>

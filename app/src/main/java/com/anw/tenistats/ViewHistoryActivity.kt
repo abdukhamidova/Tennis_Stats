@@ -51,6 +51,8 @@ class ViewHistoryActivity : AppCompatActivity() {
         }
 
 
+
+
     }
 
     private fun fetchMatchByDate(matchDateInMillis: Long) {
@@ -117,10 +119,22 @@ class ViewHistoryActivity : AppCompatActivity() {
                         //textViewSet3.visibility = View.GONE
                         textViewSet3.isClickable=false
                     }
+                    val player1 = findViewById<TextView>(R.id.textviewPlayer1His)
+                    val player2 = findViewById<TextView>(R.id.textviewPlayer2His)
+                    val serve1 = findViewById<TextView>(R.id.textViewServe1His)
+                    val serve2 = findViewById<TextView>(R.id.textViewServe2His)
+                    val set1p1 = findViewById<TextView>(R.id.textViewP1Set1His)
+                    val set2p1 = findViewById<TextView>(R.id.textViewP1Set2His)
+                    val set3p1 = findViewById<TextView>(R.id.textViewP1Set3His)
+                    val set1p2 = findViewById<TextView>(R.id.textViewP2Set1His)
+                    val set2p2 = findViewById<TextView>(R.id.textViewP2Set2His)
+                    val set3p2 = findViewById<TextView>(R.id.textViewP2Set3His)
+                    setscore(player1,player2,serve1,serve2,set1p1,set2p1,set3p1,set1p2,set2p2,set3p2)
                 } else {
                     // Obsługa, gdy dane nie istnieją w bazie danych
                     Toast.makeText(this@ViewHistoryActivity, "Nie znaleziono danych", Toast.LENGTH_SHORT).show()
                 }
+
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
@@ -129,7 +143,6 @@ class ViewHistoryActivity : AppCompatActivity() {
             }
         })
     }
-
 
     private fun fetchMatchPoints(matchId: String) {
         val user = FirebaseAuth.getInstance().currentUser?.uid
@@ -231,5 +244,79 @@ class ViewHistoryActivity : AppCompatActivity() {
         val listView = findViewById<ListView>(R.id.historyList)
         val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, pointsList)
         listView.adapter = adapter
+    }
+
+    fun setscore(player1: TextView,player2: TextView,serve1: TextView,serve2: TextView,set1p1: TextView,set2p1: TextView,set3p1: TextView,set1p2: TextView,set2p2: TextView,set3p2: TextView)
+    {
+        val user = FirebaseAuth.getInstance().currentUser?.uid
+        database = FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
+            .getReference(user.toString()).child("Matches").child(matchId)
+
+        database.child("player1").get().addOnSuccessListener { dataSnapshot ->
+            // Pobranie wartości "player1" z bazy danych
+            val player1Value = dataSnapshot.getValue(String::class.java)
+            // Ustawienie wartości w TextView
+            player1.text = player1Value
+        }.addOnFailureListener { exception ->
+            // Obsługa błędów
+        }
+
+        database.child("player2").get().addOnSuccessListener { dataSnapshot ->
+            // Pobranie wartości "player1" z bazy danych
+            val player2Value = dataSnapshot.getValue(String::class.java)
+            // Ustawienie wartości w TextView
+            player2.text = player2Value
+        }.addOnFailureListener { exception ->
+            // Obsługa błędów
+        }
+
+        database.child("set1p1").get().addOnSuccessListener { dataSnapshot ->
+            // Pobranie wartości "player1" z bazy danych
+            val set1p1Value = dataSnapshot.getValue(String::class.java)
+            // Ustawienie wartości w TextView
+            set1p1.text = set1p1Value
+        }.addOnFailureListener { exception ->
+            // Obsługa błędów
+        }
+        database.child("set2p1").get().addOnSuccessListener { dataSnapshot ->
+            // Pobranie wartości "player1" z bazy danych
+            val set2p1Value = dataSnapshot.getValue(String::class.java)
+            // Ustawienie wartości w TextView
+            set2p1.text = set2p1Value
+        }.addOnFailureListener { exception ->
+            // Obsługa błędów
+        }
+        database.child("set3p1").get().addOnSuccessListener { dataSnapshot ->
+            // Pobranie wartości "player1" z bazy danych
+            val set3p1Value = dataSnapshot.getValue(String::class.java)
+            // Ustawienie wartości w TextView
+            set3p1.text = set3p1Value
+        }.addOnFailureListener { exception ->
+            // Obsługa błędów
+        }
+        database.child("set1p2").get().addOnSuccessListener { dataSnapshot ->
+            // Pobranie wartości "player1" z bazy danych
+            val set1p2Value = dataSnapshot.getValue(String::class.java)
+            // Ustawienie wartości w TextView
+            set1p2.text = set1p2Value
+        }.addOnFailureListener { exception ->
+            // Obsługa błędów
+        }
+        database.child("set2p2").get().addOnSuccessListener { dataSnapshot ->
+            // Pobranie wartości "player1" z bazy danych
+            val set2p2Value = dataSnapshot.getValue(String::class.java)
+            // Ustawienie wartości w TextView
+            set2p2.text = set2p2Value
+        }.addOnFailureListener { exception ->
+            // Obsługa błędów
+        }
+        database.child("set3p2").get().addOnSuccessListener { dataSnapshot ->
+            // Pobranie wartości "player1" z bazy danych
+            val set3p2Value = dataSnapshot.getValue(String::class.java)
+            // Ustawienie wartości w TextView
+            set3p2.text = set3p2Value
+        }.addOnFailureListener { exception ->
+            // Obsługa błędów
+        }
     }
 }

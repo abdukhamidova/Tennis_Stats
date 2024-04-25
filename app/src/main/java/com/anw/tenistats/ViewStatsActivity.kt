@@ -1,6 +1,7 @@
 package com.anw.tenistats
 
 import android.content.ContentValues
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
@@ -131,6 +132,11 @@ class ViewStatsActivity : AppCompatActivity() {
             findViewById<TextView>(R.id.textViewSet3Stats).setBackgroundColor(0x7E65BDC9)
             setAppValues(app,3,player1name,player2name)
             setTableValue(app)
+        }
+        findViewById<TextView>(R.id.textViewHistory).setOnClickListener {
+            val intent= Intent(this,ViewHistoryActivity::class.java).also{
+                startActivity(it)
+            }
         }
     }
     fun setscore(player1: TextView,player2: TextView,serve1: TextView,serve2: TextView,set1p1: TextView,set2p1: TextView,set3p1: TextView,set1p2: TextView,set2p2: TextView,set3p2: TextView)
