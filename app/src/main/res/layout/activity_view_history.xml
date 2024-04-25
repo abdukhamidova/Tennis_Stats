@@ -157,31 +157,43 @@
         <TableRow>
 
             <TextView
+                android:id="@+id/allButton"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="#7E65BDC9"
                 android:gravity="center"
+                android:clickable="true"
+                android:focusable="true"
                 android:text="ALL"
                 android:textColor="@color/white" />
 
             <TextView
+                android:id="@+id/setButton1"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:gravity="center"
+                android:clickable="true"
+                android:focusable="true"
                 android:text="SET 1"
                 android:textColor="@color/white" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:id="@+id/setButton2"
                 android:gravity="center"
+                android:clickable="true"
+                android:focusable="true"
                 android:text="SET 2"
                 android:textColor="@color/white" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:id="@+id/setButton3"
                 android:gravity="center"
+                android:clickable="true"
+                android:focusable="true"
                 android:text="SET 3"
                 android:textColor="@color/white" />
 
