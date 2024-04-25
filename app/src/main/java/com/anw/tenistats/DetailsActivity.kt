@@ -71,44 +71,112 @@ class DetailsActivity : AppCompatActivity() {
         findViewById<Button>(R.id.buttonGround).setOnClickListener {
             if(findViewById<RadioButton>(R.id.radioButtonFH).isChecked)
             {
-                addPointDialog.show(
-                    intent.getStringExtra("Pkt1").toString(),
-                    intent.getStringExtra("Pkt2").toString(),
-                    intent.getStringExtra("Kto").toString(),
-                    intent.getStringExtra("Co").toString(),
-                    "Ground",
-                    "Forehand",
-                    intent.getStringExtra("matchID").toString(),
-                    intent.getStringExtra("gameID").toString(),
-                    intent.getStringExtra("setID").toString())
-            }
-            else{
-                addPointDialog.show(
-                    intent.getStringExtra("Pkt1").toString(),
-                    intent.getStringExtra("Pkt2").toString(),
-                    intent.getStringExtra("Kto").toString(),
-                    intent.getStringExtra("Co").toString(),
-                    "Ground",
-                    "Backhand",
-                    intent.getStringExtra("matchID").toString(),
-                    intent.getStringExtra("gameID").toString(),
-                    intent.getStringExtra("setID").toString())
-            }
-            if(!app.isCanceled){
                 if(intent.getStringExtra("Co")=="Winner") {
                     if(czyPlayer1) {
-                        score(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
+                        addPointDialog.show(
+                            player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2,
+                            intent.getStringExtra("Pkt1").toString(),
+                            intent.getStringExtra("Pkt2").toString(),
+                            intent.getStringExtra("Kto").toString(),
+                            intent.getStringExtra("Co").toString(),
+                            "Ground",
+                            "Forehand",
+                            intent.getStringExtra("matchID").toString(),
+                            intent.getStringExtra("gameID").toString(),
+                            intent.getStringExtra("setID").toString())
+                    }else{
+                        addPointDialog.show(
+                            player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,
+                            intent.getStringExtra("Pkt1").toString(),
+                            intent.getStringExtra("Pkt2").toString(),
+                            intent.getStringExtra("Kto").toString(),
+                            intent.getStringExtra("Co").toString(),
+                            "Ground",
+                            "Forehand",
+                            intent.getStringExtra("matchID").toString(),
+                            intent.getStringExtra("gameID").toString(),
+                            intent.getStringExtra("setID").toString())
                     }
-                    else{
-                        score(app,player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
-                    }
-                }//przyznanie punktu
-                else{
+                }else {
                     if(czyPlayer1) {
-                        score(app,player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
+                        addPointDialog.show(
+                            player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,
+                            intent.getStringExtra("Pkt1").toString(),
+                            intent.getStringExtra("Pkt2").toString(),
+                            intent.getStringExtra("Kto").toString(),
+                            intent.getStringExtra("Co").toString(),
+                            "Ground",
+                            "Forehand",
+                            intent.getStringExtra("matchID").toString(),
+                            intent.getStringExtra("gameID").toString(),
+                            intent.getStringExtra("setID").toString())
+                    }else{
+                        addPointDialog.show(
+                            player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2,
+                            intent.getStringExtra("Pkt1").toString(),
+                            intent.getStringExtra("Pkt2").toString(),
+                            intent.getStringExtra("Kto").toString(),
+                            intent.getStringExtra("Co").toString(),
+                            "Ground",
+                            "Forehand",
+                            intent.getStringExtra("matchID").toString(),
+                            intent.getStringExtra("gameID").toString(),
+                            intent.getStringExtra("setID").toString())
                     }
-                    else{
-                        score(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
+                }
+            }
+            else{
+                if(intent.getStringExtra("Co")=="Winner") {
+                    if(czyPlayer1) {
+                        addPointDialog.show(
+                            player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2,
+                            intent.getStringExtra("Pkt1").toString(),
+                            intent.getStringExtra("Pkt2").toString(),
+                            intent.getStringExtra("Kto").toString(),
+                            intent.getStringExtra("Co").toString(),
+                            "Ground",
+                            "Backhand",
+                            intent.getStringExtra("matchID").toString(),
+                            intent.getStringExtra("gameID").toString(),
+                            intent.getStringExtra("setID").toString())
+                    }else{
+                        addPointDialog.show(
+                            player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,
+                            intent.getStringExtra("Pkt1").toString(),
+                            intent.getStringExtra("Pkt2").toString(),
+                            intent.getStringExtra("Kto").toString(),
+                            intent.getStringExtra("Co").toString(),
+                            "Ground",
+                            "Backhand",
+                            intent.getStringExtra("matchID").toString(),
+                            intent.getStringExtra("gameID").toString(),
+                            intent.getStringExtra("setID").toString())
+                    }
+                }else {
+                    if(czyPlayer1) {
+                        addPointDialog.show(
+                            player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,
+                            intent.getStringExtra("Pkt1").toString(),
+                            intent.getStringExtra("Pkt2").toString(),
+                            intent.getStringExtra("Kto").toString(),
+                            intent.getStringExtra("Co").toString(),
+                            "Ground",
+                            "Backhand",
+                            intent.getStringExtra("matchID").toString(),
+                            intent.getStringExtra("gameID").toString(),
+                            intent.getStringExtra("setID").toString())
+                    }else{
+                        addPointDialog.show(
+                            player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2,
+                            intent.getStringExtra("Pkt1").toString(),
+                            intent.getStringExtra("Pkt2").toString(),
+                            intent.getStringExtra("Kto").toString(),
+                            intent.getStringExtra("Co").toString(),
+                            "Ground",
+                            "Backhand",
+                            intent.getStringExtra("matchID").toString(),
+                            intent.getStringExtra("gameID").toString(),
+                            intent.getStringExtra("setID").toString())
                     }
                 }
             }
@@ -117,44 +185,112 @@ class DetailsActivity : AppCompatActivity() {
         findViewById<Button>(R.id.buttonVolley).setOnClickListener {
             if(findViewById<RadioButton>(R.id.radioButtonFH).isChecked)
             {
-                addPointDialog.show(
-                    intent.getStringExtra("Pkt1").toString(),
-                    intent.getStringExtra("Pkt2").toString(),
-                    intent.getStringExtra("Kto").toString(),
-                    intent.getStringExtra("Co").toString(),
-                    "Volley",
-                    "Forehand",
-                    intent.getStringExtra("matchID").toString(),
-                    intent.getStringExtra("gameID").toString(),
-                    intent.getStringExtra("setID").toString())
-            }
-            else{
-                addPointDialog.show(
-                    intent.getStringExtra("Pkt1").toString(),
-                    intent.getStringExtra("Pkt2").toString(),
-                    intent.getStringExtra("Kto").toString(),
-                    intent.getStringExtra("Co").toString(),
-                    "Volley",
-                    "Backhand",
-                    intent.getStringExtra("matchID").toString(),
-                    intent.getStringExtra("gameID").toString(),
-                    intent.getStringExtra("setID").toString())
-            }
-            if(!app.isCanceled){
                 if(intent.getStringExtra("Co")=="Winner") {
                     if(czyPlayer1) {
-                        score(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
+                        addPointDialog.show(
+                            player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2,
+                            intent.getStringExtra("Pkt1").toString(),
+                            intent.getStringExtra("Pkt2").toString(),
+                            intent.getStringExtra("Kto").toString(),
+                            intent.getStringExtra("Co").toString(),
+                            "Volley",
+                            "Forehand",
+                            intent.getStringExtra("matchID").toString(),
+                            intent.getStringExtra("gameID").toString(),
+                            intent.getStringExtra("setID").toString())
+                    }else{
+                        addPointDialog.show(
+                            player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,
+                            intent.getStringExtra("Pkt1").toString(),
+                            intent.getStringExtra("Pkt2").toString(),
+                            intent.getStringExtra("Kto").toString(),
+                            intent.getStringExtra("Co").toString(),
+                            "Volley",
+                            "Forehand",
+                            intent.getStringExtra("matchID").toString(),
+                            intent.getStringExtra("gameID").toString(),
+                            intent.getStringExtra("setID").toString())
                     }
-                    else{
-                        score(app,player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
-                    }
-                }//przyznanie punktu
-                else{
+                }else {
                     if(czyPlayer1) {
-                        score(app,player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
+                        addPointDialog.show(
+                            player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,
+                            intent.getStringExtra("Pkt1").toString(),
+                            intent.getStringExtra("Pkt2").toString(),
+                            intent.getStringExtra("Kto").toString(),
+                            intent.getStringExtra("Co").toString(),
+                            "Volley",
+                            "Forehand",
+                            intent.getStringExtra("matchID").toString(),
+                            intent.getStringExtra("gameID").toString(),
+                            intent.getStringExtra("setID").toString())
+                    }else{
+                        addPointDialog.show(
+                            player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2,
+                            intent.getStringExtra("Pkt1").toString(),
+                            intent.getStringExtra("Pkt2").toString(),
+                            intent.getStringExtra("Kto").toString(),
+                            intent.getStringExtra("Co").toString(),
+                            "Volley",
+                            "Forehand",
+                            intent.getStringExtra("matchID").toString(),
+                            intent.getStringExtra("gameID").toString(),
+                            intent.getStringExtra("setID").toString())
                     }
-                    else{
-                        score(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
+                }
+            }
+            else{
+                if(intent.getStringExtra("Co")=="Winner") {
+                    if(czyPlayer1) {
+                        addPointDialog.show(
+                            player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2,
+                            intent.getStringExtra("Pkt1").toString(),
+                            intent.getStringExtra("Pkt2").toString(),
+                            intent.getStringExtra("Kto").toString(),
+                            intent.getStringExtra("Co").toString(),
+                            "Volley",
+                            "Backhand",
+                            intent.getStringExtra("matchID").toString(),
+                            intent.getStringExtra("gameID").toString(),
+                            intent.getStringExtra("setID").toString())
+                    }else{
+                        addPointDialog.show(
+                            player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,
+                            intent.getStringExtra("Pkt1").toString(),
+                            intent.getStringExtra("Pkt2").toString(),
+                            intent.getStringExtra("Kto").toString(),
+                            intent.getStringExtra("Co").toString(),
+                            "Volley",
+                            "Backhand",
+                            intent.getStringExtra("matchID").toString(),
+                            intent.getStringExtra("gameID").toString(),
+                            intent.getStringExtra("setID").toString())
+                    }
+                }else {
+                    if(czyPlayer1) {
+                        addPointDialog.show(
+                            player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,
+                            intent.getStringExtra("Pkt1").toString(),
+                            intent.getStringExtra("Pkt2").toString(),
+                            intent.getStringExtra("Kto").toString(),
+                            intent.getStringExtra("Co").toString(),
+                            "Volley",
+                            "Backhand",
+                            intent.getStringExtra("matchID").toString(),
+                            intent.getStringExtra("gameID").toString(),
+                            intent.getStringExtra("setID").toString())
+                    }else{
+                        addPointDialog.show(
+                            player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2,
+                            intent.getStringExtra("Pkt1").toString(),
+                            intent.getStringExtra("Pkt2").toString(),
+                            intent.getStringExtra("Kto").toString(),
+                            intent.getStringExtra("Co").toString(),
+                            "Volley",
+                            "Backhand",
+                            intent.getStringExtra("matchID").toString(),
+                            intent.getStringExtra("gameID").toString(),
+                            intent.getStringExtra("setID").toString())
                     }
                 }
             }
@@ -163,44 +299,108 @@ class DetailsActivity : AppCompatActivity() {
         findViewById<Button>(R.id.buttonLob).setOnClickListener {
             if(findViewById<RadioButton>(R.id.radioButtonFH).isChecked)
             {
-                addPointDialog.show(
-                    intent.getStringExtra("Pkt1").toString(),
-                    intent.getStringExtra("Pkt2").toString(),
-                    intent.getStringExtra("Kto").toString(),
-                    intent.getStringExtra("Co").toString(),
-                    "Lob",
-                    "Forehand",
-                    intent.getStringExtra("matchID").toString(),
-                    intent.getStringExtra("gameID").toString(),
-                    intent.getStringExtra("setID").toString())
-            }
-            else{
-                addPointDialog.show(
-                    intent.getStringExtra("Pkt1").toString(),
-                    intent.getStringExtra("Pkt2").toString(),
-                    intent.getStringExtra("Kto").toString(),
-                    intent.getStringExtra("Co").toString(),
-                    "Lob",
-                    "Backhand",
-                    intent.getStringExtra("matchID").toString(),
-                    intent.getStringExtra("gameID").toString(),
-                    intent.getStringExtra("setID").toString())
-            }
-            if(!app.isCanceled){
                 if(intent.getStringExtra("Co")=="Winner") {
                     if(czyPlayer1) {
-                        score(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
+                        addPointDialog.show(
+                            player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2,
+                            intent.getStringExtra("Pkt1").toString(),
+                            intent.getStringExtra("Pkt2").toString(),
+                            intent.getStringExtra("Kto").toString(),
+                            intent.getStringExtra("Co").toString(),
+                            "Lob",
+                            "Forehand",
+                            intent.getStringExtra("matchID").toString(),
+                            intent.getStringExtra("gameID").toString(),
+                            intent.getStringExtra("setID").toString())
+                    }else{
+                        addPointDialog.show(
+                            player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,                            intent.getStringExtra("Pkt1").toString(),
+                            intent.getStringExtra("Pkt2").toString(),
+                            intent.getStringExtra("Kto").toString(),
+                            intent.getStringExtra("Co").toString(),
+                            "Lob",
+                            "Forehand",
+                            intent.getStringExtra("matchID").toString(),
+                            intent.getStringExtra("gameID").toString(),
+                            intent.getStringExtra("setID").toString())
                     }
-                    else{
-                        score(app,player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
-                    }
-                }//przyznanie punktu
-                else{
+                }else {
                     if(czyPlayer1) {
-                        score(app,player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
+                        addPointDialog.show(
+                            player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,                            intent.getStringExtra("Pkt1").toString(),
+                            intent.getStringExtra("Pkt2").toString(),
+                            intent.getStringExtra("Kto").toString(),
+                            intent.getStringExtra("Co").toString(),
+                            "Lob",
+                            "Forehand",
+                            intent.getStringExtra("matchID").toString(),
+                            intent.getStringExtra("gameID").toString(),
+                            intent.getStringExtra("setID").toString())
+                    }else{
+                        addPointDialog.show(
+                            player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2,
+                            intent.getStringExtra("Pkt1").toString(),
+                            intent.getStringExtra("Pkt2").toString(),
+                            intent.getStringExtra("Kto").toString(),
+                            intent.getStringExtra("Co").toString(),
+                            "Lob",
+                            "Forehand",
+                            intent.getStringExtra("matchID").toString(),
+                            intent.getStringExtra("gameID").toString(),
+                            intent.getStringExtra("setID").toString())
                     }
-                    else{
-                        score(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
+                }
+            }
+            else{
+                if(intent.getStringExtra("Co")=="Winner") {
+                    if(czyPlayer1) {
+                        addPointDialog.show(
+                            player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2,
+                            intent.getStringExtra("Pkt1").toString(),
+                            intent.getStringExtra("Pkt2").toString(),
+                            intent.getStringExtra("Kto").toString(),
+                            intent.getStringExtra("Co").toString(),
+                            "Lob",
+                            "Backhand",
+                            intent.getStringExtra("matchID").toString(),
+                            intent.getStringExtra("gameID").toString(),
+                            intent.getStringExtra("setID").toString())
+                    }else{
+                        addPointDialog.show(
+                            player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,                            intent.getStringExtra("Pkt1").toString(),
+                            intent.getStringExtra("Pkt2").toString(),
+                            intent.getStringExtra("Kto").toString(),
+                            intent.getStringExtra("Co").toString(),
+                            "Lob",
+                            "Backhand",
+                            intent.getStringExtra("matchID").toString(),
+                            intent.getStringExtra("gameID").toString(),
+                            intent.getStringExtra("setID").toString())
+                    }
+                }else {
+                    if(czyPlayer1) {
+                        addPointDialog.show(
+                            player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,                            intent.getStringExtra("Pkt1").toString(),
+                            intent.getStringExtra("Pkt2").toString(),
+                            intent.getStringExtra("Kto").toString(),
+                            intent.getStringExtra("Co").toString(),
+                            "Lob",
+                            "Backhand",
+                            intent.getStringExtra("matchID").toString(),
+                            intent.getStringExtra("gameID").toString(),
+                            intent.getStringExtra("setID").toString())
+                    }else{
+                        addPointDialog.show(
+                            player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2,
+                            intent.getStringExtra("Pkt1").toString(),
+                            intent.getStringExtra("Pkt2").toString(),
+                            intent.getStringExtra("Kto").toString(),
+                            intent.getStringExtra("Co").toString(),
+                            "Lob",
+                            "Backhand",
+                            intent.getStringExtra("matchID").toString(),
+                            intent.getStringExtra("gameID").toString(),
+                            intent.getStringExtra("setID").toString())
                     }
                 }
             }
@@ -209,44 +409,108 @@ class DetailsActivity : AppCompatActivity() {
         findViewById<Button>(R.id.buttonSlice).setOnClickListener {
             if(findViewById<RadioButton>(R.id.radioButtonFH).isChecked)
             {
-                addPointDialog.show(
-                    intent.getStringExtra("Pkt1").toString(),
-                    intent.getStringExtra("Pkt2").toString(),
-                    intent.getStringExtra("Kto").toString(),
-                    intent.getStringExtra("Co").toString(),
-                    "Slice",
-                    "Forehand",
-                    intent.getStringExtra("matchID").toString(),
-                    intent.getStringExtra("gameID").toString(),
-                    intent.getStringExtra("setID").toString())
-            }
-            else{
-                addPointDialog.show(
-                    intent.getStringExtra("Pkt1").toString(),
-                    intent.getStringExtra("Pkt2").toString(),
-                    intent.getStringExtra("Kto").toString(),
-                    intent.getStringExtra("Co").toString(),
-                    "Slice",
-                    "Backhand",
-                    intent.getStringExtra("matchID").toString(),
-                    intent.getStringExtra("gameID").toString(),
-                    intent.getStringExtra("setID").toString())
-            }
-            if(!app.isCanceled){
                 if(intent.getStringExtra("Co")=="Winner") {
                     if(czyPlayer1) {
-                        score(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
+                        addPointDialog.show(
+                            player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2,
+                            intent.getStringExtra("Pkt1").toString(),
+                            intent.getStringExtra("Pkt2").toString(),
+                            intent.getStringExtra("Kto").toString(),
+                            intent.getStringExtra("Co").toString(),
+                            "Slice",
+                            "Forehand",
+                            intent.getStringExtra("matchID").toString(),
+                            intent.getStringExtra("gameID").toString(),
+                            intent.getStringExtra("setID").toString())
+                    }else{
+                        addPointDialog.show(
+                            player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,                            intent.getStringExtra("Pkt1").toString(),
+                            intent.getStringExtra("Pkt2").toString(),
+                            intent.getStringExtra("Kto").toString(),
+                            intent.getStringExtra("Co").toString(),
+                            "Slice",
+                            "Forehand",
+                            intent.getStringExtra("matchID").toString(),
+                            intent.getStringExtra("gameID").toString(),
+                            intent.getStringExtra("setID").toString())
                     }
-                    else{
-                        score(app,player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
-                    }
-                }//przyznanie punktu
-                else{
+                }else {
                     if(czyPlayer1) {
-                        score(app,player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
+                        addPointDialog.show(
+                            player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,                            intent.getStringExtra("Pkt1").toString(),
+                            intent.getStringExtra("Pkt2").toString(),
+                            intent.getStringExtra("Kto").toString(),
+                            intent.getStringExtra("Co").toString(),
+                            "Slice",
+                            "Forehand",
+                            intent.getStringExtra("matchID").toString(),
+                            intent.getStringExtra("gameID").toString(),
+                            intent.getStringExtra("setID").toString())
+                    }else{
+                        addPointDialog.show(
+                            player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2,
+                            intent.getStringExtra("Pkt1").toString(),
+                            intent.getStringExtra("Pkt2").toString(),
+                            intent.getStringExtra("Kto").toString(),
+                            intent.getStringExtra("Co").toString(),
+                            "Slice",
+                            "Forehand",
+                            intent.getStringExtra("matchID").toString(),
+                            intent.getStringExtra("gameID").toString(),
+                            intent.getStringExtra("setID").toString())
                     }
-                    else{
-                        score(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
+                }
+            }
+            else{
+                if(intent.getStringExtra("Co")=="Winner") {
+                    if(czyPlayer1) {
+                        addPointDialog.show(
+                            player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2,
+                            intent.getStringExtra("Pkt1").toString(),
+                            intent.getStringExtra("Pkt2").toString(),
+                            intent.getStringExtra("Kto").toString(),
+                            intent.getStringExtra("Co").toString(),
+                            "Slice",
+                            "Backhand",
+                            intent.getStringExtra("matchID").toString(),
+                            intent.getStringExtra("gameID").toString(),
+                            intent.getStringExtra("setID").toString())
+                    }else{
+                        addPointDialog.show(
+                            player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,                            intent.getStringExtra("Pkt1").toString(),
+                            intent.getStringExtra("Pkt2").toString(),
+                            intent.getStringExtra("Kto").toString(),
+                            intent.getStringExtra("Co").toString(),
+                            "Slice",
+                            "Backhand",
+                            intent.getStringExtra("matchID").toString(),
+                            intent.getStringExtra("gameID").toString(),
+                            intent.getStringExtra("setID").toString())
+                    }
+                }else {
+                    if(czyPlayer1) {
+                        addPointDialog.show(
+                            player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,                            intent.getStringExtra("Pkt1").toString(),
+                            intent.getStringExtra("Pkt2").toString(),
+                            intent.getStringExtra("Kto").toString(),
+                            intent.getStringExtra("Co").toString(),
+                            "Slice",
+                            "Backhand",
+                            intent.getStringExtra("matchID").toString(),
+                            intent.getStringExtra("gameID").toString(),
+                            intent.getStringExtra("setID").toString())
+                    }else{
+                        addPointDialog.show(
+                            player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2,
+                            intent.getStringExtra("Pkt1").toString(),
+                            intent.getStringExtra("Pkt2").toString(),
+                            intent.getStringExtra("Kto").toString(),
+                            intent.getStringExtra("Co").toString(),
+                            "Slice",
+                            "Backhand",
+                            intent.getStringExtra("matchID").toString(),
+                            intent.getStringExtra("gameID").toString(),
+                            intent.getStringExtra("setID").toString())
                     }
                 }
             }
@@ -255,44 +519,108 @@ class DetailsActivity : AppCompatActivity() {
         findViewById<Button>(R.id.buttonSmash).setOnClickListener {
             if(findViewById<RadioButton>(R.id.radioButtonFH).isChecked)
             {
-                addPointDialog.show(
-                    intent.getStringExtra("Pkt1").toString(),
-                    intent.getStringExtra("Pkt2").toString(),
-                    intent.getStringExtra("Kto").toString(),
-                    intent.getStringExtra("Co").toString(),
-                    "Smash",
-                    "Forehand",
-                    intent.getStringExtra("matchID").toString(),
-                    intent.getStringExtra("gameID").toString(),
-                    intent.getStringExtra("setID").toString())
-            }
-            else{
-                addPointDialog.show(
-                    intent.getStringExtra("Pkt1").toString(),
-                    intent.getStringExtra("Pkt2").toString(),
-                    intent.getStringExtra("Kto").toString(),
-                    intent.getStringExtra("Co").toString(),
-                    "Smash",
-                    "Backhand",
-                    intent.getStringExtra("matchID").toString(),
-                    intent.getStringExtra("gameID").toString(),
-                    intent.getStringExtra("setID").toString())
-            }
-            if(!app.isCanceled){
                 if(intent.getStringExtra("Co")=="Winner") {
                     if(czyPlayer1) {
-                        score(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
+                        addPointDialog.show(
+                            player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2,
+                            intent.getStringExtra("Pkt1").toString(),
+                            intent.getStringExtra("Pkt2").toString(),
+                            intent.getStringExtra("Kto").toString(),
+                            intent.getStringExtra("Co").toString(),
+                            "Smash",
+                            "Forehand",
+                            intent.getStringExtra("matchID").toString(),
+                            intent.getStringExtra("gameID").toString(),
+                            intent.getStringExtra("setID").toString())
+                    }else{
+                        addPointDialog.show(
+                            player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,                            intent.getStringExtra("Pkt1").toString(),
+                            intent.getStringExtra("Pkt2").toString(),
+                            intent.getStringExtra("Kto").toString(),
+                            intent.getStringExtra("Co").toString(),
+                            "Smash",
+                            "Forehand",
+                            intent.getStringExtra("matchID").toString(),
+                            intent.getStringExtra("gameID").toString(),
+                            intent.getStringExtra("setID").toString())
                     }
-                    else{
-                        score(app,player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
-                    }
-                }//przyznanie punktu
-                else{
+                }else {
                     if(czyPlayer1) {
-                        score(app,player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
+                        addPointDialog.show(
+                            player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,                            intent.getStringExtra("Pkt1").toString(),
+                            intent.getStringExtra("Pkt2").toString(),
+                            intent.getStringExtra("Kto").toString(),
+                            intent.getStringExtra("Co").toString(),
+                            "Smash",
+                            "Forehand",
+                            intent.getStringExtra("matchID").toString(),
+                            intent.getStringExtra("gameID").toString(),
+                            intent.getStringExtra("setID").toString())
+                    }else{
+                        addPointDialog.show(
+                            player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2,
+                            intent.getStringExtra("Pkt1").toString(),
+                            intent.getStringExtra("Pkt2").toString(),
+                            intent.getStringExtra("Kto").toString(),
+                            intent.getStringExtra("Co").toString(),
+                            "Smash",
+                            "Forehand",
+                            intent.getStringExtra("matchID").toString(),
+                            intent.getStringExtra("gameID").toString(),
+                            intent.getStringExtra("setID").toString())
                     }
-                    else{
-                        score(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
+                }
+            }
+            else{
+                if(intent.getStringExtra("Co")=="Winner") {
+                    if(czyPlayer1) {
+                        addPointDialog.show(
+                            player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2,
+                            intent.getStringExtra("Pkt1").toString(),
+                            intent.getStringExtra("Pkt2").toString(),
+                            intent.getStringExtra("Kto").toString(),
+                            intent.getStringExtra("Co").toString(),
+                            "Smash",
+                            "Backhand",
+                            intent.getStringExtra("matchID").toString(),
+                            intent.getStringExtra("gameID").toString(),
+                            intent.getStringExtra("setID").toString())
+                    }else{
+                        addPointDialog.show(
+                            player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,                            intent.getStringExtra("Pkt1").toString(),
+                            intent.getStringExtra("Pkt2").toString(),
+                            intent.getStringExtra("Kto").toString(),
+                            intent.getStringExtra("Co").toString(),
+                            "Smash",
+                            "Backhand",
+                            intent.getStringExtra("matchID").toString(),
+                            intent.getStringExtra("gameID").toString(),
+                            intent.getStringExtra("setID").toString())
+                    }
+                }else {
+                    if(czyPlayer1) {
+                        addPointDialog.show(
+                            player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,                            intent.getStringExtra("Pkt1").toString(),
+                            intent.getStringExtra("Pkt2").toString(),
+                            intent.getStringExtra("Kto").toString(),
+                            intent.getStringExtra("Co").toString(),
+                            "Smash",
+                            "Backhand",
+                            intent.getStringExtra("matchID").toString(),
+                            intent.getStringExtra("gameID").toString(),
+                            intent.getStringExtra("setID").toString())
+                    }else{
+                        addPointDialog.show(
+                            player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2,
+                            intent.getStringExtra("Pkt1").toString(),
+                            intent.getStringExtra("Pkt2").toString(),
+                            intent.getStringExtra("Kto").toString(),
+                            intent.getStringExtra("Co").toString(),
+                            "Smash",
+                            "Backhand",
+                            intent.getStringExtra("matchID").toString(),
+                            intent.getStringExtra("gameID").toString(),
+                            intent.getStringExtra("setID").toString())
                     }
                 }
             }
@@ -301,44 +629,111 @@ class DetailsActivity : AppCompatActivity() {
         findViewById<Button>(R.id.buttonDropshot).setOnClickListener {
             if(findViewById<RadioButton>(R.id.radioButtonFH).isChecked)
             {
-                addPointDialog.show(
-                    intent.getStringExtra("Pkt1").toString(),
-                    intent.getStringExtra("Pkt2").toString(),
-                    intent.getStringExtra("Kto").toString(),
-                    intent.getStringExtra("Co").toString(),
-                    "Dropshot",
-                    "Forehand",
-                    intent.getStringExtra("matchID").toString(),
-                    intent.getStringExtra("gameID").toString(),
-                    intent.getStringExtra("setID").toString())
-            }
-            else{
-                addPointDialog.show(
-                    intent.getStringExtra("Pkt1").toString(),
-                    intent.getStringExtra("Pkt2").toString(),
-                    intent.getStringExtra("Kto").toString(),
-                    intent.getStringExtra("Co").toString(),
-                    "Dropshot",
-                    "Backhand",
-                    intent.getStringExtra("matchID").toString(),
-                    intent.getStringExtra("gameID").toString(),
-                    intent.getStringExtra("setID").toString())
-            }
-            if(!app.isCanceled){
                 if(intent.getStringExtra("Co")=="Winner") {
                     if(czyPlayer1) {
-                        score(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
+                        addPointDialog.show(
+                            player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2,
+                            intent.getStringExtra("Pkt1").toString(),
+                            intent.getStringExtra("Pkt2").toString(),
+                            intent.getStringExtra("Kto").toString(),
+                            intent.getStringExtra("Co").toString(),
+                            "Dropshot",
+                            "Forehand",
+                            intent.getStringExtra("matchID").toString(),
+                            intent.getStringExtra("gameID").toString(),
+                            intent.getStringExtra("setID").toString())
+                    }else{
+                        addPointDialog.show(
+                            player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,                            intent.getStringExtra("Pkt1").toString(),
+                            intent.getStringExtra("Pkt2").toString(),
+                            intent.getStringExtra("Kto").toString(),
+                            intent.getStringExtra("Co").toString(),
+                            "Dropshot",
+                            "Forehand",
+                            intent.getStringExtra("matchID").toString(),
+                            intent.getStringExtra("gameID").toString(),
+                            intent.getStringExtra("setID").toString())
                     }
-                    else{
-                        score(app,player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
-                    }
-                }//przyznanie punktu
-                else{
+                }else {
                     if(czyPlayer1) {
-                        score(app,player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
+                        addPointDialog.show(
+                            player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,
+                            intent.getStringExtra("Pkt1").toString(),
+                            intent.getStringExtra("Pkt2").toString(),
+                            intent.getStringExtra("Kto").toString(),
+                            intent.getStringExtra("Co").toString(),
+                            "Dropshot",
+                            "Forehand",
+                            intent.getStringExtra("matchID").toString(),
+                            intent.getStringExtra("gameID").toString(),
+                            intent.getStringExtra("setID").toString())
+                    }else{
+                        addPointDialog.show(
+                            player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2,
+                            intent.getStringExtra("Pkt1").toString(),
+                            intent.getStringExtra("Pkt2").toString(),
+                            intent.getStringExtra("Kto").toString(),
+                            intent.getStringExtra("Co").toString(),
+                            "Dropshot",
+                            "Forehand",
+                            intent.getStringExtra("matchID").toString(),
+                            intent.getStringExtra("gameID").toString(),
+                            intent.getStringExtra("setID").toString())
                     }
-                    else{
-                        score(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
+                }
+            }
+            else{
+                if(intent.getStringExtra("Co")=="Winner") {
+                    if(czyPlayer1) {
+                        addPointDialog.show(
+                            player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2,
+                            intent.getStringExtra("Pkt1").toString(),
+                            intent.getStringExtra("Pkt2").toString(),
+                            intent.getStringExtra("Kto").toString(),
+                            intent.getStringExtra("Co").toString(),
+                            "Dropshot",
+                            "Backhand",
+                            intent.getStringExtra("matchID").toString(),
+                            intent.getStringExtra("gameID").toString(),
+                            intent.getStringExtra("setID").toString())
+                    }else{
+                        addPointDialog.show(
+                            player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,
+                            intent.getStringExtra("Pkt1").toString(),
+                            intent.getStringExtra("Pkt2").toString(),
+                            intent.getStringExtra("Kto").toString(),
+                            intent.getStringExtra("Co").toString(),
+                            "Dropshot",
+                            "Backhand",
+                            intent.getStringExtra("matchID").toString(),
+                            intent.getStringExtra("gameID").toString(),
+                            intent.getStringExtra("setID").toString())
+                    }
+                }else {
+                    if(czyPlayer1) {
+                        addPointDialog.show(
+                            player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,
+                            intent.getStringExtra("Pkt1").toString(),
+                            intent.getStringExtra("Pkt2").toString(),
+                            intent.getStringExtra("Kto").toString(),
+                            intent.getStringExtra("Co").toString(),
+                            "Dropshot",
+                            "Backhand",
+                            intent.getStringExtra("matchID").toString(),
+                            intent.getStringExtra("gameID").toString(),
+                            intent.getStringExtra("setID").toString())
+                    }else{
+                        addPointDialog.show(
+                            player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2,
+                            intent.getStringExtra("Pkt1").toString(),
+                            intent.getStringExtra("Pkt2").toString(),
+                            intent.getStringExtra("Kto").toString(),
+                            intent.getStringExtra("Co").toString(),
+                            "Dropshot",
+                            "Backhand",
+                            intent.getStringExtra("matchID").toString(),
+                            intent.getStringExtra("gameID").toString(),
+                            intent.getStringExtra("setID").toString())
                     }
                 }
             }

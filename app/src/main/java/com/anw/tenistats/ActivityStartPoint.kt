@@ -81,6 +81,7 @@ class ActivityStartPoint : AppCompatActivity() {
                 }
                 app.ace1++
                 addPointDialog.show(
+                    player1, player2, serve1, serve2, pkt1, pkt2, set1p1, set1p2, set2p1, set2p2, set3p1, set3p2,
                     pkt1.text.toString(),
                     pkt2.text.toString(),
                     player1.text.toString(),
@@ -90,9 +91,6 @@ class ActivityStartPoint : AppCompatActivity() {
                     matchId.toString(),
                     game.toString(),
                     set.toString())
-                if (!app.isCanceled) {
-                    score(app, player1, player2, serve1, serve2, pkt1, pkt2, set1p1, set1p2, set2p1, set2p2, set3p1, set3p2)
-                }
             }
             else { //serwuje player2
                 app.totalpoints2++
@@ -106,6 +104,7 @@ class ActivityStartPoint : AppCompatActivity() {
                 }
                 app.ace2++
                 addPointDialog.show(
+                    player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,
                     pkt1.text.toString(),
                     pkt2.text.toString(),
                     player2.text.toString(),
@@ -115,9 +114,6 @@ class ActivityStartPoint : AppCompatActivity() {
                     matchId.toString(),
                     game.toString(),
                     set.toString())
-                if(!app.isCanceled){
-                    score(app,player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
-                }
             }
         }
 
@@ -138,6 +134,7 @@ class ActivityStartPoint : AppCompatActivity() {
                     app.totalpoints2++
                     app.doublefault1++
                     addPointDialog.show(
+                        player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,
                         pkt1.text.toString(),
                         pkt2.text.toString(),
                         player1.text.toString(),
@@ -147,14 +144,12 @@ class ActivityStartPoint : AppCompatActivity() {
                         matchId.toString(),
                         game.toString(),
                         set.toString())
-                    if(!app.isCanceled){
-                        score(app,player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
-                    }
                 }
                 else {
                     app.totalpoints1++
                     app.doublefault2++
                     addPointDialog.show(
+                        player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2,
                         pkt1.text.toString(),
                         pkt2.text.toString(),
                         player2.text.toString(),
@@ -164,9 +159,6 @@ class ActivityStartPoint : AppCompatActivity() {
                         matchId.toString(),
                         game.toString(),
                         set.toString())
-                    if(!app.isCanceled){
-                        score(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
-                    }
                 }
             }
         }
@@ -185,6 +177,7 @@ class ActivityStartPoint : AppCompatActivity() {
                 }
                 app.returnwinnerFH2++
                 addPointDialog.show(
+                    player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,
                     pkt1.text.toString(),
                     pkt2.text.toString(),
                     player2.text.toString(),
@@ -194,9 +187,6 @@ class ActivityStartPoint : AppCompatActivity() {
                     matchId.toString(),
                     game.toString(),
                     set.toString())
-                if(!app.isCanceled){
-                    score(app,player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
-                }
             }
             else {
                 app.totalpoints1++
@@ -210,6 +200,7 @@ class ActivityStartPoint : AppCompatActivity() {
                 }
                 app.returnwinnerFH1++
                 addPointDialog.show(
+                    player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2,
                     pkt1.text.toString(),
                     pkt2.text.toString(),
                     player1.text.toString(),
@@ -219,9 +210,6 @@ class ActivityStartPoint : AppCompatActivity() {
                     matchId.toString(),
                     game.toString(),
                     set.toString())
-                if(!app.isCanceled){
-                    score(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
-                }
             }
         }
 
@@ -239,6 +227,7 @@ class ActivityStartPoint : AppCompatActivity() {
                 }
                 app.returnwinnerBH2++
                 addPointDialog.show(
+                    player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,
                     pkt1.text.toString(),
                     pkt2.text.toString(),
                     player2.text.toString(),
@@ -248,9 +237,6 @@ class ActivityStartPoint : AppCompatActivity() {
                     matchId.toString(),
                     game.toString(),
                     set.toString())
-                if(!app.isCanceled){
-                    score(app,player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
-                }
             }
             else {
                 app.totalpoints1++
@@ -264,6 +250,7 @@ class ActivityStartPoint : AppCompatActivity() {
                 }
                 app.returnwinnerBH1++
                 addPointDialog.show(
+                    player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2,
                     pkt1.text.toString(),
                     pkt2.text.toString(), player1.text.toString(),
                     "Winner",
@@ -272,9 +259,6 @@ class ActivityStartPoint : AppCompatActivity() {
                     matchId.toString(),
                     game.toString(),
                     set.toString())
-                if(!app.isCanceled) {
-                    score(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
-                }
             }
         }
 
@@ -292,6 +276,7 @@ class ActivityStartPoint : AppCompatActivity() {
                 }
                 app.returnerrorFH2++
                 addPointDialog.show(
+                    player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2,
                     pkt1.text.toString(),
                     pkt2.text.toString(),
                     player2.text.toString(),
@@ -301,9 +286,6 @@ class ActivityStartPoint : AppCompatActivity() {
                     matchId.toString(),
                     game.toString(),
                     set.toString())
-                if(!app.isCanceled){
-                    score(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
-                }
             }
             else {
                 app.totalpoints2++
@@ -317,6 +299,7 @@ class ActivityStartPoint : AppCompatActivity() {
                 }
                 app.returnerrorFH1++
                 addPointDialog.show(
+                    player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,
                     pkt1.text.toString(),
                     pkt2.text.toString(),
                     player1.text.toString(),
@@ -326,9 +309,6 @@ class ActivityStartPoint : AppCompatActivity() {
                     matchId.toString(),
                     game.toString(),
                     set.toString())
-                if(!app.isCanceled){
-                    score(app,player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
-                }
             }
         }
 
@@ -346,6 +326,7 @@ class ActivityStartPoint : AppCompatActivity() {
                 }
                 app.returnerrorBH2++
                 addPointDialog.show(
+                    player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2,
                     pkt1.text.toString(),
                     pkt2.text.toString(),
                     player2.text.toString(),
@@ -355,9 +336,6 @@ class ActivityStartPoint : AppCompatActivity() {
                     matchId.toString(),
                     game.toString(),
                     set.toString())
-                if(!app.isCanceled){
-                    score(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
-                }
             }
             else {
                 app.totalpoints2++
@@ -370,7 +348,8 @@ class ActivityStartPoint : AppCompatActivity() {
                     findViewById<TextView>(R.id.textViewFS).text = "1st Serve"
                 }
                 app.returnerrorBH1++
-                addPointDialog.show(
+                addPointDialog.show (
+                    player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,
                     pkt1.text.toString(),
                     pkt2.text.toString(),
                     player1.text.toString(),
@@ -380,9 +359,6 @@ class ActivityStartPoint : AppCompatActivity() {
                     matchId.toString(),
                     game.toString(),
                     set.toString())
-                if(!app.isCanceled){
-                    score(app,player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1)
-                }
             }
         }
 

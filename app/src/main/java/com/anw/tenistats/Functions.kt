@@ -6,7 +6,6 @@ import android.widget.TextView
 //poczatkowe ustawienie wyniku dla kazdej z aktywnosci z wynikiem
 fun clearScore(app: Stats)
 {
-    app.isCanceled = false
     app.isEnd = false //czy koniec meczu
     app.serwis = 1 //1-wszedl 1 serwis; 2-wszedl drugi serwis; 0-podwojny blad
     app.pktId = 1 //liczba zagranych punktow w meczu
