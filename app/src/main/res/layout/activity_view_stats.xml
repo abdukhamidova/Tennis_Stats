@@ -270,34 +270,19 @@
                     android:gravity="center_horizontal"
                     android:orientation="horizontal">
 
-                    <!--wykres-->
-                    <com.db.williamchart.view.HorizontalBarChartView
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
-                        app:chart_axis="x"
-                        app:chart_barsRadius="4dp"
-                        app:chart_labelsColor="#0D47A1"
-                        app:chart_labelsSize="10sp"
-                        app:chart_spacing="15dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"/>
+                    <View
+                        android:id="@+id/graphTotalPlayer1"
+                        android:layout_width="75dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="right"
+                        android:background="#5FB2BD"/>
 
-                    <com.db.williamchart.view.HorizontalBarChartView
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
-                        app:chart_axis="x"
-                        app:chart_barsRadius="4dp"
-                        app:chart_labelsColor="#0D47A1"
-                        app:chart_labelsSize="10sp"
-                        app:chart_spacing="15dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent" />
+                    <View
+                        android:id="@+id/graphTotalPlayer2"
+                        android:layout_width="100dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="left"
+                        android:background="#073159"/>
 
                 </LinearLayout>
 
@@ -339,35 +324,19 @@
                     android:gravity="center_horizontal"
                     android:orientation="horizontal">
 
-                    <!--wykres-->
-                    <com.db.williamchart.view.HorizontalBarChartView
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
-                        app:chart_axis="x"
-                        app:chart_barsRadius="4dp"
-                        app:chart_labelsColor="#0D47A1"
-                        app:chart_labelsSize="10sp"
-                        app:chart_spacing="15dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:textColor="@color/black" />
+                    <View
+                        android:id="@+id/graphAcePlayer1"
+                        android:layout_width="75dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="right"
+                        android:background="#5FB2BD"/>
 
-                    <com.db.williamchart.view.HorizontalBarChartView
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
-                        app:chart_axis="x"
-                        app:chart_barsRadius="4dp"
-                        app:chart_labelsColor="#0D47A1"
-                        app:chart_labelsSize="10sp"
-                        app:chart_spacing="15dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent" />
+                    <View
+                        android:id="@+id/graphAcePlayer2"
+                        android:layout_width="100dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="left"
+                        android:background="#073159"/>
 
                 </LinearLayout>
 
@@ -409,34 +378,19 @@
                     android:gravity="center_horizontal"
                     android:orientation="horizontal">
 
-                    <!--wykres-->
-                    <com.db.williamchart.view.HorizontalBarChartView
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
-                        app:chart_axis="x"
-                        app:chart_barsRadius="4dp"
-                        app:chart_labelsColor="#0D47A1"
-                        app:chart_labelsSize="10sp"
-                        app:chart_spacing="15dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent" />
+                    <View
+                        android:id="@+id/graphDoubleFaultPlayer1"
+                        android:layout_width="75dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="right"
+                        android:background="#5FB2BD"/>
 
-                    <com.db.williamchart.view.HorizontalBarChartView
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
-                        app:chart_axis="x"
-                        app:chart_barsRadius="4dp"
-                        app:chart_labelsColor="#0D47A1"
-                        app:chart_labelsSize="10sp"
-                        app:chart_spacing="15dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent" />
+                    <View
+                        android:id="@+id/graphDoubleFaultPlayer2"
+                        android:layout_width="100dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="left"
+                        android:background="#073159"/>
 
                 </LinearLayout>
 
@@ -478,34 +432,19 @@
                     android:gravity="center_horizontal"
                     android:orientation="horizontal">
 
-                    <!--wykres-->
-                    <com.db.williamchart.view.HorizontalBarChartView
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
-                        app:chart_axis="x"
-                        app:chart_barsRadius="4dp"
-                        app:chart_labelsColor="#0D47A1"
-                        app:chart_labelsSize="10sp"
-                        app:chart_spacing="15dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent" />
+                    <View
+                        android:id="@+id/graphFirstPlayer1"
+                        android:layout_width="75dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="right"
+                        android:background="#5FB2BD"/>
 
-                    <com.db.williamchart.view.HorizontalBarChartView
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
-                        app:chart_axis="x"
-                        app:chart_barsRadius="4dp"
-                        app:chart_labelsColor="#0D47A1"
-                        app:chart_labelsSize="10sp"
-                        app:chart_spacing="15dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent" />
+                    <View
+                        android:id="@+id/graphFirstPlayer2"
+                        android:layout_width="100dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="left"
+                        android:background="#073159"/>
 
                 </LinearLayout>
 
@@ -547,34 +486,19 @@
                     android:gravity="center_horizontal"
                     android:orientation="horizontal">
 
-                    <!--wykres-->
-                    <com.db.williamchart.view.HorizontalBarChartView
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
-                        app:chart_axis="x"
-                        app:chart_barsRadius="4dp"
-                        app:chart_labelsColor="#0D47A1"
-                        app:chart_labelsSize="10sp"
-                        app:chart_spacing="15dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent" />
+                    <View
+                        android:id="@+id/graphSecondPlayer1"
+                        android:layout_width="75dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="right"
+                        android:background="#5FB2BD"/>
 
-                    <com.db.williamchart.view.HorizontalBarChartView
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
-                        app:chart_axis="x"
-                        app:chart_barsRadius="4dp"
-                        app:chart_labelsColor="#0D47A1"
-                        app:chart_labelsSize="10sp"
-                        app:chart_spacing="15dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent" />
+                    <View
+                        android:id="@+id/graphSecondPlayer2"
+                        android:layout_width="100dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="left"
+                        android:background="#073159"/>
 
                 </LinearLayout>
 

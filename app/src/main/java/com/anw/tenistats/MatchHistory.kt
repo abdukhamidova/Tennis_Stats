@@ -39,5 +39,6 @@ data class Point(
     val co: String, //np. ace, winner, forced error itp
     val gdzie: String, //np. return, ground, slice itp
     val czym: String, //FH/BH
-    val serwis: Int //1 - wszedl pierwszy serwis, 2 - wszedl drugi serwis, 0 - podwojny blad
+    val serwis: Int, //1 - wszedl pierwszy serwis, 2 - wszedl drugi serwis, 0 - podwojny blad
+    val servePlayer: String //osoba serwujaca
 )

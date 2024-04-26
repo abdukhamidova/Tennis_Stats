@@ -1,4 +1,4 @@
-package com.anw.tenistats
+/*package com.anw.tenistats
 
 import android.content.Intent
 import android.os.Bundle
@@ -68,4 +68,4 @@ class AddActivity : AppCompatActivity() {
             }
         }
     }
-}
+}*/

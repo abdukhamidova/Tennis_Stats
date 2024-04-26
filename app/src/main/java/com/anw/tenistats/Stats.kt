@@ -23,8 +23,6 @@ class Stats : Application() {
     var set3p1: String = ""
     var set3p2: String = ""
 
-    //--reszta raczej nie bedzie uzywana
-
     //zmienne globalne do liczenia statystyk
     var totalpoints1: Int = 0   //ostatecznie kto ile wygrał punktów
     var totalpoints2: Int = 0

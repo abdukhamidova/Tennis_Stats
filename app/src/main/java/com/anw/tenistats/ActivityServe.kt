@@ -16,6 +16,8 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
 class ActivityServe : AppCompatActivity() {
+    private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var database: DatabaseReference
     var matchId: String?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,14 +63,21 @@ class ActivityServe : AppCompatActivity() {
 
         //kliknięcie na gracza, który serwuje jako pierwsze
         //& przekierowanie do kolejnej aktywności
+        firebaseAuth = FirebaseAuth.getInstance()
+        val user = firebaseAuth.currentUser?.uid
+        database =
+            FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
+                .getReference(user.toString()).child("Matches").child(matchId.toString())
         findViewById<Button>(R.id.buttonPlayer1).setOnClickListener{
             app.serve1="1" //do statysyk
             app.serve2=""
+            database.child("LastServePlayer").setValue(app.player1)
             callActivity()
         }
         findViewById<Button>(R.id.buttonPlayer2).setOnClickListener{
             app.serve1=""
             app.serve2="1" //do statysyk
+            database.child("LastServePlayer").setValue(app.player2)
             callActivity()
         }
 

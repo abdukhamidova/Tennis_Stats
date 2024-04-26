@@ -52,6 +52,7 @@ class EndOfMatchActivity : AppCompatActivity() {
         database =
             FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
                 .getReference(user.toString()).child("Matches").child(matchId.toString())
+        database.child("servePlayer").setValue("")
         database.child("winner").setValue(winner)
         database.child("set1p1").setValue((set1p1.text.toString()))
         database.child("set2p1").setValue((set2p1.text.toString()))

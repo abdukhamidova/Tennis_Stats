@@ -1,9 +1,11 @@
 package com.anw.tenistats
 
+import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -30,10 +32,9 @@ class ViewStatsActivity : AppCompatActivity() {
             insets
         }
         val app = application as Stats
+        //pola w tabeli wyniku
         val player1 = findViewById<TextView>(R.id.textviewPlayer1Stats)
-        val player1name = findViewById<TextView>(R.id.player1name)
         val player2 = findViewById<TextView>(R.id.textviewPlayer2Stats)
-        val player2name = findViewById<TextView>(R.id.player2name)
         val serve1 = findViewById<TextView>(R.id.textViewServe1Stats)
         val serve2 = findViewById<TextView>(R.id.textViewServe2Stats)
         val set1p1 = findViewById<TextView>(R.id.textViewP1Set1Stats)
@@ -49,9 +50,12 @@ class ViewStatsActivity : AppCompatActivity() {
         database = FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
             .getReference(user.toString()).child("Matches").child(matchID)
 
-        //ustawienie wyniku
+        //ustawienie wyniku w tabeli
         setscore(player1,player2,serve1,serve2,set1p1,set2p1,set3p1,set1p2,set2p2,set3p2)
 
+        //pola nad statystykami
+        val player1name = findViewById<TextView>(R.id.player1name)
+        val player2name = findViewById<TextView>(R.id.player2name)
         database.child("player1").get().addOnSuccessListener { dataSnapshot ->
             // Pobranie wartości "player1" z bazy danych
             val player1Value = dataSnapshot.getValue(String::class.java)
@@ -70,69 +74,84 @@ class ViewStatsActivity : AppCompatActivity() {
             // Obsługa błędów
         }
 
+        //na start ustawienie statystyk ALL
         setAppValues(app,0,player1name,player2name)
         setTableValue(app)
 
-        findViewById<TextView>(R.id.textViewSet1Stats).isClickable = true
-        findViewById<TextView>(R.id.textViewSet1Stats).isFocusable = true
-        findViewById<TextView>(R.id.textViewSet1Stats).isFocusableInTouchMode = true
+        //ustawienie wszystkich textView SET1, SET2, SET3 na clickable
+        val set1 = findViewById<TextView>(R.id.textViewSet1Stats)
+        val set2 = findViewById<TextView>(R.id.textViewSet2Stats)
+        val set3 = findViewById<TextView>(R.id.textViewSet3Stats)
+        set1.isClickable = true
+        set1.isFocusable = true
+        set1.isFocusableInTouchMode = true
 
-        findViewById<TextView>(R.id.textViewSet2Stats).isClickable = true
-        findViewById<TextView>(R.id.textViewSet2Stats).isFocusable = true
-        findViewById<TextView>(R.id.textViewSet2Stats).isFocusableInTouchMode = true
+        set2.isClickable = true
+        set2.isFocusable = true
+        set2.isFocusableInTouchMode = true
 
-        findViewById<TextView>(R.id.textViewSet3Stats).isClickable = true
-        findViewById<TextView>(R.id.textViewSet3Stats).isFocusable = true
-        findViewById<TextView>(R.id.textViewSet3Stats).isFocusableInTouchMode = true
+        set3.isClickable = true
+        set3.isFocusable = true
+        set3.isFocusableInTouchMode = true
 
+        //zmiana ustawien clickable gdy seta nie ma
         if(set1p1.text==""){
-            findViewById<TextView>(R.id.textViewSet1Stats).isClickable = false
-            findViewById<TextView>(R.id.textViewSet1Stats).isFocusable = false
-            findViewById<TextView>(R.id.textViewSet1Stats).isFocusableInTouchMode = false
+            set1.isClickable = false
+            set1.isFocusable = false
+            set1.isFocusableInTouchMode = false
         }
         if(set2p1.text==""){
-            findViewById<TextView>(R.id.textViewSet2Stats).isClickable = false
-            findViewById<TextView>(R.id.textViewSet2Stats).isFocusable = false
-            findViewById<TextView>(R.id.textViewSet2Stats).isFocusableInTouchMode = false
+            set2.isClickable = false
+            set2.isFocusable = false
+            set2.isFocusableInTouchMode = false
         }
         if(set3p1.text==""){
-            findViewById<TextView>(R.id.textViewSet3Stats).isClickable = false
-            findViewById<TextView>(R.id.textViewSet3Stats).isFocusable = false
-            findViewById<TextView>(R.id.textViewSet3Stats).isFocusableInTouchMode = false
+            set3.isClickable = false
+            set3.isFocusable = false
+            set3.isFocusableInTouchMode = false
         }
 
         findViewById<TextView>(R.id.textViewAllStats).setOnClickListener {
+            //zmiana kolorow textViews ALL, SET1,SET2,SET3
             findViewById<TextView>(R.id.textViewAllStats).setBackgroundColor(0x7E65BDC9)
             findViewById<TextView>(R.id.textViewSet1Stats).setBackgroundColor(0x073159)
             findViewById<TextView>(R.id.textViewSet2Stats).setBackgroundColor(0x073159)
             findViewById<TextView>(R.id.textViewSet3Stats).setBackgroundColor(0x073159)
+            //ustawienie statystyk ALL
             setAppValues(app,0,player1name,player2name)
             setTableValue(app)
         }
         findViewById<TextView>(R.id.textViewSet1Stats).setOnClickListener {
+            //zmiana kolorow textViews ALL, SET1,SET2,SET3
             findViewById<TextView>(R.id.textViewAllStats).setBackgroundColor(0x073159)
             findViewById<TextView>(R.id.textViewSet1Stats).setBackgroundColor(0x7E65BDC9)
             findViewById<TextView>(R.id.textViewSet2Stats).setBackgroundColor(0x073159)
             findViewById<TextView>(R.id.textViewSet3Stats).setBackgroundColor(0x073159)
+            //ustawienie statystyk SET1
             setAppValues(app,1,player1name,player2name)
             setTableValue(app)
         }
-        findViewById<TextView>(R.id.textViewSet2Stats).setOnClickListener {
+        findViewById<TextView>(R.id.textViewSet2Stats).setOnClickListener{
+            //zmiana kolorow textViews ALL, SET1,SET2,SET3
             findViewById<TextView>(R.id.textViewAllStats).setBackgroundColor(0x073159)
             findViewById<TextView>(R.id.textViewSet1Stats).setBackgroundColor(0x073159)
             findViewById<TextView>(R.id.textViewSet2Stats).setBackgroundColor(0x7E65BDC9)
             findViewById<TextView>(R.id.textViewSet3Stats).setBackgroundColor(0x073159)
+            //ustawienie statystyk SET2
             setAppValues(app,2,player1name,player2name)
             setTableValue(app)
         }
         findViewById<TextView>(R.id.textViewSet3Stats).setOnClickListener {
+            //zmiana kolorow textViews ALL, SET1,SET2,SET3
             findViewById<TextView>(R.id.textViewAllStats).setBackgroundColor(0x073159)
             findViewById<TextView>(R.id.textViewSet1Stats).setBackgroundColor(0x073159)
             findViewById<TextView>(R.id.textViewSet2Stats).setBackgroundColor(0x073159)
             findViewById<TextView>(R.id.textViewSet3Stats).setBackgroundColor(0x7E65BDC9)
+            //ustawienie statystyk SET3
             setAppValues(app,3,player1name,player2name)
             setTableValue(app)
         }
+        //zmiana aktywnosci na History
         findViewById<TextView>(R.id.textViewHistory).setOnClickListener {
             val intent= Intent(this,ViewHistoryActivity::class.java).also{
                 startActivity(it)
@@ -210,6 +229,7 @@ class ViewStatsActivity : AppCompatActivity() {
     }
 
     private fun countForPlayer(setNumber: Int, playerName: String, shotName: String, placeName: String, sideName: String,callback: (Int) -> Unit) {
+        //statystyki dla pojedynczych setow
         if(setNumber!=0) {
             database.child("set $setNumber")
                 .addListenerForSingleValueEvent(object : ValueEventListener {
@@ -218,7 +238,7 @@ class ViewStatsActivity : AppCompatActivity() {
                         for (gameSnapshot in dataSnapshot.children) {
                             if (gameSnapshot.hasChildren()) {
                                 for (pointSnapshot in gameSnapshot.children) {
-                                    // Pobranie atrybutów punktu
+                                    // pobranie atrybutów punktu
                                     val co = pointSnapshot.child("co").getValue(String::class.java)
                                     val czym =
                                         pointSnapshot.child("czym").getValue(String::class.java)
@@ -244,6 +264,7 @@ class ViewStatsActivity : AppCompatActivity() {
                     }
                 })
         }
+        //statystyki dla ALL
         else{
             database.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -253,7 +274,7 @@ class ViewStatsActivity : AppCompatActivity() {
                             for (gameSnapshot in setSnapshot.children) {
                                 if (gameSnapshot.hasChildren()) {
                                     for (pointSnapshot in gameSnapshot.children) {
-                                        // Pobranie atrybutów punktu
+                                        //pobranie atrybutów punktu
                                         val co =
                                             pointSnapshot.child("co").getValue(String::class.java)
                                         val czym =
@@ -285,9 +306,73 @@ class ViewStatsActivity : AppCompatActivity() {
         }
     }
 
+    private fun countServeForPlayer(setNumber: Int, playerName: String, serveNumber: Int,callback: (Int) -> Unit) {
+        //statystyki dla pojedynczych setow
+        if(setNumber!=0) {
+            database.child("set $setNumber")
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        var result = 0
+                        for (gameSnapshot in dataSnapshot.children) {
+                            if (gameSnapshot.hasChildren()) {
+                                for (pointSnapshot in gameSnapshot.children) {
+                                    // pobranie atrybutów punktu
+                                    val servePlayer = pointSnapshot.child("servePlayer").getValue(String::class.java)
+                                    val serwis = pointSnapshot.child("serwis").getValue(Int::class.java)
+                                    if (servePlayer == playerName && serwis == serveNumber) {
+                                        result++
+                                    }
+                                }
+                            }
+                        }
+                        callback(result)
+                    }
+
+                    override fun onCancelled(databaseError: DatabaseError) {
+                        // Obsługa błędu pobierania danych
+                        Log.e(
+                            ContentValues.TAG,
+                            "Error fetching match points: ${databaseError.message}"
+                        )
+                    }
+                })
+        }
+        //statystyki dla ALL
+        else{
+            database.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    var result = 0
+                    for (setSnapshot in dataSnapshot.children) {
+                        if (setSnapshot.hasChildren()) {
+                            for (gameSnapshot in setSnapshot.children) {
+                                if (gameSnapshot.hasChildren()) {
+                                    for (pointSnapshot in gameSnapshot.children) {
+                                        // pobranie atrybutów punktu
+                                        val servePlayer = pointSnapshot.child("servePlayer").getValue(String::class.java)
+                                        val serwis = pointSnapshot.child("serwis").getValue(Int::class.java)
+                                        if (servePlayer == playerName && serwis == serveNumber) {
+                                            result++
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    callback(result)
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    // Obsługa błędu pobierania danych
+                    Log.e(
+                        ContentValues.TAG,
+                        "Error fetching match points: ${databaseError.message}"
+                    )
+                }
+            })
+        }
+    }
+
     fun setAppValues(app: Stats,setNumber: Int,player1name: TextView,player2name: TextView){
-        app.totalpoints1=0
-        app.totalpoints2=0
         countForPlayer(setNumber, player1name.text.toString(), "Ace","","") { result ->
             // Tutaj możesz obsłużyć wynik countAcesForPlayer
             app.ace1 = result
@@ -309,6 +394,26 @@ class ViewStatsActivity : AppCompatActivity() {
             app.doublefault2 = result
             app.totalpoints1+=result
         }
+
+        countServeForPlayer(setNumber,player1name.text.toString(),1){ result ->
+            app.firstservein1=result
+        }
+        countServeForPlayer(setNumber,player2name.text.toString(),1){ result ->
+            app.firstservein2=result
+        }
+
+        countServeForPlayer(setNumber,player1name.text.toString(),2){ result ->
+            app.secondservein1=result
+        }
+        countServeForPlayer(setNumber,player2name.text.toString(),2){ result ->
+            app.secondservein2=result
+        }
+
+        app.secondserve1=app.secondservein1+app.doublefault1
+        app.secondserve2=app.secondservein2+app.doublefault2
+
+        app.firstserve1=app.firstservein1+app.secondserve1
+        app.firstserve2=app.firstservein2+app.secondserve2
 
         countForPlayer(setNumber, player1name.text.toString(), "Winner","Return","Forehand") { result ->
             // Tutaj możesz obsłużyć wynik countAcesForPlayer
@@ -732,14 +837,76 @@ class ViewStatsActivity : AppCompatActivity() {
     }
 
     fun setTableValue(app: Stats){
+        val scale = resources.displayMetrics.density
         findViewById<TextView>(R.id.totalPlayer1).text = app.totalpoints1.toString()
         findViewById<TextView>(R.id.totalPlayer2).text = app.totalpoints2.toString()
+        //kod do ustawienia wykresow totalpoints
+        app.totalpoints1 = 0
+        app.totalpoints2 = 0
 
         findViewById<TextView>(R.id.acePlayer1).text = app.ace1.toString()
         findViewById<TextView>(R.id.acePlayer2).text = app.ace2.toString()
+        if(app.ace1==0 && app.ace2==0){
+            findViewById<View>(R.id.graphAcePlayer1).layoutParams.width=(0 * scale + 0.5f).toInt()
+            findViewById<View>(R.id.graphAcePlayer2).layoutParams.width=(0 * scale + 0.5f).toInt()
+        }
+        else if(app.ace1>app.ace2){
+            findViewById<View>(R.id.graphAcePlayer1).layoutParams.width=(100 * scale + 0.5f).toInt()
+            val wyn = (app.ace2.toDouble() * 100 /app.ace1.toDouble()).toInt()
+            findViewById<View>(R.id.graphAcePlayer2).layoutParams.width=(wyn * scale + 0.5f).toInt()
+            /*findViewById<View>(R.id.graphAcePlayer2).layoutParams.width=(50 * scale + 0.5f).toInt()*/
+        }
+        else{
+            findViewById<View>(R.id.graphAcePlayer2).layoutParams.width=(100 * scale + 0.5f).toInt()
+            val wyn = (app.ace1.toDouble() * 100 / app.ace2.toDouble()).toInt()
+            findViewById<View>(R.id.graphAcePlayer1).layoutParams.width=(wyn * scale + 0.5f).toInt()
+            /*findViewById<View>(R.id.graphAcePlayer1).layoutParams.width=(50 * scale + 0.5f).toInt()*/
+        }
 
         findViewById<TextView>(R.id.doublePlayer1).text = app.doublefault1.toString()
         findViewById<TextView>(R.id.doublePlayer2).text = app.doublefault2.toString()
+        if(app.ace1==0 && app.ace2==0){
+            findViewById<View>(R.id.graphDoubleFaultPlayer1).layoutParams.width=(0 * scale + 0.5f).toInt()
+            findViewById<View>(R.id.graphDoubleFaultPlayer2).layoutParams.width=(0 * scale + 0.5f).toInt()
+        }
+        else if(app.doublefault1>app.doublefault2){
+            findViewById<View>(R.id.graphDoubleFaultPlayer1).layoutParams.width=(100 * scale + 0.5f).toInt()
+            val wyn = (app.doublefault2.toDouble() * 100 / app.doublefault1.toDouble()).toInt()
+            findViewById<View>(R.id.graphDoubleFaultPlayer2).layoutParams.width=(wyn * scale + 0.5f).toInt()
+            /*findViewById<View>(R.id.graphDoubleFaultPlayer2).layoutParams.width=(50 * scale + 0.5f).toInt()*/
+        }
+        else{
+            findViewById<View>(R.id.graphDoubleFaultPlayer2).layoutParams.width=(100 * scale + 0.5f).toInt()
+            val wyn = (app.doublefault1.toDouble() * 100 / app.doublefault2.toDouble()).toInt()
+            findViewById<View>(R.id.graphDoubleFaultPlayer1).layoutParams.width=(wyn * scale + 0.5f).toInt()
+            /*findViewById<View>(R.id.graphDoubleFaultPlayer1).layoutParams.width=(50 * scale + 0.5f).toInt()*/
+        }
+
+        val firstServeIn1 = app.firstservein1
+        val allFirstServe1 = app.firstserve1
+        val firstServePercentage1 = (firstServeIn1.toDouble() / allFirstServe1.toDouble() * 100).toInt()
+        findViewById<TextView>(R.id.firstinPlayer1).text = "$firstServeIn1/$allFirstServe1 ($firstServePercentage1%)"
+
+        val firstServeIn2 = app.firstservein2
+        val allFirstServe2 = app.firstserve2
+        val firstServePercentage2 = (firstServeIn2.toDouble() / allFirstServe2.toDouble() * 100).toInt()
+        findViewById<TextView>(R.id.firstinPlayer2).text = "$firstServeIn2/$allFirstServe2 ($firstServePercentage2%)"
+
+        findViewById<View>(R.id.graphFirstPlayer1).layoutParams.width=(firstServePercentage1 * scale + 0.5f).toInt()
+        findViewById<View>(R.id.graphFirstPlayer2).layoutParams.width=(firstServePercentage2 * scale + 0.5f).toInt()
+
+        val secondServeIn1 = app.secondservein1
+        val allSecondServe1 = app.secondserve1
+        val secondServePercentage1 = (secondServeIn1.toDouble() / allSecondServe1.toDouble() * 100).toInt()
+        findViewById<TextView>(R.id.secondinPlayer1).text = "$secondServeIn1/$allSecondServe1 ($secondServePercentage1%)"
+
+        val secondServeIn2 = app.secondservein2
+        val allSecondServe2 = app.secondserve2
+        val secondServePercentage2 = (secondServeIn2.toDouble() / allSecondServe2.toDouble() * 100).toInt()
+        findViewById<TextView>(R.id.secondinPlayer2).text = "$secondServeIn2/$allSecondServe2 ($secondServePercentage2%)"
+
+        findViewById<View>(R.id.graphSecondPlayer1).layoutParams.width=(secondServePercentage1 * scale + 0.5f).toInt()
+        findViewById<View>(R.id.graphSecondPlayer2).layoutParams.width=(secondServePercentage2 * scale + 0.5f).toInt()
 
         findViewById<TextView>(R.id.returnWfhPlayer1).text = app.returnwinnerFH1.toString()
         findViewById<TextView>(R.id.returnWfhPlayer2).text = app.returnwinnerFH2.toString()
