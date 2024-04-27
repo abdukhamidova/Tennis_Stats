@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
@@ -43,16 +44,12 @@ class ViewHistoryActivity : AppCompatActivity() {
         // Pobierz mecz na podstawie daty z bazy danych
         fetchMatchByDate(matchDateInMillis)
 
-        findViewById<TextView>(R.id.test).setOnClickListener {
+        findViewById<Button>(R.id.statistics).setOnClickListener {
             val intent= Intent(this,ViewStatsActivity::class.java).also{
                 it.putExtra("matchID",matchId)
                 startActivity(it)
             }
         }
-
-
-
-
     }
 
     private fun fetchMatchByDate(matchDateInMillis: Long) {
@@ -78,46 +75,50 @@ class ViewHistoryActivity : AppCompatActivity() {
                     // Pobierz punkty dla tego meczu
                     fetchMatchPoints(matchId) // Wywołaj fetchMatchPoints() po przypisaniu wartości do matchId
 
-                    val textViewSet1 = findViewById<TextView>(R.id.setButton1)
-                    val textViewSet2 = findViewById<TextView>(R.id.setButton2)
-                    val textViewSet3 = findViewById<TextView>(R.id.setButton3)
-                    val textViewAll = findViewById<TextView>(R.id.allButton)
+                    val buttonSet1 = findViewById<Button>(R.id.buttonSet1His)
+                    val buttonSet2 = findViewById<Button>(R.id.buttonSet2His)
+                    val buttonSet3 = findViewById<Button>(R.id.buttonSet3His)
+                    val buttonAll = findViewById<Button>(R.id.buttonAllHis)
 
-                    textViewAll.setOnClickListener {
-                        textViewSet1.setBackgroundResource(0)
-                        textViewSet2.setBackgroundResource(0) // resetowanie tła
-                        textViewSet3.setBackgroundResource(0)
+                    buttonAll.setOnClickListener {
+                        buttonAll.setBackgroundResource(R.drawable.rectangle_button)
+                        buttonSet1.setBackgroundResource(R.drawable.rec_btn_not_selected)
+                        buttonSet2.setBackgroundResource(R.drawable.rec_btn_not_selected)// resetowanie tła
+                        buttonSet3.setBackgroundResource(R.drawable.rec_btn_not_selected)
                         fetchMatchPoints(matchId)
 
                     }
-                    textViewSet1.setOnClickListener {
-                        textViewSet1.setBackgroundResource(R.drawable.background_selected_set)
-                        textViewSet2.setBackgroundResource(0) // resetowanie tła
-                        textViewSet3.setBackgroundResource(0)
+                    buttonSet1.setOnClickListener {
+                        buttonAll.setBackgroundResource(R.drawable.rec_btn_not_selected)
+                        buttonSet1.setBackgroundResource(R.drawable.rectangle_button)
+                        buttonSet2.setBackgroundResource(R.drawable.rec_btn_not_selected) // resetowanie tła
+                        buttonSet3.setBackgroundResource(R.drawable.rec_btn_not_selected)
                         // Wywołanie funkcji fetchMatchPoints tylko dla seta 1
                         fetchMatchPoints(matchId, "set 1")
                     }
 
-                    textViewSet2.setOnClickListener {
-                        textViewSet1.setBackgroundResource(0) // resetowanie tła
-                        textViewSet2.setBackgroundResource(R.drawable.background_selected_set)
-                        textViewSet3.setBackgroundResource(0)
+                    buttonSet2.setOnClickListener {
+                        buttonAll.setBackgroundResource(R.drawable.rec_btn_not_selected)
+                        buttonSet1.setBackgroundResource(R.drawable.rec_btn_not_selected)
+                        buttonSet2.setBackgroundResource(R.drawable.rectangle_button) // resetowanie tła
+                        buttonSet3.setBackgroundResource(R.drawable.rec_btn_not_selected)
                         // Wywołanie funkcji fetchMatchPoints tylko dla seta 2
                         fetchMatchPoints(matchId, "set 2")
                     }
                     // Ukryj lub pokaż przycisk dla trzeciego seta w zależności od jego istnienia
                     if (thirdSetExists) {
-                        textViewSet3.visibility = View.VISIBLE
-                        textViewSet3.setOnClickListener {
-                            //textViewSet1.setBackgroundResource(0) // resetowanie tła
-                            //textViewSet2.setBackgroundResource(0) // resetowanie tła
-                            textViewSet3.setBackgroundResource(R.drawable.background_selected_set)
+                        buttonSet3.visibility = View.VISIBLE
+                        buttonSet3.setOnClickListener {
+                            buttonAll.setBackgroundResource(R.drawable.rec_btn_not_selected)
+                            buttonSet1.setBackgroundResource(R.drawable.rec_btn_not_selected)
+                            buttonSet2.setBackgroundResource(R.drawable.rec_btn_not_selected) // resetowanie tła
+                            buttonSet3.setBackgroundResource(R.drawable.rectangle_button)
                             // Wywołanie funkcji fetchMatchPoints tylko dla seta 3
                             fetchMatchPoints(matchId, "set 3")
                         }
                     } else {
                         //textViewSet3.visibility = View.GONE
-                        textViewSet3.isClickable=false
+                        buttonSet3.isClickable=false
                     }
                     val player1 = findViewById<TextView>(R.id.textviewPlayer1His)
                     val player2 = findViewById<TextView>(R.id.textviewPlayer2His)
@@ -156,16 +157,15 @@ class ViewHistoryActivity : AppCompatActivity() {
 
                 for (setSnapshot in dataSnapshot.children) {
 
-
                     if (setSnapshot.hasChildren()) {
                         currentSet++
-                        val SetNr= "Set $currentSet"
-                        pointsList.add(SetNr)
+                        val setNr= "Set $currentSet"
+                        pointsList.add(setNr)
                         var currentGame = 0
                         for (gameSnapshot in setSnapshot.children) {
                             currentGame++
-                            val GameNr= "Game $currentGame"
-                            pointsList.add(GameNr)
+                            val gameNr= "Game $currentGame"
+                            pointsList.add(gameNr)
                             if (gameSnapshot.hasChildren()) {
                                 for (pointSnapshot in gameSnapshot.children) {
                                     // Pobranie atrybutów punktu

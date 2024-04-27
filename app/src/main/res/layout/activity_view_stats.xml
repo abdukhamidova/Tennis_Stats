@@ -6,28 +6,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ViewStatsActivity">
-
-    <Button
-        android:id="@+id/buttonMenuStats"
-        android:layout_width="92dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="0.5dp"
-        android:text="@string/menu"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.05"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.041"
-        app:shapeAppearance="@style/CardView" />
+    <include layout="@layout/toolbar"/>
 
     <TableLayout
         android:id="@+id/tableLayoutStats"
         android:layout_width="370dp"
         android:layout_height="wrap_content"
         android:background="@color/app_tableBg_color"
-        android:theme="@style/MyTextAppearance"
+        android:theme="@style/scoreTableTextAppearance"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,7 +21,6 @@
         app:layout_constraintVertical_bias="0.13999999">
 
         <TableRow>
-
             <TextView
                 android:id="@+id/textViewServe1Stats"
                 android:layout_width="wrap_content"
@@ -72,7 +57,6 @@
         </TableRow>
 
         <TableRow>
-
             <TextView
                 android:id="@+id/textViewServe2Stats"
                 android:layout_width="wrap_content"
@@ -108,134 +92,144 @@
         </TableRow>
     </TableLayout>
 
-    <TableLayout
-        android:id="@+id/tableLayout2"
-        android:layout_width="370dp"
+    <LinearLayout
+        android:id="@+id/linearLayoutNavigationStats"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:stretchColumns="0,1"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="20dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.32">
+        app:layout_constraintEnd_toEndOf="@id/tableLayoutStats"
+        app:layout_constraintStart_toStartOf="@id/tableLayoutStats"
+        app:layout_constraintTop_toBottomOf="@id/tableLayoutStats"
+        app:layout_constraintVertical_bias="0.0">
 
-        <TableRow>
+        <LinearLayout
+            android:id="@+id/linearLayoutMenuStatHisStats"
+            android:layout_width="370dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="185dp"
+            <Button
+                android:id="@+id/buttonHistoryStats"
+                android:layout_width="0dp"
                 android:layout_height="40dp"
-                android:background="#7E65BDC9"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:text="STATISTICS"
+                android:text="@string/history"
+                android:textColor="@color/white"
+                android:background="@drawable/rec_btn_not_selected"
+                style="?android:attr/buttonBarButtonStyle"/> <!--history-->
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/statistics"
+                android:textColor="@color/white"
+                android:background="@drawable/rectangle_button"
+                style="?android:attr/buttonBarButtonStyle" /> <!--statistics-->
+
+        </LinearLayout> <!--MenuStatHis-->
+
+        <LinearLayout
+            android:id="@+id/linearLayoutMenuSetsStats"
+            android:layout_width="370dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/buttonAllStats"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:background="@drawable/rectangle_button"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:text="@string/all"/>
+
+            <Button
+                android:id="@+id/buttonSet1Stats"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="@drawable/rec_btn_not_selected"
+                android:text="@string/set_1"
                 android:textColor="@color/white" />
 
-            <TextView
-                android:id="@+id/textViewHistory"
-                android:layout_width="185dp"
+            <Button
+                android:id="@+id/buttonSet2Stats"
+                android:layout_width="0dp"
                 android:layout_height="40dp"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:text="HISTORY"
+                android:background="@drawable/rec_btn_not_selected"
+                android:text="@string/set_2"
                 android:textColor="@color/white" />
 
-        </TableRow>
-
-    </TableLayout>
-
-    <TableLayout
-        android:id="@+id/tableLayout3"
-        android:layout_width="370dp"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:stretchColumns="0,1,2,3"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.38">
-
-        <TableRow>
-
-            <TextView
-                android:id="@+id/textViewAllStats"
-                android:layout_width="match_parent"
+            <Button
+                android:id="@+id/buttonSet3Stats"
+                android:layout_width="0dp"
                 android:layout_height="40dp"
-                android:background="#7E65BDC9"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:text="ALL"
+                android:background="@drawable/rec_btn_not_selected"
+                android:text="@string/set_3"
                 android:textColor="@color/white" />
+        </LinearLayout> <!--Sets-->
 
-            <TextView
-                android:id="@+id/textViewSet1Stats"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:gravity="center"
-                android:text="SET 1"
-                android:textColor="@color/white" />
+    </LinearLayout> <!--Navigation-->
 
-            <TextView
-                android:id="@+id/textViewSet2Stats"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:gravity="center"
-                android:text="SET 2"
-                android:textColor="@color/white" />
-
-            <TextView
-                android:id="@+id/textViewSet3Stats"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:gravity="center"
-                android:text="SET 3"
-                android:textColor="@color/white" />
-
-        </TableRow>
-
-    </TableLayout>
-
-    <TableLayout
-        android:id="@+id/tableLayout4"
-        android:layout_width="370dp"
+    <LinearLayout
+        android:id="@+id/linearLayoutScrollHeaderStats"
+        android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:gravity="center"
-        android:stretchColumns="0,1"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@color/white"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tableLayout3"
-        app:layout_constraintVertical_bias="0.0"
-        android:background="@color/white">
+        app:layout_constraintEnd_toEndOf="@+id/linearLayoutNavigationStats"
+        app:layout_constraintStart_toStartOf="@id/linearLayoutNavigationStats"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutNavigationStats"
+        app:layout_constraintVertical_bias="0.0">
 
-        <TableRow>
+        <TextView
+            android:id="@+id/player1name"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/player_1"
+            android:textColor="@color/black" />
 
-            <TextView
-                android:id="@+id/player1name"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="Player1"
-                android:textColor="@color/black" />
+        <TextView
+            android:id="@+id/player2name"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/player_2"
+            android:textColor="@color/black" />
 
-            <TextView
-                android:id="@+id/player2name"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="Player2"
-                android:textColor="@color/black" />
-
-        </TableRow>
-
-    </TableLayout>
+    </LinearLayout> <!--ScrollHeader-->
 
     <ScrollView
-        android:layout_width="370dp"
+        android:id="@+id/scrollViewStats"
+        android:layout_width="match_parent"
         android:layout_height="390dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:background="@color/white"
+        android:theme="@style/scrollViewTextAppearance"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tableLayout4"
+        app:layout_constraintEnd_toEndOf="@id/linearLayoutScrollHeaderStats"
+        app:layout_constraintStart_toStartOf="@id/linearLayoutScrollHeaderStats"
+        app:layout_constraintTop_toBottomOf="@id/linearLayoutScrollHeaderStats"
         app:layout_constraintVertical_bias="0.0">
 
         <TableLayout
@@ -246,21 +240,21 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="20sp"
                 android:layout_gravity="center"
                 android:gravity="center_horizontal"
-                android:text="TOTAL POINTS"
+                android:text="@string/total_points"
                 android:textColor="@color/black">
-
             </TextView>
-            <TableRow>
 
+            <TableRow>
                 <TextView
                     android:id="@+id/totalPlayer1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL1"
+                    android:text="@string/iloscpl1"
                     android:textColor="@color/black"/>
 
                 <LinearLayout
@@ -274,14 +268,14 @@
                         android:id="@+id/graphTotalPlayer1"
                         android:layout_width="75dp"
                         android:layout_height="20dp"
-                        android:layout_gravity="right"
+                        android:layout_gravity="end"
                         android:background="#5FB2BD"/>
 
                     <View
                         android:id="@+id/graphTotalPlayer2"
                         android:layout_width="100dp"
                         android:layout_height="20dp"
-                        android:layout_gravity="left"
+                        android:layout_gravity="start"
                         android:background="#073159"/>
 
                 </LinearLayout>
@@ -292,7 +286,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL2"
+                    android:text="@string/iloscpl2"
                     android:textColor="@color/black" />
             </TableRow>
 
@@ -302,19 +296,18 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center_horizontal"
-                android:text="ACES"
+                android:text="@string/aces"
                 android:textColor="@color/black">
-
             </TextView>
-            <TableRow>
 
+            <TableRow>
                 <TextView
                     android:id="@+id/acePlayer1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL1"
+                    android:text="@string/iloscpl1"
                     android:textColor="@color/black" />
 
                 <LinearLayout
@@ -328,14 +321,14 @@
                         android:id="@+id/graphAcePlayer1"
                         android:layout_width="75dp"
                         android:layout_height="20dp"
-                        android:layout_gravity="right"
+                        android:layout_gravity="end"
                         android:background="#5FB2BD"/>
 
                     <View
                         android:id="@+id/graphAcePlayer2"
                         android:layout_width="100dp"
                         android:layout_height="20dp"
-                        android:layout_gravity="left"
+                        android:layout_gravity="start"
                         android:background="#073159"/>
 
                 </LinearLayout>
@@ -346,7 +339,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL2"
+                    android:text="@string/iloscpl2"
                     android:textColor="@color/black"/>
             </TableRow>
 
@@ -356,10 +349,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center_horizontal"
-                android:text="DOUBLE FAULTS"
+                android:text="@string/double_faults"
                 android:textColor="@color/black">
-
             </TextView>
+
             <TableRow>
 
                 <TextView
@@ -368,7 +361,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL1"
+                    android:text="@string/iloscpl1"
                     android:textColor="@color/black" />
 
                 <LinearLayout
@@ -382,14 +375,14 @@
                         android:id="@+id/graphDoubleFaultPlayer1"
                         android:layout_width="75dp"
                         android:layout_height="20dp"
-                        android:layout_gravity="right"
+                        android:layout_gravity="end"
                         android:background="#5FB2BD"/>
 
                     <View
                         android:id="@+id/graphDoubleFaultPlayer2"
                         android:layout_width="100dp"
                         android:layout_height="20dp"
-                        android:layout_gravity="left"
+                        android:layout_gravity="start"
                         android:background="#073159"/>
 
                 </LinearLayout>
@@ -400,7 +393,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL2"
+                    android:text="@string/iloscpl2"
                     android:textColor="@color/black" />
             </TableRow>
 
@@ -410,19 +403,18 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center_horizontal"
-                android:text="1ST SERVE IN"
+                android:text="@string/_1st_serve_in"
                 android:textColor="@color/black">
-
             </TextView>
-            <TableRow>
 
+            <TableRow>
                 <TextView
                     android:id="@+id/firstinPlayer1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="1in/all (%)"
+                    android:text="@string/_1in_all"
                     android:textColor="@color/black"/>
 
                 <LinearLayout
@@ -436,14 +428,14 @@
                         android:id="@+id/graphFirstPlayer1"
                         android:layout_width="75dp"
                         android:layout_height="20dp"
-                        android:layout_gravity="right"
+                        android:layout_gravity="end"
                         android:background="#5FB2BD"/>
 
                     <View
                         android:id="@+id/graphFirstPlayer2"
                         android:layout_width="100dp"
                         android:layout_height="20dp"
-                        android:layout_gravity="left"
+                        android:layout_gravity="start"
                         android:background="#073159"/>
 
                 </LinearLayout>
@@ -454,7 +446,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="1in/all (%)"
+                    android:text="@string/_1in_all"
                     android:textColor="@color/black" />
             </TableRow>
 
@@ -464,19 +456,18 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center_horizontal"
-                android:text="2ND SERVE IN"
+                android:text="@string/_2nd_serve_in"
                 android:textColor="@color/black">
-
             </TextView>
-            <TableRow>
 
+            <TableRow>
                 <TextView
                     android:id="@+id/secondinPlayer1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="2in/all (%)"
+                    android:text="@string/_2in_all"
                     android:textColor="@color/black"/>
 
                 <LinearLayout
@@ -490,14 +481,14 @@
                         android:id="@+id/graphSecondPlayer1"
                         android:layout_width="75dp"
                         android:layout_height="20dp"
-                        android:layout_gravity="right"
+                        android:layout_gravity="end"
                         android:background="#5FB2BD"/>
 
                     <View
                         android:id="@+id/graphSecondPlayer2"
                         android:layout_width="100dp"
                         android:layout_height="20dp"
-                        android:layout_gravity="left"
+                        android:layout_gravity="start"
                         android:background="#073159"/>
 
                 </LinearLayout>
@@ -505,10 +496,10 @@
                 <TextView
                     android:id="@+id/secondinPlayer2"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="29dp"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="2in/all (%)"
+                    android:text="@string/_2in_all"
                     android:textColor="@color/black" />
             </TableRow>
 
@@ -518,7 +509,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center_horizontal"
-                android:text="RETURN WINNER"
+                android:text="@string/return_winner"
                 android:textColor="@color/black">
 
             </TextView>
@@ -529,7 +520,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="FH"
+                    android:text="@string/fh"
                     android:textColor="@color/black"/>
 
                 <TextView
@@ -537,7 +528,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="BH"
+                    android:text="@string/bh"
                     android:textColor="@color/black"/>
 
                 <TextView
@@ -545,7 +536,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="FH"
+                    android:text="@string/fh"
                     android:textColor="@color/black"/>
 
                 <TextView
@@ -553,7 +544,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="BH"
+                    android:text="@string/bh"
                     android:textColor="@color/black"/>
             </TableRow>
             <TableRow>
@@ -564,7 +555,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL1"
+                    android:text="@string/iloscpl1"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -573,7 +564,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL1"
+                    android:text="@string/iloscpl1"
                     android:textColor="@color/black"/>
 
                 <TextView
@@ -582,7 +573,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL2"
+                    android:text="@string/iloscpl2"
                     android:textColor="@color/black"/>
 
                 <TextView
@@ -591,7 +582,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL2"
+                    android:text="@string/iloscpl2"
                     android:textColor="@color/black"/>
             </TableRow>
 
@@ -601,18 +592,17 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center_horizontal"
-                android:text="RETURN ERROR"
+                android:text="@string/return_error"
                 android:textColor="@color/black">
 
             </TextView>
             <TableRow>
-
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="FH"
+                    android:text="@string/fh"
                     android:textColor="@color/black"/>
 
                 <TextView
@@ -620,7 +610,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="BH"
+                    android:text="@string/bh"
                     android:textColor="@color/black"/>
 
                 <TextView
@@ -628,7 +618,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="FH"
+                    android:text="@string/fh"
                     android:textColor="@color/black"/>
 
                 <TextView
@@ -636,7 +626,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="BH"
+                    android:text="@string/bh"
                     android:textColor="@color/black"/>
             </TableRow>
             <TableRow>
@@ -647,7 +637,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL1"
+                    android:text="@string/iloscpl1"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -656,7 +646,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL1"
+                    android:text="@string/iloscpl1"
                     android:textColor="@color/black"/>
 
                 <TextView
@@ -665,7 +655,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL2"
+                    android:text="@string/iloscpl2"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -674,7 +664,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL2"
+                    android:text="@string/iloscpl2"
                     android:textColor="@color/black" />
             </TableRow>
 
@@ -684,8 +674,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center_horizontal"
-                android:text="WINNER"
-                android:textColor="@color/black">
+                android:text="@string/winner"
+                android:textColor="@color/black"
+                android:textAllCaps="true">
 
             </TextView>
 
@@ -694,7 +685,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center_horizontal"
-                android:text="GROUND"
+                android:text="@string/ground"
+                android:textAllCaps="true"
                 android:textColor="@color/black">
 
             </TextView>
@@ -705,7 +697,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="FH"
+                    android:text="@string/fh"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -713,7 +705,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="BH"
+                    android:text="@string/bh"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -721,7 +713,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="FH"
+                    android:text="@string/fh"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -729,7 +721,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="BH"
+                    android:text="@string/bh"
                     android:textColor="@color/black" />
             </TableRow>
             <TableRow>
@@ -740,7 +732,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL1"
+                    android:text="@string/iloscpl1"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -749,7 +741,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL1"
+                    android:text="@string/iloscpl1"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -758,7 +750,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL2"
+                    android:text="@string/iloscpl2"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -767,7 +759,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL2"
+                    android:text="@string/iloscpl2"
                     android:textColor="@color/black" />
             </TableRow>
 
@@ -776,7 +768,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center_horizontal"
-                android:text="SLICE"
+                android:text="@string/slice"
+                android:textAllCaps="true"
                 android:textColor="@color/black">
 
             </TextView>
@@ -787,7 +780,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="FH"
+                    android:text="@string/fh"
                     android:textColor="@color/black"/>
 
                 <TextView
@@ -795,7 +788,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="BH"
+                    android:text="@string/bh"
                     android:textColor="@color/black"/>
 
                 <TextView
@@ -803,7 +796,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="FH"
+                    android:text="@string/fh"
                     android:textColor="@color/black"/>
 
                 <TextView
@@ -811,7 +804,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="BH"
+                    android:text="@string/bh"
                     android:textColor="@color/black" />
             </TableRow>
             <TableRow>
@@ -822,7 +815,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL1"
+                    android:text="@string/iloscpl1"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -831,7 +824,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL1"
+                    android:text="@string/iloscpl1"
                     android:textColor="@color/black"/>
 
                 <TextView
@@ -840,7 +833,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL2"
+                    android:text="@string/iloscpl2"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -849,7 +842,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL2"
+                    android:text="@string/iloscpl2"
                     android:textColor="@color/black" />
             </TableRow>
 
@@ -858,7 +851,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center_horizontal"
-                android:text="VOLLEY"
+                android:text="@string/volley"
+                android:textAllCaps="true"
                 android:textColor="@color/black">
 
             </TextView>
@@ -869,7 +863,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="FH"
+                    android:text="@string/fh"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -877,7 +871,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="BH"
+                    android:text="@string/bh"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -885,7 +879,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="FH"
+                    android:text="@string/fh"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -893,7 +887,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="BH"
+                    android:text="@string/bh"
                     android:textColor="@color/black"/>
             </TableRow>
             <TableRow>
@@ -904,7 +898,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL1"
+                    android:text="@string/iloscpl1"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -913,7 +907,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL1"
+                    android:text="@string/iloscpl1"
                     android:textColor="@color/black"/>
 
                 <TextView
@@ -922,7 +916,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL2"
+                    android:text="@string/iloscpl2"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -931,7 +925,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL2"
+                    android:text="@string/iloscpl2"
                     android:textColor="@color/black" />
             </TableRow>
 
@@ -940,18 +934,18 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center_horizontal"
-                android:text="SMASH"
+                android:text="@string/smash"
+                android:textAllCaps="true"
                 android:textColor="@color/black">
 
             </TextView>
             <TableRow>
-
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="FH"
+                    android:text="@string/fh"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -959,7 +953,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="BH"
+                    android:text="@string/bh"
                     android:textColor="@color/black"/>
 
                 <TextView
@@ -967,7 +961,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="FH"
+                    android:text="@string/fh"
                     android:textColor="@color/black"/>
 
                 <TextView
@@ -975,7 +969,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="BH"
+                    android:text="@string/bh"
                     android:textColor="@color/black" />
             </TableRow>
             <TableRow>
@@ -986,7 +980,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL1"
+                    android:text="@string/iloscpl1"
                     android:textColor="@color/black"/>
 
                 <TextView
@@ -995,7 +989,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL1"
+                    android:text="@string/iloscpl1"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -1004,7 +998,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL2"
+                    android:text="@string/iloscpl2"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -1013,7 +1007,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL2"
+                    android:text="@string/iloscpl2"
                     android:textColor="@color/black"/>
             </TableRow>
 
@@ -1022,18 +1016,18 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center_horizontal"
-                android:text="LOB"
+                android:text="@string/lob"
+                android:textAllCaps="true"
                 android:textColor="@color/black">
 
             </TextView>
             <TableRow>
-
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="FH"
+                    android:text="@string/fh"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -1041,24 +1035,24 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="BH"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="FH"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="BH"
+                    android:text="@string/bh"
                     android:textColor="@color/black"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:text="@string/fh"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:text="@string/bh"
+                    android:textColor="@color/black" />
             </TableRow>
             <TableRow>
 
@@ -1068,7 +1062,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL1"
+                    android:text="@string/iloscpl1"
                     android:textColor="@color/black"/>
 
                 <TextView
@@ -1077,7 +1071,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL1"
+                    android:text="@string/iloscpl1"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -1086,7 +1080,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL2"
+                    android:text="@string/iloscpl2"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -1095,7 +1089,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL2"
+                    android:text="@string/iloscpl2"
                     android:textColor="@color/black" />
             </TableRow>
 
@@ -1104,26 +1098,18 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center_horizontal"
-                android:text="DROPSHOT"
+                android:text="@string/dropshot"
+                android:textAllCaps="true"
                 android:textColor="@color/black">
 
             </TextView>
             <TableRow>
-
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="FH"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="BH"
+                    android:text="@string/fh"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -1131,7 +1117,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="FH"
+                    android:text="@string/bh"
                     android:textColor="@color/black"/>
 
                 <TextView
@@ -1139,8 +1125,16 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="BH"
+                    android:text="@string/fh"
                     android:textColor="@color/black"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:text="@string/bh"
+                    android:textColor="@color/black" />
             </TableRow>
             <TableRow>
 
@@ -1150,7 +1144,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL1"
+                    android:text="@string/iloscpl1"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -1159,7 +1153,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL1"
+                    android:text="@string/iloscpl1"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -1168,7 +1162,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL2"
+                    android:text="@string/iloscpl2"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -1177,7 +1171,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL2"
+                    android:text="@string/iloscpl2"
                     android:textColor="@color/black" />
             </TableRow>
 
@@ -1187,7 +1181,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center_horizontal"
-                android:text="FORCED ERROR"
+                android:text="@string/forced_error"
+                android:textAllCaps="true"
                 android:textColor="@color/black">
 
             </TextView>
@@ -1197,18 +1192,18 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center_horizontal"
-                android:text="GROUND"
+                android:text="@string/ground"
+                android:textAllCaps="true"
                 android:textColor="@color/black">
 
             </TextView>
             <TableRow>
-
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="FH"
+                    android:text="@string/fh"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -1216,7 +1211,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="BH"
+                    android:text="@string/bh"
                     android:textColor="@color/black"/>
 
                 <TextView
@@ -1224,16 +1219,16 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="FH"
+                    android:text="@string/fh"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:text="@string/bh"
                     android:textColor="@color/black" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="BH"
-                    android:textColor="@color/black"/>
             </TableRow>
             <TableRow>
 
@@ -1243,7 +1238,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL1"
+                    android:text="@string/iloscpl1"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -1252,7 +1247,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL1"
+                    android:text="@string/iloscpl1"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -1261,7 +1256,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL2"
+                    android:text="@string/iloscpl2"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -1270,7 +1265,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL2"
+                    android:text="@string/iloscpl2"
                     android:textColor="@color/black" />
             </TableRow>
 
@@ -1279,34 +1274,18 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center_horizontal"
-                android:text="SLICE"
+                android:text="@string/slice"
+                android:textAllCaps="true"
                 android:textColor="@color/black">
 
             </TextView>
             <TableRow>
-
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="FH"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="BH"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="FH"
+                    android:text="@string/fh"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -1314,8 +1293,24 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="BH"
+                    android:text="@string/bh"
                     android:textColor="@color/black"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:text="@string/fh"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:text="@string/bh"
+                    android:textColor="@color/black" />
             </TableRow>
             <TableRow>
 
@@ -1325,7 +1320,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL1"
+                    android:text="@string/iloscpl1"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -1334,7 +1329,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL1"
+                    android:text="@string/iloscpl1"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -1343,7 +1338,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL2"
+                    android:text="@string/iloscpl2"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -1352,7 +1347,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL2"
+                    android:text="@string/iloscpl2"
                     android:textColor="@color/black" />
             </TableRow>
 
@@ -1361,18 +1356,18 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center_horizontal"
-                android:text="VOLLEY"
+                android:text="@string/volley"
+                android:textAllCaps="true"
                 android:textColor="@color/black">
 
             </TextView>
             <TableRow>
-
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="FH"
+                    android:text="@string/fh"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -1380,23 +1375,23 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="BH"
-                    android:textColor="@color/black" />
+                    android:text="@string/bh"
+                    android:textColor="@color/black"/>
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="FH"
-                    android:textColor="@color/black" />
+                    android:text="@string/fh"
+                    android:textColor="@color/black"/>
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="BH"
+                    android:text="@string/bh"
                     android:textColor="@color/black" />
             </TableRow>
             <TableRow>
@@ -1407,7 +1402,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL1"
+                    android:text="@string/iloscpl1"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -1416,7 +1411,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL1"
+                    android:text="@string/iloscpl1"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -1425,7 +1420,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL2"
+                    android:text="@string/iloscpl2"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -1434,7 +1429,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL2"
+                    android:text="@string/iloscpl1"
                     android:textColor="@color/black" />
             </TableRow>
 
@@ -1443,26 +1438,18 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center_horizontal"
-                android:text="SMASH"
+                android:text="@string/smash"
+                android:textAllCaps="true"
                 android:textColor="@color/black">
 
             </TextView>
             <TableRow>
-
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="FH"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="BH"
+                    android:text="@string/fh"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -1470,7 +1457,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="FH"
+                    android:text="@string/bh"
                     android:textColor="@color/black"/>
 
                 <TextView
@@ -1478,7 +1465,15 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="BH"
+                    android:text="@string/fh"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:text="@string/bh"
                     android:textColor="@color/black" />
             </TableRow>
             <TableRow>
@@ -1489,7 +1484,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL1"
+                    android:text="@string/iloscpl1"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -1498,7 +1493,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL1"
+                    android:text="@string/iloscpl1"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -1507,7 +1502,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL2"
+                    android:text="@string/iloscpl2"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -1516,7 +1511,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL2"
+                    android:text="@string/iloscpl2"
                     android:textColor="@color/black"/>
             </TableRow>
 
@@ -1525,18 +1520,17 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center_horizontal"
-                android:text="LOB"
+                android:text="@string/lob"
+                android:textAllCaps="true"
                 android:textColor="@color/black">
-
             </TextView>
             <TableRow>
-
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="FH"
+                    android:text="@string/fh"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -1544,23 +1538,23 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="BH"
-                    android:textColor="@color/black" />
+                    android:text="@string/bh"
+                    android:textColor="@color/black"/>
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="FH"
-                    android:textColor="@color/black" />
+                    android:text="@string/fh"
+                    android:textColor="@color/black"/>
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="BH"
+                    android:text="@string/bh"
                     android:textColor="@color/black" />
             </TableRow>
             <TableRow>
@@ -1571,7 +1565,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL1"
+                    android:text="@string/iloscpl1"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -1580,7 +1574,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL1"
+                    android:text="@string/iloscpl1"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -1589,7 +1583,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL2"
+                    android:text="@string/iloscpl2"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -1598,7 +1592,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL2"
+                    android:text="@string/iloscpl2"
                     android:textColor="@color/black" />
             </TableRow>
 
@@ -1607,18 +1601,26 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center_horizontal"
-                android:text="DROPSHOT"
+                android:text="@string/dropshot"
+                android:textAllCaps="true"
                 android:textColor="@color/black">
 
             </TextView>
             <TableRow>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:text="@string/fh"
+                    android:textColor="@color/black" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="FH"
+                    android:text="@string/bh"
                     android:textColor="@color/black"/>
 
                 <TextView
@@ -1626,7 +1628,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="BH"
+                    android:text="@string/fh"
                     android:textColor="@color/black"/>
 
                 <TextView
@@ -1634,16 +1636,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="FH"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="BH"
-                    android:textColor="@color/black"/>
+                    android:text="@string/bh"
+                    android:textColor="@color/black" />
             </TableRow>
             <TableRow>
 
@@ -1653,7 +1647,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL1"
+                    android:text="@string/iloscpl1"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -1662,7 +1656,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL1"
+                    android:text="@string/iloscpl1"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -1671,7 +1665,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL2"
+                    android:text="@string/iloscpl2"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -1680,7 +1674,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL2"
+                    android:text="@string/iloscpl2"
                     android:textColor="@color/black" />
             </TableRow>
 
@@ -1690,7 +1684,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center_horizontal"
-                android:text="UNFORCED ERROR"
+                android:text="@string/unforced_error"
+                android:textAllCaps="true"
                 android:textColor="@color/black">
 
             </TextView>
@@ -1700,18 +1695,18 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center_horizontal"
-                android:text="GROUND"
+                android:text="@string/ground"
+                android:textAllCaps="true"
                 android:textColor="@color/black">
 
             </TextView>
             <TableRow>
-
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="FH"
+                    android:text="@string/fh"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -1719,23 +1714,23 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="BH"
-                    android:textColor="@color/black" />
+                    android:text="@string/bh"
+                    android:textColor="@color/black"/>
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="FH"
-                    android:textColor="@color/black" />
+                    android:text="@string/fh"
+                    android:textColor="@color/black"/>
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="BH"
+                    android:text="@string/bh"
                     android:textColor="@color/black" />
             </TableRow>
             <TableRow>
@@ -1746,7 +1741,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL1"
+                    android:text="@string/iloscpl1"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -1755,7 +1750,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL1"
+                    android:text="@string/iloscpl1"
                     android:textColor="@color/black"/>
 
                 <TextView
@@ -1764,7 +1759,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL2"
+                    android:text="@string/iloscpl2"
                     android:textColor="@color/black"/>
 
                 <TextView
@@ -1773,7 +1768,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL2"
+                    android:text="@string/iloscpl2"
                     android:textColor="@color/black"/>
             </TableRow>
 
@@ -1782,18 +1777,18 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center_horizontal"
-                android:text="SLICE"
+                android:text="@string/slice"
+                android:textAllCaps="true"
                 android:textColor="@color/black">
 
             </TextView>
             <TableRow>
-
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="FH"
+                    android:text="@string/fh"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -1801,23 +1796,23 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="BH"
-                    android:textColor="@color/black" />
+                    android:text="@string/bh"
+                    android:textColor="@color/black"/>
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="FH"
-                    android:textColor="@color/black" />
+                    android:text="@string/fh"
+                    android:textColor="@color/black"/>
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="BH"
+                    android:text="@string/bh"
                     android:textColor="@color/black" />
             </TableRow>
             <TableRow>
@@ -1828,7 +1823,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL1"
+                    android:text="@string/iloscpl1"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -1837,7 +1832,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL1"
+                    android:text="@string/iloscpl1"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -1846,7 +1841,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL2"
+                    android:text="@string/iloscpl2"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -1855,7 +1850,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL2"
+                    android:text="@string/iloscpl2"
                     android:textColor="@color/black" />
             </TableRow>
 
@@ -1864,18 +1859,18 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center_horizontal"
-                android:text="VOLLEY"
+                android:text="@string/volley"
+                android:textAllCaps="true"
                 android:textColor="@color/black">
 
             </TextView>
             <TableRow>
-
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="FH"
+                    android:text="@string/fh"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -1883,23 +1878,23 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="BH"
-                    android:textColor="@color/black" />
+                    android:text="@string/bh"
+                    android:textColor="@color/black"/>
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="FH"
-                    android:textColor="@color/black" />
+                    android:text="@string/fh"
+                    android:textColor="@color/black"/>
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="BH"
+                    android:text="@string/bh"
                     android:textColor="@color/black" />
             </TableRow>
             <TableRow>
@@ -1910,7 +1905,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL1"
+                    android:text="@string/iloscpl1"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -1919,7 +1914,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL1"
+                    android:text="@string/iloscpl1"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -1928,7 +1923,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL2"
+                    android:text="@string/iloscpl2"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -1937,7 +1932,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL2"
+                    android:text="@string/iloscpl2"
                     android:textColor="@color/black" />
             </TableRow>
 
@@ -1946,26 +1941,18 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center_horizontal"
-                android:text="SMASH"
+                android:text="@string/smash"
+                android:textAllCaps="true"
                 android:textColor="@color/black">
 
             </TextView>
             <TableRow>
-
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="FH"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="BH"
+                    android:text="@string/fh"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -1973,7 +1960,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="FH"
+                    android:text="@string/bh"
                     android:textColor="@color/black"/>
 
                 <TextView
@@ -1981,7 +1968,15 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="BH"
+                    android:text="@string/fh"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:text="@string/bh"
                     android:textColor="@color/black" />
             </TableRow>
             <TableRow>
@@ -1992,7 +1987,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL1"
+                    android:text="@string/iloscpl1"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -2001,7 +1996,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL1"
+                    android:text="@string/iloscpl1"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -2010,7 +2005,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL2"
+                    android:text="@string/iloscpl2"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -2019,7 +2014,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL2"
+                    android:text="@string/iloscpl2"
                     android:textColor="@color/black"/>
             </TableRow>
 
@@ -2028,34 +2023,18 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center_horizontal"
-                android:text="LOB"
+                android:text="@string/lob"
+                android:textAllCaps="true"
                 android:textColor="@color/black">
 
             </TextView>
             <TableRow>
-
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="FH"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="BH"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="FH"
+                    android:text="@string/fh"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -2063,8 +2042,24 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="BH"
+                    android:text="@string/bh"
                     android:textColor="@color/black"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:text="@string/fh"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:text="@string/bh"
+                    android:textColor="@color/black" />
             </TableRow>
             <TableRow>
 
@@ -2074,7 +2069,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL1"
+                    android:text="@string/iloscpl1"
                     android:textColor="@color/black" />
 
 
@@ -2084,7 +2079,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL1"
+                    android:text="@string/iloscpl1"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -2093,7 +2088,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL2"
+                    android:text="@string/iloscpl2"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -2102,7 +2097,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL2"
+                    android:text="@string/iloscpl2"
                     android:textColor="@color/black" />
             </TableRow>
 
@@ -2111,18 +2106,18 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center_horizontal"
-                android:text="DROPSHOT"
+                android:text="@string/dropshot"
+                android:textAllCaps="true"
                 android:textColor="@color/black">
 
             </TextView>
             <TableRow>
-
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="FH"
+                    android:text="@string/fh"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -2130,23 +2125,23 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="BH"
-                    android:textColor="@color/black" />
+                    android:text="@string/bh"
+                    android:textColor="@color/black"/>
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="FH"
-                    android:textColor="@color/black" />
+                    android:text="@string/fh"
+                    android:textColor="@color/black"/>
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="BH"
+                    android:text="@string/bh"
                     android:textColor="@color/black" />
             </TableRow>
             <TableRow>
@@ -2157,7 +2152,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL1"
+                    android:text="@string/iloscpl1"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -2166,7 +2161,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL1"
+                    android:text="@string/iloscpl1"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -2175,7 +2170,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL2"
+                    android:text="@string/iloscpl2"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -2184,7 +2179,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="iloscPL2"
+                    android:text="@string/iloscpl2"
                     android:textColor="@color/black" />
             </TableRow>
 

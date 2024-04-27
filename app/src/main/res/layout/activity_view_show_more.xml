@@ -43,7 +43,7 @@
         android:layout_width="370dp"
         android:layout_height="wrap_content"
         android:background="@color/app_tableBg_color"
-        android:theme="@style/MyTextAppearance"
+        android:theme="@style/scoreTableTextAppearance"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

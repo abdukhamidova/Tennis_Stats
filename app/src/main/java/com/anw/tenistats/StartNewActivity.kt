@@ -5,12 +5,17 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.CheckBox
+import android.widget.ImageButton
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import com.anw.tenistats.databinding.ActivityStartNewBinding
+import com.anw.tenistats.ui.theme.NavigationDrawerHelper
+import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.DataSnapshot
@@ -23,24 +28,53 @@ class StartNewActivity : AppCompatActivity() {
     private lateinit var binding: ActivityStartNewBinding
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var database: DatabaseReference
+    private lateinit var navigationDrawerHelper: NavigationDrawerHelper
+    private lateinit var drawerLayout: DrawerLayout
     private val playersList = mutableListOf<String>()
     private var matchId: String?=null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         // Initialize Firebase Auth
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         binding = ActivityStartNewBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        //Weronika 23 marca ~ zapisywanie danych playera do bazy
-
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        firebaseAuth = FirebaseAuth.getInstance()
+
+        //------------ MENU
+        drawerLayout = findViewById<DrawerLayout>(R.id.drawer_layout)
+        val menu = findViewById<ImageButton>(R.id.buttonMenu)
+        val navigationView = findViewById<NavigationView>(R.id.navigationViewMenu)
+        val headerView = navigationView.getHeaderView(0)
+
+        menu.setOnClickListener{
+            drawerLayout.open()
+        }
+        navigationDrawerHelper = NavigationDrawerHelper(this)
+        navigationDrawerHelper.setupNavigationDrawer(drawerLayout, navigationView, firebaseAuth)
+        val backButton = findViewById<ImageButton>(R.id.buttonReturnUndo)
+        backButton.setOnClickListener{
+            startActivity(Intent(this,ActivityMenu::class.java))
+        }
+
+        val userEmail = FirebaseAuth.getInstance().currentUser?.email.toString()
+        if(userEmail.isNotEmpty()) {
+            headerView.findViewById<TextView>(R.id.textViewUserEmail).text = userEmail
+        }
+        else {
+            findViewById<TextView>(R.id.textViewUserEmail).text = "user_email@smth.com"
+        }
+        //------------ MENU
+
+        //Weronika 23 marca ~ zapisywanie danych playera do bazy
 
         //11.04 ~u
-        firebaseAuth = FirebaseAuth.getInstance()
+
         val user = firebaseAuth.currentUser?.uid
         database =
             FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")

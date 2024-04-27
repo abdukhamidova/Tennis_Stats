@@ -1,11 +1,11 @@
 package com.anw.tenistats
 
-import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -79,9 +79,9 @@ class ViewStatsActivity : AppCompatActivity() {
         setTableValue(app)
 
         //ustawienie wszystkich textView SET1, SET2, SET3 na clickable
-        val set1 = findViewById<TextView>(R.id.textViewSet1Stats)
-        val set2 = findViewById<TextView>(R.id.textViewSet2Stats)
-        val set3 = findViewById<TextView>(R.id.textViewSet3Stats)
+        val set1 = findViewById<TextView>(R.id.buttonSet1Stats)
+        val set2 = findViewById<TextView>(R.id.buttonSet2Stats)
+        val set3 = findViewById<TextView>(R.id.buttonSet3Stats)
         set1.isClickable = true
         set1.isFocusable = true
         set1.isFocusableInTouchMode = true
@@ -111,48 +111,48 @@ class ViewStatsActivity : AppCompatActivity() {
             set3.isFocusableInTouchMode = false
         }
 
-        findViewById<TextView>(R.id.textViewAllStats).setOnClickListener {
+        findViewById<Button>(R.id.buttonAllStats).setOnClickListener {
             //zmiana kolorow textViews ALL, SET1,SET2,SET3
-            findViewById<TextView>(R.id.textViewAllStats).setBackgroundColor(0x7E65BDC9)
-            findViewById<TextView>(R.id.textViewSet1Stats).setBackgroundColor(0x073159)
-            findViewById<TextView>(R.id.textViewSet2Stats).setBackgroundColor(0x073159)
-            findViewById<TextView>(R.id.textViewSet3Stats).setBackgroundColor(0x073159)
+            findViewById<Button>(R.id.buttonAllStats).setBackgroundResource(R.drawable.rectangle_button)
+            findViewById<Button>(R.id.buttonSet1Stats).setBackgroundResource(R.drawable.rec_btn_not_selected)
+            findViewById<Button>(R.id.buttonSet2Stats).setBackgroundResource(R.drawable.rec_btn_not_selected)
+            findViewById<Button>(R.id.buttonSet3Stats).setBackgroundResource(R.drawable.rec_btn_not_selected)
             //ustawienie statystyk ALL
             setAppValues(app,0,player1name,player2name)
             setTableValue(app)
         }
-        findViewById<TextView>(R.id.textViewSet1Stats).setOnClickListener {
+        findViewById<Button>(R.id.buttonSet1Stats).setOnClickListener {
             //zmiana kolorow textViews ALL, SET1,SET2,SET3
-            findViewById<TextView>(R.id.textViewAllStats).setBackgroundColor(0x073159)
-            findViewById<TextView>(R.id.textViewSet1Stats).setBackgroundColor(0x7E65BDC9)
-            findViewById<TextView>(R.id.textViewSet2Stats).setBackgroundColor(0x073159)
-            findViewById<TextView>(R.id.textViewSet3Stats).setBackgroundColor(0x073159)
+            findViewById<Button>(R.id.buttonAllStats).setBackgroundResource(R.drawable.rec_btn_not_selected)
+            findViewById<Button>(R.id.buttonSet1Stats).setBackgroundResource(R.drawable.rectangle_button)
+            findViewById<Button>(R.id.buttonSet2Stats).setBackgroundResource(R.drawable.rec_btn_not_selected)
+            findViewById<Button>(R.id.buttonSet3Stats).setBackgroundResource(R.drawable.rec_btn_not_selected)
             //ustawienie statystyk SET1
             setAppValues(app,1,player1name,player2name)
             setTableValue(app)
         }
-        findViewById<TextView>(R.id.textViewSet2Stats).setOnClickListener{
+        findViewById<Button>(R.id.buttonSet2Stats).setOnClickListener{
             //zmiana kolorow textViews ALL, SET1,SET2,SET3
-            findViewById<TextView>(R.id.textViewAllStats).setBackgroundColor(0x073159)
-            findViewById<TextView>(R.id.textViewSet1Stats).setBackgroundColor(0x073159)
-            findViewById<TextView>(R.id.textViewSet2Stats).setBackgroundColor(0x7E65BDC9)
-            findViewById<TextView>(R.id.textViewSet3Stats).setBackgroundColor(0x073159)
+            findViewById<Button>(R.id.buttonAllStats).setBackgroundResource(R.drawable.rec_btn_not_selected)
+            findViewById<Button>(R.id.buttonSet1Stats).setBackgroundResource(R.drawable.rec_btn_not_selected)
+            findViewById<Button>(R.id.buttonSet2Stats).setBackgroundResource(R.drawable.rectangle_button)
+            findViewById<Button>(R.id.buttonSet3Stats).setBackgroundResource(R.drawable.rec_btn_not_selected)
             //ustawienie statystyk SET2
             setAppValues(app,2,player1name,player2name)
             setTableValue(app)
         }
-        findViewById<TextView>(R.id.textViewSet3Stats).setOnClickListener {
+        findViewById<Button>(R.id.buttonSet3Stats).setOnClickListener {
             //zmiana kolorow textViews ALL, SET1,SET2,SET3
-            findViewById<TextView>(R.id.textViewAllStats).setBackgroundColor(0x073159)
-            findViewById<TextView>(R.id.textViewSet1Stats).setBackgroundColor(0x073159)
-            findViewById<TextView>(R.id.textViewSet2Stats).setBackgroundColor(0x073159)
-            findViewById<TextView>(R.id.textViewSet3Stats).setBackgroundColor(0x7E65BDC9)
+            findViewById<Button>(R.id.buttonAllStats).setBackgroundResource(R.drawable.rec_btn_not_selected)
+            findViewById<Button>(R.id.buttonSet1Stats).setBackgroundResource(R.drawable.rec_btn_not_selected)
+            findViewById<Button>(R.id.buttonSet2Stats).setBackgroundResource(R.drawable.rec_btn_not_selected)
+            findViewById<Button>(R.id.buttonSet3Stats).setBackgroundResource(R.drawable.rectangle_button)
             //ustawienie statystyk SET3
             setAppValues(app,3,player1name,player2name)
             setTableValue(app)
         }
         //zmiana aktywnosci na History
-        findViewById<TextView>(R.id.textViewHistory).setOnClickListener {
+        findViewById<Button>(R.id.buttonHistoryStats).setOnClickListener {
             val intent= Intent(this,ViewHistoryActivity::class.java).also{
                 startActivity(it)
             }

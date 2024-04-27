@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="HardcodedText">
+
+    <group
+        android:id="@+id/group_main">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/icon_home_line"
+            android:title="Home"/>
+        <item
+            android:id="@+id/nav_startNew"
+            android:icon="@drawable/icon_start_new"
+            android:title="Start New Game" />
+
+        <item
+            android:id="@+id/nav_viewMatch"
+            android:icon="@drawable/icon_match"
+            android:title="View Matches" />
+
+        <item
+            android:id="@+id/nav_myPlayer"
+            android:icon="@drawable/icon_players"
+            android:title="View Players" />
+    </group>
+
+    <group
+        android:id="@+id/group_matchSett">
+        <item
+            android:id="@+id/nav_return"
+            android:icon="@drawable/icon_resume"
+            android:title="Resume Match"/>
+    </group>
+
+    <group
+        android:id="@+id/group_logout">
+        <item
+            android:id="@+id/buttonLogOut"
+            android:icon="@drawable/icon_logout"
+            android:title="Log out"/>
+    </group>
+
+</menu>

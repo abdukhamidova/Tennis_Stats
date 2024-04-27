@@ -20,11 +20,11 @@ class ViewPlayerActivity : ComponentActivity() {
             insets
         }
 
-        val MatchViewButton=findViewById<Button>(R.id.buttonMatchesP)
+        /*val MatchViewButton=findViewById<Button>(R.id.buttonMatchesP)
         MatchViewButton.isEnabled=true
         MatchViewButton.setOnClickListener{
             startActivity(Intent(this,ViewMatchesActivity::class.java))
-        }
+        }*/
 
     }
 

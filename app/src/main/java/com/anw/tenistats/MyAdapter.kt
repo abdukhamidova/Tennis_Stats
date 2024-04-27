@@ -7,12 +7,10 @@ import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
 import android.widget.TextView
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.anw.tenistats.MatchView
 import com.anw.tenistats.R
 import com.anw.tenistats.ViewHistoryActivity
-import com.anw.tenistats.ViewMatchesActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import java.text.SimpleDateFormat
@@ -51,6 +49,7 @@ class MyAdapter(private val originalList: List<MatchView>, private val firebaseA
         holder.date.text = formattedDate
         holder.player1.text = currentItem.player1
         holder.player2.text = currentItem.player2
+
         holder.itemView.setOnClickListener {
             val match = filteredList[position]
             listener?.onItemClick(match)

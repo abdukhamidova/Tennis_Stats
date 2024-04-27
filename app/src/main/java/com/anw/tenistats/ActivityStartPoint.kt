@@ -29,7 +29,7 @@ class ActivityStartPoint : AppCompatActivity() {
             insets
         }
 
-        var matchId = intent.getStringExtra("matchID")
+        val matchId = intent.getStringExtra("matchID")
 
         val app = application as Stats
 
@@ -50,33 +50,19 @@ class ActivityStartPoint : AppCompatActivity() {
         fillUpScoreInActivity(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
 
 
-        findViewById<Button>(R.id.buttonMenuSP).setOnClickListener {
-            startActivity(Intent(this,ActivityMenu::class.java))
-        }
-        //link do poprzedniego activity (Serve)
-        /*findViewById<ImageButton>(R.id.imageButtonBack).setOnClickListener {
-            val player1=findViewById<TextView>(R.id.textviewPlayer1).text.toString()
-            val player2=findViewById<TextView>(R.id.textviewPlayer2).text.toString()
-
-            val intent=Intent(this,ActivityServe::class.java).also{
-                it.putExtra("DanePlayer1",player1)
-                it.putExtra("DanePlayer2",player2)
-                startActivity(it)
-            }
-        }*/
-
-        val (game,set) = calculateGame(set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
+        val (_, _) = calculateGame(set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
 
         findViewById<Button>(R.id.buttonAce).setOnClickListener {
             val (game,set) = calculateGame(set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
             if (app.serve1 != "") { //serwuje player 1
                 app.totalpoints1++
-                if (findViewById<Button>(R.id.buttonFault).text == "Fault") { //trafiony 1 serwis
+                val btnFault = findViewById<Button>(R.id.buttonFault)
+                if (btnFault.text == "Fault") { //trafiony 1 serwis
                     app.firstservein1++
                 }
-                else if (findViewById<Button>(R.id.buttonFault).text == "Double Fault") {
+                else if (btnFault.text == "Double Fault") {
                     app.secondservein1++
-                    findViewById<Button>(R.id.buttonFault).text = "Fault"
+                    btnFault.text = "Fault"
                     findViewById<TextView>(R.id.textViewFS).text = "1st Serve"
                 }
                 app.ace1++

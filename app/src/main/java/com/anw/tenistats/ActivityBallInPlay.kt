@@ -2,14 +2,23 @@ package com.anw.tenistats
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import com.anw.tenistats.ui.theme.NavigationDrawerHelper
+import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
 
 class ActivityBallInPlay : AppCompatActivity() {
+    private lateinit var navigationDrawerHelper: NavigationDrawerHelper
+    private lateinit var drawerLayout: DrawerLayout
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -42,22 +51,6 @@ class ActivityBallInPlay : AppCompatActivity() {
         val player1 = findViewById<TextView>(R.id.textviewPlayer1)
         val player2 = findViewById<TextView>(R.id.textviewPlayer2)
 
-        //link do Menu
-        findViewById<Button>(R.id.buttonMenuBIP).setOnClickListener {
-            startActivity(Intent(this,ActivityMenu::class.java))
-        }
-
-        //link do poprzedniego activity (StartPoint)
-        /*findViewById<ImageButton>(R.id.imageButtonBack).setOnClickListener {
-            val player1=findViewById<TextView>(R.id.textviewPlayer1).text.toString()
-            val player2=findViewById<TextView>(R.id.textviewPlayer2).text.toString()
-
-            val intent=Intent(this,ActivityStartPoint::class.java).also{
-                it.putExtra("DanePlayer1",player1)
-                it.putExtra("DanePlayer2",player2)
-                startActivity(it)
-            }
-        }*/
 
         findViewById<TextView>(R.id.textPL1).text = player1.text
         findViewById<TextView>(R.id.textPL2).text = player2.text

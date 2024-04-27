@@ -7,43 +7,14 @@
     android:layout_height="match_parent"
     tools:context=".ViewMatchesActivity">
 
-    <Button
-        android:id="@+id/buttonMenuViewM"
-        android:layout_width="92dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="0.5dp"
-        android:text="@string/menu"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.05"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.041"
-        app:shapeAppearance="@style/CardView"  />
-
-    <ImageButton
-        android:id="@+id/imageButtonBack"
-        android:layout_width="105dp"
-        android:layout_height="48dp"
-        android:background="@drawable/rounded_button"
-        android:contentDescription="@string/back_button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.947"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.039"
-        app:srcCompat="@android:drawable/ic_menu_revert" />
-
     <LinearLayout
         android:id="@+id/navigationLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/imageButtonBack"
-        app:layout_constraintStart_toStartOf="@+id/buttonMenuViewM"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.068">
 

@@ -7,27 +7,12 @@
     android:layout_height="match_parent"
     tools:context=".ViewHistoryActivity">
 
-    <Button
-        android:id="@+id/buttonMenuHis"
-        android:layout_width="92dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="0.5dp"
-        android:text="@string/menu"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.05"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.041"
-        app:shapeAppearance="@style/CardView" />
-
     <TableLayout
         android:id="@+id/tableLayoutHis"
         android:layout_width="370dp"
         android:layout_height="wrap_content"
         android:background="@color/app_tableBg_color"
-        android:theme="@style/MyTextAppearance"
+        android:theme="@style/scoreTableTextAppearance"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,7 +20,6 @@
         app:layout_constraintVertical_bias="0.13999999">
 
         <TableRow>
-
             <TextView
                 android:id="@+id/textViewServe1His"
                 android:layout_width="wrap_content"
@@ -108,8 +92,98 @@
         </TableRow>
     </TableLayout>
 
-    <TableLayout
-        android:id="@+id/tableLayout2"
+    <LinearLayout
+        android:id="@+id/linearLayoutNavigationStats"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="20dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/tableLayoutHis"
+        app:layout_constraintStart_toStartOf="@id/tableLayoutHis"
+        app:layout_constraintTop_toBottomOf="@id/tableLayoutHis"
+        app:layout_constraintVertical_bias="0.0">
+
+        <LinearLayout
+            android:layout_width="370dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/history"
+                android:textColor="@color/white"
+                android:background="@drawable/rectangle_button"
+                style="?android:attr/buttonBarButtonStyle"/> <!--history-->
+
+            <Button
+                android:id="@+id/statistics"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/statistics"
+                android:textColor="@color/white"
+                android:background="@drawable/rec_btn_not_selected"
+                style="?android:attr/buttonBarButtonStyle" /> <!--statistics-->
+
+        </LinearLayout> <!--MenuStatHis-->
+
+        <LinearLayout
+            android:layout_width="370dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/buttonAllHis"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:background="@drawable/rectangle_button"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:text="@string/all"/>
+
+            <Button
+                android:id="@+id/buttonSet1His"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="@drawable/rec_btn_not_selected"
+                android:text="@string/set_1"
+                android:textColor="@color/white" />
+
+            <Button
+                android:id="@+id/buttonSet2His"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="@drawable/rec_btn_not_selected"
+                android:text="@string/set_2"
+                android:textColor="@color/white" />
+
+            <Button
+                android:id="@+id/buttonSet3His"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="@drawable/rec_btn_not_selected"
+                android:text="@string/set_3"
+                android:textColor="@color/white" />
+        </LinearLayout> <!--Sets-->
+
+    </LinearLayout> <!--Navigation-->
+
+   <!-- <TableLayout
+        android:id="@+id/linearLayoutMenuStatHisStats"
         android:layout_width="370dp"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -123,10 +197,11 @@
         <TableRow>
 
             <TextView
+                android:id="@+id/statistics"
                 android:layout_width="185dp"
                 android:layout_height="40dp"
                 android:gravity="center"
-                android:id="@+id/test"
+
                 android:text="STATISTICS"
                 android:textColor="@color/white" />
 
@@ -143,7 +218,7 @@
     </TableLayout>
 
     <TableLayout
-        android:id="@+id/tableLayout3"
+        android:id="@+id/linearLayoutMenuSetsStats"
         android:layout_width="370dp"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -157,7 +232,7 @@
         <TableRow>
 
             <TextView
-                android:id="@+id/allButton"
+                android:id="@+id/buttonAllHis"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="#7E65BDC9"
@@ -168,19 +243,19 @@
                 android:textColor="@color/white" />
 
             <TextView
-                android:id="@+id/setButton1"
+                android:id="@+id/buttonSet1His"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:gravity="center"
                 android:clickable="true"
                 android:focusable="true"
+                android:gravity="center"
                 android:text="SET 1"
                 android:textColor="@color/white" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:id="@+id/setButton2"
+                android:id="@+id/buttonSet2His"
                 android:gravity="center"
                 android:clickable="true"
                 android:focusable="true"
@@ -190,7 +265,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:id="@+id/setButton3"
+                android:id="@+id/buttonSet3His"
                 android:gravity="center"
                 android:clickable="true"
                 android:focusable="true"
@@ -199,21 +274,22 @@
 
         </TableRow>
 
-    </TableLayout>
+    </TableLayout>-->
+
     <ListView
         android:id="@+id/historyList"
         android:layout_width="match_parent"
         android:layout_height="729dp"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="5dp"
         android:layout_marginBottom="1dp"
-        android:tint="@color/app_tableBg_color"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:background="#F3ECD5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tableLayout3"
-        app:layout_constraintVertical_bias="0.0"
-        />
-
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutNavigationStats"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

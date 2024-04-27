@@ -3,6 +3,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="transparent">#00FFFFFF</color>
+    <color name="dark_blue">#0F4F8C</color>
     <color name="app_bg_color">#073159</color>
     <color name="app_btn_color">#65BECA</color>
     <color name="app_btnClick_color">#5FB2BD</color>
@@ -11,4 +12,6 @@
     <color name="app_tableBg_color">#e1e184</color>
     <color name="app_btnText_color">#073159</color>
     <color name="app_tableText_color">#000000</color>
+    <color name="app_statsViewButton">#36768F</color>
+    <color name="app_statsViewButton_Click">#346B81</color>
 </resources>
