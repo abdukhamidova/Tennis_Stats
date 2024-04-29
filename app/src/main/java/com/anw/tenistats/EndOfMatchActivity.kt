@@ -42,7 +42,7 @@ class EndOfMatchActivity : AppCompatActivity() {
         var matchId = intent.getStringExtra("matchID")
         var winner: String ?=null
         //sprawdzenie kto wygral
-        if(serve1.text==""){
+        if(serve1.text==""){ //wygral player2
             winner=player2.text.toString()
         } //wygral player2
         else{

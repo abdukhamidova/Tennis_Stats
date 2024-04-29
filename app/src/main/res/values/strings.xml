@@ -78,5 +78,16 @@
     <string name="_2in_all">2in/all (%)</string>
     <string name="bh">BH</string>
     <string name="return_error">RETURN ERROR</string>
+    <string name="enter_nationality">Enter Nationality</string>
+    <string name="select_date_of_birth">Select Date of Birth</string>
+    <string name="enter_ranking">Enter Ranking</string>
+    <string name="enter_strength">Enter Strength</string>
+    <string name="enter_weakness">Enter Weakness</string>
+    <string name="nationality">Nationality:</string>
+    <string name="date_of_birth">Date of Birth:</string>
+    <string name="ranking">Ranking:</string>
+    <string name="strength">Strength:</string>
+    <string name="weakness">Weakness:</string>
+    <string name="submit">SUBMIT</string>
 
 </resources>

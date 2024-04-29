@@ -266,14 +266,14 @@
 
                     <View
                         android:id="@+id/graphTotalPlayer1"
-                        android:layout_width="75dp"
+                        android:layout_width="0dp"
                         android:layout_height="20dp"
                         android:layout_gravity="end"
-                        android:background="#5FB2BD"/>
+                        android:background="#5FB2BD" />
 
                     <View
                         android:id="@+id/graphTotalPlayer2"
-                        android:layout_width="100dp"
+                        android:layout_width="0dp"
                         android:layout_height="20dp"
                         android:layout_gravity="start"
                         android:background="#073159"/>

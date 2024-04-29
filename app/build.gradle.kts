@@ -79,5 +79,7 @@ dependencies {
 
     implementation("com.google.android.material:material:1.3.0-alpha03")
 
-    implementation("com.diogobernardino:williamchart:3.10.1")
+    //baza danych z krajami
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 }

@@ -16,9 +16,14 @@ data class Match(
 )
 
 data class Player(
-    val firstName : String?=null,
-    val lastName : String?=null,
-    val duplicate : Int
+    val firstName: String?=null,
+    val lastName: String?=null,
+    val duplicate: Int,
+    val nationality: String?,
+    val dateOfBirth: Long?,
+    val ranking: Int?,
+    val strength: String?,
+    val weakness: String?
 )
 
 data class Set(

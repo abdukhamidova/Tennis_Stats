@@ -33,6 +33,12 @@ class StartNewActivity : AppCompatActivity() {
     private val playersList = mutableListOf<String>()
     private var matchId: String?=null
 
+    /*val dateString = "01/01/1900" // format daty: "dd/MM/yyyy"
+    val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+    val date = dateFormat.parse(dateString) // Sparsowanie daty
+
+    val milliseconds = date?.time ?: 0*/
+
     override fun onCreate(savedInstanceState: Bundle?) {
         // Initialize Firebase Auth
         super.onCreate(savedInstanceState)
@@ -207,7 +213,12 @@ class StartNewActivity : AppCompatActivity() {
                                     val player = Player(
                                         firstName,
                                         lastName,
-                                        newDuplicate
+                                        newDuplicate,
+                                        "",
+                                        null,
+                                        null,
+                                        "",
+                                        ""
                                     )
                                     // dodanie gracza do bazy (jako obiekt klasy Player)
                                     database.child(playerToReturn).setValue(player)
@@ -237,7 +248,14 @@ class StartNewActivity : AppCompatActivity() {
                 } else { callback(playerName) }
             } else {
                 //jeżeli player nie istnieje, stwórz obiekt klasy Player
-                val player = Player(firstName, lastName, 1)
+                val player = Player(firstName,
+                    lastName,
+                    1,
+                    "",
+                    null,
+                    null,
+                    "",
+                    "")
                 //dodaj taki węzeł
                 database.child(playerName).setValue(player)
                     .addOnSuccessListener {

@@ -8,31 +8,4 @@
     tools:context=".ViewPlayerActivity"
     tools:ignore="ExtraText">
 
-    <Button
-        android:id="@+id/buttonMenuViewM"
-        android:layout_width="92dp"
-        android:layout_height="40dp"
-        android:text="@string/menu"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.004" />
-
-    <ImageButton
-        android:id="@+id/imageButtonBack"
-        android:layout_width="92dp"
-        android:layout_height="40dp"
-        android:background="@drawable/rounded_button"
-        android:contentDescription="@string/back_button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.005"
-        app:srcCompat="@android:drawable/ic_menu_revert" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -74,43 +74,6 @@ class ViewStatsActivity : AppCompatActivity() {
             // Obsługa błędów
         }
 
-        //na start ustawienie statystyk ALL
-        setAppValues(app,0,player1name,player2name)
-        setTableValue(app)
-
-        //ustawienie wszystkich textView SET1, SET2, SET3 na clickable
-        val set1 = findViewById<TextView>(R.id.buttonSet1Stats)
-        val set2 = findViewById<TextView>(R.id.buttonSet2Stats)
-        val set3 = findViewById<TextView>(R.id.buttonSet3Stats)
-        set1.isClickable = true
-        set1.isFocusable = true
-        set1.isFocusableInTouchMode = true
-
-        set2.isClickable = true
-        set2.isFocusable = true
-        set2.isFocusableInTouchMode = true
-
-        set3.isClickable = true
-        set3.isFocusable = true
-        set3.isFocusableInTouchMode = true
-
-        //zmiana ustawien clickable gdy seta nie ma
-        if(set1p1.text==""){
-            set1.isClickable = false
-            set1.isFocusable = false
-            set1.isFocusableInTouchMode = false
-        }
-        if(set2p1.text==""){
-            set2.isClickable = false
-            set2.isFocusable = false
-            set2.isFocusableInTouchMode = false
-        }
-        if(set3p1.text==""){
-            set3.isClickable = false
-            set3.isFocusable = false
-            set3.isFocusableInTouchMode = false
-        }
-
         findViewById<Button>(R.id.buttonAllStats).setOnClickListener {
             //zmiana kolorow textViews ALL, SET1,SET2,SET3
             findViewById<Button>(R.id.buttonAllStats).setBackgroundResource(R.drawable.rectangle_button)
@@ -131,25 +94,29 @@ class ViewStatsActivity : AppCompatActivity() {
             setAppValues(app,1,player1name,player2name)
             setTableValue(app)
         }
-        findViewById<Button>(R.id.buttonSet2Stats).setOnClickListener{
-            //zmiana kolorow textViews ALL, SET1,SET2,SET3
-            findViewById<Button>(R.id.buttonAllStats).setBackgroundResource(R.drawable.rec_btn_not_selected)
-            findViewById<Button>(R.id.buttonSet1Stats).setBackgroundResource(R.drawable.rec_btn_not_selected)
-            findViewById<Button>(R.id.buttonSet2Stats).setBackgroundResource(R.drawable.rectangle_button)
-            findViewById<Button>(R.id.buttonSet3Stats).setBackgroundResource(R.drawable.rec_btn_not_selected)
-            //ustawienie statystyk SET2
-            setAppValues(app,2,player1name,player2name)
-            setTableValue(app)
+        findViewById<Button>(R.id.buttonSet2Stats).setOnClickListener {
+            if (set2p1.text != ""){
+                //zmiana kolorow textViews ALL, SET1,SET2,SET3
+                findViewById<Button>(R.id.buttonAllStats).setBackgroundResource(R.drawable.rec_btn_not_selected)
+                findViewById<Button>(R.id.buttonSet1Stats).setBackgroundResource(R.drawable.rec_btn_not_selected)
+                findViewById<Button>(R.id.buttonSet2Stats).setBackgroundResource(R.drawable.rectangle_button)
+                findViewById<Button>(R.id.buttonSet3Stats).setBackgroundResource(R.drawable.rec_btn_not_selected)
+                //ustawienie statystyk SET2
+                setAppValues(app, 2, player1name, player2name)
+                setTableValue(app)
+            }
         }
         findViewById<Button>(R.id.buttonSet3Stats).setOnClickListener {
-            //zmiana kolorow textViews ALL, SET1,SET2,SET3
-            findViewById<Button>(R.id.buttonAllStats).setBackgroundResource(R.drawable.rec_btn_not_selected)
-            findViewById<Button>(R.id.buttonSet1Stats).setBackgroundResource(R.drawable.rec_btn_not_selected)
-            findViewById<Button>(R.id.buttonSet2Stats).setBackgroundResource(R.drawable.rec_btn_not_selected)
-            findViewById<Button>(R.id.buttonSet3Stats).setBackgroundResource(R.drawable.rectangle_button)
-            //ustawienie statystyk SET3
-            setAppValues(app,3,player1name,player2name)
-            setTableValue(app)
+            if(set3p1.text!=""){
+                //zmiana kolorow textViews ALL, SET1,SET2,SET3
+                findViewById<Button>(R.id.buttonAllStats).setBackgroundResource(R.drawable.rec_btn_not_selected)
+                findViewById<Button>(R.id.buttonSet1Stats).setBackgroundResource(R.drawable.rec_btn_not_selected)
+                findViewById<Button>(R.id.buttonSet2Stats).setBackgroundResource(R.drawable.rec_btn_not_selected)
+                findViewById<Button>(R.id.buttonSet3Stats).setBackgroundResource(R.drawable.rectangle_button)
+                //ustawienie statystyk SET3
+                setAppValues(app,3,player1name,player2name)
+                setTableValue(app)
+            }
         }
         //zmiana aktywnosci na History
         findViewById<Button>(R.id.buttonHistoryStats).setOnClickListener {
@@ -841,14 +808,27 @@ class ViewStatsActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.totalPlayer1).text = app.totalpoints1.toString()
         findViewById<TextView>(R.id.totalPlayer2).text = app.totalpoints2.toString()
         //kod do ustawienia wykresow totalpoints
+        if(app.totalpoints1>app.totalpoints2){
+            findViewById<View>(R.id.graphTotalPlayer1).layoutParams.width=(100 * scale + 0.5f).toInt()
+            val wyn = (app.totalpoints2.toDouble() * 100 /app.totalpoints1.toDouble()).toInt()
+            findViewById<View>(R.id.graphTotalPlayer2).layoutParams.width=(wyn * scale + 0.5f).toInt()
+            /*findViewById<View>(R.id.graphAcePlayer2).layoutParams.width=(50 * scale + 0.5f).toInt()*/
+        }
+        else{
+            findViewById<View>(R.id.graphTotalPlayer2).layoutParams.width=(100 * scale + 0.5f).toInt()
+            val wyn = (app.totalpoints1.toDouble() * 100 / app.totalpoints2.toDouble()).toInt()
+            findViewById<View>(R.id.graphTotalPlayer1).layoutParams.width=(wyn * scale + 0.5f).toInt()
+            /*findViewById<View>(R.id.graphAcePlayer1).layoutParams.width=(50 * scale + 0.5f).toInt()*/
+        }
+
         app.totalpoints1 = 0
         app.totalpoints2 = 0
 
         findViewById<TextView>(R.id.acePlayer1).text = app.ace1.toString()
         findViewById<TextView>(R.id.acePlayer2).text = app.ace2.toString()
-        if(app.ace1==0 && app.ace2==0){
-            findViewById<View>(R.id.graphAcePlayer1).layoutParams.width=(0 * scale + 0.5f).toInt()
-            findViewById<View>(R.id.graphAcePlayer2).layoutParams.width=(0 * scale + 0.5f).toInt()
+        if(app.ace1==app.ace2 && app.ace1==0){
+            findViewById<View>(R.id.graphAcePlayer1).layoutParams.width=0
+            findViewById<View>(R.id.graphAcePlayer2).layoutParams.width=0
         }
         else if(app.ace1>app.ace2){
             findViewById<View>(R.id.graphAcePlayer1).layoutParams.width=(100 * scale + 0.5f).toInt()
@@ -865,9 +845,9 @@ class ViewStatsActivity : AppCompatActivity() {
 
         findViewById<TextView>(R.id.doublePlayer1).text = app.doublefault1.toString()
         findViewById<TextView>(R.id.doublePlayer2).text = app.doublefault2.toString()
-        if(app.ace1==0 && app.ace2==0){
-            findViewById<View>(R.id.graphDoubleFaultPlayer1).layoutParams.width=(0 * scale + 0.5f).toInt()
-            findViewById<View>(R.id.graphDoubleFaultPlayer2).layoutParams.width=(0 * scale + 0.5f).toInt()
+        if(app.doublefault1==app.doublefault2 && app.doublefault1==0){
+            findViewById<View>(R.id.graphDoubleFaultPlayer1).layoutParams.width=0
+            findViewById<View>(R.id.graphDoubleFaultPlayer2).layoutParams.width=0
         }
         else if(app.doublefault1>app.doublefault2){
             findViewById<View>(R.id.graphDoubleFaultPlayer1).layoutParams.width=(100 * scale + 0.5f).toInt()
