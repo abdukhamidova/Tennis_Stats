@@ -102,12 +102,6 @@ class EndOfMatchActivity : AppCompatActivity() {
 
         clear(app)
 
-        findViewById<Button>(R.id.buttonEndViewStats).setOnClickListener {
-            Intent(this, ViewStatsActivity::class.java).also{
-                it.putExtra("matchID", matchId)
-                startActivity(it)
-            }
-        }
         findViewById<Button>(R.id.buttonViewStatsEOF).setOnClickListener {
             database.child("data").get().addOnSuccessListener { dataSnapshot ->
                 // Pobranie wartości "player1" z bazy danych

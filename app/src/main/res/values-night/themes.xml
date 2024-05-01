@@ -10,7 +10,6 @@
     </style>
 
     <style name="Theme.TenniStats" parent="Base.Theme.TenniStats" />
-
     <!--styl domyślny button-->
     <style name="our_button" parent="Widget.AppCompat.Button">
         <item name="android:background">@drawable/rounded_button</item>
@@ -43,5 +42,9 @@
         <item name="backgroundTint">@color/app_bg_color</item>
         <item name="android:listDivider">@color/dark_blue</item>
         <item name="android:textColorSecondary">@color/white</item>
+        <item name="elevation">20dp</item>
+        <item name="itemTextColor">@color/white</item>
+        <item name="itemIconTint">@color/white</item>
+        <item name="dividerInsetStart">45dp</item>
     </style>
 </resources>

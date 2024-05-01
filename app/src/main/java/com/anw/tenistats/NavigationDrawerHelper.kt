@@ -29,7 +29,7 @@ class NavigationDrawerHelper(private val activity: AppCompatActivity) {
             R.id.nav_home -> Intent(activity, ActivityMenu::class.java)
             R.id.nav_startNew -> Intent(activity, StartNewActivity::class.java)
             R.id.nav_viewMatch -> Intent(activity, ViewMatchesActivity::class.java)
-            R.id.nav_myPlayer -> Intent(activity, ViewPlayerActivity::class.java)
+            R.id.nav_myPlayer -> Intent(activity, PlayerDetailsActivity::class.java)
             R.id.buttonLogOut -> {
                 auth.signOut()
                 Intent(activity, MainActivity::class.java)
