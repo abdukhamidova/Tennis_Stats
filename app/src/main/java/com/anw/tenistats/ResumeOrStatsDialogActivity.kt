@@ -8,17 +8,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import com.anw.tenistats.ActivityStartPoint
-import com.anw.tenistats.EndOfMatchActivity
-import com.anw.tenistats.Point
 import com.anw.tenistats.R
 import com.anw.tenistats.Stats
 import com.anw.tenistats.ViewHistoryActivity
 import com.anw.tenistats.ViewMatchesActivity
-import com.anw.tenistats.databinding.ActivityViewHistoryBinding
-import com.anw.tenistats.fillUpScore
-import com.anw.tenistats.score
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -26,14 +20,15 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-class ResumeOrStatsDialogActivity(private val context: Context, private val openedFromStartPoint: Boolean = false) {
+class ResumeOrStatsDialogActivity(private val context: Context,private val openedFromStartPoint: Boolean = false) {
 
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var database: DatabaseReference
     private lateinit var alertDialog: AlertDialog
     val app = (context.applicationContext as? Stats)
+    @SuppressLint("InflateParams")
     val dialogView = LayoutInflater.from(context).inflate(R.layout.resume_or_stats_dialog, null)
-    val matchId: TextView = dialogView.findViewById<TextView>(R.id.textViewMatchIdRoS)
+    val matchId: TextView = dialogView.findViewById(R.id.textViewMatchIdRoS)
 
     @SuppressLint("MissingInflatedId")
     fun show(milliseconds: Long){
@@ -78,11 +73,6 @@ class ResumeOrStatsDialogActivity(private val context: Context, private val open
                     val btnResume : Button = dialogView.findViewById(R.id.buttonResumeRoS)
                     setscore(btnResume,player1,player2,serve1,serve2,set1p1,set2p1,set3p1,set1p2,set2p2,set3p2,pkt1,pkt2)
 
-                    //zapisanie wyniku w zmiennych globalnych
-                    /*if (app != null){
-                        fillUpScore(app,player1, player2, serve1, serve2, pkt1, pkt2, set1p1, set1p2, set2p1, set2p2, set3p1, set3p2)
-                    }*/
-
                     val btnViewStats : Button = dialogView.findViewById(R.id.buttonViewStatsRoS)
                     val btnCancel : Button = dialogView.findViewById(R.id.buttonCancelRoS)
 
@@ -99,10 +89,9 @@ class ResumeOrStatsDialogActivity(private val context: Context, private val open
                             app.set2p2 = set2p2.text.toString()
                             app.set3p1 = set3p1.text.toString()
                             app.set3p2 = set3p2.text.toString()
-                            //fillUpScore(app,player1, player2, serve1, serve2, pkt1, pkt2, set1p1, set1p2, set2p1, set2p2, set3p1, set3p2)
                         }
                         val intent = Intent(context, ActivityStartPoint::class.java)
-                        //intent.putExtra("matchID", matchId.text.toString())
+                        intent.putExtra("matchID", matchId.text.toString())
                         database =
                             FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
                                 .getReference(user.toString()).child("Current match")
@@ -128,14 +117,12 @@ class ResumeOrStatsDialogActivity(private val context: Context, private val open
 
                     } else {
                     // Obsługa, gdy dane nie istnieją w bazie danych
-                    //Toast.makeText(this@ResumeOrStatsDialogActivity, "Nie znaleziono danych", Toast.LENGTH_SHORT).show()
                 }
 
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
                 // Obsługa błędu zapytania do bazy danych
-                //Toast.makeText(this@ResumeOrStatsDialogActivity, "Błąd zapytania do bazy danych", Toast.LENGTH_SHORT).show()
             }
         })
         alertDialog.show()

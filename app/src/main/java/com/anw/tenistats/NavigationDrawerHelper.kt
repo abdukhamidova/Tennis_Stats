@@ -11,7 +11,6 @@ import com.anw.tenistats.PlayerDetailsActivity
 import com.anw.tenistats.R
 import com.anw.tenistats.StartNewActivity
 import com.anw.tenistats.ViewMatchesActivity
-import com.anw.tenistats.ViewPlayerActivity
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 

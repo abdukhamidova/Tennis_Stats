@@ -2,11 +2,9 @@ package com.anw.tenistats
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
-import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -59,11 +57,10 @@ class ActivityStartPoint : AppCompatActivity() {
         if(userEmail.isNotEmpty()) {
             userEmailView.text = userEmail
         }else {
-            userEmailView.text = "user_email@smth.com"
+            userEmailView.text = resources.getString(R.string.user_email)
         }
         //MENU
 
-        //val matchId = intent.getStringExtra("matchID")
         firebaseAuth = FirebaseAuth.getInstance()
         val user = firebaseAuth.currentUser?.uid
         database =
@@ -94,26 +91,21 @@ class ActivityStartPoint : AppCompatActivity() {
         val addPointDialog = AddPointDialog(this,true)
         fillUpScoreInActivity(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
 
-        //database.child("pkt1").setValue(pkt1.text)
-        //database.child("pkt2").setValue(pkt2.text)
-
+        val btnFault = findViewById<Button>(R.id.buttonFault)
+        val fault_text = resources.getString(R.string.fault)
+        val double_fault_text = resources.getString(R.string.double_fault)
+        val first_serve_text = resources.getString(R.string.first_serve)
+        val second_serve_text = resources.getString(R.string.second_serve)
 
         val (_, _) = calculateGame(set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
 
         findViewById<Button>(R.id.buttonAce).setOnClickListener {
             val (game,set) = calculateGame(set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
             if (app.serve1 != "") { //serwuje player 1
-                app.totalpoints1++
-                val btnFault = findViewById<Button>(R.id.buttonFault)
-                if (btnFault.text == "Fault") { //trafiony 1 serwis
-                    app.firstservein1++
+                if (btnFault.text == double_fault_text) {
+                    btnFault.text = fault_text
+                    findViewById<TextView>(R.id.textViewFS).text = first_serve_text
                 }
-                else if (btnFault.text == "Double Fault") {
-                    app.secondservein1++
-                    btnFault.text = "Fault"
-                    findViewById<TextView>(R.id.textViewFS).text = "1st Serve"
-                }
-                app.ace1++
                 addPointDialog.show(
                     player1, player2, serve1, serve2, pkt1, pkt2, set1p1, set1p2, set2p1, set2p2, set3p1, set3p2,
                     pkt1.text.toString(),
@@ -127,16 +119,10 @@ class ActivityStartPoint : AppCompatActivity() {
                     set.toString())
             }
             else { //serwuje player2
-                app.totalpoints2++
-                if (findViewById<Button>(R.id.buttonFault).text == "Fault") { //trafiony 1 serwis
-                    app.firstservein2++
+                if (btnFault.text == double_fault_text) {
+                    btnFault.text = fault_text
+                    findViewById<TextView>(R.id.textViewFS).text = first_serve_text
                 }
-                else if (findViewById<Button>(R.id.buttonFault).text == "Double Fault") {
-                    app.secondservein2++
-                    findViewById<Button>(R.id.buttonFault).text = "Fault"
-                    findViewById<TextView>(R.id.textViewFS).text = "1st Serve"
-                }
-                app.ace2++
                 addPointDialog.show(
                     player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,
                     pkt1.text.toString(),
@@ -151,22 +137,20 @@ class ActivityStartPoint : AppCompatActivity() {
             }
         }
 
-        findViewById<Button>(R.id.buttonFault).setOnClickListener {
+        btnFault.setOnClickListener {
             val (game,set) = calculateGame(set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
-            if (findViewById<Button>(R.id.buttonFault).text == "Fault") {
+            if (btnFault.text == fault_text) {
                 app.serwis=2
-                findViewById<Button>(R.id.buttonFault).text = "Double Fault"
-                findViewById<Button>(R.id.buttonFault).textSize = 15.4f
-                findViewById<TextView>(R.id.textViewFS).text = "2nd Serve"
+                btnFault.text = double_fault_text
+                btnFault.textSize = 15.4f
+                findViewById<TextView>(R.id.textViewFS).text = second_serve_text
             }
-            else if (findViewById<Button>(R.id.buttonFault).text == "Double Fault") {
+            else if (btnFault.text == double_fault_text) {
                 app.serwis=0
-                findViewById<Button>(R.id.buttonFault).text = "Fault"
-                findViewById<Button>(R.id.buttonFault).textSize = 19.9f
-                findViewById<TextView>(R.id.textViewFS).text = "1st Serve"
+                btnFault.text = fault_text
+                btnFault.textSize = 19.9f
+                findViewById<TextView>(R.id.textViewFS).text = first_serve_text
                 if (app.serve1 != "") {
-                    app.totalpoints2++
-                    app.doublefault1++
                     addPointDialog.show(
                         player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,
                         pkt1.text.toString(),
@@ -180,8 +164,6 @@ class ActivityStartPoint : AppCompatActivity() {
                         set.toString())
                 }
                 else {
-                    app.totalpoints1++
-                    app.doublefault2++
                     addPointDialog.show(
                         player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2,
                         pkt1.text.toString(),
@@ -200,16 +182,10 @@ class ActivityStartPoint : AppCompatActivity() {
         findViewById<Button>(R.id.buttonRWF).setOnClickListener{
             val (game,set) = calculateGame(set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
             if (app.serve1 != "") { //serwuje player 1
-                app.totalpoints2++
-                if (findViewById<Button>(R.id.buttonFault).text == "Fault") { //trafiony 1 serwis
-                    app.firstservein1++
+                if (btnFault.text == double_fault_text) {
+                    btnFault.text = fault_text
+                    findViewById<TextView>(R.id.textViewFS).text = first_serve_text
                 }
-                else if (findViewById<Button>(R.id.buttonFault).text == "Double Fault") {
-                    app.secondservein1++
-                    findViewById<Button>(R.id.buttonFault).text = "Fault"
-                    findViewById<TextView>(R.id.textViewFS).text = "1st Serve"
-                }
-                app.returnwinnerFH2++
                 addPointDialog.show(
                     player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,
                     pkt1.text.toString(),
@@ -223,16 +199,10 @@ class ActivityStartPoint : AppCompatActivity() {
                     set.toString())
             }
             else {
-                app.totalpoints1++
-                if (findViewById<Button>(R.id.buttonFault).text == "Fault") { //trafiony 1 serwis
-                    app.firstservein2++
+                if (btnFault.text == double_fault_text) {
+                    btnFault.text = fault_text
+                    findViewById<TextView>(R.id.textViewFS).text = first_serve_text
                 }
-                else if (findViewById<Button>(R.id.buttonFault).text == "Double Fault") {
-                    app.secondservein2++
-                    findViewById<Button>(R.id.buttonFault).text = "Fault"
-                    findViewById<TextView>(R.id.textViewFS).text = "1st Serve"
-                }
-                app.returnwinnerFH1++
                 addPointDialog.show(
                     player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2,
                     pkt1.text.toString(),
@@ -250,16 +220,10 @@ class ActivityStartPoint : AppCompatActivity() {
         findViewById<Button>(R.id.buttonRWB).setOnClickListener {
             val (game,set) = calculateGame(set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
             if (app.serve1 != "") { //serwuje player 1
-                app.totalpoints2++
-                if (findViewById<Button>(R.id.buttonFault).text == "Fault") { //trafiony 1 serwis
-                    app.firstservein1++
+                if (btnFault.text == double_fault_text) {
+                    btnFault.text = fault_text
+                    findViewById<TextView>(R.id.textViewFS).text = first_serve_text
                 }
-                else if (findViewById<Button>(R.id.buttonFault).text == "Double Fault") {
-                    app.secondservein1++
-                    findViewById<Button>(R.id.buttonFault).text = "Fault"
-                    findViewById<TextView>(R.id.textViewFS).text = "1st Serve"
-                }
-                app.returnwinnerBH2++
                 addPointDialog.show(
                     player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,
                     pkt1.text.toString(),
@@ -273,16 +237,10 @@ class ActivityStartPoint : AppCompatActivity() {
                     set.toString())
             }
             else {
-                app.totalpoints1++
-                if (findViewById<Button>(R.id.buttonFault).text == "Fault") { //trafiony 1 serwis
-                    app.firstservein2++
+                if (btnFault.text == double_fault_text) {
+                    btnFault.text = fault_text
+                    findViewById<TextView>(R.id.textViewFS).text = first_serve_text
                 }
-                else if (findViewById<Button>(R.id.buttonFault).text == "Double Fault") {
-                    app.secondservein2++
-                    findViewById<Button>(R.id.buttonFault).text = "Fault"
-                    findViewById<TextView>(R.id.textViewFS).text = "1st Serve"
-                }
-                app.returnwinnerBH1++
                 addPointDialog.show(
                     player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2,
                     pkt1.text.toString(),
@@ -299,16 +257,10 @@ class ActivityStartPoint : AppCompatActivity() {
         findViewById<Button>(R.id.buttonREF).setOnClickListener {
             val (game,set) = calculateGame(set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
             if (app.serve1 != "") { //serwuje player 1
-                app.totalpoints1++
-                if (findViewById<Button>(R.id.buttonFault).text == "Fault") { //trafiony 1 serwis
-                    app.firstservein1++
+                if (btnFault.text == double_fault_text) {
+                    btnFault.text = fault_text
+                    findViewById<TextView>(R.id.textViewFS).text = first_serve_text
                 }
-                else if (findViewById<Button>(R.id.buttonFault).text == "Double Fault") {
-                    app.secondservein1++
-                    findViewById<Button>(R.id.buttonFault).text = "Fault"
-                    findViewById<TextView>(R.id.textViewFS).text = "1st Serve"
-                }
-                app.returnerrorFH2++
                 addPointDialog.show(
                     player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2,
                     pkt1.text.toString(),
@@ -322,16 +274,10 @@ class ActivityStartPoint : AppCompatActivity() {
                     set.toString())
             }
             else {
-                app.totalpoints2++
-                if (findViewById<Button>(R.id.buttonFault).text == "Fault") { //trafiony 1 serwis
-                    app.firstservein2++
+                if (btnFault.text == double_fault_text) {
+                    btnFault.text = fault_text
+                    findViewById<TextView>(R.id.textViewFS).text = first_serve_text
                 }
-                else if (findViewById<Button>(R.id.buttonFault).text == "Double Fault") {
-                    app.secondservein2++
-                    findViewById<Button>(R.id.buttonFault).text = "Fault"
-                    findViewById<TextView>(R.id.textViewFS).text = "1st Serve"
-                }
-                app.returnerrorFH1++
                 addPointDialog.show(
                     player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,
                     pkt1.text.toString(),
@@ -349,16 +295,10 @@ class ActivityStartPoint : AppCompatActivity() {
         findViewById<Button>(R.id.buttonREB).setOnClickListener {
             val (game,set) = calculateGame(set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
             if (app.serve1 != "") { //serwuje player 1
-                app.totalpoints1++
-                if (findViewById<Button>(R.id.buttonFault).text == "Fault") { //trafiony 1 serwis
-                    app.firstservein1++
+                if (btnFault.text == double_fault_text) {
+                    btnFault.text = fault_text
+                    findViewById<TextView>(R.id.textViewFS).text = first_serve_text
                 }
-                else if (findViewById<Button>(R.id.buttonFault).text == "Double Fault") {
-                    app.secondservein1++
-                    findViewById<Button>(R.id.buttonFault).text = "Fault"
-                    findViewById<TextView>(R.id.textViewFS).text = "1st Serve"
-                }
-                app.returnerrorBH2++
                 addPointDialog.show(
                     player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2,
                     pkt1.text.toString(),
@@ -372,16 +312,10 @@ class ActivityStartPoint : AppCompatActivity() {
                     set.toString())
             }
             else {
-                app.totalpoints2++
-                if (findViewById<Button>(R.id.buttonFault).text == "Fault") { //trafiony 1 serwis
-                    app.firstservein2++
+                if (btnFault.text == double_fault_text) {
+                    btnFault.text = fault_text
+                    findViewById<TextView>(R.id.textViewFS).text = first_serve_text
                 }
-                else if (findViewById<Button>(R.id.buttonFault).text == "Double Fault") {
-                    app.secondservein2++
-                    findViewById<Button>(R.id.buttonFault).text = "Fault"
-                    findViewById<TextView>(R.id.textViewFS).text = "1st Serve"
-                }
-                app.returnerrorBH1++
                 addPointDialog.show (
                     player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,
                     pkt1.text.toString(),
@@ -399,24 +333,15 @@ class ActivityStartPoint : AppCompatActivity() {
         findViewById<Button>(R.id.buttonBIP).setOnClickListener {
             val (game,set) = calculateGame(set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
             if(app.serve1 != ""){
-                if (findViewById<Button>(R.id.buttonFault).text == "Fault") { //trafiony 1 serwis
-                    app.firstservein1++
-                }
-                else if (findViewById<Button>(R.id.buttonFault).text == "Double Fault") {
-                    app.secondservein1++
-                    findViewById<Button>(R.id.buttonFault).text = "Fault"
-                    findViewById<TextView>(R.id.textViewFS).text = "1st Serve"
+                if (btnFault.text == double_fault_text) {
+                    btnFault.text = fault_text
+                    findViewById<TextView>(R.id.textViewFS).text = first_serve_text
                 }
             }
             else {
-                //app.totalpoints2++
-                if (findViewById<Button>(R.id.buttonFault).text == "Fault") { //trafiony 1 serwis
-                    app.firstservein2++
-                }
-                else if (findViewById<Button>(R.id.buttonFault).text == "Double Fault") {
-                    app.secondservein2++
-                    findViewById<Button>(R.id.buttonFault).text = "Fault"
-                    findViewById<TextView>(R.id.textViewFS).text = "1st Serve"
+                if (btnFault.text == double_fault_text) {
+                    btnFault.text = fault_text
+                    findViewById<TextView>(R.id.textViewFS).text = first_serve_text
                 }
             }
 
@@ -430,12 +355,11 @@ class ActivityStartPoint : AppCompatActivity() {
                 it.putExtra("DanePlayer2",player2.text)
             }
             startActivity(intent)
-            //callActivity() //zmiana aktywnosci na ActivityBallInPlay
         }
     }
 
     fun calculateGame(set1p1: TextView, set1p2: TextView, set2p1: TextView, set2p2: TextView, set3p1: TextView, set3p2: TextView): Pair<Int, Int> {
-        var game = 1
+        val game: Int
         var set = 1
 
         if (set2p1.text == "") {
@@ -453,12 +377,6 @@ class ActivityStartPoint : AppCompatActivity() {
             val game2 = set3p2.text.toString().toInt()
             game = game1 + game2 + 1
         }
-        /*database.child("set1p1").setValue((set1p1.text.toString()))
-        database.child("set2p1").setValue((set2p1.text.toString()))
-        database.child("set3p1").setValue((set3p1.text.toString()))
-        database.child("set1p2").setValue((set1p2.text.toString()))
-        database.child("set2p2").setValue((set2p2.text.toString()))
-        database.child("set3p2").setValue((set3p2.text.toString()))*/
 
         return Pair(game, set)
     }

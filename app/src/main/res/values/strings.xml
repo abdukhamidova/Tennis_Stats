@@ -17,6 +17,7 @@
     <string name="return_error_bh">Return Error BH</string>
     <string name="return_winner_bh">Return Winner BH</string>
     <string name="fault">Fault</string>
+    <string name="double_fault">Double Fault</string>
     <string name="ball_in_play">Ball In Play</string>
     <string name="i_m_already_signed_in">I\'m already signed in</string>
     <string name="tennis_stats">TENNIS STATS</string>
@@ -91,5 +92,8 @@
     <string name="submit">SUBMIT</string>
     <string name="decision">WHAT DO YOU WANT TO DO</string>
     <string name="resume_match">Resume Match</string>
+    <string name="first_serve">1st Serve</string>
+    <string name="second_serve">2st Serve</string>
+    <string name="user_email">user_email@smth.com</string>
 
 </resources>

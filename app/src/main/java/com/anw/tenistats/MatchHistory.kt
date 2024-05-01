@@ -1,8 +1,8 @@
 package com.anw.tenistats
 
-import java.sql.Date
+//import java.sql.Date
 
-data class Uzytkownik(
+/*data class Uzytkownik(
     val matches: MutableList<Match> = mutableListOf(), //lista meczow danego uzytkownika
     val players: MutableList<Player> = mutableListOf() //lista playerow danego uzytkownika
 )
@@ -13,7 +13,7 @@ data class Match(
     val player1: Player, //pierwszy grajacy player
     val player2: Player, //drugi grajacy player
     val sets: MutableList<Set> = mutableListOf() //lista poszczegolnych setow po kolei
-)
+)*/
 
 data class Player(
     val firstName: String?=null,
@@ -26,7 +26,7 @@ data class Player(
     val weakness: String?
 )
 
-data class Set(
+/*data class Set(
     val id: Int, //po kolei set 1, 2, 3
     val gems: MutableList<Game> = mutableListOf() //lista gemow w danym secie
 )
@@ -35,7 +35,7 @@ data class Game(
     val set1: Int, //ilosc gemow playera 1 w danym secie
     val set2: Int, //ilosc gemow playera 2 w danym secie
     val points: MutableList<Point> = mutableListOf() //lista punktow w danym gemie
-)
+)*/
 
 data class Point(
     val pkt1: String, //ilosc punktow playera 1 w danym gemie

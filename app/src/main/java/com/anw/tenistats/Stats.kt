@@ -7,9 +7,8 @@ class Stats : Application() {
     var serwis: Int = 1 //1-wszedl 1 serwis; 2-wszedl drugi serwis; 0-podwojny blad
     var pktId: Int = 1 //liczba zagranych punktow w meczu
     var matchId: String = ""
-    var isResume: Boolean = false
 
-    var czyTiebreak: Boolean = false
+    var isTiebreak: Boolean = false
     //dane
     var player1: String = ""
     var player2: String = ""

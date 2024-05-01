@@ -72,7 +72,7 @@ class PlayerDetailsActivity : AppCompatActivity() {
         if(userEmail.isNotEmpty()) {
             userEmailView.text = userEmail
         }else {
-            userEmailView.text = "user_email@smth.com"
+            userEmailView.text = resources.getString(R.string.user_email)
         }
         //MENU
 
@@ -216,17 +216,6 @@ class PlayerDetailsActivity : AppCompatActivity() {
             DatePickerDialog.OnDateSetListener { view: DatePicker?, year: Int, monthOfYear: Int, dayOfMonth: Int ->
                 val selectedDate = "$dayOfMonth/${monthOfYear + 1}/$year"
                 findViewById<EditText>(R.id.editTextDate).setText(selectedDate)
-                //zapisanie do bazy
-                /*val databaseRef = database.child("dateOfBirth")
-                databaseRef.setValue(selectedDate)
-                    .addOnSuccessListener {
-                        // Powodzenie operacji zapisu
-                        Toast.makeText(this, "Data została zapisana do bazy danych", Toast.LENGTH_SHORT).show()
-                    }
-                    .addOnFailureListener {
-                        // Błąd podczas operacji zapisu
-                        Toast.makeText(this, "Błąd podczas zapisywania daty do bazy danych", Toast.LENGTH_SHORT).show()
-                    }*/
             },
             year, month, day
         )
@@ -235,7 +224,7 @@ class PlayerDetailsActivity : AppCompatActivity() {
 
     private fun setupAutoCompleteTextView(countries: List<String>) {
         val autoCompleteTextView = findViewById<AutoCompleteTextView>(R.id.autoCompleteTextViewNationality)
-        val adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, countries)
+        ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, countries)
         autoCompleteTextView.setOnClickListener {
             autoCompleteTextView.showDropDown()
         }
@@ -252,7 +241,7 @@ class PlayerDetailsActivity : AppCompatActivity() {
         val strength = findViewById<TextView>(R.id.autoCompleteTextViewStrength).text.toString()
         val weakness = findViewById<TextView>(R.id.autoCompleteTextViewWeakness).text.toString()
 
-        if(!nationality.isNullOrEmpty()){
+        if(nationality.isNotEmpty()){
             database.child("nationality").setValue(nationality)
         }
         if(!date.isNullOrEmpty()){
@@ -262,7 +251,7 @@ class PlayerDetailsActivity : AppCompatActivity() {
             val milliseconds = date?.time ?: 0
             database.child("dateOfBirth").setValue(milliseconds)
         }
-        if(!ranking.isNullOrEmpty()){
+        if(ranking.isNotEmpty()){
             if(isNumber(ranking))
             {
                 database.child("ranking").setValue(ranking)
@@ -271,10 +260,10 @@ class PlayerDetailsActivity : AppCompatActivity() {
                 Toast.makeText(this, "Enter an integer.", Toast.LENGTH_SHORT).show()
             }
         }
-        if(!strength.isNullOrEmpty()){
+        if(strength.isNotEmpty()){
             database.child("strength").setValue(strength)
         }
-        if(!weakness.isNullOrEmpty()){
+        if(weakness.isNotEmpty()){
             database.child("weakness").setValue(weakness)
         }
 

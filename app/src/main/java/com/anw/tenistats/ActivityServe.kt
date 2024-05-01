@@ -15,12 +15,15 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.anw.tenistats.ui.theme.NavigationDrawerHelper
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 class ActivityServe : AppCompatActivity() {
     private var matchId: String?=null
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var navigationDrawerHelper: NavigationDrawerHelper
     private lateinit var drawerLayout: DrawerLayout
+    private lateinit var database: DatabaseReference
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,7 +57,7 @@ class ActivityServe : AppCompatActivity() {
         if(userEmail.isNotEmpty()) {
             userEmailView.text = userEmail
         }else {
-            userEmailView.text = "user_email@smth.com"
+            userEmailView.text = resources.getString(R.string.user_email)
         }
         //MENU
 
@@ -108,17 +111,23 @@ class ActivityServe : AppCompatActivity() {
             false
         }
 
+        firebaseAuth=FirebaseAuth.getInstance()
+        val user = firebaseAuth.currentUser?.uid
+        database = FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
+            .getReference(user.toString()).child("Matches").child(matchId.toString())
 
         //kliknięcie na gracza, który serwuje jako pierwsze
         //& przekierowanie do kolejnej aktywności
         btnPlayer1.setOnClickListener{
             app.serve1="1" //do statysyk
             app.serve2=""
+            database.child("LastServePlayer").setValue(btnPlayer1.text.toString())
             callActivity()
         }
         btnPlayer2.setOnClickListener{
             app.serve1=""
-            app.serve2="1" //do statysyk
+            app.serve2="1"
+            database.child("LastServePlayer").setValue(btnPlayer2.text.toString())
             callActivity()
         }
     }

@@ -32,7 +32,7 @@ class AddPointDialog(private val context: Context, private val openedFromStartPo
         alertDialog = AlertDialog.Builder(context)
             .setView(dialogView)
             .create()
-        val collectedPoint : TextView = dialogView.findViewById(R.id.textViewPointData)
+        val collectedPoint = dialogView.findViewById<TextView>(R.id.textViewPointData)
         val btnAdd : Button = dialogView.findViewById(R.id.buttonAdd)
         val btnCancel : Button = dialogView.findViewById(R.id.buttonCancel)
 
@@ -47,33 +47,34 @@ class AddPointDialog(private val context: Context, private val openedFromStartPo
 
             if (app != null) {
                 //ustawienie wyniku w danym gemie
-                var score1: String
-                var score2: String
-                if(setId=="1"){
-                    score1=app.set1p1
-                    score2=app.set1p2
-                }
-                else if(setId=="2"){
-                    score1=app.set2p1
-                    score2=app.set2p2
-                }
-                else{
-                    score1=app.set3p1
-                    score2=app.set3p2
+                val score1: String
+                val score2: String
+                when(setId) {
+                    "1" -> {
+                        score1 = app.set1p1
+                        score2 = app.set1p2
+                    }
+                    "2" -> {
+                        score1 = app.set2p1
+                        score2 = app.set2p2
+                    }
+                    else -> {
+                        score1 = app.set3p1
+                        score2 = app.set3p2
+                    }
                 }
                 database.child(("set "+ setId)).child(("game "+gameId)).child("score").child("player1score").setValue(score1)
                 database.child(("set "+ setId)).child(("game "+gameId)).child("score").child("player2score").setValue(score2)
 
                 //ustawienie osoby serwujacej w danym gemie
                 val servePlayer: String
-                if(app.serve1=="1"){
-                    servePlayer=app.player1
-                }
-                else{
-                    servePlayer=app.player2
+                servePlayer = if(app.serve1=="1"){
+                    app.player1
+                } else{
+                    app.player2
                 }
 
-                score(app,player1,player2,serve1,serve2,pkt1txt,pkt2txt,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
+                score(app,player1,serve1,serve2,pkt1txt,pkt2txt,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
                 database = FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
                     .getReference(user.toString()).child("Matches").child(matchId)
                 database.child("pkt1").setValue(app.pkt1)

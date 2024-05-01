@@ -12,7 +12,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.anw.tenistats.com.anw.tenistats.ResumeOrStatsDialogActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import com.anw.tenistats.ui.theme.NavigationDrawerHelper
 import com.google.android.material.navigation.NavigationView
@@ -57,7 +56,7 @@ class ViewStatsActivity : AppCompatActivity() {
         if(userEmail.isNotEmpty()) {
             userEmailView.text = userEmail
         }else {
-            userEmailView.text = "user_email@smth.com"
+            userEmailView.text = resources.getString(R.string.user_email)
         }
         //MENU
 
@@ -156,7 +155,7 @@ class ViewStatsActivity : AppCompatActivity() {
         }
         //zmiana aktywnosci na History
         findViewById<Button>(R.id.buttonHistoryStats).setOnClickListener {
-            val intent= Intent(this,ViewHistoryActivity::class.java).also{
+            Intent(this,ViewHistoryActivity::class.java).also{
                 it.putExtra("matchDateInMillis",intent.getLongExtra("matchDateInMillis", 0L))
                 startActivity(it)
             }

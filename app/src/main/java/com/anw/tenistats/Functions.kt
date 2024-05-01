@@ -1,5 +1,6 @@
 package com.anw.tenistats
 
+import android.annotation.SuppressLint
 import android.view.View
 import android.widget.TextView
 
@@ -10,7 +11,7 @@ fun clearScore(app: Stats)
     app.serwis = 1 //1-wszedl 1 serwis; 2-wszedl drugi serwis; 0-podwojny blad
     app.pktId = 1 //liczba zagranych punktow w meczu
 
-    app.czyTiebreak = false
+    app.isTiebreak = false
     //dane
     app.player1 = ""
     app.player2 = ""
@@ -27,7 +28,7 @@ fun clearScore(app: Stats)
     app.set3p2 = ""
 }
 
-fun fillUpScoreInActivity(app: Stats,player1: TextView, player2: TextView, serve1: TextView, serve2: TextView, pkt1: TextView, pkt2: TextView, set1p1: TextView, set1p2: TextView, set2p1: TextView, set2p2: TextView, set3p1: TextView, set3p2: TextView): Unit {
+fun fillUpScoreInActivity(app: Stats,player1: TextView, player2: TextView, serve1: TextView, serve2: TextView, pkt1: TextView, pkt2: TextView, set1p1: TextView, set1p2: TextView, set2p1: TextView, set2p2: TextView, set3p1: TextView, set3p2: TextView) {
     player1.text = app.player1
     player2.text = app.player2
     if(app.serve1=="1"){
@@ -38,8 +39,6 @@ fun fillUpScoreInActivity(app: Stats,player1: TextView, player2: TextView, serve
         serve1.visibility = View.INVISIBLE
         serve2.visibility = View.VISIBLE
     }
-    //serve1.text = app.serve1
-    //serve2.text = app.serve2
     pkt1.text = app.pkt1
     pkt2.text = app.pkt2
     set1p1.text = app.set1p1
@@ -51,7 +50,7 @@ fun fillUpScoreInActivity(app: Stats,player1: TextView, player2: TextView, serve
 }
 
 //wyliczenie wyniku
-fun score(app: Stats,player1: TextView, player2: TextView, serve1: TextView, serve2: TextView, pkt1: TextView, pkt2: TextView, set1p1: TextView, set1p2: TextView, set2p1: TextView, set2p2: TextView, set3p1: TextView, set3p2: TextView) {
+fun score(app: Stats,player1: TextView, serve1: TextView, serve2: TextView, pkt1: TextView, pkt2: TextView, set1p1: TextView, set1p2: TextView, set2p1: TextView, set2p2: TextView, set3p1: TextView, set3p2: TextView) {
     var serwis1: String
     var serwis2: String
     if(app.player1 == player1.text){
@@ -62,7 +61,7 @@ fun score(app: Stats,player1: TextView, player2: TextView, serve1: TextView, ser
         serwis1 = app.serve2
         serwis2 = app.serve1
     }
-    if (app.czyTiebreak) { //gramy tiebreaka
+    if (app.isTiebreak) { //gramy tiebreaka
         if (scoreTiebreak(pkt1, pkt2)) { //jesli prawda to koniec tiebreaka
             if (set2p1.text == "" && set2p2.text == "") { //jesli prawda to jestesmy w secie 1
                 set1p1.text = "7"
@@ -76,7 +75,7 @@ fun score(app: Stats,player1: TextView, player2: TextView, serve1: TextView, ser
             }
             else{
                 set3p1.text = "7"
-                fillUpScore(app,player1, player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
+                fillUpScore(app,player1,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
                 app.isEnd=true
             }
             pkt1.text = "0"
@@ -93,7 +92,7 @@ fun score(app: Stats,player1: TextView, player2: TextView, serve1: TextView, ser
                 serwis1 = "1"
                 serwis2 = ""
             }
-            app.czyTiebreak=false
+            app.isTiebreak=false
         }
     }
     else if (scorePkt(pkt1, pkt2)) { //jesli prawda to koniec gema
@@ -116,7 +115,7 @@ fun score(app: Stats,player1: TextView, player2: TextView, serve1: TextView, ser
             }
             else {
                 if (set1p1.text == "6" && set1p2.text == "6") { //jesli prawda to bedzie tiebreak
-                    app.czyTiebreak = true
+                    app.isTiebreak = true
                 }
             }
         }
@@ -127,7 +126,7 @@ fun score(app: Stats,player1: TextView, player2: TextView, serve1: TextView, ser
                     serwis2 = ""
                     serve1.visibility = View.VISIBLE
                     serve2.visibility = View.INVISIBLE
-                    fillUpScore(app,player1, player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
+                    fillUpScore(app,player1,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
                     app.isEnd=true
                 }
                 else {
@@ -137,7 +136,7 @@ fun score(app: Stats,player1: TextView, player2: TextView, serve1: TextView, ser
             }
             else {
                 if (set2p1.text == "6" && set2p2.text == "6") { //jesli prawda to bedzie tiebreak
-                    app.czyTiebreak = true
+                    app.isTiebreak = true
                 }
             }
         }
@@ -147,17 +146,17 @@ fun score(app: Stats,player1: TextView, player2: TextView, serve1: TextView, ser
                 serwis2 = ""
                 serve1.visibility = View.VISIBLE
                 serve2.visibility = View.INVISIBLE
-                fillUpScore(app,player1, player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
+                fillUpScore(app,player1,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
                 app.isEnd=true
             }
             else {
                 if (set3p1.text == "6" && set3p2.text == "6") { //jesli prawda to bedzie tiebreak
-                    app.czyTiebreak = true
+                    app.isTiebreak = true
                 }
             }
         }
     }
-    if (app.czyTiebreak) {
+    if (app.isTiebreak) {
         val p1_string: String = pkt1.text.toString()
         val p1: Int = p1_string.toInt()
         val p2_string: String = pkt2.text.toString()
@@ -184,9 +183,10 @@ fun score(app: Stats,player1: TextView, player2: TextView, serve1: TextView, ser
         app.serve2 = serwis1
         app.serve1 = serwis2
     }
-    fillUpScore(app,player1, player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2) //tutaj nie wiem czy potrzebne, ale niech narazie zostanie
+    fillUpScore(app,player1,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2) //tutaj nie wiem czy potrzebne, ale niech narazie zostanie
 }
 
+@SuppressLint("SetTextI18n")
 fun scorePkt(pkt1: TextView, pkt2: TextView): Boolean {
     if (pkt1.text == "0") {
         pkt1.text = "15"
@@ -203,9 +203,9 @@ fun scorePkt(pkt1: TextView, pkt2: TextView): Boolean {
     } else if (pkt1.text == "40" || pkt1.text == "A") { //koniec gema
         pkt1.text = "0"
         pkt2.text = "0"
-        return true; //zmiana wyniku w secie
+        return true //zmiana wyniku w secie
     }
-    return false; //dalej gramy gema
+    return false //dalej gramy gema
 }
 
 fun scoreSet(setp1: TextView, setp2: TextView): Boolean {
@@ -218,7 +218,7 @@ fun scoreSet(setp1: TextView, setp2: TextView): Boolean {
     setp1.text = s1.toString()
     if (s1 - 1 == 5) {
         if (s2 != 5 && s2 != 6) {
-            return true;
+            return true
         }
     } else if (s1 - 1 == 6) {
         return true
@@ -235,7 +235,7 @@ fun scoreTiebreak(pkt1: TextView, pkt2: TextView): Boolean {
     p1++
     pkt1.text = p1.toString()
     if (p1 - 1 >= 6 && (p1 - 1 - p2) >= 1) {
-        return true;
+        return true
     }
     return false
 }
@@ -257,10 +257,8 @@ fun isEnd(set1p1: TextView, set1p2: TextView,set2p1: TextView, set2p2: TextView)
 }
 
 //aktualizuje wynik w klasie Stats
-fun fillUpScore(app: Stats,player1: TextView, player2: TextView, serve1: TextView, serve2: TextView, pkt1: TextView, pkt2: TextView, set1p1: TextView, set1p2: TextView, set2p1: TextView, set2p2: TextView, set3p1: TextView, set3p2: TextView): Unit {
+fun fillUpScore(app: Stats,player1: TextView, pkt1: TextView, pkt2: TextView, set1p1: TextView, set1p2: TextView, set2p1: TextView, set2p2: TextView, set3p1: TextView, set3p2: TextView){
     if(player1.text == app.player1) {
-        //app.serve1 = serve1.text.toString()
-        //app.serve2 = serve2.text.toString()
         app.pkt1 = pkt1.text.toString()
         app.pkt2 = pkt2.text.toString()
         app.set1p1 = set1p1.text.toString()
@@ -272,8 +270,6 @@ fun fillUpScore(app: Stats,player1: TextView, player2: TextView, serve1: TextVie
     }
     else
     {
-        //app.serve2 = serve1.text.toString()
-        //app.serve1 = serve2.text.toString()
         app.pkt2 = pkt1.text.toString()
         app.pkt1 = pkt2.text.toString()
         app.set1p2 = set1p1.text.toString()

@@ -3,11 +3,9 @@ package com.anw.tenistats
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
-import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -56,7 +54,7 @@ class EndOfMatchActivity : AppCompatActivity() {
         if(userEmail.isNotEmpty()) {
             userEmailView.text = userEmail
         }else {
-            userEmailView.text = "user_email@smth.com"
+            userEmailView.text = resources.getString(R.string.user_email)
         }
         //MENU
 
@@ -75,7 +73,7 @@ class EndOfMatchActivity : AppCompatActivity() {
 
         val user = firebaseAuth.currentUser?.uid
         val matchId = intent.getStringExtra("matchID")
-        var winner: String ?=null
+        val winner: String
         //sprawdzenie kto wygral
         winner = if(serve1.text==""){ //wygral player2
             player2.text.toString()
@@ -106,7 +104,7 @@ class EndOfMatchActivity : AppCompatActivity() {
             database.child("data").get().addOnSuccessListener { dataSnapshot ->
                 // Pobranie wartości "player1" z bazy danych
                 val data = dataSnapshot.getValue(Long::class.java)
-                val intent= Intent(this,ViewHistoryActivity::class.java).also{
+                Intent(this,ViewHistoryActivity::class.java).also{
                     it.putExtra("matchDateInMillis",data)
                     startActivity(it)
                 }
@@ -117,7 +115,7 @@ class EndOfMatchActivity : AppCompatActivity() {
     }
 }
 
-fun fillUpScoreInActivityEnd(app: Stats,player1: TextView, player2: TextView, serve1: TextView, serve2: TextView,set1p1: TextView, set1p2: TextView, set2p1: TextView, set2p2: TextView, set3p1: TextView, set3p2: TextView):Unit {
+fun fillUpScoreInActivityEnd(app: Stats,player1: TextView, player2: TextView, serve1: TextView, serve2: TextView,set1p1: TextView, set1p2: TextView, set2p1: TextView, set2p2: TextView, set3p1: TextView, set3p2: TextView) {
     player1.text = app.player1
     player2.text = app.player2
     serve1.text = app.serve1
@@ -130,7 +128,7 @@ fun fillUpScoreInActivityEnd(app: Stats,player1: TextView, player2: TextView, se
     set3p2.text = app.set3p2
 }
 
-fun clear(app: Stats):Unit{
+fun clear(app: Stats){
     app.serve1 = ""
     app.serve2 = ""
     app.set1p1 = "0"

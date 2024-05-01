@@ -1,6 +1,7 @@
 package com.anw.tenistats
 
 import MyAdapter
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
@@ -19,7 +20,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.anw.tenistats.ui.theme.NavigationDrawerHelper
 import com.google.android.material.navigation.NavigationView
-import com.anw.tenistats.com.anw.tenistats.ResumeOrStatsDialogActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -73,7 +73,7 @@ class ViewMatchesActivity : AppCompatActivity(), MyAdapter.OnItemClickListener {
             headerView.findViewById<TextView>(R.id.textViewUserEmail).text = userEmail
         }
         else {
-            findViewById<TextView>(R.id.textViewUserEmail).text = "user_email@smth.com"
+            findViewById<TextView>(R.id.textViewUserEmail).text = resources.getString(R.string.user_email)
         }
         //------------ MENU
 
@@ -114,6 +114,7 @@ class ViewMatchesActivity : AppCompatActivity(), MyAdapter.OnItemClickListener {
             .child("Matches")
 
         dbref.addValueEventListener(object : ValueEventListener {
+            @SuppressLint("NotifyDataSetChanged")
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
                     for (matchSnapshot in snapshot.children) {

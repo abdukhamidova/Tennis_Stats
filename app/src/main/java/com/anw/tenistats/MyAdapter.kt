@@ -1,5 +1,4 @@
 import android.content.Context
-import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -62,7 +61,8 @@ class MyAdapter(private val originalList: List<MatchView>, private val firebaseA
             /*val intent = Intent(context, ViewHistoryActivity::class.java)
             intent.putExtra("matchDateInMillis", dateInMillis)
             context.startActivity(intent)*/
-            val ResumeOrStatsDialog = ResumeOrStatsDialogActivity(context,true)
+            // Otwórz ResumeOrStatsDialog i przekaż datę meczu
+            val ResumeOrStatsDialog = ResumeOrStatsDialogActivity(context)
             ResumeOrStatsDialog.show(
                 dateInMillis
             )

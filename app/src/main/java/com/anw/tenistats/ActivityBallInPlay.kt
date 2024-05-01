@@ -2,7 +2,6 @@ package com.anw.tenistats
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
@@ -51,16 +50,13 @@ class ActivityBallInPlay : AppCompatActivity() {
         if(userEmail.isNotEmpty()) {
             userEmailView.text = userEmail
         }else {
-            userEmailView.text = "user_email@smth.com"
+            userEmailView.text = resources.getString(R.string.user_email)
         }
         //MENU
-        //serve1.visibility = View.VISIBLE
 
         val app = application as Stats
         val serve1 = findViewById<TextView>(R.id.textViewServe1BIP)
-        //val serve1 = binding.textViewServe1BIP
         val serve2 = findViewById<TextView>(R.id.textViewServe2BIP)
-        //val serve2 = binding.textViewServe2BIP
         val pkt1 = findViewById<TextView>(R.id.textViewPlayer1PktBIP)
         val set1p1 = findViewById<TextView>(R.id.textViewPlayer1Set1BIP)
         val set2p1 = findViewById<TextView>(R.id.textViewPlayer1Set2BIP)
@@ -70,18 +66,16 @@ class ActivityBallInPlay : AppCompatActivity() {
         val set2p2 = findViewById<TextView>(R.id.textViewPlayer2Set2BIP)
         val set3p2 = findViewById<TextView>(R.id.textViewPlayer2Set3BIP)
 
-
-        fillUpScoreInActivity(app,findViewById<TextView>(R.id.textviewPlayer1),findViewById<TextView>(R.id.textviewPlayer2),serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2) //ustawienie poczatkowe wyniku
-
         val player1 = findViewById<TextView>(R.id.textviewPlayer1)
         val player2 = findViewById<TextView>(R.id.textviewPlayer2)
 
+        fillUpScoreInActivity(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2) //ustawienie poczatkowe wyniku
 
         findViewById<TextView>(R.id.textPL1).text = player1.text
         findViewById<TextView>(R.id.textPL2).text = player2.text
 
         findViewById<Button>(R.id.buttonWinner1).setOnClickListener {
-            val intent=Intent(this,DetailsActivity::class.java).also{
+            Intent(this,DetailsActivity::class.java).also{
                 it.putExtra("Pkt1",intent.getStringExtra("Pkt1"))
                 it.putExtra("Pkt2",intent.getStringExtra("Pkt2"))
                 it.putExtra("matchID",intent.getStringExtra("matchID"))
@@ -94,7 +88,7 @@ class ActivityBallInPlay : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.buttonWinner2).setOnClickListener {
-            val intent=Intent(this,DetailsActivity::class.java).also{
+            Intent(this,DetailsActivity::class.java).also{
                 it.putExtra("Pkt1",intent.getStringExtra("Pkt1"))
                 it.putExtra("Pkt2",intent.getStringExtra("Pkt2"))
                 it.putExtra("matchID",intent.getStringExtra("matchID"))
@@ -107,7 +101,7 @@ class ActivityBallInPlay : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.buttonForcedError1).setOnClickListener {
-            val intent=Intent(this,DetailsActivity::class.java).also{
+            Intent(this,DetailsActivity::class.java).also{
                 it.putExtra("Pkt1",intent.getStringExtra("Pkt1"))
                 it.putExtra("Pkt2",intent.getStringExtra("Pkt2"))
                 it.putExtra("matchID",intent.getStringExtra("matchID"))
@@ -120,7 +114,7 @@ class ActivityBallInPlay : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.buttonForcedError2).setOnClickListener {
-            val intent=Intent(this,DetailsActivity::class.java).also{
+            Intent(this,DetailsActivity::class.java).also{
                 it.putExtra("Pkt1",intent.getStringExtra("Pkt1"))
                 it.putExtra("Pkt2",intent.getStringExtra("Pkt2"))
                 it.putExtra("matchID",intent.getStringExtra("matchID"))
@@ -133,7 +127,7 @@ class ActivityBallInPlay : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.buttonUnforcedError1).setOnClickListener {
-            val intent=Intent(this,DetailsActivity::class.java).also{
+            Intent(this,DetailsActivity::class.java).also{
                 it.putExtra("Pkt1",intent.getStringExtra("Pkt1"))
                 it.putExtra("Pkt2",intent.getStringExtra("Pkt2"))
                 it.putExtra("matchID",intent.getStringExtra("matchID"))
@@ -146,7 +140,7 @@ class ActivityBallInPlay : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.buttonUnforcedError2).setOnClickListener {
-            val intent=Intent(this,DetailsActivity::class.java).also{
+            Intent(this,DetailsActivity::class.java).also{
                 it.putExtra("Pkt1",intent.getStringExtra("Pkt1"))
                 it.putExtra("Pkt2",intent.getStringExtra("Pkt2"))
                 it.putExtra("matchID",intent.getStringExtra("matchID"))

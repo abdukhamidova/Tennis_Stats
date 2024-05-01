@@ -51,7 +51,7 @@ class DetailsActivity : AppCompatActivity() {
         if(userEmail.isNotEmpty()) {
             userEmailView.text = userEmail
         }else {
-            userEmailView.text = "user_email@smth.com"
+            userEmailView.text = resources.getString(R.string.user_email)
         }
         //MENU
 
@@ -76,12 +76,14 @@ class DetailsActivity : AppCompatActivity() {
         val set2p2 = findViewById<TextView>(R.id.textviewPlayer2Set2Details)
         val set3p2 = findViewById<TextView>(R.id.textviewPlayer2Set3Details)
         val addPointDialog = AddPointDialog(this,false)
-        fillUpScoreInActivity(app,findViewById<TextView>(R.id.textviewPlayer1Details),findViewById<TextView>(R.id.textviewPlayer2Details),serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
 
         val player1 = findViewById<TextView>(R.id.textviewPlayer1Details)
         val player2 = findViewById<TextView>(R.id.textviewPlayer2Details)
+
+        fillUpScoreInActivity(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
+
         //spr kto serwuje
-        var czyPlayer1: Boolean = false
+        var czyPlayer1 = false
         if(player1.text==intent.getStringExtra("Kto")){
             czyPlayer1 = true
         }
@@ -333,7 +335,8 @@ class DetailsActivity : AppCompatActivity() {
                             intent.getStringExtra("setID").toString())
                     }else{
                         addPointDialog.show(
-                            player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,                            intent.getStringExtra("Pkt1").toString(),
+                            player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,
+                            intent.getStringExtra("Pkt1").toString(),
                             intent.getStringExtra("Pkt2").toString(),
                             intent.getStringExtra("Kto").toString(),
                             intent.getStringExtra("Co").toString(),
@@ -346,7 +349,8 @@ class DetailsActivity : AppCompatActivity() {
                 }else {
                     if(czyPlayer1) {
                         addPointDialog.show(
-                            player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,                            intent.getStringExtra("Pkt1").toString(),
+                            player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,
+                            intent.getStringExtra("Pkt1").toString(),
                             intent.getStringExtra("Pkt2").toString(),
                             intent.getStringExtra("Kto").toString(),
                             intent.getStringExtra("Co").toString(),
@@ -386,7 +390,8 @@ class DetailsActivity : AppCompatActivity() {
                             intent.getStringExtra("setID").toString())
                     }else{
                         addPointDialog.show(
-                            player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,                            intent.getStringExtra("Pkt1").toString(),
+                            player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,
+                            intent.getStringExtra("Pkt1").toString(),
                             intent.getStringExtra("Pkt2").toString(),
                             intent.getStringExtra("Kto").toString(),
                             intent.getStringExtra("Co").toString(),
@@ -399,7 +404,8 @@ class DetailsActivity : AppCompatActivity() {
                 }else {
                     if(czyPlayer1) {
                         addPointDialog.show(
-                            player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,                            intent.getStringExtra("Pkt1").toString(),
+                            player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,
+                            intent.getStringExtra("Pkt1").toString(),
                             intent.getStringExtra("Pkt2").toString(),
                             intent.getStringExtra("Kto").toString(),
                             intent.getStringExtra("Co").toString(),
@@ -443,7 +449,8 @@ class DetailsActivity : AppCompatActivity() {
                             intent.getStringExtra("setID").toString())
                     }else{
                         addPointDialog.show(
-                            player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,                            intent.getStringExtra("Pkt1").toString(),
+                            player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,
+                            intent.getStringExtra("Pkt1").toString(),
                             intent.getStringExtra("Pkt2").toString(),
                             intent.getStringExtra("Kto").toString(),
                             intent.getStringExtra("Co").toString(),
@@ -456,7 +463,8 @@ class DetailsActivity : AppCompatActivity() {
                 }else {
                     if(czyPlayer1) {
                         addPointDialog.show(
-                            player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,                            intent.getStringExtra("Pkt1").toString(),
+                            player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,
+                            intent.getStringExtra("Pkt1").toString(),
                             intent.getStringExtra("Pkt2").toString(),
                             intent.getStringExtra("Kto").toString(),
                             intent.getStringExtra("Co").toString(),
@@ -496,7 +504,8 @@ class DetailsActivity : AppCompatActivity() {
                             intent.getStringExtra("setID").toString())
                     }else{
                         addPointDialog.show(
-                            player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,                            intent.getStringExtra("Pkt1").toString(),
+                            player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,
+                            intent.getStringExtra("Pkt1").toString(),
                             intent.getStringExtra("Pkt2").toString(),
                             intent.getStringExtra("Kto").toString(),
                             intent.getStringExtra("Co").toString(),
@@ -509,7 +518,8 @@ class DetailsActivity : AppCompatActivity() {
                 }else {
                     if(czyPlayer1) {
                         addPointDialog.show(
-                            player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,                            intent.getStringExtra("Pkt1").toString(),
+                            player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,
+                            intent.getStringExtra("Pkt1").toString(),
                             intent.getStringExtra("Pkt2").toString(),
                             intent.getStringExtra("Kto").toString(),
                             intent.getStringExtra("Co").toString(),
@@ -553,7 +563,8 @@ class DetailsActivity : AppCompatActivity() {
                             intent.getStringExtra("setID").toString())
                     }else{
                         addPointDialog.show(
-                            player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,                            intent.getStringExtra("Pkt1").toString(),
+                            player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,
+                            intent.getStringExtra("Pkt1").toString(),
                             intent.getStringExtra("Pkt2").toString(),
                             intent.getStringExtra("Kto").toString(),
                             intent.getStringExtra("Co").toString(),
@@ -566,7 +577,8 @@ class DetailsActivity : AppCompatActivity() {
                 }else {
                     if(czyPlayer1) {
                         addPointDialog.show(
-                            player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,                            intent.getStringExtra("Pkt1").toString(),
+                            player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,
+                            intent.getStringExtra("Pkt1").toString(),
                             intent.getStringExtra("Pkt2").toString(),
                             intent.getStringExtra("Kto").toString(),
                             intent.getStringExtra("Co").toString(),
@@ -606,7 +618,8 @@ class DetailsActivity : AppCompatActivity() {
                             intent.getStringExtra("setID").toString())
                     }else{
                         addPointDialog.show(
-                            player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,                            intent.getStringExtra("Pkt1").toString(),
+                            player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,
+                            intent.getStringExtra("Pkt1").toString(),
                             intent.getStringExtra("Pkt2").toString(),
                             intent.getStringExtra("Kto").toString(),
                             intent.getStringExtra("Co").toString(),
@@ -619,7 +632,8 @@ class DetailsActivity : AppCompatActivity() {
                 }else {
                     if(czyPlayer1) {
                         addPointDialog.show(
-                            player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,                            intent.getStringExtra("Pkt1").toString(),
+                            player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,
+                            intent.getStringExtra("Pkt1").toString(),
                             intent.getStringExtra("Pkt2").toString(),
                             intent.getStringExtra("Kto").toString(),
                             intent.getStringExtra("Co").toString(),
@@ -663,7 +677,8 @@ class DetailsActivity : AppCompatActivity() {
                             intent.getStringExtra("setID").toString())
                     }else{
                         addPointDialog.show(
-                            player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,                            intent.getStringExtra("Pkt1").toString(),
+                            player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,
+                            intent.getStringExtra("Pkt1").toString(),
                             intent.getStringExtra("Pkt2").toString(),
                             intent.getStringExtra("Kto").toString(),
                             intent.getStringExtra("Co").toString(),

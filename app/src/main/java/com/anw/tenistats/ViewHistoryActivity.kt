@@ -19,7 +19,6 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.anw.tenistats.ui.theme.NavigationDrawerHelper
 import com.google.android.material.navigation.NavigationView
-import com.anw.tenistats.com.anw.tenistats.ResumeOrStatsDialogActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -64,7 +63,7 @@ class ViewHistoryActivity : AppCompatActivity() {
         if(userEmail.isNotEmpty()) {
             userEmailView.text = userEmail
         }else {
-            userEmailView.text = "user_email@smth.com"
+            userEmailView.text = resources.getString(R.string.user_email)
         }
         //MENU
 
@@ -75,7 +74,7 @@ class ViewHistoryActivity : AppCompatActivity() {
         fetchMatchByDate(matchDateInMillis)
 
         findViewById<Button>(R.id.statistics).setOnClickListener {
-            val intent= Intent(this,ViewStatsActivity::class.java).also{
+            Intent(this,ViewStatsActivity::class.java).also{
                 it.putExtra("matchID",matchId)
                 it.putExtra("matchDateInMillis",matchDateInMillis)
                 startActivity(it)
