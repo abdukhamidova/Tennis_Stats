@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300sp"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#2A89AE">
+
+    <TextView
+        android:id="@+id/textViewMatchIdRoS"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="invisible"/>
+
+    <TextView
+        android:id="@+id/textViewConfirm"
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_gravity="center"
+        android:text="@string/decision"
+        android:textColor="@color/app_mainTitles_color"
+        android:textSize="35sp"
+        android:textAlignment="center"/>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/app_tableBg_color"
+        android:theme="@style/scoreTableTextAppearance"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.19">
+
+        <TableRow>
+            <TextView
+                android:id="@+id/textViewServe1RoS"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_weight="0"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="4dp"
+                android:visibility="visible"
+                app:drawableStartCompat="@drawable/ball" />
+
+            <TextView
+                android:id="@+id/textviewPlayer1RoS"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textAlignment="textStart"
+                android:layout_marginStart="6dp"
+                android:text="@string/imie_nazwisko_player1"/>
+
+            <TextView
+                android:id="@+id/textViewPlayer1Set1RoS"
+                android:layout_height="match_parent"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/textViewPlayer1Set2RoS"
+                android:layout_height="match_parent"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/textViewPlayer1Set3RoS"
+                android:layout_height="match_parent"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/textViewPlayer1PktRoS"
+                android:layout_height="match_parent"
+                android:text=""/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:id="@+id/textViewServe2RoS"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_weight="0"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="4dp"
+                android:visibility="invisible"
+                app:drawableStartCompat="@drawable/ball" />
+
+            <TextView
+                android:id="@+id/textviewPlayer2RoS"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="6dp"
+                android:layout_weight="1"
+                android:textAlignment="textStart"
+                android:text="@string/imie_nazwisko_player2"/>
+
+            <TextView
+                android:id="@+id/textViewPlayer2Set1RoS"
+                android:layout_height="match_parent"
+                android:text=""/>
+
+            <TextView
+                android:id="@+id/textViewPlayer2Set2RoS"
+                android:layout_height="match_parent"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/textViewPlayer2Set3RoS"
+                android:layout_height="match_parent"
+                android:text=""
+                android:textAlignment="center"/>
+
+            <TextView
+                android:id="@+id/textViewPlayer2PktRoS"
+                android:layout_height="match_parent"
+                android:text="" />
+        </TableRow>
+    </TableLayout>
+
+    <TableRow
+        android:layout_width="150sp"
+        android:layout_height="300dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="5dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_gravity="center">
+
+        <Button
+            android:id="@+id/buttonResumeRoS"
+            android:layout_width="200sp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/app_tableBg_color"
+            android:text="@string/resume_match"
+            android:textSize="22sp" /></TableRow>
+
+    <TableRow
+        android:layout_width="150sp"
+        android:layout_height="300dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="5dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_gravity="center">
+
+        <Button
+            android:id="@+id/buttonViewStatsRoS"
+            android:layout_width="200sp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/app_tableBg_color"
+            android:text="@string/view_stats"
+            android:textSize="22sp" /></TableRow>
+
+    <TableRow
+        android:layout_width="150sp"
+        android:layout_height="300dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_gravity="center">
+
+        <Button
+        android:id="@+id/buttonCancelRoS"
+        android:layout_width="200sp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:background="@drawable/border_button"
+        android:text="@string/cancel"
+        android:textSize="20sp"/>
+    </TableRow>
+
+</TableLayout>

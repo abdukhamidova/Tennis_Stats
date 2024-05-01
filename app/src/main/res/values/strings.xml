@@ -89,5 +89,7 @@
     <string name="strength">Strength:</string>
     <string name="weakness">Weakness:</string>
     <string name="submit">SUBMIT</string>
+    <string name="decision">WHAT DO YOU WANT TO DO</string>
+    <string name="resume_match">Resume Match</string>
 
 </resources>

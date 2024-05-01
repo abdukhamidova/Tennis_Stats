@@ -14,6 +14,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.anw.tenistats.com.anw.tenistats.ResumeOrStatsDialogActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -29,7 +30,6 @@ class ViewMatchesActivity : AppCompatActivity(), MyAdapter.OnItemClickListener {
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var adapter: MyAdapter
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -40,7 +40,8 @@ class ViewMatchesActivity : AppCompatActivity(), MyAdapter.OnItemClickListener {
             insets
         }
 
-
+        val app = application as Stats
+        app.matchId = ""
 
         firebaseAuth = FirebaseAuth.getInstance()
         matchRecyclerView = findViewById(R.id.matchList)

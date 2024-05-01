@@ -60,6 +60,7 @@ class AddPointDialog(private val context: Context, private val openedFromStartPo
                 }
                 database.child(("set "+ setId)).child(("game "+gameId)).child("score").child("player1score").setValue(score1)
                 database.child(("set "+ setId)).child(("game "+gameId)).child("score").child("player2score").setValue(score2)
+
                 //ustawienie osoby serwujacej w danym gemie
                 val servePlayer: String
                 if(app.serve1=="1"){
@@ -72,6 +73,8 @@ class AddPointDialog(private val context: Context, private val openedFromStartPo
                 score(app,player1,player2,serve1,serve2,pkt1txt,pkt2txt,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
                 database = FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
                     .getReference(user.toString()).child("Matches").child(matchId)
+                database.child("pkt1").setValue(app.pkt1)
+                database.child("pkt2").setValue(app.pkt2)
                 //ustawienie osoby serwujacej aktualnie (potrzebne do wznowienia meczu)
                 if(app.serve1=="1"){
                     database.child("LastServePlayer").setValue(app.player1)

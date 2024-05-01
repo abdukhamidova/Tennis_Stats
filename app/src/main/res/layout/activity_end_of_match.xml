@@ -125,6 +125,7 @@
     </TableLayout>
 
     <Button
+        android:id="@+id/buttonViewStatsEOF"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:text="@string/view_stats"

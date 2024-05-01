@@ -6,6 +6,8 @@ class Stats : Application() {
     var isEnd: Boolean = false //czy koniec meczu
     var serwis: Int = 1 //1-wszedl 1 serwis; 2-wszedl drugi serwis; 0-podwojny blad
     var pktId: Int = 1 //liczba zagranych punktow w meczu
+    var matchId: String = ""
+    var isResume: Boolean = false
 
     var czyTiebreak: Boolean = false
     //dane

@@ -11,6 +11,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.anw.tenistats.com.anw.tenistats.ResumeOrStatsDialogActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -43,6 +44,8 @@ class ViewStatsActivity : AppCompatActivity() {
         val set1p2 = findViewById<TextView>(R.id.textViewP2Set1Stats)
         val set2p2 = findViewById<TextView>(R.id.textViewP2Set2Stats)
         val set3p2 = findViewById<TextView>(R.id.textViewP2Set3Stats)
+        val pkt1 = findViewById<TextView>(R.id.textViewPlayer1PktStats)
+        val pkt2 = findViewById<TextView>(R.id.textViewPlayer2PktStats)
 
         firebaseAuth=FirebaseAuth.getInstance()
         val matchID = intent.getStringExtra("matchID").toString()
@@ -51,7 +54,7 @@ class ViewStatsActivity : AppCompatActivity() {
             .getReference(user.toString()).child("Matches").child(matchID)
 
         //ustawienie wyniku w tabeli
-        setscore(player1,player2,serve1,serve2,set1p1,set2p1,set3p1,set1p2,set2p2,set3p2)
+        setscore(player1,player2,serve1,serve2,set1p1,set2p1,set3p1,set1p2,set2p2,set3p2,pkt1,pkt2)
 
         //pola nad statystykami
         val player1name = findViewById<TextView>(R.id.player1name)
@@ -74,6 +77,9 @@ class ViewStatsActivity : AppCompatActivity() {
             // Obsługa błędów
         }
 
+        setAppValues(app,0,player1name,player2name)
+        setTableValue(app)
+
         findViewById<Button>(R.id.buttonAllStats).setOnClickListener {
             //zmiana kolorow textViews ALL, SET1,SET2,SET3
             findViewById<Button>(R.id.buttonAllStats).setBackgroundResource(R.drawable.rectangle_button)
@@ -85,6 +91,7 @@ class ViewStatsActivity : AppCompatActivity() {
             setTableValue(app)
         }
         findViewById<Button>(R.id.buttonSet1Stats).setOnClickListener {
+            Log.d("ViewStatsActivity", "Button clicked")
             //zmiana kolorow textViews ALL, SET1,SET2,SET3
             findViewById<Button>(R.id.buttonAllStats).setBackgroundResource(R.drawable.rec_btn_not_selected)
             findViewById<Button>(R.id.buttonSet1Stats).setBackgroundResource(R.drawable.rectangle_button)
@@ -121,11 +128,13 @@ class ViewStatsActivity : AppCompatActivity() {
         //zmiana aktywnosci na History
         findViewById<Button>(R.id.buttonHistoryStats).setOnClickListener {
             val intent= Intent(this,ViewHistoryActivity::class.java).also{
+                it.putExtra("matchDateInMillis",intent.getLongExtra("matchDateInMillis", 0L))
                 startActivity(it)
             }
         }
     }
-    fun setscore(player1: TextView,player2: TextView,serve1: TextView,serve2: TextView,set1p1: TextView,set2p1: TextView,set3p1: TextView,set1p2: TextView,set2p2: TextView,set3p2: TextView)
+
+    fun setscore(player1: TextView,player2: TextView,serve1: TextView,serve2: TextView,set1p1: TextView,set2p1: TextView,set3p1: TextView,set1p2: TextView,set2p2: TextView,set3p2: TextView,pkt1:TextView,pkt2:TextView)
     {
         database.child("player1").get().addOnSuccessListener { dataSnapshot ->
             // Pobranie wartości "player1" z bazy danych
@@ -190,6 +199,61 @@ class ViewStatsActivity : AppCompatActivity() {
             val set3p2Value = dataSnapshot.getValue(String::class.java)
             // Ustawienie wartości w TextView
             set3p2.text = set3p2Value
+        }.addOnFailureListener { exception ->
+            // Obsługa błędów
+        }
+        database.child("pkt1").get().addOnSuccessListener { dataSnapshot ->
+            // Pobranie wartości "player1" z bazy danych
+            val pkt1Value = dataSnapshot.getValue(String::class.java)
+            // Ustawienie wartości w TextView
+            pkt1.text = pkt1Value
+        }.addOnFailureListener { exception ->
+            // Obsługa błędów
+        }
+        database.child("pkt2").get().addOnSuccessListener { dataSnapshot ->
+            // Pobranie wartości "player1" z bazy danych
+            val pkt2Value = dataSnapshot.getValue(String::class.java)
+            // Ustawienie wartości w TextView
+            pkt2.text = pkt2Value
+        }.addOnFailureListener { exception ->
+            // Obsługa błędów
+        }
+        database.child("winner").get().addOnSuccessListener { dataSnapshot ->
+            // Pobranie wartości "player1" z bazy danych
+            if(dataSnapshot.exists()){
+                // Pobranie wartości "player1" z bazy danych
+                val winner = dataSnapshot.getValue(String::class.java)
+                serve1.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_resume, 0, 0, 0)
+                serve2.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_resume, 0, 0, 0)
+                // Ustawienie wartości w TextView
+                if(winner==player1.text){
+                    serve1.visibility = View.VISIBLE
+                    serve2.visibility = View.INVISIBLE
+                }
+                else{
+                    serve1.visibility = View.INVISIBLE
+                    serve2.visibility = View.VISIBLE
+                }
+            }
+            else{
+                database.child("LastServePlayer").get().addOnSuccessListener { dataSnapshot ->
+                    // Pobranie wartości "player1" z bazy danych
+                    val lastserve = dataSnapshot.getValue(String::class.java)
+                    serve1.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ball, 0, 0, 0)
+                    serve2.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ball, 0, 0, 0)
+                    // Ustawienie wartości w TextView
+                    if(lastserve==player1.text){
+                        serve1.visibility = View.VISIBLE
+                        serve2.visibility = View.INVISIBLE
+                    }
+                    else{
+                        serve1.visibility = View.INVISIBLE
+                        serve2.visibility = View.VISIBLE
+                    }
+                }.addOnFailureListener { exception ->
+                    // Obsługa błędów
+                }
+            }
         }.addOnFailureListener { exception ->
             // Obsługa błędów
         }
@@ -887,6 +951,18 @@ class ViewStatsActivity : AppCompatActivity() {
 
         findViewById<View>(R.id.graphSecondPlayer1).layoutParams.width=(secondServePercentage1 * scale + 0.5f).toInt()
         findViewById<View>(R.id.graphSecondPlayer2).layoutParams.width=(secondServePercentage2 * scale + 0.5f).toInt()
+
+        //odswiazanie
+        findViewById<View>(R.id.graphTotalPlayer1).requestLayout()
+        findViewById<View>(R.id.graphTotalPlayer2).requestLayout()
+        findViewById<View>(R.id.graphAcePlayer1).requestLayout()
+        findViewById<View>(R.id.graphAcePlayer2).requestLayout()
+        findViewById<View>(R.id.graphDoubleFaultPlayer1).requestLayout()
+        findViewById<View>(R.id.graphDoubleFaultPlayer2).requestLayout()
+        findViewById<View>(R.id.graphFirstPlayer1).requestLayout()
+        findViewById<View>(R.id.graphFirstPlayer2).requestLayout()
+        findViewById<View>(R.id.graphSecondPlayer1).requestLayout()
+        findViewById<View>(R.id.graphSecondPlayer1).requestLayout()
 
         findViewById<TextView>(R.id.returnWfhPlayer1).text = app.returnwinnerFH1.toString()
         findViewById<TextView>(R.id.returnWfhPlayer2).text = app.returnwinnerFH2.toString()

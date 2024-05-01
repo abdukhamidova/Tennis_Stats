@@ -2,6 +2,7 @@ package com.anw.tenistats
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
@@ -30,10 +31,14 @@ class ActivityStartPoint : AppCompatActivity() {
         }
 
         val matchId = intent.getStringExtra("matchID")
+        firebaseAuth = FirebaseAuth.getInstance()
+        val user = firebaseAuth.currentUser?.uid
+        database =
+            FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
+                .getReference(user.toString()).child("Matches").child(matchId.toString())
 
         val app = application as Stats
 
-        //val app = application as Stats
         val player1 = findViewById<TextView>(R.id.textviewPlayer1)
         val player2 = findViewById<TextView>(R.id.textviewPlayer2)
         val serve1 = findViewById<TextView>(R.id.textViewBallPl1)
@@ -48,6 +53,9 @@ class ActivityStartPoint : AppCompatActivity() {
         val set3p2 = findViewById<TextView>(R.id.textViewSet3Pl2)
         val addPointDialog = AddPointDialog(this,true)
         fillUpScoreInActivity(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
+
+        database.child("pkt1").setValue(pkt1.text)
+        database.child("pkt2").setValue(pkt2.text)
 
 
         val (_, _) = calculateGame(set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
@@ -405,12 +413,6 @@ class ActivityStartPoint : AppCompatActivity() {
             game = game1 + game2 + 1
         }
 
-        firebaseAuth = FirebaseAuth.getInstance()
-        val user = firebaseAuth.currentUser?.uid
-        matchId = intent.getStringExtra("matchID")
-        database =
-            FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
-                .getReference(user.toString()).child("Matches").child(matchId.toString())
         database.child("set1p1").setValue((set1p1.text.toString()))
         database.child("set2p1").setValue((set2p1.text.toString()))
         database.child("set3p1").setValue((set3p1.text.toString()))

@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.anw.tenistats.MatchView
 import com.anw.tenistats.R
 import com.anw.tenistats.ViewHistoryActivity
+import com.anw.tenistats.com.anw.tenistats.ResumeOrStatsDialogActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import java.text.SimpleDateFormat
@@ -58,9 +59,13 @@ class MyAdapter(private val originalList: List<MatchView>, private val firebaseA
             val dateInMillis = currentItem.data
             Log.d("MyAdapter", "Date in milliseconds: $dateInMillis")
             // Otwórz ViewHistoryActivity i przekaż datę meczu
-            val intent = Intent(context, ViewHistoryActivity::class.java)
+            /*val intent = Intent(context, ViewHistoryActivity::class.java)
             intent.putExtra("matchDateInMillis", dateInMillis)
-            context.startActivity(intent)
+            context.startActivity(intent)*/
+            val ResumeOrStatsDialog = ResumeOrStatsDialogActivity(context,true)
+            ResumeOrStatsDialog.show(
+                dateInMillis
+            )
         }
     }
 
