@@ -60,10 +60,14 @@
                     android:layout_height="match_parent"
                     android:text="" />
 
-                <TextView
-                    android:id="@+id/textViewP1Set3His"
-                    android:layout_height="match_parent"
-                    android:text="" />
+            <TextView
+                android:id="@+id/textViewP1Set3His"
+                android:layout_height="match_parent"
+                android:text="" />
+            <TextView
+                android:id="@+id/textViewPlayer1PktHis"
+                android:layout_height="match_parent"
+                android:text=""/>
 
             </TableRow>
 
@@ -99,12 +103,16 @@
                     android:layout_height="match_parent"
                     android:text="" />
 
-                <TextView
-                    android:id="@+id/textViewP2Set3His"
-                    android:layout_height="match_parent"
-                    android:text="" />
-            </TableRow>
-        </TableLayout>
+            <TextView
+                android:id="@+id/textViewP2Set3His"
+                android:layout_height="match_parent"
+                android:text="" />
+            <TextView
+                android:id="@+id/textViewPlayer2PktHis"
+                android:layout_height="match_parent"
+                android:text=""/>
+        </TableRow>
+    </TableLayout>
 
         <LinearLayout
             android:id="@+id/linearLayoutNavigationStats"

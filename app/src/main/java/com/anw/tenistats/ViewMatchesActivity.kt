@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.anw.tenistats.ui.theme.NavigationDrawerHelper
 import com.google.android.material.navigation.NavigationView
+import com.anw.tenistats.com.anw.tenistats.ResumeOrStatsDialogActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -36,7 +37,6 @@ class ViewMatchesActivity : AppCompatActivity(), MyAdapter.OnItemClickListener {
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var adapter: MyAdapter
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -46,6 +46,9 @@ class ViewMatchesActivity : AppCompatActivity(), MyAdapter.OnItemClickListener {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        val app = application as Stats
+        app.matchId = ""
 
         firebaseAuth = FirebaseAuth.getInstance()
 

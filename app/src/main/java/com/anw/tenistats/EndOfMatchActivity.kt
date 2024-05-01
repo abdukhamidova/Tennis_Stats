@@ -1,5 +1,6 @@
 package com.anw.tenistats
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
@@ -23,6 +24,7 @@ class EndOfMatchActivity : AppCompatActivity() {
     private lateinit var database: DatabaseReference
     private lateinit var navigationDrawerHelper: NavigationDrawerHelper
     private lateinit var drawerLayout: DrawerLayout
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -93,6 +95,8 @@ class EndOfMatchActivity : AppCompatActivity() {
         database.child("set1p2").setValue((set1p2.text.toString()))
         database.child("set2p2").setValue((set2p2.text.toString()))
         database.child("set3p2").setValue((set3p2.text.toString()))
+        database.child("pkt1").setValue("")
+        database.child("pkt2").setValue("")
 
         app.isEnd=false
 
@@ -102,6 +106,18 @@ class EndOfMatchActivity : AppCompatActivity() {
             Intent(this, ViewStatsActivity::class.java).also{
                 it.putExtra("matchID", matchId)
                 startActivity(it)
+            }
+        }
+        findViewById<Button>(R.id.buttonViewStatsEOF).setOnClickListener {
+            database.child("data").get().addOnSuccessListener { dataSnapshot ->
+                // Pobranie wartości "player1" z bazy danych
+                val data = dataSnapshot.getValue(Long::class.java)
+                val intent= Intent(this,ViewHistoryActivity::class.java).also{
+                    it.putExtra("matchDateInMillis",data)
+                    startActivity(it)
+                }
+            }.addOnFailureListener { exception ->
+                // Obsługa błędów
             }
         }
     }

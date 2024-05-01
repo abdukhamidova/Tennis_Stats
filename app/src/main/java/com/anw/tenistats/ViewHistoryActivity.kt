@@ -19,6 +19,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.anw.tenistats.ui.theme.NavigationDrawerHelper
 import com.google.android.material.navigation.NavigationView
+import com.anw.tenistats.com.anw.tenistats.ResumeOrStatsDialogActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -76,6 +77,7 @@ class ViewHistoryActivity : AppCompatActivity() {
         findViewById<Button>(R.id.statistics).setOnClickListener {
             val intent= Intent(this,ViewStatsActivity::class.java).also{
                 it.putExtra("matchID",matchId)
+                it.putExtra("matchDateInMillis",matchDateInMillis)
                 startActivity(it)
             }
         }
@@ -97,6 +99,10 @@ class ViewHistoryActivity : AppCompatActivity() {
 
                     // Pobranie ID meczu
                     matchId = matchSnapshot.key ?: ""
+                    /*val resumeOrStatsDialog = ResumeOrStatsDialogActivity(this@ViewHistoryActivity,true)
+                    resumeOrStatsDialog.show(
+                        matchId
+                    )*/
 
                     // Sprawdzenie czy istnieje trzeci set
                     val thirdSetExists = matchSnapshot.child("set 3").exists()
@@ -159,7 +165,9 @@ class ViewHistoryActivity : AppCompatActivity() {
                     val set1p2 = findViewById<TextView>(R.id.textViewP2Set1His)
                     val set2p2 = findViewById<TextView>(R.id.textViewP2Set2His)
                     val set3p2 = findViewById<TextView>(R.id.textViewP2Set3His)
-                    setscore(player1,player2,serve1,serve2,set1p1,set2p1,set3p1,set1p2,set2p2,set3p2)
+                    val pkt1 = findViewById<TextView>(R.id.textViewPlayer1PktHis)
+                    val pkt2 = findViewById<TextView>(R.id.textViewPlayer2PktHis)
+                    setscore(player1,player2,serve1,serve2,set1p1,set2p1,set3p1,set1p2,set2p2,set3p2,pkt1,pkt2)
                 } else {
                     // Obsługa, gdy dane nie istnieją w bazie danych
                     Toast.makeText(this@ViewHistoryActivity, "Nie znaleziono danych", Toast.LENGTH_SHORT).show()
@@ -275,7 +283,7 @@ class ViewHistoryActivity : AppCompatActivity() {
         listView.adapter = adapter
     }
 
-    fun setscore(player1: TextView,player2: TextView,serve1: TextView,serve2: TextView,set1p1: TextView,set2p1: TextView,set3p1: TextView,set1p2: TextView,set2p2: TextView,set3p2: TextView)
+    fun setscore(player1: TextView,player2: TextView,serve1: TextView,serve2: TextView,set1p1: TextView,set2p1: TextView,set3p1: TextView,set1p2: TextView,set2p2: TextView,set3p2: TextView,pkt1: TextView,pkt2: TextView)
     {
         val user = FirebaseAuth.getInstance().currentUser?.uid
         database = FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
@@ -344,6 +352,61 @@ class ViewHistoryActivity : AppCompatActivity() {
             val set3p2Value = dataSnapshot.getValue(String::class.java)
             // Ustawienie wartości w TextView
             set3p2.text = set3p2Value
+        }.addOnFailureListener { exception ->
+            // Obsługa błędów
+        }
+        database.child("pkt1").get().addOnSuccessListener { dataSnapshot ->
+            // Pobranie wartości "player1" z bazy danych
+            val pkt1Value = dataSnapshot.getValue(String::class.java)
+            // Ustawienie wartości w TextView
+            pkt1.text = pkt1Value
+        }.addOnFailureListener { exception ->
+            // Obsługa błędów
+        }
+        database.child("pkt2").get().addOnSuccessListener { dataSnapshot ->
+            // Pobranie wartości "player1" z bazy danych
+            val pkt2Value = dataSnapshot.getValue(String::class.java)
+            // Ustawienie wartości w TextView
+            pkt2.text = pkt2Value
+        }.addOnFailureListener { exception ->
+            // Obsługa błędów
+        }
+        database.child("winner").get().addOnSuccessListener { dataSnapshot ->
+            // Pobranie wartości "player1" z bazy danych
+            if(dataSnapshot.exists()){
+                // Pobranie wartości "player1" z bazy danych
+                val winner = dataSnapshot.getValue(String::class.java)
+                serve1.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_resume, 0, 0, 0)
+                serve2.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_resume, 0, 0, 0)
+                // Ustawienie wartości w TextView
+                if(winner==player1.text){
+                    serve1.visibility = View.VISIBLE
+                    serve2.visibility = View.INVISIBLE
+                }
+                else{
+                    serve1.visibility = View.INVISIBLE
+                    serve2.visibility = View.VISIBLE
+                }
+            }
+            else{
+                database.child("LastServePlayer").get().addOnSuccessListener { dataSnapshot ->
+                    // Pobranie wartości "player1" z bazy danych
+                    val lastserve = dataSnapshot.getValue(String::class.java)
+                    serve1.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ball, 0, 0, 0)
+                    serve2.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ball, 0, 0, 0)
+                    // Ustawienie wartości w TextView
+                    if(lastserve==player1.text){
+                        serve1.visibility = View.VISIBLE
+                        serve2.visibility = View.INVISIBLE
+                    }
+                    else{
+                        serve1.visibility = View.INVISIBLE
+                        serve2.visibility = View.VISIBLE
+                    }
+                }.addOnFailureListener { exception ->
+                    // Obsługa błędów
+                }
+            }
         }.addOnFailureListener { exception ->
             // Obsługa błędów
         }

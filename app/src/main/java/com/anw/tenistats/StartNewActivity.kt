@@ -245,14 +245,16 @@ class StartNewActivity : AppCompatActivity() {
                 } else { callback(playerName) }
             } else {
                 //jeżeli player nie istnieje, stwórz obiekt klasy Player
-                val player = Player(firstName,
+                val player = Player(
+                    firstName,
                     lastName,
                     1,
                     "",
                     null,
                     null,
                     "",
-                    "")
+                    ""
+                )
                 //dodaj taki węzeł
                 database.child(playerName).setValue(player)
                     .addOnSuccessListener {
