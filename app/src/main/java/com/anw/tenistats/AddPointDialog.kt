@@ -23,7 +23,10 @@ class AddPointDialog(private val context: Context, private val openedFromStartPo
     private lateinit var alertDialog: AlertDialog
     val app = (context.applicationContext as? Stats)
 
-    fun show(player1: TextView,player2: TextView,serve1: TextView,serve2: TextView,pkt1txt: TextView,pkt2txt: TextView,set1p1: TextView,set1p2: TextView,set2p1: TextView,set2p2: TextView,set3p1: TextView, set3p2:TextView, pkt1: String, pkt2: String, kto: String, co: String, gdzie: String, czym: String, matchId: String, gameId: String, setId: String){
+    fun show(player1: TextView,player2: TextView,serve1: TextView,serve2: TextView,pkt1txt: TextView,
+             pkt2txt: TextView,set1p1: TextView,set1p2: TextView,set2p1: TextView,set2p2: TextView,
+             set3p1: TextView, set3p2:TextView, pkt1: String, pkt2: String, kto: String, co: String,
+             gdzie: String, czym: String, matchId: String, gameId: String, setId: String){
         //przygotowanie zmiennych
         val dialogView = LayoutInflater.from(context).inflate(R.layout.add_dialog, null)
         alertDialog = AlertDialog.Builder(context)

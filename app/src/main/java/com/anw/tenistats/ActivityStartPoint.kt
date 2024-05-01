@@ -3,12 +3,17 @@ package com.anw.tenistats
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import com.anw.tenistats.com.anw.tenistats.AddPointDialog
+import com.anw.tenistats.ui.theme.NavigationDrawerHelper
+import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -16,9 +21,13 @@ import com.google.firebase.database.FirebaseDatabase
 class ActivityStartPoint : AppCompatActivity() {
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var database: DatabaseReference
+    private lateinit var navigationDrawerHelper: NavigationDrawerHelper
+    private lateinit var drawerLayout: DrawerLayout
     var matchId: String?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_start_point)
@@ -28,6 +37,32 @@ class ActivityStartPoint : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+
+        //MENU
+        firebaseAuth = FirebaseAuth.getInstance()
+        drawerLayout = findViewById(R.id.drawer_layout)
+        val navigationView = findViewById<NavigationView>(R.id.navigationViewMenu)
+        val menu = findViewById<ImageButton>(R.id.buttonMenu)
+        val headerView = navigationView.getHeaderView(0)
+        menu.setOnClickListener{
+            drawerLayout.open()
+        }
+        navigationDrawerHelper = NavigationDrawerHelper(this)
+        navigationDrawerHelper.setupNavigationDrawer(drawerLayout, navigationView, firebaseAuth)
+        val backButton = findViewById<ImageButton>(R.id.buttonReturnUndo)
+        backButton.setOnClickListener{
+            startActivity(Intent(this,ActivityMenu::class.java))
+        }
+
+        val userEmail = firebaseAuth.currentUser?.email.toString()
+        val userEmailView = headerView.findViewById<TextView>(R.id.textViewUserEmail)
+        if(userEmail.isNotEmpty()) {
+            userEmailView.text = userEmail
+        }else {
+            userEmailView.text = "user_email@smth.com"
+        }
+        //MENU
 
         val matchId = intent.getStringExtra("matchID")
 
@@ -385,6 +420,7 @@ class ActivityStartPoint : AppCompatActivity() {
             //callActivity() //zmiana aktywnosci na ActivityBallInPlay
         }
     }
+
     fun calculateGame(set1p1: TextView, set1p2: TextView, set2p1: TextView, set2p2: TextView, set3p1: TextView, set3p2: TextView): Pair<Int, Int> {
         var game = 1
         var set = 1

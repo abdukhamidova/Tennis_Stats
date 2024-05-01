@@ -3,15 +3,23 @@ package com.anw.tenistats
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.RadioButton
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import com.anw.tenistats.com.anw.tenistats.AddPointDialog
+import com.anw.tenistats.ui.theme.NavigationDrawerHelper
+import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
 
 class DetailsActivity : AppCompatActivity() {
+    private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var navigationDrawerHelper: NavigationDrawerHelper
+    private lateinit var drawerLayout: DrawerLayout
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -21,6 +29,32 @@ class DetailsActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        //MENU
+        firebaseAuth = FirebaseAuth.getInstance()
+        drawerLayout = findViewById(R.id.drawer_layout)
+        val navigationView = findViewById<NavigationView>(R.id.navigationViewMenu)
+        val menu = findViewById<ImageButton>(R.id.buttonMenu)
+        val headerView = navigationView.getHeaderView(0)
+        menu.setOnClickListener{
+            drawerLayout.open()
+        }
+        navigationDrawerHelper = NavigationDrawerHelper(this)
+        navigationDrawerHelper.setupNavigationDrawer(drawerLayout, navigationView, firebaseAuth)
+        val backButton = findViewById<ImageButton>(R.id.buttonReturnUndo)
+        backButton.setOnClickListener{
+            startActivity(Intent(this,ActivityMenu::class.java))
+        }
+
+        val userEmail = firebaseAuth.currentUser?.email.toString()
+        val userEmailView = headerView.findViewById<TextView>(R.id.textViewUserEmail)
+        if(userEmail.isNotEmpty()) {
+            userEmailView.text = userEmail
+        }else {
+            userEmailView.text = "user_email@smth.com"
+        }
+        //MENU
+
 
         //ustawienie textView kto i co
         findViewById<TextView>(R.id.textPlayerName).apply {
@@ -52,21 +86,6 @@ class DetailsActivity : AppCompatActivity() {
             czyPlayer1 = true
         }
 
-        //button Menu
-        findViewById<Button>(R.id.buttonMenuDetails).setOnClickListener {
-            startActivity(Intent(this,ActivityMenu::class.java))
-        }
-        //link do poprzedniego activity (BallInPlay)
-        /*findViewById<ImageButton>(R.id.imageButtonBack).setOnClickListener {
-            val player1=findViewById<TextView>(R.id.textviewPlayer1).text.toString()
-            val player2=findViewById<TextView>(R.id.textviewPlayer2).text.toString()
-
-            val intent=Intent(this,ActivityBallInPlay::class.java).also{
-                it.putExtra("DanePlayer1",player1)
-                it.putExtra("DanePlayer2",player2)
-                startActivity(it)
-            }
-        }*/
 
         findViewById<Button>(R.id.buttonGround).setOnClickListener {
             if(findViewById<RadioButton>(R.id.radioButtonFH).isChecked)

@@ -1,5 +1,6 @@
 package com.anw.tenistats
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -39,6 +40,7 @@ class StartNewActivity : AppCompatActivity() {
 
     val milliseconds = date?.time ?: 0*/
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         // Initialize Firebase Auth
         super.onCreate(savedInstanceState)
@@ -52,35 +54,30 @@ class StartNewActivity : AppCompatActivity() {
         }
         firebaseAuth = FirebaseAuth.getInstance()
 
-        //------------ MENU
-        drawerLayout = findViewById<DrawerLayout>(R.id.drawer_layout)
-        val menu = findViewById<ImageButton>(R.id.buttonMenu)
+        //MENU
+        drawerLayout = findViewById(R.id.drawer_layout)
         val navigationView = findViewById<NavigationView>(R.id.navigationViewMenu)
+        val menu = findViewById<ImageButton>(R.id.buttonMenu)
         val headerView = navigationView.getHeaderView(0)
-
         menu.setOnClickListener{
             drawerLayout.open()
         }
         navigationDrawerHelper = NavigationDrawerHelper(this)
         navigationDrawerHelper.setupNavigationDrawer(drawerLayout, navigationView, firebaseAuth)
         val backButton = findViewById<ImageButton>(R.id.buttonReturnUndo)
-        backButton.setOnClickListener{
-            startActivity(Intent(this,ActivityMenu::class.java))
-        }
+        backButton.visibility = View.GONE
 
         val userEmail = FirebaseAuth.getInstance().currentUser?.email.toString()
+        val userEmailView = headerView.findViewById<TextView>(R.id.textViewUserEmail)
         if(userEmail.isNotEmpty()) {
-            headerView.findViewById<TextView>(R.id.textViewUserEmail).text = userEmail
+            userEmailView.text = userEmail
+        }else {
+            userEmailView.text = "user_email@smth.com"
         }
-        else {
-            findViewById<TextView>(R.id.textViewUserEmail).text = "user_email@smth.com"
-        }
-        //------------ MENU
+        //MENU
 
         //Weronika 23 marca ~ zapisywanie danych playera do bazy
-
         //11.04 ~u
-
         val user = firebaseAuth.currentUser?.uid
         database =
             FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")

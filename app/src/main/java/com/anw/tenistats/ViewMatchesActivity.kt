@@ -7,13 +7,18 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.widget.EditText
+import android.widget.ImageButton
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.anw.tenistats.ui.theme.NavigationDrawerHelper
+import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -27,6 +32,8 @@ class ViewMatchesActivity : AppCompatActivity(), MyAdapter.OnItemClickListener {
     private lateinit var matchRecyclerView: RecyclerView
     private lateinit var matchArrayList: ArrayList<MatchView>
     private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var navigationDrawerHelper: NavigationDrawerHelper
+    private lateinit var drawerLayout: DrawerLayout
     private lateinit var adapter: MyAdapter
 
 
@@ -40,9 +47,33 @@ class ViewMatchesActivity : AppCompatActivity(), MyAdapter.OnItemClickListener {
             insets
         }
 
-
-
         firebaseAuth = FirebaseAuth.getInstance()
+
+        //------------ MENU
+        drawerLayout = findViewById<DrawerLayout>(R.id.drawer_layout)
+        val menu = findViewById<ImageButton>(R.id.buttonMenu)
+        val navigationView = findViewById<NavigationView>(R.id.navigationViewMenu)
+        val headerView = navigationView.getHeaderView(0)
+
+        menu.setOnClickListener{
+            drawerLayout.open()
+        }
+        navigationDrawerHelper = NavigationDrawerHelper(this)
+        navigationDrawerHelper.setupNavigationDrawer(drawerLayout, navigationView, firebaseAuth)
+        val backButton = findViewById<ImageButton>(R.id.buttonReturnUndo)
+        backButton.setOnClickListener{
+            startActivity(Intent(this, ActivityMenu::class.java))
+        }
+
+        val userEmail = FirebaseAuth.getInstance().currentUser?.email.toString()
+        if(userEmail.isNotEmpty()) {
+            headerView.findViewById<TextView>(R.id.textViewUserEmail).text = userEmail
+        }
+        else {
+            findViewById<TextView>(R.id.textViewUserEmail).text = "user_email@smth.com"
+        }
+        //------------ MENU
+
         matchRecyclerView = findViewById(R.id.matchList)
         matchRecyclerView.layoutManager = LinearLayoutManager(this)
         matchRecyclerView.setHasFixedSize(true)
@@ -85,7 +116,10 @@ class ViewMatchesActivity : AppCompatActivity(), MyAdapter.OnItemClickListener {
                     for (matchSnapshot in snapshot.children) {
                         val match = matchSnapshot.getValue(MatchView::class.java)
                         if (match != null) {
+                            findViewById<TextView>(R.id.textViewNotFound).visibility = View.INVISIBLE
                             matchArrayList.add(match)
+                        }else{
+                            findViewById<TextView>(R.id.textViewNotFound).visibility = View.VISIBLE
                         }
                     }
                     // Inicjalizacja adaptera
@@ -108,7 +142,4 @@ class ViewMatchesActivity : AppCompatActivity(), MyAdapter.OnItemClickListener {
         val intent = Intent(this, ViewHistoryActivity::class.java)
         startActivity(intent)
     }
-
-
-
 }

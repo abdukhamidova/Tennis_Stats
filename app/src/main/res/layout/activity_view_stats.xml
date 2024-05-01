@@ -1,2190 +1,2226 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ViewStatsActivity">
-    <include layout="@layout/toolbar"/>
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start"
+    tools:context=".ViewStatsActivity"
+    tools:ignore="HardcodedText">
 
-    <TableLayout
-        android:id="@+id/tableLayoutStats"
-        android:layout_width="370dp"
-        android:layout_height="wrap_content"
-        android:background="@color/app_tableBg_color"
-        android:theme="@style/scoreTableTextAppearance"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.13999999">
-
-        <TableRow>
-            <TextView
-                android:id="@+id/textViewServe1Stats"
-                android:layout_width="wrap_content"
-                android:layout_height="45dp"
-                android:layout_marginStart="3dp"
-                android:layout_marginEnd="4dp"
-                android:layout_weight="0"
-                android:visibility="invisible"
-                app:drawableStartCompat="@drawable/ball" />
-
-            <TextView
-                android:id="@+id/textviewPlayer1Stats"
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:layout_marginStart="6dp"
-                android:layout_weight="1"
-                android:textAlignment="textStart" />
-
-            <TextView
-                android:id="@+id/textViewP1Set1Stats"
-                android:layout_height="match_parent"
-                android:text="" />
-
-            <TextView
-                android:id="@+id/textViewP1Set2Stats"
-                android:layout_height="match_parent"
-                android:text="" />
-
-            <TextView
-                android:id="@+id/textViewP1Set3Stats"
-                android:layout_height="match_parent"
-                android:text="" />
-
-        </TableRow>
-
-        <TableRow>
-            <TextView
-                android:id="@+id/textViewServe2Stats"
-                android:layout_width="wrap_content"
-                android:layout_height="45dp"
-                android:layout_marginStart="3dp"
-                android:layout_marginEnd="4dp"
-                android:layout_weight="0"
-                android:visibility="invisible"
-                app:drawableStartCompat="@drawable/ball" />
-
-            <TextView
-                android:id="@+id/textviewPlayer2Stats"
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:layout_marginStart="6dp"
-                android:layout_weight="1"
-                android:textAlignment="textStart" />
-
-            <TextView
-                android:id="@+id/textViewP2Set1Stats"
-                android:layout_height="match_parent"
-                android:text="" />
-
-            <TextView
-                android:id="@+id/textViewP2Set2Stats"
-                android:layout_height="match_parent"
-                android:text="" />
-
-            <TextView
-                android:id="@+id/textViewP2Set3Stats"
-                android:layout_height="match_parent"
-                android:text="" />
-        </TableRow>
-    </TableLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayoutNavigationStats"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="20dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/tableLayoutStats"
-        app:layout_constraintStart_toStartOf="@id/tableLayoutStats"
-        app:layout_constraintTop_toBottomOf="@id/tableLayoutStats"
-        app:layout_constraintVertical_bias="0.0">
-
-        <LinearLayout
-            android:id="@+id/linearLayoutMenuStatHisStats"
-            android:layout_width="370dp"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/buttonHistoryStats"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/history"
-                android:textColor="@color/white"
-                android:background="@drawable/rec_btn_not_selected"
-                style="?android:attr/buttonBarButtonStyle"/> <!--history-->
-
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/statistics"
-                android:textColor="@color/white"
-                android:background="@drawable/rectangle_button"
-                style="?android:attr/buttonBarButtonStyle" /> <!--statistics-->
-
-        </LinearLayout> <!--MenuStatHis-->
-
-        <LinearLayout
-            android:id="@+id/linearLayoutMenuSetsStats"
-            android:layout_width="370dp"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/buttonAllStats"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_weight="1"
-                android:background="@drawable/rectangle_button"
-                android:textColor="@color/white"
-                android:gravity="center"
-                android:text="@string/all"/>
-
-            <Button
-                android:id="@+id/buttonSet1Stats"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:background="@drawable/rec_btn_not_selected"
-                android:text="@string/set_1"
-                android:textColor="@color/white" />
-
-            <Button
-                android:id="@+id/buttonSet2Stats"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:background="@drawable/rec_btn_not_selected"
-                android:text="@string/set_2"
-                android:textColor="@color/white" />
-
-            <Button
-                android:id="@+id/buttonSet3Stats"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:background="@drawable/rec_btn_not_selected"
-                android:text="@string/set_3"
-                android:textColor="@color/white" />
-        </LinearLayout> <!--Sets-->
-
-    </LinearLayout> <!--Navigation-->
-
-    <LinearLayout
-        android:id="@+id/linearLayoutScrollHeaderStats"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:background="@color/white"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/linearLayoutNavigationStats"
-        app:layout_constraintStart_toStartOf="@id/linearLayoutNavigationStats"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutNavigationStats"
-        app:layout_constraintVertical_bias="0.0">
-
-        <TextView
-            android:id="@+id/player1name"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/player_1"
-            android:textColor="@color/black" />
-
-        <TextView
-            android:id="@+id/player2name"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/player_2"
-            android:textColor="@color/black" />
-
-    </LinearLayout> <!--ScrollHeader-->
-
-    <ScrollView
-        android:id="@+id/scrollViewStats"
-        android:layout_width="match_parent"
-        android:layout_height="390dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:background="@color/white"
-        android:theme="@style/scrollViewTextAppearance"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/linearLayoutScrollHeaderStats"
-        app:layout_constraintStart_toStartOf="@id/linearLayoutScrollHeaderStats"
-        app:layout_constraintTop_toBottomOf="@id/linearLayoutScrollHeaderStats"
-        app:layout_constraintVertical_bias="0.0">
+        android:layout_height="match_parent">
+        <include layout="@layout/toolbar"/>
 
         <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <!--TOTAL POINTS-->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:layout_gravity="center"
-                android:gravity="center_horizontal"
-                android:text="@string/total_points"
-                android:textColor="@color/black">
-            </TextView>
+            android:id="@+id/tableLayoutStats"
+            android:layout_width="370dp"
+            android:layout_height="wrap_content"
+            android:background="@color/app_tableBg_color"
+            android:theme="@style/scoreTableTextAppearance"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.13999999">
 
             <TableRow>
                 <TextView
-                    android:id="@+id/totalPlayer1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl1"
-                    android:textColor="@color/black"/>
-
-                <LinearLayout
+                    android:id="@+id/textViewServe1Stats"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:orientation="horizontal">
-
-                    <View
-                        android:id="@+id/graphTotalPlayer1"
-                        android:layout_width="0dp"
-                        android:layout_height="20dp"
-                        android:layout_gravity="end"
-                        android:background="#5FB2BD" />
-
-                    <View
-                        android:id="@+id/graphTotalPlayer2"
-                        android:layout_width="0dp"
-                        android:layout_height="20dp"
-                        android:layout_gravity="start"
-                        android:background="#073159"/>
-
-                </LinearLayout>
+                    android:layout_height="45dp"
+                    android:layout_marginStart="3dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_weight="0"
+                    android:gravity="center"
+                    android:visibility="invisible"
+                    app:drawableStartCompat="@drawable/icon_laurel3" />
 
                 <TextView
-                    android:id="@+id/totalPlayer2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/textviewPlayer1Stats"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="6dp"
                     android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl2"
-                    android:textColor="@color/black" />
-            </TableRow>
+                    android:textAlignment="gravity"
+                    android:gravity="start|center_vertical"/>
 
-            <!--ACES-->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center_horizontal"
-                android:text="@string/aces"
-                android:textColor="@color/black">
-            </TextView>
+                <TextView
+                    android:id="@+id/textViewP1Set1Stats"
+                    android:layout_height="match_parent"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/textViewP1Set2Stats"
+                    android:layout_height="match_parent"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/textViewP1Set3Stats"
+                    android:layout_height="match_parent"
+                    android:text="" />
+
+            </TableRow>
 
             <TableRow>
                 <TextView
-                    android:id="@+id/acePlayer1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl1"
-                    android:textColor="@color/black" />
-
-                <LinearLayout
+                    android:id="@+id/textViewServe2Stats"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:orientation="horizontal">
-
-                    <View
-                        android:id="@+id/graphAcePlayer1"
-                        android:layout_width="75dp"
-                        android:layout_height="20dp"
-                        android:layout_gravity="end"
-                        android:background="#5FB2BD"/>
-
-                    <View
-                        android:id="@+id/graphAcePlayer2"
-                        android:layout_width="100dp"
-                        android:layout_height="20dp"
-                        android:layout_gravity="start"
-                        android:background="#073159"/>
-
-                </LinearLayout>
+                    android:layout_height="45dp"
+                    android:layout_marginStart="3dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_weight="0"
+                    android:gravity="center"
+                    android:visibility="invisible"
+                    app:drawableStartCompat="@drawable/icon_laurel3" />
 
                 <TextView
-                    android:id="@+id/acePlayer2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/textviewPlayer2Stats"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="6dp"
                     android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl2"
-                    android:textColor="@color/black"/>
+                    android:textAlignment="gravity"
+                    android:gravity="start|center_vertical"/>
+
+                <TextView
+                    android:id="@+id/textViewP2Set1Stats"
+                    android:layout_height="match_parent"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/textViewP2Set2Stats"
+                    android:layout_height="match_parent"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/textViewP2Set3Stats"
+                    android:layout_height="match_parent"
+                    android:text="" />
             </TableRow>
-
-            <!--DOUBLE FAULTS-->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center_horizontal"
-                android:text="@string/double_faults"
-                android:textColor="@color/black">
-            </TextView>
-
-            <TableRow>
-
-                <TextView
-                    android:id="@+id/doublePlayer1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl1"
-                    android:textColor="@color/black" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:orientation="horizontal">
-
-                    <View
-                        android:id="@+id/graphDoubleFaultPlayer1"
-                        android:layout_width="75dp"
-                        android:layout_height="20dp"
-                        android:layout_gravity="end"
-                        android:background="#5FB2BD"/>
-
-                    <View
-                        android:id="@+id/graphDoubleFaultPlayer2"
-                        android:layout_width="100dp"
-                        android:layout_height="20dp"
-                        android:layout_gravity="start"
-                        android:background="#073159"/>
-
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/doublePlayer2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl2"
-                    android:textColor="@color/black" />
-            </TableRow>
-
-            <!--1ST SERVE IN-->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center_horizontal"
-                android:text="@string/_1st_serve_in"
-                android:textColor="@color/black">
-            </TextView>
-
-            <TableRow>
-                <TextView
-                    android:id="@+id/firstinPlayer1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/_1in_all"
-                    android:textColor="@color/black"/>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:orientation="horizontal">
-
-                    <View
-                        android:id="@+id/graphFirstPlayer1"
-                        android:layout_width="75dp"
-                        android:layout_height="20dp"
-                        android:layout_gravity="end"
-                        android:background="#5FB2BD"/>
-
-                    <View
-                        android:id="@+id/graphFirstPlayer2"
-                        android:layout_width="100dp"
-                        android:layout_height="20dp"
-                        android:layout_gravity="start"
-                        android:background="#073159"/>
-
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/firstinPlayer2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/_1in_all"
-                    android:textColor="@color/black" />
-            </TableRow>
-
-            <!--2ND SERVE IN-->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center_horizontal"
-                android:text="@string/_2nd_serve_in"
-                android:textColor="@color/black">
-            </TextView>
-
-            <TableRow>
-                <TextView
-                    android:id="@+id/secondinPlayer1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/_2in_all"
-                    android:textColor="@color/black"/>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:orientation="horizontal">
-
-                    <View
-                        android:id="@+id/graphSecondPlayer1"
-                        android:layout_width="75dp"
-                        android:layout_height="20dp"
-                        android:layout_gravity="end"
-                        android:background="#5FB2BD"/>
-
-                    <View
-                        android:id="@+id/graphSecondPlayer2"
-                        android:layout_width="100dp"
-                        android:layout_height="20dp"
-                        android:layout_gravity="start"
-                        android:background="#073159"/>
-
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/secondinPlayer2"
-                    android:layout_width="0dp"
-                    android:layout_height="29dp"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/_2in_all"
-                    android:textColor="@color/black" />
-            </TableRow>
-
-            <!--RETURN WINNER-->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center_horizontal"
-                android:text="@string/return_winner"
-                android:textColor="@color/black">
-
-            </TextView>
-            <TableRow>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/fh"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/bh"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/fh"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/bh"
-                    android:textColor="@color/black"/>
-            </TableRow>
-            <TableRow>
-
-                <TextView
-                    android:id="@+id/returnWfhPlayer1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl1"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/returnWbhPlayer1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl1"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:id="@+id/returnWfhPlayer2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl2"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:id="@+id/returnWbhPlayer2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl2"
-                    android:textColor="@color/black"/>
-            </TableRow>
-
-            <!--RETURN ERROR-->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center_horizontal"
-                android:text="@string/return_error"
-                android:textColor="@color/black">
-
-            </TextView>
-            <TableRow>
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/fh"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/bh"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/fh"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/bh"
-                    android:textColor="@color/black"/>
-            </TableRow>
-            <TableRow>
-
-                <TextView
-                    android:id="@+id/returnEfhPlayer1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl1"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/returnEbhPlayer1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl1"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:id="@+id/returnEfhPlayer2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl2"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/returnEbhPlayer2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl2"
-                    android:textColor="@color/black" />
-            </TableRow>
-
-            <!--WINNER-->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center_horizontal"
-                android:text="@string/winner"
-                android:textColor="@color/black"
-                android:textAllCaps="true">
-
-            </TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center_horizontal"
-                android:text="@string/ground"
-                android:textAllCaps="true"
-                android:textColor="@color/black">
-
-            </TextView>
-            <TableRow>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/fh"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/bh"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/fh"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/bh"
-                    android:textColor="@color/black" />
-            </TableRow>
-            <TableRow>
-
-                <TextView
-                    android:id="@+id/winnerGroundfhPlayer1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl1"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/winnerGroundbhPlayer1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl1"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/winnerGroundfhPlayer2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl2"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/winnerGroundbhPlayer2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl2"
-                    android:textColor="@color/black" />
-            </TableRow>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center_horizontal"
-                android:text="@string/slice"
-                android:textAllCaps="true"
-                android:textColor="@color/black">
-
-            </TextView>
-            <TableRow>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/fh"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/bh"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/fh"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/bh"
-                    android:textColor="@color/black" />
-            </TableRow>
-            <TableRow>
-
-                <TextView
-                    android:id="@+id/winnerSlicefhPlayer1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl1"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/winnerSlicebhPlayer1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl1"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:id="@+id/winnerSlicefhPlayer2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl2"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/winnerSlicebhPlayer2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl2"
-                    android:textColor="@color/black" />
-            </TableRow>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center_horizontal"
-                android:text="@string/volley"
-                android:textAllCaps="true"
-                android:textColor="@color/black">
-
-            </TextView>
-            <TableRow>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/fh"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/bh"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/fh"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/bh"
-                    android:textColor="@color/black"/>
-            </TableRow>
-            <TableRow>
-
-                <TextView
-                    android:id="@+id/winnerVolleyfhPlayer1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl1"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/winnerVolleybhPlayer1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl1"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:id="@+id/winnerVolleyfhPlayer2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl2"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/winnerVolleybhPlayer2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl2"
-                    android:textColor="@color/black" />
-            </TableRow>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center_horizontal"
-                android:text="@string/smash"
-                android:textAllCaps="true"
-                android:textColor="@color/black">
-
-            </TextView>
-            <TableRow>
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/fh"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/bh"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/fh"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/bh"
-                    android:textColor="@color/black" />
-            </TableRow>
-            <TableRow>
-
-                <TextView
-                    android:id="@+id/winnerSmashfhPlayer1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl1"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:id="@+id/winnerSmashbhPlayer1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl1"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/winnerSmashfhPlayer2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl2"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/winnerSmashbhPlayer2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl2"
-                    android:textColor="@color/black"/>
-            </TableRow>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center_horizontal"
-                android:text="@string/lob"
-                android:textAllCaps="true"
-                android:textColor="@color/black">
-
-            </TextView>
-            <TableRow>
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/fh"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/bh"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/fh"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/bh"
-                    android:textColor="@color/black" />
-            </TableRow>
-            <TableRow>
-
-                <TextView
-                    android:id="@+id/winnerLobfhPlayer1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl1"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:id="@+id/winnerLobbhPlayer1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl1"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/winnerLobfhPlayer2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl2"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/winnerLobbhPlayer2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl2"
-                    android:textColor="@color/black" />
-            </TableRow>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center_horizontal"
-                android:text="@string/dropshot"
-                android:textAllCaps="true"
-                android:textColor="@color/black">
-
-            </TextView>
-            <TableRow>
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/fh"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/bh"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/fh"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/bh"
-                    android:textColor="@color/black" />
-            </TableRow>
-            <TableRow>
-
-                <TextView
-                    android:id="@+id/winnerDropshotfhPlayer1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl1"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/winnerDropshotbhPlayer1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl1"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/winnerDropshotfhPlayer2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl2"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/winnerDropshotbhPlayer2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl2"
-                    android:textColor="@color/black" />
-            </TableRow>
-
-            <!--FORCED ERROR-->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center_horizontal"
-                android:text="@string/forced_error"
-                android:textAllCaps="true"
-                android:textColor="@color/black">
-
-            </TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center_horizontal"
-                android:text="@string/ground"
-                android:textAllCaps="true"
-                android:textColor="@color/black">
-
-            </TextView>
-            <TableRow>
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/fh"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/bh"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/fh"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/bh"
-                    android:textColor="@color/black" />
-            </TableRow>
-            <TableRow>
-
-                <TextView
-                    android:id="@+id/forcedErrorGroundfhPlayer1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl1"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/forcedErrorGroundbhPlayer1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl1"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/forcedErrorGroundfhPlayer2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl2"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/forcedErrorGroundbhPlayer2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl2"
-                    android:textColor="@color/black" />
-            </TableRow>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center_horizontal"
-                android:text="@string/slice"
-                android:textAllCaps="true"
-                android:textColor="@color/black">
-
-            </TextView>
-            <TableRow>
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/fh"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/bh"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/fh"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/bh"
-                    android:textColor="@color/black" />
-            </TableRow>
-            <TableRow>
-
-                <TextView
-                    android:id="@+id/forcedErrorSlicefhPlayer1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl1"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/forcedErrorSlicebhPlayer1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl1"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/forcedErrorSlicefhPlayer2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl2"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/forcedErrorSlicebhPlayer2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl2"
-                    android:textColor="@color/black" />
-            </TableRow>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center_horizontal"
-                android:text="@string/volley"
-                android:textAllCaps="true"
-                android:textColor="@color/black">
-
-            </TextView>
-            <TableRow>
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/fh"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/bh"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/fh"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/bh"
-                    android:textColor="@color/black" />
-            </TableRow>
-            <TableRow>
-
-                <TextView
-                    android:id="@+id/forcedErrorVolleyfhPlayer1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl1"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/forcedErrorVolleybhPlayer1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl1"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/forcedErrorVolleyfhPlayer2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl2"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/forcedErrorVolleybhPlayer2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl1"
-                    android:textColor="@color/black" />
-            </TableRow>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center_horizontal"
-                android:text="@string/smash"
-                android:textAllCaps="true"
-                android:textColor="@color/black">
-
-            </TextView>
-            <TableRow>
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/fh"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/bh"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/fh"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/bh"
-                    android:textColor="@color/black" />
-            </TableRow>
-            <TableRow>
-
-                <TextView
-                    android:id="@+id/forcedErrorSmashfhPlayer1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl1"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/forcedErrorSmashbhPlayer1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl1"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/forcedErrorSmashfhPlayer2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl2"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/forcedErrorSmashbhPlayer2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl2"
-                    android:textColor="@color/black"/>
-            </TableRow>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center_horizontal"
-                android:text="@string/lob"
-                android:textAllCaps="true"
-                android:textColor="@color/black">
-            </TextView>
-            <TableRow>
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/fh"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/bh"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/fh"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/bh"
-                    android:textColor="@color/black" />
-            </TableRow>
-            <TableRow>
-
-                <TextView
-                    android:id="@+id/forcedErrorLobfhPlayer1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl1"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/forcedErrorLobbhPlayer1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl1"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/forcedErrorLobfhPlayer2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl2"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/forcedErrorLobbhPlayer2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl2"
-                    android:textColor="@color/black" />
-            </TableRow>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center_horizontal"
-                android:text="@string/dropshot"
-                android:textAllCaps="true"
-                android:textColor="@color/black">
-
-            </TextView>
-            <TableRow>
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/fh"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/bh"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/fh"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/bh"
-                    android:textColor="@color/black" />
-            </TableRow>
-            <TableRow>
-
-                <TextView
-                    android:id="@+id/forcedErrorDropshotfhPlayer1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl1"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/forcedErrorDropshotbhPlayer1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl1"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/forcedErrorDropshotfhPlayer2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl2"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/forcedErrorDropshotbhPlayer2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl2"
-                    android:textColor="@color/black" />
-            </TableRow>
-
-            <!--UNFORCED ERROR-->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center_horizontal"
-                android:text="@string/unforced_error"
-                android:textAllCaps="true"
-                android:textColor="@color/black">
-
-            </TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center_horizontal"
-                android:text="@string/ground"
-                android:textAllCaps="true"
-                android:textColor="@color/black">
-
-            </TextView>
-            <TableRow>
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/fh"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/bh"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/fh"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/bh"
-                    android:textColor="@color/black" />
-            </TableRow>
-            <TableRow>
-
-                <TextView
-                    android:id="@+id/unforcedErrorGroundfhPlayer1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl1"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/unforcedErrorGroundbhPlayer1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl1"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:id="@+id/unforcedErrorGroundfhPlayer2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl2"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:id="@+id/unforcedErrorGroundbhPlayer2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl2"
-                    android:textColor="@color/black"/>
-            </TableRow>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center_horizontal"
-                android:text="@string/slice"
-                android:textAllCaps="true"
-                android:textColor="@color/black">
-
-            </TextView>
-            <TableRow>
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/fh"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/bh"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/fh"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/bh"
-                    android:textColor="@color/black" />
-            </TableRow>
-            <TableRow>
-
-                <TextView
-                    android:id="@+id/unforcedErrorSlicefhPlayer1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl1"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/unforcedErrorSlicebhPlayer1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl1"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/unforcedErrorSlicefhPlayer2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl2"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/unforcedErrorSlicebhPlayer2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl2"
-                    android:textColor="@color/black" />
-            </TableRow>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center_horizontal"
-                android:text="@string/volley"
-                android:textAllCaps="true"
-                android:textColor="@color/black">
-
-            </TextView>
-            <TableRow>
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/fh"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/bh"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/fh"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/bh"
-                    android:textColor="@color/black" />
-            </TableRow>
-            <TableRow>
-
-                <TextView
-                    android:id="@+id/unforcedErrorVolleyfhPlayer1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl1"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/unforcedErrorVolleybhPlayer1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl1"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/unforcedErrorVolleyfhPlayer2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl2"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/unforcedErrorVolleybhPlayer2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl2"
-                    android:textColor="@color/black" />
-            </TableRow>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center_horizontal"
-                android:text="@string/smash"
-                android:textAllCaps="true"
-                android:textColor="@color/black">
-
-            </TextView>
-            <TableRow>
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/fh"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/bh"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/fh"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/bh"
-                    android:textColor="@color/black" />
-            </TableRow>
-            <TableRow>
-
-                <TextView
-                    android:id="@+id/unforcedErrorSmashfhPlayer1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl1"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/unforcedErrorSmashbhPlayer1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl1"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/unforcedErrorSmashfhPlayer2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl2"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/unforcedErrorSmashbhPlayer2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl2"
-                    android:textColor="@color/black"/>
-            </TableRow>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center_horizontal"
-                android:text="@string/lob"
-                android:textAllCaps="true"
-                android:textColor="@color/black">
-
-            </TextView>
-            <TableRow>
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/fh"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/bh"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/fh"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/bh"
-                    android:textColor="@color/black" />
-            </TableRow>
-            <TableRow>
-
-                <TextView
-                    android:id="@+id/unforcedErrorLobfhPlayer1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl1"
-                    android:textColor="@color/black" />
-
-
-                <TextView
-                    android:id="@+id/unforcedErrorLobbhPlayer1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl1"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/unforcedErrorLobfhPlayer2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl2"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/unforcedErrorLobbhPlayer2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl2"
-                    android:textColor="@color/black" />
-            </TableRow>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center_horizontal"
-                android:text="@string/dropshot"
-                android:textAllCaps="true"
-                android:textColor="@color/black">
-
-            </TextView>
-            <TableRow>
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/fh"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/bh"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/fh"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/bh"
-                    android:textColor="@color/black" />
-            </TableRow>
-            <TableRow>
-
-                <TextView
-                    android:id="@+id/unforcedErrorDropshotfhPlayer1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl1"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/unforcedErrorDropshotbhPlayer1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl1"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/unforcedErrorDropshotfhPlayer2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl2"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/unforcedErrorDropshotbhPlayer2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/iloscpl2"
-                    android:textColor="@color/black" />
-            </TableRow>
-
         </TableLayout>
 
-    </ScrollView>
+        <LinearLayout
+            android:id="@+id/linearLayoutNavigationStats"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="20dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/tableLayoutStats"
+            app:layout_constraintStart_toStartOf="@id/tableLayoutStats"
+            app:layout_constraintTop_toBottomOf="@id/tableLayoutStats"
+            app:layout_constraintVertical_bias="0.0">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <LinearLayout
+                android:id="@+id/linearLayoutMenuStatHisStats"
+                android:layout_width="370dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/buttonHistoryStats"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/history"
+                    android:textSize="17dp"
+                    android:textColor="@color/white"
+                    android:background="@drawable/rec_btn_not_selected"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:drawableStart="@drawable/icon_history"
+                    android:paddingStart="17dp"
+                    android:drawablePadding="8dp"
+                    android:drawableTint="@color/white" /> <!--history-->
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:text="@string/statistics"
+                    android:textSize="17dp"
+                    android:textColor="@color/white"
+                    android:background="@drawable/rectangle_button"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:gravity="center_vertical"
+                    android:drawableStart="@drawable/icon_stats"
+                    android:paddingStart="15dp"
+                    android:drawablePadding="8dp"
+                    android:drawableTint="@color/white"/> <!--statistics-->
+
+            </LinearLayout> <!--MenuStatHis-->
+
+            <LinearLayout
+                android:id="@+id/linearLayoutMenuSetsStats"
+                android:layout_width="370dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/buttonAllStats"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rectangle_button"
+                    android:textColor="@color/white"
+                    android:gravity="center"
+                    android:text="@string/all"/>
+
+                <Button
+                    android:id="@+id/buttonSet1Stats"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:background="@drawable/rec_btn_not_selected"
+                    android:text="@string/set_1"
+                    android:textColor="@color/white" />
+
+                <Button
+                    android:id="@+id/buttonSet2Stats"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:background="@drawable/rec_btn_not_selected"
+                    android:text="@string/set_2"
+                    android:textColor="@color/white" />
+
+                <Button
+                    android:id="@+id/buttonSet3Stats"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:background="@drawable/rec_btn_not_selected"
+                    android:text="@string/set_3"
+                    android:textColor="@color/white" />
+            </LinearLayout> <!--Sets-->
+
+        </LinearLayout> <!--Navigation-->
+
+        <LinearLayout
+            android:id="@+id/linearLayoutScrollHeaderStats"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/linearLayoutNavigationStats"
+            app:layout_constraintStart_toStartOf="@id/linearLayoutNavigationStats"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayoutNavigationStats"
+            app:layout_constraintVertical_bias="0.0">
+
+            <TextView
+                android:id="@+id/player1name"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/player_1"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/player2name"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/player_2"
+                android:textColor="@color/black" />
+
+        </LinearLayout> <!--ScrollHeader-->
+
+        <ScrollView
+            android:id="@+id/scrollViewStats"
+            android:layout_width="match_parent"
+            android:layout_height="390dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@color/white"
+            android:theme="@style/scrollViewTextAppearance"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/linearLayoutScrollHeaderStats"
+            app:layout_constraintStart_toStartOf="@id/linearLayoutScrollHeaderStats"
+            app:layout_constraintTop_toBottomOf="@id/linearLayoutScrollHeaderStats"
+            app:layout_constraintVertical_bias="0.0">
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <!--TOTAL POINTS-->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:text="@string/total_points"
+                    android:textColor="@color/black">
+                </TextView>
+
+                <TableRow>
+                    <TextView
+                        android:id="@+id/totalPlayer1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl1"
+                        android:textColor="@color/black"/>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal">
+
+                        <View
+                            android:id="@+id/graphTotalPlayer1"
+                            android:layout_width="0dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="end"
+                            android:background="#5FB2BD" />
+
+                        <View
+                            android:id="@+id/graphTotalPlayer2"
+                            android:layout_width="0dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="start"
+                            android:background="#073159"/>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/totalPlayer2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl2"
+                        android:textColor="@color/black" />
+                </TableRow>
+
+                <!--ACES-->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:text="@string/aces"
+                    android:textColor="@color/black">
+                </TextView>
+
+                <TableRow>
+                    <TextView
+                        android:id="@+id/acePlayer1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl1"
+                        android:textColor="@color/black" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal">
+
+                        <View
+                            android:id="@+id/graphAcePlayer1"
+                            android:layout_width="75dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="end"
+                            android:background="#5FB2BD"/>
+
+                        <View
+                            android:id="@+id/graphAcePlayer2"
+                            android:layout_width="100dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="start"
+                            android:background="#073159"/>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/acePlayer2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl2"
+                        android:textColor="@color/black"/>
+                </TableRow>
+
+                <!--DOUBLE FAULTS-->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:text="@string/double_faults"
+                    android:textColor="@color/black">
+                </TextView>
+
+                <TableRow>
+
+                    <TextView
+                        android:id="@+id/doublePlayer1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl1"
+                        android:textColor="@color/black" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal">
+
+                        <View
+                            android:id="@+id/graphDoubleFaultPlayer1"
+                            android:layout_width="75dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="end"
+                            android:background="#5FB2BD"/>
+
+                        <View
+                            android:id="@+id/graphDoubleFaultPlayer2"
+                            android:layout_width="100dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="start"
+                            android:background="#073159"/>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/doublePlayer2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl2"
+                        android:textColor="@color/black" />
+                </TableRow>
+
+                <!--1ST SERVE IN-->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:text="@string/_1st_serve_in"
+                    android:textColor="@color/black">
+                </TextView>
+
+                <TableRow>
+                    <TextView
+                        android:id="@+id/firstinPlayer1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/_1in_all"
+                        android:textColor="@color/black"/>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal">
+
+                        <View
+                            android:id="@+id/graphFirstPlayer1"
+                            android:layout_width="75dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="end"
+                            android:background="#5FB2BD"/>
+
+                        <View
+                            android:id="@+id/graphFirstPlayer2"
+                            android:layout_width="100dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="start"
+                            android:background="#073159"/>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/firstinPlayer2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/_1in_all"
+                        android:textColor="@color/black" />
+                </TableRow>
+
+                <!--2ND SERVE IN-->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:text="@string/_2nd_serve_in"
+                    android:textColor="@color/black">
+                </TextView>
+
+                <TableRow>
+                    <TextView
+                        android:id="@+id/secondinPlayer1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/_2in_all"
+                        android:textColor="@color/black"/>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal">
+
+                        <View
+                            android:id="@+id/graphSecondPlayer1"
+                            android:layout_width="75dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="end"
+                            android:background="#5FB2BD"/>
+
+                        <View
+                            android:id="@+id/graphSecondPlayer2"
+                            android:layout_width="100dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="start"
+                            android:background="#073159"/>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/secondinPlayer2"
+                        android:layout_width="0dp"
+                        android:layout_height="29dp"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/_2in_all"
+                        android:textColor="@color/black" />
+                </TableRow>
+
+                <!--RETURN WINNER-->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:text="@string/return_winner"
+                    android:textColor="@color/black">
+
+                </TextView>
+                <TableRow>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/fh"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/bh"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/fh"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/bh"
+                        android:textColor="@color/black"/>
+                </TableRow>
+                <TableRow>
+
+                    <TextView
+                        android:id="@+id/returnWfhPlayer1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl1"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/returnWbhPlayer1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl1"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:id="@+id/returnWfhPlayer2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl2"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:id="@+id/returnWbhPlayer2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl2"
+                        android:textColor="@color/black"/>
+                </TableRow>
+
+                <!--RETURN ERROR-->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:text="@string/return_error"
+                    android:textColor="@color/black">
+
+                </TextView>
+                <TableRow>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/fh"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/bh"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/fh"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/bh"
+                        android:textColor="@color/black"/>
+                </TableRow>
+                <TableRow>
+
+                    <TextView
+                        android:id="@+id/returnEfhPlayer1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl1"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/returnEbhPlayer1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl1"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:id="@+id/returnEfhPlayer2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl2"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/returnEbhPlayer2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl2"
+                        android:textColor="@color/black" />
+                </TableRow>
+
+                <!--WINNER-->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:text="@string/winner"
+                    android:textColor="@color/black"
+                    android:textAllCaps="true">
+
+                </TextView>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:text="@string/ground"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black">
+
+                </TextView>
+                <TableRow>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/fh"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/bh"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/fh"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/bh"
+                        android:textColor="@color/black" />
+                </TableRow>
+                <TableRow>
+
+                    <TextView
+                        android:id="@+id/winnerGroundfhPlayer1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl1"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/winnerGroundbhPlayer1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl1"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/winnerGroundfhPlayer2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl2"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/winnerGroundbhPlayer2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl2"
+                        android:textColor="@color/black" />
+                </TableRow>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:text="@string/slice"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black">
+
+                </TextView>
+                <TableRow>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/fh"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/bh"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/fh"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/bh"
+                        android:textColor="@color/black" />
+                </TableRow>
+                <TableRow>
+
+                    <TextView
+                        android:id="@+id/winnerSlicefhPlayer1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl1"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/winnerSlicebhPlayer1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl1"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:id="@+id/winnerSlicefhPlayer2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl2"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/winnerSlicebhPlayer2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl2"
+                        android:textColor="@color/black" />
+                </TableRow>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:text="@string/volley"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black">
+
+                </TextView>
+                <TableRow>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/fh"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/bh"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/fh"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/bh"
+                        android:textColor="@color/black"/>
+                </TableRow>
+                <TableRow>
+
+                    <TextView
+                        android:id="@+id/winnerVolleyfhPlayer1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl1"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/winnerVolleybhPlayer1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl1"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:id="@+id/winnerVolleyfhPlayer2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl2"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/winnerVolleybhPlayer2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl2"
+                        android:textColor="@color/black" />
+                </TableRow>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:text="@string/smash"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black">
+
+                </TextView>
+                <TableRow>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/fh"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/bh"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/fh"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/bh"
+                        android:textColor="@color/black" />
+                </TableRow>
+                <TableRow>
+
+                    <TextView
+                        android:id="@+id/winnerSmashfhPlayer1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl1"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:id="@+id/winnerSmashbhPlayer1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl1"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/winnerSmashfhPlayer2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl2"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/winnerSmashbhPlayer2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl2"
+                        android:textColor="@color/black"/>
+                </TableRow>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:text="@string/lob"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black">
+
+                </TextView>
+                <TableRow>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/fh"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/bh"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/fh"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/bh"
+                        android:textColor="@color/black" />
+                </TableRow>
+                <TableRow>
+
+                    <TextView
+                        android:id="@+id/winnerLobfhPlayer1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl1"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:id="@+id/winnerLobbhPlayer1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl1"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/winnerLobfhPlayer2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl2"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/winnerLobbhPlayer2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl2"
+                        android:textColor="@color/black" />
+                </TableRow>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:text="@string/dropshot"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black">
+
+                </TextView>
+                <TableRow>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/fh"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/bh"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/fh"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/bh"
+                        android:textColor="@color/black" />
+                </TableRow>
+                <TableRow>
+
+                    <TextView
+                        android:id="@+id/winnerDropshotfhPlayer1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl1"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/winnerDropshotbhPlayer1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl1"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/winnerDropshotfhPlayer2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl2"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/winnerDropshotbhPlayer2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl2"
+                        android:textColor="@color/black" />
+                </TableRow>
+
+                <!--FORCED ERROR-->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:text="@string/forced_error"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black">
+
+                </TextView>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:text="@string/ground"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black">
+
+                </TextView>
+                <TableRow>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/fh"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/bh"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/fh"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/bh"
+                        android:textColor="@color/black" />
+                </TableRow>
+                <TableRow>
+
+                    <TextView
+                        android:id="@+id/forcedErrorGroundfhPlayer1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl1"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/forcedErrorGroundbhPlayer1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl1"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/forcedErrorGroundfhPlayer2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl2"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/forcedErrorGroundbhPlayer2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl2"
+                        android:textColor="@color/black" />
+                </TableRow>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:text="@string/slice"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black">
+
+                </TextView>
+                <TableRow>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/fh"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/bh"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/fh"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/bh"
+                        android:textColor="@color/black" />
+                </TableRow>
+                <TableRow>
+
+                    <TextView
+                        android:id="@+id/forcedErrorSlicefhPlayer1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl1"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/forcedErrorSlicebhPlayer1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl1"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/forcedErrorSlicefhPlayer2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl2"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/forcedErrorSlicebhPlayer2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl2"
+                        android:textColor="@color/black" />
+                </TableRow>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:text="@string/volley"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black">
+
+                </TextView>
+                <TableRow>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/fh"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/bh"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/fh"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/bh"
+                        android:textColor="@color/black" />
+                </TableRow>
+                <TableRow>
+
+                    <TextView
+                        android:id="@+id/forcedErrorVolleyfhPlayer1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl1"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/forcedErrorVolleybhPlayer1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl1"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/forcedErrorVolleyfhPlayer2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl2"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/forcedErrorVolleybhPlayer2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl1"
+                        android:textColor="@color/black" />
+                </TableRow>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:text="@string/smash"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black">
+
+                </TextView>
+                <TableRow>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/fh"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/bh"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/fh"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/bh"
+                        android:textColor="@color/black" />
+                </TableRow>
+                <TableRow>
+
+                    <TextView
+                        android:id="@+id/forcedErrorSmashfhPlayer1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl1"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/forcedErrorSmashbhPlayer1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl1"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/forcedErrorSmashfhPlayer2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl2"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/forcedErrorSmashbhPlayer2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl2"
+                        android:textColor="@color/black"/>
+                </TableRow>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:text="@string/lob"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black">
+                </TextView>
+                <TableRow>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/fh"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/bh"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/fh"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/bh"
+                        android:textColor="@color/black" />
+                </TableRow>
+                <TableRow>
+
+                    <TextView
+                        android:id="@+id/forcedErrorLobfhPlayer1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl1"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/forcedErrorLobbhPlayer1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl1"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/forcedErrorLobfhPlayer2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl2"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/forcedErrorLobbhPlayer2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl2"
+                        android:textColor="@color/black" />
+                </TableRow>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:text="@string/dropshot"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black">
+
+                </TextView>
+                <TableRow>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/fh"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/bh"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/fh"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/bh"
+                        android:textColor="@color/black" />
+                </TableRow>
+                <TableRow>
+
+                    <TextView
+                        android:id="@+id/forcedErrorDropshotfhPlayer1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl1"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/forcedErrorDropshotbhPlayer1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl1"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/forcedErrorDropshotfhPlayer2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl2"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/forcedErrorDropshotbhPlayer2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl2"
+                        android:textColor="@color/black" />
+                </TableRow>
+
+                <!--UNFORCED ERROR-->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:text="@string/unforced_error"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black">
+
+                </TextView>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:text="@string/ground"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black">
+
+                </TextView>
+                <TableRow>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/fh"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/bh"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/fh"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/bh"
+                        android:textColor="@color/black" />
+                </TableRow>
+                <TableRow>
+
+                    <TextView
+                        android:id="@+id/unforcedErrorGroundfhPlayer1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl1"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/unforcedErrorGroundbhPlayer1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl1"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:id="@+id/unforcedErrorGroundfhPlayer2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl2"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:id="@+id/unforcedErrorGroundbhPlayer2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl2"
+                        android:textColor="@color/black"/>
+                </TableRow>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:text="@string/slice"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black">
+
+                </TextView>
+                <TableRow>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/fh"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/bh"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/fh"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/bh"
+                        android:textColor="@color/black" />
+                </TableRow>
+                <TableRow>
+
+                    <TextView
+                        android:id="@+id/unforcedErrorSlicefhPlayer1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl1"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/unforcedErrorSlicebhPlayer1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl1"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/unforcedErrorSlicefhPlayer2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl2"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/unforcedErrorSlicebhPlayer2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl2"
+                        android:textColor="@color/black" />
+                </TableRow>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:text="@string/volley"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black">
+
+                </TextView>
+                <TableRow>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/fh"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/bh"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/fh"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/bh"
+                        android:textColor="@color/black" />
+                </TableRow>
+                <TableRow>
+
+                    <TextView
+                        android:id="@+id/unforcedErrorVolleyfhPlayer1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl1"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/unforcedErrorVolleybhPlayer1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl1"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/unforcedErrorVolleyfhPlayer2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl2"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/unforcedErrorVolleybhPlayer2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl2"
+                        android:textColor="@color/black" />
+                </TableRow>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:text="@string/smash"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black">
+
+                </TextView>
+                <TableRow>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/fh"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/bh"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/fh"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/bh"
+                        android:textColor="@color/black" />
+                </TableRow>
+                <TableRow>
+
+                    <TextView
+                        android:id="@+id/unforcedErrorSmashfhPlayer1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl1"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/unforcedErrorSmashbhPlayer1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl1"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/unforcedErrorSmashfhPlayer2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl2"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/unforcedErrorSmashbhPlayer2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl2"
+                        android:textColor="@color/black"/>
+                </TableRow>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:text="@string/lob"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black">
+
+                </TextView>
+                <TableRow>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/fh"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/bh"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/fh"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/bh"
+                        android:textColor="@color/black" />
+                </TableRow>
+                <TableRow>
+
+                    <TextView
+                        android:id="@+id/unforcedErrorLobfhPlayer1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl1"
+                        android:textColor="@color/black" />
+
+
+                    <TextView
+                        android:id="@+id/unforcedErrorLobbhPlayer1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl1"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/unforcedErrorLobfhPlayer2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl2"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/unforcedErrorLobbhPlayer2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl2"
+                        android:textColor="@color/black" />
+                </TableRow>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:text="@string/dropshot"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black">
+
+                </TextView>
+                <TableRow>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/fh"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/bh"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/fh"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/bh"
+                        android:textColor="@color/black" />
+                </TableRow>
+                <TableRow>
+
+                    <TextView
+                        android:id="@+id/unforcedErrorDropshotfhPlayer1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl1"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/unforcedErrorDropshotbhPlayer1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl1"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/unforcedErrorDropshotfhPlayer2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl2"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/unforcedErrorDropshotbhPlayer2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iloscpl2"
+                        android:textColor="@color/black" />
+                </TableRow>
+
+            </TableLayout>
+
+        </ScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigationViewMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:theme="@style/NavigationViewTheme"
+        app:headerLayout="@layout/navigation_header"
+        app:menu="@menu/navigation_menu"
+        app:itemIconPadding="20dp"
+        app:itemHorizontalPadding="30dp"/>
+
+</androidx.drawerlayout.widget.DrawerLayout>

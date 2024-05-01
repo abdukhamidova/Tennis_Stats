@@ -35,11 +35,14 @@
             android:layout_marginTop="60dp"
             android:autofillHints="emailAddress"
             android:backgroundTint="@color/white"
+            android:drawableStart="@drawable/icon_email"
+            android:drawablePadding="5dp"
+            android:drawableTint="@color/app_hint_color"
             android:ems="10"
             android:hint="@string/enter_e_mail"
             android:inputType="textEmailAddress"
             android:textColor="@color/white"
-            android:textColorHint="@color/app_hint_color"/> <!--e-mail-->
+            android:textColorHint="@color/app_hint_color" /> <!--e-mail-->
 
         <EditText
             android:id="@+id/textPasswordSignIn"
@@ -47,9 +50,13 @@
             android:layout_height="48dp"
             android:layout_marginTop="10dp"
             android:backgroundTint="@color/white"
+            android:drawableStart="@drawable/icon_password"
+            android:drawablePadding="5dp"
+            android:drawableTint="@color/app_hint_color"
             android:ems="10"
             android:hint="@string/enter_password"
             android:inputType="textPassword"
+            android:textColor="@color/white"
             android:textColorHint="@color/app_hint_color" /> <!--password-->
 
         <Button

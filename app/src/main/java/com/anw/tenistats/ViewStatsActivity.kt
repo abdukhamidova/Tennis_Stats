@@ -6,11 +6,15 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import com.anw.tenistats.ui.theme.NavigationDrawerHelper
+import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -21,6 +25,8 @@ import com.google.firebase.database.DatabaseError
 class ViewStatsActivity : AppCompatActivity() {
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var database: DatabaseReference
+    private lateinit var navigationDrawerHelper: NavigationDrawerHelper
+    private lateinit var drawerLayout: DrawerLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +37,29 @@ class ViewStatsActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        firebaseAuth=FirebaseAuth.getInstance()
+        //MENU
+        drawerLayout = findViewById(R.id.drawer_layout)
+        val navigationView = findViewById<NavigationView>(R.id.navigationViewMenu)
+        val menu = findViewById<ImageButton>(R.id.buttonMenu)
+        val headerView = navigationView.getHeaderView(0)
+        menu.setOnClickListener{
+            drawerLayout.open()
+        }
+        navigationDrawerHelper = NavigationDrawerHelper(this)
+        navigationDrawerHelper.setupNavigationDrawer(drawerLayout, navigationView, firebaseAuth)
+        val backButton = findViewById<ImageButton>(R.id.buttonReturnUndo)
+        backButton.visibility = View.GONE
+
+        val userEmail = firebaseAuth.currentUser?.email.toString()
+        val userEmailView = headerView.findViewById<TextView>(R.id.textViewUserEmail)
+        if(userEmail.isNotEmpty()) {
+            userEmailView.text = userEmail
+        }else {
+            userEmailView.text = "user_email@smth.com"
+        }
+        //MENU
+
         val app = application as Stats
         //pola w tabeli wyniku
         val player1 = findViewById<TextView>(R.id.textviewPlayer1Stats)
@@ -44,7 +73,7 @@ class ViewStatsActivity : AppCompatActivity() {
         val set2p2 = findViewById<TextView>(R.id.textViewP2Set2Stats)
         val set3p2 = findViewById<TextView>(R.id.textViewP2Set3Stats)
 
-        firebaseAuth=FirebaseAuth.getInstance()
+
         val matchID = intent.getStringExtra("matchID").toString()
         val user = firebaseAuth.currentUser?.uid
         database = FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
@@ -66,7 +95,7 @@ class ViewStatsActivity : AppCompatActivity() {
         }
 
         database.child("player2").get().addOnSuccessListener { dataSnapshot ->
-            // Pobranie wartości "player1" z bazy danych
+            // Pobranie wartości "player2" z bazy danych
             val player2Value = dataSnapshot.getValue(String::class.java)
             // Ustawienie wartości w TextView
             player2name.text = player2Value

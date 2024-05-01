@@ -212,7 +212,7 @@ fun scoreSet(setp1: TextView, setp2: TextView): Boolean {
     val s1_string: String = setp1.text.toString()
     var s1: Int = s1_string.toInt()
     val s2_string: String = setp2.text.toString()
-    var s2: Int = s2_string.toInt()
+    val s2: Int = s2_string.toInt()
 
     s1++
     setp1.text = s1.toString()
@@ -230,7 +230,7 @@ fun scoreTiebreak(pkt1: TextView, pkt2: TextView): Boolean {
     val p1_string: String = pkt1.text.toString()
     var p1: Int = p1_string.toInt()
     val p2_string: String = pkt2.text.toString()
-    var p2: Int = p2_string.toInt()
+    val p2: Int = p2_string.toInt()
 
     p1++
     pkt1.text = p1.toString()
@@ -242,10 +242,10 @@ fun scoreTiebreak(pkt1: TextView, pkt2: TextView): Boolean {
 
 //spr czy koniec meczu
 fun isEnd(set1p1: TextView, set1p2: TextView,set2p1: TextView, set2p2: TextView): Boolean{
-    var s1p1: Int = set1p1.text.toString().toInt()
-    var s1p2: Int = set1p2.text.toString().toInt()
-    var s2p1: Int = set2p1.text.toString().toInt()
-    var s2p2: Int = set2p2.text.toString().toInt()
+    val s1p1: Int = set1p1.text.toString().toInt()
+    val s1p2: Int = set1p2.text.toString().toInt()
+    val s2p1: Int = set2p1.text.toString().toInt()
+    val s2p2: Int = set2p2.text.toString().toInt()
 
     if(s1p1>s1p2)
     {

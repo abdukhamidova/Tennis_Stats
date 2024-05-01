@@ -6,7 +6,6 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -34,7 +33,7 @@ class ActivityMenu : AppCompatActivity() {
         val navigationView = findViewById<NavigationView>(R.id.navigationViewMenu)
         val headerView = navigationView.getHeaderView(0)
 
-        menu.setOnClickListener{
+        menu.setOnClickListener {
             drawerLayout.open()
         }
         navigationDrawerHelper = NavigationDrawerHelper(this)
@@ -42,16 +41,15 @@ class ActivityMenu : AppCompatActivity() {
         val backButton = findViewById<ImageButton>(R.id.buttonReturnUndo)
         backButton.visibility = View.GONE
 
-        if(user.isNotEmpty()) {
+        if (user.isNotEmpty()) {
             headerView.findViewById<TextView>(R.id.textViewUserEmail).text = user
-        }
-        else {
+        } else {
             findViewById<TextView>(R.id.textViewUserEmail).text = "user_email@smth.com"
         }
         //------------ MENU
 
 
-        findViewById<Button>(R.id.buttonStartNewGame).setOnClickListener{
+        findViewById<Button>(R.id.buttonStartNewGame).setOnClickListener {
             startActivity(Intent(this,StartNewActivity::class.java))
         }
 
@@ -60,8 +58,8 @@ class ActivityMenu : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        findViewById<Button>(R.id.buttonViewMatches).setOnClickListener{
-            startActivity(Intent(this,ViewMatchesActivity::class.java))
+        findViewById<Button>(R.id.buttonViewMatches).setOnClickListener {
+            startActivity(Intent(this, ViewMatchesActivity::class.java))
         }
     }
 }

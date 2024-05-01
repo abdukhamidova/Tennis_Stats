@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
@@ -15,6 +16,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import com.anw.tenistats.ui.theme.NavigationDrawerHelper
+import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -25,6 +29,8 @@ import com.google.firebase.database.ValueEventListener
 class ViewHistoryActivity : AppCompatActivity() {
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var database: DatabaseReference
+    private lateinit var navigationDrawerHelper: NavigationDrawerHelper
+    private lateinit var drawerLayout: DrawerLayout
     private var matchId = "" // Zmienna matchId zamiast stałej
 
     @SuppressLint("MissingInflatedId")
@@ -37,6 +43,29 @@ class ViewHistoryActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        //MENU
+        firebaseAuth = FirebaseAuth.getInstance()
+        drawerLayout = findViewById(R.id.drawer_layout)
+        val navigationView = findViewById<NavigationView>(R.id.navigationViewMenu)
+        val menu = findViewById<ImageButton>(R.id.buttonMenu)
+        val headerView = navigationView.getHeaderView(0)
+        menu.setOnClickListener{
+            drawerLayout.open()
+        }
+        navigationDrawerHelper = NavigationDrawerHelper(this)
+        navigationDrawerHelper.setupNavigationDrawer(drawerLayout, navigationView, firebaseAuth)
+        val backButton = findViewById<ImageButton>(R.id.buttonReturnUndo)
+        backButton.visibility = View.GONE
+
+        val userEmail = firebaseAuth.currentUser?.email.toString()
+        val userEmailView = headerView.findViewById<TextView>(R.id.textViewUserEmail)
+        if(userEmail.isNotEmpty()) {
+            userEmailView.text = userEmail
+        }else {
+            userEmailView.text = "user_email@smth.com"
+        }
+        //MENU
 
         // Odbierz datę meczu w formacie milisekund z poprzedniej aktywności
         val matchDateInMillis = intent.getLongExtra("matchDateInMillis", 0L)

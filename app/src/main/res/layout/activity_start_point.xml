@@ -16,7 +16,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/app_bg_color">
-
         <include layout="@layout/toolbar"/>
 
         <TableLayout
@@ -40,6 +39,7 @@
                     android:layout_weight="0"
                     android:layout_marginStart="3dp"
                     android:layout_marginEnd="4dp"
+                    android:gravity="center"
                     android:visibility="visible"
                     app:drawableStartCompat="@drawable/ball" />
 
@@ -48,7 +48,8 @@
                     android:layout_width="100dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:textAlignment="textStart"
+                    android:textAlignment="gravity"
+                    android:gravity="start|center_vertical"
                     android:layout_marginStart="6dp"
                     android:text="@string/imie_nazwisko_player1"/>
 
@@ -83,6 +84,7 @@
                     android:layout_weight="0"
                     android:layout_marginStart="3dp"
                     android:layout_marginEnd="4dp"
+                    android:gravity="center"
                     android:visibility="visible"
                     app:drawableStartCompat="@drawable/ball" />
 
@@ -91,7 +93,8 @@
                     android:layout_width="100dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:textAlignment="textStart"
+                    android:textAlignment="gravity"
+                    android:gravity="start|center_vertical"
                     android:layout_marginStart="6dp"
                     android:text="@string/imie_nazwisko_player2"/>
 

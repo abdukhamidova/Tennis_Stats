@@ -16,6 +16,7 @@ import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 
 class ActivityBallInPlay : AppCompatActivity() {
+    private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var navigationDrawerHelper: NavigationDrawerHelper
     private lateinit var drawerLayout: DrawerLayout
 
@@ -29,6 +30,30 @@ class ActivityBallInPlay : AppCompatActivity() {
             insets
         }
 
+        //MENU
+        firebaseAuth = FirebaseAuth.getInstance()
+        drawerLayout = findViewById(R.id.drawer_layout)
+        val navigationView = findViewById<NavigationView>(R.id.navigationViewMenu)
+        val menu = findViewById<ImageButton>(R.id.buttonMenu)
+        val headerView = navigationView.getHeaderView(0)
+        menu.setOnClickListener{
+            drawerLayout.open()
+        }
+        navigationDrawerHelper = NavigationDrawerHelper(this)
+        navigationDrawerHelper.setupNavigationDrawer(drawerLayout, navigationView, firebaseAuth)
+        val backButton = findViewById<ImageButton>(R.id.buttonReturnUndo)
+        backButton.setOnClickListener{
+            startActivity(Intent(this,ActivityMenu::class.java))
+        }
+
+        val userEmail = FirebaseAuth.getInstance().currentUser?.email.toString()
+        val userEmailView = headerView.findViewById<TextView>(R.id.textViewUserEmail)
+        if(userEmail.isNotEmpty()) {
+            userEmailView.text = userEmail
+        }else {
+            userEmailView.text = "user_email@smth.com"
+        }
+        //MENU
         //serve1.visibility = View.VISIBLE
 
         val app = application as Stats
