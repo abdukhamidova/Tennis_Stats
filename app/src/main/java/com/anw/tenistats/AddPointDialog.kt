@@ -78,6 +78,12 @@ class AddPointDialog(private val context: Context, private val openedFromStartPo
                     .getReference(user.toString()).child("Matches").child(matchId)
                 database.child("pkt1").setValue(app.pkt1)
                 database.child("pkt2").setValue(app.pkt2)
+                database.child("set1p1").setValue(app.set1p1)
+                database.child("set2p1").setValue(app.set2p1)
+                database.child("set3p1").setValue(app.set3p1)
+                database.child("set1p2").setValue(app.set1p2)
+                database.child("set2p2").setValue(app.set2p2)
+                database.child("set3p2").setValue(app.set3p2)
                 //ustawienie osoby serwujacej aktualnie (potrzebne do wznowienia meczu)
                 if(app.serve1=="1"){
                     database.child("LastServePlayer").setValue(app.player1)

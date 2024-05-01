@@ -139,16 +139,27 @@ class StartNewActivity : AppCompatActivity() {
         //~u
         // Generowanie unikalnego identyfikatora dla meczu
         matchId = database.parent?.child("Matches")?.push()?.key
+        firebaseAuth = FirebaseAuth.getInstance()
+        val user = firebaseAuth.currentUser?.uid
         // Pobieranie bieżącego czasu
         val currentDate = Calendar.getInstance().timeInMillis
         // Tworzenie danych meczu
         val matchData = mapOf<String, Any>(
             "data" to currentDate,
             "player1" to player1,
-            "player2" to player2
+            "player2" to player2,
+            "set1p1" to "0",
+            "set1p2" to "0",
+            "pkt1" to "0",
+            "pkt2" to "0"
         )
         // Zapisywanie danych meczu do bazy danych pod unikalnym identyfikatorem meczu
         database.parent?.child("Matches")?.child(matchId!!)?.setValue(matchData)
+        //zapisywanie aktualnie rozgrywanego meczu
+        database =
+            FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
+                .getReference(user.toString()).child("Current match")
+        database.setValue(matchId.toString())
         //kasowanie usawien
         val app = application as Stats
         clearScore(app)
@@ -280,7 +291,7 @@ class StartNewActivity : AppCompatActivity() {
         val intent = Intent(this, ActivityServe::class.java).apply {
             putExtra("DanePlayer1", player1)
             putExtra("DanePlayer2", player2)
-            //~u //hej ~w
+            //~u //hej ~w //hej hej ~u
             putExtra("matchID",matchId)
         }
         startActivity(intent)

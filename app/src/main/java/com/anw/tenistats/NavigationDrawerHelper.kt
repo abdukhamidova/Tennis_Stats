@@ -5,6 +5,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import com.anw.tenistats.ActivityMenu
+import com.anw.tenistats.ActivityStartPoint
 import com.anw.tenistats.MainActivity
 import com.anw.tenistats.PlayerDetailsActivity
 import com.anw.tenistats.R
@@ -15,7 +16,6 @@ import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 
 class NavigationDrawerHelper(private val activity: AppCompatActivity) {
-
     fun setupNavigationDrawer(drawerLayout: DrawerLayout, navigationView: NavigationView, auth: FirebaseAuth) {
         navigationView.setNavigationItemSelectedListener { menuItem ->
             handleNavigationItemSelected(menuItem, auth)
@@ -30,6 +30,7 @@ class NavigationDrawerHelper(private val activity: AppCompatActivity) {
             R.id.nav_startNew -> Intent(activity, StartNewActivity::class.java)
             R.id.nav_viewMatch -> Intent(activity, ViewMatchesActivity::class.java)
             R.id.nav_myPlayer -> Intent(activity, PlayerDetailsActivity::class.java)
+            R.id.nav_return -> Intent(activity,ActivityStartPoint::class.java)
             R.id.buttonLogOut -> {
                 auth.signOut()
                 Intent(activity, MainActivity::class.java)

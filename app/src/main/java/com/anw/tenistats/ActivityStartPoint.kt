@@ -27,8 +27,6 @@ class ActivityStartPoint : AppCompatActivity() {
     var matchId: String?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
-
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_start_point)
@@ -65,9 +63,16 @@ class ActivityStartPoint : AppCompatActivity() {
         }
         //MENU
 
-        val matchId = intent.getStringExtra("matchID")
+        //val matchId = intent.getStringExtra("matchID")
         firebaseAuth = FirebaseAuth.getInstance()
         val user = firebaseAuth.currentUser?.uid
+        database =
+            FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
+                .getReference(user.toString()).child("Current match")
+        database.get().addOnSuccessListener {dataSnapshot ->
+            matchId = dataSnapshot.getValue(String::class.java)
+        }
+
         database =
             FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
                 .getReference(user.toString()).child("Matches").child(matchId.toString())
@@ -89,8 +94,8 @@ class ActivityStartPoint : AppCompatActivity() {
         val addPointDialog = AddPointDialog(this,true)
         fillUpScoreInActivity(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
 
-        database.child("pkt1").setValue(pkt1.text)
-        database.child("pkt2").setValue(pkt2.text)
+        //database.child("pkt1").setValue(pkt1.text)
+        //database.child("pkt2").setValue(pkt2.text)
 
 
         val (_, _) = calculateGame(set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
@@ -448,13 +453,12 @@ class ActivityStartPoint : AppCompatActivity() {
             val game2 = set3p2.text.toString().toInt()
             game = game1 + game2 + 1
         }
-
-        database.child("set1p1").setValue((set1p1.text.toString()))
+        /*database.child("set1p1").setValue((set1p1.text.toString()))
         database.child("set2p1").setValue((set2p1.text.toString()))
         database.child("set3p1").setValue((set3p1.text.toString()))
         database.child("set1p2").setValue((set1p2.text.toString()))
         database.child("set2p2").setValue((set2p2.text.toString()))
-        database.child("set3p2").setValue((set3p2.text.toString()))
+        database.child("set3p2").setValue((set3p2.text.toString()))*/
 
         return Pair(game, set)
     }

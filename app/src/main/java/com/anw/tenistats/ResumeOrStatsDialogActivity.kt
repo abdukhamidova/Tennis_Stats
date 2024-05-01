@@ -102,7 +102,11 @@ class ResumeOrStatsDialogActivity(private val context: Context, private val open
                             //fillUpScore(app,player1, player2, serve1, serve2, pkt1, pkt2, set1p1, set1p2, set2p1, set2p2, set3p1, set3p2)
                         }
                         val intent = Intent(context, ActivityStartPoint::class.java)
-                        intent.putExtra("matchID", matchId.text.toString())
+                        //intent.putExtra("matchID", matchId.text.toString())
+                        database =
+                            FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
+                                .getReference(user.toString()).child("Current match")
+                        database.setValue(matchId.text.toString())
                         context.startActivity(intent)
                         alertDialog.dismiss()
                     }
