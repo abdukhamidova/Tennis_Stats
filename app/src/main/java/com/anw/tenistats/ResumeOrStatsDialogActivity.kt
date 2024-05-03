@@ -89,6 +89,14 @@ class ResumeOrStatsDialogActivity(private val context: Context,private val opene
                             app.set2p2 = set2p2.text.toString()
                             app.set3p1 = set3p1.text.toString()
                             app.set3p2 = set3p2.text.toString()
+                            if(serve1.visibility == View.VISIBLE){
+                                app.serve1 = "1"
+                                app.serve2 = ""
+                            }
+                            else{
+                                app.serve1 = ""
+                                app.serve2 = "1"
+                            }
                         }
                         val intent = Intent(context, ActivityStartPoint::class.java)
                         intent.putExtra("matchID", matchId.text.toString())

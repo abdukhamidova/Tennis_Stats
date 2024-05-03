@@ -122,12 +122,14 @@ class ActivityServe : AppCompatActivity() {
             app.serve1="1" //do statysyk
             app.serve2=""
             database.child("LastServePlayer").setValue(btnPlayer1.text.toString())
+            database.child("pktCount").setValue(1)
             callActivity()
         }
         btnPlayer2.setOnClickListener{
             app.serve1=""
             app.serve2="1"
             database.child("LastServePlayer").setValue(btnPlayer2.text.toString())
+            database.child("pktCount").setValue(1)
             callActivity()
         }
     }

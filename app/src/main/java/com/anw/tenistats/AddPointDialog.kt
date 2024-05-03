@@ -77,6 +77,7 @@ class AddPointDialog(private val context: Context, private val openedFromStartPo
                 score(app,player1,serve1,serve2,pkt1txt,pkt2txt,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
                 database = FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
                     .getReference(user.toString()).child("Matches").child(matchId)
+
                 database.child("pkt1").setValue(app.pkt1)
                 database.child("pkt2").setValue(app.pkt2)
                 database.child("set1p1").setValue(app.set1p1)
@@ -92,16 +93,39 @@ class AddPointDialog(private val context: Context, private val openedFromStartPo
                 else{
                     database.child("LastServePlayer").setValue(app.player2)
                 }
+                database.child("pktCount").get().addOnSuccessListener { dataSnapshot ->
+                    if (dataSnapshot.exists()) {
+                        val currentCount = dataSnapshot.getValue(Int::class.java) ?: 0
 
-                database = FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
-                    .getReference(user.toString()).child("Matches").child(matchId).child(("set "+ setId)).child(("game "+gameId)).child(("point "+app.pktId))
+                        // Zapis punktu do bazy danych
+                        val pointDatabase =
+                            database.child(("set " + setId)).child(("game " + gameId))
+                                .child(("point " + currentCount))
+                        val point = Point(
+                            pkt1, pkt2, kto,
+                            co, gdzie, czym, app.serwis, servePlayer
+                        )
+                        pointDatabase.setValue(point)
+                        pointDatabase.child("score").child("pkt1").setValue(pkt1txt.text.toString())
+                        pointDatabase.child("score").child("pkt2").setValue(pkt2txt.text.toString())
+                        pointDatabase.child("score").child("set1p1")
+                            .setValue(set1p1.text.toString())
+                        pointDatabase.child("score").child("set1p2")
+                            .setValue(set1p2.text.toString())
+                        pointDatabase.child("score").child("set2p1")
+                            .setValue(set2p1.text.toString())
+                        pointDatabase.child("score").child("set2p2")
+                            .setValue(set2p2.text.toString())
+                        pointDatabase.child("score").child("set3p1")
+                            .setValue(set3p1.text.toString())
+                        pointDatabase.child("score").child("set3p2")
+                            .setValue(set3p2.text.toString())
 
-                val point =  Point(
-                    pkt1, pkt2, kto,
-                    co, gdzie, czym, app.serwis, servePlayer
-                )
-                database.setValue(point)
-                app.pktId++
+                        // Inkrementacja i zapisanie wartości pktCount
+                        val newCount = currentCount + 1
+                        database.child("pktCount").setValue(newCount)
+                    }
+                }
                 app.serwis=1
 
                 if(!app.isEnd){
