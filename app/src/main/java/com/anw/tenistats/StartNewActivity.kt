@@ -63,8 +63,8 @@ class StartNewActivity : AppCompatActivity() {
             drawerLayout.open()
         }
         navigationDrawerHelper = NavigationDrawerHelper(this)
-        navigationDrawerHelper.setupNavigationDrawer(drawerLayout, navigationView, firebaseAuth)
-        val backButton = findViewById<ImageButton>(R.id.buttonReturnUndo)
+        navigationDrawerHelper.setupNavigationDrawer(drawerLayout, navigationView, firebaseAuth, true)
+        val backButton = findViewById<ImageButton>(R.id.buttonUndo)
         backButton.visibility = View.GONE
 
         val userEmail = FirebaseAuth.getInstance().currentUser?.email.toString()
@@ -295,5 +295,6 @@ class StartNewActivity : AppCompatActivity() {
             putExtra("matchID",matchId)
         }
         startActivity(intent)
+        finish()
     }
 }

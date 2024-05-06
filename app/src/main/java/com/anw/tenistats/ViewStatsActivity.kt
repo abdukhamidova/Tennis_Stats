@@ -48,7 +48,7 @@ class ViewStatsActivity : AppCompatActivity() {
         }
         navigationDrawerHelper = NavigationDrawerHelper(this)
         navigationDrawerHelper.setupNavigationDrawer(drawerLayout, navigationView, firebaseAuth)
-        val backButton = findViewById<ImageButton>(R.id.buttonReturnUndo)
+        val backButton = findViewById<ImageButton>(R.id.buttonUndo)
         backButton.visibility = View.GONE
 
         val userEmail = firebaseAuth.currentUser?.email.toString()

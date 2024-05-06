@@ -36,7 +36,7 @@ class AddPointDialog(private val context: Context, private val openedFromStartPo
         val btnAdd : Button = dialogView.findViewById(R.id.buttonAdd)
         val btnCancel : Button = dialogView.findViewById(R.id.buttonCancel)
 
-        collectedPoint.text = "Player: $kto\n$co\n$gdzie\n$czym"
+        collectedPoint.text = "Player: $kto\n\n$co\n\n$gdzie\n\n$czym"
 
         btnAdd.setOnClickListener {
             // Dodaj punkt do bazy danych
@@ -106,8 +106,8 @@ class AddPointDialog(private val context: Context, private val openedFromStartPo
                             co, gdzie, czym, app.serwis, servePlayer
                         )
                         pointDatabase.setValue(point)
-                        pointDatabase.child("score").child("pkt1").setValue(pkt1txt.text.toString())
-                        pointDatabase.child("score").child("pkt2").setValue(pkt2txt.text.toString())
+                        pointDatabase.child("score").child("pkt1").setValue(app.pkt1)
+                        pointDatabase.child("score").child("pkt2").setValue(app.pkt2)
                         pointDatabase.child("score").child("set1p1")
                             .setValue(set1p1.text.toString())
                         pointDatabase.child("score").child("set1p2")

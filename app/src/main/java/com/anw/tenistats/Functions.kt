@@ -9,7 +9,7 @@ fun clearScore(app: Stats)
 {
     app.isEnd = false //czy koniec meczu
     app.serwis = 1 //1-wszedl 1 serwis; 2-wszedl drugi serwis; 0-podwojny blad
-    app.pktId = 1 //liczba zagranych punktow w meczu
+    app.pktId = 1 //liczba zagranych punktow w gemie
 
     app.isTiebreak = false
     //dane
@@ -28,7 +28,9 @@ fun clearScore(app: Stats)
     app.set3p2 = ""
 }
 
-fun fillUpScoreInActivity(app: Stats,player1: TextView, player2: TextView, serve1: TextView, serve2: TextView, pkt1: TextView, pkt2: TextView, set1p1: TextView, set1p2: TextView, set2p1: TextView, set2p2: TextView, set3p1: TextView, set3p2: TextView) {
+fun fillUpScoreInActivity(app: Stats,player1: TextView, player2: TextView, serve1: TextView, serve2: TextView,
+                          pkt1: TextView, pkt2: TextView, set1p1: TextView, set1p2: TextView, set2p1: TextView,
+                          set2p2: TextView, set3p1: TextView, set3p2: TextView) {
     player1.text = app.player1
     player2.text = app.player2
     if(app.serve1=="1"){
@@ -257,7 +259,9 @@ fun isEnd(set1p1: TextView, set1p2: TextView,set2p1: TextView, set2p2: TextView)
 }
 
 //aktualizuje wynik w klasie Stats
-fun fillUpScore(app: Stats,player1: TextView, pkt1: TextView, pkt2: TextView, set1p1: TextView, set1p2: TextView, set2p1: TextView, set2p2: TextView, set3p1: TextView, set3p2: TextView){
+fun fillUpScore(app: Stats,player1: TextView, pkt1: TextView, pkt2: TextView,
+                set1p1: TextView, set1p2: TextView, set2p1: TextView,
+                set2p2: TextView, set3p1: TextView, set3p2: TextView){
     if(player1.text == app.player1) {
         app.pkt1 = pkt1.text.toString()
         app.pkt2 = pkt2.text.toString()
@@ -278,5 +282,30 @@ fun fillUpScore(app: Stats,player1: TextView, pkt1: TextView, pkt2: TextView, se
         app.set2p1 = set2p2.text.toString()
         app.set3p2 = set3p1.text.toString()
         app.set3p1 = set3p2.text.toString()
+    }
+}
+fun fillUpScoreUndoCustom(app: Stats,player1: String, pkt1: String, pkt2: String,
+                set1p1: String, set1p2: String, set2p1: String,
+                set2p2: String, set3p1: String, set3p2: String){
+    if(player1 == app.player1) {
+        app.pkt1 = pkt1
+        app.pkt2 = pkt2
+        app.set1p1 = set1p1
+        app.set1p2 = set1p2
+        app.set2p1 = set2p1
+        app.set2p2 = set2p2
+        app.set3p1 = set3p1
+        app.set3p2 = set3p2
+    }
+    else
+    {
+        app.pkt2 = pkt1
+        app.pkt1 = pkt2
+        app.set1p2 = set1p1
+        app.set1p1 = set1p2
+        app.set2p2 = set2p1
+        app.set2p1 = set2p2
+        app.set3p2 = set3p1
+        app.set3p1 = set3p2
     }
 }

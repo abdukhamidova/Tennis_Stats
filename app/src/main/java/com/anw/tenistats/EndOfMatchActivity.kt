@@ -43,8 +43,8 @@ class EndOfMatchActivity : AppCompatActivity() {
             drawerLayout.open()
         }
         navigationDrawerHelper = NavigationDrawerHelper(this)
-        navigationDrawerHelper.setupNavigationDrawer(drawerLayout, navigationView, firebaseAuth)
-        val backButton = findViewById<ImageButton>(R.id.buttonReturnUndo)
+        navigationDrawerHelper.setupNavigationDrawer(drawerLayout, navigationView, firebaseAuth, true)
+        val backButton = findViewById<ImageButton>(R.id.buttonUndo)
         backButton.setOnClickListener{
             startActivity(Intent(this,ActivityMenu::class.java))
         }
@@ -107,6 +107,7 @@ class EndOfMatchActivity : AppCompatActivity() {
                 Intent(this,ViewHistoryActivity::class.java).also{
                     it.putExtra("matchDateInMillis",data)
                     startActivity(it)
+                    finish()
                 }
             }.addOnFailureListener { exception ->
                 // Obsługa błędów

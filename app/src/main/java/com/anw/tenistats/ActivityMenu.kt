@@ -38,7 +38,7 @@ class ActivityMenu : AppCompatActivity() {
         }
         navigationDrawerHelper = NavigationDrawerHelper(this)
         navigationDrawerHelper.setupNavigationDrawer(drawerLayout, navigationView, auth)
-        val backButton = findViewById<ImageButton>(R.id.buttonReturnUndo)
+        val backButton = findViewById<ImageButton>(R.id.buttonUndo)
         backButton.visibility = View.GONE
 
         if (user.isNotEmpty()) {

@@ -15,9 +15,13 @@ import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 
 class NavigationDrawerHelper(private val activity: AppCompatActivity) {
-    fun setupNavigationDrawer(drawerLayout: DrawerLayout, navigationView: NavigationView, auth: FirebaseAuth) {
+    fun setupNavigationDrawer(drawerLayout: DrawerLayout, navigationView: NavigationView, auth: FirebaseAuth, fromGame : Boolean = false) {
         navigationView.setNavigationItemSelectedListener { menuItem ->
-            handleNavigationItemSelected(menuItem, auth)
+            if(fromGame) {
+                handleNavigationItemSelectedGame(menuItem, auth)
+            }else {
+                handleNavigationItemSelected(menuItem, auth)
+            }
             true
         }
     }
@@ -40,4 +44,23 @@ class NavigationDrawerHelper(private val activity: AppCompatActivity) {
             activity.startActivity(it)
         }
     }
+     private fun handleNavigationItemSelectedGame(menuItem: MenuItem, auth: FirebaseAuth) {
+        val activity = activity as AppCompatActivity
+        val intent = when (menuItem.itemId) {
+            R.id.nav_home -> Intent(activity, ActivityMenu::class.java)
+            R.id.nav_startNew -> Intent(activity, StartNewActivity::class.java)
+            R.id.nav_viewMatch -> Intent(activity, ViewMatchesActivity::class.java)
+            R.id.nav_myPlayer -> Intent(activity, PlayerDetailsActivity::class.java)
+            R.id.buttonLogOut -> {
+                auth.signOut()
+                Intent(activity, MainActivity::class.java)
+            }
+            else -> null
+        }
+        intent?.let {
+            activity.startActivity(it)
+            activity.finish()
+        }
+    }
+
 }

@@ -57,16 +57,13 @@ class ViewMatchesActivity : AppCompatActivity(), MyAdapter.OnItemClickListener {
         val menu = findViewById<ImageButton>(R.id.buttonMenu)
         val navigationView = findViewById<NavigationView>(R.id.navigationViewMenu)
         val headerView = navigationView.getHeaderView(0)
-
         menu.setOnClickListener{
             drawerLayout.open()
         }
         navigationDrawerHelper = NavigationDrawerHelper(this)
         navigationDrawerHelper.setupNavigationDrawer(drawerLayout, navigationView, firebaseAuth)
-        val backButton = findViewById<ImageButton>(R.id.buttonReturnUndo)
-        backButton.setOnClickListener{
-            startActivity(Intent(this, ActivityMenu::class.java))
-        }
+        val backButton = findViewById<ImageButton>(R.id.buttonUndo)
+        backButton.visibility = View.GONE
 
         val userEmail = FirebaseAuth.getInstance().currentUser?.email.toString()
         if(userEmail.isNotEmpty()) {

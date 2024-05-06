@@ -27,11 +27,7 @@ class SignInActivity : AppCompatActivity() {
             insets
         }
         firebaseAuth = FirebaseAuth.getInstance()
-        //tekst, że jestem już zalogawany
-        /*binding.textView.setOnClickListener {
-            val intent = Intent(this, SignUpActivity::class.java)
-            startActivity(intent)
-        }*/
+
         binding.textNotSignUp.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)

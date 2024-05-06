@@ -22,7 +22,7 @@
             android:id="@+id/tableLayout"
             android:layout_width="370dp"
             android:layout_height="wrap_content"
-            android:background="@color/app_tableBg_color"
+            android:background="@drawable/border_button"
             android:theme="@style/scoreTableTextAppearance"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

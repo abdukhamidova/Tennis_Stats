@@ -1,10 +1,12 @@
 package com.anw.tenistats
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -23,7 +25,20 @@ class ActivityStartPoint : AppCompatActivity() {
     private lateinit var navigationDrawerHelper: NavigationDrawerHelper
     private lateinit var drawerLayout: DrawerLayout
     var matchId: String?=null
+    var pointNr: Int = 0
 
+    private lateinit var player1: TextView
+    private lateinit var player2: TextView
+    private lateinit var serve1: TextView
+    private lateinit var serve2: TextView
+    private lateinit var pkt1: TextView
+    private lateinit var set1p1: TextView
+    private lateinit var set2p1: TextView
+    private lateinit var set3p1: TextView
+    private lateinit var pkt2: TextView
+    private lateinit var set1p2: TextView
+    private lateinit var set2p2: TextView
+    private lateinit var set3p2: TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -35,9 +50,9 @@ class ActivityStartPoint : AppCompatActivity() {
             insets
         }
 
+        firebaseAuth = FirebaseAuth.getInstance()
 
         //MENU
-        firebaseAuth = FirebaseAuth.getInstance()
         drawerLayout = findViewById(R.id.drawer_layout)
         val navigationView = findViewById<NavigationView>(R.id.navigationViewMenu)
         val menu = findViewById<ImageButton>(R.id.buttonMenu)
@@ -46,11 +61,8 @@ class ActivityStartPoint : AppCompatActivity() {
             drawerLayout.open()
         }
         navigationDrawerHelper = NavigationDrawerHelper(this)
-        navigationDrawerHelper.setupNavigationDrawer(drawerLayout, navigationView, firebaseAuth)
-        val backButton = findViewById<ImageButton>(R.id.buttonReturnUndo)
-        backButton.setOnClickListener{
-            startActivity(Intent(this,ActivityMenu::class.java))
-        }
+        navigationDrawerHelper.setupNavigationDrawer(drawerLayout, navigationView, firebaseAuth, true)
+        val backButton = findViewById<ImageButton>(R.id.buttonUndo)
 
         val userEmail = firebaseAuth.currentUser?.email.toString()
         val userEmailView = headerView.findViewById<TextView>(R.id.textViewUserEmail)
@@ -60,34 +72,35 @@ class ActivityStartPoint : AppCompatActivity() {
             userEmailView.text = resources.getString(R.string.user_email)
         }
         //MENU
-
-        firebaseAuth = FirebaseAuth.getInstance()
         val user = firebaseAuth.currentUser?.uid
+
         database =
             FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
-                .getReference(user.toString()).child("Current match")
-        database.get().addOnSuccessListener {dataSnapshot ->
+                .getReference(user.toString())
+        database.child("Current match").get().addOnSuccessListener {dataSnapshot ->
             matchId = dataSnapshot.getValue(String::class.java)
+        }.addOnFailureListener {
+            Toast.makeText(this, "Failed to read Current Match ID", Toast.LENGTH_SHORT).show()
         }
 
+
+        //czy to jest potrzebne? bo wydaje mi się, że zmienna database nigdzie nie jest dalej używana
         database =
             FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
                 .getReference(user.toString()).child("Matches").child(matchId.toString())
-
         val app = application as Stats
-
-        val player1 = findViewById<TextView>(R.id.textviewPlayer1)
-        val player2 = findViewById<TextView>(R.id.textviewPlayer2)
-        val serve1 = findViewById<TextView>(R.id.textViewBallPl1)
-        val serve2 = findViewById<TextView>(R.id.textViewBallPl2)
-        val pkt1 = findViewById<TextView>(R.id.textViewPktPl1)
-        val set1p1 = findViewById<TextView>(R.id.textViewSet1Pl1)
-        val set2p1 = findViewById<TextView>(R.id.textViewSet2Pl1)
-        val set3p1 = findViewById<TextView>(R.id.textViewSet3Pl1)
-        val pkt2 = findViewById<TextView>(R.id.textViewPktPl2)
-        val set1p2 = findViewById<TextView>(R.id.textViewSet1Pl2)
-        val set2p2 = findViewById<TextView>(R.id.textViewSet2Pl2)
-        val set3p2 = findViewById<TextView>(R.id.textViewSet3Pl2)
+        player1 = findViewById<TextView>(R.id.textviewPlayer1)
+        player2 = findViewById<TextView>(R.id.textviewPlayer2)
+        serve1 = findViewById<TextView>(R.id.textViewBallPl1)
+        serve2 = findViewById<TextView>(R.id.textViewBallPl2)
+        pkt1 = findViewById<TextView>(R.id.textViewPktPl1)
+        set1p1 = findViewById<TextView>(R.id.textViewSet1Pl1)
+        set2p1 = findViewById<TextView>(R.id.textViewSet2Pl1)
+        set3p1 = findViewById<TextView>(R.id.textViewSet3Pl1)
+        pkt2 = findViewById<TextView>(R.id.textViewPktPl2)
+        set1p2 = findViewById<TextView>(R.id.textViewSet1Pl2)
+        set2p2 = findViewById<TextView>(R.id.textViewSet2Pl2)
+        set3p2 = findViewById<TextView>(R.id.textViewSet3Pl2)
         val addPointDialog = AddPointDialog(this,true)
         fillUpScoreInActivity(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
 
@@ -355,6 +368,29 @@ class ActivityStartPoint : AppCompatActivity() {
                 it.putExtra("DanePlayer2",player2.text)
             }
             startActivity(intent)
+            finish()
+        }
+
+        backButton.setOnClickListener{
+            if (matchId != null) {
+                database = FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
+                    .getReference(user.toString()).child("Matches").child(matchId.toString())
+                database.child("pktCount").get()
+                    .addOnSuccessListener { pktCountSnapshot ->
+                        val pktCount = pktCountSnapshot.getValue(Int::class.java)
+                        if (pktCount != null) {
+                            pointNr = pktCount
+                            undoAfterCare(user, app)
+                        } else {
+                            Toast.makeText(this, "pktCount is Null", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                    .addOnFailureListener { exception ->
+                        Toast.makeText(this, "Failed to read pktCount", Toast.LENGTH_SHORT).show()
+                    }
+            } else {
+                Toast.makeText(this, "Current Match ID is null", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -380,4 +416,113 @@ class ActivityStartPoint : AppCompatActivity() {
 
         return Pair(game, set)
     }
+
+    fun undoAfterCare(user: String?, context: Context)
+    {
+        if(pointNr <= 1){
+            Toast.makeText(this, "Nothing to undo",Toast.LENGTH_LONG).show()
+        }else{
+            var scoreIsSet : Boolean
+            val app = (context.applicationContext as? Stats)
+            //wyliczenie stanu rozgrywki na podstawie wyników z tablicy
+            val (gameId,setId) = calculateGame(set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
+            var scoringPlayer : String
+            if(app!=null){
+                val db = FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
+                    .getReference(user.toString()).child("Matches").child("$matchId")
+                val delPointNr = pointNr - 1 //numer usuwanego punktu
+                val deletePoint = db.child("set $setId").child("game $gameId")
+                    .child("point $delPointNr")
+
+                if(pointNr == 2){
+                    deletePoint.child("servePlayer").get().addOnSuccessListener { ktoServeSnapshot ->
+                        val ktoServe = ktoServeSnapshot.getValue(String::class.java)
+                        //ustawienie wartości globalnych
+                        if (ktoServe != null) {
+                            scoringPlayer = ktoServe
+                            if(scoringPlayer == player1.text.toString()){
+                                app.serve1 = "1"
+                                app.serve2 = ""
+                            }else{
+                                app.serve1 = "1"
+                                app.serve2 = ""
+                            }
+
+                            fillUpScore(app, player1, toTxtV("0"), toTxtV("0"), toTxtV("0"),toTxtV("0"),
+                                toTxtV(""), toTxtV(""),toTxtV(""),toTxtV(""))
+                            //ustawienie wartosci w tabelce
+                            fillUpScoreInActivity(app, player1, player2, serve1, serve2, pkt1, pkt2, set1p1, set1p2,
+                                set2p1, set2p2, set3p1, set3p2)
+                            deletePoint(delPointNr, db, deletePoint)
+                        } else {
+                            Toast.makeText(this, "kto is Null", Toast.LENGTH_SHORT).show()
+                        }
+                    }.addOnFailureListener{
+                        Toast.makeText(this, "Couldn't get who serves",Toast.LENGTH_SHORT).show()
+                    }
+                }
+                else if(pointNr > 2){
+                    val prevPointNr = delPointNr -1 //numer poprzednika usuwanego punktu
+                    val prevPoint = db.child("set $setId").child("game $gameId")
+                        .child("point $prevPointNr")
+
+                    //pobranie poprzeniego stanu meczu przed zdobyciem punktu z wezla score
+                    prevPoint.child("score").get().addOnSuccessListener {
+                        if(it.exists()){
+                            val getpkt1 = it.child("pkt1").getValue(String::class.java)
+                            val getpkt2 = it.child("pkt2").getValue(String::class.java)
+                            val getset1p1 = it.child("set1p1").getValue(String::class.java)
+                            val getset1p2 = it.child("set1p2").getValue(String::class.java)
+                            val getset2p1 = it.child("set2p1").getValue(String::class.java)
+                            val getset2p2 = it.child("set2p2").getValue(String::class.java)
+                            val getset3p1 = it.child("set3p1").getValue(String::class.java)
+                            val getset3p2 = it.child("set3p2").getValue(String::class.java)
+
+                            deletePoint.child("servePlayer").get().addOnSuccessListener { ktoServeSnapshot ->
+                                val ktoServe = ktoServeSnapshot.getValue(String::class.java)
+                                if (ktoServe != null) {
+                                    scoringPlayer = ktoServe
+                                    if(scoringPlayer == player1.text.toString()){
+                                        app.serve1 = "1"
+                                        app.serve2 = ""
+
+                                    }else{
+                                        app.serve1 = "1"
+                                        app.serve2 = ""
+                                    }
+                                    //zmiana wartosci globalnych
+                                    fillUpScore(app, player1,toTxtV(getpkt1), toTxtV(getpkt2),toTxtV(getset1p1),toTxtV(getset1p2),
+                                        toTxtV(getset2p1),toTxtV(getset2p2),toTxtV(getset3p1),toTxtV(getset3p2))
+                                    //ustawienie wartosci w tabelce
+                                    fillUpScoreInActivity(app, player1, player2, serve1, serve2, pkt1, pkt2, set1p1, set1p2,
+                                        set2p1, set2p2, set3p1, set3p2)
+                                    deletePoint(delPointNr, db, deletePoint)
+                                } else {
+                                    Toast.makeText(this, "kto is Null", Toast.LENGTH_SHORT).show()
+                                }
+                            }.addOnFailureListener{
+                                Toast.makeText(this, "Couldn't get who serves",Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    // Function to delete a point
+    private fun deletePoint(delPointNr: Int, db: DatabaseReference, deletePoint: DatabaseReference) {
+        db.child("pktCount").setValue(delPointNr)
+        deletePoint.removeValue().addOnSuccessListener {
+            Toast.makeText(this, "Undo", Toast.LENGTH_LONG).show()
+        }.addOnFailureListener{
+            Toast.makeText(this, "Undo failed", Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun toTxtV(a: String?): TextView {
+        val textView = TextView(this)
+        textView.text = a
+        return textView
+    }
+
 }

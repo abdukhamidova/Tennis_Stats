@@ -6,6 +6,7 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.RadioButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -41,9 +42,11 @@ class DetailsActivity : AppCompatActivity() {
         }
         navigationDrawerHelper = NavigationDrawerHelper(this)
         navigationDrawerHelper.setupNavigationDrawer(drawerLayout, navigationView, firebaseAuth)
-        val backButton = findViewById<ImageButton>(R.id.buttonReturnUndo)
+        val backButton = findViewById<ImageButton>(R.id.buttonUndo)
         backButton.setOnClickListener{
-            startActivity(Intent(this,ActivityMenu::class.java))
+            Toast.makeText(this,"Point cleared", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this,ActivityStartPoint::class.java))
+            finish()
         }
 
         val userEmail = firebaseAuth.currentUser?.email.toString()

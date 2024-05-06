@@ -46,8 +46,8 @@ class ActivityServe : AppCompatActivity() {
             drawerLayout.open()
         }
         navigationDrawerHelper = NavigationDrawerHelper(this)
-        navigationDrawerHelper.setupNavigationDrawer(drawerLayout, navigationView, firebaseAuth)
-        val backButton = findViewById<ImageButton>(R.id.buttonReturnUndo)
+        navigationDrawerHelper.setupNavigationDrawer(drawerLayout, navigationView, firebaseAuth, true)
+        val backButton = findViewById<ImageButton>(R.id.buttonUndo)
         backButton.setOnClickListener{
             startActivity(Intent(this,StartNewActivity::class.java))
         }
@@ -146,6 +146,7 @@ class ActivityServe : AppCompatActivity() {
             it.putExtra("DanePlayer2",player2)
             it.putExtra("matchID",matchId)
             startActivity(it)
+            finish()
         }
     }
 }
