@@ -1,6 +1,6 @@
 package com.anw.tenistats
 
-import MyAdapter
+import MyAdapterMatch
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
@@ -27,7 +27,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-class ViewMatchesActivity : AppCompatActivity(), MyAdapter.OnItemClickListener {
+class ViewMatchesActivity : AppCompatActivity(), MyAdapterMatch.OnItemClickListener {
 
     private lateinit var dbref : DatabaseReference
     private lateinit var matchRecyclerView: RecyclerView
@@ -35,7 +35,7 @@ class ViewMatchesActivity : AppCompatActivity(), MyAdapter.OnItemClickListener {
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var navigationDrawerHelper: NavigationDrawerHelper
     private lateinit var drawerLayout: DrawerLayout
-    private lateinit var adapter: MyAdapter
+    private lateinit var adapter: MyAdapterMatch
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,9 +79,11 @@ class ViewMatchesActivity : AppCompatActivity(), MyAdapter.OnItemClickListener {
         matchRecyclerView.setHasFixedSize(true)
 
         matchArrayList = arrayListOf<MatchView>()
-        val adapter = MyAdapter(matchArrayList, firebaseAuth)
-        // Inicjalizacja adaptera jako zmienna składowa klasy
-        matchRecyclerView.adapter = adapter // Podpięcie adaptera do RecyclerView
+        // Inicjalizacja adaptera i przypisanie do RecyclerView
+        adapter = MyAdapterMatch(matchArrayList, firebaseAuth)
+        adapter.setOnItemClickListener(this)
+        matchRecyclerView.adapter = adapter
+// Podpięcie adaptera do RecyclerView
         getMatchData()
 
         matchRecyclerView.isEnabled = true
@@ -99,10 +101,6 @@ class ViewMatchesActivity : AppCompatActivity(), MyAdapter.OnItemClickListener {
         })
     }
 
-    fun onTextClicked(view: View) {
-        // Obsługa kliknięcia w tekście
-        Toast.makeText(this, "Tekst został kliknięty!", Toast.LENGTH_SHORT).show()
-    }
 
     private fun getMatchData() {
         val user = firebaseAuth.currentUser?.uid
@@ -114,23 +112,23 @@ class ViewMatchesActivity : AppCompatActivity(), MyAdapter.OnItemClickListener {
             @SuppressLint("NotifyDataSetChanged")
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
-                    for (matchSnapshot in snapshot.children) {
+                    matchArrayList.clear() // Wyczyść listę przed dodaniem nowych danych
+
+                    for (matchSnapshot in snapshot.children.reversed()) { // Iteruj odwrotnie, aby najnowsze mecze były na początku
                         val match = matchSnapshot.getValue(MatchView::class.java)
                         if (match != null) {
                             findViewById<TextView>(R.id.textViewNotFound).visibility = View.INVISIBLE
                             matchArrayList.add(match)
-                        }else{
+                        } else {
                             findViewById<TextView>(R.id.textViewNotFound).visibility = View.VISIBLE
                         }
                     }
-                    // Inicjalizacja adaptera
-                    adapter = MyAdapter(matchArrayList, firebaseAuth)
-                    // Podpięcie adaptera do RecyclerView
-                    matchRecyclerView.adapter = adapter
+
                     // Poinformuj adapter o zmianach w danych
                     adapter.notifyDataSetChanged()
                 }
             }
+
 
             override fun onCancelled(error: DatabaseError) {
                 // Obsłużenie błędu zapytania do bazy danych
@@ -138,9 +136,6 @@ class ViewMatchesActivity : AppCompatActivity(), MyAdapter.OnItemClickListener {
         })
     }
     override fun onItemClick(matchView: MatchView) {
-        // Tu umieść logikę obsługi kliknięcia na element listy
-        // Na przykład, możesz uruchomić nową aktywność lub wykonać inne czynności
-        val intent = Intent(this, ViewHistoryActivity::class.java)
-        startActivity(intent)
+
     }
 }

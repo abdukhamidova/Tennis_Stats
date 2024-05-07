@@ -8,6 +8,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
@@ -77,7 +78,7 @@ class PlayerDetailsActivity : AppCompatActivity() {
         //MENU
 
         val user = firebaseAuth.currentUser?.uid
-        val playerId = "Brad Pitt" //intent.getStringExtra("playerID").toString()
+        val playerId = intent.getStringExtra("playerId").toString()
         database = FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
             .getReference(user.toString()).child("Players").child(playerId)
 
@@ -110,17 +111,25 @@ class PlayerDetailsActivity : AppCompatActivity() {
         }
         findViewById<Button>(R.id.buttonSubmit).setOnClickListener {
             setValues()
+            Toast.makeText(
+                applicationContext,
+                "Updated player",
+                Toast.LENGTH_SHORT
+            ).show()
+            startActivity(Intent(this,ViewPlayerActivity::class.java))
         }
     }
 
     fun start() {
         database.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val firstName = dataSnapshot.child("firstName").getValue(String::class.java)
-                val lastName = dataSnapshot.child("lastName").getValue(String::class.java)
+                /*val firstName = dataSnapshot.child("firstName").getValue(String::class.java)
+                val lastName = dataSnapshot.child("lastName").getValue(String::class.java)*/
+                val Name = dataSnapshot.child("player").getValue(String::class.java)
 
                 // Ustawienie tekstu w TextView
-                findViewById<TextView>(R.id.textViewName).text = "$firstName $lastName"
+                //findViewById<TextView>(R.id.textViewName).text = "$firstName $lastName"
+                findViewById<TextView>(R.id.textViewName).text = Name
             }
 
             override fun onCancelled(databaseError: DatabaseError) {

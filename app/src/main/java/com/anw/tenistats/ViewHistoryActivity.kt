@@ -14,6 +14,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -31,7 +32,7 @@ class ViewHistoryActivity : AppCompatActivity() {
     private lateinit var database: DatabaseReference
     private lateinit var navigationDrawerHelper: NavigationDrawerHelper
     private lateinit var drawerLayout: DrawerLayout
-    private var matchId = "" // Zmienna matchId zamiast stałej
+    private var matchId = ""
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -185,26 +186,98 @@ class ViewHistoryActivity : AppCompatActivity() {
         val user = FirebaseAuth.getInstance().currentUser?.uid
         val database = FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
             .getReference(user.toString()).child("Matches").child(matchId)
+        val playerReference = FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
+            .getReference(user.toString()).child("Matches").child(matchId)
 
-        database.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val pointsList = mutableListOf<String>()
-                var currentSet = 0
+        var player1: String? = null
+        var player2: String? = null
 
-                for (setSnapshot in dataSnapshot.children) {
+        playerReference.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(player1Snapshot: DataSnapshot) {
+                player1 = player1Snapshot.child("player1").getValue(String::class.java)
+                player2 = player1Snapshot.child("player2").getValue(String::class.java)
 
-                    if (setSnapshot.hasChildren()) {
-                        currentSet++
-                        val setNr= "Set $currentSet"
-                        pointsList.add(setNr)
+                database.addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        val pointsList = mutableListOf<String>()
+                        var currentSet = 0
+
+                        for (setSnapshot in dataSnapshot.children) {
+                            if (setSnapshot.hasChildren()) {
+                                currentSet++
+                                pointsList.add("Set $currentSet")
+
+                                for (gameSnapshot in setSnapshot.children) {
+                                    val gameP1 = gameSnapshot.child("score").child("player1score").getValue(String::class.java)
+                                    val gameP2 = gameSnapshot.child("score").child("player2score").getValue(String::class.java)
+                                    pointsList.add("$gameP1 : $gameP2")
+
+                                    if (gameSnapshot.hasChildren()) {
+                                        for (pointSnapshot in gameSnapshot.children) {
+                                            val co = pointSnapshot.child("co").getValue(String::class.java)
+                                            val czym = pointSnapshot.child("czym").getValue(String::class.java)
+                                            val gdzie = pointSnapshot.child("gdzie").getValue(String::class.java)
+                                            val player = pointSnapshot.child("kto").getValue(String::class.java)
+                                            val score1 = pointSnapshot.child("pkt1").getValue(String::class.java)
+                                            val score2 = pointSnapshot.child("pkt2").getValue(String::class.java)
+
+                                            /*val inName=firstLetters(player)*/
+                                            val pointString = if (player == player1) {
+                                                "$score1:$score2 ° $co $czym $gdzie" // symbol X dla player1
+                                            } else {
+                                                "$score1:$score2 • $co $czym $gdzie" // symbol O dla player2
+                                            }
+
+                                            if (score1 != null && score2 != null && player != null && co != null && czym != null && gdzie != null) {
+                                                pointsList.add(pointString)
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        displayMatchPoints(pointsList, "°", "•")
+                    }
+
+                    override fun onCancelled(databaseError: DatabaseError) {
+                        Log.e(TAG, "Error fetching match points: ${databaseError.message}")
+                    }
+                })
+            }
+
+            override fun onCancelled(player1DatabaseError: DatabaseError) {
+                Log.e(TAG, "Error fetching player1 data: ${player1DatabaseError.message}")
+            }
+        })
+    }
+
+
+    private fun fetchMatchPoints(matchId: String, set: String) {
+        val user = FirebaseAuth.getInstance().currentUser?.uid
+        val database = FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
+            .getReference(user.toString()).child("Matches").child(matchId).child(set)
+        val Player = FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
+            .getReference(user.toString()).child("Matches").child(matchId)
+
+        var player1: String? = null
+        var player2: String? = null
+
+        Player.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(player1Snapshot: DataSnapshot) {
+                player1 = player1Snapshot.child("player1").getValue(String::class.java)
+                player2 = player1Snapshot.child("player2").getValue(String::class.java)
+                database.addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        val pointsList = mutableListOf<String>()
                         var currentGame = 0
-                        for (gameSnapshot in setSnapshot.children) {
-                            currentGame++
-                            val gameNr= "Game $currentGame"
-                            pointsList.add(gameNr)
+
+                        for (gameSnapshot in dataSnapshot.children) {
+                            val gameP1 = gameSnapshot.child("score").child("player1score").getValue(String::class.java)
+                            val gameP2 = gameSnapshot.child("score").child("player2score").getValue(String::class.java)
+                            pointsList.add("$gameP1 : $gameP2")
+
                             if (gameSnapshot.hasChildren()) {
                                 for (pointSnapshot in gameSnapshot.children) {
-                                    // Pobranie atrybutów punktu
                                     val co = pointSnapshot.child("co").getValue(String::class.java)
                                     val czym = pointSnapshot.child("czym").getValue(String::class.java)
                                     val gdzie = pointSnapshot.child("gdzie").getValue(String::class.java)
@@ -212,74 +285,67 @@ class ViewHistoryActivity : AppCompatActivity() {
                                     val score1 = pointSnapshot.child("pkt1").getValue(String::class.java)
                                     val score2 = pointSnapshot.child("pkt2").getValue(String::class.java)
 
-                                    // Zbudowanie łańcucha znaków na podstawie atrybutów punktu
-                                    val pointString = "$score1:$score2 $player played $co $czym $gdzie"
-                                    pointsList.add(pointString)
+                                    /*val inName=firstLetters(player)*/
+                                    val pointString = if (player == player1) {
+                                        "$score1:$score2 ° $co $czym $gdzie" // symbol X dla player1
+                                    } else {
+                                        "$score1:$score2 • $co $czym $gdzie" // symbol O dla player2
+                                    }
+
+
+                                        if (score1 != null && score2 != null && player != null && co != null && czym != null && gdzie != null) {
+                                        pointsList.add(pointString)
+                                    }
                                 }
                             }
                         }
+                        displayMatchPoints(pointsList, "°", "•")
                     }
-                }
 
-                // Po pobraniu wszystkich punktów, wyświetl je na ekranie
-                displayMatchPoints(pointsList)
+                    override fun onCancelled(databaseError: DatabaseError) {
+                        Log.e(TAG, "Error fetching match points: ${databaseError.message}")
+                    }
+                })
             }
 
-            override fun onCancelled(databaseError: DatabaseError) {
-                // Obsługa błędu pobierania danych
-                Log.e(TAG, "Error fetching match points: ${databaseError.message}")
+            override fun onCancelled(player1DatabaseError: DatabaseError) {
+                Log.e(TAG, "Error fetching player1 data: ${player1DatabaseError.message}")
             }
         })
     }
 
-    private fun fetchMatchPoints(matchId: String, set: String) {
-        val user = FirebaseAuth.getInstance().currentUser?.uid
-        val database = FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
-            .getReference(user.toString()).child("Matches").child(matchId).child(set)
-
-        database.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val pointsList = mutableListOf<String>()
-                var currentGame = 0
-
-                for (gameSnapshot in dataSnapshot.children) {
-                    currentGame++
-                    val gameNr = "Game $currentGame"
-                    pointsList.add(gameNr)
-
-                    if (gameSnapshot.hasChildren()) {
-                        for (pointSnapshot in gameSnapshot.children) {
-                            // Pobranie atrybutów punktu
-                            val co = pointSnapshot.child("co").getValue(String::class.java)
-                            val czym = pointSnapshot.child("czym").getValue(String::class.java)
-                            val gdzie = pointSnapshot.child("gdzie").getValue(String::class.java)
-                            val player = pointSnapshot.child("kto").getValue(String::class.java)
-                            val score1 = pointSnapshot.child("pkt1").getValue(String::class.java)
-                            val score2 = pointSnapshot.child("pkt2").getValue(String::class.java)
-
-                            // Zbudowanie łańcucha znaków na podstawie atrybutów punktu
-                            val pointString = "$score1:$score2 $player played $co $czym $gdzie"
-                            pointsList.add(pointString)
-                        }
-                    }
-                }
-
-                // Po pobraniu wszystkich punktów, wyświetl je na ekranie
-                displayMatchPoints(pointsList)
-            }
-
-            override fun onCancelled(databaseError: DatabaseError) {
-                // Obsługa błędu pobierania danych
-                Log.e(TAG, "Error fetching match points: ${databaseError.message}")
-            }
-        })
-    }
-
-    private fun displayMatchPoints(pointsList: List<String>) {
-        // Znajdź ListView w układzie i ustaw adapter na nim
+    private fun displayMatchPoints(pointsList: List<String>, player1Name: String?, player2Name: String?) {
         val listView = findViewById<ListView>(R.id.historyList)
-        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, pointsList)
+        val adapter = CustomArrayAdapter(this, pointsList, player1Name, player2Name)
         listView.adapter = adapter
+    }
+
+
+    fun firstLetters(input: String?): String {
+        var result = ""
+
+        // Dzielenie ciągu wejściowego na słowa po spacji
+        val words = input?.split(" ")
+
+        // Przechodzenie przez każde słowo w ciągu wejściowym
+        if (words != null) {
+            for (word in words) {
+                // Jeśli słowo nie jest puste
+                if (word.isNotEmpty()) {
+                    // Dodaj pierwszą literę słowa do wyniku
+                    result += word[0]
+
+                    // Sprawdź, czy słowo zawiera liczby
+                    val numbers = word.filter { it.isDigit() }
+                    if (numbers.isNotEmpty()) {
+                        result += numbers // Dodaj liczby do wyniku
+                    }
+                }
+            }
+        }
+
+        // Zwróć wynik
+        return result
     }
 
     fun setscore(player1: TextView,player2: TextView,serve1: TextView,serve2: TextView,set1p1: TextView,set2p1: TextView,set3p1: TextView,set1p2: TextView,set2p2: TextView,set3p2: TextView,pkt1: TextView,pkt2: TextView)
@@ -292,7 +358,7 @@ class ViewHistoryActivity : AppCompatActivity() {
             // Pobranie wartości "player1" z bazy danych
             val player1Value = dataSnapshot.getValue(String::class.java)
             // Ustawienie wartości w TextView
-            player1.text = player1Value
+            player1.text = "$player1Value°"
         }.addOnFailureListener { exception ->
             // Obsługa błędów
         }
@@ -301,7 +367,7 @@ class ViewHistoryActivity : AppCompatActivity() {
             // Pobranie wartości "player1" z bazy danych
             val player2Value = dataSnapshot.getValue(String::class.java)
             // Ustawienie wartości w TextView
-            player2.text = player2Value
+            player2.text = "$player2Value•"
         }.addOnFailureListener { exception ->
             // Obsługa błędów
         }
@@ -411,3 +477,4 @@ class ViewHistoryActivity : AppCompatActivity() {
         }
     }
 }
+

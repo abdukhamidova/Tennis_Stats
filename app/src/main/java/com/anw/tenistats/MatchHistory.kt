@@ -16,15 +16,20 @@ data class Match(
 )*/
 
 data class Player(
-    val firstName: String?=null,
-    val lastName: String?=null,
-    val duplicate: Int,
-    val nationality: String?,
-    val dateOfBirth: Long?,
-    val ranking: Int?,
-    val strength: String?,
-    val weakness: String?
+    var firstName: String? = null,
+    var lastName: String? = null,
+    var player: String? = null,
+    var duplicate: Int? = null,
+    var nationality: String? = null,
+    var dateOfBirth: Long? = null,
+    var ranking: String? = null,
+    var strength: String? = null,
+    var weakness: String? = null
 )
+
+{
+    constructor() : this(null, null, null, null, null, null, null, null, null)
+}
 
 /*data class Set(
     val id: Int, //po kolei set 1, 2, 3

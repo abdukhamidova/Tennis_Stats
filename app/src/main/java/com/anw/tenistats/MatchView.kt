@@ -10,7 +10,7 @@ class MatchView {
     // Konstruktor główny
     constructor()
 
-    // Konstruktor wtórny, umożliwiający tworzenie obiektu bez podawania wszystkich parametrów
+    // Konstruktor, umożliwiający tworzenie obiektu bez podawania wszystkich parametrów
     constructor(data: Long, player1: String, player2: String) {
         this.data = data
         this.player1 = player1

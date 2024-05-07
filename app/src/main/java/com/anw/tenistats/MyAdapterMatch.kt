@@ -12,12 +12,14 @@ import com.anw.tenistats.R
 import com.anw.tenistats.ViewHistoryActivity
 import com.anw.tenistats.com.anw.tenistats.ResumeOrStatsDialogActivity
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-class MyAdapter(private val originalList: List<MatchView>, private val firebaseAuth: FirebaseAuth) :
-    RecyclerView.Adapter<MyAdapter.MyViewHolder>(), Filterable {
+class MyAdapterMatch(
+    private val originalList: List<MatchView>,
+    private val firebaseAuth: FirebaseAuth
+) :
+    RecyclerView.Adapter<MyAdapterMatch.MyViewHolder>(), Filterable {
 
     private var filteredList: List<MatchView> = originalList
     private lateinit var context: Context

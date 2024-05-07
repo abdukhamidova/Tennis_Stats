@@ -221,6 +221,7 @@ class StartNewActivity : AppCompatActivity() {
                                     val player = Player(
                                         firstName,
                                         lastName,
+                                        playerToReturn,
                                         newDuplicate,
                                         "",
                                         null,
@@ -259,6 +260,7 @@ class StartNewActivity : AppCompatActivity() {
                 val player = Player(
                     firstName,
                     lastName,
+                    playerName,
                     1,
                     "",
                     null,
@@ -275,10 +277,10 @@ class StartNewActivity : AppCompatActivity() {
                             Toast.LENGTH_SHORT
                         ).show()
                         callback(playerName)
-                }.addOnFailureListener {
-                    Toast.makeText(this, "Failed to save player $playerName", Toast.LENGTH_SHORT)
-                        .show()
-                }
+                    }.addOnFailureListener {
+                        Toast.makeText(this, "Failed to save player $playerName", Toast.LENGTH_SHORT)
+                            .show()
+                    }
             }
         }.addOnFailureListener{
             Toast.makeText(this, "Failed to get player $playerName", Toast.LENGTH_SHORT)
