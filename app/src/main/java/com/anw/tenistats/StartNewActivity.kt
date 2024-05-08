@@ -108,8 +108,10 @@ class StartNewActivity : AppCompatActivity() {
         binding.buttonStartGame.setOnClickListener {
             var player1 = binding.autoNamePlayer1.text.toString().trimEnd() //pobiera Imię i Nazwisko gracza
             var player2 = binding.autoNamePlayer2.text.toString().trimEnd()
-            val (player1FirstName, player1LastName) = splitNameToFirstAndLastName(player1)  //zwraca Imię i Nazwisko jako odzielne gracza
-            val (player2FirstName, player2LastName) = splitNameToFirstAndLastName(player2)
+            val pl1Inticap=getStringWithoutDigits(initcap(player1))
+            val pl2Inticap=getStringWithoutDigits(initcap(player2))
+            val (player1FirstName, player1LastName) = splitNameToFirstAndLastName(pl1Inticap)  //zwraca Imię i Nazwisko jako odzielne gracza
+            val (player2FirstName, player2LastName) = splitNameToFirstAndLastName(pl2Inticap)
             val btn1 = binding.checkBoxPlayer1New
             val btn2 = binding.checkBoxPlayer2New
             //~ru 14.04 optymalizacja i poprawa dodawania playera do bazy
@@ -118,10 +120,10 @@ class StartNewActivity : AppCompatActivity() {
                 Toast.makeText(this, "Don't leave empty fields.", Toast.LENGTH_SHORT).show()
             }else{
                 //sprawdzenie istnienia player1, jego ewentualne dodanie/duplikowanie
-                checkPlayerExistence(player1,player1FirstName, player1LastName, btn1) {updatedPlayer1 ->
+                checkPlayerExistence(pl1Inticap,player1FirstName, player1LastName, btn1) {updatedPlayer1 ->
                     player1 = updatedPlayer1
                     //sprawdzenie istnienia player2, jego ewentualne dodanie/duplikowanie
-                    checkPlayerExistence(player2, player2FirstName, player2LastName, btn2) { updatedPlayer2 ->
+                    checkPlayerExistence(pl2Inticap, player2FirstName, player2LastName, btn2) { updatedPlayer2 ->
                         player2 = updatedPlayer2
                         //zapisanie meczu do bazy
                         createAndSaveMatchData(player1, player2)
@@ -198,63 +200,86 @@ class StartNewActivity : AppCompatActivity() {
     }
     //optymalizacja funkcji ~ru 12.04
     private fun checkPlayerExistence(
-        playerName: String, //nazwa węzła zawodnika, jedo unikalne id w obrębie użytkownika (Imię Nazwisko, z ewentualnym numerem duplikacji)
-        firstName: String?, //dana atomowa: Imię
-        lastName: String?, //dana atomowa: Nazwisko
+        playerName: String, // nazwa węzła zawodnika, jego unikalne id w obrębie użytkownika (Imię Nazwisko, z ewentualnym numerem duplikacji)
+        firstName: String?, // dana atomowa: Imię
+        lastName: String?, // dana atomowa: Nazwisko
         btn: CheckBox,
         callback: (String) -> Unit
-    ){
+    ) {
         database.child(playerName).get().addOnSuccessListener { snapshot ->
             if (snapshot.exists()) {
                 if (btn.isChecked) {
-                    //przygtowanie numeru duplikatu:
-                    database.child(playerName).child("duplicate").get()
-                        .addOnSuccessListener { duplicateSnapshot ->
-                            //pobranie liczby ilości duplikatów od gracza "bez numerka"
-                            val currentDuplicate = duplicateSnapshot.getValue(Int::class.java) ?: 0
-                            val newDuplicate = currentDuplicate + 1 //zwiększemie liczby duplikatów o jeden
-                            database.child(playerName).child("duplicate").setValue(newDuplicate)
-                                .addOnSuccessListener {
-                                    //dodanie numeru duplikatu do Nazwiska
-                                    val playerToReturn =  playerName + newDuplicate.toString()
-
-                                    val player = Player(
-                                        firstName,
-                                        lastName,
-                                        playerToReturn,
-                                        newDuplicate,
-                                        "",
-                                        null,
-                                        null,
-                                        "",
-                                        ""
-                                    )
-                                    // dodanie gracza do bazy (jako obiekt klasy Player)
-                                    database.child(playerToReturn).setValue(player)
-                                        .addOnSuccessListener {
-                                            Toast.makeText(
-                                                this,
-                                                "Player $playerName Successfully Saved",
-                                                Toast.LENGTH_SHORT
-                                            ).show()
-                                            callback(playerToReturn)
-                                        }.addOnFailureListener {
-                                            Toast.makeText(
-                                                this,
-                                                "Failed to save player $playerName",
-                                                Toast.LENGTH_SHORT
-                                            ).show()
-                                        }
+                    // Sprawdzenie czy istnieją inni gracze o takim samym imieniu i nazwisku
+                    var duplicateCount = 0
+                    database.orderByChild("firstName").equalTo(firstName)
+                        .addListenerForSingleValueEvent(object : ValueEventListener {
+                            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                                for (childSnapshot in dataSnapshot.children) {
+                                    val player = childSnapshot.getValue(Player::class.java)
+                                    if (player?.lastName == lastName && player?.firstName == firstName) {
+                                        duplicateCount++
+                                    }
                                 }
-                        }.addOnFailureListener {
-                            Toast.makeText(
-                                this,
-                                "Failed to get duplicate from player",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-                    btn.isChecked=false
-                } else { callback(playerName) }
+                                duplicateCount++
+                                for (childSnapshot in dataSnapshot.children) {
+                                    val player = childSnapshot.getValue(Player::class.java)
+                                    if (player != null) {
+                                        if (player?.lastName == lastName && player?.firstName == firstName && duplicateCount < player?.duplicate!!) {
+                                            duplicateCount= player?.duplicate!!+1
+                                        }
+                                    }
+                                }
+                                // Pobranie numeru duplikatu dla nowego zawodnika
+                                //val newDuplicate = duplicateCount + 1
+
+                                // Dodanie numeru duplikatu do nazwiska gracza
+
+                                val playerToReturn = playerName + duplicateCount.toString()
+
+                                // Tworzenie obiektu Player
+                                val player = Player(
+                                    firstName,
+                                    lastName,
+                                    playerToReturn,
+                                    duplicateCount,
+                                    "",
+                                    null,
+                                    null,
+                                    "",
+                                    ""
+                                )
+
+                                // Dodanie nowego zawodnika do bazy danych
+                                database.child(playerToReturn).setValue(player)
+                                    .addOnSuccessListener {
+                                        Toast.makeText(
+                                            this@StartNewActivity,
+                                            "Player $playerName Successfully Saved",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                        callback(playerToReturn)
+                                    }.addOnFailureListener {
+                                        Toast.makeText(
+                                            this@StartNewActivity,
+                                            "Failed to save player $playerName",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
+                            }
+
+                            override fun onCancelled(databaseError: DatabaseError) {
+                                Toast.makeText(
+                                    this@StartNewActivity,
+                                    "Failed to get duplicate count",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        })
+
+                    btn.isChecked = false
+                } else {
+                    callback(playerName)
+                }
             } else {
                 //jeżeli player nie istnieje, stwórz obiekt klasy Player
                 val player = Player(
@@ -272,23 +297,53 @@ class StartNewActivity : AppCompatActivity() {
                 database.child(playerName).setValue(player)
                     .addOnSuccessListener {
                         Toast.makeText(
-                            this,
+                            this@StartNewActivity,
                             "Player $playerName Successfully Saved",
                             Toast.LENGTH_SHORT
                         ).show()
                         callback(playerName)
                     }.addOnFailureListener {
-                        Toast.makeText(this, "Failed to save player $playerName", Toast.LENGTH_SHORT)
-                            .show()
+                        Toast.makeText(
+                            this@StartNewActivity,
+                            "Failed to save player $playerName",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
             }
-        }.addOnFailureListener{
-            Toast.makeText(this, "Failed to get player $playerName", Toast.LENGTH_SHORT)
-                .show()
+        }.addOnFailureListener {
+            Toast.makeText(
+                this@StartNewActivity,
+                "Failed to get player $playerName",
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 
 
+    fun initcap(input: String): String {
+        if (input.isEmpty()) {
+            return ""
+        }
+        val words = input.split(" ")
+        val capitalizedWords = words.map { word ->
+            if (word.isNotEmpty()) {
+                word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase()
+            } else {
+                ""
+            }
+        }
+        return capitalizedWords.joinToString(" ")
+    }
+
+    fun getStringWithoutDigits(input: String): String {
+        val result = StringBuilder()
+        for (char in input) {
+            if (!char.isDigit()) {
+                result.append(char)
+            }
+        }
+        return result.toString()
+    }
     private fun callActivity(player1:String, player2:String) {
         val intent = Intent(this, ActivityServe::class.java).apply {
             putExtra("DanePlayer1", player1)
