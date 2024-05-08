@@ -444,8 +444,10 @@ class ActivityStartPoint : AppCompatActivity() {
                                 app.serve1 = "1"
                                 app.serve2 = ""
                             }else{
-                                app.serve1 = "1"
-                                app.serve2 = ""
+                                app.serve1 = ""
+                                app.serve2 = "1" //~u poprawa
+                                //app.serve1 = "1"
+                                //app.serve2 = ""
                             }
 
                             fillUpScore(app, player1, toTxtV("0"), toTxtV("0"), toTxtV("0"),toTxtV("0"),
@@ -487,8 +489,10 @@ class ActivityStartPoint : AppCompatActivity() {
                                         app.serve2 = ""
 
                                     }else{
-                                        app.serve1 = "1"
-                                        app.serve2 = ""
+                                        app.serve1 = ""
+                                        app.serve2 = "1" //~u poprawa
+                                        //app.serve1 = "1"
+                                        //app.serve2 = ""
                                     }
                                     //zmiana wartosci globalnych
                                     fillUpScore(app, player1,toTxtV(getpkt1), toTxtV(getpkt2),toTxtV(getset1p1),toTxtV(getset1p2),

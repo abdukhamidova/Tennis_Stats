@@ -16,21 +16,22 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:ignore="HardCodedText">
-        <include layout="@layout/toolbar"/>
+
+        <include layout="@layout/toolbar" />
 
         <TextView
             android:id="@+id/textViewName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/add_player"
             android:textColor="@color/white"
             android:textSize="40sp"
-            android:text="Player Name"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.15" />
+            app:layout_constraintVertical_bias="0.108" />
 
         <LinearLayout
             android:id="@+id/linearLayoutForm"
@@ -44,8 +45,33 @@
             app:layout_constraintVertical_bias="0.100000024">
 
             <LinearLayout
+                android:id="@+id/linearLayoutName"
+                android:layout_width="345dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/enter_name"
+                    android:textColor="@color/white" />
+
+                <EditText
+                    android:id="@+id/editTextName"
+                    android:layout_width="215dp"
+                    android:layout_height="48dp"
+                    android:backgroundTint="@color/white"
+                    android:completionHintView="@color/white"
+                    android:hint="@string/name"
+                    android:textSize="16dp"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/app_hint_color" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/linearLayoutNationality"
-                android:layout_width="match_parent"
+                android:layout_width="345dp"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
@@ -58,7 +84,7 @@
                     android:textColor="@color/white" />
 
                 <AutoCompleteTextView
-                    android:id="@+id/autoCompleteTextViewNationality"
+                    android:id="@+id/autoCompleteTextViewNationalityAP"
                     android:layout_width="215dp"
                     android:layout_height="48dp"
                     android:backgroundTint="@color/white"
@@ -83,45 +109,53 @@
                     android:textColor="@color/white" />
 
                 <EditText
-                    android:id="@+id/editTextDate"
+                    android:id="@+id/editTextDateAP"
                     android:layout_width="215dp"
                     android:layout_height="48dp"
+                    android:autofillHints="date of birthday"
                     android:backgroundTint="@color/white"
                     android:focusable="false"
                     android:hint="@string/select_date_of_birth"
                     android:inputType="date"
                     android:textColor="@color/white"
-                    android:textColorHint="@color/app_hint_color"
-                    android:autofillHints="date of birthday"/>
+                    android:textColorHint="@color/app_hint_color" />
             </LinearLayout>
 
-            <RadioGroup
-                android:id="@+id/radioGroupPlayerDetails"
+            <!--<LinearLayout
+                android:id="@+id/linearLayoutRanking"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal">
+                android:layout_marginTop="20dp">-->
 
-                <RadioButton
-                    android:id="@+id/radioButtonR"
-                    android:layout_width="150dp"
-                    android:layout_height="40dp"
-                    android:layout_marginEnd="30dp"
-                    android:buttonTint="@color/app_mainTitles_color"
-                    android:text="@string/righthanded"
-                    android:textColor="@color/white"
-                    android:textSize="18sp"/>
+                <RadioGroup
+                    android:id="@+id/radioGroupAddPlayer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal">
 
-                <RadioButton
-                    android:id="@+id/radioButtonL"
-                    android:layout_width="150dp"
-                    android:layout_height="40dp"
-                    android:layout_marginStart="30dp"
-                    android:buttonTint="@color/app_mainTitles_color"
-                    android:text="@string/lefthanded"
-                    android:textColor="@color/white"
-                    android:textSize="18sp" />
-            </RadioGroup>
+                    <RadioButton
+                        android:id="@+id/radioButtonR"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="30dp"
+                        android:buttonTint="@color/app_mainTitles_color"
+                        android:text="@string/righthanded"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"/>
+
+                    <RadioButton
+                        android:id="@+id/radioButtonL"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="30dp"
+                        android:buttonTint="@color/app_mainTitles_color"
+                        android:text="@string/lefthanded"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"/>
+                </RadioGroup>
+            <!--</LinearLayout>-->
 
             <LinearLayout
                 android:id="@+id/linearLayoutStrength"
@@ -138,7 +172,7 @@
                     android:textColor="@color/white" />
 
                 <AutoCompleteTextView
-                    android:id="@+id/autoCompleteTextViewStrength"
+                    android:id="@+id/autoCompleteTextViewStrengthAP"
                     android:layout_width="215dp"
                     android:layout_height="48dp"
                     android:backgroundTint="@color/white"
@@ -162,7 +196,7 @@
                     android:textColor="@color/white" />
 
                 <AutoCompleteTextView
-                    android:id="@+id/autoCompleteTextViewWeakness"
+                    android:id="@+id/autoCompleteTextViewWeaknessAP"
                     android:layout_width="215dp"
                     android:layout_height="48dp"
                     android:backgroundTint="@color/white"
@@ -174,10 +208,10 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/buttonSubmit"
+            android:id="@+id/buttonAdd"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:text="@string/submit"
+            android:text="@string/add"
             android:textSize="17sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/linearLayoutForm"

@@ -22,7 +22,7 @@ data class Player(
     var duplicate: Int? = null,
     var nationality: String? = null,
     var dateOfBirth: Long? = null,
-    var ranking: String? = null,
+    var handedness: String? = null,
     var strength: String? = null,
     var weakness: String? = null
 )

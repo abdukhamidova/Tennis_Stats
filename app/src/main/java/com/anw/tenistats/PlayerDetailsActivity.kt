@@ -16,6 +16,7 @@ import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.DatePicker
 import android.widget.ImageButton
+import android.widget.RadioButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.drawerlayout.widget.DrawerLayout
@@ -170,11 +171,14 @@ class PlayerDetailsActivity : AppCompatActivity() {
         })
         database.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val ranking = dataSnapshot.child("ranking").getValue()
+                val handedness = dataSnapshot.child("handedness").getValue()
 
                 // Ustawienie tekstu w TextView
-                if(ranking != null) {// Ustawienie tekstu w TextView
-                    findViewById<TextView>(R.id.editTextRanking).text = ranking.toString()
+                if(handedness == "Righthanded") {// Ustawienie tekstu w TextView
+                    findViewById<RadioButton>(R.id.radioButtonR).isChecked = true
+                }
+                else if(handedness == "Lefthanded") {// Ustawienie tekstu w TextView
+                    findViewById<RadioButton>(R.id.radioButtonL).isChecked = true
                 }
             }
 
@@ -246,7 +250,8 @@ class PlayerDetailsActivity : AppCompatActivity() {
     private fun setValues(){
         val nationality = findViewById<TextView>(R.id.autoCompleteTextViewNationality).text.toString()
         val date = findViewById<TextView>(R.id.editTextDate).text
-        val ranking = findViewById<TextView>(R.id.editTextRanking).text.toString()
+        val right = findViewById<RadioButton>(R.id.radioButtonR)
+        val left = findViewById<RadioButton>(R.id.radioButtonL)
         val strength = findViewById<TextView>(R.id.autoCompleteTextViewStrength).text.toString()
         val weakness = findViewById<TextView>(R.id.autoCompleteTextViewWeakness).text.toString()
 
@@ -260,14 +265,11 @@ class PlayerDetailsActivity : AppCompatActivity() {
             val milliseconds = date?.time ?: 0
             database.child("dateOfBirth").setValue(milliseconds)
         }
-        if(ranking.isNotEmpty()){
-            if(isNumber(ranking))
-            {
-                database.child("ranking").setValue(ranking)
-            }
-            else {
-                Toast.makeText(this, "Enter an integer.", Toast.LENGTH_SHORT).show()
-            }
+        if(right.isChecked){
+            database.child("handedness").setValue("Righthanded")
+        }
+        else if(left.isChecked){
+            database.child("handedness").setValue("Lefthanded")
         }
         if(strength.isNotEmpty()){
             database.child("strength").setValue(strength)
