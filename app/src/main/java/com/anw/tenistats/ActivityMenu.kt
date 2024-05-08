@@ -44,7 +44,7 @@ class ActivityMenu : AppCompatActivity() {
         if (user.isNotEmpty()) {
             headerView.findViewById<TextView>(R.id.textViewUserEmail).text = user
         } else {
-            findViewById<TextView>(R.id.textViewUserEmail).text = "user_email@smth.com"
+            findViewById<TextView>(R.id.textViewUserEmail).text = resources.getString(R.string.user_email)
         }
         //------------ MENU
 

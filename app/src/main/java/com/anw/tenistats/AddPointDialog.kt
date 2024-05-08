@@ -47,24 +47,19 @@ class AddPointDialog(private val context: Context, private val openedFromStartPo
 
             if (app != null) {
                 //ustawienie wyniku w danym gemie
-                val score1: String
-                val score2: String
-                when(setId) {
-                    "1" -> {
-                        score1 = app.set1p1
-                        score2 = app.set1p2
-                    }
-                    "2" -> {
-                        score1 = app.set2p1
-                        score2 = app.set2p2
-                    }
-                    else -> {
-                        score1 = app.set3p1
-                        score2 = app.set3p2
-                    }
-                }
-                database.child(("set "+ setId)).child(("game "+gameId)).child("score").child("player1score").setValue(score1)
-                database.child(("set "+ setId)).child(("game "+gameId)).child("score").child("player2score").setValue(score2)
+                val set1P1 = app.set1p1
+                val set1P2 = app.set1p2
+                val set2P1 = app.set2p1
+                val set2P2 = app.set2p2
+                val set3P1 = app.set3p1
+                val set3P2 = app.set3p2
+
+                database.child(("set "+ setId)).child(("game "+gameId)).child("score").child("player1set1").setValue(set1P1)
+                database.child(("set "+ setId)).child(("game "+gameId)).child("score").child("player2set1").setValue(set1P2)
+                database.child(("set "+ setId)).child(("game "+gameId)).child("score").child("player1set2").setValue(set2P1)
+                database.child(("set "+ setId)).child(("game "+gameId)).child("score").child("player2set2").setValue(set2P2)
+                database.child(("set "+ setId)).child(("game "+gameId)).child("score").child("player1set3").setValue(set3P1)
+                database.child(("set "+ setId)).child(("game "+gameId)).child("score").child("player2set3").setValue(set3P2)
 
                 //ustawienie osoby serwujacej w danym gemie
                 val servePlayer: String
@@ -96,11 +91,18 @@ class AddPointDialog(private val context: Context, private val openedFromStartPo
                 database.child("pktCount").get().addOnSuccessListener { dataSnapshot ->
                     if (dataSnapshot.exists()) {
                         val currentCount = dataSnapshot.getValue(Int::class.java) ?: 0
+                        val count: String
+                        if(currentCount<10){
+                            count = "point 0" + currentCount.toString()
+                        }
+                        else{
+                            count = "point " + currentCount.toString()
+                        }
 
                         // Zapis punktu do bazy danych
                         val pointDatabase =
                             database.child(("set " + setId)).child(("game " + gameId))
-                                .child(("point " + currentCount))
+                                .child((count))
                         val point = Point(
                             pkt1, pkt2, kto,
                             co, gdzie, czym, app.serwis, servePlayer
@@ -151,6 +153,4 @@ class AddPointDialog(private val context: Context, private val openedFromStartPo
         }
         alertDialog.show()
     }
-
 }
-

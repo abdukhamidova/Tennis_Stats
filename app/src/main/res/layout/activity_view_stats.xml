@@ -21,7 +21,7 @@
             android:id="@+id/tableLayoutStats"
             android:layout_width="370dp"
             android:layout_height="wrap_content"
-            android:background="@color/app_tableBg_color"
+            android:background="@drawable/border_button"
             android:theme="@style/scoreTableTextAppearance"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -30,6 +30,7 @@
             app:layout_constraintVertical_bias="0.13999999">
 
             <TableRow>
+
                 <TextView
                     android:id="@+id/textViewServe1Stats"
                     android:layout_width="wrap_content"
@@ -47,27 +48,29 @@
                     android:layout_height="match_parent"
                     android:layout_marginStart="6dp"
                     android:layout_weight="1"
+                    android:gravity="start|center_vertical"
                     android:textAlignment="gravity"
-                    android:gravity="start|center_vertical"/>
+                    android:textColor="@color/app_bg_color" />
 
                 <TextView
                     android:id="@+id/textViewP1Set1Stats"
                     android:layout_height="match_parent"
-                    android:text="" />
+                    android:textColor="@color/app_bg_color" />
 
                 <TextView
                     android:id="@+id/textViewP1Set2Stats"
                     android:layout_height="match_parent"
-                    android:text="" />
+                    android:textColor="@color/app_bg_color" />
 
-            <TextView
-                android:id="@+id/textViewP1Set3Stats"
-                android:layout_height="match_parent"
-                android:text="" />
-            <TextView
-                android:id="@+id/textViewPlayer1PktStats"
-                android:layout_height="match_parent"
-                android:text=""/>
+                <TextView
+                    android:id="@+id/textViewP1Set3Stats"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/app_bg_color" />
+
+                <TextView
+                    android:id="@+id/textViewPlayer1PktStats"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/app_bg_color" />
 
             </TableRow>
 
@@ -89,27 +92,29 @@
                     android:layout_height="match_parent"
                     android:layout_marginStart="6dp"
                     android:layout_weight="1"
+                    android:gravity="start|center_vertical"
                     android:textAlignment="gravity"
-                    android:gravity="start|center_vertical"/>
+                    android:textColor="@color/app_btnClick_color" />
 
                 <TextView
                     android:id="@+id/textViewP2Set1Stats"
                     android:layout_height="match_parent"
-                    android:text="" />
+                    android:textColor="@color/app_btnClick_color" />
 
                 <TextView
                     android:id="@+id/textViewP2Set2Stats"
                     android:layout_height="match_parent"
-                    android:text="" />
+                    android:textColor="@color/app_btnClick_color" />
 
-            <TextView
-                android:id="@+id/textViewP2Set3Stats"
-                android:layout_height="match_parent"
-                android:text="" />
-            <TextView
-                android:id="@+id/textViewPlayer2PktStats"
-                android:layout_height="match_parent"
-                android:text=""/>
+                <TextView
+                    android:id="@+id/textViewP2Set3Stats"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/app_btnClick_color" />
+
+                <TextView
+                    android:id="@+id/textViewPlayer2PktStats"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/app_btnClick_color" />
         </TableRow>
     </TableLayout>
 
@@ -236,7 +241,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/player_1"
-                android:textColor="@color/black" />
+                android:textColor="@color/app_bg_color"/>
 
             <TextView
                 android:id="@+id/player2name"
@@ -245,7 +250,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/player_2"
-                android:textColor="@color/black" />
+                android:textColor="@color/app_btnClick_color" />
 
         </LinearLayout> <!--ScrollHeader-->
 
@@ -271,12 +276,12 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="20sp"
                     android:layout_gravity="center"
                     android:gravity="center_horizontal"
                     android:text="@string/total_points"
-                    android:textColor="@color/black">
-                </TextView>
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"></TextView>
 
                 <TableRow>
                     <TextView
@@ -300,14 +305,14 @@
                             android:layout_width="0dp"
                             android:layout_height="20dp"
                             android:layout_gravity="end"
-                            android:background="#5FB2BD" />
+                            android:background="@color/app_bg_color"/>
 
                         <View
                             android:id="@+id/graphTotalPlayer2"
                             android:layout_width="0dp"
                             android:layout_height="20dp"
                             android:layout_gravity="start"
-                            android:background="#073159"/>
+                            android:background="@color/app_btnClick_color"/>
 
                     </LinearLayout>
 
@@ -353,14 +358,14 @@
                             android:layout_width="75dp"
                             android:layout_height="20dp"
                             android:layout_gravity="end"
-                            android:background="#5FB2BD"/>
+                            android:background="@color/app_bg_color" />
 
                         <View
                             android:id="@+id/graphAcePlayer2"
                             android:layout_width="100dp"
                             android:layout_height="20dp"
                             android:layout_gravity="start"
-                            android:background="#073159"/>
+                            android:background="@color/app_btnClick_color"/>
 
                     </LinearLayout>
 
@@ -407,14 +412,14 @@
                             android:layout_width="75dp"
                             android:layout_height="20dp"
                             android:layout_gravity="end"
-                            android:background="#5FB2BD"/>
+                            android:background="@color/app_bg_color"/>
 
                         <View
                             android:id="@+id/graphDoubleFaultPlayer2"
                             android:layout_width="100dp"
                             android:layout_height="20dp"
                             android:layout_gravity="start"
-                            android:background="#073159"/>
+                            android:background="@color/app_btnClick_color"/>
 
                     </LinearLayout>
 
@@ -460,14 +465,14 @@
                             android:layout_width="75dp"
                             android:layout_height="20dp"
                             android:layout_gravity="end"
-                            android:background="#5FB2BD"/>
+                            android:background="@color/app_bg_color"/>
 
                         <View
                             android:id="@+id/graphFirstPlayer2"
                             android:layout_width="100dp"
                             android:layout_height="20dp"
                             android:layout_gravity="start"
-                            android:background="#073159"/>
+                            android:background="@color/app_btnClick_color"/>
 
                     </LinearLayout>
 
@@ -513,14 +518,14 @@
                             android:layout_width="75dp"
                             android:layout_height="20dp"
                             android:layout_gravity="end"
-                            android:background="#5FB2BD"/>
+                            android:background="@color/app_bg_color"/>
 
                         <View
                             android:id="@+id/graphSecondPlayer2"
                             android:layout_width="100dp"
                             android:layout_height="20dp"
                             android:layout_gravity="start"
-                            android:background="#073159"/>
+                            android:background="@color/app_btnClick_color"/>
 
                     </LinearLayout>
 
@@ -541,7 +546,9 @@
                     android:layout_gravity="center"
                     android:gravity="center_horizontal"
                     android:text="@string/return_winner"
-                    android:textColor="@color/black">
+                    android:textColor="@color/black"
+                    android:textSize="20dp"
+                    android:textStyle="bold">
 
                 </TextView>
                 <TableRow>
@@ -706,6 +713,8 @@
                     android:layout_gravity="center"
                     android:gravity="center_horizontal"
                     android:text="@string/winner"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
                     android:textColor="@color/black"
                     android:textAllCaps="true">
 
@@ -800,6 +809,8 @@
                     android:layout_gravity="center"
                     android:gravity="center_horizontal"
                     android:text="@string/slice"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
                     android:textAllCaps="true"
                     android:textColor="@color/black">
 
@@ -883,6 +894,8 @@
                     android:layout_gravity="center"
                     android:gravity="center_horizontal"
                     android:text="@string/volley"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
                     android:textAllCaps="true"
                     android:textColor="@color/black">
 
@@ -966,6 +979,8 @@
                     android:layout_gravity="center"
                     android:gravity="center_horizontal"
                     android:text="@string/smash"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
                     android:textAllCaps="true"
                     android:textColor="@color/black">
 
@@ -1048,6 +1063,8 @@
                     android:layout_gravity="center"
                     android:gravity="center_horizontal"
                     android:text="@string/lob"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
                     android:textAllCaps="true"
                     android:textColor="@color/black">
 
@@ -1130,6 +1147,8 @@
                     android:layout_gravity="center"
                     android:gravity="center_horizontal"
                     android:text="@string/dropshot"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
                     android:textAllCaps="true"
                     android:textColor="@color/black">
 

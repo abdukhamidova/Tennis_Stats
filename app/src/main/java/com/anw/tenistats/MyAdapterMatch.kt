@@ -9,7 +9,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.anw.tenistats.MatchView
 import com.anw.tenistats.R
-import com.anw.tenistats.ViewHistoryActivity
 import com.anw.tenistats.com.anw.tenistats.ResumeOrStatsDialogActivity
 import com.google.firebase.auth.FirebaseAuth
 import java.text.SimpleDateFormat
@@ -43,7 +42,7 @@ class MyAdapterMatch(
         val currentItem = filteredList[position]
 
         val dateFormat = SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.getDefault())
-        val date = Date(currentItem.data.toLong())
+        val date = Date(currentItem.data)
         val formattedDate = dateFormat.format(date)
 
         Log.d("MyAdapter", "onBindViewHolder - date: $formattedDate, player1: ${currentItem.player1}, player2: ${currentItem.player2}")

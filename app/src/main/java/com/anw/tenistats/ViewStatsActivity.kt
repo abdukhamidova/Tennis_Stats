@@ -168,7 +168,7 @@ class ViewStatsActivity : AppCompatActivity() {
             // Pobranie wartości "player1" z bazy danych
             val player1Value = dataSnapshot.getValue(String::class.java)
             // Ustawienie wartości w TextView
-            player1.text = player1Value
+            player1.text = player1Value.toString()
         }.addOnFailureListener { exception ->
             // Obsługa błędów
         }
@@ -177,7 +177,7 @@ class ViewStatsActivity : AppCompatActivity() {
             // Pobranie wartości "player1" z bazy danych
             val player2Value = dataSnapshot.getValue(String::class.java)
             // Ustawienie wartości w TextView
-            player2.text = player2Value
+            player2.text = player2Value.toString()
         }.addOnFailureListener { exception ->
             // Obsługa błędów
         }
@@ -251,8 +251,8 @@ class ViewStatsActivity : AppCompatActivity() {
             if(dataSnapshot.exists()){
                 // Pobranie wartości "player1" z bazy danych
                 val winner = dataSnapshot.getValue(String::class.java)
-                serve1.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_resume, 0, 0, 0)
-                serve2.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_resume, 0, 0, 0)
+                serve1.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_laurel3, 0, 0, 0)
+                serve2.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_laurel3, 0, 0, 0)
                 // Ustawienie wartości w TextView
                 if(winner==player1.text){
                     serve1.visibility = View.VISIBLE

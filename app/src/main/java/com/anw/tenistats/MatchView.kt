@@ -1,7 +1,5 @@
 package com.anw.tenistats
 
-import java.util.Date
-
 class MatchView {
     var data: Long = 0
     var player1: String = ""

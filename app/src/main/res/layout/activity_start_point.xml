@@ -51,27 +51,32 @@
                     android:textAlignment="gravity"
                     android:gravity="start|center_vertical"
                     android:layout_marginStart="6dp"
-                    android:text="@string/imie_nazwisko_player1"/>
+                    android:text="@string/imie_nazwisko_player1"
+                    android:textColor="@color/app_bg_color"/>
 
                 <TextView
                     android:id="@+id/textViewSet1Pl1"
                     android:layout_height="match_parent"
-                    android:text=""/>
+                    android:text=""
+                    android:textColor="@color/app_bg_color"/>
 
                 <TextView
                     android:id="@+id/textViewSet2Pl1"
                     android:layout_height="match_parent"
-                    android:text=""/>
+                    android:text=""
+                    android:textColor="@color/app_bg_color"/>
 
                 <TextView
                     android:id="@+id/textViewSet3Pl1"
                     android:layout_height="match_parent"
-                    android:text=""/>
+                    android:text=""
+                    android:textColor="@color/app_bg_color"/>
 
                 <TextView
                     android:id="@+id/textViewPktPl1"
                     android:layout_height="match_parent"
-                    android:text=""/>
+                    android:text=""
+                    android:textColor="@color/app_bg_color"/>
 
             </TableRow>
 
@@ -96,27 +101,32 @@
                     android:textAlignment="gravity"
                     android:gravity="start|center_vertical"
                     android:layout_marginStart="6dp"
-                    android:text="@string/imie_nazwisko_player2"/>
+                    android:text="@string/imie_nazwisko_player2"
+                    android:textColor="@color/app_btnClick_color"/>
 
                 <TextView
                     android:id="@+id/textViewSet1Pl2"
                     android:layout_height="match_parent"
-                    android:text=""/>
+                    android:text=""
+                    android:textColor="@color/app_btnClick_color"/>
 
                 <TextView
                     android:id="@+id/textViewSet2Pl2"
                     android:layout_height="match_parent"
-                    android:text=""/>
+                    android:text=""
+                    android:textColor="@color/app_btnClick_color"/>
 
                 <TextView
                     android:id="@+id/textViewSet3Pl2"
                     android:layout_height="match_parent"
-                    android:text="" />
+                    android:text=""
+                    android:textColor="@color/app_btnClick_color" />
 
                 <TextView
                     android:id="@+id/textViewPktPl2"
                     android:layout_height="match_parent"
-                    android:text=""/>
+                    android:text=""
+                    android:textColor="@color/app_btnClick_color"/>
 
 
             </TableRow>

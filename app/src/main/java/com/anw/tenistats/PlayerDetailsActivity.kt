@@ -243,10 +243,6 @@ class PlayerDetailsActivity : AppCompatActivity() {
         }
     }
 
-    private fun isNumber(input: String): Boolean {
-        return input.toIntOrNull() != null
-    }
-
     private fun setValues(){
         val nationality = findViewById<TextView>(R.id.autoCompleteTextViewNationality).text.toString()
         val date = findViewById<TextView>(R.id.editTextDate).text

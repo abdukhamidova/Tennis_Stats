@@ -16,4 +16,5 @@
     <color name="app_tableText_color">#000000</color>
     <color name="app_statsViewButton">#36768F</color>
     <color name="app_statsViewButton_Click">#346B81</color>
+    <color name="app_viewMatches_color">#D5F6F5ED</color>
 </resources>

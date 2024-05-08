@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardElevation="8dp"
-    android:layout_marginTop="10dp"
     android:layout_marginStart="5dp"
+    android:layout_marginTop="10dp"
     android:layout_marginEnd="5dp"
-    android:backgroundTint="#D398F6FA"
+    android:backgroundTint="@color/app_viewMatches_color"
+    app:cardElevation="8dp"
     tools:ignore="HardCodedText">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginVertical="6dp"
+        android:layout_marginStart="16dp"
         android:orientation="vertical">
 
         <LinearLayout
@@ -24,13 +23,15 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:orientation="horizontal">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/date_item"
                 android:textColor="@color/black"
                 android:textSize="26sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/textviewDateVM"
                 android:layout_width="wrap_content"
@@ -38,7 +39,7 @@
                 android:layout_marginStart="8dp"
                 android:text="Arya"
                 android:textColor="@color/black"
-                android:textSize="20sp"/>
+                android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -51,9 +52,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/player1_item"
-                android:textColor="@color/black"
+                android:textColor="@color/app_bg_color"
                 android:textSize="26sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textviewPlayer1VM"
@@ -61,8 +62,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:text="Stark"
-                android:textColor="@color/black"
-                android:textSize="20sp"/>
+                android:textColor="@color/app_bg_color"
+                android:textSize="20sp" />
 
         </LinearLayout>
 
@@ -74,12 +75,12 @@
 
             <TextView
                 android:id="@+id/textviewLabelPlayer2VM"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/player2_item"
-            android:textColor="@color/black"
-            android:textSize="26sp"
-            android:textStyle="bold"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/player2_item"
+                android:textColor="@color/app_btnClick_color"
+                android:textSize="26sp"
+                android:textStyle="bold" />
 
 
             <TextView
@@ -88,8 +89,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:text="20"
-                android:textColor="@color/black"
-                android:textSize="20sp"/>
+                android:textColor="@color/app_btnClick_color"
+                android:textSize="20sp" />
         </LinearLayout>
     </LinearLayout>
 

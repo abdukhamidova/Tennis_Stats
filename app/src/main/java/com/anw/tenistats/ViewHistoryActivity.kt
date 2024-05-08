@@ -6,7 +6,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ListView
@@ -14,7 +13,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -33,6 +31,7 @@ class ViewHistoryActivity : AppCompatActivity() {
     private lateinit var navigationDrawerHelper: NavigationDrawerHelper
     private lateinit var drawerLayout: DrawerLayout
     private var matchId = ""
+    private lateinit var pl1: String
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -208,9 +207,21 @@ class ViewHistoryActivity : AppCompatActivity() {
                                 pointsList.add("Set $currentSet")
 
                                 for (gameSnapshot in setSnapshot.children) {
-                                    val gameP1 = gameSnapshot.child("score").child("player1score").getValue(String::class.java)
-                                    val gameP2 = gameSnapshot.child("score").child("player2score").getValue(String::class.java)
-                                    pointsList.add("$gameP1 : $gameP2")
+                                    val set1P1 = gameSnapshot.child("score").child("player1set1").getValue(String::class.java)
+                                    val set1P2 = gameSnapshot.child("score").child("player2set1").getValue(String::class.java)
+                                    val set2P1 = gameSnapshot.child("score").child("player1set2").getValue(String::class.java)
+                                    val set2P2 = gameSnapshot.child("score").child("player2set2").getValue(String::class.java)
+                                    val set3P1 = gameSnapshot.child("score").child("player1set3").getValue(String::class.java)
+                                    val set3P2 = gameSnapshot.child("score").child("player2set3").getValue(String::class.java)
+                                    if(currentSet==1) {
+                                        pointsList.add("$set1P1 : $set1P2")
+                                    }
+                                    else if(currentSet==2) {
+                                        pointsList.add("$set1P1 : $set1P2 | $set2P1 : $set2P2")
+                                    }
+                                    else{
+                                        pointsList.add("$set1P1 : $set1P2 | $set2P1 : $set2P2 | $set3P1 : $set3P2")
+                                    }
 
                                     if (gameSnapshot.hasChildren()) {
                                         for (pointSnapshot in gameSnapshot.children) {
@@ -251,7 +262,6 @@ class ViewHistoryActivity : AppCompatActivity() {
         })
     }
 
-
     private fun fetchMatchPoints(matchId: String, set: String) {
         val user = FirebaseAuth.getInstance().currentUser?.uid
         val database = FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
@@ -272,9 +282,21 @@ class ViewHistoryActivity : AppCompatActivity() {
                         var currentGame = 0
 
                         for (gameSnapshot in dataSnapshot.children) {
-                            val gameP1 = gameSnapshot.child("score").child("player1score").getValue(String::class.java)
-                            val gameP2 = gameSnapshot.child("score").child("player2score").getValue(String::class.java)
-                            pointsList.add("$gameP1 : $gameP2")
+                            val set1P1 = gameSnapshot.child("score").child("player1set1").getValue(String::class.java)
+                            val set1P2 = gameSnapshot.child("score").child("player2set1").getValue(String::class.java)
+                            val set2P1 = gameSnapshot.child("score").child("player1set2").getValue(String::class.java)
+                            val set2P2 = gameSnapshot.child("score").child("player2set2").getValue(String::class.java)
+                            val set3P1 = gameSnapshot.child("score").child("player1set3").getValue(String::class.java)
+                            val set3P2 = gameSnapshot.child("score").child("player2set3").getValue(String::class.java)
+                            if(set2P1=="") {
+                                pointsList.add("$set1P1 : $set1P2")
+                            }
+                            else if(set3P1=="") {
+                                pointsList.add("$set1P1 : $set1P2 | $set2P1 : $set2P2")
+                            }
+                            else{
+                                pointsList.add("$set1P1 : $set1P2 | $set2P1 : $set2P2 | $set3P1 : $set3P2")
+                            }
 
                             if (gameSnapshot.hasChildren()) {
                                 for (pointSnapshot in gameSnapshot.children) {
@@ -293,7 +315,7 @@ class ViewHistoryActivity : AppCompatActivity() {
                                     }
 
 
-                                        if (score1 != null && score2 != null && player != null && co != null && czym != null && gdzie != null) {
+                                    if (score1 != null && score2 != null && player != null && co != null && czym != null && gdzie != null) {
                                         pointsList.add(pointString)
                                     }
                                 }
@@ -319,7 +341,6 @@ class ViewHistoryActivity : AppCompatActivity() {
         val adapter = CustomArrayAdapter(this, pointsList, player1Name, player2Name)
         listView.adapter = adapter
     }
-
 
     fun firstLetters(input: String?): String {
         var result = ""
@@ -353,12 +374,12 @@ class ViewHistoryActivity : AppCompatActivity() {
         val user = FirebaseAuth.getInstance().currentUser?.uid
         database = FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
             .getReference(user.toString()).child("Matches").child(matchId)
-
         database.child("player1").get().addOnSuccessListener { dataSnapshot ->
             // Pobranie wartości "player1" z bazy danych
             val player1Value = dataSnapshot.getValue(String::class.java)
             // Ustawienie wartości w TextView
             player1.text = "$player1Value°"
+            pl1 = player1Value.toString()
         }.addOnFailureListener { exception ->
             // Obsługa błędów
         }
@@ -441,10 +462,10 @@ class ViewHistoryActivity : AppCompatActivity() {
             if(dataSnapshot.exists()){
                 // Pobranie wartości "player1" z bazy danych
                 val winner = dataSnapshot.getValue(String::class.java)
-                serve1.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_resume, 0, 0, 0)
-                serve2.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_resume, 0, 0, 0)
+                serve1.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_laurel3, 0, 0, 0)
+                serve2.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_laurel3, 0, 0, 0)
                 // Ustawienie wartości w TextView
-                if(winner==player1.text){
+                if(winner==pl1){
                     serve1.visibility = View.VISIBLE
                     serve2.visibility = View.INVISIBLE
                 }
@@ -460,7 +481,7 @@ class ViewHistoryActivity : AppCompatActivity() {
                     serve1.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ball, 0, 0, 0)
                     serve2.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ball, 0, 0, 0)
                     // Ustawienie wartości w TextView
-                    if(lastserve==player1.text){
+                    if(lastserve==pl1){
                         serve1.visibility = View.VISIBLE
                         serve2.visibility = View.INVISIBLE
                     }

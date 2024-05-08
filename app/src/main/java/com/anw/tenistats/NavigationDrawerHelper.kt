@@ -7,7 +7,6 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.anw.tenistats.ActivityMenu
 import com.anw.tenistats.ActivityStartPoint
 import com.anw.tenistats.MainActivity
-import com.anw.tenistats.PlayerDetailsActivity
 import com.anw.tenistats.R
 import com.anw.tenistats.StartNewActivity
 import com.anw.tenistats.ViewMatchesActivity

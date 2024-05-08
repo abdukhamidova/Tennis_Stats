@@ -146,7 +146,7 @@ class ResumeOrStatsDialogActivity(private val context: Context,private val opene
             // Pobranie wartości "player1" z bazy danych
             val player1Value = dataSnapshot.getValue(String::class.java)
             // Ustawienie wartości w TextView
-            player1.text = player1Value
+            player1.text = player1Value.toString()
         }.addOnFailureListener { exception ->
             // Obsługa błędów
         }
@@ -155,7 +155,7 @@ class ResumeOrStatsDialogActivity(private val context: Context,private val opene
             // Pobranie wartości "player1" z bazy danych
             val player2Value = dataSnapshot.getValue(String::class.java)
             // Ustawienie wartości w TextView
-            player2.text = player2Value
+            player2.text = player2Value.toString()
         }.addOnFailureListener { exception ->
             // Obsługa błędów
         }

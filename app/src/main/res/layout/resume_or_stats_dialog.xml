@@ -26,7 +26,7 @@
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/app_tableBg_color"
+        android:background="@drawable/border_button"
         android:theme="@style/scoreTableTextAppearance"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -52,27 +52,32 @@
                 android:layout_weight="1"
                 android:textAlignment="textStart"
                 android:layout_marginStart="6dp"
-                android:text="@string/imie_nazwisko_player1"/>
+                android:text="@string/imie_nazwisko_player1"
+                android:textColor="@color/app_bg_color"/>
 
             <TextView
                 android:id="@+id/textViewPlayer1Set1RoS"
                 android:layout_height="match_parent"
-                android:text="" />
+                android:text=""
+                android:textColor="@color/app_bg_color" />
 
             <TextView
                 android:id="@+id/textViewPlayer1Set2RoS"
                 android:layout_height="match_parent"
-                android:text="" />
+                android:text=""
+                android:textColor="@color/app_bg_color"/>
 
             <TextView
                 android:id="@+id/textViewPlayer1Set3RoS"
                 android:layout_height="match_parent"
-                android:text="" />
+                android:text=""
+                android:textColor="@color/app_bg_color"/>
 
             <TextView
                 android:id="@+id/textViewPlayer1PktRoS"
                 android:layout_height="match_parent"
-                android:text=""/>
+                android:text=""
+                android:textColor="@color/app_bg_color"/>
         </TableRow>
 
         <TableRow>
@@ -93,28 +98,33 @@
                 android:layout_marginStart="6dp"
                 android:layout_weight="1"
                 android:textAlignment="textStart"
-                android:text="@string/imie_nazwisko_player2"/>
+                android:text="@string/imie_nazwisko_player2"
+                android:textColor="@color/app_btnClick_color"/>
 
             <TextView
                 android:id="@+id/textViewPlayer2Set1RoS"
                 android:layout_height="match_parent"
-                android:text=""/>
+                android:text=""
+                android:textColor="@color/app_btnClick_color"/>
 
             <TextView
                 android:id="@+id/textViewPlayer2Set2RoS"
                 android:layout_height="match_parent"
-                android:text="" />
+                android:text=""
+                android:textColor="@color/app_btnClick_color" />
 
             <TextView
                 android:id="@+id/textViewPlayer2Set3RoS"
                 android:layout_height="match_parent"
                 android:text=""
-                android:textAlignment="center"/>
+                android:textAlignment="center"
+                android:textColor="@color/app_btnClick_color"/>
 
             <TextView
                 android:id="@+id/textViewPlayer2PktRoS"
                 android:layout_height="match_parent"
-                android:text="" />
+                android:text=""
+                android:textColor="@color/app_btnClick_color"/>
         </TableRow>
     </TableLayout>
 
