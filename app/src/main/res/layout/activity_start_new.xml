@@ -51,7 +51,7 @@
             android:layout_width="346dp"
             android:layout_height="50dp"
             android:layout_marginStart="24dp"
-            android:hint="@string/name_p2"
+            android:hint="@string/name"
             android:textColor="@color/white"
             android:textColorHint="@color/app_hint_color"
             android:backgroundTint="@color/white"

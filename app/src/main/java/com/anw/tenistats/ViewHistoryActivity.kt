@@ -247,6 +247,7 @@ class ViewHistoryActivity : AppCompatActivity() {
                                 }
                             }
                         }
+                        //⏺ ⃝⃝
                         displayMatchPoints(pointsList, "°", "•")
                     }
 

@@ -1,8 +1,10 @@
 package com.anw.tenistats
 
+import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
@@ -16,8 +18,11 @@ import com.anw.tenistats.com.anw.tenistats.AddPointDialog
 import com.anw.tenistats.ui.theme.NavigationDrawerHelper
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class ActivityStartPoint : AppCompatActivity() {
     private lateinit var firebaseAuth: FirebaseAuth
@@ -85,9 +90,9 @@ class ActivityStartPoint : AppCompatActivity() {
 
 
         //czy to jest potrzebne? bo wydaje mi się, że zmienna database nigdzie nie jest dalej używana
-        database =
-            FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
-                .getReference(user.toString()).child("Matches").child(matchId.toString())
+       // database =
+        //    FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
+         //       .getReference(user.toString()).child("Matches").child(matchId.toString())
         val app = application as Stats
         player1 = findViewById<TextView>(R.id.textviewPlayer1)
         player2 = findViewById<TextView>(R.id.textviewPlayer2)
@@ -110,7 +115,7 @@ class ActivityStartPoint : AppCompatActivity() {
         val first_serve_text = resources.getString(R.string.first_serve)
         val second_serve_text = resources.getString(R.string.second_serve)
 
-        val (_, _) = calculateGame(set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
+       // val (_, _) = calculateGame(set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
 
         findViewById<Button>(R.id.buttonAce).setOnClickListener {
             val (game,set) = calculateGame(set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
@@ -565,7 +570,8 @@ class ActivityStartPoint : AppCompatActivity() {
                                     )
                                         .show()
                                 }
-                        } else {
+                        }
+                        else {
                             if (gameId > 1) {
                                 gameId -= 1
                                 prevPoint = db.child("set $setId").child("game $gameId")
@@ -770,7 +776,52 @@ class ActivityStartPoint : AppCompatActivity() {
         }
     }
 
-    // Function to delete a point
+    //funkcja punktu poprzedniego
+    private fun getPrevPoint(prevPointNr: Int, db: DatabaseReference, setId: Int, gameId: Int)
+    {
+
+    }
+    private fun getSetGame(user: String?, db: DatabaseReference, setId: Int, gameId: Int): Pair<Int, Int>
+    {
+        var retGame:Int = gameId
+        var retSet: Int = setId
+
+        db.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val set1p1: String? = dataSnapshot.child("set1p1").getValue(String::class.java)
+                val set1p2 = dataSnapshot.child("set1p2").getValue(String::class.java)
+                val set2p1 = dataSnapshot.child("set2p1").getValue(String::class.java)
+                val set2p2 = dataSnapshot.child("set2p2").getValue(String::class.java)
+                val set3p1 = dataSnapshot.child("set3p1").getValue(String::class.java)
+                val set3p2 = dataSnapshot.child("set3p2").getValue(String::class.java)
+
+                if(set2p1=="")
+                {
+                    //jestem w 1 secie
+                    retGame -= 1
+                }
+                else if(set3p1 == "") {
+                    //jestem w 2 secie
+                }else
+                {
+                    //jestem w 3 secie
+                }
+                   //game1 w set2
+                //set2p1 == 0
+                //set2p2 == 0 okk
+            }
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Obsługa błędu pobierania danych
+                Log.e(
+                    ContentValues.TAG,
+                    "Error fetching match points: ${databaseError.message}"
+                )
+            }
+        })
+
+        return Pair(setId, gameId)
+    }
+    // funkcja usuwajaca punkt
     private fun deletePoint(delPointNr: Int, db: DatabaseReference, deletePoint: DatabaseReference) {
         db.child("pktCount").setValue(delPointNr)
         deletePoint.removeValue().addOnSuccessListener {

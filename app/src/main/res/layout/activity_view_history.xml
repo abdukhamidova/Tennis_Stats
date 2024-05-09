@@ -21,7 +21,7 @@
             android:id="@+id/tableLayoutHis"
             android:layout_width="370dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/border_button"
+            android:background="@drawable/score_table"
             android:theme="@style/scoreTableTextAppearance"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -29,16 +29,18 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.13999999">
 
-            <TableRow>
+            <TableRow
+                android:theme="@style/player1TextAppearance">
                 <TextView
                     android:id="@+id/textViewServe1His"
                     android:layout_width="wrap_content"
                     android:layout_height="45dp"
-                    android:layout_marginStart="3dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginEnd="4dp"
                     android:layout_weight="0"
                     android:gravity="center"
-                    android:visibility="invisible"
+                    android:visibility="visible"
+                    app:drawableTint="@color/gold"
                     app:drawableStartCompat="@drawable/icon_laurel3" />
 
                 <TextView
@@ -47,43 +49,41 @@
                     android:layout_height="match_parent"
                     android:layout_marginStart="6dp"
                     android:layout_weight="1"
-                    android:textColor="@color/app_bg_color"
+                    android:text="@string/imie_nazwisko_player1"
                     android:textAlignment="gravity"
-                    android:gravity="start|center_vertical" />
+                    android:gravity="start|center_vertical"/>
 
                 <TextView
                     android:id="@+id/textViewP1Set1His"
-                    android:layout_height="match_parent"
-                    android:textColor="@color/app_bg_color"/>
+                    android:layout_height="match_parent"/>
 
                 <TextView
                     android:id="@+id/textViewP1Set2His"
-                    android:layout_height="match_parent"
-                    android:textColor="@color/app_bg_color" />
+                    android:layout_height="match_parent"/>
 
                 <TextView
                     android:id="@+id/textViewP1Set3His"
-                    android:layout_height="match_parent"
-                    android:textColor="@color/app_bg_color" />
+                    android:layout_height="match_parent" />
                 <TextView
                     android:id="@+id/textViewPlayer1PktHis"
-                    android:layout_height="match_parent"
-                    android:textColor="@color/app_bg_color"/>
+                    android:layout_height="match_parent"/>
 
             </TableRow>
 
-            <TableRow>
+            <TableRow
+                android:theme="@style/player2TextAppearance">
 
                 <TextView
                     android:id="@+id/textViewServe2His"
                     android:layout_width="wrap_content"
                     android:layout_height="45dp"
-                    android:layout_marginStart="3dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginEnd="4dp"
                     android:layout_weight="0"
                     android:gravity="center"
-                    android:visibility="invisible"
-                    app:drawableStartCompat="@drawable/icon_laurel3" />
+                    android:visibility="visible"
+                    app:drawableStartCompat="@drawable/icon_laurel3"
+                    app:drawableTint="@color/gold" />
 
                 <TextView
                     android:id="@+id/textviewPlayer2His"
@@ -91,28 +91,24 @@
                     android:layout_height="match_parent"
                     android:layout_marginStart="6dp"
                     android:layout_weight="1"
+                    android:text="@string/imie_nazwisko_player2"
                     android:gravity="start|center_vertical"
-                    android:textAlignment="gravity"
-                    android:textColor="@color/app_btnClick_color" />
+                    android:textAlignment="gravity"/>
 
                 <TextView
                     android:id="@+id/textViewP2Set1His"
-                    android:layout_height="match_parent"
-                    android:textColor="@color/app_btnClick_color" />
+                    android:layout_height="match_parent"/>
 
                 <TextView
                     android:id="@+id/textViewP2Set2His"
-                    android:layout_height="match_parent"
-                    android:textColor="@color/app_btnClick_color" />
+                    android:layout_height="match_parent"/>
 
                 <TextView
                     android:id="@+id/textViewP2Set3His"
-                    android:layout_height="match_parent"
-                    android:textColor="@color/app_btnClick_color" />
+                    android:layout_height="match_parent"/>
                 <TextView
                     android:id="@+id/textViewPlayer2PktHis"
-                    android:layout_height="match_parent"
-                    android:textColor="@color/app_btnClick_color"/>
+                    android:layout_height="match_parent"/>
             </TableRow>
         </TableLayout>
 
@@ -137,7 +133,7 @@
 
                 <Button
                     android:layout_width="0dp"
-                    android:layout_height="40dp"
+                    android:layout_height="48dp"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:text="@string/history"
@@ -153,7 +149,7 @@
                 <Button
                     android:id="@+id/statistics"
                     android:layout_width="0dp"
-                    android:layout_height="40dp"
+                    android:layout_height="48dp"
                     android:layout_weight="1"
                     android:text="@string/statistics"
                     android:textSize="17sp"
@@ -176,42 +172,46 @@
                 <Button
                     android:id="@+id/buttonAllHis"
                     android:layout_width="0dp"
-                    android:layout_height="40dp"
+                    android:layout_height="48dp"
                     android:layout_weight="1"
                     android:background="@drawable/rectangle_button"
                     android:textColor="@color/white"
                     android:gravity="center"
-                    android:text="@string/all"/>
+                    android:text="@string/all"
+                    style="?android:attr/buttonBarButtonStyle"/>
 
                 <Button
                     android:id="@+id/buttonSet1His"
                     android:layout_width="0dp"
-                    android:layout_height="40dp"
+                    android:layout_height="48dp"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:background="@drawable/rec_btn_not_selected"
                     android:text="@string/set_1"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    style="?android:attr/buttonBarButtonStyle"/>
 
                 <Button
                     android:id="@+id/buttonSet2His"
                     android:layout_width="0dp"
-                    android:layout_height="40dp"
+                    android:layout_height="48dp"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:background="@drawable/rec_btn_not_selected"
                     android:text="@string/set_2"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    style="?android:attr/buttonBarButtonStyle"/>
 
                 <Button
                     android:id="@+id/buttonSet3His"
                     android:layout_width="0dp"
-                    android:layout_height="40dp"
+                    android:layout_height="48dp"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:background="@drawable/rec_btn_not_selected"
                     android:text="@string/set_3"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    style="?android:attr/buttonBarButtonStyle"/>
             </LinearLayout> <!--Sets-->
 
         </LinearLayout> <!--Navigation-->
@@ -224,7 +224,8 @@
             android:layout_marginBottom="1dp"
             android:layout_marginEnd="20dp"
             android:layout_marginStart="20dp"
-            android:background="@color/dark_blue"
+            android:padding="5dp"
+            android:background="@color/transparent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"

@@ -22,7 +22,7 @@
             android:id="@+id/tableLayout"
             android:layout_width="370dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/border_button"
+            android:background="@drawable/score_table"
             android:theme="@style/scoreTableTextAppearance"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -36,10 +36,10 @@
                     android:id="@+id/textViewBallPl1"
                     android:layout_width="wrap_content"
                     android:layout_height="45dp"
-                    android:layout_weight="0"
-                    android:layout_marginStart="3dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginEnd="4dp"
-                    android:gravity="center"
+                    android:layout_weight="0"
+                    android:gravity="end"
                     android:visibility="visible"
                     app:drawableStartCompat="@drawable/ball" />
 
@@ -51,32 +51,27 @@
                     android:textAlignment="gravity"
                     android:gravity="start|center_vertical"
                     android:layout_marginStart="6dp"
-                    android:text="@string/imie_nazwisko_player1"
-                    android:textColor="@color/app_bg_color"/>
+                    android:text="@string/imie_nazwisko_player1"/>
 
                 <TextView
                     android:id="@+id/textViewSet1Pl1"
                     android:layout_height="match_parent"
-                    android:text=""
-                    android:textColor="@color/app_bg_color"/>
+                    android:text=""/>
 
                 <TextView
                     android:id="@+id/textViewSet2Pl1"
                     android:layout_height="match_parent"
-                    android:text=""
-                    android:textColor="@color/app_bg_color"/>
+                    android:text=""/>
 
                 <TextView
                     android:id="@+id/textViewSet3Pl1"
                     android:layout_height="match_parent"
-                    android:text=""
-                    android:textColor="@color/app_bg_color"/>
+                    android:text=""/>
 
                 <TextView
                     android:id="@+id/textViewPktPl1"
                     android:layout_height="match_parent"
-                    android:text=""
-                    android:textColor="@color/app_bg_color"/>
+                    android:text=""/>
 
             </TableRow>
 
@@ -87,11 +82,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="45dp"
                     android:layout_weight="0"
-                    android:layout_marginStart="3dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginEnd="4dp"
                     android:gravity="center"
                     android:visibility="visible"
-                    app:drawableStartCompat="@drawable/ball" />
+                    app:drawableStartCompat="@drawable/ball"/>
 
                 <TextView
                     android:id="@+id/textviewPlayer2"
@@ -101,32 +96,27 @@
                     android:textAlignment="gravity"
                     android:gravity="start|center_vertical"
                     android:layout_marginStart="6dp"
-                    android:text="@string/imie_nazwisko_player2"
-                    android:textColor="@color/app_btnClick_color"/>
+                    android:text="@string/imie_nazwisko_player2"/>
 
                 <TextView
                     android:id="@+id/textViewSet1Pl2"
                     android:layout_height="match_parent"
-                    android:text=""
-                    android:textColor="@color/app_btnClick_color"/>
+                    android:text=""/>
 
                 <TextView
                     android:id="@+id/textViewSet2Pl2"
                     android:layout_height="match_parent"
-                    android:text=""
-                    android:textColor="@color/app_btnClick_color"/>
+                    android:text=""/>
 
                 <TextView
                     android:id="@+id/textViewSet3Pl2"
                     android:layout_height="match_parent"
-                    android:text=""
-                    android:textColor="@color/app_btnClick_color" />
+                    android:text=""/>
 
                 <TextView
                     android:id="@+id/textViewPktPl2"
                     android:layout_height="match_parent"
-                    android:text=""
-                    android:textColor="@color/app_btnClick_color"/>
+                    android:text=""/>
 
 
             </TableRow>

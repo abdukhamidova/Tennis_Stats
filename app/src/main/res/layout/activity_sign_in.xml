@@ -65,7 +65,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="@string/log_in"
-            android:textSize="19sp" /> <!--log in-->
+            android:textSize="21sp" /> <!--log in-->
 
         <TextView
             android:id="@+id/textNotSignUp"
@@ -75,7 +75,7 @@
             android:layout_marginTop="10dp"
             android:text="@string/i_m_not_signed_up"
             android:textColor="@color/white"
-            android:textSize="15sp"
+            android:textSize="16sp"
             app:layout_constraintVertical_bias="0" /> <!--sign up-->
     </LinearLayout>
 

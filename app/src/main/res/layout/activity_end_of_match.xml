@@ -36,7 +36,7 @@
             android:id="@+id/tableLayoutEnd"
             android:layout_width="370dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/border_button"
+            android:background="@drawable/score_table"
             android:theme="@style/scoreTableTextAppearance"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -50,12 +50,12 @@
                     android:id="@+id/textViewServe1EOM"
                     android:layout_width="wrap_content"
                     android:layout_height="45dp"
-                    android:layout_marginStart="3dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginEnd="4dp"
                     android:layout_weight="0"
-                    android:visibility="visible"
+                    android:visibility="invisible"
                     app:drawableStartCompat="@drawable/icon_laurel3"
-                    app:drawableTint="@color/dark_green" />
+                    app:drawableTint="@color/gold" />
 
                 <TextView
                     android:id="@+id/textviewPlayer1"
@@ -65,26 +65,22 @@
                     android:layout_weight="1"
                     android:gravity="start|center_vertical"
                     android:text="@string/imie_nazwisko_player1"
-                    android:textAlignment="gravity"
-                    android:textColor="@color/app_bg_color" />
+                    android:textAlignment="gravity"/>
 
                 <TextView
                     android:id="@+id/textViewP1Set1EOM"
                     android:layout_height="match_parent"
-                    android:text=""
-                    android:textColor="@color/app_bg_color" />
+                    android:text=""/>
 
                 <TextView
                     android:id="@+id/textViewP1Set2EOM"
                     android:layout_height="match_parent"
-                    android:text=""
-                    android:textColor="@color/app_bg_color" />
+                    android:text=""/>
 
                 <TextView
                     android:id="@+id/textViewP1Set3EOM"
                     android:layout_height="match_parent"
-                    android:text=""
-                    android:textColor="@color/app_bg_color" />
+                    android:text=""/>
 
             </TableRow>
 
@@ -94,12 +90,12 @@
                     android:id="@+id/textViewServe2EOM"
                     android:layout_width="wrap_content"
                     android:layout_height="45dp"
-                    android:layout_marginStart="3dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginEnd="4dp"
                     android:layout_weight="0"
-                    android:visibility="visible"
+                    android:visibility="invisible"
                     app:drawableStartCompat="@drawable/icon_laurel3"
-                    app:drawableTint="@color/dark_green" />
+                    app:drawableTint="@color/gold" />
 
                 <TextView
                     android:id="@+id/textviewPlayer2"
@@ -108,14 +104,12 @@
                     android:layout_marginStart="6dp"
                     android:layout_weight="1"
                     android:text="@string/imie_nazwisko_player2"
-                    android:textAlignment="textStart"
-                    android:textColor="@color/app_btnClick_color" />
+                    android:textAlignment="textStart"/>
 
                 <TextView
                     android:id="@+id/textViewP2Set1EOM"
                     android:layout_height="match_parent"
-                    android:text=""
-                    android:textColor="@color/app_btnClick_color" />
+                    android:text=""/>
 
                 <TextView
                     android:id="@+id/textViewP2Set2EOM"
@@ -126,8 +120,7 @@
                 <TextView
                     android:id="@+id/textViewP2Set3EOM"
                     android:layout_height="match_parent"
-                    android:text=""
-                    android:textColor="@color/app_btnClick_color" />
+                    android:text=""/>
             </TableRow>
         </TableLayout>
 

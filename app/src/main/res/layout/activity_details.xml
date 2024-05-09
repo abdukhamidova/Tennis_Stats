@@ -22,7 +22,7 @@
             android:id="@+id/tableLayoutDetails"
             android:layout_width="370dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/border_button"
+            android:background="@drawable/score_table"
             android:theme="@style/scoreTableTextAppearance"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -36,7 +36,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="45dp"
                     android:layout_weight="0"
-                    android:layout_marginStart="3dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginEnd="4dp"
                     android:gravity="center"
                     android:visibility="visible"
@@ -50,28 +50,23 @@
                     android:layout_weight="1"
                     android:textAlignment="gravity"
                     android:gravity="start|center_vertical"
-                    android:text="@string/imie_nazwisko_player1"
-                    android:textColor="@color/app_bg_color"/>
+                    android:text="@string/imie_nazwisko_player1"/>
 
                 <TextView
                     android:id="@+id/textviewPlayer1Set1Details"
-                    android:layout_height="match_parent"
-                    android:textColor="@color/app_bg_color" />
+                    android:layout_height="match_parent"/>
 
                 <TextView
                     android:id="@+id/textviewPlayer1Set2Details"
-                    android:layout_height="match_parent"
-                    android:textColor="@color/app_bg_color" />
+                    android:layout_height="match_parent"/>
 
                 <TextView
                     android:id="@+id/textviewPlayer1Set3Details"
-                    android:layout_height="match_parent"
-                    android:textColor="@color/app_bg_color"/>
+                    android:layout_height="match_parent"/>
 
                 <TextView
                     android:id="@+id/textviewPlayer1PktDetails"
-                    android:layout_height="match_parent"
-                    android:textColor="@color/app_bg_color" />
+                    android:layout_height="match_parent" />
 
             </TableRow>
 
@@ -82,7 +77,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="45dp"
                     android:layout_weight="0"
-                    android:layout_marginStart="3dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginEnd="4dp"
                     android:gravity="center"
                     android:visibility="invisible"
@@ -96,28 +91,23 @@
                     android:layout_weight="1"
                     android:textAlignment="gravity"
                     android:gravity="start|center_vertical"
-                    android:text="@string/imie_nazwisko_player2"
-                    android:textColor="@color/app_btnClick_color"/>
+                    android:text="@string/imie_nazwisko_player2"/>
 
                 <TextView
                     android:id="@+id/textviewPlayer2Set1Details"
-                    android:layout_height="match_parent"
-                    android:textColor="@color/app_btnClick_color"/>
+                    android:layout_height="match_parent"/>
 
                 <TextView
                     android:id="@+id/textviewPlayer2Set2Details"
-                    android:layout_height="match_parent"
-                    android:textColor="@color/app_btnClick_color" />
+                    android:layout_height="match_parent"/>
 
                 <TextView
                     android:id="@+id/textviewPlayer2Set3Details"
-                    android:layout_height="match_parent"
-                    android:textColor="@color/app_btnClick_color"/>
+                    android:layout_height="match_parent"/>
 
                 <TextView
                     android:id="@+id/textviewPlayer2PktDetails"
-                    android:layout_height="match_parent"
-                    android:textColor="@color/app_btnClick_color"/>
+                    android:layout_height="match_parent"/>
             </TableRow>
         </TableLayout>
 
@@ -274,7 +264,7 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.google.android.material.navigation.NavigationView
+   <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigationViewMenu"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"

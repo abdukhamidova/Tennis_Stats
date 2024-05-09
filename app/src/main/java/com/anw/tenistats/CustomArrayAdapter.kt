@@ -44,16 +44,19 @@ class CustomArrayAdapter(
         val currentItem = getItem(position) as String
 
         if (currentItem.contains(player1Name ?: "")) {
-            view.setBackgroundColor(ContextCompat.getColor(context, R.color.app_bg_color))
+            view.setBackgroundColor(ContextCompat.getColor(context, R.color.app_player1_color))
+            (view as? TextView)?.setTextColor(ContextCompat.getColor(context, R.color.app_bg_color))
         } else if (currentItem.contains(player2Name ?: "")) {
-            view.setBackgroundColor(ContextCompat.getColor(context, R.color.app_btnClick_color))
+            view.setBackgroundColor(ContextCompat.getColor(context, R.color.app_player2_color))
+            (view as? TextView)?.setTextColor(ContextCompat.getColor(context, R.color.app_bg_color))
         } else {
             view.setBackgroundColor(ContextCompat.getColor(context, android.R.color.transparent))
+            (view as? TextView)?.setTextColor(ContextCompat.getColor(context, R.color.white))
         }
 
         // Ustawienie tekstu dla TextView
         (view as TextView).text = currentItem
-        view.setTextColor(ContextCompat.getColor(context,R.color.white))
+        //view.setTextColor(ContextCompat.getColor(context,R.color.txt_players))
         return view
     }
 

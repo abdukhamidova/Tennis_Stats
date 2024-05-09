@@ -48,13 +48,15 @@
                 android:id="@+id/linearLayoutName"
                 android:layout_width="345dp"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginBottom="10dp">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/enter_name"
+                    android:textSize="18sp"
                     android:textColor="@color/white" />
 
                 <EditText
@@ -69,14 +71,17 @@
                     android:drawableTint="@color/app_hint_color"
                     android:textSize="16sp"
                     android:textColor="@color/white"
-                    android:textColorHint="@color/app_hint_color" />
+                    android:textColorHint="@color/app_hint_color"
+                    android:autofillHints="name"
+                    android:inputType="text"/>
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/linearLayoutNationality"
                 android:layout_width="345dp"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginBottom="10dp">
 
                 <TextView
                     android:id="@+id/textView3"
@@ -84,6 +89,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/nationality"
+                    android:textSize="18sp"
                     android:textColor="@color/white" />
 
                 <AutoCompleteTextView
@@ -104,7 +110,7 @@
                 android:id="@+id/linearLayoutBDay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp">
+                android:layout_marginBottom="10dp">
 
                 <TextView
                     android:id="@+id/textView6"
@@ -112,6 +118,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/date_of_birth"
+                    android:textSize="17sp"
                     android:textColor="@color/white" />
 
                 <EditText
@@ -124,7 +131,7 @@
                     android:hint="@string/select_date_of_birth"
                     android:drawableStart="@drawable/icon_calendar"
                     android:drawableTint="@color/app_hint_color"
-                    android:padding="5dp"
+                    android:drawablePadding="5dp"
                     android:inputType="date"
                     android:textColor="@color/white"
                     android:textColorHint="@color/app_hint_color" />
@@ -140,17 +147,17 @@
                     android:id="@+id/radioGroupAddPlayer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="20dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="10dp">
 
                     <RadioButton
                         android:id="@+id/radioButtonR"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
-                        android:layout_marginEnd="30dp"
+                        android:layout_marginEnd="20dp"
                         android:buttonTint="@color/app_mainTitles_color"
-                        android:text="@string/righthanded"
+                        android:text="@string/right_handed"
                         android:textColor="@color/white"
                         android:textSize="20sp"/>
 
@@ -158,9 +165,8 @@
                         android:id="@+id/radioButtonL"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
-                        android:layout_marginStart="30dp"
                         android:buttonTint="@color/app_mainTitles_color"
-                        android:text="@string/lefthanded"
+                        android:text="@string/left_handed"
                         android:textColor="@color/white"
                         android:textSize="20sp"/>
                 </RadioGroup>
@@ -170,7 +176,7 @@
                 android:id="@+id/linearLayoutStrength"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp">
+                android:layout_marginBottom="10dp">
 
                 <TextView
                     android:id="@+id/textView4"
@@ -178,6 +184,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/strength"
+                    android:textSize="18sp"
                     android:textColor="@color/white" />
 
                 <AutoCompleteTextView
@@ -196,8 +203,7 @@
             <LinearLayout
                 android:id="@+id/linearLayoutWeakness"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp">
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/textView5"
@@ -205,6 +211,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/weakness"
+                    android:textSize="18sp"
                     android:textColor="@color/white" />
 
                 <AutoCompleteTextView
@@ -227,7 +234,7 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:text="@string/add"
-            android:textSize="17sp"
+            android:textSize="22sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/linearLayoutForm"
             app:layout_constraintStart_toStartOf="@+id/linearLayoutForm"
@@ -236,7 +243,7 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.google.android.material.navigation.NavigationView
+   <!--<com.google.android.material.navigation.NavigationView
         android:id="@+id/navigationViewMenu"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
@@ -245,6 +252,6 @@
         app:headerLayout="@layout/navigation_header"
         app:menu="@menu/navigation_menu"
         app:itemIconPadding="20dp"
-        app:itemHorizontalPadding="30dp"/>
+        app:itemHorizontalPadding="30dp"/>-->
 
 </androidx.drawerlayout.widget.DrawerLayout>

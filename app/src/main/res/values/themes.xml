@@ -26,7 +26,17 @@
         <item name="android:layout_marginTop">5dp</item>
         <item name="android:layout_marginBottom">5dp</item>
         <item name="android:layout_weight">0.9</item>
-        <item name="android:textColor">@color/black</item>
+        <item name="android:textColor">@color/app_viewMatches_color</item>
+        <item name="drawableTint">@color/app_mainTitles_color</item>
+    </style>
+
+    <!--styl dla koloru playera1-->
+    <style name="player1TextAppearance">
+        <item name="android:textColor">@color/app_player1_color</item>
+    </style>
+    <!--styl dla koloru playera2-->
+    <style name="player2TextAppearance">
+        <item name="android:textColor">@color/app_player2_color</item>
     </style>
 
     <!--styl dla statystyk-->

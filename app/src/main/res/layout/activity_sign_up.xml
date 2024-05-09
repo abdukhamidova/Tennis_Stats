@@ -62,7 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="@string/sign_up"
-            android:textSize="19sp" /> <!--sign up-->
+            android:textSize="21sp" /> <!--sign up-->
 
         <TextView
             android:id="@+id/textAlreadySignIn"
@@ -72,7 +72,7 @@
             android:layout_marginTop="10dp"
             android:text="@string/i_m_already_signed_in"
             android:textColor="@color/white"
-            android:textSize="15sp"
+            android:textSize="16sp"
             app:layout_constraintVertical_bias="0" /> <!--sign in-->
     </LinearLayout>
 
