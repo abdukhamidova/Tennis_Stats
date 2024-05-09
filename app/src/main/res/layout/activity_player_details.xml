@@ -64,6 +64,9 @@
                     android:backgroundTint="@color/white"
                     android:completionHintView="@color/white"
                     android:hint="@string/enter_nationality"
+                    android:drawableStart="@drawable/icon_flag"
+                    android:drawablePadding="5dp"
+                    android:drawableTint="@color/app_hint_color"
                     android:textColor="@color/white"
                     android:textColorHint="@color/app_hint_color" />
             </LinearLayout>
@@ -89,6 +92,9 @@
                     android:backgroundTint="@color/white"
                     android:focusable="false"
                     android:hint="@string/select_date_of_birth"
+                    android:drawableStart="@drawable/icon_calendar"
+                    android:drawablePadding="5dp"
+                    android:drawableTint="@color/app_hint_color"
                     android:inputType="date"
                     android:textColor="@color/white"
                     android:textColorHint="@color/app_hint_color"
@@ -143,6 +149,9 @@
                     android:layout_height="48dp"
                     android:backgroundTint="@color/white"
                     android:hint="@string/enter_strength"
+                    android:drawableStart="@drawable/icon_strength"
+                    android:drawablePadding="5dp"
+                    android:drawableTint="@color/app_hint_color"
                     android:textColor="@color/white"
                     android:textColorHint="@color/app_hint_color" />
             </LinearLayout>
@@ -167,6 +176,9 @@
                     android:layout_height="48dp"
                     android:backgroundTint="@color/white"
                     android:hint="@string/enter_weakness"
+                    android:drawableStart="@drawable/icon_weakness"
+                    android:drawablePadding="5dp"
+                    android:drawableTint="@color/app_hint_color"
                     android:textColor="@color/white"
                     android:textColorHint="@color/app_hint_color" />
             </LinearLayout>
