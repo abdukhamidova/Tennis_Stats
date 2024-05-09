@@ -417,60 +417,90 @@ class ActivityStartPoint : AppCompatActivity() {
         return Pair(game, set)
     }
 
-    fun undoAfterCare(user: String?, context: Context)
-    {
-        if(pointNr <= 1){
-            Toast.makeText(this, "Nothing to undo",Toast.LENGTH_LONG).show()
-        }else{
-            var scoreIsSet : Boolean
+    fun undoAfterCare(user: String?, context: Context) {
+        if (pointNr <= 1) {
+            Toast.makeText(this, "Nothing to undo", Toast.LENGTH_LONG).show()
+        } else {
+            var scoreIsSet: Boolean
             val app = (context.applicationContext as? Stats)
             //wyliczenie stanu rozgrywki na podstawie wyników z tablicy
-            val (gameId,setId) = calculateGame(set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
-            var scoringPlayer : String
-            if(app!=null){
-                val db = FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
-                    .getReference(user.toString()).child("Matches").child("$matchId")
+            var (gameId, setId) = calculateGame(set1p1, set1p2, set2p1, set2p2, set3p1, set3p2)
+            var scoringPlayer: String
+            if (app != null) {
+                val db =
+                    FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
+                        .getReference(user.toString()).child("Matches").child("$matchId")
                 val delPointNr = pointNr - 1 //numer usuwanego punktu
-                val deletePoint = db.child("set $setId").child("game $gameId")
-                    .child("point $delPointNr")
-
-                if(pointNr == 2){
-                    deletePoint.child("servePlayer").get().addOnSuccessListener { ktoServeSnapshot ->
-                        val ktoServe = ktoServeSnapshot.getValue(String::class.java)
-                        //ustawienie wartości globalnych
-                        if (ktoServe != null) {
-                            scoringPlayer = ktoServe
-                            if(scoringPlayer == player1.text.toString()){
-                                app.serve1 = "1"
-                                app.serve2 = ""
-                            }else{
-                                app.serve1 = ""
-                                app.serve2 = "1" //~u poprawa
-                                //app.serve1 = "1"
-                                //app.serve2 = ""
-                            }
-
-                            fillUpScore(app, player1, toTxtV("0"), toTxtV("0"), toTxtV("0"),toTxtV("0"),
-                                toTxtV(""), toTxtV(""),toTxtV(""),toTxtV(""))
-                            //ustawienie wartosci w tabelce
-                            fillUpScoreInActivity(app, player1, player2, serve1, serve2, pkt1, pkt2, set1p1, set1p2,
-                                set2p1, set2p2, set3p1, set3p2)
-                            deletePoint(delPointNr, db, deletePoint)
-                        } else {
-                            Toast.makeText(this, "kto is Null", Toast.LENGTH_SHORT).show()
-                        }
-                    }.addOnFailureListener{
-                        Toast.makeText(this, "Couldn't get who serves",Toast.LENGTH_SHORT).show()
-                    }
+                var delPointNrString = delPointNr.toString()
+                if (delPointNr < 10) {
+                    delPointNrString = "0" + delPointNr
                 }
-                else if(pointNr > 2){
-                    val prevPointNr = delPointNr -1 //numer poprzednika usuwanego punktu
-                    val prevPoint = db.child("set $setId").child("game $gameId")
-                        .child("point $prevPointNr")
+                val deletePoint = db.child("set $setId").child("game $gameId")
+                    .child("point $delPointNrString")
+
+                if (pointNr == 2) {
+                    deletePoint.child("servePlayer").get()
+                        .addOnSuccessListener { ktoServeSnapshot ->
+                            val ktoServe = ktoServeSnapshot.getValue(String::class.java)
+                            //ustawienie wartości globalnych
+                            if (ktoServe != null) {
+                                scoringPlayer = ktoServe
+                                if (scoringPlayer == player1.text.toString()) {
+                                    app.serve1 = "1"
+                                    app.serve2 = ""
+                                } else {
+                                    app.serve1 = ""
+                                    app.serve2 = "1"
+                                }
+
+                                fillUpScore(
+                                    app,
+                                    player1,
+                                    toTxtV("0"),
+                                    toTxtV("0"),
+                                    toTxtV("0"),
+                                    toTxtV("0"),
+                                    toTxtV(""),
+                                    toTxtV(""),
+                                    toTxtV(""),
+                                    toTxtV("")
+                                )
+                                //ustawienie wartosci w tabelce
+                                fillUpScoreInActivity(
+                                    app,
+                                    player1,
+                                    player2,
+                                    serve1,
+                                    serve2,
+                                    pkt1,
+                                    pkt2,
+                                    set1p1,
+                                    set1p2,
+                                    set2p1,
+                                    set2p2,
+                                    set3p1,
+                                    set3p2
+                                )
+                                deletePoint(delPointNr, db, deletePoint)
+                            } else {
+                                Toast.makeText(this, "kto is Null", Toast.LENGTH_SHORT).show()
+                            }
+                        }.addOnFailureListener {
+                            Toast.makeText(this, "Couldn't get who serves", Toast.LENGTH_SHORT)
+                                .show()
+                        }
+                } else if (pointNr > 2) {
+                    val prevPointNr = delPointNr - 1 //numer poprzednika usuwanego punktu
+                    var delPointNrString = delPointNr.toString()
+                    if (delPointNr < 10) {
+                        delPointNrString = "0" + delPointNr
+                    }
+                    var prevPoint = db.child("set $setId").child("game $gameId")
+                        .child("point $delPointNrString")
 
                     //pobranie poprzeniego stanu meczu przed zdobyciem punktu z wezla score
                     prevPoint.child("score").get().addOnSuccessListener {
-                        if(it.exists()){
+                        if (it.exists()) {
                             val getpkt1 = it.child("pkt1").getValue(String::class.java)
                             val getpkt2 = it.child("pkt2").getValue(String::class.java)
                             val getset1p1 = it.child("set1p1").getValue(String::class.java)
@@ -480,32 +510,258 @@ class ActivityStartPoint : AppCompatActivity() {
                             val getset3p1 = it.child("set3p1").getValue(String::class.java)
                             val getset3p2 = it.child("set3p2").getValue(String::class.java)
 
-                            deletePoint.child("servePlayer").get().addOnSuccessListener { ktoServeSnapshot ->
-                                val ktoServe = ktoServeSnapshot.getValue(String::class.java)
-                                if (ktoServe != null) {
-                                    scoringPlayer = ktoServe
-                                    if(scoringPlayer == player1.text.toString()){
-                                        app.serve1 = "1"
-                                        app.serve2 = ""
+                            deletePoint.child("servePlayer").get()
+                                .addOnSuccessListener { ktoServeSnapshot ->
+                                    val ktoServe = ktoServeSnapshot.getValue(String::class.java)
+                                    if (ktoServe != null) {
+                                        scoringPlayer = ktoServe
+                                        if (scoringPlayer == player1.text.toString()) {
+                                            app.serve1 = "1"
+                                            app.serve2 = ""
 
-                                    }else{
-                                        app.serve1 = ""
-                                        app.serve2 = "1" //~u poprawa
-                                        //app.serve1 = "1"
-                                        //app.serve2 = ""
+                                        } else {
+                                            app.serve1 = ""
+                                            app.serve2 = "1"
+                                        }
+                                        //zmiana wartosci globalnych
+                                        fillUpScore(
+                                            app,
+                                            player1,
+                                            toTxtV(getpkt1),
+                                            toTxtV(getpkt2),
+                                            toTxtV(getset1p1),
+                                            toTxtV(getset1p2),
+                                            toTxtV(getset2p1),
+                                            toTxtV(getset2p2),
+                                            toTxtV(getset3p1),
+                                            toTxtV(getset3p2)
+                                        )
+                                        //ustawienie wartosci w tabelce
+                                        fillUpScoreInActivity(
+                                            app,
+                                            player1,
+                                            player2,
+                                            serve1,
+                                            serve2,
+                                            pkt1,
+                                            pkt2,
+                                            set1p1,
+                                            set1p2,
+                                            set2p1,
+                                            set2p2,
+                                            set3p1,
+                                            set3p2
+                                        )
+                                        deletePoint(delPointNr, db, deletePoint)
+                                    } else {
+                                        Toast.makeText(this, "kto is Null", Toast.LENGTH_SHORT)
+                                            .show()
                                     }
-                                    //zmiana wartosci globalnych
-                                    fillUpScore(app, player1,toTxtV(getpkt1), toTxtV(getpkt2),toTxtV(getset1p1),toTxtV(getset1p2),
-                                        toTxtV(getset2p1),toTxtV(getset2p2),toTxtV(getset3p1),toTxtV(getset3p2))
-                                    //ustawienie wartosci w tabelce
-                                    fillUpScoreInActivity(app, player1, player2, serve1, serve2, pkt1, pkt2, set1p1, set1p2,
-                                        set2p1, set2p2, set3p1, set3p2)
-                                    deletePoint(delPointNr, db, deletePoint)
-                                } else {
-                                    Toast.makeText(this, "kto is Null", Toast.LENGTH_SHORT).show()
+                                }.addOnFailureListener {
+                                    Toast.makeText(
+                                        this,
+                                        "Couldn't get who serves",
+                                        Toast.LENGTH_SHORT
+                                    )
+                                        .show()
                                 }
-                            }.addOnFailureListener{
-                                Toast.makeText(this, "Couldn't get who serves",Toast.LENGTH_SHORT).show()
+                        } else {
+                            if (gameId > 1) {
+                                gameId -= 1
+                                prevPoint = db.child("set $setId").child("game $gameId")
+                                    .child("point $delPointNrString")
+                                prevPoint.child("score").get().addOnSuccessListener {
+                                    if (it.exists()) {
+                                        val getpkt1 = it.child("pkt1").getValue(String::class.java)
+                                        val getpkt2 = it.child("pkt2").getValue(String::class.java)
+                                        val getset1p1 =
+                                            it.child("set1p1").getValue(String::class.java)
+                                        val getset1p2 =
+                                            it.child("set1p2").getValue(String::class.java)
+                                        val getset2p1 =
+                                            it.child("set2p1").getValue(String::class.java)
+                                        val getset2p2 =
+                                            it.child("set2p2").getValue(String::class.java)
+                                        val getset3p1 =
+                                            it.child("set3p1").getValue(String::class.java)
+                                        val getset3p2 =
+                                            it.child("set3p2").getValue(String::class.java)
+
+                                        deletePoint.child("servePlayer").get()
+                                            .addOnSuccessListener { ktoServeSnapshot ->
+                                                val ktoServe =
+                                                    ktoServeSnapshot.getValue(String::class.java)
+                                                if (ktoServe != null) {
+                                                    scoringPlayer = ktoServe
+                                                    if (scoringPlayer == player1.text.toString()) {
+                                                        app.serve1 = "1"
+                                                        app.serve2 = ""
+
+                                                    } else {
+                                                        app.serve1 = ""
+                                                        app.serve2 = "1"
+                                                    }
+                                                    //zmiana wartosci globalnych
+                                                    fillUpScore(
+                                                        app,
+                                                        player1,
+                                                        toTxtV(getpkt1),
+                                                        toTxtV(getpkt2),
+                                                        toTxtV(getset1p1),
+                                                        toTxtV(getset1p2),
+                                                        toTxtV(getset2p1),
+                                                        toTxtV(getset2p2),
+                                                        toTxtV(getset3p1),
+                                                        toTxtV(getset3p2)
+                                                    )
+                                                    //ustawienie wartosci w tabelce
+                                                    fillUpScoreInActivity(
+                                                        app,
+                                                        player1,
+                                                        player2,
+                                                        serve1,
+                                                        serve2,
+                                                        pkt1,
+                                                        pkt2,
+                                                        set1p1,
+                                                        set1p2,
+                                                        set2p1,
+                                                        set2p2,
+                                                        set3p1,
+                                                        set3p2
+                                                    )
+                                                    deletePoint(delPointNr, db, deletePoint)
+                                                } else {
+                                                    Toast.makeText(
+                                                        this,
+                                                        "kto is Null",
+                                                        Toast.LENGTH_SHORT
+                                                    ).show()
+                                                }
+                                            }.addOnFailureListener {
+                                                Toast.makeText(
+                                                    this,
+                                                    "Couldn't get who serves",
+                                                    Toast.LENGTH_SHORT
+                                                ).show()
+                                            }
+                                    }
+                                }
+                            } else if (gameId == 1 && setId > 1) {
+                                setId = -1
+                                db.child("set${setId}p1").get()
+                                    .addOnSuccessListener { dataSnapshot ->
+                                        if (it.exists()) {
+                                            val game1 = dataSnapshot.getValue(String::class.java)
+                                            db.child("set${setId}p2").get()
+                                                .addOnSuccessListener { dataSnapshot ->
+                                                    if (it.exists()) {
+                                                        val game2 =
+                                                            dataSnapshot.getValue(String::class.java)
+                                                        val game1Int = game1?.toInt()
+                                                        val game2Int = game2?.toInt()
+                                                        gameId = game1Int?.plus(game2Int!!) ?: 0
+                                                        prevPoint = db.child("set $setId")
+                                                            .child("game $gameId")
+                                                            .child("point $delPointNrString")
+                                                        prevPoint.child("score").get()
+                                                            .addOnSuccessListener {
+                                                                if (it.exists()) {
+                                                                    val getpkt1 = it.child("pkt1")
+                                                                        .getValue(String::class.java)
+                                                                    val getpkt2 = it.child("pkt2")
+                                                                        .getValue(String::class.java)
+                                                                    val getset1p1 =
+                                                                        it.child("set1p1")
+                                                                            .getValue(String::class.java)
+                                                                    val getset1p2 =
+                                                                        it.child("set1p2")
+                                                                            .getValue(String::class.java)
+                                                                    val getset2p1 =
+                                                                        it.child("set2p1")
+                                                                            .getValue(String::class.java)
+                                                                    val getset2p2 =
+                                                                        it.child("set2p2")
+                                                                            .getValue(String::class.java)
+                                                                    val getset3p1 =
+                                                                        it.child("set3p1")
+                                                                            .getValue(String::class.java)
+                                                                    val getset3p2 =
+                                                                        it.child("set3p2")
+                                                                            .getValue(String::class.java)
+
+                                                                    deletePoint.child("servePlayer")
+                                                                        .get()
+                                                                        .addOnSuccessListener { ktoServeSnapshot ->
+                                                                            val ktoServe =
+                                                                                ktoServeSnapshot.getValue(
+                                                                                    String::class.java
+                                                                                )
+                                                                            if (ktoServe != null) {
+                                                                                scoringPlayer =
+                                                                                    ktoServe
+                                                                                if (scoringPlayer == player1.text.toString()) {
+                                                                                    app.serve1 = "1"
+                                                                                    app.serve2 = ""
+
+                                                                                } else {
+                                                                                    app.serve1 = ""
+                                                                                    app.serve2 = "1"
+                                                                                }
+                                                                                //zmiana wartosci globalnych
+                                                                                fillUpScore(
+                                                                                    app,
+                                                                                    player1,
+                                                                                    toTxtV(getpkt1),
+                                                                                    toTxtV(getpkt2),
+                                                                                    toTxtV(getset1p1),
+                                                                                    toTxtV(getset1p2),
+                                                                                    toTxtV(getset2p1),
+                                                                                    toTxtV(getset2p2),
+                                                                                    toTxtV(getset3p1),
+                                                                                    toTxtV(getset3p2)
+                                                                                )
+                                                                                //ustawienie wartosci w tabelce
+                                                                                fillUpScoreInActivity(
+                                                                                    app,
+                                                                                    player1,
+                                                                                    player2,
+                                                                                    serve1,
+                                                                                    serve2,
+                                                                                    pkt1,
+                                                                                    pkt2,
+                                                                                    set1p1,
+                                                                                    set1p2,
+                                                                                    set2p1,
+                                                                                    set2p2,
+                                                                                    set3p1,
+                                                                                    set3p2
+                                                                                )
+                                                                                deletePoint(
+                                                                                    delPointNr,
+                                                                                    db,
+                                                                                    deletePoint
+                                                                                )
+                                                                            } else {
+                                                                                Toast.makeText(
+                                                                                    this,
+                                                                                    "kto is Null",
+                                                                                    Toast.LENGTH_SHORT
+                                                                                ).show()
+                                                                            }
+                                                                        }.addOnFailureListener {
+                                                                            Toast.makeText(
+                                                                                this,
+                                                                                "Couldn't get who serves",
+                                                                                Toast.LENGTH_SHORT
+                                                                            ).show()
+                                                                        }
+                                                                }
+                                                            }
+                                                    }
+                                                }
+                                        }
+                                    }
                             }
                         }
                     }
@@ -513,6 +769,7 @@ class ActivityStartPoint : AppCompatActivity() {
             }
         }
     }
+
     // Function to delete a point
     private fun deletePoint(delPointNr: Int, db: DatabaseReference, deletePoint: DatabaseReference) {
         db.child("pktCount").setValue(delPointNr)
