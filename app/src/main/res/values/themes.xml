@@ -6,6 +6,7 @@
         <item name="buttonStyle">@style/our_button</item>
         <item name="android:fontFamily">@font/aldrich</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:windowLightStatusBar">true</item>
         <item name="android:windowBackground">@color/app_bg_color</item>
     </style>
 
@@ -26,8 +27,28 @@
         <item name="android:layout_marginTop">5dp</item>
         <item name="android:layout_marginBottom">5dp</item>
         <item name="android:layout_weight">0.9</item>
-        <item name="android:textColor">@color/app_viewMatches_color</item>
+        <item name="android:textColor">@color/light_grey</item>
         <item name="drawableTint">@color/app_mainTitles_color</item>
+    </style>
+    <!--styl dla tablic w view matches-->
+    <style name="matchTableTextAppearance">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:layout_weight">0.9</item>
+        <item name="android:textColor">@color/light_grey</item>
+        <item name="drawableTint">@color/gold</item>
+    </style>
+    <!--styl dla tablic w view matches-->
+    <style name="rosTableTextAppearance">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:layout_weight">0.9</item>
+        <item name="android:textColor">@color/app_bg_color</item>
+        <item name="drawableTint">@color/gold</item>
     </style>
 
     <!--styl dla koloru playera1-->

@@ -42,6 +42,7 @@ class SignInActivity : AppCompatActivity() {
                     if (it.isSuccessful) {
                         val intent = Intent(this, ActivityMenu::class.java)
                         startActivity(intent)
+                        finish()
                     } else {
                         Toast.makeText(this, "Sorry, either your email or password is incorrect.", Toast.LENGTH_LONG).show()
                     }

@@ -7,19 +7,17 @@
     android:layout_marginStart="5dp"
     android:layout_marginTop="10dp"
     android:layout_marginEnd="5dp"
-    android:backgroundTint="@color/app_viewMatches_color"
-    app:cardElevation="8dp"
+    app:cardCornerRadius="10dp"
+    android:backgroundTint="#23507A"
     tools:ignore="HardCodedText">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginVertical="6dp"
-        android:layout_marginStart="16dp"
-        android:orientation="vertical"
-
-        android:padding="5dp">
-
+        android:layout_marginStart="15dp"
+        android:orientation="vertical">
+        <!--data field-->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -31,7 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/date_item"
-                android:textColor="@color/black"
+                android:textColor="@color/light_grey"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -40,62 +38,96 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginStart="10dp"
-                android:text="12.01.2024"
-                android:textColor="@color/black"
-                android:textSize="24sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:orientation="horizontal"
-            android:layout_marginBottom="5dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/player1_item"
-                android:textColor="@color/app_bg_color"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/textviewPlayer1VM"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:text="Jan Kowalski"
-                android:textColor="@color/app_bg_color"
-                android:textSize="22sp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textviewLabelPlayer2VM"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/player2_item"
-                android:textColor="@color/app_bg_color"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-
-            <TextView
-                android:id="@+id/textviewPlayer2VM"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:text="Anna Nowak"
-                android:textColor="@color/app_bg_color"
+                android:text="12.01.2024 15:28"
+                android:textColor="@color/light_grey"
                 android:textSize="22sp" />
         </LinearLayout>
+
+        <TableLayout
+            android:id="@+id/tableLayoutMatch"
+            android:layout_width="370dp"
+            android:layout_height="wrap_content"
+            android:theme="@style/scoreTableTextAppearance">
+
+            <TableRow
+                android:layout_marginBottom="0dp">
+                <TextView
+                    android:id="@+id/textViewWin1Match"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_weight="0"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="4dp"
+                    android:gravity="center"
+                    android:visibility="visible"
+                    app:drawableStartCompat="@drawable/icon_laurel3" />
+
+                <TextView
+                    android:id="@+id/textviewPlayer1VM"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textAlignment="gravity"
+                    android:gravity="start|center_vertical"
+                    android:layout_marginStart="6dp"
+                    android:text="@string/imie_nazwisko_player1"/>
+
+                <TextView
+                    android:id="@+id/textViewPlayer1Set1Match"
+                    android:layout_height="match_parent"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/textViewPlayer1Set2Match"
+                    android:layout_height="match_parent"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/textViewPlayer1Set3Match"
+                    android:layout_height="match_parent"
+                    android:text=""/>
+            </TableRow>
+
+            <TableRow
+                android:layout_marginTop="0dp">
+                <TextView
+                    android:id="@+id/textViewWin2Match"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_weight="0"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="4dp"
+                    android:gravity="center"
+                    android:visibility="visible"
+                    app:drawableStartCompat="@drawable/icon_laurel3" />
+
+                <TextView
+                    android:id="@+id/textviewPlayer2VM"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="6dp"
+                    android:layout_weight="1"
+                    android:textAlignment="gravity"
+                    android:gravity="start|center_vertical"
+                    android:text="@string/imie_nazwisko_player2"/>
+
+                <TextView
+                    android:id="@+id/textViewPlayer2Set1Match"
+                    android:layout_height="match_parent"
+                    android:text=""/>
+
+                <TextView
+                    android:id="@+id/textViewPlayer2Set2Match"
+                    android:layout_height="match_parent"
+                    android:text=""/>
+
+                <TextView
+                    android:id="@+id/textViewPlayer2Set3Match"
+                    android:layout_height="match_parent"
+                    android:text=""
+                    android:textAlignment="center"/>
+            </TableRow>
+        </TableLayout>
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

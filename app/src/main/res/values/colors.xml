@@ -4,8 +4,11 @@
     <color name="white">#FFFFFFFF</color>
     <color name="transparent">#00FFFFFF</color>
     <color name="dark_blue">#0F4F8C</color>
+    <color name="darker_blue">#23507A</color>
     <color name="pale_grey">#D5C7C7</color>
+    <color name="light_grey">#ECE8E8</color>
     <color name="gold">#FFD700</color>
+    <color name="light_yellow">#E8E488</color>
     <color name="app_bg_color">#073159</color>
     <color name="app_btn_color">#65BECA</color>
     <color name="app_btnClick_color">#5FB2BD</color>
@@ -16,7 +19,7 @@
     <color name="app_tableText_color">#000000</color>
     <color name="app_statsViewButton">#36768F</color>
     <color name="app_statsViewButton_Click">#346B81</color>
-    <color name="app_viewMatches_color">#E1F2F4</color>
+    <color name="app_viewMatches_color">#E4E3E3</color>
     <color name="app_player1_color">#AEE8EE</color>
     <color name="app_player2_color">#78DBE8</color>
     <color name="txt_players">#ffffff</color>

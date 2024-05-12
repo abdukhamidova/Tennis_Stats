@@ -60,9 +60,7 @@ class ViewPlayerActivity : AppCompatActivity(), MyAdapterPlayer.OnItemClickListe
         navigationDrawerHelper = NavigationDrawerHelper(this)
         navigationDrawerHelper.setupNavigationDrawer(drawerLayout, navigationView, firebaseAuth)
         val backButton = findViewById<ImageButton>(R.id.buttonUndo)
-        backButton.setOnClickListener{
-            startActivity(Intent(this, ActivityMenu::class.java))
-        }
+        backButton.visibility = View.GONE
         val add = findViewById<ImageButton>(R.id.buttonAddVP)
         add.setOnClickListener {
             startActivity(Intent(this,AddPlayerActivity::class.java))

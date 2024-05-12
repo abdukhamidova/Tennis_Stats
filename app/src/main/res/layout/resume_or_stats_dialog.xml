@@ -1,184 +1,163 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="300sp"
-    android:layout_height="wrap_content"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="#2A89AE">
+    android:background="@color/darker_blue">
 
-    <TextView
-        android:id="@+id/textViewMatchIdRoS"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:visibility="invisible"/>
-
-    <TextView
-        android:id="@+id/textViewConfirm"
-        android:layout_width="230dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_gravity="center"
-        android:text="@string/decision"
-        android:textColor="@color/app_mainTitles_color"
-        android:textSize="35sp"
-        android:textAlignment="center"/>
-
-    <TableLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/border_button"
-        android:theme="@style/scoreTableTextAppearance"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.19">
-
-        <TableRow>
-            <TextView
-                android:id="@+id/textViewServe1RoS"
-                android:layout_width="wrap_content"
-                android:layout_height="45dp"
-                android:layout_weight="0"
-                android:layout_marginStart="3dp"
-                android:layout_marginEnd="4dp"
-                android:visibility="visible"
-                app:drawableStartCompat="@drawable/ball" />
-
-            <TextView
-                android:id="@+id/textviewPlayer1RoS"
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:textAlignment="textStart"
-                android:layout_marginStart="6dp"
-                android:text="@string/imie_nazwisko_player1"
-                android:textColor="@color/app_bg_color"/>
-
-            <TextView
-                android:id="@+id/textViewPlayer1Set1RoS"
-                android:layout_height="match_parent"
-                android:text=""
-                android:textColor="@color/app_bg_color" />
-
-            <TextView
-                android:id="@+id/textViewPlayer1Set2RoS"
-                android:layout_height="match_parent"
-                android:text=""
-                android:textColor="@color/app_bg_color"/>
-
-            <TextView
-                android:id="@+id/textViewPlayer1Set3RoS"
-                android:layout_height="match_parent"
-                android:text=""
-                android:textColor="@color/app_bg_color"/>
-
-            <TextView
-                android:id="@+id/textViewPlayer1PktRoS"
-                android:layout_height="match_parent"
-                android:text=""
-                android:textColor="@color/app_bg_color"/>
-        </TableRow>
-
-        <TableRow>
-            <TextView
-                android:id="@+id/textViewServe2RoS"
-                android:layout_width="wrap_content"
-                android:layout_height="45dp"
-                android:layout_weight="0"
-                android:layout_marginStart="3dp"
-                android:layout_marginEnd="4dp"
-                android:visibility="invisible"
-                app:drawableStartCompat="@drawable/ball" />
-
-            <TextView
-                android:id="@+id/textviewPlayer2RoS"
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:layout_marginStart="6dp"
-                android:layout_weight="1"
-                android:textAlignment="textStart"
-                android:text="@string/imie_nazwisko_player2"
-                android:textColor="@color/app_btnClick_color"/>
-
-            <TextView
-                android:id="@+id/textViewPlayer2Set1RoS"
-                android:layout_height="match_parent"
-                android:text=""
-                android:textColor="@color/app_btnClick_color"/>
-
-            <TextView
-                android:id="@+id/textViewPlayer2Set2RoS"
-                android:layout_height="match_parent"
-                android:text=""
-                android:textColor="@color/app_btnClick_color" />
-
-            <TextView
-                android:id="@+id/textViewPlayer2Set3RoS"
-                android:layout_height="match_parent"
-                android:text=""
-                android:textAlignment="center"
-                android:textColor="@color/app_btnClick_color"/>
-
-            <TextView
-                android:id="@+id/textViewPlayer2PktRoS"
-                android:layout_height="match_parent"
-                android:text=""
-                android:textColor="@color/app_btnClick_color"/>
-        </TableRow>
-    </TableLayout>
-
-    <TableRow
-        android:layout_width="150sp"
-        android:layout_height="300dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="5dp"
-        android:gravity="center"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_gravity="center">
+
+        <TextView
+            android:id="@+id/textViewMatchIdRoS"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="invisible"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/icon_list_40"/>
+        <!--dialog score table-->
+        <TableLayout
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/ros_score_table"
+            android:theme="@style/rosTableTextAppearance">
+
+            <TableRow
+                android:layout_marginBottom="0dp">
+                <TextView
+                    android:id="@+id/textViewServe1RoS"
+                    android:layout_width="wrap_content"
+                    android:layout_height="45dp"
+                    android:layout_weight="0"
+                    android:layout_marginStart="3dp"
+                    android:layout_marginEnd="4dp"
+                    android:visibility="visible"
+                    app:drawableStartCompat="@drawable/ball"
+                    app:drawableTint="@color/black"/>
+
+                <TextView
+                    android:id="@+id/textviewPlayer1RoS"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textAlignment="textStart"
+                    android:layout_marginStart="6dp"
+                    android:text="@string/imie_nazwisko_player1"/>
+
+                <TextView
+                    android:id="@+id/textViewPlayer1Set1RoS"
+                    android:layout_height="match_parent"
+                    android:text=""
+                    android:textColor="@color/app_bg_color" />
+
+                <TextView
+                    android:id="@+id/textViewPlayer1Set2RoS"
+                    android:layout_height="match_parent"
+                    android:text=""
+                    android:textColor="@color/app_bg_color"/>
+
+                <TextView
+                    android:id="@+id/textViewPlayer1Set3RoS"
+                    android:layout_height="match_parent"
+                    android:text=""
+                    android:textColor="@color/app_bg_color"/>
+
+                <TextView
+                    android:id="@+id/textViewPlayer1PktRoS"
+                    android:layout_height="match_parent"
+                    android:text=""
+                    android:textColor="@color/app_bg_color"/>
+            </TableRow>
+
+            <TableRow
+                android:layout_marginTop="0dp">
+                <TextView
+                    android:id="@+id/textViewServe2RoS"
+                    android:layout_width="wrap_content"
+                    android:layout_height="45dp"
+                    android:layout_weight="0"
+                    android:layout_marginStart="3dp"
+                    android:layout_marginEnd="4dp"
+                    android:visibility="invisible"
+                    app:drawableStartCompat="@drawable/ball" />
+
+                <TextView
+                    android:id="@+id/textviewPlayer2RoS"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="6dp"
+                    android:layout_weight="1"
+                    android:textAlignment="textStart"
+                    android:text="@string/imie_nazwisko_player2"/>
+
+                <TextView
+                    android:id="@+id/textViewPlayer2Set1RoS"
+                    android:layout_height="match_parent"
+                    android:text=""
+                    android:textColor="@color/app_btnClick_color"/>
+
+                <TextView
+                    android:id="@+id/textViewPlayer2Set2RoS"
+                    android:layout_height="match_parent"
+                    android:text=""
+                    android:textColor="@color/app_btnClick_color" />
+
+                <TextView
+                    android:id="@+id/textViewPlayer2Set3RoS"
+                    android:layout_height="match_parent"
+                    android:text=""
+                    android:textAlignment="center"
+                    android:textColor="@color/app_btnClick_color"/>
+
+                <TextView
+                    android:id="@+id/textViewPlayer2PktRoS"
+                    android:layout_height="match_parent"
+                    android:text=""
+                    android:textColor="@color/app_btnClick_color"/>
+            </TableRow>
+        </TableLayout>
 
         <Button
             android:id="@+id/buttonResumeRoS"
             android:layout_width="200sp"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/app_tableBg_color"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/light_yellow"
             android:text="@string/resume_match"
-            android:textSize="22sp" /></TableRow>
-
-    <TableRow
-        android:layout_width="150sp"
-        android:layout_height="300dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="5dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:layout_gravity="center">
-
+            android:textSize="20sp" />
         <Button
             android:id="@+id/buttonViewStatsRoS"
             android:layout_width="200sp"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/app_tableBg_color"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/light_yellow"
             android:text="@string/view_stats"
-            android:textSize="22sp" /></TableRow>
-
-    <TableRow
-        android:layout_width="150sp"
-        android:layout_height="300dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="10dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:layout_gravity="center">
-
+            android:textSize="20sp" />
         <Button
-        android:id="@+id/buttonCancelRoS"
-        android:layout_width="200sp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="5dp"
-        android:background="@drawable/border_button"
-        android:text="@string/cancel"
-        android:textSize="20sp"/>
-    </TableRow>
+            android:id="@+id/buttonCancelRoS"
+            android:layout_width="200sp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/border_button"
+            android:text="@string/cancel"
+            android:textSize="20sp"
+            android:textColor="@color/light_grey"/>
+    </LinearLayout>
 
-</TableLayout>
+</LinearLayout>

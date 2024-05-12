@@ -37,6 +37,7 @@ class NavigationDrawerHelper(private val activity: AppCompatActivity) {
             R.id.nav_return -> Intent(activity,ActivityStartPoint::class.java)
             R.id.buttonLogOut -> {
                 auth.signOut()
+                activity.finish()
                 Intent(activity, MainActivity::class.java)
             }
             else -> null

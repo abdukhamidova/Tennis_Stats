@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:openDrawer="start"
-    tools:context=".ActivityMenu"
+    tools:context=".ViewPlayerActivity"
     tools:ignore="HardcodedText">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,56 +21,54 @@
             android:id="@+id/include"
             layout="@layout/toolbar" />
 
-
-        <EditText
-            android:id="@+id/searchPlayer"
-            android:layout_width="337dp"
-            android:layout_height="49dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
-            android:autofillHints="Search"
-            android:backgroundTint="@color/white"
-            android:drawableStart="@drawable/icon_search"
-            android:drawablePadding="10dp"
-            android:drawableTint="@color/app_hint_color"
-            android:hint="@string/search"
-            android:inputType="text"
-            android:maxLines="1"
-            android:textColor="@color/white"
-            android:textColorHint="@color/app_hint_color"
+        <LinearLayout
+            android:id="@+id/linearLayoutSearchAdd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/include"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.0" >
 
-        <ImageButton
-            android:id="@+id/buttonAddVP"
-            android:layout_width="57dp"
-            android:layout_height="35dp"
-            android:layout_marginStart="2dp"
-            android:backgroundTint="@color/transparent"
-            android:src="@drawable/icon_add"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/searchPlayer"
-            app:layout_constraintTop_toBottomOf="@+id/include"
-            app:layout_constraintVertical_bias="0.01" />
+                <EditText
+                    android:id="@+id/searchPlayer"
+                    android:layout_width="337dp"
+                    android:layout_height="49dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:textColor="@color/white"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:backgroundTint="@color/white"
+                    android:hint="@string/search"
+                    android:autofillHints="Search"
+                    android:textColorHint="@color/app_hint_color"
+                    android:drawableStart="@drawable/icon_search"
+                    android:drawablePadding="10dp"
+                    android:drawableTint="@color/app_hint_color"/>
+
+                <ImageButton
+                    android:id="@+id/buttonAddVP"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/transparent"
+                    android:src="@drawable/icon_person_add" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/textViewNotFound"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="No Matches found"
+            android:text="No Players found"
             android:textColor="@color/pale_grey"
             android:drawablePadding="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/searchPlayer"
-            app:layout_constraintStart_toStartOf="@id/searchPlayer"
-            app:layout_constraintTop_toBottomOf="@id/searchPlayer"
+            app:layout_constraintEnd_toEndOf="@id/linearLayoutSearchAdd"
+            app:layout_constraintStart_toStartOf="@id/linearLayoutSearchAdd"
+            app:layout_constraintTop_toBottomOf="@id/linearLayoutSearchAdd"
             app:layout_constraintVertical_bias="0.31"
             app:drawableTint="@color/pale_grey"
             app:drawableStartCompat="@drawable/icon_cant_find" />
@@ -85,7 +83,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/searchPlayer"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayoutSearchAdd"
             app:layout_constraintVertical_bias="0.0">
 
             <androidx.recyclerview.widget.RecyclerView
