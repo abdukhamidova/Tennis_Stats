@@ -108,6 +108,7 @@ class ActivityBallInPlay : AppCompatActivity() {
                 it.putExtra("Kto",player1.text)
                 it.putExtra("Co","Winner")
                 startActivity(it)
+                finish()
             }
         }
 
@@ -121,6 +122,7 @@ class ActivityBallInPlay : AppCompatActivity() {
                 it.putExtra("Kto",player2.text)
                 it.putExtra("Co","Winner")
                 startActivity(it)
+                finish()
             }
         }
 
@@ -134,6 +136,7 @@ class ActivityBallInPlay : AppCompatActivity() {
                 it.putExtra("Kto",player1.text)
                 it.putExtra("Co","Forced Error")
                 startActivity(it)
+                finish()
             }
         }
 
@@ -147,6 +150,7 @@ class ActivityBallInPlay : AppCompatActivity() {
                 it.putExtra("Kto",player2.text)
                 it.putExtra("Co","Forced Error")
                 startActivity(it)
+                finish()
             }
         }
 
@@ -160,6 +164,7 @@ class ActivityBallInPlay : AppCompatActivity() {
                 it.putExtra("Kto",player1.text)
                 it.putExtra("Co","Unforced Error")
                 startActivity(it)
+                finish()
             }
         }
 
@@ -173,6 +178,7 @@ class ActivityBallInPlay : AppCompatActivity() {
                 it.putExtra("Kto",player2.text)
                 it.putExtra("Co","Unforced Error")
                 startActivity(it)
+                finish()
             }
         }
     }

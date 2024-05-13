@@ -6,7 +6,6 @@
         <item name="buttonStyle">@style/our_button</item>
         <item name="android:fontFamily">@font/aldrich</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:windowLightStatusBar">true</item>
         <item name="android:windowBackground">@color/app_bg_color</item>
     </style>
 

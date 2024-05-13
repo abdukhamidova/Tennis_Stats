@@ -1,5 +1,6 @@
 package com.anw.tenistats.com.anw.tenistats
 
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
@@ -196,12 +197,16 @@ class AddPointDialog(private val context: Context, private val openedFromStartPo
                     if(!openedFromStartPoint) {
                         val intent = Intent(context, ActivityStartPoint::class.java)
                         intent.putExtra("matchID", matchId)
-                        context.startActivity(intent)
+                        (context as Activity).startActivity(intent)
+                        context.finish()
+
                     }
                 }else{
                     val intent = Intent(context, EndOfMatchActivity::class.java)
                     intent.putExtra("matchID", matchId)
-                    context.startActivity(intent)
+                    (context as Activity).startActivity(intent)
+                    context.finish()
+
                 }
             }
             alertDialog.dismiss()
@@ -211,7 +216,8 @@ class AddPointDialog(private val context: Context, private val openedFromStartPo
             if(!openedFromStartPoint) {
                 val intent = Intent(context, ActivityStartPoint::class.java)
                 intent.putExtra("matchID", matchId)
-                context.startActivity(intent)
+                (context as Activity).startActivity(intent)
+                context.finish()
             }
             alertDialog.dismiss()
         }

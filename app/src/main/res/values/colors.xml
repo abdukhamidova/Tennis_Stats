@@ -20,7 +20,7 @@
     <color name="app_statsViewButton">#36768F</color>
     <color name="app_statsViewButton_Click">#346B81</color>
     <color name="app_viewMatches_color">#E4E3E3</color>
-    <color name="app_player1_color">#AEE8EE</color>
-    <color name="app_player2_color">#78DBE8</color>
+    <color name="app_player1_color">#B7EFF4</color>
+    <color name="app_player2_color">#7DD8E4</color>
     <color name="txt_players">#ffffff</color>
 </resources>
