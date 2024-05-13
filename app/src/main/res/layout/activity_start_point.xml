@@ -41,7 +41,7 @@
                     android:layout_weight="0"
                     android:gravity="end"
                     android:visibility="visible"
-                    app:drawableStartCompat="@drawable/ball" />
+                    app:drawableStartCompat="@drawable/ball"/>
 
                 <TextView
                     android:id="@+id/textviewPlayer1"

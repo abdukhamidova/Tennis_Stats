@@ -114,6 +114,19 @@ class ViewHistoryActivity : AppCompatActivity() {
                     val buttonSet3 = findViewById<Button>(R.id.buttonSet3His)
                     val buttonAll = findViewById<Button>(R.id.buttonAllHis)
 
+                    val player1 = findViewById<TextView>(R.id.textviewPlayer1His)
+                    val player2 = findViewById<TextView>(R.id.textviewPlayer2His)
+                    val serve1 = findViewById<TextView>(R.id.textViewServe1His)
+                    val serve2 = findViewById<TextView>(R.id.textViewServe2His)
+                    val set1p1 = findViewById<TextView>(R.id.textViewP1Set1His)
+                    val set2p1 = findViewById<TextView>(R.id.textViewP1Set2His)
+                    val set3p1 = findViewById<TextView>(R.id.textViewP1Set3His)
+                    val set1p2 = findViewById<TextView>(R.id.textViewP2Set1His)
+                    val set2p2 = findViewById<TextView>(R.id.textViewP2Set2His)
+                    val set3p2 = findViewById<TextView>(R.id.textViewP2Set3His)
+                    val pkt1 = findViewById<TextView>(R.id.textViewPlayer1PktHis)
+                    val pkt2 = findViewById<TextView>(R.id.textViewPlayer2PktHis)
+
                     buttonAll.setOnClickListener {
                         buttonAll.setBackgroundResource(R.drawable.rectangle_button)
                         buttonSet1.setBackgroundResource(R.drawable.rec_btn_not_selected)
@@ -132,40 +145,34 @@ class ViewHistoryActivity : AppCompatActivity() {
                     }
 
                     buttonSet2.setOnClickListener {
-                        buttonAll.setBackgroundResource(R.drawable.rec_btn_not_selected)
-                        buttonSet1.setBackgroundResource(R.drawable.rec_btn_not_selected)
-                        buttonSet2.setBackgroundResource(R.drawable.rectangle_button) // resetowanie tła
-                        buttonSet3.setBackgroundResource(R.drawable.rec_btn_not_selected)
-                        // Wywołanie funkcji fetchMatchPoints tylko dla seta 2
-                        fetchMatchPoints(matchId, "set 2")
-                    }
-                    // Ukryj lub pokaż przycisk dla trzeciego seta w zależności od jego istnienia
-                    if (thirdSetExists) {
-                        buttonSet3.visibility = View.VISIBLE
-                        buttonSet3.setOnClickListener {
+                        if (set2p1.text != "") {
                             buttonAll.setBackgroundResource(R.drawable.rec_btn_not_selected)
                             buttonSet1.setBackgroundResource(R.drawable.rec_btn_not_selected)
-                            buttonSet2.setBackgroundResource(R.drawable.rec_btn_not_selected) // resetowanie tła
-                            buttonSet3.setBackgroundResource(R.drawable.rectangle_button)
-                            // Wywołanie funkcji fetchMatchPoints tylko dla seta 3
-                            fetchMatchPoints(matchId, "set 3")
+                            buttonSet2.setBackgroundResource(R.drawable.rectangle_button) // resetowanie tła
+                            buttonSet3.setBackgroundResource(R.drawable.rec_btn_not_selected)
+                            // Wywołanie funkcji fetchMatchPoints tylko dla seta 2
+                            fetchMatchPoints(matchId, "set 2")
                         }
-                    } else {
-                        //textViewSet3.visibility = View.GONE
-                        buttonSet3.isClickable=false
                     }
-                    val player1 = findViewById<TextView>(R.id.textviewPlayer1His)
-                    val player2 = findViewById<TextView>(R.id.textviewPlayer2His)
-                    val serve1 = findViewById<TextView>(R.id.textViewServe1His)
-                    val serve2 = findViewById<TextView>(R.id.textViewServe2His)
-                    val set1p1 = findViewById<TextView>(R.id.textViewP1Set1His)
-                    val set2p1 = findViewById<TextView>(R.id.textViewP1Set2His)
-                    val set3p1 = findViewById<TextView>(R.id.textViewP1Set3His)
-                    val set1p2 = findViewById<TextView>(R.id.textViewP2Set1His)
-                    val set2p2 = findViewById<TextView>(R.id.textViewP2Set2His)
-                    val set3p2 = findViewById<TextView>(R.id.textViewP2Set3His)
-                    val pkt1 = findViewById<TextView>(R.id.textViewPlayer1PktHis)
-                    val pkt2 = findViewById<TextView>(R.id.textViewPlayer2PktHis)
+                    //zrobilam zamiast ukrywania przyciku spradzenie czy dany set istnieje i zmienilam przycisk danego seta na nieaktywny ~u
+                    // Ukryj lub pokaż przycisk dla trzeciego seta w zależności od jego istnienia
+                    //if (thirdSetExists) {
+                      //  buttonSet3.visibility = View.VISIBLE
+                        buttonSet3.setOnClickListener {
+                            if (set3p1.text != "") {
+                                buttonAll.setBackgroundResource(R.drawable.rec_btn_not_selected)
+                                buttonSet1.setBackgroundResource(R.drawable.rec_btn_not_selected)
+                                buttonSet2.setBackgroundResource(R.drawable.rec_btn_not_selected) // resetowanie tła
+                                buttonSet3.setBackgroundResource(R.drawable.rectangle_button)
+                                // Wywołanie funkcji fetchMatchPoints tylko dla seta 3
+                                fetchMatchPoints(matchId, "set 3")
+                            }
+                        }
+                    //} else {
+                        //textViewSet3.visibility = View.GONE
+                      //  buttonSet3.isClickable=false
+                    //}
+
                     setscore(player1,player2,serve1,serve2,set1p1,set2p1,set3p1,set1p2,set2p2,set3p2,pkt1,pkt2)
                 } else {
                     // Obsługa, gdy dane nie istnieją w bazie danych

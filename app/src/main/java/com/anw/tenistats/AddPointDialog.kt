@@ -108,6 +108,7 @@ class AddPointDialog(private val context: Context, private val openedFromStartPo
                             co, gdzie, czym, app.serwis, servePlayer
                         )
                         pointDatabase.setValue(point)
+                        pointDatabase.child("score").child("servePlayer").setValue(servePlayer)
                         pointDatabase.child("score").child("pkt1").setValue(app.pkt1)
                         pointDatabase.child("score").child("pkt2").setValue(app.pkt2)
                         pointDatabase.child("score").child("set1p1")

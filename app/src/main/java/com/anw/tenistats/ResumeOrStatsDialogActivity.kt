@@ -57,7 +57,7 @@ class ResumeOrStatsDialogActivity(private val context: Context,private val opene
                         app.matchId = matchId.text.toString()
                     }
                     //ustawienie wyniku w tabelce
-                    val player1: TextView = dialogView.findViewById<TextView>(R.id.textviewPlayer1RoS)
+                    /*val player1: TextView = dialogView.findViewById<TextView>(R.id.textviewPlayer1RoS)
                     val player2: TextView = dialogView.findViewById<TextView>(R.id.textviewPlayer2RoS)
                     val serve1: TextView = dialogView.findViewById<TextView>(R.id.textViewServe1RoS)
                     val serve2: TextView = dialogView.findViewById<TextView>(R.id.textViewServe2RoS)
@@ -68,17 +68,17 @@ class ResumeOrStatsDialogActivity(private val context: Context,private val opene
                     val set2p2: TextView = dialogView.findViewById<TextView>(R.id.textViewPlayer2Set2RoS)
                     val set3p2: TextView = dialogView.findViewById<TextView>(R.id.textViewPlayer2Set3RoS)
                     val pkt1: TextView = dialogView.findViewById<TextView>(R.id.textViewPlayer1PktRoS)
-                    val pkt2: TextView = dialogView.findViewById<TextView>(R.id.textViewPlayer2PktRoS)
+                    val pkt2: TextView = dialogView.findViewById<TextView>(R.id.textViewPlayer2PktRoS)*/
 
                     val btnResume : Button = dialogView.findViewById(R.id.buttonResumeRoS)
-                    setscore(btnResume,player1,player2,serve1,serve2,set1p1,set2p1,set3p1,set1p2,set2p2,set3p2,pkt1,pkt2)
+                    //setscore(btnResume,player1,player2,serve1,serve2,set1p1,set2p1,set3p1,set1p2,set2p2,set3p2,pkt1,pkt2)
 
                     val btnViewStats : Button = dialogView.findViewById(R.id.buttonViewStatsRoS)
                     val btnCancel : Button = dialogView.findViewById(R.id.buttonCancelRoS)
 
                     btnResume.setOnClickListener {
                         //zapisanie wyniku w zmiennych globalnych
-                        if (app != null){
+                        /*if (app != null){
                             app.player1=player1.text.toString()
                             app.player2=player2.text.toString()
                             app.pkt1 = pkt1.text.toString()
@@ -97,7 +97,7 @@ class ResumeOrStatsDialogActivity(private val context: Context,private val opene
                                 app.serve1 = ""
                                 app.serve2 = "1"
                             }
-                        }
+                        }*/
                         val intent = Intent(context, ActivityStartPoint::class.java)
                         intent.putExtra("matchID", matchId.text.toString())
                         database =
@@ -230,8 +230,8 @@ class ResumeOrStatsDialogActivity(private val context: Context,private val opene
                 btnResume.isEnabled=false
                 // Pobranie wartości "player1" z bazy danych
                 val winner = dataSnapshot.getValue(String::class.java)
-                serve1.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_resume, 0, 0, 0)
-                serve2.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_resume, 0, 0, 0)
+                serve1.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_laurel3, 0, 0, 0)
+                serve2.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_laurel3, 0, 0, 0)
                 // Ustawienie wartości w TextView
                 if(winner==player1.text){
                     serve1.visibility = View.VISIBLE
