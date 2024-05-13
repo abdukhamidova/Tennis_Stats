@@ -286,7 +286,7 @@
                     android:layout_gravity="center"
                     android:gravity="center_horizontal"
                     android:text="@string/total_points"
-                    android:textColor="@color/light_grey"
+                    android:textColor="@color/statistics_text_color"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
@@ -298,7 +298,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl1"
-                        android:textColor="@color/light_grey"/>
+                        android:textColor="@color/statistics_text_color"/>
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -330,7 +330,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl2"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
                 </TableRow>
 
                 <!--ACES-->
@@ -340,7 +340,7 @@
                     android:layout_gravity="center"
                     android:gravity="center_horizontal"
                     android:text="@string/aces"
-                    android:textColor="@color/light_grey">
+                    android:textColor="@color/statistics_text_color">
                 </TextView>
 
                 <TableRow>
@@ -351,7 +351,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl1"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -383,7 +383,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl2"
-                        android:textColor="@color/light_grey"/>
+                        android:textColor="@color/statistics_text_color"/>
                 </TableRow>
 
                 <!--DOUBLE FAULTS-->
@@ -393,7 +393,7 @@
                     android:layout_gravity="center"
                     android:gravity="center_horizontal"
                     android:text="@string/double_faults"
-                    android:textColor="@color/light_grey">
+                    android:textColor="@color/statistics_text_color">
                 </TextView>
 
                 <TableRow>
@@ -405,7 +405,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl1"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -437,7 +437,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl2"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
                 </TableRow>
 
                 <!--1ST SERVE IN-->
@@ -447,7 +447,7 @@
                     android:layout_gravity="center"
                     android:gravity="center_horizontal"
                     android:text="@string/_1st_serve_in"
-                    android:textColor="@color/light_grey">
+                    android:textColor="@color/statistics_text_color">
                 </TextView>
 
                 <TableRow>
@@ -458,7 +458,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/_1in_all"
-                        android:textColor="@color/light_grey"/>
+                        android:textColor="@color/statistics_text_color"/>
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -490,7 +490,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/_1in_all"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
                 </TableRow>
 
                 <!--2ND SERVE IN-->
@@ -500,7 +500,7 @@
                     android:layout_gravity="center"
                     android:gravity="center_horizontal"
                     android:text="@string/_2nd_serve_in"
-                    android:textColor="@color/light_grey">
+                    android:textColor="@color/statistics_text_color">
                 </TextView>
 
                 <TableRow>
@@ -511,7 +511,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/_2in_all"
-                        android:textColor="@color/light_grey"/>
+                        android:textColor="@color/statistics_text_color"/>
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -543,7 +543,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/_2in_all"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
                 </TableRow>
 
                 <!--RETURN WINNER-->
@@ -553,7 +553,7 @@
                     android:layout_gravity="center"
                     android:gravity="center_horizontal"
                     android:text="@string/return_winner"
-                    android:textColor="@color/light_grey"
+                    android:textColor="@color/statistics_text_color"
                     android:textSize="20sp"
                     android:textStyle="bold">
 
@@ -566,7 +566,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/fh"
-                        android:textColor="@color/light_grey"/>
+                        android:textColor="@color/statistics_text_color"/>
 
                     <TextView
                         android:layout_width="0dp"
@@ -574,7 +574,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/bh"
-                        android:textColor="@color/light_grey"/>
+                        android:textColor="@color/statistics_text_color"/>
 
                     <TextView
                         android:layout_width="0dp"
@@ -582,7 +582,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/fh"
-                        android:textColor="@color/light_grey"/>
+                        android:textColor="@color/statistics_text_color"/>
 
                     <TextView
                         android:layout_width="0dp"
@@ -590,7 +590,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/bh"
-                        android:textColor="@color/light_grey"/>
+                        android:textColor="@color/statistics_text_color"/>
                 </TableRow>
                 <TableRow>
 
@@ -601,7 +601,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl1"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:id="@+id/returnWbhPlayer1"
@@ -610,7 +610,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl1"
-                        android:textColor="@color/light_grey"/>
+                        android:textColor="@color/statistics_text_color"/>
 
                     <TextView
                         android:id="@+id/returnWfhPlayer2"
@@ -619,7 +619,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl2"
-                        android:textColor="@color/light_grey"/>
+                        android:textColor="@color/statistics_text_color"/>
 
                     <TextView
                         android:id="@+id/returnWbhPlayer2"
@@ -628,7 +628,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl2"
-                        android:textColor="@color/light_grey"/>
+                        android:textColor="@color/statistics_text_color"/>
                 </TableRow>
 
                 <!--RETURN ERROR-->
@@ -638,7 +638,7 @@
                     android:layout_gravity="center"
                     android:gravity="center_horizontal"
                     android:text="@string/return_error"
-                    android:textColor="@color/light_grey">
+                    android:textColor="@color/statistics_text_color">
 
                 </TextView>
                 <TableRow>
@@ -648,7 +648,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/fh"
-                        android:textColor="@color/light_grey"/>
+                        android:textColor="@color/statistics_text_color"/>
 
                     <TextView
                         android:layout_width="0dp"
@@ -656,7 +656,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/bh"
-                        android:textColor="@color/light_grey"/>
+                        android:textColor="@color/statistics_text_color"/>
 
                     <TextView
                         android:layout_width="0dp"
@@ -664,7 +664,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/fh"
-                        android:textColor="@color/light_grey"/>
+                        android:textColor="@color/statistics_text_color"/>
 
                     <TextView
                         android:layout_width="0dp"
@@ -672,7 +672,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/bh"
-                        android:textColor="@color/light_grey"/>
+                        android:textColor="@color/statistics_text_color"/>
                 </TableRow>
                 <TableRow>
 
@@ -683,7 +683,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl1"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:id="@+id/returnEbhPlayer1"
@@ -692,7 +692,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl1"
-                        android:textColor="@color/light_grey"/>
+                        android:textColor="@color/statistics_text_color"/>
 
                     <TextView
                         android:id="@+id/returnEfhPlayer2"
@@ -701,7 +701,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl2"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:id="@+id/returnEbhPlayer2"
@@ -710,7 +710,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl2"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
                 </TableRow>
 
                 <!--WINNER-->
@@ -722,7 +722,7 @@
                     android:text="@string/winner"
                     android:textStyle="bold"
                     android:textSize="20sp"
-                    android:textColor="@color/light_grey"
+                    android:textColor="@color/statistics_text_color"
                     android:textAllCaps="true">
 
                 </TextView>
@@ -734,7 +734,7 @@
                     android:gravity="center_horizontal"
                     android:text="@string/ground"
                     android:textAllCaps="true"
-                    android:textColor="@color/light_grey">
+                    android:textColor="@color/statistics_text_color">
 
                 </TextView>
                 <TableRow>
@@ -745,7 +745,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/fh"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -753,7 +753,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/bh"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -761,7 +761,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/fh"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -769,7 +769,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/bh"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
                 </TableRow>
                 <TableRow>
 
@@ -780,7 +780,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl1"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:id="@+id/winnerGroundbhPlayer1"
@@ -789,7 +789,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl1"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:id="@+id/winnerGroundfhPlayer2"
@@ -798,7 +798,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl2"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:id="@+id/winnerGroundbhPlayer2"
@@ -807,7 +807,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl2"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
                 </TableRow>
 
                 <TextView
@@ -819,7 +819,7 @@
                     android:textStyle="bold"
                     android:textSize="20sp"
                     android:textAllCaps="true"
-                    android:textColor="@color/light_grey">
+                    android:textColor="@color/statistics_text_color">
 
                 </TextView>
                 <TableRow>
@@ -830,7 +830,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/fh"
-                        android:textColor="@color/light_grey"/>
+                        android:textColor="@color/statistics_text_color"/>
 
                     <TextView
                         android:layout_width="0dp"
@@ -838,7 +838,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/bh"
-                        android:textColor="@color/light_grey"/>
+                        android:textColor="@color/statistics_text_color"/>
 
                     <TextView
                         android:layout_width="0dp"
@@ -846,7 +846,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/fh"
-                        android:textColor="@color/light_grey"/>
+                        android:textColor="@color/statistics_text_color"/>
 
                     <TextView
                         android:layout_width="0dp"
@@ -854,7 +854,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/bh"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
                 </TableRow>
                 <TableRow>
 
@@ -865,7 +865,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl1"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:id="@+id/winnerSlicebhPlayer1"
@@ -874,7 +874,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl1"
-                        android:textColor="@color/light_grey"/>
+                        android:textColor="@color/statistics_text_color"/>
 
                     <TextView
                         android:id="@+id/winnerSlicefhPlayer2"
@@ -883,7 +883,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl2"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:id="@+id/winnerSlicebhPlayer2"
@@ -892,7 +892,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl2"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
                 </TableRow>
 
                 <TextView
@@ -904,7 +904,7 @@
                     android:textStyle="bold"
                     android:textSize="20sp"
                     android:textAllCaps="true"
-                    android:textColor="@color/light_grey">
+                    android:textColor="@color/statistics_text_color">
 
                 </TextView>
                 <TableRow>
@@ -915,7 +915,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/fh"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -923,7 +923,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/bh"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -931,7 +931,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/fh"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -939,7 +939,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/bh"
-                        android:textColor="@color/light_grey"/>
+                        android:textColor="@color/statistics_text_color"/>
                 </TableRow>
                 <TableRow>
 
@@ -950,7 +950,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl1"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:id="@+id/winnerVolleybhPlayer1"
@@ -959,7 +959,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl1"
-                        android:textColor="@color/light_grey"/>
+                        android:textColor="@color/statistics_text_color"/>
 
                     <TextView
                         android:id="@+id/winnerVolleyfhPlayer2"
@@ -968,7 +968,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl2"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:id="@+id/winnerVolleybhPlayer2"
@@ -977,7 +977,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl2"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
                 </TableRow>
 
                 <TextView
@@ -989,7 +989,7 @@
                     android:textStyle="bold"
                     android:textSize="20sp"
                     android:textAllCaps="true"
-                    android:textColor="@color/light_grey">
+                    android:textColor="@color/statistics_text_color">
 
                 </TextView>
                 <TableRow>
@@ -999,7 +999,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/fh"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -1007,7 +1007,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/bh"
-                        android:textColor="@color/light_grey"/>
+                        android:textColor="@color/statistics_text_color"/>
 
                     <TextView
                         android:layout_width="0dp"
@@ -1015,7 +1015,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/fh"
-                        android:textColor="@color/light_grey"/>
+                        android:textColor="@color/statistics_text_color"/>
 
                     <TextView
                         android:layout_width="0dp"
@@ -1023,7 +1023,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/bh"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
                 </TableRow>
                 <TableRow>
 
@@ -1034,7 +1034,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl1"
-                        android:textColor="@color/light_grey"/>
+                        android:textColor="@color/statistics_text_color"/>
 
                     <TextView
                         android:id="@+id/winnerSmashbhPlayer1"
@@ -1043,7 +1043,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl1"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:id="@+id/winnerSmashfhPlayer2"
@@ -1052,7 +1052,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl2"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:id="@+id/winnerSmashbhPlayer2"
@@ -1061,7 +1061,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl2"
-                        android:textColor="@color/light_grey"/>
+                        android:textColor="@color/statistics_text_color"/>
                 </TableRow>
 
                 <TextView
@@ -1073,7 +1073,7 @@
                     android:textStyle="bold"
                     android:textSize="20sp"
                     android:textAllCaps="true"
-                    android:textColor="@color/light_grey">
+                    android:textColor="@color/statistics_text_color">
 
                 </TextView>
                 <TableRow>
@@ -1083,7 +1083,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/fh"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -1091,7 +1091,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/bh"
-                        android:textColor="@color/light_grey"/>
+                        android:textColor="@color/statistics_text_color"/>
 
                     <TextView
                         android:layout_width="0dp"
@@ -1099,7 +1099,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/fh"
-                        android:textColor="@color/light_grey"/>
+                        android:textColor="@color/statistics_text_color"/>
 
                     <TextView
                         android:layout_width="0dp"
@@ -1107,7 +1107,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/bh"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
                 </TableRow>
                 <TableRow>
 
@@ -1118,7 +1118,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl1"
-                        android:textColor="@color/light_grey"/>
+                        android:textColor="@color/statistics_text_color"/>
 
                     <TextView
                         android:id="@+id/winnerLobbhPlayer1"
@@ -1127,7 +1127,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl1"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:id="@+id/winnerLobfhPlayer2"
@@ -1136,7 +1136,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl2"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:id="@+id/winnerLobbhPlayer2"
@@ -1145,7 +1145,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl2"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
                 </TableRow>
 
                 <TextView
@@ -1157,7 +1157,7 @@
                     android:textStyle="bold"
                     android:textSize="20sp"
                     android:textAllCaps="true"
-                    android:textColor="@color/light_grey">
+                    android:textColor="@color/statistics_text_color">
 
                 </TextView>
                 <TableRow>
@@ -1167,7 +1167,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/fh"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -1175,7 +1175,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/bh"
-                        android:textColor="@color/light_grey"/>
+                        android:textColor="@color/statistics_text_color"/>
 
                     <TextView
                         android:layout_width="0dp"
@@ -1183,7 +1183,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/fh"
-                        android:textColor="@color/light_grey"/>
+                        android:textColor="@color/statistics_text_color"/>
 
                     <TextView
                         android:layout_width="0dp"
@@ -1191,7 +1191,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/bh"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
                 </TableRow>
                 <TableRow>
 
@@ -1202,7 +1202,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl1"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:id="@+id/winnerDropshotbhPlayer1"
@@ -1211,7 +1211,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl1"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:id="@+id/winnerDropshotfhPlayer2"
@@ -1220,7 +1220,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl2"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:id="@+id/winnerDropshotbhPlayer2"
@@ -1229,7 +1229,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl2"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
                 </TableRow>
 
                 <!--FORCED ERROR-->
@@ -1240,7 +1240,7 @@
                     android:gravity="center_horizontal"
                     android:text="@string/forced_error"
                     android:textAllCaps="true"
-                    android:textColor="@color/light_grey">
+                    android:textColor="@color/statistics_text_color">
 
                 </TextView>
 
@@ -1251,7 +1251,7 @@
                     android:gravity="center_horizontal"
                     android:text="@string/ground"
                     android:textAllCaps="true"
-                    android:textColor="@color/light_grey">
+                    android:textColor="@color/statistics_text_color">
 
                 </TextView>
                 <TableRow>
@@ -1261,7 +1261,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/fh"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -1269,7 +1269,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/bh"
-                        android:textColor="@color/light_grey"/>
+                        android:textColor="@color/statistics_text_color"/>
 
                     <TextView
                         android:layout_width="0dp"
@@ -1277,7 +1277,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/fh"
-                        android:textColor="@color/light_grey"/>
+                        android:textColor="@color/statistics_text_color"/>
 
                     <TextView
                         android:layout_width="0dp"
@@ -1285,7 +1285,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/bh"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
                 </TableRow>
                 <TableRow>
 
@@ -1296,7 +1296,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl1"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:id="@+id/forcedErrorGroundbhPlayer1"
@@ -1305,7 +1305,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl1"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:id="@+id/forcedErrorGroundfhPlayer2"
@@ -1314,7 +1314,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl2"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:id="@+id/forcedErrorGroundbhPlayer2"
@@ -1323,7 +1323,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl2"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
                 </TableRow>
 
                 <TextView
@@ -1333,7 +1333,7 @@
                     android:gravity="center_horizontal"
                     android:text="@string/slice"
                     android:textAllCaps="true"
-                    android:textColor="@color/light_grey">
+                    android:textColor="@color/statistics_text_color">
 
                 </TextView>
                 <TableRow>
@@ -1343,7 +1343,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/fh"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -1351,7 +1351,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/bh"
-                        android:textColor="@color/light_grey"/>
+                        android:textColor="@color/statistics_text_color"/>
 
                     <TextView
                         android:layout_width="0dp"
@@ -1359,7 +1359,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/fh"
-                        android:textColor="@color/light_grey"/>
+                        android:textColor="@color/statistics_text_color"/>
 
                     <TextView
                         android:layout_width="0dp"
@@ -1367,7 +1367,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/bh"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
                 </TableRow>
                 <TableRow>
 
@@ -1378,7 +1378,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl1"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:id="@+id/forcedErrorSlicebhPlayer1"
@@ -1387,7 +1387,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl1"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:id="@+id/forcedErrorSlicefhPlayer2"
@@ -1396,7 +1396,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl2"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:id="@+id/forcedErrorSlicebhPlayer2"
@@ -1405,7 +1405,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl2"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
                 </TableRow>
 
                 <TextView
@@ -1415,7 +1415,7 @@
                     android:gravity="center_horizontal"
                     android:text="@string/volley"
                     android:textAllCaps="true"
-                    android:textColor="@color/light_grey">
+                    android:textColor="@color/statistics_text_color">
 
                 </TextView>
                 <TableRow>
@@ -1425,7 +1425,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/fh"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -1433,7 +1433,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/bh"
-                        android:textColor="@color/light_grey"/>
+                        android:textColor="@color/statistics_text_color"/>
 
                     <TextView
                         android:layout_width="0dp"
@@ -1441,7 +1441,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/fh"
-                        android:textColor="@color/light_grey"/>
+                        android:textColor="@color/statistics_text_color"/>
 
                     <TextView
                         android:layout_width="0dp"
@@ -1449,7 +1449,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/bh"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
                 </TableRow>
                 <TableRow>
 
@@ -1460,7 +1460,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl1"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:id="@+id/forcedErrorVolleybhPlayer1"
@@ -1469,7 +1469,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl1"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:id="@+id/forcedErrorVolleyfhPlayer2"
@@ -1478,7 +1478,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl2"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:id="@+id/forcedErrorVolleybhPlayer2"
@@ -1487,7 +1487,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl1"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
                 </TableRow>
 
                 <TextView
@@ -1497,7 +1497,7 @@
                     android:gravity="center_horizontal"
                     android:text="@string/smash"
                     android:textAllCaps="true"
-                    android:textColor="@color/light_grey">
+                    android:textColor="@color/statistics_text_color">
 
                 </TextView>
                 <TableRow>
@@ -1507,7 +1507,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/fh"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -1515,7 +1515,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/bh"
-                        android:textColor="@color/light_grey"/>
+                        android:textColor="@color/statistics_text_color"/>
 
                     <TextView
                         android:layout_width="0dp"
@@ -1523,7 +1523,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/fh"
-                        android:textColor="@color/light_grey"/>
+                        android:textColor="@color/statistics_text_color"/>
 
                     <TextView
                         android:layout_width="0dp"
@@ -1531,7 +1531,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/bh"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
                 </TableRow>
                 <TableRow>
 
@@ -1542,7 +1542,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl1"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:id="@+id/forcedErrorSmashbhPlayer1"
@@ -1551,7 +1551,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl1"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:id="@+id/forcedErrorSmashfhPlayer2"
@@ -1560,7 +1560,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl2"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:id="@+id/forcedErrorSmashbhPlayer2"
@@ -1569,7 +1569,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl2"
-                        android:textColor="@color/light_grey"/>
+                        android:textColor="@color/statistics_text_color"/>
                 </TableRow>
 
                 <TextView
@@ -1579,7 +1579,7 @@
                     android:gravity="center_horizontal"
                     android:text="@string/lob"
                     android:textAllCaps="true"
-                    android:textColor="@color/light_grey">
+                    android:textColor="@color/statistics_text_color">
                 </TextView>
                 <TableRow>
                     <TextView
@@ -1588,7 +1588,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/fh"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -1596,7 +1596,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/bh"
-                        android:textColor="@color/light_grey"/>
+                        android:textColor="@color/statistics_text_color"/>
 
                     <TextView
                         android:layout_width="0dp"
@@ -1604,7 +1604,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/fh"
-                        android:textColor="@color/light_grey"/>
+                        android:textColor="@color/statistics_text_color"/>
 
                     <TextView
                         android:layout_width="0dp"
@@ -1612,7 +1612,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/bh"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
                 </TableRow>
                 <TableRow>
 
@@ -1623,7 +1623,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl1"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:id="@+id/forcedErrorLobbhPlayer1"
@@ -1632,7 +1632,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl1"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:id="@+id/forcedErrorLobfhPlayer2"
@@ -1641,7 +1641,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl2"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:id="@+id/forcedErrorLobbhPlayer2"
@@ -1650,7 +1650,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl2"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
                 </TableRow>
 
                 <TextView
@@ -1660,7 +1660,7 @@
                     android:gravity="center_horizontal"
                     android:text="@string/dropshot"
                     android:textAllCaps="true"
-                    android:textColor="@color/light_grey">
+                    android:textColor="@color/statistics_text_color">
 
                 </TextView>
                 <TableRow>
@@ -1670,7 +1670,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/fh"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -1678,7 +1678,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/bh"
-                        android:textColor="@color/light_grey"/>
+                        android:textColor="@color/statistics_text_color"/>
 
                     <TextView
                         android:layout_width="0dp"
@@ -1686,7 +1686,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/fh"
-                        android:textColor="@color/light_grey"/>
+                        android:textColor="@color/statistics_text_color"/>
 
                     <TextView
                         android:layout_width="0dp"
@@ -1694,7 +1694,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/bh"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
                 </TableRow>
                 <TableRow>
 
@@ -1705,7 +1705,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl1"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:id="@+id/forcedErrorDropshotbhPlayer1"
@@ -1714,7 +1714,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl1"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:id="@+id/forcedErrorDropshotfhPlayer2"
@@ -1723,7 +1723,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl2"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:id="@+id/forcedErrorDropshotbhPlayer2"
@@ -1732,7 +1732,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl2"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
                 </TableRow>
 
                 <!--UNFORCED ERROR-->
@@ -1743,7 +1743,7 @@
                     android:gravity="center_horizontal"
                     android:text="@string/unforced_error"
                     android:textAllCaps="true"
-                    android:textColor="@color/light_grey">
+                    android:textColor="@color/statistics_text_color">
 
                 </TextView>
 
@@ -1754,7 +1754,7 @@
                     android:gravity="center_horizontal"
                     android:text="@string/ground"
                     android:textAllCaps="true"
-                    android:textColor="@color/light_grey">
+                    android:textColor="@color/statistics_text_color">
 
                 </TextView>
                 <TableRow>
@@ -1764,7 +1764,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/fh"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -1772,7 +1772,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/bh"
-                        android:textColor="@color/light_grey"/>
+                        android:textColor="@color/statistics_text_color"/>
 
                     <TextView
                         android:layout_width="0dp"
@@ -1780,7 +1780,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/fh"
-                        android:textColor="@color/light_grey"/>
+                        android:textColor="@color/statistics_text_color"/>
 
                     <TextView
                         android:layout_width="0dp"
@@ -1788,7 +1788,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/bh"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
                 </TableRow>
                 <TableRow>
 
@@ -1799,7 +1799,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl1"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:id="@+id/unforcedErrorGroundbhPlayer1"
@@ -1808,7 +1808,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl1"
-                        android:textColor="@color/light_grey"/>
+                        android:textColor="@color/statistics_text_color"/>
 
                     <TextView
                         android:id="@+id/unforcedErrorGroundfhPlayer2"
@@ -1817,7 +1817,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl2"
-                        android:textColor="@color/light_grey"/>
+                        android:textColor="@color/statistics_text_color"/>
 
                     <TextView
                         android:id="@+id/unforcedErrorGroundbhPlayer2"
@@ -1826,7 +1826,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl2"
-                        android:textColor="@color/light_grey"/>
+                        android:textColor="@color/statistics_text_color"/>
                 </TableRow>
 
                 <TextView
@@ -1836,7 +1836,7 @@
                     android:gravity="center_horizontal"
                     android:text="@string/slice"
                     android:textAllCaps="true"
-                    android:textColor="@color/light_grey">
+                    android:textColor="@color/statistics_text_color">
 
                 </TextView>
                 <TableRow>
@@ -1846,7 +1846,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/fh"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -1854,7 +1854,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/bh"
-                        android:textColor="@color/light_grey"/>
+                        android:textColor="@color/statistics_text_color"/>
 
                     <TextView
                         android:layout_width="0dp"
@@ -1862,7 +1862,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/fh"
-                        android:textColor="@color/light_grey"/>
+                        android:textColor="@color/statistics_text_color"/>
 
                     <TextView
                         android:layout_width="0dp"
@@ -1870,7 +1870,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/bh"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
                 </TableRow>
                 <TableRow>
 
@@ -1881,7 +1881,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl1"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:id="@+id/unforcedErrorSlicebhPlayer1"
@@ -1890,7 +1890,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl1"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:id="@+id/unforcedErrorSlicefhPlayer2"
@@ -1899,7 +1899,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl2"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:id="@+id/unforcedErrorSlicebhPlayer2"
@@ -1908,7 +1908,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl2"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
                 </TableRow>
 
                 <TextView
@@ -1918,7 +1918,7 @@
                     android:gravity="center_horizontal"
                     android:text="@string/volley"
                     android:textAllCaps="true"
-                    android:textColor="@color/light_grey">
+                    android:textColor="@color/statistics_text_color">
 
                 </TextView>
                 <TableRow>
@@ -1928,7 +1928,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/fh"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -1936,7 +1936,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/bh"
-                        android:textColor="@color/light_grey"/>
+                        android:textColor="@color/statistics_text_color"/>
 
                     <TextView
                         android:layout_width="0dp"
@@ -1944,7 +1944,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/fh"
-                        android:textColor="@color/light_grey"/>
+                        android:textColor="@color/statistics_text_color"/>
 
                     <TextView
                         android:layout_width="0dp"
@@ -1952,7 +1952,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/bh"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
                 </TableRow>
                 <TableRow>
 
@@ -1963,7 +1963,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl1"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:id="@+id/unforcedErrorVolleybhPlayer1"
@@ -1972,7 +1972,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl1"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:id="@+id/unforcedErrorVolleyfhPlayer2"
@@ -1981,7 +1981,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl2"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:id="@+id/unforcedErrorVolleybhPlayer2"
@@ -1990,7 +1990,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl2"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
                 </TableRow>
 
                 <TextView
@@ -2000,7 +2000,7 @@
                     android:gravity="center_horizontal"
                     android:text="@string/smash"
                     android:textAllCaps="true"
-                    android:textColor="@color/light_grey">
+                    android:textColor="@color/statistics_text_color">
 
                 </TextView>
                 <TableRow>
@@ -2010,7 +2010,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/fh"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -2018,7 +2018,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/bh"
-                        android:textColor="@color/light_grey"/>
+                        android:textColor="@color/statistics_text_color"/>
 
                     <TextView
                         android:layout_width="0dp"
@@ -2026,7 +2026,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/fh"
-                        android:textColor="@color/light_grey"/>
+                        android:textColor="@color/statistics_text_color"/>
 
                     <TextView
                         android:layout_width="0dp"
@@ -2034,7 +2034,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/bh"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
                 </TableRow>
                 <TableRow>
 
@@ -2045,7 +2045,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl1"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:id="@+id/unforcedErrorSmashbhPlayer1"
@@ -2054,7 +2054,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl1"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:id="@+id/unforcedErrorSmashfhPlayer2"
@@ -2063,7 +2063,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl2"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:id="@+id/unforcedErrorSmashbhPlayer2"
@@ -2072,7 +2072,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl2"
-                        android:textColor="@color/light_grey"/>
+                        android:textColor="@color/statistics_text_color"/>
                 </TableRow>
 
                 <TextView
@@ -2082,7 +2082,7 @@
                     android:gravity="center_horizontal"
                     android:text="@string/lob"
                     android:textAllCaps="true"
-                    android:textColor="@color/light_grey">
+                    android:textColor="@color/statistics_text_color">
 
                 </TextView>
                 <TableRow>
@@ -2092,7 +2092,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/fh"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -2100,7 +2100,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/bh"
-                        android:textColor="@color/light_grey"/>
+                        android:textColor="@color/statistics_text_color"/>
 
                     <TextView
                         android:layout_width="0dp"
@@ -2108,7 +2108,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/fh"
-                        android:textColor="@color/light_grey"/>
+                        android:textColor="@color/statistics_text_color"/>
 
                     <TextView
                         android:layout_width="0dp"
@@ -2116,7 +2116,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/bh"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
                 </TableRow>
                 <TableRow>
 
@@ -2127,7 +2127,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl1"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
 
                     <TextView
@@ -2137,7 +2137,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl1"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:id="@+id/unforcedErrorLobfhPlayer2"
@@ -2146,7 +2146,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl2"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:id="@+id/unforcedErrorLobbhPlayer2"
@@ -2155,7 +2155,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl2"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
                 </TableRow>
 
                 <TextView
@@ -2165,7 +2165,7 @@
                     android:gravity="center_horizontal"
                     android:text="@string/dropshot"
                     android:textAllCaps="true"
-                    android:textColor="@color/light_grey">
+                    android:textColor="@color/statistics_text_color">
 
                 </TextView>
                 <TableRow>
@@ -2175,7 +2175,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/fh"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -2183,7 +2183,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/bh"
-                        android:textColor="@color/light_grey"/>
+                        android:textColor="@color/statistics_text_color"/>
 
                     <TextView
                         android:layout_width="0dp"
@@ -2191,7 +2191,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/fh"
-                        android:textColor="@color/light_grey"/>
+                        android:textColor="@color/statistics_text_color"/>
 
                     <TextView
                         android:layout_width="0dp"
@@ -2199,7 +2199,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/bh"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
                 </TableRow>
                 <TableRow>
 
@@ -2210,7 +2210,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl1"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:id="@+id/unforcedErrorDropshotbhPlayer1"
@@ -2219,7 +2219,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl1"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:id="@+id/unforcedErrorDropshotfhPlayer2"
@@ -2228,7 +2228,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl2"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
 
                     <TextView
                         android:id="@+id/unforcedErrorDropshotbhPlayer2"
@@ -2237,7 +2237,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/iloscpl2"
-                        android:textColor="@color/light_grey" />
+                        android:textColor="@color/statistics_text_color" />
                 </TableRow>
 
             </TableLayout>
