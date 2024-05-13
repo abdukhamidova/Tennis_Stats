@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.MotionEvent
+import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
@@ -48,9 +49,7 @@ class ActivityServe : AppCompatActivity() {
         navigationDrawerHelper = NavigationDrawerHelper(this)
         navigationDrawerHelper.setupNavigationDrawer(drawerLayout, navigationView, firebaseAuth, true)
         val backButton = findViewById<ImageButton>(R.id.buttonUndo)
-        backButton.setOnClickListener{
-            startActivity(Intent(this,StartNewActivity::class.java))
-        }
+        backButton.visibility = View.GONE
 
         val userEmail = firebaseAuth.currentUser?.email.toString()
         val userEmailView = headerView.findViewById<TextView>(R.id.textViewUserEmail)

@@ -147,9 +147,11 @@ class AddPointDialog(private val context: Context, private val openedFromStartPo
         }
 
         btnCancel.setOnClickListener {
-            val intent = Intent(context, ActivityStartPoint::class.java)
-            intent.putExtra("matchID", matchId)
-            context.startActivity(intent)
+            if(!openedFromStartPoint) {
+                val intent = Intent(context, ActivityStartPoint::class.java)
+                intent.putExtra("matchID", matchId)
+                context.startActivity(intent)
+            }
             alertDialog.dismiss()
         }
         alertDialog.show()

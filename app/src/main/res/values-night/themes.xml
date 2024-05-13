@@ -10,6 +10,7 @@
     </style>
 
     <style name="Theme.TenniStats" parent="Base.Theme.TenniStats" />
+
     <!--styl domyślny button-->
     <style name="our_button" parent="Widget.AppCompat.Button">
         <item name="android:background">@drawable/rounded_button</item>
@@ -25,7 +26,37 @@
         <item name="android:layout_marginTop">5dp</item>
         <item name="android:layout_marginBottom">5dp</item>
         <item name="android:layout_weight">0.9</item>
-        <item name="android:textColor">@color/black</item>
+        <item name="android:textColor">@color/light_grey</item>
+        <item name="drawableTint">@color/app_mainTitles_color</item>
+    </style>
+    <!--styl dla tablic w view matches-->
+    <style name="matchTableTextAppearance">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:layout_weight">0.9</item>
+        <item name="android:textColor">@color/light_grey</item>
+        <item name="drawableTint">@color/gold</item>
+    </style>
+    <!--styl dla tablic w view matches-->
+    <style name="rosTableTextAppearance">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:layout_weight">0.9</item>
+        <item name="android:textColor">@color/app_bg_color</item>
+        <item name="drawableTint">@color/gold</item>
+    </style>
+
+    <!--styl dla koloru playera1-->
+    <style name="player1TextAppearance">
+        <item name="android:textColor">@color/app_player1_color</item>
+    </style>
+    <!--styl dla koloru playera2-->
+    <style name="player2TextAppearance">
+        <item name="android:textColor">@color/app_player2_color</item>
     </style>
 
     <!--styl dla statystyk-->
