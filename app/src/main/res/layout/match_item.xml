@@ -86,6 +86,10 @@
                     android:id="@+id/textViewPlayer1Set3Match"
                     android:layout_height="match_parent"
                     android:text=""/>
+
+                <TextView
+                    android:id="@+id/textViewPlayer1PktStats"
+                    android:layout_height="match_parent"/>
             </TableRow>
 
             <TableRow
@@ -126,6 +130,9 @@
                     android:layout_height="match_parent"
                     android:text=""
                     android:textAlignment="center"/>
+                <TextView
+                    android:id="@+id/textViewPlayer2PktStats"
+                    android:layout_height="match_parent"/>
             </TableRow>
         </TableLayout>
     </LinearLayout>

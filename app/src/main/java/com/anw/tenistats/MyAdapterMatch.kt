@@ -50,6 +50,52 @@ class MyAdapterMatch(
         holder.date.text = formattedDate
         holder.player1.text = currentItem.player1
         holder.player2.text = currentItem.player2
+        holder.pkt1.text=currentItem.pkt1
+        holder.pkt2.text=currentItem.pkt2
+        holder.set1p1.text=currentItem.set1p1
+        holder.set1p2.text=currentItem.set1p2
+        holder.set2p1.text=currentItem.set2p1
+        holder.set2p2.text=currentItem.set2p2
+        holder.set3p1.text=currentItem.set3p1
+        holder.set3p2.text=currentItem.set3p2
+
+        if(currentItem.winner != "")
+        {
+            holder.iconPlayer1.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_laurel3, 0, 0, 0)
+            holder.iconPlayer2.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_laurel3, 0, 0, 0)
+            if(currentItem.winner == currentItem.player1)
+            run{
+                holder.iconPlayer1.visibility = View.VISIBLE
+                holder.iconPlayer2.visibility = View.INVISIBLE
+            }
+            else if (currentItem.winner == currentItem.player2)
+            run {
+                holder.iconPlayer1.visibility = View.INVISIBLE
+                holder.iconPlayer2.visibility = View.VISIBLE
+            }
+        }
+        else if(currentItem.LastServePlayer != "")
+        {
+            holder.iconPlayer1.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ball, 0, 0, 0)
+            holder.iconPlayer2.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ball, 0, 0, 0)
+            if(currentItem.LastServePlayer==currentItem.player1)
+            run{
+                holder.iconPlayer1.visibility = View.VISIBLE
+                holder.iconPlayer2.visibility = View.INVISIBLE
+            }
+            else if (currentItem.LastServePlayer==currentItem.player2)
+            run {
+                holder.iconPlayer1.visibility = View.INVISIBLE
+                holder.iconPlayer2.visibility = View.VISIBLE
+            }
+        }
+        else
+        {
+            holder.iconPlayer1.visibility = View.INVISIBLE
+            holder.iconPlayer2.visibility = View.INVISIBLE
+        }
+
+
 
         holder.itemView.setOnClickListener {
             val match = filteredList[position]
@@ -101,6 +147,17 @@ class MyAdapterMatch(
         val date: TextView = itemView.findViewById(R.id.textviewDateVM)
         val player1: TextView = itemView.findViewById(R.id.textviewPlayer1VM)
         val player2: TextView = itemView.findViewById(R.id.textviewPlayer2VM)
+        val pkt1: TextView = itemView.findViewById(R.id.textViewPlayer1PktStats)
+        val pkt2: TextView = itemView.findViewById(R.id.textViewPlayer2PktStats)
+        val set1p1: TextView = itemView.findViewById(R.id.textViewPlayer1Set1Match)
+        val set1p2: TextView = itemView.findViewById(R.id.textViewPlayer2Set1Match)
+        val set2p1: TextView = itemView.findViewById(R.id.textViewPlayer1Set2Match)
+        val set2p2: TextView = itemView.findViewById(R.id.textViewPlayer2Set2Match)
+        val set3p1: TextView = itemView.findViewById(R.id.textViewPlayer1Set3Match)
+        val set3p2: TextView = itemView.findViewById(R.id.textViewPlayer2Set3Match)
+        val iconPlayer1: TextView = itemView.findViewById(R.id.textViewWin1Match)
+        val iconPlayer2: TextView = itemView.findViewById(R.id.textViewWin2Match)
+
     }
 
     interface OnItemClickListener {

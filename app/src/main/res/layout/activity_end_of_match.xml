@@ -114,8 +114,7 @@
                 <TextView
                     android:id="@+id/textViewP2Set2EOM"
                     android:layout_height="match_parent"
-                    android:text=""
-                    android:textColor="@color/app_btnClick_color" />
+                    android:text="" />
 
                 <TextView
                     android:id="@+id/textViewP2Set3EOM"
