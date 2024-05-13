@@ -47,19 +47,80 @@ class AddPointDialog(private val context: Context, private val openedFromStartPo
 
             if (app != null) {
                 //ustawienie wyniku w danym gemie
-                val set1P1 = app.set1p1
-                val set1P2 = app.set1p2
-                val set2P1 = app.set2p1
-                val set2P2 = app.set2p2
-                val set3P1 = app.set3p1
-                val set3P2 = app.set3p2
+                var set1P1: String
+                var set1P2: String
+                var set2P1: String
+                var set2P2: String
+                var set3P1: String
+                var set3P2: String
 
-                database.child(("set "+ setId)).child(("game "+gameId)).child("score").child("player1set1").setValue(set1P1)
+                database.child("set1p1").get().addOnSuccessListener { dataSnapshot ->
+                    // Pobranie wartości "player1" z bazy danych
+                    val set1p1Value = dataSnapshot.getValue(String::class.java).toString()
+                    // Ustawienie wartości w TextView
+                    set1P1 = set1p1Value
+                    app.set1p1=set1P1
+                    database.child(("set "+ setId)).child(("game "+gameId)).child("score").child("player1set1").setValue(set1P1)
+                }.addOnFailureListener { exception ->
+                    // Obsługa błędów
+                }
+                database.child("set2p1").get().addOnSuccessListener { dataSnapshot ->
+                    // Pobranie wartości "player1" z bazy danych
+                    val set2p1Value = dataSnapshot.getValue(String::class.java).toString()
+                    // Ustawienie wartości w TextView
+                    set2P1 = set2p1Value
+                    app.set2p1=set2P1
+                    database.child(("set "+ setId)).child(("game "+gameId)).child("score").child("player1set2").setValue(set2P1)
+                }.addOnFailureListener { exception ->
+                    // Obsługa błędów
+                }
+                database.child("set3p1").get().addOnSuccessListener { dataSnapshot ->
+                    // Pobranie wartości "player1" z bazy danych
+                    val set3p1Value = dataSnapshot.getValue(String::class.java).toString()
+                    // Ustawienie wartości w TextView
+                    set3P1 = set3p1Value
+                    app.set3p1=set3P1
+                    database.child(("set "+ setId)).child(("game "+gameId)).child("score").child("player1set3").setValue(set3P1)
+                }.addOnFailureListener { exception ->
+                    // Obsługa błędów
+                }
+                database.child("set1p2").get().addOnSuccessListener { dataSnapshot ->
+                    // Pobranie wartości "player1" z bazy danych
+                    val set1p2Value = dataSnapshot.getValue(String::class.java).toString()
+                    // Ustawienie wartości w TextView
+                    set1P2 = set1p2Value
+                    app.set1p2=set1P2
+                    database.child(("set "+ setId)).child(("game "+gameId)).child("score").child("player2set1").setValue(set1P2)
+                }.addOnFailureListener { exception ->
+                    // Obsługa błędów
+                }
+                database.child("set2p2").get().addOnSuccessListener { dataSnapshot ->
+                    // Pobranie wartości "player1" z bazy danych
+                    val set2p2Value = dataSnapshot.getValue(String::class.java).toString()
+                    // Ustawienie wartości w TextView
+                    set2P2 = set2p2Value
+                    app.set2p2=set2P2
+                    database.child(("set "+ setId)).child(("game "+gameId)).child("score").child("player2set2").setValue(set2P2)
+                }.addOnFailureListener { exception ->
+                    // Obsługa błędów
+                }
+                database.child("set3p2").get().addOnSuccessListener { dataSnapshot ->
+                    // Pobranie wartości "player1" z bazy danych
+                    val set3p2Value = dataSnapshot.getValue(String::class.java).toString()
+                    // Ustawienie wartości w TextView
+                    set3P2 = set3p2Value
+                    app.set3p2=set3P2
+                    database.child(("set "+ setId)).child(("game "+gameId)).child("score").child("player2set3").setValue(set3P2)
+                }.addOnFailureListener { exception ->
+                    // Obsługa błędów
+                }
+
+                /*database.child(("set "+ setId)).child(("game "+gameId)).child("score").child("player1set1").setValue(set1P1)
                 database.child(("set "+ setId)).child(("game "+gameId)).child("score").child("player2set1").setValue(set1P2)
                 database.child(("set "+ setId)).child(("game "+gameId)).child("score").child("player1set2").setValue(set2P1)
                 database.child(("set "+ setId)).child(("game "+gameId)).child("score").child("player2set2").setValue(set2P2)
                 database.child(("set "+ setId)).child(("game "+gameId)).child("score").child("player1set3").setValue(set3P1)
-                database.child(("set "+ setId)).child(("game "+gameId)).child("score").child("player2set3").setValue(set3P2)
+                database.child(("set "+ setId)).child(("game "+gameId)).child("score").child("player2set3").setValue(set3P2)*/
 
                 //ustawienie osoby serwujacej w danym gemie
                 val servePlayer: String
@@ -112,17 +173,17 @@ class AddPointDialog(private val context: Context, private val openedFromStartPo
                         pointDatabase.child("score").child("pkt1").setValue(app.pkt1)
                         pointDatabase.child("score").child("pkt2").setValue(app.pkt2)
                         pointDatabase.child("score").child("set1p1")
-                            .setValue(set1p1.text.toString())
+                            .setValue(app.set1p1)//.text.toString())
                         pointDatabase.child("score").child("set1p2")
-                            .setValue(set1p2.text.toString())
+                            .setValue(app.set1p2)//.text.toString())
                         pointDatabase.child("score").child("set2p1")
-                            .setValue(set2p1.text.toString())
+                            .setValue(app.set2p1)//.text.toString())
                         pointDatabase.child("score").child("set2p2")
-                            .setValue(set2p2.text.toString())
+                            .setValue(app.set2p2)//.text.toString())
                         pointDatabase.child("score").child("set3p1")
-                            .setValue(set3p1.text.toString())
+                            .setValue(app.set3p1)//.text.toString())
                         pointDatabase.child("score").child("set3p2")
-                            .setValue(set3p2.text.toString())
+                            .setValue(app.set3p2)//.text.toString())
 
                         // Inkrementacja i zapisanie wartości pktCount
                         val newCount = currentCount + 1

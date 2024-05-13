@@ -111,7 +111,6 @@ class DetailsActivity : AppCompatActivity() {
             czyPlayer1 = true
         }
 
-
         findViewById<Button>(R.id.buttonGround).setOnClickListener {
             if(findViewById<RadioButton>(R.id.radioButtonFH).isChecked)
             {
