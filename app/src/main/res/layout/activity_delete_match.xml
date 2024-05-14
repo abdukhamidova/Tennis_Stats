@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/darker_blue">
+
+    <TextView
+        android:id="@+id/textViewConfirm"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:text="@string/deleteInfo"
+        android:textColor="@color/light_yellow"
+        android:textSize="30sp"
+        android:textAlignment="center"/>
+
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="15dp"
+        android:layout_gravity="center_horizontal">
+        <Button
+            android:id="@+id/buttonCancel"
+            android:layout_width="130dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/border_button"
+            android:text="@string/cancel"
+            android:textSize="17sp"
+            android:textColor="@color/light_grey"/>
+
+        <Button
+            android:id="@+id/buttonDelete"
+            android:layout_width="130dp"
+            android:layout_height="48dp"
+            android:layout_toEndOf="@+id/buttonCancel"
+            android:backgroundTint="@color/light_yellow"
+            android:text="@string/delete"
+            android:textSize="19sp" />
+    </RelativeLayout>
+</LinearLayout>

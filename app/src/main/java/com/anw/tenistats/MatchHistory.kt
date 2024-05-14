@@ -25,10 +25,12 @@ data class Player(
     var handedness: String? = null,
     var strength: String? = null,
     var weakness: String? = null
+    //var active: Boolean? = null
 )
 
 {
     constructor() : this(null, null, null, null, null, null, null, null, null)
+    //constructor() : this(null, null, null, null, null, null, null, null, null, null)
 }
 
 /*data class Set(

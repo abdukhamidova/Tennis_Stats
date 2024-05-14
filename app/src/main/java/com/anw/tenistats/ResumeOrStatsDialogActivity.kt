@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import com.anw.tenistats.ActivityStartPoint
+import com.anw.tenistats.DeleteMatchDialogActivity
 import com.anw.tenistats.R
 import com.anw.tenistats.Stats
 import com.anw.tenistats.ViewHistoryActivity
@@ -76,6 +77,8 @@ class ResumeOrStatsDialogActivity(private val context: Context,private val opene
                     val btnViewStats : Button = dialogView.findViewById(R.id.buttonViewStatsRoS)
                     val btnCancel : Button = dialogView.findViewById(R.id.buttonCancelRoS)
 
+                    val btnDelete : Button = dialogView.findViewById(R.id.buttonDelete)
+
                     btnResume.setOnClickListener {
                         //zapisanie wyniku w zmiennych globalnych
                         /*if (app != null){
@@ -115,13 +118,18 @@ class ResumeOrStatsDialogActivity(private val context: Context,private val opene
                         alertDialog.dismiss()
                     }
 
+                    btnDelete.setOnClickListener {
+                        val deleteMatchDialog = DeleteMatchDialogActivity(context)
+                        deleteMatchDialog.show(matchId.text.toString())
+                        alertDialog.dismiss()
+                    }
+
                     btnCancel.setOnClickListener {
                         val intent = Intent(context, ViewMatchesActivity::class.java)
                         intent.putExtra("matchID", matchId.text)
                         context.startActivity(intent)
                         alertDialog.dismiss()
                     }
-
 
                     } else {
                     // Obsługa, gdy dane nie istnieją w bazie danych

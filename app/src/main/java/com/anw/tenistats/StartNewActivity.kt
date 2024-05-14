@@ -118,7 +118,10 @@ class StartNewActivity : AppCompatActivity() {
             //tak, aby w kolejnym activity obowiązywało nazewnictwo z bazy
             if (player1.isEmpty() || player2.isEmpty()) {
                 Toast.makeText(this, "Don't leave empty fields.", Toast.LENGTH_SHORT).show()
-            }else{
+            }else if(player1==player2){
+                Toast.makeText(this, "You chose the same player. Choose another opponent.", Toast.LENGTH_SHORT).show()
+            }
+            else{
                 //sprawdzenie istnienia player1, jego ewentualne dodanie/duplikowanie
                 checkPlayerExistence(pl1Inticap,player1FirstName, player1LastName, btn1) {updatedPlayer1 ->
                     player1 = updatedPlayer1
@@ -247,6 +250,7 @@ class StartNewActivity : AppCompatActivity() {
                                     null,
                                     "",
                                     ""
+                                    //true
                                 )
 
                                 // Dodanie nowego zawodnika do bazy danych
@@ -292,6 +296,7 @@ class StartNewActivity : AppCompatActivity() {
                     null,
                     "",
                     ""
+                    //true
                 )
                 //dodaj taki węzeł
                 database.child(playerName).setValue(player)

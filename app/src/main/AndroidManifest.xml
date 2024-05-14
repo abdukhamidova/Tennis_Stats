@@ -14,7 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TenniStats"
         tools:targetApi="31">
-
+        <activity
+            android:name=".DeleteMatchDialogActivity"
+            android:exported="false" />
         <activity
             android:name=".AddPlayerActivity"
             android:exported="false" />

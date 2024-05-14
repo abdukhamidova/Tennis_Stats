@@ -224,6 +224,7 @@ class AddPlayerActivity : AppCompatActivity() {
                                     "Righthanded",
                                     strength,
                                     weakness
+                                    //true
                                 )
                             } else if (rbL.isChecked) {
                                 player = Player(
@@ -236,6 +237,7 @@ class AddPlayerActivity : AppCompatActivity() {
                                     "Lefthanded",
                                     strength,
                                     weakness
+                                    //true
                                 )
                             } else {
                                 player = Player(
@@ -248,6 +250,7 @@ class AddPlayerActivity : AppCompatActivity() {
                                     null,
                                     strength,
                                     weakness
+                                    //true
                                 )
                             }
 
@@ -278,6 +281,7 @@ class AddPlayerActivity : AppCompatActivity() {
                         "Righthanded",
                         strength,
                         weakness
+                        //true
                     )
                 } else {
                     player = Player(
@@ -290,6 +294,7 @@ class AddPlayerActivity : AppCompatActivity() {
                         "Lefthanded",
                         strength,
                         weakness
+                        //true
                     )
                 }
 

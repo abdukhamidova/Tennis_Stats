@@ -148,6 +148,15 @@
             android:text="@string/view_stats"
             android:textSize="20sp" />
         <Button
+            android:id="@+id/buttonDelete"
+            android:layout_width="200sp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/light_yellow"
+            android:text="@string/delete_match"
+            android:textSize="20sp" />
+        <Button
             android:id="@+id/buttonCancelRoS"
             android:layout_width="200sp"
             android:layout_height="wrap_content"

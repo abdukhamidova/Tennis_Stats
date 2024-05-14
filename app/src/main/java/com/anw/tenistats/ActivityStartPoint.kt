@@ -111,7 +111,7 @@ class ActivityStartPoint : AppCompatActivity() {
         set2p2 = findViewById(R.id.textViewSet2Pl2)
         set3p2 = findViewById(R.id.textViewSet3Pl2)
         val addPointDialog = AddPointDialog(this,true)
-        fillUpScoreInActivity(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
+        //fillUpScoreInActivity(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
 
         val btnFault = findViewById<Button>(R.id.buttonFault)
         val fault_text = resources.getString(R.string.fault)
