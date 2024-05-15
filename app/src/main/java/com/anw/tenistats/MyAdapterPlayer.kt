@@ -19,7 +19,7 @@ class MyAdapterPlayer(
 ) :
     RecyclerView.Adapter<MyAdapterPlayer.MyViewHolder>(), Filterable {
 
-    private var filteredList: List<PlayerView> = originalList
+    private var filteredList: List<PlayerView> = originalList.filter { it.active } // Filtrowanie tylko aktywnych zawodników
     private lateinit var context: Context
     private var listener: OnItemClickListener? = null
 
@@ -41,13 +41,12 @@ class MyAdapterPlayer(
         val currentItem = filteredList[position]
 
         holder.playerName.text = currentItem.player
-        //holder.lastName.text = currentItem.lastName
 
         holder.itemView.setOnClickListener {
             val player = filteredList[position]
             listener?.onItemClick(player)
 
-            val playerId = currentItem.player// Pobranie klucza zawodnika
+            val playerId = currentItem.player
             val intent = Intent(context, PlayerDetailsActivity::class.java)
             intent.putExtra("playerId", playerId)
             context.startActivity(intent)
@@ -57,22 +56,21 @@ class MyAdapterPlayer(
     override fun getFilter(): Filter {
         return object : Filter() {
             override fun performFiltering(constraint: CharSequence?): FilterResults {
-                val filteredResults = mutableListOf<PlayerView>()
+                val filteredResults = originalList.filter { it.active } // Filtrowanie tylko aktywnych zawodników
                 if (constraint.isNullOrEmpty()) {
-                    filteredResults.addAll(originalList)
+                    return FilterResults().apply {
+                        values = filteredResults
+                    }
                 } else {
                     val filterPattern = constraint.toString().toLowerCase(Locale.getDefault()).trim()
-                    for (item in originalList) {
-                        // Sprawdzanie, czy firstName lub lastName zawierają wzorzec filtrowania
-                        if (item.firstName.toLowerCase(Locale.getDefault()).contains(filterPattern)
-                            || item.lastName.toLowerCase(Locale.getDefault()).contains(filterPattern)) {
-                            filteredResults.add(item)
-                        }
+                    val filteredList = filteredResults.filter {
+                        it.firstName.toLowerCase(Locale.getDefault()).contains(filterPattern)
+                                || it.lastName.toLowerCase(Locale.getDefault()).contains(filterPattern)
+                    }
+                    return FilterResults().apply {
+                        values = filteredList
                     }
                 }
-                val results = FilterResults()
-                results.values = filteredResults
-                return results
             }
 
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
@@ -82,10 +80,8 @@ class MyAdapterPlayer(
         }
     }
 
-
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val playerName: TextView = itemView.findViewById(R.id.textviewPlayer)
-        //val lastName: TextView = itemView.findViewById(R.id.textviewPlayerLN)
     }
 
     interface OnItemClickListener {

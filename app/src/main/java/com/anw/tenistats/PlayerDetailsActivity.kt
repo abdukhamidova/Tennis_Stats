@@ -1,24 +1,23 @@
 package com.anw.tenistats
 
-import android.os.Bundle
-import android.widget.EditText
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-
 import android.app.DatePickerDialog
 import android.content.Intent
+import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.DatePicker
+import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.RadioButton
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.anw.tenistats.data.CountryRepository
 import com.anw.tenistats.ui.theme.NavigationDrawerHelper
@@ -34,7 +33,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
+
 
 class PlayerDetailsActivity : AppCompatActivity() {
     private lateinit var firebaseAuth: FirebaseAuth
@@ -110,6 +112,11 @@ class PlayerDetailsActivity : AppCompatActivity() {
         findViewById<EditText>(R.id.editTextDate).setOnClickListener {
             showDatePickerDialog()
         }
+        findViewById<Button>(R.id.buttonDelete).setOnClickListener {
+            val deletePlayerDialog = DeletePlayerActivity(this)
+            deletePlayerDialog.show(playerId)
+        }
+
         findViewById<Button>(R.id.buttonSubmit).setOnClickListener {
             setValues()
             Toast.makeText(

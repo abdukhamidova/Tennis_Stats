@@ -84,7 +84,7 @@ class StartNewActivity : AppCompatActivity() {
                 .getReference(user.toString()).child("Players")
 
         // Pobierz listę graczy z bazy danych
-        database.addValueEventListener(object : ValueEventListener {
+        database.orderByChild("active").equalTo(true).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 playersList.clear()
                 for (playerSnapshot in snapshot.children) {
@@ -104,12 +104,13 @@ class StartNewActivity : AppCompatActivity() {
             }
         })
 
+
         // Obsługa przycisku rozpoczęcia gry
         binding.buttonStartGame.setOnClickListener {
             var player1 = binding.autoNamePlayer1.text.toString().trimEnd() //pobiera Imię i Nazwisko gracza
             var player2 = binding.autoNamePlayer2.text.toString().trimEnd()
-            val pl1Inticap=getStringWithoutDigits(initcap(player1))
-            val pl2Inticap=getStringWithoutDigits(initcap(player2))
+            val pl1Inticap=initcap(player1)
+            val pl2Inticap=initcap(player2)
             val (player1FirstName, player1LastName) = splitNameToFirstAndLastName(pl1Inticap)  //zwraca Imię i Nazwisko jako odzielne gracza
             val (player2FirstName, player2LastName) = splitNameToFirstAndLastName(pl2Inticap)
             val btn1 = binding.checkBoxPlayer1New
@@ -203,23 +204,38 @@ class StartNewActivity : AppCompatActivity() {
     }
     //optymalizacja funkcji ~ru 12.04
     private fun checkPlayerExistence(
-        playerName: String, // nazwa węzła zawodnika, jego unikalne id w obrębie użytkownika (Imię Nazwisko, z ewentualnym numerem duplikacji)
-        firstName: String?, // dana atomowa: Imię
-        lastName: String?, // dana atomowa: Nazwisko
+        playerName: String,
+        firstName: String?,
+        lastName: String?,
         btn: CheckBox,
         callback: (String) -> Unit
     ) {
+        val playerNameB=getStringWithoutDigits(playerName)
+        val firstNameB=getStringWithoutDigits(firstName.toString())
+        val lastNameB=getStringWithoutDigits(lastName.toString())
+        var sedzia = ""
+
+        // Pobierz wartość pola active dla zawodnika playerName
         database.child(playerName).get().addOnSuccessListener { snapshot ->
+            val player = snapshot.getValue(Player::class.java)
+            sedzia = player?.active.toString()// Tutaj pobieramy wartość pola active
+        }.addOnFailureListener {
+            Toast.makeText(
+                this@StartNewActivity,
+                "Failed to get player $playerName",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+        database.child(playerNameB).get().addOnSuccessListener { snapshot ->
             if (snapshot.exists()) {
-                if (btn.isChecked) {
-                    // Sprawdzenie czy istnieją inni gracze o takim samym imieniu i nazwisku
+                if (btn.isChecked || (sedzia == "false" )) { // Dodaj warunek sprawdzający pole active
                     var duplicateCount = 0
-                    database.orderByChild("firstName").equalTo(firstName)
+                    database.orderByChild("firstName").equalTo(firstNameB)
                         .addListenerForSingleValueEvent(object : ValueEventListener {
                             override fun onDataChange(dataSnapshot: DataSnapshot) {
                                 for (childSnapshot in dataSnapshot.children) {
                                     val player = childSnapshot.getValue(Player::class.java)
-                                    if (player?.lastName == lastName && player?.firstName == firstName) {
+                                    if (player?.lastName == lastNameB && player?.firstName == firstNameB) {
                                         duplicateCount++
                                     }
                                 }
@@ -227,45 +243,36 @@ class StartNewActivity : AppCompatActivity() {
                                 for (childSnapshot in dataSnapshot.children) {
                                     val player = childSnapshot.getValue(Player::class.java)
                                     if (player != null) {
-                                        if (player?.lastName == lastName && player?.firstName == firstName && duplicateCount < player?.duplicate!!) {
-                                            duplicateCount= player?.duplicate!!+1
+                                        if (player.lastName == lastNameB && player.firstName == firstNameB && duplicateCount < player.duplicate!!.toInt()) {
+                                            duplicateCount = player.duplicate!! + 1
                                         }
                                     }
                                 }
-                                // Pobranie numeru duplikatu dla nowego zawodnika
-                                //val newDuplicate = duplicateCount + 1
-
-                                // Dodanie numeru duplikatu do nazwiska gracza
-
-                                val playerToReturn = playerName + duplicateCount.toString()
-
-                                // Tworzenie obiektu Player
+                                val playerToReturn = playerNameB + duplicateCount.toString()
                                 val player = Player(
-                                    firstName,
-                                    lastName,
+                                    firstNameB,
+                                    lastNameB,
                                     playerToReturn,
                                     duplicateCount,
                                     "",
                                     null,
                                     null,
                                     "",
-                                    ""
-                                    //true
+                                    "",
+                                    true
                                 )
-
-                                // Dodanie nowego zawodnika do bazy danych
                                 database.child(playerToReturn).setValue(player)
                                     .addOnSuccessListener {
                                         Toast.makeText(
                                             this@StartNewActivity,
-                                            "Player $playerName Successfully Saved",
+                                            "Player $playerToReturn Successfully Saved",
                                             Toast.LENGTH_SHORT
                                         ).show()
                                         callback(playerToReturn)
                                     }.addOnFailureListener {
                                         Toast.makeText(
                                             this@StartNewActivity,
-                                            "Failed to save player $playerName",
+                                            "Failed to save player $playerToReturn",
                                             Toast.LENGTH_SHORT
                                         ).show()
                                     }
@@ -279,38 +286,35 @@ class StartNewActivity : AppCompatActivity() {
                                 ).show()
                             }
                         })
-
                     btn.isChecked = false
                 } else {
                     callback(playerName)
                 }
             } else {
-                //jeżeli player nie istnieje, stwórz obiekt klasy Player
                 val player = Player(
-                    firstName,
-                    lastName,
-                    playerName,
+                    firstNameB,
+                    lastNameB,
+                    playerNameB,
                     1,
                     "",
                     null,
                     null,
                     "",
-                    ""
-                    //true
+                    "",
+                    true
                 )
-                //dodaj taki węzeł
                 database.child(playerName).setValue(player)
                     .addOnSuccessListener {
                         Toast.makeText(
                             this@StartNewActivity,
-                            "Player $playerName Successfully Saved",
+                            "Player $playerNameB Successfully Saved",
                             Toast.LENGTH_SHORT
                         ).show()
                         callback(playerName)
                     }.addOnFailureListener {
                         Toast.makeText(
                             this@StartNewActivity,
-                            "Failed to save player $playerName",
+                            "Failed to save player $playerNameB",
                             Toast.LENGTH_SHORT
                         ).show()
                     }
@@ -318,11 +322,12 @@ class StartNewActivity : AppCompatActivity() {
         }.addOnFailureListener {
             Toast.makeText(
                 this@StartNewActivity,
-                "Failed to get player $playerName",
+                "Failed to get player $playerNameB",
                 Toast.LENGTH_SHORT
             ).show()
         }
     }
+
 
 
     fun initcap(input: String): String {

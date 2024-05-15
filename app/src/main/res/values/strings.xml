@@ -99,7 +99,9 @@
     <string name="left_handed">left-handed</string>
     <string name="right_handed">right-handed</string>
     <string name="delete">Delete</string>
+    <string name="deletePlayer">DELETE PLAYER</string>
     <string name="delete_match">Delete Match</string>
     <string name="deleteInfo">Do you want to delete match?</string>
+    <string name="deleteInfoP">Do you want to delete player?</string>
 
 </resources>

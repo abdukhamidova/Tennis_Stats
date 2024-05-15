@@ -223,8 +223,8 @@ class AddPlayerActivity : AppCompatActivity() {
                                     milliseconds,
                                     "Righthanded",
                                     strength,
-                                    weakness
-                                    //true
+                                    weakness,
+                                    true
                                 )
                             } else if (rbL.isChecked) {
                                 player = Player(
@@ -236,8 +236,8 @@ class AddPlayerActivity : AppCompatActivity() {
                                     milliseconds,
                                     "Lefthanded",
                                     strength,
-                                    weakness
-                                    //true
+                                    weakness,
+                                    true
                                 )
                             } else {
                                 player = Player(
@@ -249,8 +249,8 @@ class AddPlayerActivity : AppCompatActivity() {
                                     milliseconds,
                                     null,
                                     strength,
-                                    weakness
-                                    //true
+                                    weakness,
+                                    true
                                 )
                             }
 
@@ -280,8 +280,8 @@ class AddPlayerActivity : AppCompatActivity() {
                         milliseconds,
                         "Righthanded",
                         strength,
-                        weakness
-                        //true
+                        weakness,
+                        true
                     )
                 } else {
                     player = Player(
@@ -293,8 +293,8 @@ class AddPlayerActivity : AppCompatActivity() {
                         milliseconds,
                         "Lefthanded",
                         strength,
-                        weakness
-                        //true
+                        weakness,
+                        true
                     )
                 }
 
