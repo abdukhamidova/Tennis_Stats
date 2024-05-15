@@ -68,7 +68,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="20dp"
                     android:text="@string/view_matches"
-                    android:textSize="19sp" /> <!--view matches-->
+                    android:textSize="19sp"/> <!--view matches-->
             </LinearLayout> <!--button layout-->
         </LinearLayout>
 

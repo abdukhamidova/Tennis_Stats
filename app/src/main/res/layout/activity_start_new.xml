@@ -134,6 +134,8 @@
         <Button
             android:id="@+id/buttonStartGame"
             android:layout_width="198dp"
+            android:backgroundTint="#23507A"
+            android:textColor="@color/white"
             android:layout_height="58dp"
             android:text="@string/start_game"
             android:textSize="20sp"
@@ -144,7 +146,7 @@
             app:layout_constraintVertical_bias="0.78" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.google.android.material.navigation.NavigationView
+   <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigationViewMenu"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"

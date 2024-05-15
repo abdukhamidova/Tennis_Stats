@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import com.anw.tenistats.ActivityStartPoint
 import com.anw.tenistats.DeleteMatchDialogActivity
 import com.anw.tenistats.R
@@ -101,12 +102,16 @@ class ResumeOrStatsDialogActivity(private val context: Context,private val opene
                                 app.serve2 = "1"
                             }
                         }*/
+
                         val intent = Intent(context, ActivityStartPoint::class.java)
                         intent.putExtra("matchID", matchId.text.toString())
                         database =
                             FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
                                 .getReference(user.toString()).child("Current match")
                         database.setValue(matchId.text.toString())
+
+                        //setScoreInApp()
+
                         context.startActivity(intent)
                         alertDialog.dismiss()
                     }
@@ -142,6 +147,66 @@ class ResumeOrStatsDialogActivity(private val context: Context,private val opene
             }
         })
         alertDialog.show()
+    }
+
+    fun setScoreInApp()
+    {
+        if(app!=null) {
+            val user = firebaseAuth.currentUser?.uid
+            database =
+                FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
+                    .getReference(user.toString()).child("Matches").child(matchId.toString())
+            database.child("player1").get().addOnSuccessListener { dataSnapshot ->
+                app.player1 = dataSnapshot.child("player1").getValue(String::class.java).toString()
+            }.addOnFailureListener { exception ->
+                // Obsługa błędów
+            }
+            database.child("player2").get().addOnSuccessListener { dataSnapshot ->
+                app.player2 = dataSnapshot.child("player2").getValue(String::class.java).toString()
+            }.addOnFailureListener { exception ->
+                // Obsługa błędów
+            }
+            database.child("pkt1").get().addOnSuccessListener { dataSnapshot ->
+                app.pkt1 = dataSnapshot.child("pkt1").getValue(String::class.java).toString()
+            }.addOnFailureListener { exception ->
+                // Obsługa błędów
+            }
+            database.child("pkt2").get().addOnSuccessListener { dataSnapshot ->
+                app.pkt2 = dataSnapshot.child("pkt2").getValue(String::class.java).toString()
+            }.addOnFailureListener { exception ->
+                // Obsługa błędów
+            }
+            database.child("set1p1").get().addOnSuccessListener { dataSnapshot ->
+                app.set1p1 = dataSnapshot.child("set1p1").getValue(String::class.java).toString()
+            }.addOnFailureListener { exception ->
+                // Obsługa błędów
+            }
+            database.child("set1p2").get().addOnSuccessListener { dataSnapshot ->
+                app.set1p2 = dataSnapshot.child("set1p2").getValue(String::class.java).toString()
+            }.addOnFailureListener { exception ->
+                // Obsługa błędów
+            }
+            database.child("set2p1").get().addOnSuccessListener { dataSnapshot ->
+                app.set2p1 = dataSnapshot.child("set2p1").getValue(String::class.java).toString()
+            }.addOnFailureListener { exception ->
+                // Obsługa błędów
+            }
+            database.child("set2p2").get().addOnSuccessListener { dataSnapshot ->
+                app.set2p2 = dataSnapshot.child("set2p2").getValue(String::class.java).toString()
+            }.addOnFailureListener { exception ->
+                // Obsługa błędów
+            }
+            database.child("set3p1").get().addOnSuccessListener { dataSnapshot ->
+                app.set3p1 = dataSnapshot.child("set3p1").getValue(String::class.java).toString()
+            }.addOnFailureListener { exception ->
+                // Obsługa błędów
+            }
+            database.child("set3p2").get().addOnSuccessListener { dataSnapshot ->
+                app.set3p2 = dataSnapshot.child("set3p2").getValue(String::class.java).toString()
+            }.addOnFailureListener { exception ->
+                // Obsługa błędów
+            }
+        }
     }
 
     fun setscore(btnResume : Button,player1: TextView,player2: TextView,serve1: TextView,serve2: TextView,set1p1: TextView,set2p1: TextView,set3p1: TextView,set1p2: TextView,set2p2: TextView,set3p2: TextView,pkt1: TextView,pkt2: TextView)

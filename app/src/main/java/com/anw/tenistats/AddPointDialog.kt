@@ -7,6 +7,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import com.anw.tenistats.ActivityStartPoint
 import com.anw.tenistats.EndOfMatchActivity
 import com.anw.tenistats.Point
@@ -16,6 +17,7 @@ import com.anw.tenistats.score
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.getValue
 
 class AddPointDialog(private val context: Context, private val openedFromStartPoint: Boolean = false) {
 
@@ -131,27 +133,31 @@ class AddPointDialog(private val context: Context, private val openedFromStartPo
                     app.player2
                 }
 
-                score(app,player1,serve1,serve2,pkt1txt,pkt2txt,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
-                database = FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
-                    .getReference(user.toString()).child("Matches").child(matchId)
-
-                database.child("pkt1").setValue(app.pkt1)
-                database.child("pkt2").setValue(app.pkt2)
-                database.child("set1p1").setValue(app.set1p1)
-                database.child("set2p1").setValue(app.set2p1)
-                database.child("set3p1").setValue(app.set3p1)
-                database.child("set1p2").setValue(app.set1p2)
-                database.child("set2p2").setValue(app.set2p2)
-                database.child("set3p2").setValue(app.set3p2)
-                //ustawienie osoby serwujacej aktualnie (potrzebne do wznowienia meczu)
-                if(app.serve1=="1"){
-                    database.child("LastServePlayer").setValue(app.player1)
-                }
-                else{
-                    database.child("LastServePlayer").setValue(app.player2)
-                }
                 database.child("pktCount").get().addOnSuccessListener { dataSnapshot ->
                     if (dataSnapshot.exists()) {
+                        score(app,player1,serve1,serve2,pkt1txt,pkt2txt,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
+                        database = FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
+                            .getReference(user.toString()).child("Matches").child(matchId)
+
+                        database.child("pkt1").setValue(app.pkt1)
+                        database.child("pkt2").setValue(app.pkt2)
+                        database.child("set1p1").setValue(app.set1p1)
+                        database.child("set2p1").setValue(app.set2p1)
+                        database.child("set3p1").setValue(app.set3p1)
+                        database.child("set1p2").setValue(app.set1p2)
+                        database.child("set2p2").setValue(app.set2p2)
+                        database.child("set3p2").setValue(app.set3p2)
+                        //ustawienie osoby serwujacej aktualnie (potrzebne do wznowienia meczu)
+                        var lastServePlayer: String
+                        if(app.serve1=="1"){
+                            database.child("LastServePlayer").setValue(app.player1)
+                            lastServePlayer=app.player1
+                        }
+                        else{
+                            database.child("LastServePlayer").setValue(app.player2)
+                            lastServePlayer=app.player2
+                        }
+
                         val currentCount = dataSnapshot.getValue(Int::class.java) ?: 0
                         val count: String
                         if(currentCount<10){
@@ -170,7 +176,7 @@ class AddPointDialog(private val context: Context, private val openedFromStartPo
                             co, gdzie, czym, app.serwis, servePlayer
                         )
                         pointDatabase.setValue(point)
-                        pointDatabase.child("score").child("servePlayer").setValue(servePlayer)
+                        pointDatabase.child("score").child("servePlayer").setValue(lastServePlayer)
                         pointDatabase.child("score").child("pkt1").setValue(app.pkt1)
                         pointDatabase.child("score").child("pkt2").setValue(app.pkt2)
                         pointDatabase.child("score").child("set1p1")

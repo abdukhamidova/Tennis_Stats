@@ -63,6 +63,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="@string/sign_up"
+            android:backgroundTint="#23507A"
+            android:textColor="@color/white"
             android:textSize="21sp" /> <!--sign up-->
 
         <TextView

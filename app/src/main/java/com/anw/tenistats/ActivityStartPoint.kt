@@ -88,6 +88,8 @@ class ActivityStartPoint : AppCompatActivity() {
 
             //ustawienie wyniku w tabeli
             setscore(player1,player2,serve1,serve2,set1p1,set2p1,set3p1,set1p2,set2p2,set3p2,pkt1,pkt2)
+            val app = application as Stats
+            //fillUpScore(app,player1,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
         }.addOnFailureListener {
             Toast.makeText(this, "Failed to read Current Match ID", Toast.LENGTH_SHORT).show()
         }
@@ -97,6 +99,7 @@ class ActivityStartPoint : AppCompatActivity() {
        // database =
         //    FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
          //       .getReference(user.toString()).child("Matches").child(matchId.toString())
+
         val app = application as Stats
         player1 = findViewById(R.id.textviewPlayer1)
         player2 = findViewById(R.id.textviewPlayer2)
@@ -111,7 +114,7 @@ class ActivityStartPoint : AppCompatActivity() {
         set2p2 = findViewById(R.id.textViewSet2Pl2)
         set3p2 = findViewById(R.id.textViewSet3Pl2)
         val addPointDialog = AddPointDialog(this,true)
-        //fillUpScoreInActivity(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
+        fillUpScoreInActivity(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
 
         val btnFault = findViewById<Button>(R.id.buttonFault)
         val fault_text = resources.getString(R.string.fault)
@@ -406,11 +409,13 @@ class ActivityStartPoint : AppCompatActivity() {
 
     private fun setscore(player1: TextView, player2: TextView, serve1: TextView, serve2: TextView, set1p1: TextView, set2p1: TextView, set3p1: TextView, set1p2: TextView, set2p2: TextView, set3p2: TextView, pkt1:TextView, pkt2:TextView)
     {
+        val app = application as Stats
         database.child("player1").get().addOnSuccessListener { dataSnapshot ->
             // Pobranie wartości "player1" z bazy danych
             val player1Value = dataSnapshot.getValue(String::class.java)
             // Ustawienie wartości w TextView
             player1.text = player1Value.toString()
+            app.player1 = player1Value.toString()
         }.addOnFailureListener { exception ->
             // Obsługa błędów
         }
@@ -420,6 +425,7 @@ class ActivityStartPoint : AppCompatActivity() {
             val player2Value = dataSnapshot.getValue(String::class.java)
             // Ustawienie wartości w TextView
             player2.text = player2Value.toString()
+            app.player2 = player2Value.toString()
         }.addOnFailureListener { exception ->
             // Obsługa błędów
         }
@@ -429,6 +435,7 @@ class ActivityStartPoint : AppCompatActivity() {
             val set1p1Value = dataSnapshot.getValue(String::class.java)
             // Ustawienie wartości w TextView
             set1p1.text = set1p1Value
+            app.set1p1 = set1p1Value.toString()
         }.addOnFailureListener { exception ->
             // Obsługa błędów
         }
@@ -437,6 +444,7 @@ class ActivityStartPoint : AppCompatActivity() {
             val set2p1Value = dataSnapshot.getValue(String::class.java)
             // Ustawienie wartości w TextView
             set2p1.text = set2p1Value
+            app.set2p1 = set2p1Value.toString()
         }.addOnFailureListener { exception ->
             // Obsługa błędów
         }
@@ -445,6 +453,7 @@ class ActivityStartPoint : AppCompatActivity() {
             val set3p1Value = dataSnapshot.getValue(String::class.java)
             // Ustawienie wartości w TextView
             set3p1.text = set3p1Value
+            app.set3p1 = set3p1Value.toString()
         }.addOnFailureListener { exception ->
             // Obsługa błędów
         }
@@ -453,6 +462,7 @@ class ActivityStartPoint : AppCompatActivity() {
             val set1p2Value = dataSnapshot.getValue(String::class.java)
             // Ustawienie wartości w TextView
             set1p2.text = set1p2Value
+            app.set1p2 = set1p2Value.toString()
         }.addOnFailureListener { exception ->
             // Obsługa błędów
         }
@@ -461,6 +471,7 @@ class ActivityStartPoint : AppCompatActivity() {
             val set2p2Value = dataSnapshot.getValue(String::class.java)
             // Ustawienie wartości w TextView
             set2p2.text = set2p2Value
+            app.set2p2 = set2p2Value.toString()
         }.addOnFailureListener { exception ->
             // Obsługa błędów
         }
@@ -469,6 +480,7 @@ class ActivityStartPoint : AppCompatActivity() {
             val set3p2Value = dataSnapshot.getValue(String::class.java)
             // Ustawienie wartości w TextView
             set3p2.text = set3p2Value
+            app.set3p2 = set3p2Value.toString()
         }.addOnFailureListener { exception ->
             // Obsługa błędów
         }
@@ -477,6 +489,7 @@ class ActivityStartPoint : AppCompatActivity() {
             val pkt1Value = dataSnapshot.getValue(String::class.java)
             // Ustawienie wartości w TextView
             pkt1.text = pkt1Value
+            app.pkt1 = pkt1Value.toString()
         }.addOnFailureListener { exception ->
             // Obsługa błędów
         }
@@ -485,6 +498,7 @@ class ActivityStartPoint : AppCompatActivity() {
             val pkt2Value = dataSnapshot.getValue(String::class.java)
             // Ustawienie wartości w TextView
             pkt2.text = pkt2Value
+            app.pkt2 = pkt2Value.toString()
         }.addOnFailureListener { exception ->
             // Obsługa błędów
         }
@@ -799,12 +813,12 @@ class ActivityStartPoint : AppCompatActivity() {
         db.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 dataSnapshot.children.forEach { setIdSnapshot ->
-                        if (setIdSnapshot.key?.startsWith(setPrefix) == true) {
-                            val value = setIdSnapshot.getValue(String::class.java)
-                            if (!value.isNullOrBlank()) {
-                                sum += value.toIntOrNull() ?: 0
-                            }
+                    if (setIdSnapshot.key?.startsWith(setPrefix) == true) {
+                        val value = setIdSnapshot.getValue(String::class.java)
+                        if (!value.isNullOrBlank()) {
+                            sum += value.toIntOrNull() ?: 0
                         }
+                    }
                 }
                 completion(sum)
             }
@@ -842,5 +856,4 @@ class ActivityStartPoint : AppCompatActivity() {
         }*/
         return resultString
     }
-
 }
