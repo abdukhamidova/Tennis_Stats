@@ -2,7 +2,9 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.TenniStats" parent="Theme.AppCompat.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
-        <item name="colorPrimaryDark">@color/transparent</item>
+        <item name="android:statusBarColor">@color/pale_grey</item>
+        <item name="android:navigationBarColor">@color/light_yellow</item>
+        <item name="colorPrimaryDark">@color/white</item>
         <item name="buttonStyle">@style/our_button</item>
         <item name="android:fontFamily">@font/aldrich</item>
         <item name="android:textStyle">bold</item>
@@ -27,7 +29,6 @@
         <item name="android:layout_marginBottom">5dp</item>
         <item name="android:layout_weight">0.9</item>
         <item name="android:textColor">@color/light_grey</item>
-        <item name="drawableTint">@color/app_mainTitles_color</item>
     </style>
     <!--styl dla tablic w view matches-->
     <style name="matchTableTextAppearance">
@@ -53,10 +54,12 @@
     <!--styl dla koloru playera1-->
     <style name="player1TextAppearance">
         <item name="android:textColor">@color/app_player1_color</item>
+        <item name="android:gravity">center</item>
     </style>
     <!--styl dla koloru playera2-->
     <style name="player2TextAppearance">
         <item name="android:textColor">@color/app_player2_color</item>
+        <item name="android:gravity">center</item>
     </style>
 
     <!--styl dla statystyk-->
