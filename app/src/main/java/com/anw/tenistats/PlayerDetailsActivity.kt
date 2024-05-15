@@ -69,7 +69,8 @@ class PlayerDetailsActivity : AppCompatActivity() {
         navigationDrawerHelper = NavigationDrawerHelper(this)
         navigationDrawerHelper.setupNavigationDrawer(drawerLayout, navigationView, firebaseAuth)
         val backButton = findViewById<ImageButton>(R.id.buttonUndo)
-        backButton.visibility = View.GONE
+        backButton.setImageResource(R.drawable.icon_delete_30)
+
 
         val userEmail = firebaseAuth.currentUser?.email.toString()
         val userEmailView = headerView.findViewById<TextView>(R.id.textViewUserEmail)

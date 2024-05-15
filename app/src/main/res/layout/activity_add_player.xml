@@ -235,6 +235,8 @@
             android:layout_height="wrap_content"
             android:text="@string/add"
             android:textSize="22sp"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/darker_blue"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/linearLayoutForm"
             app:layout_constraintStart_toStartOf="@+id/linearLayoutForm"
