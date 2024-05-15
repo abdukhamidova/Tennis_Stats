@@ -152,6 +152,8 @@ class ViewHistoryActivity : AppCompatActivity() {
                             buttonSet3.setBackgroundResource(R.drawable.rec_btn_not_selected)
                             // Wywołanie funkcji fetchMatchPoints tylko dla seta 2
                             fetchMatchPoints(matchId, "set 2")
+                        }else{
+                            Toast.makeText(this@ViewHistoryActivity, "Set2 does not exist", Toast.LENGTH_SHORT).show()
                         }
                     }
                     //zrobilam zamiast ukrywania przyciku spradzenie czy dany set istnieje i zmienilam przycisk danego seta na nieaktywny ~u
@@ -166,6 +168,8 @@ class ViewHistoryActivity : AppCompatActivity() {
                                 buttonSet3.setBackgroundResource(R.drawable.rectangle_button)
                                 // Wywołanie funkcji fetchMatchPoints tylko dla seta 3
                                 fetchMatchPoints(matchId, "set 3")
+                            }else{
+                                Toast.makeText(this@ViewHistoryActivity, "Set3 does not exist", Toast.LENGTH_SHORT).show()
                             }
                         }
                     //} else {

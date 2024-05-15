@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -140,6 +141,9 @@ class ViewStatsActivity : AppCompatActivity() {
                 setAppValues(app, 2, player1name, player2name)
                 setTableValue(app)
             }
+            else{
+                Toast.makeText(this, "Set2 does not exist", Toast.LENGTH_SHORT).show()
+            }
         }
         findViewById<Button>(R.id.buttonSet3Stats).setOnClickListener {
             if(set3p1.text!=""){
@@ -151,6 +155,9 @@ class ViewStatsActivity : AppCompatActivity() {
                 //ustawienie statystyk SET3
                 setAppValues(app,3,player1name,player2name)
                 setTableValue(app)
+            }
+            else{
+                Toast.makeText(this, "Set3 does not exist", Toast.LENGTH_SHORT).show()
             }
         }
         //zmiana aktywnosci na History

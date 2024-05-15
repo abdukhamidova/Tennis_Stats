@@ -159,18 +159,18 @@ class AddPointDialog(private val context: Context, private val openedFromStartPo
                         }
 
                         val currentCount = dataSnapshot.getValue(Int::class.java) ?: 0
-                        val count: String
-                        if(currentCount<10){
+                        val count = addZeros(currentCount)
+                        /*if(currentCount<10){
                             count = "point 0" + currentCount.toString()
                         }
                         else{
                             count = "point " + currentCount.toString()
-                        }
+                        }*/
 
                         // Zapis punktu do bazy danych
                         val pointDatabase =
                             database.child(("set " + setId)).child(("game " + gameId))
-                                .child((count))
+                                .child("point $count")
                         val point = Point(
                             pkt1, pkt2, kto,
                             co, gdzie, czym, app.serwis, servePlayer
@@ -228,5 +228,18 @@ class AddPointDialog(private val context: Context, private val openedFromStartPo
             alertDialog.dismiss()
         }
         alertDialog.show()
+    }
+
+    private fun addZeros(a: Int) : String
+    {
+        var resultString: String
+        if(a<10){
+            //"00$a" jezeli dodane 100
+            resultString = "0$a"
+        }else resultString = a.toString()
+        /*else if(a<100) {
+            resultString = "0$a"
+        }*/
+        return resultString
     }
 }
