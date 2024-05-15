@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.anw.tenistats.MatchView
 import com.anw.tenistats.R
 import com.anw.tenistats.com.anw.tenistats.ResumeOrStatsDialogActivity
+import com.anw.tenistats.getGoldenDrawable
 import com.google.firebase.auth.FirebaseAuth
 import java.text.SimpleDateFormat
 import java.util.*
@@ -61,8 +62,9 @@ class MyAdapterMatch(
 
         if(currentItem.winner != "")
         {
-            holder.iconPlayer1.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_laurel3, 0, 0, 0)
-            holder.iconPlayer2.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_laurel3, 0, 0, 0)
+            val goldenLaurel = getGoldenDrawable(holder.itemView.context, R.drawable.icon_laurel3)
+            holder.iconPlayer1.setCompoundDrawablesWithIntrinsicBounds(goldenLaurel, null, null, null)
+            holder.iconPlayer2.setCompoundDrawablesWithIntrinsicBounds(goldenLaurel, null, null, null)
             if(currentItem.winner == currentItem.player1)
             run{
                 holder.iconPlayer1.visibility = View.VISIBLE

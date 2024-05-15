@@ -20,11 +20,12 @@
             android:visibility="invisible"/>
 
         <ImageView
+            android:id="@+id/buttonDelete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
-            android:src="@drawable/icon_list_40"/>
+            android:src="@drawable/icon_delete"/>
         <!--dialog score table-->
         <!--<TableLayout
             android:layout_width="280dp"
@@ -147,7 +148,7 @@
             android:backgroundTint="@color/light_yellow"
             android:text="@string/view_stats"
             android:textSize="20sp" />
-        <Button
+        <!--<Button
             android:id="@+id/buttonDelete"
             android:layout_width="200sp"
             android:layout_height="wrap_content"
@@ -155,7 +156,7 @@
             android:layout_gravity="center"
             android:backgroundTint="@color/light_yellow"
             android:text="@string/delete_match"
-            android:textSize="20sp" />
+            android:textSize="20sp" />-->
         <Button
             android:id="@+id/buttonCancelRoS"
             android:layout_width="200sp"

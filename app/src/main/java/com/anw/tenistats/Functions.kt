@@ -1,8 +1,13 @@
 package com.anw.tenistats
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.graphics.PorterDuff
+import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.TextView
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.DrawableCompat
 
 //poczatkowe ustawienie wyniku dla kazdej z aktywnosci z wynikiem
 fun clearScore(app: Stats)
@@ -308,4 +313,16 @@ fun fillUpScoreUndoCustom(app: Stats,player1: String, pkt1: String, pkt2: String
         app.set3p2 = set3p1
         app.set3p1 = set3p2
     }
+}
+
+fun getGoldenDrawable(context: Context, drawableId: Int): Drawable {
+    // Pobierz obrazek zasobu
+    val drawable = ContextCompat.getDrawable(context, drawableId)
+
+    // Utwórz kopię obrazka z filtrem koloru
+    val wrappedDrawable = DrawableCompat.wrap(drawable!!)
+    DrawableCompat.setTint(wrappedDrawable.mutate(), ContextCompat.getColor(context, R.color.gold))
+    DrawableCompat.setTintMode(wrappedDrawable, PorterDuff.Mode.SRC_IN)
+
+    return wrappedDrawable
 }

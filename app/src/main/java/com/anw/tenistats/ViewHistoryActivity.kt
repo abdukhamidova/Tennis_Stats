@@ -3,6 +3,8 @@ package com.anw.tenistats
 import android.annotation.SuppressLint
 import android.content.ContentValues.TAG
 import android.content.Intent
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -13,6 +15,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -224,14 +227,16 @@ class ViewHistoryActivity : AppCompatActivity() {
                                     val set2P2 = gameSnapshot.child("score").child("player2set2").getValue(String::class.java)
                                     val set3P1 = gameSnapshot.child("score").child("player1set3").getValue(String::class.java)
                                     val set3P2 = gameSnapshot.child("score").child("player2set3").getValue(String::class.java)
-                                    if(currentSet==1) {
-                                        pointsList.add("$set1P1 : $set1P2")
-                                    }
-                                    else if(currentSet==2) {
-                                        pointsList.add("$set1P1 : $set1P2 | $set2P1 : $set2P2")
-                                    }
-                                    else{
-                                        pointsList.add("$set1P1 : $set1P2 | $set2P1 : $set2P2 | $set3P1 : $set3P2")
+                                    when (currentSet) {
+                                        1 -> {
+                                            pointsList.add("$set1P1 : $set1P2")
+                                        }
+                                        2 -> {
+                                            pointsList.add("$set1P1 : $set1P2 | $set2P1 : $set2P2")
+                                        }
+                                        else -> {
+                                            pointsList.add("$set1P1 : $set1P2 | $set2P1 : $set2P2 | $set3P1 : $set3P2")
+                                        }
                                     }
 
                                     if (gameSnapshot.hasChildren()) {
@@ -245,9 +250,9 @@ class ViewHistoryActivity : AppCompatActivity() {
 
                                             /*val inName=firstLetters(player)*/
                                             val pointString = if (player == player1) {
-                                                "$score1:$score2 ° $co $czym $gdzie" // symbol X dla player1
+                                                "$score1:$score2 ◁ $co $czym $gdzie" // symbol X dla player1
                                             } else {
-                                                "$score1:$score2 • $co $czym $gdzie" // symbol O dla player2
+                                                "$score1:$score2 ▶ $co $czym $gdzie" // symbol O dla player2
                                             }
 
                                             if (score1 != null && score2 != null && player != null && co != null && czym != null && gdzie != null) {
@@ -258,8 +263,8 @@ class ViewHistoryActivity : AppCompatActivity() {
                                 }
                             }
                         }
-                        //⏺ ⃝⃝
-                        displayMatchPoints(pointsList, "°", "•")
+
+                        displayMatchPoints(pointsList, "◁", "▶")
                     }
 
                     override fun onCancelled(databaseError: DatabaseError) {
@@ -321,9 +326,9 @@ class ViewHistoryActivity : AppCompatActivity() {
 
                                     /*val inName=firstLetters(player)*/
                                     val pointString = if (player == player1) {
-                                        "$score1:$score2 ° $co $czym $gdzie" // symbol X dla player1
+                                        "$score1:$score2 ◁ $co $czym $gdzie" // symbol X dla player1
                                     } else {
-                                        "$score1:$score2 • $co $czym $gdzie" // symbol O dla player2
+                                        "$score1:$score2 ▶ $co $czym $gdzie" // symbol O dla player2
                                     }
 
 
@@ -333,7 +338,7 @@ class ViewHistoryActivity : AppCompatActivity() {
                                 }
                             }
                         }
-                        displayMatchPoints(pointsList, "°", "•")
+                        displayMatchPoints(pointsList, "◁", "▶")
                     }
 
                     override fun onCancelled(databaseError: DatabaseError) {
@@ -390,7 +395,7 @@ class ViewHistoryActivity : AppCompatActivity() {
             // Pobranie wartości "player1" z bazy danych
             val player1Value = dataSnapshot.getValue(String::class.java)
             // Ustawienie wartości w TextView
-            player1.text = "$player1Value°"
+            player1.text = player1Value
             pl1 = player1Value.toString()
         }.addOnFailureListener { exception ->
             // Obsługa błędów
@@ -400,7 +405,7 @@ class ViewHistoryActivity : AppCompatActivity() {
             // Pobranie wartości "player1" z bazy danych
             val player2Value = dataSnapshot.getValue(String::class.java)
             // Ustawienie wartości w TextView
-            player2.text = "$player2Value•"
+           player2.text = player2Value
         }.addOnFailureListener { exception ->
             // Obsługa błędów
         }
@@ -474,8 +479,10 @@ class ViewHistoryActivity : AppCompatActivity() {
             if(dataSnapshot.exists()){
                 // Pobranie wartości "player1" z bazy danych
                 val winner = dataSnapshot.getValue(String::class.java)
-                serve1.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_laurel3, 0, 0, 0)
-                serve2.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_laurel3, 0, 0, 0)
+                val goldenLaurel = getGoldenDrawable(applicationContext, R.drawable.icon_laurel3)
+                serve1.setCompoundDrawablesWithIntrinsicBounds(goldenLaurel, null, null, null)
+                serve2.setCompoundDrawablesWithIntrinsicBounds(goldenLaurel, null, null, null)
+
                 // Ustawienie wartości w TextView
                 if(winner==pl1){
                     serve1.visibility = View.VISIBLE

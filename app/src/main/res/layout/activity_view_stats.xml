@@ -41,8 +41,7 @@
                     android:layout_weight="0"
                     android:gravity="center"
                     android:visibility="invisible"
-                    app:drawableStartCompat="@drawable/icon_laurel3"
-                    app:drawableTint="@color/gold" />
+                    app:drawableStartCompat="@drawable/icon_laurel3" />
 
                 <TextView
                     android:id="@+id/textviewPlayer1Stats"
@@ -83,8 +82,7 @@
                     android:layout_weight="0"
                     android:gravity="center"
                     android:visibility="invisible"
-                    app:drawableStartCompat="@drawable/icon_laurel3"
-                    app:drawableTint="@color/gold" />
+                    app:drawableStartCompat="@drawable/icon_laurel3" />
 
                 <TextView
                     android:id="@+id/textviewPlayer2Stats"

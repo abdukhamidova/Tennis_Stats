@@ -44,7 +44,7 @@ class SignInActivity : AppCompatActivity() {
                         startActivity(intent)
                         finish()
                     } else {
-                        Toast.makeText(this, "Sorry, either your email or password is incorrect.", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this, "Incorrect email or password.", Toast.LENGTH_LONG).show()
                     }
                 }
             }else {

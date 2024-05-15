@@ -40,7 +40,6 @@
                     android:layout_weight="0"
                     android:gravity="center"
                     android:visibility="visible"
-                    app:drawableTint="@color/gold"
                     app:drawableStartCompat="@drawable/icon_laurel3" />
 
                 <TextView
@@ -52,6 +51,15 @@
                     android:text="@string/imie_nazwisko_player1"
                     android:textAlignment="gravity"
                     android:gravity="start|center_vertical"/>
+
+                <TextView
+                    android:id="@+id/textViewSymbol1His"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    android:gravity="center"
+                    android:text="◁"
+                    android:textSize="25sp"/>
 
                 <TextView
                     android:id="@+id/textViewP1Set1His"
@@ -82,8 +90,7 @@
                     android:layout_weight="0"
                     android:gravity="center"
                     android:visibility="visible"
-                    app:drawableStartCompat="@drawable/icon_laurel3"
-                    app:drawableTint="@color/gold" />
+                    app:drawableStartCompat="@drawable/icon_laurel3"/>
 
                 <TextView
                     android:id="@+id/textviewPlayer2His"
@@ -91,9 +98,17 @@
                     android:layout_height="match_parent"
                     android:layout_marginStart="6dp"
                     android:layout_weight="1"
-                    android:text="@string/imie_nazwisko_player2"
                     android:gravity="start|center_vertical"
-                    android:textAlignment="gravity"/>
+                    android:text="@string/imie_nazwisko_player2"
+                    android:textAlignment="gravity" />
+                <TextView
+                    android:id="@+id/textViewSymbol2His"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    android:gravity="center"
+                    android:text="▶"
+                    android:textSize="25sp"/>
 
                 <TextView
                     android:id="@+id/textViewP2Set1His"
@@ -235,7 +250,7 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.google.android.material.navigation.NavigationView
+  <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigationViewMenu"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
