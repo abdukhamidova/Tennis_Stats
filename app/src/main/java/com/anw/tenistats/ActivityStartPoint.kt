@@ -384,7 +384,6 @@ class ActivityStartPoint : AppCompatActivity() {
         }
 
         backButton.setOnClickListener{
-            Toast.makeText(this, "undo btn", Toast.LENGTH_SHORT).show()
             if (matchId != null) {
                 database = FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
                     .getReference(user.toString()).child("Matches").child(matchId.toString())
@@ -591,7 +590,6 @@ class ActivityStartPoint : AppCompatActivity() {
                         .child("point $delPointNrString")
 
                     if (pointNr == 2) {
-                        Toast.makeText(this, "1 point", Toast.LENGTH_SHORT).show()
                         //jest tylko jeden punkt, wyzerowac tablice
                         deletePoint.child("servePlayer").get()
                             .addOnSuccessListener { ktoServeSnapshot ->
@@ -641,7 +639,6 @@ class ActivityStartPoint : AppCompatActivity() {
                         //znalezenie sciezki set, game poprzedniego punktu
                         getPointSetGame(db, setId, gameId, prevPointNrString) { prevPointSet, prevPointGame ->
                             //uzycie odpowiedniej sciezki do przywrocenia poprzedniego stanu meczu
-                            Toast.makeText(this, "prevPoint", Toast.LENGTH_SHORT).show()
                             prevPointScore(app, db, deletePoint, delPointNr, prevPointSet, prevPointGame, prevPointNrString)
                         }
                     }
@@ -655,7 +652,6 @@ class ActivityStartPoint : AppCompatActivity() {
     private fun prevPointScore(context: Context, db: DatabaseReference, deletePoint: DatabaseReference, delPointNr: Int, setId: Int, gameId: Int, prevPointNrString: String) {
         val app = (context.applicationContext as? Stats)
         val gameIdString = addZeros(gameId)
-        Toast.makeText(this, "set$setId, game$gameIdString", Toast.LENGTH_SHORT).show()
         if(app!=null){
             val prevPoint = db.child("set $setId").child("game $gameIdString")
                 .child("point $prevPointNrString")
@@ -736,42 +732,6 @@ class ActivityStartPoint : AppCompatActivity() {
 
     }
 
-   /* private fun getPrevPointSetGameString(db: DatabaseReference, setId: Int, gameId: Int, prevPointNrString: String, completion: (Int, String) -> Unit) {
-        var retGame: String
-        var retSet: Int
-        Toast.makeText(this, "setGame", Toast.LENGTH_SHORT).show()
-        //sprawdza czy prevPoint jest w tym gamie
-        db.child("set $setId").child("game $gameId").child("point $prevPointNrString").addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                if (!dataSnapshot.exists()) {
-                    // jezeli wezel poprzedniego punktu nie istnieje
-                    if (gameId > 1) {
-                        //to jest w tym samym set, poprzednim game
-                        retGame = addZeros(gameId - 1)
-                        retSet = setId
-                        completion(retSet, retGame)
-                    } else if (gameId == 1 && setId > 1) {
-                        //to jest w poprzednim set, ostatnim game poprzedniego setu
-                        retSet = setId - 1
-                        sumGame(db, setId) { sum ->
-                            //sum to ilosc gamow poprzednieho setu => numer ostatnego gamu
-                            retGame = addZeros(sum)
-                            completion(retSet, retGame)
-                        }
-                    }
-                } else {
-                    //prevPoint jest w tym gamie, zwracam bez zadnych zmian
-                    retGame = addZeros(gameId)
-                    retSet = setId
-                    completion(retSet, retGame)
-                }
-            }
-
-            override fun onCancelled(databaseError: DatabaseError) {
-                //Toast.makeText(this, "game read failed", Toast.LENGTH_SHORT).show()
-            }
-        })
-    }*/
     private fun getPointSetGame(db: DatabaseReference, setId: Int, gameId: Int, PointNrString: String, completion: (Int, Int) -> Unit) {
         var retGame: Int
         var retSet: Int
@@ -849,14 +809,12 @@ class ActivityStartPoint : AppCompatActivity() {
 
     private fun addZeros(a: Int) : String
     {
-        var resultString: String
-        if(a<10){
+        val resultString: String = if(a<10){
             //"00$a" jezeli dodane 100
-            resultString = "00$a"
-        }
-        else if(a<100) {
-            resultString = "0$a"
-        }else resultString = a.toString()
+            "00$a"
+        } else if(a<100) {
+            "0$a"
+        }else a.toString()
         return resultString
     }
 }
