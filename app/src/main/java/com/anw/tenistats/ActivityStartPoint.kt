@@ -586,7 +586,8 @@ class ActivityStartPoint : AppCompatActivity() {
                 //sceizka do usuwanego punktu
                 getPointSetGame(db, setId, gameId, delPointNrString) { setId, gameId ->
                     //uzycie odpowiedniej sciezki do usuwanego punktu
-                    val deletePoint = db.child("set $setId").child("game $gameId")
+                    val gameIdString = addZeros(gameId)
+                    val deletePoint = db.child("set $setId").child("game $gameIdString")
                         .child("point $delPointNrString")
 
                     if (pointNr == 2) {
@@ -653,9 +654,10 @@ class ActivityStartPoint : AppCompatActivity() {
     //funkcja dla punktu poprzedniego
     private fun prevPointScore(context: Context, db: DatabaseReference, deletePoint: DatabaseReference, delPointNr: Int, setId: Int, gameId: Int, prevPointNrString: String) {
         val app = (context.applicationContext as? Stats)
-        Toast.makeText(this, "set$setId, game$gameId", Toast.LENGTH_SHORT).show()
+        val gameIdString = addZeros(gameId)
+        Toast.makeText(this, "set$setId, game$gameIdString", Toast.LENGTH_SHORT).show()
         if(app!=null){
-            val prevPoint = db.child("set $setId").child("game $gameId")
+            val prevPoint = db.child("set $setId").child("game $gameIdString")
                 .child("point $prevPointNrString")
 
             //pobranie poprzeniego stanu meczu z wezla score przed zdobyciem punktu
@@ -773,8 +775,9 @@ class ActivityStartPoint : AppCompatActivity() {
     private fun getPointSetGame(db: DatabaseReference, setId: Int, gameId: Int, PointNrString: String, completion: (Int, Int) -> Unit) {
         var retGame: Int
         var retSet: Int
+        val gameIdString = addZeros(gameId)
         //sprawdza czy prevPoint jest w tym gamie
-        db.child("set $setId").child("game $gameId").child("point $PointNrString").addListenerForSingleValueEvent(object : ValueEventListener {
+        db.child("set $setId").child("game $gameIdString").child("point $PointNrString").addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (!dataSnapshot.exists()) {
                     // jezeli wezel poprzedniego punktu nie istnieje
@@ -849,11 +852,11 @@ class ActivityStartPoint : AppCompatActivity() {
         var resultString: String
         if(a<10){
             //"00$a" jezeli dodane 100
+            resultString = "00$a"
+        }
+        else if(a<100) {
             resultString = "0$a"
         }else resultString = a.toString()
-        /*else if(a<100) {
-            resultString = "0$a"
-        }*/
         return resultString
     }
 }

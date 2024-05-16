@@ -56,6 +56,7 @@ class AddPointDialog(private val context: Context, private val openedFromStartPo
                 var set2P2: String
                 var set3P1: String
                 var set3P2: String
+                val gameString = addZeros(gameId.toInt())
 
                 database.child("set1p1").get().addOnSuccessListener { dataSnapshot ->
                     // Pobranie wartości "player1" z bazy danych
@@ -63,7 +64,7 @@ class AddPointDialog(private val context: Context, private val openedFromStartPo
                     // Ustawienie wartości w TextView
                     set1P1 = set1p1Value
                     app.set1p1=set1P1
-                    database.child(("set "+ setId)).child(("game "+gameId)).child("score").child("player1set1").setValue(set1P1)
+                    database.child(("set "+ setId)).child(("game "+gameString)).child("score").child("player1set1").setValue(set1P1)
                 }.addOnFailureListener { exception ->
                     // Obsługa błędów
                 }
@@ -73,7 +74,7 @@ class AddPointDialog(private val context: Context, private val openedFromStartPo
                     // Ustawienie wartości w TextView
                     set2P1 = set2p1Value
                     app.set2p1=set2P1
-                    database.child(("set "+ setId)).child(("game "+gameId)).child("score").child("player1set2").setValue(set2P1)
+                    database.child(("set "+ setId)).child(("game "+gameString)).child("score").child("player1set2").setValue(set2P1)
                 }.addOnFailureListener { exception ->
                     // Obsługa błędów
                 }
@@ -83,7 +84,7 @@ class AddPointDialog(private val context: Context, private val openedFromStartPo
                     // Ustawienie wartości w TextView
                     set3P1 = set3p1Value
                     app.set3p1=set3P1
-                    database.child(("set "+ setId)).child(("game "+gameId)).child("score").child("player1set3").setValue(set3P1)
+                    database.child(("set "+ setId)).child(("game "+gameString)).child("score").child("player1set3").setValue(set3P1)
                 }.addOnFailureListener { exception ->
                     // Obsługa błędów
                 }
@@ -93,7 +94,7 @@ class AddPointDialog(private val context: Context, private val openedFromStartPo
                     // Ustawienie wartości w TextView
                     set1P2 = set1p2Value
                     app.set1p2=set1P2
-                    database.child(("set "+ setId)).child(("game "+gameId)).child("score").child("player2set1").setValue(set1P2)
+                    database.child(("set "+ setId)).child(("game "+gameString)).child("score").child("player2set1").setValue(set1P2)
                 }.addOnFailureListener { exception ->
                     // Obsługa błędów
                 }
@@ -103,7 +104,7 @@ class AddPointDialog(private val context: Context, private val openedFromStartPo
                     // Ustawienie wartości w TextView
                     set2P2 = set2p2Value
                     app.set2p2=set2P2
-                    database.child(("set "+ setId)).child(("game "+gameId)).child("score").child("player2set2").setValue(set2P2)
+                    database.child(("set "+ setId)).child(("game "+gameString)).child("score").child("player2set2").setValue(set2P2)
                 }.addOnFailureListener { exception ->
                     // Obsługa błędów
                 }
@@ -113,7 +114,7 @@ class AddPointDialog(private val context: Context, private val openedFromStartPo
                     // Ustawienie wartości w TextView
                     set3P2 = set3p2Value
                     app.set3p2=set3P2
-                    database.child(("set "+ setId)).child(("game "+gameId)).child("score").child("player2set3").setValue(set3P2)
+                    database.child(("set "+ setId)).child(("game "+gameString)).child("score").child("player2set3").setValue(set3P2)
                 }.addOnFailureListener { exception ->
                     // Obsługa błędów
                 }
@@ -169,7 +170,7 @@ class AddPointDialog(private val context: Context, private val openedFromStartPo
 
                         // Zapis punktu do bazy danych
                         val pointDatabase =
-                            database.child(("set " + setId)).child(("game " + gameId))
+                            database.child(("set " + setId)).child(("game " + gameString))
                                 .child("point $count")
                         val point = Point(
                             pkt1, pkt2, kto,
@@ -235,11 +236,11 @@ class AddPointDialog(private val context: Context, private val openedFromStartPo
         var resultString: String
         if(a<10){
             //"00$a" jezeli dodane 100
+            resultString = "00$a"
+        }
+        else if(a<100) {
             resultString = "0$a"
         }else resultString = a.toString()
-        /*else if(a<100) {
-            resultString = "0$a"
-        }*/
         return resultString
     }
 }
