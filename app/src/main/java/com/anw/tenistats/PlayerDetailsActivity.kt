@@ -113,7 +113,7 @@ class PlayerDetailsActivity : AppCompatActivity() {
         findViewById<EditText>(R.id.editTextDate).setOnClickListener {
             showDatePickerDialog()
         }
-        findViewById<Button>(R.id.buttonDelete).setOnClickListener {
+        findViewById<ImageButton>(R.id.buttonUndo).setOnClickListener {
             val deletePlayerDialog = DeletePlayerActivity(this)
             deletePlayerDialog.show(playerId)
         }

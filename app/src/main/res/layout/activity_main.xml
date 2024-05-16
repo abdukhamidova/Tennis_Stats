@@ -6,48 +6,51 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="@color/app_bg_color">
-
-    <TextView
-        android:id="@+id/textView2"
+    android:background="@drawable/background">
+    <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/tennis_stats"
-        android:textAlignment="center"
-        android:textColor="@color/app_mainTitles_color"
-        android:textSize="80sp"
+        android:background="@drawable/background"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.212"/>
+        app:layout_constraintVertical_bias="0.0">
+    <LinearLayout
+        android:layout_width="231dp"
+        android:layout_height="173dp"
+        android:layout_gravity="center"
+        android:layout_margin="525dp"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/buttonLogIn"
-        android:layout_width="170dp"
-        android:layout_height="wrap_content"
-        android:text="@string/log_in"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:layout_constraintVertical_bias="0.16000003"
-        app:shapeAppearance="@style/CardView"/>
 
-    <Button
-        android:id="@+id/buttonSignUp"
-        android:layout_width="170dp"
-        android:layout_height="wrap_content"
-        android:text="@string/sign_up"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonLogIn"
-        app:layout_constraintVertical_bias="0.060000002"/>
+
+        <Button
+            android:id="@+id/buttonLogIn"
+            android:backgroundTint="#23507A"
+            android:textColor="@color/white"
+            android:layout_width="232dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:text="@string/log_in"
+            android:textSize="19sp" />
+
+        <Button
+            android:id="@+id/buttonSignUp"
+            android:backgroundTint="#23507A"
+            android:textColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:text="@string/sign_up"
+            android:textSize="19sp"/> <!--view matches-->
+    </LinearLayout>
+    </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
