@@ -70,4 +70,10 @@
         <item name="itemIconTint">@color/white</item>
         <item name="dividerInsetStart">@dimen/_34sdp</item>
     </style>
+
+    <style name="CustomDatePickerDialog" parent="Theme.MaterialComponents.DayNight.Dialog.Alert">
+        <item name="colorPrimary">@color/dirty_white</item>
+        <item name="colorAccent">@color/dirty_white</item>
+        <item name="android:background">@color/darkest_blue</item>
+    </style>
 </resources>

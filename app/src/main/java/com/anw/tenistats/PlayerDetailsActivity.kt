@@ -16,6 +16,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.ui.res.colorResource
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -234,6 +235,7 @@ class PlayerDetailsActivity : AppCompatActivity() {
 
         val datePickerDialog = DatePickerDialog(
             this,
+            R.style.CustomDatePickerDialog,
             DatePickerDialog.OnDateSetListener { view: DatePicker?, year: Int, monthOfYear: Int, dayOfMonth: Int ->
                 val selectedDate = "$dayOfMonth/${monthOfYear + 1}/$year"
                 findViewById<EditText>(R.id.editTextDate).setText(selectedDate)

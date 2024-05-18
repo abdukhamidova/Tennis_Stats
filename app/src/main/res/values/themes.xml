@@ -72,4 +72,12 @@
         <item name="itemIconTint">@color/menu_textColor</item>
         <item name="dividerInsetStart">45dp</item>
     </style>
+
+    <style name="CustomDatePickerDialog" parent="Theme.MaterialComponents.Light.Dialog.Alert">
+        <item name="colorPrimary">@color/app_bg_color</item>
+        <item name="colorPrimaryDark">@color/darkest_blue</item>
+        <item name="colorAccent">@color/darkest_blue</item>
+    </style>
+
+
 </resources>
