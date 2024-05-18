@@ -45,13 +45,13 @@ class CustomArrayAdapter(
 
         if (currentItem.contains(player1Name ?: "")) {
             view.setBackgroundColor(ContextCompat.getColor(context, R.color.app_player1_color))
-            (view as? TextView)?.setTextColor(ContextCompat.getColor(context, R.color.app_bg_color))
+            (view as? TextView)?.setTextColor(ContextCompat.getColor(context, R.color.darkest_blue))
         } else if (currentItem.contains(player2Name ?: "")) {
             view.setBackgroundColor(ContextCompat.getColor(context, R.color.app_player2_color))
-            (view as? TextView)?.setTextColor(ContextCompat.getColor(context, R.color.app_bg_color))
+            (view as? TextView)?.setTextColor(ContextCompat.getColor(context, R.color.darkest_blue))
         } else {
-            view.setBackgroundColor(ContextCompat.getColor(context, android.R.color.transparent))
-            (view as? TextView)?.setTextColor(ContextCompat.getColor(context, R.color.white))
+            view.setBackgroundColor(ContextCompat.getColor(context, R.color.history_bg_color))
+            (view as? TextView)?.setTextColor(ContextCompat.getColor(context, R.color.general_text_color))
         }
 
         // Ustawienie tekstu dla TextView

@@ -18,15 +18,15 @@ class NavigationDrawerHelper(private val activity: AppCompatActivity) {
     fun setupNavigationDrawer(drawerLayout: DrawerLayout, navigationView: NavigationView, auth: FirebaseAuth, fromGame : Boolean = false) {
         navigationView.setNavigationItemSelectedListener { menuItem ->
             if(fromGame) {
-                handleNavigationItemSelectedGame(menuItem, auth)
+                handleNavigationItemSelectedGame(menuItem, auth, drawerLayout)
             }else {
-                handleNavigationItemSelected(menuItem, auth)
+                handleNavigationItemSelected(menuItem, auth, drawerLayout)
             }
             true
         }
     }
 
-    private fun handleNavigationItemSelected(menuItem: MenuItem, auth: FirebaseAuth) {
+    private fun handleNavigationItemSelected(menuItem: MenuItem, auth: FirebaseAuth, drawerLayout: DrawerLayout) {
         val activity = activity as AppCompatActivity
         val intent = when (menuItem.itemId) {
             R.id.nav_home -> Intent(activity, ActivityMenu::class.java)
@@ -43,10 +43,11 @@ class NavigationDrawerHelper(private val activity: AppCompatActivity) {
             else -> null
         }
         intent?.let {
+            drawerLayout.closeDrawers()
             activity.startActivity(it)
         }
     }
-     private fun handleNavigationItemSelectedGame(menuItem: MenuItem, auth: FirebaseAuth) {
+     private fun handleNavigationItemSelectedGame(menuItem: MenuItem, auth: FirebaseAuth,drawerLayout: DrawerLayout) {
         val activity = activity as AppCompatActivity
         val intent = when (menuItem.itemId) {
             R.id.nav_home -> Intent(activity, ActivityMenu::class.java)
@@ -55,6 +56,7 @@ class NavigationDrawerHelper(private val activity: AppCompatActivity) {
             R.id.nav_myPlayer -> Intent(activity, ViewPlayerActivity::class.java)
             R.id.buttonLogOut -> {
                 auth.signOut()
+                drawerLayout.closeDrawers()
                 Intent(activity, MainActivity::class.java)
             }
             else -> null

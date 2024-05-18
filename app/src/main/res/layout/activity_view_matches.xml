@@ -15,6 +15,7 @@
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/app_bg_color"
         tools:context=".ViewMatchesActivity">
 
         <include
@@ -25,18 +26,18 @@
         <EditText
             android:id="@+id/searchEditText"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="@dimen/_40sdp"
             android:autofillHints="Search"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="@color/autoFill_field"
             android:hint="@string/search"
             android:inputType="text"
             android:maxLines="1"
-            android:textColor="@color/white"
+            android:textColor="@color/autoFill_field"
             android:textColorHint="@color/app_hint_color"
-            android:layout_marginEnd="5dp"
-            android:layout_marginStart="5dp"
+            android:layout_marginEnd="@dimen/_3sdp"
+            android:layout_marginStart="@dimen/_3sdp"
             android:drawableStart="@drawable/icon_search"
-            android:drawablePadding="10dp"
+            android:drawablePadding="@dimen/_7sdp"
             android:drawableTint="@color/app_hint_color"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -51,8 +52,8 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="No Matches found"
-            android:textColor="@color/pale_grey"
-            android:drawablePadding="5dp"
+            android:textColor="@color/textNotFound_color"
+            android:drawablePadding="@dimen/_3sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/searchEditText"
             app:layout_constraintStart_toStartOf="@id/searchEditText"
@@ -64,8 +65,8 @@
         <ScrollView
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="1dp"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:layout_marginBottom="@dimen/_1sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -79,7 +80,6 @@
                 android:layout_height="wrap_content"
                 android:clickable="true"
                 android:focusable="true"
-                android:tint="@color/app_tableBg_color"
                 tools:listitem="@layout/match_item" />
         </ScrollView>
 
@@ -90,11 +90,12 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:background="@color/app_bg_color"
         android:theme="@style/NavigationViewTheme"
         app:headerLayout="@layout/navigation_header"
         app:menu="@menu/navigation_menu"
-        app:itemIconPadding="20dp"
-        app:itemHorizontalPadding="30dp"/>
+        app:itemIconPadding="@dimen/_15sdp"
+        app:itemHorizontalPadding="@dimen/_23sdp"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>
 

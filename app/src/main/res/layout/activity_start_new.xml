@@ -11,26 +11,29 @@
     tools:context=".StartNewActivity"
     tools:ignore="HardcodedText">
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/app_bg_color">
-        <include layout="@layout/toolbar"/>
+
+        <include
+            android:id="@+id/include3"
+            layout="@layout/toolbar" />
 
         <TextView
             android:id="@+id/textStartNew"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="@string/start_new"
             android:textColor="@color/app_mainTitles_color"
-            android:textSize="40sp"
+            android:textSize="@dimen/_40sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.108" />
+            app:layout_constraintTop_toBottomOf="@+id/include3"
+            app:layout_constraintVertical_bias="0.059" />
 
         <TextView
             android:id="@+id/textPlayer1"
@@ -38,7 +41,7 @@
             android:layout_height="wrap_content"
             android:text="@string/player_1"
             android:textColor="@color/app_mainTitles_color"
-            android:textSize="20sp"
+            android:textSize="@dimen/_20sdp"
             app:layout_constraintBottom_toTopOf="@+id/autoNamePlayer1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.072"
@@ -48,30 +51,31 @@
 
         <AutoCompleteTextView
             android:id="@+id/autoNamePlayer1"
-            android:layout_width="346dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="24dp"
-            android:hint="@string/name"
-            android:textColor="@color/white"
-            android:textColorHint="@color/app_hint_color"
-            android:backgroundTint="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginStart="@dimen/_24sdp"
+            android:layout_marginEnd="@dimen/_24sdp"
+            android:backgroundTint="@color/autoFill_field"
             android:drawableStart="@drawable/icon_person"
-            android:drawablePadding="5dp"
+            android:drawablePadding="@dimen/_5sdp"
             android:drawableTint="@color/app_hint_color"
+            android:hint="@string/name"
+            android:textColor="@color/autoFill_field"
+            android:textColorHint="@color/app_hint_color"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textStartNew"
-            app:layout_constraintVertical_bias="0.176" />
+            app:layout_constraintVertical_bias="0.13" />
 
         <CheckBox
             android:id="@+id/checkBoxPlayer1New"
             android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:layout_marginStart="24dp"
+            android:layout_height="@dimen/_36sdp"
+            android:layout_marginStart="@dimen/_24sdp"
             android:text="@string/create_player"
-            android:textColor="@color/white"
+            android:textColor="@color/accent_text_color2"
             app:buttonTint="@color/app_mainTitles_color"
             app:layout_constraintBottom_toTopOf="@+id/textPlayer2"
             app:layout_constraintEnd_toEndOf="parent"
@@ -84,12 +88,12 @@
             android:id="@+id/textPlayer2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="200dp"
-            android:layout_marginEnd="329dp"
+            android:layout_marginStart="@dimen/_24sdp"
+            android:layout_marginTop="@dimen/_200sdp"
+            android:layout_marginEnd="@dimen/_329sdp"
             android:text="@string/player_2"
             android:textColor="@color/app_mainTitles_color"
-            android:textSize="20sp"
+            android:textSize="@dimen/_20sdp"
             app:layout_constraintBottom_toTopOf="@+id/autoNamePlayer2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -99,30 +103,31 @@
 
         <AutoCompleteTextView
             android:id="@+id/autoNamePlayer2"
-            android:layout_width="351dp"
-            android:layout_height="55dp"
-            android:layout_marginStart="24dp"
-            android:hint="@string/name"
-            android:textColor="@color/white"
-            android:textColorHint="@color/app_hint_color"
-            android:backgroundTint="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginStart="@dimen/_24sdp"
+            android:layout_marginEnd="@dimen/_24sdp"
+            android:backgroundTint="@color/autoFill_field"
             android:drawableStart="@drawable/icon_person"
-            android:drawablePadding="5dp"
+            android:drawablePadding="@dimen/_5sdp"
             android:drawableTint="@color/app_hint_color"
+            android:hint="@string/name"
+            android:textColor="@color/autoFill_field"
+            android:textColorHint="@color/app_hint_color"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/autoNamePlayer1"
-            app:layout_constraintVertical_bias="0.303" />
+            app:layout_constraintVertical_bias="0.149" />
 
         <CheckBox
             android:id="@+id/checkBoxPlayer2New"
             android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:layout_marginStart="24dp"
+            android:layout_height="@dimen/_36sdp"
+            android:layout_marginStart="@dimen/_24sdp"
             android:text="@string/create_player"
-            android:textColor="@color/white"
+            android:textColor="@color/accent_text_color2"
             app:buttonTint = "@color/app_mainTitles_color"
             app:layout_constraintBottom_toTopOf="@+id/buttonStartGame"
             app:layout_constraintEnd_toEndOf="parent"
@@ -133,28 +138,29 @@
 
         <Button
             android:id="@+id/buttonStartGame"
-            android:layout_width="198dp"
-            android:backgroundTint="#23507A"
-            android:textColor="@color/white"
-            android:layout_height="58dp"
+            android:layout_width="@dimen/_198sdp"
+            android:layout_height="@dimen/_39sdp"
+            android:backgroundTint="@color/darker_blue"
             android:text="@string/start_game"
-            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_17ssp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.78" />
+            app:layout_constraintVertical_bias="0.696" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-   <com.google.android.material.navigation.NavigationView
+    <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigationViewMenu"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:background="@color/app_bg_color"
         android:theme="@style/NavigationViewTheme"
         app:headerLayout="@layout/navigation_header"
         app:menu="@menu/navigation_menu"
-        app:itemIconPadding="20dp"
-        app:itemHorizontalPadding="30dp"/>
-
+        app:itemIconPadding="@dimen/_20sdp"
+        app:itemHorizontalPadding="@dimen/_30sdp"/>
 </androidx.drawerlayout.widget.DrawerLayout>

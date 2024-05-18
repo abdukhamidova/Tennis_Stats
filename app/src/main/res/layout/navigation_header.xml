@@ -3,11 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="176dp"
+    android:layout_height="@dimen/_160sdp"
     android:orientation="vertical"
     android:gravity="center_horizontal|bottom"
-    android:background="@color/app_bg_color"
-    android:padding="15dp">
+    android:background="@color/darkest_blue"
+    android:padding="@dimen/_11sdp">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -19,5 +19,5 @@
         android:layout_height="wrap_content"
         android:text="@string/usermail"
         android:textColor="@color/white"
-        android:textSize="15sp"/>
+        android:textSize="@dimen/_11sdp"/>
 </LinearLayout>

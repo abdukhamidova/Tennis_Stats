@@ -4,8 +4,8 @@
     <solid
         android:color="@color/transparent"/>
     <stroke
-        android:width="3dp"
-        android:color="@color/light_grey"/>
+        android:width="@dimen/_2sdp"
+        android:color="@color/dialog_btnCancel"/>
     <corners
-        android:radius="12dp"/>
+        android:radius="@dimen/_8sdp"/>
 </shape>

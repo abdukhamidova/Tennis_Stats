@@ -20,8 +20,10 @@
 
         <TableLayout
             android:id="@+id/tableLayout"
-            android:layout_width="370dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
             android:background="@drawable/score_table"
             android:theme="@style/scoreTableTextAppearance"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -30,27 +32,28 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.19">
 
-            <TableRow>
-
+            <TableRow
+                android:layout_marginBottom="0dp">
                 <TextView
                     android:id="@+id/textViewBallPl1"
                     android:layout_width="wrap_content"
-                    android:layout_height="45dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="4dp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_4sdp"
                     android:layout_weight="0"
                     android:gravity="end"
                     android:visibility="visible"
-                    app:drawableStartCompat="@drawable/ball"/>
+                    app:drawableStartCompat="@drawable/ball"
+                    app:drawableTint="@color/ball_scoreTable_color" />
 
                 <TextView
                     android:id="@+id/textviewPlayer1"
-                    android:layout_width="100dp"
+                    android:layout_width="@dimen/_90sdp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:textAlignment="gravity"
                     android:gravity="start|center_vertical"
-                    android:layout_marginStart="6dp"
+                    android:layout_marginStart="@dimen/_4sdp"
                     android:text="@string/imie_nazwisko_player1"/>
 
                 <TextView
@@ -75,27 +78,28 @@
 
             </TableRow>
 
-            <TableRow>
-
+            <TableRow
+                android:layout_marginTop="0dp">
                 <TextView
                     android:id="@+id/textViewBallPl2"
                     android:layout_width="wrap_content"
-                    android:layout_height="45dp"
+                    android:layout_height="@dimen/_40sdp"
                     android:layout_weight="0"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="4dp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_4sdp"
                     android:gravity="center"
                     android:visibility="visible"
-                    app:drawableStartCompat="@drawable/ball"/>
+                    app:drawableStartCompat="@drawable/ball"
+                    app:drawableTint="@color/ball_scoreTable_color" />
 
                 <TextView
                     android:id="@+id/textviewPlayer2"
-                    android:layout_width="100dp"
+                    android:layout_width="@dimen/_90sdp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:textAlignment="gravity"
                     android:gravity="start|center_vertical"
-                    android:layout_marginStart="6dp"
+                    android:layout_marginStart="@dimen/_4sdp"
                     android:text="@string/imie_nazwisko_player2"/>
 
                 <TextView
@@ -118,7 +122,6 @@
                     android:layout_height="match_parent"
                     android:text=""/>
 
-
             </TableRow>
 
         </TableLayout>
@@ -126,11 +129,11 @@
         <TextView
             android:id="@+id/textViewFS"
             android:layout_width="wrap_content"
-            android:layout_height="43dp"
-            android:layout_marginTop="20dp"
+            android:layout_height="@dimen/_43sdp"
+            android:layout_marginTop="@dimen/_20sdp"
             android:text="@string/_1st_serve"
-            android:textColor="@color/white"
-            android:textSize="30sp"
+            android:textColor="@color/serve_title_color"
+            android:textSize="@dimen/_23ssp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/tableLayout"
             app:layout_constraintStart_toStartOf="@+id/tableLayout"
@@ -140,93 +143,94 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
             android:gravity="center_horizontal"
-            android:layout_marginTop="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/textViewFS"
-            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintHorizontal_bias="0.505"
             app:layout_constraintStart_toStartOf="@+id/textViewFS"
             app:layout_constraintTop_toBottomOf="@+id/textViewFS"
-            app:layout_constraintVertical_bias="0.0">
+            app:layout_constraintVertical_bias="0.077">
 
             <Button
                 android:id="@+id/buttonAce"
-                android:layout_width="102dp"
-                android:layout_height="97dp"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_70sdp"
                 android:layout_alignParentStart="true"
                 android:text="@string/ace"
-                android:textSize="25sp" /> <!--Ace-->
+                android:textSize="@dimen/_20ssp" /> <!--Ace-->
 
             <Button
                 android:id="@+id/buttonRWF"
-                android:layout_width="102dp"
-                android:layout_height="97dp"
-                android:layout_marginStart="15dp"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_70sdp"
+                android:layout_marginStart="@dimen/_10sdp"
                 android:layout_toEndOf="@+id/buttonAce"
                 android:text="@string/return_winner_fh"
-                android:textSize="17sp" /> <!--Return Winner FH-->
+                android:textSize="@dimen/_14ssp" /> <!--Return Winner FH-->
 
             <Button
                 android:id="@+id/buttonRWB"
-                android:layout_width="102dp"
-                android:layout_height="97dp"
-                android:layout_marginStart="15dp"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_70sdp"
+                android:layout_marginStart="@dimen/_10sdp"
                 android:layout_toEndOf="@+id/buttonRWF"
                 android:text="@string/return_winner_bh"
-                android:textSize="17sp" /> <!--Return Winner BH-->
+                android:textSize="@dimen/_14ssp" /> <!--Return Winner BH-->
 
             <Button
                 android:id="@+id/buttonFault"
-                android:layout_width="102dp"
-                android:layout_height="97dp"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_70sdp"
                 android:layout_below="@+id/buttonAce"
                 android:layout_alignParentStart="true"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/_15sdp"
                 android:text="@string/fault"
-                android:textSize="21sp" /> <!--Fault-->
+                android:textSize="@dimen/_18ssp" /> <!--Fault-->
 
             <Button
                 android:id="@+id/buttonREF"
-                android:layout_width="102dp"
-                android:layout_height="97dp"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_70sdp"
                 android:layout_below="@id/buttonRWF"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_15sdp"
                 android:layout_toEndOf="@+id/buttonFault"
                 android:text="@string/return_error_fh"
-                android:textSize="17sp" /> <!--Return Error FH-->
+                android:textSize="@dimen/_14ssp" /> <!--Return Error FH-->
 
             <Button
                 android:id="@+id/buttonREB"
-                android:layout_width="102dp"
-                android:layout_height="97dp"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_70sdp"
                 android:layout_below="@+id/buttonRWB"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_15sdp"
                 android:layout_toEndOf="@+id/buttonREF"
                 android:text="@string/return_error_bh"
-                android:textSize="17sp" /> <!--Return Error BH-->
+                android:textSize="@dimen/_14ssp" /> <!--Return Error BH-->
 
             <Button
                 android:id="@+id/buttonBIP"
-                android:layout_width="336dp"
-                android:layout_height="51dp"
+                android:layout_width="@dimen/_260sdp"
+                android:layout_height="@dimen/_40sdp"
                 android:layout_below="@+id/buttonFault"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="@dimen/_15sdp"
                 android:text="@string/ball_in_play"
-                android:textSize="23sp" /> <!--Ball in play-->
+                android:textSize="@dimen/_17ssp" /> <!--Ball in play-->
         </RelativeLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-   <com.google.android.material.navigation.NavigationView
+    <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigationViewMenu"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:background="@color/app_bg_color"
         android:theme="@style/NavigationViewTheme"
         app:headerLayout="@layout/navigation_header"
         app:menu="@menu/navigation_menu"
-        app:itemIconPadding="20dp"
-        app:itemHorizontalPadding="30dp"/>
+        app:itemIconPadding="@dimen/_15sdp"
+        app:itemHorizontalPadding="@dimen/_23sdp"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>

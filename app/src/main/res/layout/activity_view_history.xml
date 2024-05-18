@@ -14,13 +14,16 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/app_bg_color">
         <include layout="@layout/toolbar"/>
 
         <TableLayout
             android:id="@+id/tableLayoutHis"
-            android:layout_width="370dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
             android:background="@drawable/score_table"
             android:theme="@style/scoreTableTextAppearance"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -34,23 +37,23 @@
                 <TextView
                     android:id="@+id/textViewServe1His"
                     android:layout_width="wrap_content"
-                    android:layout_height="45dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="4dp"
+                    android:layout_height="@dimen/_34sdp"
+                    android:layout_marginStart="@dimen/_7sdp"
+                    android:layout_marginEnd="@dimen/_2sdp"
                     android:layout_weight="0"
                     android:gravity="center"
-                    android:visibility="visible"
-                    app:drawableStartCompat="@drawable/icon_laurel3" />
+                    android:visibility="invisible"
+                    app:drawableStartCompat="@drawable/icon_laurel3"  />
 
                 <TextView
                     android:id="@+id/textviewPlayer1His"
-                    android:layout_width="100dp"
+                    android:layout_width="@dimen/_76sdp"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="6dp"
+                    android:layout_marginStart="@dimen/_4sdp"
                     android:layout_weight="1"
-                    android:text="@string/imie_nazwisko_player1"
+                    android:gravity="start|center_vertical"
                     android:textAlignment="gravity"
-                    android:gravity="start|center_vertical"/>
+                    android:text="@string/imie_nazwisko_player1"/>
 
                 <TextView
                     android:id="@+id/textViewSymbol1His"
@@ -59,7 +62,7 @@
                     android:layout_weight="0"
                     android:gravity="center"
                     android:text="◁"
-                    android:textSize="25sp"/>
+                    android:textSize="@dimen/_19ssp"/>
 
                 <TextView
                     android:id="@+id/textViewP1Set1His"
@@ -84,23 +87,23 @@
                 <TextView
                     android:id="@+id/textViewServe2His"
                     android:layout_width="wrap_content"
-                    android:layout_height="45dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="4dp"
+                    android:layout_height="@dimen/_34sdp"
+                    android:layout_marginStart="@dimen/_7sdp"
+                    android:layout_marginEnd="@dimen/_2sdp"
                     android:layout_weight="0"
                     android:gravity="center"
-                    android:visibility="visible"
-                    app:drawableStartCompat="@drawable/icon_laurel3"/>
+                    android:visibility="invisible"
+                    app:drawableStartCompat="@drawable/icon_laurel3" />
 
                 <TextView
                     android:id="@+id/textviewPlayer2His"
-                    android:layout_width="100dp"
+                    android:layout_width="@dimen/_76sdp"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="6dp"
+                    android:layout_marginStart="@dimen/_4sdp"
                     android:layout_weight="1"
                     android:gravity="start|center_vertical"
-                    android:text="@string/imie_nazwisko_player2"
-                    android:textAlignment="gravity" />
+                    android:textAlignment="gravity"
+                    android:text="@string/imie_nazwisko_player2"/>
                 <TextView
                     android:id="@+id/textViewSymbol2His"
                     android:layout_width="wrap_content"
@@ -108,7 +111,7 @@
                     android:layout_weight="0"
                     android:gravity="center"
                     android:text="▶"
-                    android:textSize="25sp"/>
+                    android:textSize="@dimen/_19sdp"/>
 
                 <TextView
                     android:id="@+id/textViewP2Set1His"
@@ -131,9 +134,9 @@
             android:id="@+id/linearLayoutNavigationStats"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_23sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/tableLayoutHis"
@@ -142,90 +145,94 @@
             app:layout_constraintVertical_bias="0.0">
 
             <LinearLayout
-                android:layout_width="370dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <Button
                     android:layout_width="0dp"
-                    android:layout_height="48dp"
+                    android:layout_height="@dimen/_36sdp"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:text="@string/history"
-                    android:textSize="17sp"
+                    android:textSize="@dimen/_13ssp"
                     android:textColor="@color/white"
                     android:background="@drawable/rectangle_button"
                     style="?android:attr/buttonBarButtonStyle"
                     android:drawableStart="@drawable/icon_history"
-                    android:paddingStart="17dp"
-                    android:drawablePadding="8dp"
+                    android:paddingStart="@dimen/_13sdp"
+                    android:drawablePadding="@dimen/_5sdp"
                     android:drawableTint="@color/white"/> <!--history-->
 
                 <Button
                     android:id="@+id/statistics"
                     android:layout_width="0dp"
-                    android:layout_height="48dp"
+                    android:layout_height="@dimen/_36sdp"
                     android:layout_weight="1"
                     android:text="@string/statistics"
-                    android:textSize="17sp"
-                    android:textColor="@color/white"
+                    android:textSize="@dimen/_13ssp"
+                    android:textColor="@color/general_text_color"
                     android:background="@drawable/rec_btn_not_selected"
                     style="?android:attr/buttonBarButtonStyle"
                     android:gravity="center_vertical"
                     android:drawableStart="@drawable/icon_stats"
-                    android:paddingStart="15dp"
-                    android:drawablePadding="8dp"
-                    android:drawableTint="@color/white"/> <!--statistics-->
+                    android:paddingStart="@dimen/_11sdp"
+                    android:drawablePadding="@dimen/_5sdp"
+                    android:drawableTint="@color/general_text_color"/> <!--statistics-->
 
             </LinearLayout> <!--MenuStatHis-->
 
             <LinearLayout
-                android:layout_width="370dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/buttonAllHis"
                     android:layout_width="0dp"
-                    android:layout_height="48dp"
+                    android:layout_height="@dimen/_36sdp"
                     android:layout_weight="1"
                     android:background="@drawable/rectangle_button"
                     android:textColor="@color/white"
                     android:gravity="center"
                     android:text="@string/all"
-                    style="?android:attr/buttonBarButtonStyle"/>
+                    android:textSize="@dimen/_12ssp"
+                    style="?android:attr/buttonBarButtonStyle" />
 
                 <Button
                     android:id="@+id/buttonSet1His"
                     android:layout_width="0dp"
-                    android:layout_height="48dp"
+                    android:layout_height="@dimen/_36sdp"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:background="@drawable/rec_btn_not_selected"
                     android:text="@string/set_1"
-                    android:textColor="@color/white"
+                    android:textColor="@color/general_text_color"
+                    android:textSize="@dimen/_12ssp"
                     style="?android:attr/buttonBarButtonStyle"/>
 
                 <Button
                     android:id="@+id/buttonSet2His"
                     android:layout_width="0dp"
-                    android:layout_height="48dp"
+                    android:layout_height="@dimen/_36sdp"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:background="@drawable/rec_btn_not_selected"
                     android:text="@string/set_2"
-                    android:textColor="@color/white"
-                    style="?android:attr/buttonBarButtonStyle"/>
+                    android:textColor="@color/general_text_color"
+                    android:textSize="@dimen/_12ssp"
+                    style="?android:attr/buttonBarButtonStyle" />
 
                 <Button
                     android:id="@+id/buttonSet3His"
                     android:layout_width="0dp"
-                    android:layout_height="48dp"
+                    android:layout_height="@dimen/_36sdp"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:background="@drawable/rec_btn_not_selected"
                     android:text="@string/set_3"
-                    android:textColor="@color/white"
+                    android:textSize="@dimen/_12ssp"
+                    android:textColor="@color/general_text_color"
                     style="?android:attr/buttonBarButtonStyle"/>
             </LinearLayout> <!--Sets-->
 
@@ -234,17 +241,16 @@
         <ListView
             android:id="@+id/historyList"
             android:layout_width="match_parent"
-            android:layout_height="450dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="1dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginStart="20dp"
-            android:padding="5dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:layout_marginBottom="@dimen/_2sdp"
             android:background="@color/transparent"
+            android:padding="@dimen/_3sdp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/linearLayoutNavigationStats"
             app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/linearLayoutNavigationStats"
             app:layout_constraintTop_toBottomOf="@+id/linearLayoutNavigationStats"
             app:layout_constraintVertical_bias="0.0" />
 
@@ -255,10 +261,11 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+      android:background="@color/app_bg_color"
         android:theme="@style/NavigationViewTheme"
         app:headerLayout="@layout/navigation_header"
         app:menu="@menu/navigation_menu"
-        app:itemIconPadding="20dp"
-        app:itemHorizontalPadding="30dp"/>
+      app:itemIconPadding="@dimen/_15sdp"
+      app:itemHorizontalPadding="@dimen/_23sdp"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>

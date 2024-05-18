@@ -1,44 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:backgroundTint="@color/white">
+    android:backgroundTint="@color/transparent">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:elevation="5dp"
-        android:background="@color/app_bg_color">
+        android:background="@drawable/toolbar_bg"
+        android:layout_height="@dimen/_43sdp">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/_11sdp"
+        android:layout_marginEnd="@dimen/_11sdp">
 
-            <ImageButton
-                android:id="@+id/buttonMenu"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/transparent"
-                android:src="@drawable/menu_button35"
-                android:padding="1dp"
-                android:visibility="visible"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"/>
+        <ImageButton
+            android:id="@+id/buttonMenu"
+            android:layout_width="@dimen/_36sdp"
+            android:layout_height="@dimen/_36sdp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:backgroundTint="@color/transparent"
+            android:padding="@dimen/_1sdp"
+            android:src="@drawable/menu_button35"
+            android:visibility="visible"
+            app:tint="@color/app_menu_buttons"/>
 
-            <ImageButton
-                android:id="@+id/buttonUndo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="1dp"
-                android:visibility="visible"
-                android:backgroundTint="@color/transparent"
-                android:src="@drawable/undo_button35"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="25dp"/>
-        </RelativeLayout>
-
+        <ImageButton
+            android:id="@+id/buttonUndo"
+            android:layout_width="@dimen/_36sdp"
+            android:layout_height="@dimen/_36sdp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:backgroundTint="@color/transparent"
+            android:padding="@dimen/_1sdp"
+            android:src="@drawable/icon_undo_30"
+            android:visibility="visible"
+            app:tint="@color/app_menu_buttons"/>
+    </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
 </LinearLayout>

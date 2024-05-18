@@ -4,52 +4,53 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@color/darker_blue">
+    android:background="@color/dialog_bg_color">
 
     <TextView
         android:id="@+id/textViewConfirm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/_7sdp"
         android:layout_gravity="center"
         android:text="@string/confirm"
-        android:textColor="@color/light_yellow"
-        android:textSize="30sp"
+        android:textColor="@color/dialog_textTitle_color"
+        android:textSize="@dimen/_23ssp"
         android:textAlignment="center"/>
 
     <TextView
         android:id="@+id/textViewPointData"
-        android:layout_width="300dp"
-        android:layout_height="165dp"
+        android:layout_width="@dimen/_232sdp"
+        android:layout_height="@dimen/_126sdp"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:padding="15dp"
-        android:textColor="@color/white"
-        android:textSize="20sp"/>
+        android:layout_marginTop="@dimen/_15sdp"
+        android:padding="@dimen/_11sdp"
+        android:textColor="@color/general_text_color"
+        android:textSize="@dimen/_15ssp"/>
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginBottom="@dimen/_11sdp"
         android:layout_gravity="center_horizontal">
         <Button
             android:id="@+id/buttonCancel"
-            android:layout_width="150dp"
-            android:layout_height="48dp"
-            android:layout_marginEnd="10dp"
+            android:layout_width="@dimen/_99sdp"
+            android:layout_height="@dimen/_36sdp"
+            android:layout_marginEnd="@dimen/_7sdp"
             android:background="@drawable/border_button"
             android:text="@string/cancel"
-            android:textSize="17sp"
-            android:textColor="@color/light_grey"/>
+            android:textSize="@dimen/_13ssp"
+            android:textColor="@color/dialog_btnCancel"/>
 
         <Button
             android:id="@+id/buttonAdd"
-            android:layout_width="150dp"
-            android:layout_height="48dp"
+            android:layout_width="@dimen/_99sdp"
+            android:layout_height="@dimen/_36sdp"
             android:layout_toEndOf="@+id/buttonCancel"
-            android:backgroundTint="@color/light_yellow"
+            android:backgroundTint="@color/dialog_textTitle_color"
+            android:textColor="@color/dialog_text_color"
             android:text="@string/add"
-            android:textSize="19sp" />
+            android:textSize="@dimen/_14ssp" />
     </RelativeLayout>
 </LinearLayout>

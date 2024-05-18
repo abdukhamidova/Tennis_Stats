@@ -11,6 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -112,9 +113,13 @@ class ViewStatsActivity : AppCompatActivity() {
         findViewById<Button>(R.id.buttonAllStats).setOnClickListener {
             //zmiana kolorow textViews ALL, SET1,SET2,SET3
             findViewById<Button>(R.id.buttonAllStats).setBackgroundResource(R.drawable.rectangle_button)
+            findViewById<Button>(R.id.buttonAllStats).setTextColor(ContextCompat.getColor(this, R.color.white))
             findViewById<Button>(R.id.buttonSet1Stats).setBackgroundResource(R.drawable.rec_btn_not_selected)
+            findViewById<Button>(R.id.buttonSet1Stats).setTextColor(ContextCompat.getColor(this, R.color.general_text_color))
             findViewById<Button>(R.id.buttonSet2Stats).setBackgroundResource(R.drawable.rec_btn_not_selected)
+            findViewById<Button>(R.id.buttonSet2Stats).setTextColor(ContextCompat.getColor(this, R.color.general_text_color))
             findViewById<Button>(R.id.buttonSet3Stats).setBackgroundResource(R.drawable.rec_btn_not_selected)
+            findViewById<Button>(R.id.buttonSet3Stats).setTextColor(ContextCompat.getColor(this, R.color.general_text_color))
             //ustawienie statystyk ALL
             setAppValues(app,0,player1name,player2name)
             setTableValue(app)
@@ -123,9 +128,13 @@ class ViewStatsActivity : AppCompatActivity() {
             Log.d("ViewStatsActivity", "Button clicked")
             //zmiana kolorow textViews ALL, SET1,SET2,SET3
             findViewById<Button>(R.id.buttonAllStats).setBackgroundResource(R.drawable.rec_btn_not_selected)
+            findViewById<Button>(R.id.buttonAllStats).setTextColor(ContextCompat.getColor(this, R.color.general_text_color))
             findViewById<Button>(R.id.buttonSet1Stats).setBackgroundResource(R.drawable.rectangle_button)
+            findViewById<Button>(R.id.buttonSet1Stats).setTextColor(ContextCompat.getColor(this, R.color.white))
             findViewById<Button>(R.id.buttonSet2Stats).setBackgroundResource(R.drawable.rec_btn_not_selected)
+            findViewById<Button>(R.id.buttonSet2Stats).setTextColor(ContextCompat.getColor(this, R.color.general_text_color))
             findViewById<Button>(R.id.buttonSet3Stats).setBackgroundResource(R.drawable.rec_btn_not_selected)
+            findViewById<Button>(R.id.buttonSet3Stats).setTextColor(ContextCompat.getColor(this, R.color.general_text_color))
             //ustawienie statystyk SET1
             setAppValues(app,1,player1name,player2name)
             setTableValue(app)
@@ -134,9 +143,13 @@ class ViewStatsActivity : AppCompatActivity() {
             if (set2p1.text != ""){
                 //zmiana kolorow textViews ALL, SET1,SET2,SET3
                 findViewById<Button>(R.id.buttonAllStats).setBackgroundResource(R.drawable.rec_btn_not_selected)
+                findViewById<Button>(R.id.buttonAllStats).setTextColor(ContextCompat.getColor(this, R.color.general_text_color))
                 findViewById<Button>(R.id.buttonSet1Stats).setBackgroundResource(R.drawable.rec_btn_not_selected)
+                findViewById<Button>(R.id.buttonSet1Stats).setTextColor(ContextCompat.getColor(this, R.color.general_text_color))
                 findViewById<Button>(R.id.buttonSet2Stats).setBackgroundResource(R.drawable.rectangle_button)
+                findViewById<Button>(R.id.buttonSet2Stats).setTextColor(ContextCompat.getColor(this, R.color.white))
                 findViewById<Button>(R.id.buttonSet3Stats).setBackgroundResource(R.drawable.rec_btn_not_selected)
+                findViewById<Button>(R.id.buttonSet3Stats).setTextColor(ContextCompat.getColor(this, R.color.general_text_color))
                 //ustawienie statystyk SET2
                 setAppValues(app, 2, player1name, player2name)
                 setTableValue(app)
@@ -149,9 +162,13 @@ class ViewStatsActivity : AppCompatActivity() {
             if(set3p1.text!=""){
                 //zmiana kolorow textViews ALL, SET1,SET2,SET3
                 findViewById<Button>(R.id.buttonAllStats).setBackgroundResource(R.drawable.rec_btn_not_selected)
+                findViewById<Button>(R.id.buttonAllStats).setTextColor(ContextCompat.getColor(this, R.color.general_text_color))
                 findViewById<Button>(R.id.buttonSet1Stats).setBackgroundResource(R.drawable.rec_btn_not_selected)
+                findViewById<Button>(R.id.buttonSet1Stats).setTextColor(ContextCompat.getColor(this, R.color.general_text_color))
                 findViewById<Button>(R.id.buttonSet2Stats).setBackgroundResource(R.drawable.rec_btn_not_selected)
+                findViewById<Button>(R.id.buttonSet2Stats).setTextColor(ContextCompat.getColor(this, R.color.general_text_color))
                 findViewById<Button>(R.id.buttonSet3Stats).setBackgroundResource(R.drawable.rectangle_button)
+                findViewById<Button>(R.id.buttonSet3Stats).setTextColor(ContextCompat.getColor(this, R.color.white))
                 //ustawienie statystyk SET3
                 setAppValues(app,3,player1name,player2name)
                 setTableValue(app)
@@ -260,7 +277,7 @@ class ViewStatsActivity : AppCompatActivity() {
                 val winner = dataSnapshot.getValue(String::class.java)
                 val goldenLaurel = getGoldenDrawable(applicationContext, R.drawable.icon_laurel3)
                 serve1.setCompoundDrawablesWithIntrinsicBounds(goldenLaurel, null, null, null)
-                serve1.setCompoundDrawablesWithIntrinsicBounds(goldenLaurel, null, null, null)
+                serve2.setCompoundDrawablesWithIntrinsicBounds(goldenLaurel, null, null, null)
                 // Ustawienie wartości w TextView
                 if(winner==player1.text){
                     serve1.visibility = View.VISIBLE

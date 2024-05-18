@@ -15,15 +15,16 @@
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:ignore="HardCodedText">
+        tools:ignore="HardCodedText"
+        android:background="@color/app_bg_color">
         <include layout="@layout/toolbar"/>
 
         <TextView
             android:id="@+id/textViewName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:textSize="40sp"
+            android:textColor="@color/general_text_color"
+            android:textSize="@dimen/_20ssp"
             android:text="Player Name"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -45,10 +46,10 @@
 
             <LinearLayout
                 android:id="@+id/linearLayoutNationality"
-                android:layout_width="match_parent"
+                android:layout_width="@dimen/_265sdp"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginBottom="10dp">
+                android:layout_marginBottom="@dimen/_7sdp">
 
                 <TextView
                     android:id="@+id/textView3"
@@ -56,28 +57,29 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/nationality"
-                    android:textSize="18sp"
-                    android:textColor="@color/white" />
+                    android:textSize="@dimen/_13ssp"
+                    android:textColor="@color/general_text_color"  />
 
                 <AutoCompleteTextView
                     android:id="@+id/autoCompleteTextViewNationality"
-                    android:layout_width="215dp"
-                    android:layout_height="48dp"
-                    android:backgroundTint="@color/white"
-                    android:completionHintView="@color/white"
+                    android:layout_width="@dimen/_165sdp"
+                    android:layout_height="@dimen/_36sdp"
+                    android:backgroundTint="@color/general_text_color"
+                    android:completionHintView="@color/general_text_color"
                     android:hint="@string/enter_nationality"
                     android:drawableStart="@drawable/icon_flag"
-                    android:drawablePadding="5dp"
+                    android:drawablePadding="@dimen/_3sdp"
                     android:drawableTint="@color/app_hint_color"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/app_hint_color" />
+                    android:textSize="@dimen/_12ssp"
+                    android:textColor="@color/general_text_color"
+                    android:textColorHint="@color/app_hint_color"/>
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/linearLayoutBDay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp">
+                android:layout_marginBottom="@dimen/_7sdp">
 
                 <TextView
                     android:id="@+id/textView6"
@@ -85,51 +87,53 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/date_of_birth"
-                    android:textSize="17sp"
-                    android:textColor="@color/white"/>
+                    android:textSize="@dimen/_12ssp"
+                    android:textColor="@color/general_text_color"/>
 
                 <EditText
                     android:id="@+id/editTextDate"
-                    android:layout_width="215dp"
-                    android:layout_height="48dp"
-                    android:backgroundTint="@color/white"
+                    android:layout_width="@dimen/_165sdp"
+                    android:layout_height="@dimen/_36sdp"
+                    android:backgroundTint="@color/general_text_color"
+                    android:completionHintView="@color/general_text_color"
+                    android:autofillHints="date of birthday"
                     android:focusable="false"
                     android:hint="@string/select_date_of_birth"
                     android:drawableStart="@drawable/icon_calendar"
-                    android:drawablePadding="5dp"
                     android:drawableTint="@color/app_hint_color"
+                    android:drawablePadding="@dimen/_3sdp"
                     android:inputType="date"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/app_hint_color"
-                    android:autofillHints="date of birthday"/>
+                    android:textSize="@dimen/_12ssp"
+                    android:textColor="@color/general_text_color"
+                    android:textColorHint="@color/app_hint_color" />
             </LinearLayout>
 
             <RadioGroup
                 android:id="@+id/radioGroupPlayerDetails"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="10dp">
+                android:layout_marginTop="@dimen/_3sdp"
+                android:layout_marginBottom="@dimen/_7sdp">
 
                 <RadioButton
                     android:id="@+id/radioButtonR"
                     android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_marginEnd="20dp"
-                    android:buttonTint="@color/app_mainTitles_color"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:buttonTint="@color/accent_text_color"
                     android:text="@string/right_handed"
-                    android:textColor="@color/white"
-                    android:textSize="20sp"/>
+                    android:textColor="@color/general_text_color"
+                    android:textSize="@dimen/_15sdp"/>
 
                 <RadioButton
                     android:id="@+id/radioButtonL"
                     android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:buttonTint="@color/app_mainTitles_color"
+                    android:layout_height="@dimen/_30sdp"
+                    android:buttonTint="@color/accent_text_color"
                     android:text="@string/left_handed"
-                    android:textColor="@color/white"
-                    android:textSize="20sp" />
+                    android:textColor="@color/general_text_color"
+                    android:textSize="@dimen/_15sdp"/>
             </RadioGroup>
 
             <LinearLayout
@@ -144,19 +148,20 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/strength"
-                    android:textSize="18sp"
-                    android:textColor="@color/white"/>
+                    android:textSize="@dimen/_13sdp"
+                    android:textColor="@color/general_text_color" />
 
                 <AutoCompleteTextView
                     android:id="@+id/autoCompleteTextViewStrength"
-                    android:layout_width="215dp"
-                    android:layout_height="48dp"
-                    android:backgroundTint="@color/white"
+                    android:layout_width="@dimen/_165sdp"
+                    android:layout_height="@dimen/_36sdp"
+                    android:backgroundTint="@color/general_text_color"
+                    android:completionHintView="@color/general_text_color"
                     android:hint="@string/enter_strength"
                     android:drawableStart="@drawable/icon_strength"
-                    android:drawablePadding="5dp"
+                    android:drawablePadding="@dimen/_3sdp"
                     android:drawableTint="@color/app_hint_color"
-                    android:textColor="@color/white"
+                    android:textColor="@color/general_text_color"
                     android:textColorHint="@color/app_hint_color" />
             </LinearLayout>
 
@@ -171,19 +176,20 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/weakness"
-                    android:textSize="18sp"
-                    android:textColor="@color/white" />
+                    android:textSize="@dimen/_13sdp"
+                    android:textColor="@color/general_text_color" />
 
                 <AutoCompleteTextView
                     android:id="@+id/autoCompleteTextViewWeakness"
-                    android:layout_width="215dp"
-                    android:layout_height="48dp"
-                    android:backgroundTint="@color/white"
+                    android:layout_width="@dimen/_165sdp"
+                    android:layout_height="@dimen/_36sdp"
+                    android:backgroundTint="@color/general_text_color"
+                    android:completionHintView="@color/general_text_color"
                     android:hint="@string/enter_weakness"
                     android:drawableStart="@drawable/icon_weakness"
-                    android:drawablePadding="5dp"
+                    android:drawablePadding="@dimen/_3sdp"
                     android:drawableTint="@color/app_hint_color"
-                    android:textColor="@color/white"
+                    android:textColor="@color/general_text_color"
                     android:textColorHint="@color/app_hint_color" />
             </LinearLayout>
 
@@ -191,10 +197,10 @@
 
         <Button
             android:id="@+id/buttonSubmit"
-            android:layout_width="300dp"
+            android:layout_width="@dimen/_230sdp"
             android:layout_height="wrap_content"
             android:text="@string/submit"
-            android:textSize="21sp"
+            android:textSize="@dimen/_16ssp"
             android:textColor="@color/white"
             android:backgroundTint="@color/darker_blue"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -211,10 +217,11 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:background="@color/app_bg_color"
         android:theme="@style/NavigationViewTheme"
         app:headerLayout="@layout/navigation_header"
         app:menu="@menu/navigation_menu"
-        app:itemIconPadding="20dp"
-        app:itemHorizontalPadding="30dp"/>
+        app:itemIconPadding="@dimen/_15sdp"
+        app:itemHorizontalPadding="@dimen/_23sdp"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>

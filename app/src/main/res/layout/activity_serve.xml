@@ -14,8 +14,12 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <include layout="@layout/toolbar"/>
+        android:layout_height="match_parent"
+        android:background="@color/app_bg_color">
+
+        <include
+            android:id="@+id/include2"
+            layout="@layout/toolbar" />
 
         <LinearLayout
             android:id="@+id/linearLayoutServe"
@@ -25,9 +29,10 @@
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.409">
+            app:layout_constraintTop_toBottomOf="@+id/include2"
+            app:layout_constraintVertical_bias="0.287">
 
             <TextView
                 android:id="@+id/textViewServe"
@@ -36,40 +41,42 @@
                 android:text="@string/who_serves_first"
                 android:textAlignment="center"
                 android:textColor="@color/app_mainTitles_color"
-                android:textSize="45sp"/>
+                android:textSize="@dimen/_35sdp" />
 
             <Button
                 android:id="@+id/buttonPlayer1"
-                android:layout_width="210dp"
+                android:layout_width="@dimen/_161sdp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:textSize="17sp"
-                android:text="@string/imie_nazwisko_player1"
+                android:drawablePadding="@dimen/_1sdp"
                 android:drawableTint="@color/app_btnText_color"
-                android:drawablePadding="2dp"/>
+                android:text="@string/imie_nazwisko_player1"
+                android:textSize="@dimen/_14sdp" />
+
             <Button
                 android:id="@+id/buttonPlayer2"
-                android:layout_width="210dp"
+                android:layout_width="@dimen/_161sdp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:textSize="17sp"
-                android:text="@string/imie_nazwisko_player2"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:drawablePadding="@dimen/_1sdp"
                 android:drawableTint="@color/app_btnText_color"
-                android:drawablePadding="2dp"/>
+                android:text="@string/imie_nazwisko_player2"
+                android:textSize="@dimen/_14sdp" />
         </LinearLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.google.android.material.navigation.NavigationView
+   <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigationViewMenu"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+       android:background="@color/app_bg_color"
         android:theme="@style/NavigationViewTheme"
         app:headerLayout="@layout/navigation_header"
         app:menu="@menu/navigation_menu"
-        app:itemIconPadding="20dp"
-        app:itemHorizontalPadding="30dp"/>
+       app:itemIconPadding="@dimen/_15sdp"
+       app:itemHorizontalPadding="@dimen/_23sdp"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>

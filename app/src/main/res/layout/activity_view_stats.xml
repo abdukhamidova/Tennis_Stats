@@ -14,13 +14,16 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/app_bg_color">
         <include layout="@layout/toolbar"/>
 
         <TableLayout
             android:id="@+id/tableLayoutStats"
-            android:layout_width="370dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
             android:background="@drawable/score_table"
             android:theme="@style/scoreTableTextAppearance"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -30,14 +33,15 @@
             app:layout_constraintVertical_bias="0.13999999">
 
             <TableRow
-                android:theme="@style/player1TextAppearance">
+                android:theme="@style/player1TextAppearance"
+                android:layout_marginBottom="0dp">
 
                 <TextView
                     android:id="@+id/textViewServe1Stats"
                     android:layout_width="wrap_content"
-                    android:layout_height="45dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="4dp"
+                    android:layout_height="@dimen/_34sdp"
+                    android:layout_marginStart="@dimen/_7sdp"
+                    android:layout_marginEnd="@dimen/_2sdp"
                     android:layout_weight="0"
                     android:gravity="center"
                     android:visibility="invisible"
@@ -45,9 +49,9 @@
 
                 <TextView
                     android:id="@+id/textviewPlayer1Stats"
-                    android:layout_width="100dp"
+                    android:layout_width="@dimen/_76sdp"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="6dp"
+                    android:layout_marginStart="@dimen/_4sdp"
                     android:layout_weight="1"
                     android:gravity="start|center_vertical"
                     android:textAlignment="gravity"
@@ -71,14 +75,15 @@
             </TableRow>
 
             <TableRow
-                android:theme="@style/player2TextAppearance">
+                android:theme="@style/player2TextAppearance"
+                android:layout_marginTop="0dp">
 
                 <TextView
                     android:id="@+id/textViewServe2Stats"
                     android:layout_width="wrap_content"
-                    android:layout_height="45dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="4dp"
+                    android:layout_height="@dimen/_34sdp"
+                    android:layout_marginStart="@dimen/_7sdp"
+                    android:layout_marginEnd="@dimen/_2sdp"
                     android:layout_weight="0"
                     android:gravity="center"
                     android:visibility="invisible"
@@ -86,9 +91,9 @@
 
                 <TextView
                     android:id="@+id/textviewPlayer2Stats"
-                    android:layout_width="100dp"
+                    android:layout_width="@dimen/_76sdp"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="6dp"
+                    android:layout_marginStart="@dimen/_4sdp"
                     android:layout_weight="1"
                     android:gravity="start|center_vertical"
                     android:textAlignment="gravity"
@@ -117,9 +122,9 @@
             android:id="@+id/linearLayoutNavigationStats"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_23sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/tableLayoutStats"
@@ -129,95 +134,95 @@
 
             <LinearLayout
                 android:id="@+id/linearLayoutMenuStatHisStats"
-                android:layout_width="370dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/buttonHistoryStats"
                     android:layout_width="0dp"
-                    android:layout_height="48dp"
+                    android:layout_height="@dimen/_36sdp"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:text="@string/history"
-                    android:textSize="17sp"
-                    android:textColor="@color/white"
+                    android:textSize="@dimen/_13ssp"
+                    android:textColor="@color/general_text_color"
                     android:background="@drawable/rec_btn_not_selected"
                     style="?android:attr/buttonBarButtonStyle"
                     android:drawableStart="@drawable/icon_history"
-                    android:paddingStart="17dp"
-                    android:drawablePadding="8dp"
-                    android:drawableTint="@color/white" /> <!--history-->
+                    android:paddingStart="@dimen/_13sdp"
+                    android:drawablePadding="@dimen/_5sdp"
+                    android:drawableTint="@color/general_text_color" /> <!--history-->
 
                 <Button
                     android:layout_width="0dp"
-                    android:layout_height="48dp"
+                    android:layout_height="@dimen/_36sdp"
                     android:layout_weight="1"
                     android:text="@string/statistics"
-                    android:textSize="17sp"
+                    android:textSize="@dimen/_13ssp"
                     android:textColor="@color/white"
                     android:background="@drawable/rectangle_button"
                     style="?android:attr/buttonBarButtonStyle"
                     android:gravity="center_vertical"
                     android:drawableStart="@drawable/icon_stats"
-                    android:paddingStart="15dp"
-                    android:drawablePadding="8dp"
+                    android:paddingStart="@dimen/_11sdp"
+                    android:drawablePadding="@dimen/_5sdp"
                     android:drawableTint="@color/white"/> <!--statistics-->
 
             </LinearLayout> <!--MenuStatHis-->
 
             <LinearLayout
                 android:id="@+id/linearLayoutMenuSetsStats"
-                android:layout_width="370dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/buttonAllStats"
                     android:layout_width="0dp"
-                    android:layout_height="48dp"
+                    android:layout_height="@dimen/_36sdp"
                     android:layout_weight="1"
                     android:background="@drawable/rectangle_button"
                     android:textColor="@color/white"
                     android:gravity="center"
                     android:text="@string/all"
-                    android:textSize="16sp"
+                    android:textSize="@dimen/_12ssp"
                     style="?android:attr/buttonBarButtonStyle" />
 
                 <Button
                     android:id="@+id/buttonSet1Stats"
                     android:layout_width="0dp"
-                    android:layout_height="48dp"
+                    android:layout_height="@dimen/_36sdp"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:background="@drawable/rec_btn_not_selected"
                     android:text="@string/set_1"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"
+                    android:textColor="@color/general_text_color"
+                    android:textSize="@dimen/_12ssp"
                     style="?android:attr/buttonBarButtonStyle" />
 
                 <Button
                     android:id="@+id/buttonSet2Stats"
                     android:layout_width="0dp"
-                    android:layout_height="48dp"
+                    android:layout_height="@dimen/_36sdp"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:background="@drawable/rec_btn_not_selected"
                     android:text="@string/set_2"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"
+                    android:textColor="@color/general_text_color"
+                    android:textSize="@dimen/_12ssp"
                     style="?android:attr/buttonBarButtonStyle" />
 
                 <Button
                     android:id="@+id/buttonSet3Stats"
                     android:layout_width="0dp"
-                    android:layout_height="48dp"
+                    android:layout_height="@dimen/_36sdp"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:background="@drawable/rec_btn_not_selected"
                     android:text="@string/set_3"
-                    android:textSize="16sp"
-                    android:textColor="@color/white"
+                    android:textSize="@dimen/_12ssp"
+                    android:textColor="@color/general_text_color"
                     style="?android:attr/buttonBarButtonStyle" />
             </LinearLayout> <!--Sets-->
 
@@ -226,9 +231,9 @@
         <LinearLayout
             android:id="@+id/linearLayoutScrollHeaderStats"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
             android:background="@color/transparent"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -245,7 +250,7 @@
                 android:gravity="center"
                 android:text="@string/player_1"
                 android:textColor="@color/app_player1_color"
-                android:textSize="18sp"/>
+                android:textSize="@dimen/_13ssp"/>
 
             <TextView
                 android:id="@+id/player2name"
@@ -255,17 +260,19 @@
                 android:gravity="center"
                 android:text="@string/player_2"
                 android:textColor="@color/app_player2_color"
-                android:textSize="18sp"/>
+                android:textSize="@dimen/_13ssp"/>
 
         </LinearLayout> <!--ScrollHeader-->
 
         <ScrollView
             android:id="@+id/scrollViewStats"
             android:layout_width="match_parent"
-            android:layout_height="390dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:background="@color/app_bg_color"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:layout_marginBottom="@dimen/_2sdp"
+            android:background="@color/scrollView_bg_color"
             android:theme="@style/scrollViewTextAppearance"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/linearLayoutScrollHeaderStats"
@@ -285,7 +292,7 @@
                     android:gravity="center_horizontal"
                     android:text="@string/total_points"
                     android:textColor="@color/statistics_text_color"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/_16ssp"
                     android:textStyle="bold" />
 
                 <TableRow>
@@ -307,15 +314,15 @@
 
                         <View
                             android:id="@+id/graphTotalPlayer1"
-                            android:layout_width="75dp"
-                            android:layout_height="20dp"
+                            android:layout_width="@dimen/_57sdp"
+                            android:layout_height="@dimen/_15sdp"
                             android:layout_gravity="end"
                             android:background="@color/app_player1_color"/>
 
                         <View
                             android:id="@+id/graphTotalPlayer2"
-                            android:layout_width="100dp"
-                            android:layout_height="20dp"
+                            android:layout_width="@dimen/_76sdp"
+                            android:layout_height="@dimen/_15sdp"
                             android:layout_gravity="start"
                             android:background="@color/app_player2_color"/>
 
@@ -360,15 +367,15 @@
 
                         <View
                             android:id="@+id/graphAcePlayer1"
-                            android:layout_width="75dp"
-                            android:layout_height="20dp"
+                            android:layout_width="@dimen/_57sdp"
+                            android:layout_height="@dimen/_15sdp"
                             android:layout_gravity="end"
                             android:background="@color/app_player1_color" />
 
                         <View
                             android:id="@+id/graphAcePlayer2"
-                            android:layout_width="100dp"
-                            android:layout_height="20dp"
+                            android:layout_width="@dimen/_76sdp"
+                            android:layout_height="@dimen/_15sdp"
                             android:layout_gravity="start"
                             android:background="@color/app_player2_color"/>
 
@@ -414,15 +421,15 @@
 
                         <View
                             android:id="@+id/graphDoubleFaultPlayer1"
-                            android:layout_width="75dp"
-                            android:layout_height="20dp"
+                            android:layout_width="@dimen/_57sdp"
+                            android:layout_height="@dimen/_15sdp"
                             android:layout_gravity="end"
                             android:background="@color/app_player1_color"/>
 
                         <View
                             android:id="@+id/graphDoubleFaultPlayer2"
-                            android:layout_width="100dp"
-                            android:layout_height="20dp"
+                            android:layout_width="@dimen/_76sdp"
+                            android:layout_height="@dimen/_15sdp"
                             android:layout_gravity="start"
                             android:background="@color/app_player2_color"/>
 
@@ -467,15 +474,15 @@
 
                         <View
                             android:id="@+id/graphFirstPlayer1"
-                            android:layout_width="75dp"
-                            android:layout_height="20dp"
+                            android:layout_width="@dimen/_57sdp"
+                            android:layout_height="@dimen/_15sdp"
                             android:layout_gravity="end"
                             android:background="@color/app_player1_color"/>
 
                         <View
                             android:id="@+id/graphFirstPlayer2"
-                            android:layout_width="100dp"
-                            android:layout_height="20dp"
+                            android:layout_width="@dimen/_76sdp"
+                            android:layout_height="@dimen/_15sdp"
                             android:layout_gravity="start"
                             android:background="@color/app_player2_color"/>
 
@@ -520,15 +527,15 @@
 
                         <View
                             android:id="@+id/graphSecondPlayer1"
-                            android:layout_width="75dp"
-                            android:layout_height="20dp"
+                            android:layout_width="@dimen/_57sdp"
+                            android:layout_height="@dimen/_15sdp"
                             android:layout_gravity="end"
                             android:background="@color/app_player1_color"/>
 
                         <View
                             android:id="@+id/graphSecondPlayer2"
-                            android:layout_width="100dp"
-                            android:layout_height="20dp"
+                            android:layout_width="@dimen/_76sdp"
+                            android:layout_height="@dimen/_15sdp"
                             android:layout_gravity="start"
                             android:background="@color/app_player2_color"/>
 
@@ -537,7 +544,7 @@
                     <TextView
                         android:id="@+id/secondinPlayer2"
                         android:layout_width="0dp"
-                        android:layout_height="29dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="@string/_2in_all"
@@ -552,7 +559,7 @@
                     android:gravity="center_horizontal"
                     android:text="@string/return_winner"
                     android:textColor="@color/statistics_text_color"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/_15ssp"
                     android:textStyle="bold">
 
                 </TextView>
@@ -719,7 +726,7 @@
                     android:gravity="center_horizontal"
                     android:text="@string/winner"
                     android:textStyle="bold"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/_15ssp"
                     android:textColor="@color/statistics_text_color"
                     android:textAllCaps="true">
 
@@ -815,7 +822,7 @@
                     android:gravity="center_horizontal"
                     android:text="@string/slice"
                     android:textStyle="bold"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/_15ssp"
                     android:textAllCaps="true"
                     android:textColor="@color/statistics_text_color">
 
@@ -900,7 +907,7 @@
                     android:gravity="center_horizontal"
                     android:text="@string/volley"
                     android:textStyle="bold"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/_15ssp"
                     android:textAllCaps="true"
                     android:textColor="@color/statistics_text_color">
 
@@ -985,7 +992,7 @@
                     android:gravity="center_horizontal"
                     android:text="@string/smash"
                     android:textStyle="bold"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/_15ssp"
                     android:textAllCaps="true"
                     android:textColor="@color/statistics_text_color">
 
@@ -1069,7 +1076,7 @@
                     android:gravity="center_horizontal"
                     android:text="@string/lob"
                     android:textStyle="bold"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/_15ssp"
                     android:textAllCaps="true"
                     android:textColor="@color/statistics_text_color">
 
@@ -1153,7 +1160,7 @@
                     android:gravity="center_horizontal"
                     android:text="@string/dropshot"
                     android:textStyle="bold"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/_15ssp"
                     android:textAllCaps="true"
                     android:textColor="@color/statistics_text_color">
 
@@ -2249,10 +2256,11 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:background="@color/app_bg_color"
         android:theme="@style/NavigationViewTheme"
         app:headerLayout="@layout/navigation_header"
         app:menu="@menu/navigation_menu"
-        app:itemIconPadding="20dp"
-        app:itemHorizontalPadding="30dp"/>
+      app:itemIconPadding="@dimen/_15sdp"
+      app:itemHorizontalPadding="@dimen/_23sdp"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -24,8 +24,8 @@
             android:layout_height="wrap_content"
             android:text="@string/end_of_match"
             android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="60sp"
+            android:textColor="@color/app_mainTitles_color"
+            android:textSize="@dimen/_46sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -34,8 +34,10 @@
 
         <TableLayout
             android:id="@+id/tableLayoutEnd"
-            android:layout_width="370dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
             android:background="@drawable/score_table"
             android:theme="@style/scoreTableTextAppearance"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -44,28 +46,30 @@
             app:layout_constraintTop_toBottomOf="@+id/textViewEnd"
             app:layout_constraintVertical_bias="0.120000005">
 
-            <TableRow>
+            <TableRow
+                android:layout_marginBottom="0dp">
 
                 <TextView
                     android:id="@+id/textViewServe1EOM"
                     android:layout_width="wrap_content"
-                    android:layout_height="45dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="4dp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_4sdp"
                     android:layout_weight="0"
+                    android:gravity="end"
                     android:visibility="invisible"
                     app:drawableStartCompat="@drawable/icon_laurel3"
                     app:drawableTint="@color/gold" />
 
                 <TextView
                     android:id="@+id/textviewPlayer1"
-                    android:layout_width="100dp"
+                    android:layout_width="@dimen/_90sdp"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="6dp"
                     android:layout_weight="1"
+                    android:textAlignment="gravity"
                     android:gravity="start|center_vertical"
-                    android:text="@string/imie_nazwisko_player1"
-                    android:textAlignment="gravity"/>
+                    android:layout_marginStart="@dimen/_4sdp"
+                    android:text="@string/imie_nazwisko_player1"/>
 
                 <TextView
                     android:id="@+id/textViewP1Set1EOM"
@@ -84,27 +88,30 @@
 
             </TableRow>
 
-            <TableRow>
+            <TableRow
+                android:layout_marginTop="0dp">
 
                 <TextView
                     android:id="@+id/textViewServe2EOM"
                     android:layout_width="wrap_content"
-                    android:layout_height="45dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="4dp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_4sdp"
                     android:layout_weight="0"
+                    android:gravity="end"
                     android:visibility="invisible"
                     app:drawableStartCompat="@drawable/icon_laurel3"
                     app:drawableTint="@color/gold" />
 
                 <TextView
                     android:id="@+id/textviewPlayer2"
-                    android:layout_width="100dp"
+                    android:layout_width="@dimen/_90sdp"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="6dp"
                     android:layout_weight="1"
-                    android:text="@string/imie_nazwisko_player2"
-                    android:textAlignment="textStart"/>
+                    android:textAlignment="gravity"
+                    android:gravity="start|center_vertical"
+                    android:layout_marginStart="@dimen/_4sdp"
+                    android:text="@string/imie_nazwisko_player2"/>
 
                 <TextView
                     android:id="@+id/textViewP2Set1EOM"
@@ -125,10 +132,12 @@
 
     <Button
         android:id="@+id/buttonViewStatsEOF"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/_198sdp"
+        android:layout_height="@dimen/_39sdp"
+        android:backgroundTint="@color/darker_blue"
         android:text="View Match Stats"
-        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_17ssp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/tableLayoutEnd"
         app:layout_constraintStart_toStartOf="@+id/tableLayoutEnd"
@@ -143,10 +152,11 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:background="@color/app_bg_color"
         android:theme="@style/NavigationViewTheme"
         app:headerLayout="@layout/navigation_header"
         app:menu="@menu/navigation_menu"
-        app:itemIconPadding="20dp"
-        app:itemHorizontalPadding="30dp"/>
+        app:itemIconPadding="@dimen/_15sdp"
+        app:itemHorizontalPadding="@dimen/_23sdp"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>

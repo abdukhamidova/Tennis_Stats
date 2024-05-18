@@ -10,87 +10,97 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/Theme.TenniStats"
         tools:targetApi="31">
         <activity
             android:name=".DeletePlayerActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.theme.DeletePlayerActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".DeleteMatchDialogActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".AddPlayerActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".PlayerDetailsActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <!--
         <activity
             android:name=".ViewHistoryActivity"
             android:exported="false" />
         -->
-        <activity android:name=".ViewHistoryActivity" />
+        <activity
+            android:name=".ViewHistoryActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ViewStatsActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ViewPlayerActivity"
             android:exported="false"
             android:label="@string/title_activity_view_player"
-            android:theme="@style/Theme.TenniStats" />
-        <activity
-            android:name=".ViewShowMoreActivity"
-            android:exported="false"
-            android:label="@string/title_activity_view_show_more"
-            android:theme="@style/Theme.TenniStats" />
+            android:theme="@style/Theme.TenniStats"
+            android:screenOrientation="portrait"/>
+
         <activity
             android:name=".ViewMatchesActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".EndOfMatchActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".DetailsActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ActivityBallInPlay"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ActivityStartPoint"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ActivityServe"
             android:exported="false"
-            android:parentActivityName=".StartNewActivity" />
+            android:parentActivityName=".StartNewActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".SignUpActivity"
-            android:exported="true"
-            android:noHistory="true" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".SignInActivity"
             android:exported="false"
-            android:noHistory="true" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ActivityMenu"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity
             android:name=".StartNewActivity"
             android:exported="false"
-            android:parentActivityName=".ActivityMenu" />
+            android:parentActivityName=".ActivityMenu"
+            android:screenOrientation="portrait"/>
 
         <meta-data
             android:name="preloaded_fonts"

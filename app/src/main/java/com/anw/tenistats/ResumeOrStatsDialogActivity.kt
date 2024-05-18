@@ -131,9 +131,9 @@ class ResumeOrStatsDialogActivity(private val context: Context,private val opene
                     }
 
                     btnCancel.setOnClickListener {
-                        val intent = Intent(context, ViewMatchesActivity::class.java)
+                        /*val intent = Intent(context, ViewMatchesActivity::class.java)
                         intent.putExtra("matchID", matchId.text)
-                        context.startActivity(intent)
+                        context.startActivity(intent)*/
                         alertDialog.dismiss()
                     }
 

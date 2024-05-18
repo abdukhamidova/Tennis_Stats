@@ -3,6 +3,7 @@ package com.anw.tenistats
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
@@ -75,13 +76,21 @@ class EndOfMatchActivity : AppCompatActivity() {
         val matchId = intent.getStringExtra("matchID")
         val winner: String
         //sprawdzenie kto wygral
+
         winner = if(serve1.text==""){ //wygral player2
             player2.text.toString()
         } //wygral player2
         else{
             player1.text.toString()
         }
-
+        if(winner == player2.text)
+        {
+            serve2.visibility = View.VISIBLE
+            serve1.visibility = View.INVISIBLE
+        }else {
+            serve1.visibility = View.VISIBLE
+            serve2.visibility = View.INVISIBLE
+        }
         database =
             FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
                 .getReference(user.toString()).child("Matches").child(matchId.toString())

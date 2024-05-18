@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/app_bg_color"
     tools:context=".SignUpActivity">
 
     <LinearLayout
@@ -24,33 +25,35 @@
             android:layout_height="wrap_content"
             android:text="@string/tennis_stats"
             android:textColor="@color/app_mainTitles_color"
-            android:textSize="40sp" /> <!--Tennis Stats-->
+            android:textSize="@dimen/_30sdp" /> <!--Tennis Stats-->
 
         <EditText
             android:id="@+id/textEmailSignUp"
-            android:layout_width="302dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="60dp"
+            android:layout_width="@dimen/_232sdp"
+            android:layout_height="@dimen/_36sdp"
+            android:layout_marginTop="@dimen/_46sdp"
+            android:textSize="@dimen/_14sdp"
             android:autofillHints="emailAddress"
             android:backgroundTint="@color/white"
             android:drawableStart="@drawable/icon_email"
-            android:drawablePadding="5dp"
+            android:drawablePadding="@dimen/_4sdp"
             android:drawableTint="@color/app_hint_color"
             android:ems="10"
             android:hint="@string/enter_e_mail"
             android:inputType="textEmailAddress"
-            android:textColor="@color/white"
+            android:textColor="@color/autoFill_field"
             android:textColorHint="@color/app_hint_color" /> <!--e-mail-->
 
         <EditText
             android:id="@+id/textPasswordSignUp"
-            android:layout_width="302dp"
-            android:layout_height="47dp"
-            android:layout_marginTop="10dp"
-            android:backgroundTint="@color/white"
-            android:textColor="@color/white"
+            android:layout_width="@dimen/_232sdp"
+            android:layout_height="@dimen/_36sdp"
+            android:layout_marginTop="@dimen/_7sdp"
+            android:textSize="@dimen/_14sdp"
+            android:backgroundTint="@color/autoFill_field"
+            android:textColor="@color/autoFill_field"
             android:drawableStart="@drawable/icon_password"
-            android:drawablePadding="5dp"
+            android:drawablePadding="@dimen/_4sdp"
             android:drawableTint="@color/app_hint_color"
             android:ems="10"
             android:hint="@string/enter_password"
@@ -61,21 +64,21 @@
             android:id="@+id/buttonSignUp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/_15sdp"
             android:text="@string/sign_up"
             android:backgroundTint="#23507A"
             android:textColor="@color/white"
-            android:textSize="21sp" /> <!--sign up-->
+            android:textSize="@dimen/_16ssp" /> <!--sign up-->
 
         <TextView
             android:id="@+id/textAlreadySignIn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/_7sdp"
             android:text="@string/i_m_already_signed_in"
-            android:textColor="@color/white"
-            android:textSize="16sp"
+            android:textColor="@color/accent_text_color"
+            android:textSize="@dimen/_12ssp"
             app:layout_constraintVertical_bias="0" /> <!--sign in-->
     </LinearLayout>
 

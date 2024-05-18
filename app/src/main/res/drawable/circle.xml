@@ -6,10 +6,10 @@
     <solid
         android:color="@color/transparent"/>
     <stroke
-        android:width="2dp"
-        android:color="#ECE8E8"/>
+        android:width="@dimen/_1sdp"
+        android:color="@color/item_textColor"/>
 
     <size
-        android:width="120dp"
-        android:height="120dp"/>
+        android:width="@dimen/_92sdp"
+        android:height="@dimen/_92sdp"/>
 </shape>

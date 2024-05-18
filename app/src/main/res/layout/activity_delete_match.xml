@@ -4,17 +4,17 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@color/darker_blue">
+    android:background="@color/dialog_bg_color">
 
     <TextView
         android:id="@+id/textViewConfirm"
-        android:layout_width="250dp"
+        android:layout_width="@dimen/_192sdp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/_7sdp"
         android:layout_gravity="center"
         android:text="@string/deleteInfo"
-        android:textColor="@color/light_yellow"
-        android:textSize="30sp"
+        android:textColor="@color/dialog_textTitle_color"
+        android:textSize="@dimen/_23ssp"
         android:textAlignment="center"/>
 
 
@@ -22,26 +22,27 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginBottom="@dimen/_11sdp"
         android:layout_gravity="center_horizontal">
         <Button
             android:id="@+id/buttonCancel"
-            android:layout_width="130dp"
-            android:layout_height="48dp"
-            android:layout_marginEnd="10dp"
+            android:layout_width="@dimen/_99sdp"
+            android:layout_height="@dimen/_36sdp"
+            android:layout_marginEnd="@dimen/_7sdp"
             android:background="@drawable/border_button"
             android:text="@string/cancel"
-            android:textSize="17sp"
-            android:textColor="@color/light_grey"/>
+            android:textSize="@dimen/_14ssp"
+            android:textColor="@color/dialog_btnCancel"/>
 
         <Button
             android:id="@+id/buttonDelete"
-            android:layout_width="130dp"
-            android:layout_height="48dp"
+            android:layout_width="@dimen/_99sdp"
+            android:layout_height="@dimen/_36sdp"
             android:layout_toEndOf="@+id/buttonCancel"
-            android:backgroundTint="@color/light_yellow"
+            android:backgroundTint="@color/dialog_textTitle_color"
             android:text="@string/delete"
-            android:textSize="19sp" />
+            android:textColor="@color/dialog_text_color"
+            android:textSize="@dimen/_14ssp" />
     </RelativeLayout>
 </LinearLayout>

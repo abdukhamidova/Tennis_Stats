@@ -132,17 +132,25 @@ class ViewHistoryActivity : AppCompatActivity() {
 
                     buttonAll.setOnClickListener {
                         buttonAll.setBackgroundResource(R.drawable.rectangle_button)
+                        buttonAll.setTextColor(ContextCompat.getColor(this@ViewHistoryActivity, R.color.white))
                         buttonSet1.setBackgroundResource(R.drawable.rec_btn_not_selected)
-                        buttonSet2.setBackgroundResource(R.drawable.rec_btn_not_selected)// resetowanie tła
+                        buttonSet1.setTextColor(ContextCompat.getColor(this@ViewHistoryActivity, R.color.general_text_color))
+                        buttonSet2.setBackgroundResource(R.drawable.rec_btn_not_selected)
+                        buttonSet2.setTextColor(ContextCompat.getColor(this@ViewHistoryActivity, R.color.general_text_color))
                         buttonSet3.setBackgroundResource(R.drawable.rec_btn_not_selected)
+                        buttonSet3.setTextColor(ContextCompat.getColor(this@ViewHistoryActivity, R.color.general_text_color))
                         fetchMatchPoints(matchId)
 
                     }
                     buttonSet1.setOnClickListener {
                         buttonAll.setBackgroundResource(R.drawable.rec_btn_not_selected)
+                        buttonAll.setTextColor(ContextCompat.getColor(this@ViewHistoryActivity, R.color.general_text_color))
                         buttonSet1.setBackgroundResource(R.drawable.rectangle_button)
-                        buttonSet2.setBackgroundResource(R.drawable.rec_btn_not_selected) // resetowanie tła
+                        buttonSet1.setTextColor(ContextCompat.getColor(this@ViewHistoryActivity, R.color.white))
+                        buttonSet2.setBackgroundResource(R.drawable.rec_btn_not_selected)
+                        buttonSet2.setTextColor(ContextCompat.getColor(this@ViewHistoryActivity, R.color.general_text_color))
                         buttonSet3.setBackgroundResource(R.drawable.rec_btn_not_selected)
+                        buttonSet3.setTextColor(ContextCompat.getColor(this@ViewHistoryActivity, R.color.general_text_color))
                         // Wywołanie funkcji fetchMatchPoints tylko dla seta 1
                         fetchMatchPoints(matchId, "set 1")
                     }
@@ -150,9 +158,13 @@ class ViewHistoryActivity : AppCompatActivity() {
                     buttonSet2.setOnClickListener {
                         if (set2p1.text != "") {
                             buttonAll.setBackgroundResource(R.drawable.rec_btn_not_selected)
+                            buttonAll.setTextColor(ContextCompat.getColor(this@ViewHistoryActivity, R.color.general_text_color))
                             buttonSet1.setBackgroundResource(R.drawable.rec_btn_not_selected)
-                            buttonSet2.setBackgroundResource(R.drawable.rectangle_button) // resetowanie tła
+                            buttonSet1.setTextColor(ContextCompat.getColor(this@ViewHistoryActivity, R.color.general_text_color))
+                            buttonSet2.setBackgroundResource(R.drawable.rectangle_button)
+                            buttonSet2.setTextColor(ContextCompat.getColor(this@ViewHistoryActivity, R.color.white))
                             buttonSet3.setBackgroundResource(R.drawable.rec_btn_not_selected)
+                            buttonSet3.setTextColor(ContextCompat.getColor(this@ViewHistoryActivity, R.color.general_text_color))
                             // Wywołanie funkcji fetchMatchPoints tylko dla seta 2
                             fetchMatchPoints(matchId, "set 2")
                         }else{
@@ -166,9 +178,13 @@ class ViewHistoryActivity : AppCompatActivity() {
                         buttonSet3.setOnClickListener {
                             if (set3p1.text != "") {
                                 buttonAll.setBackgroundResource(R.drawable.rec_btn_not_selected)
+                                buttonAll.setTextColor(ContextCompat.getColor(this@ViewHistoryActivity, R.color.general_text_color))
                                 buttonSet1.setBackgroundResource(R.drawable.rec_btn_not_selected)
-                                buttonSet2.setBackgroundResource(R.drawable.rec_btn_not_selected) // resetowanie tła
+                                buttonSet1.setTextColor(ContextCompat.getColor(this@ViewHistoryActivity, R.color.general_text_color))
+                                buttonSet2.setBackgroundResource(R.drawable.rec_btn_not_selected)
+                                buttonSet2.setTextColor(ContextCompat.getColor(this@ViewHistoryActivity, R.color.general_text_color))
                                 buttonSet3.setBackgroundResource(R.drawable.rectangle_button)
+                                buttonSet3.setTextColor(ContextCompat.getColor(this@ViewHistoryActivity, R.color.white))
                                 // Wywołanie funkcji fetchMatchPoints tylko dla seta 3
                                 fetchMatchPoints(matchId, "set 3")
                             }else{

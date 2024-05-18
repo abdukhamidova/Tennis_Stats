@@ -13,10 +13,13 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var firebaseAuth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
-           super.onCreate(savedInstanceState)
-        firebaseAuth = FirebaseAuth.getInstance()
+        super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
+
+        firebaseAuth = FirebaseAuth.getInstance()
+
+
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -38,6 +41,7 @@ class MainActivity : AppCompatActivity() {
         if(firebaseAuth.currentUser!=null){
             val intent = Intent(this,ActivityMenu::class.java)
             startActivity(intent)
+            finish()
         }
     }
 }

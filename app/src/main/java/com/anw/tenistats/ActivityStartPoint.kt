@@ -506,8 +506,9 @@ class ActivityStartPoint : AppCompatActivity() {
             if(dataSnapshot.exists()){
                 // Pobranie wartości "player1" z bazy danych
                 val winner = dataSnapshot.getValue(String::class.java)
-                serve1.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_laurel3, 0, 0, 0)
-                serve2.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_laurel3, 0, 0, 0)
+                val goldenLaurel = getGoldenDrawable(applicationContext, R.drawable.icon_laurel3)
+                serve1.setCompoundDrawablesWithIntrinsicBounds(goldenLaurel, null, null, null)
+                serve2.setCompoundDrawablesWithIntrinsicBounds(goldenLaurel, null, null, null)
                 // Ustawienie wartości w TextView
                 if(winner==player1.text){
                     serve1.visibility = View.VISIBLE

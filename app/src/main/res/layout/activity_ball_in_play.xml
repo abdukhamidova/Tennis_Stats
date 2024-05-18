@@ -14,13 +14,16 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <include layout="@layout/toolbar"/>
+        android:layout_height="match_parent"
+        android:background="@color/app_bg_color">
+        <include layout="@layout/toolbar" />
 
         <TableLayout
             android:id="@+id/tableLayout"
-            android:layout_width="370dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
             android:background="@drawable/score_table"
             android:theme="@style/scoreTableTextAppearance"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -29,26 +32,28 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.19">
 
-            <TableRow>
+            <TableRow
+                android:layout_marginBottom="0dp">
                 <TextView
                     android:id="@+id/textViewServe1BIP"
                     android:layout_width="wrap_content"
-                    android:layout_height="45dp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_4sdp"
                     android:layout_weight="0"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="4dp"
-                    android:gravity="center"
+                    android:gravity="end"
                     android:visibility="visible"
-                    app:drawableStartCompat="@drawable/ball" />
+                    app:drawableStartCompat="@drawable/ball"
+                    app:drawableTint="@color/ball_scoreTable_color"/>
 
                 <TextView
                     android:id="@+id/textviewPlayer1"
-                    android:layout_width="100dp"
+                    android:layout_width="@dimen/_90sdp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:textAlignment="gravity"
                     android:gravity="start|center_vertical"
-                    android:layout_marginStart="6dp"
+                    android:layout_marginStart="@dimen/_4sdp"
                     android:text="@string/imie_nazwisko_player1"/>
 
                 <TextView
@@ -72,27 +77,29 @@
                     android:text=""/>
             </TableRow>
 
-            <TableRow>
+            <TableRow
+                android:layout_marginTop="0dp">
                 <TextView
                     android:id="@+id/textViewServe2BIP"
                     android:layout_width="wrap_content"
-                    android:layout_height="45dp"
+                    android:layout_height="@dimen/_40sdp"
                     android:layout_weight="0"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="4dp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_4sdp"
                     android:gravity="center"
                     android:visibility="visible"
-                    app:drawableStartCompat="@drawable/ball" />
+                    app:drawableStartCompat="@drawable/ball"
+                    app:drawableTint="@color/ball_scoreTable_color" />
 
                 <TextView
                     android:id="@+id/textviewPlayer2"
-                    android:layout_width="100dp"
+                    android:layout_width="@dimen/_90sdp"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="6dp"
                     android:layout_weight="1"
                     android:textAlignment="gravity"
                     android:gravity="start|center_vertical"
-                    android:text="@string/imie_nazwisko_player2"/>
+                    android:layout_marginStart="@dimen/_4sdp"
+                    android:text="@string/imie_nazwisko_player1"/>
 
                 <TextView
                     android:id="@+id/textViewPlayer2Set1BIP"
@@ -118,10 +125,10 @@
         </TableLayout>
 
         <RelativeLayout
-            android:layout_width="374dp"
+            android:layout_width="@dimen/_287sdp"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="@dimen/_23sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/tableLayout"
             app:layout_constraintStart_toStartOf="@+id/tableLayout"
@@ -130,38 +137,38 @@
 
             <TextView
                 android:id="@+id/textPL1"
-                android:layout_width="171dp"
+                android:layout_width="@dimen/_131sdp"
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/linearLayoutLeft"
                 android:layout_alignParentStart="true"
-                android:layout_marginBottom="10dp"
-                android:padding="10dp"
+                android:layout_marginBottom="@dimen/_7sdp"
+                android:padding="@dimen/_7sdp"
                 android:text="@string/imie_nazwisko_player1"
                 android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="17sp" />
+                android:textColor="@color/general_text_color"
+                android:textSize="@dimen/_14ssp" />
 
             <TextView
                 android:id="@+id/textPL2"
-                android:layout_width="171dp"
+                android:layout_width="@dimen/_131sdp"
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/linearLayoutRight"
                 android:layout_alignParentEnd="true"
-                android:layout_marginBottom="10dp"
-                android:padding="10dp"
+                android:layout_marginBottom="@dimen/_7sdp"
+                android:padding="@dimen/_7sdp"
                 android:text="@string/imie_nazwisko_player2"
                 android:textAlignment="center"
-                android:textSize="17sp"
-                android:textColor="@color/white"/>
+                android:textSize="@dimen/_14ssp"
+                android:textColor="@color/general_text_color"/>
 
             <View
                 android:id="@+id/verticalLine"
-                android:layout_width="2dp"
-                android:layout_height="310dp"
+                android:layout_width="@dimen/_1sdp"
+                android:layout_height="@dimen/_238sdp"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="@dimen/_30sdp"
                 android:background="@android:color/darker_gray"
-                android:backgroundTint="@color/white" />
+                android:backgroundTint="@color/general_text_color"/>
 
             <!--Right-->
 
@@ -171,35 +178,32 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/horizontalLine"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="20dp"
+                android:layout_marginTop="@dimen/_11sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
                 android:orientation="vertical">
 
                 <Button
                     android:id="@+id/buttonWinner2"
-                    android:layout_width="143dp"
-                    android:layout_height="71dp"
-                    android:text="@string/winner"
-                    android:textSize="20sp"
-                    app:shapeAppearance="@style/CardView" />
+                    android:layout_width="@dimen/_109sdp"
+                    android:layout_height="@dimen/_54sdp"
+                    android:textSize="@dimen/_15ssp"
+                    android:text="@string/winner"/>
 
                 <Button
                     android:id="@+id/buttonForcedError2"
-                    android:layout_width="143dp"
-                    android:layout_height="71dp"
-                    android:layout_marginTop="20dp"
-                    android:text="@string/forced_error"
-                    android:textSize="20sp"
-                    app:shapeAppearance="@style/CardView" />
+                    android:layout_width="@dimen/_109sdp"
+                    android:layout_height="@dimen/_54sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:textSize="@dimen/_15ssp"
+                    android:text="@string/forced_error" />
 
                 <Button
                     android:id="@+id/buttonUnforcedError2"
-                    android:layout_width="143dp"
-                    android:layout_height="71dp"
-                    android:layout_marginTop="20dp"
-                    android:text="@string/unforced_error"
-                    android:textSize="19.2sp"
-                    app:shapeAppearance="@style/CardView" />
+                    android:layout_width="@dimen/_109sdp"
+                    android:layout_height="@dimen/_54sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:textSize="@dimen/_15ssp"
+                    android:text="@string/unforced_error"/>
 
             </LinearLayout>
 
@@ -209,59 +213,57 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/horizontalLine"
                 android:layout_alignParentStart="true"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_11sdp"
                 android:orientation="vertical">
 
                 <Button
                     android:id="@+id/buttonWinner1"
-                    android:layout_width="143dp"
-                    android:layout_height="71dp"
-                    android:text="@string/winner"
-                    android:textSize="20sp"
-                    app:shapeAppearance="@style/CardView" />
+                    android:layout_width="@dimen/_109sdp"
+                    android:layout_height="@dimen/_54sdp"
+                    android:textSize="@dimen/_15ssp"
+                    android:text="@string/winner"/>
 
                 <Button
                     android:id="@+id/buttonForcedError1"
-                    android:layout_width="143dp"
-                    android:layout_height="71dp"
-                    android:layout_marginTop="20dp"
-                    android:text="@string/forced_error"
-                    android:textSize="20sp"
-                    app:shapeAppearance="@style/CardView" />
+                    android:layout_width="@dimen/_109sdp"
+                    android:layout_height="@dimen/_54sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:textSize="@dimen/_15ssp"
+                    android:text="@string/forced_error"/>
 
                 <Button
                     android:id="@+id/buttonUnforcedError1"
-                    android:layout_width="143dp"
-                    android:layout_height="71dp"
-                    android:layout_marginTop="20dp"
-                    android:text="@string/unforced_error"
-                    android:textSize="19.2sp"
-                    app:shapeAppearance="@style/CardView" />
+                    android:layout_width="@dimen/_109sdp"
+                    android:layout_height="@dimen/_54sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:textSize="@dimen/_15ssp"
+                    android:text="@string/unforced_error" />
             </LinearLayout> <!--Left-->
 
             <View
                 android:id="@+id/horizontalLine"
-                android:layout_width="380dp"
+                android:layout_width="@dimen/_292sdp"
                 android:layout_height="2dp"
                 android:layout_alignTop="@+id/verticalLine"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="@dimen/_23sdp"
                 android:background="@android:color/darker_gray"
-                android:backgroundTint="@color/white" />
+                android:backgroundTint="@color/general_text_color"/>
         </RelativeLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.google.android.material.navigation.NavigationView
+   <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigationViewMenu"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+       android:background="@color/app_bg_color"
         android:theme="@style/NavigationViewTheme"
         app:headerLayout="@layout/navigation_header"
         app:menu="@menu/navigation_menu"
-        app:itemIconPadding="20dp"
-        app:itemHorizontalPadding="30dp"/>
+       app:itemIconPadding="@dimen/_15sdp"
+       app:itemHorizontalPadding="@dimen/_23sdp"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>

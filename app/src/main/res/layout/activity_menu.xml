@@ -14,62 +14,52 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/app_bg_color">
 
         <!--content-->
         <include
             layout="@layout/toolbar"
-            tools:layout_editor_absoluteX="-16dp"
-            tools:layout_editor_absoluteY="-6dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/background"
+            android:layout_gravity="center"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0">
+            app:layout_constraintVertical_bias="0.626">
 
-            <!--tennis stats-->
+            <!--Start game-->
 
+            <Button
+                android:id="@+id/buttonStartNewGame"
+                android:layout_width="@dimen/_178sdp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:backgroundTint="@color/darker_blue"
+                android:text="@string/start_new_game"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14ssp" />
 
-            <LinearLayout
-                android:layout_width="231dp"
-                android:layout_height="173dp"
-                android:layout_gravity="center"
-                android:layout_margin="525dp"
-                android:orientation="vertical">
-
-                <!--Start game-->
-
-                <Button
-                    android:id="@+id/buttonStartNewGame"
-                    android:backgroundTint="#23507A"
-                    android:textColor="@color/white"
-                    android:layout_width="232dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="20dp"
-                    android:text="@string/start_new_game"
-                    android:textSize="19sp" />
-
-                <Button
-                    android:id="@+id/buttonViewMatches"
-                    android:backgroundTint="#23507A"
-                    android:textColor="@color/white"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="20dp"
-                    android:text="@string/view_matches"
-                    android:textSize="19sp"/> <!--view matches-->
-            </LinearLayout> <!--button layout-->
-        </LinearLayout>
+            <Button
+                android:id="@+id/buttonViewMatches"
+                android:layout_width="@dimen/_178sdp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:backgroundTint="@color/darker_blue"
+                android:text="@string/view_matches"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14ssp" /> <!--view matches-->
+        </LinearLayout> <!--button layout-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -78,10 +68,11 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:background="@color/app_bg_color"
         android:theme="@style/NavigationViewTheme"
         app:headerLayout="@layout/navigation_header"
         app:menu="@menu/navigation_menu"
-        app:itemIconPadding="20dp"
-        app:itemHorizontalPadding="30dp"/>
+        app:itemIconPadding="@dimen/_15sdp"
+        app:itemHorizontalPadding="@dimen/_23sdp"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>

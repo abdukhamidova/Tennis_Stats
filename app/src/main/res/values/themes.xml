@@ -2,17 +2,19 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.TenniStats" parent="Theme.AppCompat.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <item name="android:statusBarColor">@color/pale_grey</item>
-        <item name="android:navigationBarColor">@color/light_yellow</item>
-        <item name="colorPrimaryDark">@color/white</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:colorPrimaryDark">@color/blue2</item>
         <item name="buttonStyle">@style/our_button</item>
         <item name="android:fontFamily">@font/aldrich</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:windowBackground">@color/app_bg_color</item>
+        <item name="android:windowBackground">@color/darkest_blue</item>
     </style>
 
     <style name="Theme.TenniStats" parent="Base.Theme.TenniStats" />
 
+    <style name="LaunchingWindowTheme" parent="ThemeOverlay.AppCompat.Dark">
+        <item name="android:windowBackground">@color/launching_window</item>
+    </style>
     <!--styl domyślny button-->
     <style name="our_button" parent="Widget.AppCompat.Button">
         <item name="android:background">@drawable/rounded_button</item>
@@ -23,32 +25,21 @@
 
     <!--styl dla tablic wynikowych-->
     <style name="scoreTableTextAppearance">
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">@dimen/_15ssp</item>
         <item name="android:textAlignment">center</item>
-        <item name="android:layout_marginTop">5dp</item>
-        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:layout_marginTop">@dimen/_3sdp</item>
+        <item name="android:layout_marginBottom">@dimen/_3sdp</item>
         <item name="android:layout_weight">0.9</item>
-        <item name="android:textColor">@color/light_grey</item>
+        <item name="android:textColor">@color/item_textColor</item>
     </style>
     <!--styl dla tablic w view matches-->
     <style name="matchTableTextAppearance">
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">@dimen/_13ssp</item>
         <item name="android:textAlignment">center</item>
-        <item name="android:layout_marginTop">5dp</item>
-        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:layout_marginTop">@dimen/_3sdp</item>
+        <item name="android:layout_marginBottom">@dimen/_3sdp</item>
         <item name="android:layout_weight">0.9</item>
-        <item name="android:textColor">@color/light_grey</item>
-        <item name="drawableTint">@color/gold</item>
-    </style>
-    <!--styl dla tablic w view matches-->
-    <style name="rosTableTextAppearance">
-        <item name="android:textSize">15sp</item>
-        <item name="android:textAlignment">center</item>
-        <item name="android:layout_marginTop">5dp</item>
-        <item name="android:layout_marginBottom">5dp</item>
-        <item name="android:layout_weight">0.9</item>
-        <item name="android:textColor">@color/app_bg_color</item>
-        <item name="drawableTint">@color/gold</item>
+        <item name="android:textColor">@color/item_textColor</item>
     </style>
 
     <!--styl dla koloru playera1-->
@@ -77,8 +68,8 @@
         <item name="android:listDivider">@color/dark_blue</item>
         <item name="android:textColorSecondary">@color/white</item>
         <item name="elevation">20dp</item>
-        <item name="itemTextColor">@color/white</item>
-        <item name="itemIconTint">@color/white</item>
+        <item name="itemTextColor">@color/menu_textColor</item>
+        <item name="itemIconTint">@color/menu_textColor</item>
         <item name="dividerInsetStart">45dp</item>
     </style>
 </resources>
