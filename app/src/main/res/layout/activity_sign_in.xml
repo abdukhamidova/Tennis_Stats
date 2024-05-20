@@ -51,7 +51,7 @@
             android:layout_height="@dimen/_36sdp"
             android:layout_marginTop="@dimen/_7sdp"
             android:textSize="@dimen/_14sdp"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="@color/autoFill_field"
             android:drawableStart="@drawable/icon_password"
             android:drawablePadding="@dimen/_4sdp"
             android:drawableTint="@color/app_hint_color"

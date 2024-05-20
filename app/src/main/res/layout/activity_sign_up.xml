@@ -34,7 +34,7 @@
             android:layout_marginTop="@dimen/_46sdp"
             android:textSize="@dimen/_14sdp"
             android:autofillHints="emailAddress"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="@color/autoFill_field"
             android:drawableStart="@drawable/icon_email"
             android:drawablePadding="@dimen/_4sdp"
             android:drawableTint="@color/app_hint_color"
