@@ -16,6 +16,7 @@ import com.anw.tenistats.R
 import com.anw.tenistats.Stats
 import com.anw.tenistats.ViewHistoryActivity
 import com.anw.tenistats.ViewMatchesActivity
+import com.anw.tenistats.ViewStatsActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -118,7 +119,7 @@ class ResumeOrStatsDialogActivity(private val context: Context,private val opene
                     }
 
                     btnViewStats.setOnClickListener {
-                        val intent = Intent(context, ViewHistoryActivity::class.java)
+                        val intent = Intent(context, ViewHistoryActivity::class.java)   //należy zmienić przejście do Stats
                         intent.putExtra("matchDateInMillis", milliseconds)
                         context.startActivity(intent)
                         alertDialog.dismiss()

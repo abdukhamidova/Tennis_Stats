@@ -225,6 +225,22 @@ class PlayerDetailsActivity : AppCompatActivity() {
                 // Obsługa błędu
             }
         })
+        database.child("note").addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    val notes = dataSnapshot.getValue(String::class.java)
+
+                    // Ustawienie tekstu w TextView
+                    if (notes != null) {
+                        findViewById<TextView>(R.id.editTextNote).text = notes
+                    }
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Obsługa błędu
+            }
+        })
     }
 
     private fun showDatePickerDialog() {
@@ -260,6 +276,7 @@ class PlayerDetailsActivity : AppCompatActivity() {
         val left = findViewById<RadioButton>(R.id.radioButtonL)
         val strength = findViewById<TextView>(R.id.autoCompleteTextViewStrength).text.toString()
         val weakness = findViewById<TextView>(R.id.autoCompleteTextViewWeakness).text.toString()
+        val notes = findViewById<EditText>(R.id.editTextNote).text.toString()
 
         if(nationality.isNotEmpty()){
             database.child("nationality").setValue(nationality)
@@ -282,6 +299,9 @@ class PlayerDetailsActivity : AppCompatActivity() {
         }
         if(weakness.isNotEmpty()){
             database.child("weakness").setValue(weakness)
+        }
+        if(notes.isNotEmpty()){
+            database.child("note").setValue(notes)
         }
 
     }

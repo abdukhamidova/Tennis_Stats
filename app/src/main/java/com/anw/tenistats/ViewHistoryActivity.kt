@@ -368,7 +368,7 @@ class ViewHistoryActivity : AppCompatActivity() {
             }
         })
     }
-
+    //wyświetlanie historii
     private fun displayMatchPoints(pointsList: List<String>, player1Name: String?, player2Name: String?) {
         val listView = findViewById<ListView>(R.id.historyList)
         val adapter = CustomArrayAdapter(this, pointsList, player1Name, player2Name)

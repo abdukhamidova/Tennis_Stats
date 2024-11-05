@@ -77,6 +77,12 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
+    val fragment_version = "1.8.4"
+    // Java language implementation
+    implementation("androidx.fragment:fragment:$fragment_version")
+    // Kotlin
+    implementation("androidx.fragment:fragment-ktx:$fragment_version")
+
     implementation("com.google.android.material:material:1.3.0-alpha03")
     //sdp i ssp
     implementation("com.intuit.sdp:sdp-android:1.0.6")

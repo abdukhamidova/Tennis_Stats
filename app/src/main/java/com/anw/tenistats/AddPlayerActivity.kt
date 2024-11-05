@@ -139,6 +139,7 @@ class AddPlayerActivity : AppCompatActivity() {
             val rbL = binding.radioButtonL
             val strength = binding.autoCompleteTextViewStrengthAP.text.toString()
             val weakness = binding.autoCompleteTextViewWeaknessAP.text.toString()
+            val notes = binding.editTextNote.text.toString()
             var milliseconds: Long? = null
             if(!dateOfBirth.isNullOrEmpty()) {
                 val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
@@ -152,7 +153,7 @@ class AddPlayerActivity : AppCompatActivity() {
                 Toast.makeText(this, "Don't leave empty fields.", Toast.LENGTH_SHORT).show()
             }else{
                 //sprawdzenie istnienia player1, jego ewentualne dodanie/duplikowanie
-                checkPlayerExistence(pl1Inticap,player1FirstName, player1LastName,nationality, milliseconds,rbR,rbL,strength,weakness) { updatedPlayer1 ->
+                checkPlayerExistence(pl1Inticap,player1FirstName, player1LastName,nationality, milliseconds,rbR,rbL,strength,weakness, notes) { updatedPlayer1 ->
                     player1 = updatedPlayer1
                 }
             }
@@ -186,6 +187,7 @@ class AddPlayerActivity : AppCompatActivity() {
         rbL: RadioButton,
         strength: String?,
         weakness: String?,
+        notes: String?,
         callback: (String) -> Unit
     ) {
         database.child(playerName).get().addOnSuccessListener { snapshot ->
@@ -224,7 +226,8 @@ class AddPlayerActivity : AppCompatActivity() {
                                     "Righthanded",
                                     strength,
                                     weakness,
-                                    true
+                                    true,
+                                    notes
                                 )
                             } else if (rbL.isChecked) {
                                 player = Player(
@@ -237,7 +240,8 @@ class AddPlayerActivity : AppCompatActivity() {
                                     "Lefthanded",
                                     strength,
                                     weakness,
-                                    true
+                                    true,
+                                    notes
                                 )
                             } else {
                                 player = Player(
@@ -250,7 +254,8 @@ class AddPlayerActivity : AppCompatActivity() {
                                     null,
                                     strength,
                                     weakness,
-                                    true
+                                    true,
+                                    notes
                                 )
                             }
 
@@ -281,7 +286,8 @@ class AddPlayerActivity : AppCompatActivity() {
                         "Righthanded",
                         strength,
                         weakness,
-                        true
+                        true,
+                        notes
                     )
                 } else {
                     player = Player(
@@ -294,7 +300,8 @@ class AddPlayerActivity : AppCompatActivity() {
                         "Lefthanded",
                         strength,
                         weakness,
-                        true
+                        true,
+                        notes
                     )
                 }
 

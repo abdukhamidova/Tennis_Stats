@@ -25,7 +25,8 @@ data class Player(
     var handedness: String? = null,
     var strength: String? = null,
     var weakness: String? = null,
-    var active: Boolean? = null
+    var active: Boolean? = null,
+    var note: String? = null
 )
 
 {
