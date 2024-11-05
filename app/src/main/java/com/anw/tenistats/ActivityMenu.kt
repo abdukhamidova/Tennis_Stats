@@ -50,7 +50,6 @@ class ActivityMenu : AppCompatActivity() {
         }
         //------------ MENU
 
-
         findViewById<Button>(R.id.buttonStartNewGame).setOnClickListener {
             startActivity(Intent(this,StartNewActivity::class.java))
         }

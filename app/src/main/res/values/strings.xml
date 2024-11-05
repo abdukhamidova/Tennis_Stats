@@ -36,14 +36,14 @@
     <string name="winner">Winner</string>
     <string name="forced_error">Forced Error</string>
     <string name="unforced_error">Unforced Error</string>
-    <string name="ground">Ground</string>
-    <string name="dropshot">Dropshot</string>
-    <string name="smash">Smash</string>
-    <string name="lob">Lob</string>
+    <string name="ground">GROUND</string>
+    <string name="dropshot">DROPSHOT</string>
+    <string name="smash">SMASH</string>
+    <string name="lob">LOB</string>
     <string name="forehand">Forehand</string>
     <string name="backhand">Backhand</string>
-    <string name="slice">Slice</string>
-    <string name="volley">Volley</string>
+    <string name="slice">SLICE</string>
+    <string name="volley">VOLLEY</string>
     <string name="back_button">Back button</string>
     <string name="confirm">CONFIRM</string>
     <string name="cancel">Cancel</string>
@@ -70,13 +70,13 @@
     <string name="iloscpl2">iloscPL2</string>
     <string name="aces">ACES</string>
     <string name="return_winner">RETURN WINNER</string>
-    <string name="fh">FH</string>
+    <string name="fh">FOREHAND</string>
     <string name="double_faults">DOUBLE FAULTS</string>
     <string name="_1st_serve_in">1ST SERVE IN</string>
     <string name="_1in_all">1in/all (%)</string>
     <string name="_2nd_serve_in">2ND SERVE IN</string>
     <string name="_2in_all">2in/all (%)</string>
-    <string name="bh">BH</string>
+    <string name="bh">BACKHAND</string>
     <string name="return_error">RETURN ERROR</string>
     <string name="enter_nationality">Enter Nationality</string>
     <string name="select_date_of_birth">Select Date</string>
@@ -103,7 +103,12 @@
     <string name="delete_match">Delete Match</string>
     <string name="deleteInfo">Do you want to delete match?</string>
     <string name="deleteInfoP">Do you want to delete player?</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="h2h">Head 2 Head</string>
+    <string name="enter_player1">Enter Player 1</string>
+    <string name="enter_player2">Enter Player 2</string>
+    <string name="matches_won">MATCHES WON</string>
+    <string name="scores">SCORES</string>
+    <string name="select_player1">Select Player1</string>
+    <string name="select_player2">Select Player2</string>
 
 </resources>

@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import com.anw.tenistats.ActivityMenu
 import com.anw.tenistats.ActivityStartPoint
+import com.anw.tenistats.Head2HeadActivity
 import com.anw.tenistats.MainActivity
 import com.anw.tenistats.R
 import com.anw.tenistats.StartNewActivity
@@ -34,6 +35,7 @@ class NavigationDrawerHelper(private val activity: AppCompatActivity) {
             R.id.nav_viewMatch -> Intent(activity, ViewMatchesActivity::class.java)
             //ustawione do testów ~W
             R.id.nav_myPlayer -> Intent(activity, ViewPlayerActivity::class.java)
+            R.id.nav_h2h -> Intent(activity, Head2HeadActivity::class.java)
             R.id.nav_return -> Intent(activity,ActivityStartPoint::class.java)
             R.id.buttonLogOut -> {
                 auth.signOut()
@@ -54,6 +56,7 @@ class NavigationDrawerHelper(private val activity: AppCompatActivity) {
             R.id.nav_startNew -> Intent(activity, StartNewActivity::class.java)
             R.id.nav_viewMatch -> Intent(activity, ViewMatchesActivity::class.java)
             R.id.nav_myPlayer -> Intent(activity, ViewPlayerActivity::class.java)
+            R.id.nav_h2h -> Intent(activity, Head2HeadActivity::class.java)
             R.id.buttonLogOut -> {
                 auth.signOut()
                 drawerLayout.closeDrawers()

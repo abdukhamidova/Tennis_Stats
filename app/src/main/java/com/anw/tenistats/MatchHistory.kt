@@ -5,15 +5,24 @@ package com.anw.tenistats
 /*data class Uzytkownik(
     val matches: MutableList<Match> = mutableListOf(), //lista meczow danego uzytkownika
     val players: MutableList<Player> = mutableListOf() //lista playerow danego uzytkownika
-)
-
-data class Match(
-    val id: String, //identyfikator z bazy
-    val date: Date, //format data -> SYSDATE
-    val player1: Player, //pierwszy grajacy player
-    val player2: Player, //drugi grajacy player
-    val sets: MutableList<Set> = mutableListOf() //lista poszczegolnych setow po kolei
 )*/
+
+//do Head2Head
+data class Match(
+    val id: String = "",
+    val player1: String = "",
+    val player2: String = "",
+    val data: Long = 0L,
+    val set1p1: String = "",
+    val set1p2: String = "",
+    val set2p1: String = "",
+    val set2p2: String = "",
+    val set3p1: String = "",
+    val set3p2: String = "",
+    val pkt1: String = "",
+    val pkt2: String = "",
+    val winner: String? = null
+)
 
 data class Player(
     var firstName: String? = null,

@@ -94,8 +94,10 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
+        <activity
+            android:name=".Head2HeadActivity"
+            android:exported="true"/>
         <activity
             android:name=".StartNewActivity"
             android:exported="false"

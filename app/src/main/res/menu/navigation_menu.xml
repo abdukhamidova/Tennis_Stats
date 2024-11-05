@@ -24,6 +24,11 @@
             android:id="@+id/nav_myPlayer"
             android:icon="@drawable/icon_players"
             android:title="View Players" />
+
+        <item
+            android:id="@+id/nav_h2h"
+            android:icon="@drawable/icon_players"
+            android:title="Head 2 Head" />
     </group>
 
     <group

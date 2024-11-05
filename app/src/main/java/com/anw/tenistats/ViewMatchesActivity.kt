@@ -51,7 +51,7 @@ class ViewMatchesActivity : AppCompatActivity(), MyAdapterMatch.OnItemClickListe
         firebaseAuth = FirebaseAuth.getInstance()
 
         //------------ MENU
-        drawerLayout = findViewById<DrawerLayout>(R.id.drawer_layout)
+        drawerLayout = findViewById(R.id.drawer_layout)
         val menu = findViewById<ImageButton>(R.id.buttonMenu)
         val navigationView = findViewById<NavigationView>(R.id.navigationViewMenu)
         val headerView = navigationView.getHeaderView(0)

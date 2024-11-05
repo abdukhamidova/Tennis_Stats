@@ -8,9 +8,12 @@ import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ListView
+import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -35,6 +38,7 @@ class ViewHistoryActivity : AppCompatActivity() {
     private lateinit var drawerLayout: DrawerLayout
     private var matchId = ""
     private lateinit var pl1: String
+    private lateinit var spinner2: Spinner
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,7 +51,7 @@ class ViewHistoryActivity : AppCompatActivity() {
             insets
         }
 
-        //MENU
+    //MENU
         firebaseAuth = FirebaseAuth.getInstance()
         drawerLayout = findViewById(R.id.drawer_layout)
         val navigationView = findViewById<NavigationView>(R.id.navigationViewMenu)
@@ -68,21 +72,57 @@ class ViewHistoryActivity : AppCompatActivity() {
         }else {
             userEmailView.text = resources.getString(R.string.user_email)
         }
-        //MENU
+    //MENU
 
-        // Odbierz datę meczu w formacie milisekund z poprzedniej aktywności
+    // Odbierz datę meczu w formacie milisekund z poprzedniej aktywności
         val matchDateInMillis = intent.getLongExtra("matchDateInMillis", 0L)
 
-        // Pobierz mecz na podstawie daty z bazy danych
+    // Pobierz mecz na podstawie daty z bazy danych
         fetchMatchByDate(matchDateInMillis)
 
-        findViewById<Button>(R.id.statistics).setOnClickListener {
-            Intent(this,ViewStatsActivity::class.java).also{
-                it.putExtra("matchID",matchId)
-                it.putExtra("matchDateInMillis",matchDateInMillis)
-                startActivity(it)
+    //lista rozwijana HIST & STATS
+        val spinner1: Spinner = findViewById(R.id.spinnerHist)
+        val items1 = arrayOf("HISTORY","STATISTICS")
+        val adapter1 = ArrayAdapter(this,R.layout.spinner_item_stats_left,items1)
+        adapter1.setDropDownViewResource(R.layout.spinner_item_stats_left)
+        spinner1.adapter = adapter1
+
+        spinner1.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                when(position)
+                {
+                    1 -> {
+                        val intent = Intent(this@ViewHistoryActivity,ViewStatsActivity::class.java)
+                        intent.putExtra("matchID",matchId)
+                        intent.putExtra("matchDateInMillis",matchDateInMillis)
+                        startActivity(intent)
+                    }
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // Code to perform if nothing is selected
             }
         }
+    //lista rozwijana HIST & STATS
+
+    //lista rozwijana POINTS & GAMES
+        spinner2= findViewById(R.id.spinnerHistCategory)
+        val items2 = arrayOf("POINTS","GAMES")
+        val adapter2 = ArrayAdapter(this,R.layout.spinner_item_stats_right,items2)
+        adapter2.setDropDownViewResource(R.layout.spinner_item_stats_right)
+        spinner2.adapter = adapter2
+
+        spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                fetchMatchByDate(matchDateInMillis)
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // Code to perform if nothing is selected
+            }
+        }
+    //lista rozwijana POINTS & GAMES
     }
 
     private fun fetchMatchByDate(matchDateInMillis: Long) {
@@ -171,7 +211,7 @@ class ViewHistoryActivity : AppCompatActivity() {
                             Toast.makeText(this@ViewHistoryActivity, "Set2 does not exist", Toast.LENGTH_SHORT).show()
                         }
                     }
-                    //zrobilam zamiast ukrywania przyciku spradzenie czy dany set istnieje i zmienilam przycisk danego seta na nieaktywny ~u
+                    //zrobilam zamiast ukrywania przyciku sprawdzenie czy dany set istnieje i zmienilam przycisk danego seta na nieaktywny ~u
                     // Ukryj lub pokaż przycisk dla trzeciego seta w zależności od jego istnienia
                     //if (thirdSetExists) {
                       //  buttonSet3.visibility = View.VISIBLE
@@ -255,24 +295,32 @@ class ViewHistoryActivity : AppCompatActivity() {
                                         }
                                     }
 
-                                    if (gameSnapshot.hasChildren()) {
-                                        for (pointSnapshot in gameSnapshot.children) {
-                                            val co = pointSnapshot.child("co").getValue(String::class.java)
-                                            val czym = pointSnapshot.child("czym").getValue(String::class.java)
-                                            val gdzie = pointSnapshot.child("gdzie").getValue(String::class.java)
-                                            val player = pointSnapshot.child("kto").getValue(String::class.java)
-                                            val score1 = pointSnapshot.child("pkt1").getValue(String::class.java)
-                                            val score2 = pointSnapshot.child("pkt2").getValue(String::class.java)
+                                    if(spinner2.selectedItemPosition == 0) { //dodaj tylko w trybie "POINTS"
+                                        if (gameSnapshot.hasChildren()) {
+                                            for (pointSnapshot in gameSnapshot.children) {
+                                                val co = pointSnapshot.child("co")
+                                                    .getValue(String::class.java)
+                                                val czym = pointSnapshot.child("czym")
+                                                    .getValue(String::class.java)
+                                                val gdzie = pointSnapshot.child("gdzie")
+                                                    .getValue(String::class.java)
+                                                val player = pointSnapshot.child("kto")
+                                                    .getValue(String::class.java)
+                                                val score1 = pointSnapshot.child("pkt1")
+                                                    .getValue(String::class.java)
+                                                val score2 = pointSnapshot.child("pkt2")
+                                                    .getValue(String::class.java)
 
-                                            /*val inName=firstLetters(player)*/
-                                            val pointString = if (player == player1) {
-                                                "$score1:$score2 ◁ $co $czym $gdzie" // symbol X dla player1
-                                            } else {
-                                                "$score1:$score2 ▶ $co $czym $gdzie" // symbol O dla player2
-                                            }
+                                                val inName = firstLetters(player)
+                                                val pointString = if (player == player1) {
+                                                    "$score1:$score2 ◁ $co $czym $gdzie" // symbol X dla player1
+                                                } else {
+                                                    "$score1:$score2 ▶ $co $czym $gdzie" // symbol O dla player2
+                                                }
 
-                                            if (score1 != null && score2 != null && player != null && co != null && czym != null && gdzie != null) {
-                                                pointsList.add(pointString)
+                                                if (score1 != null && score2 != null && player != null && co != null && czym != null && gdzie != null) {
+                                                    pointsList.add(pointString)
+                                                }
                                             }
                                         }
                                     }
@@ -331,25 +379,33 @@ class ViewHistoryActivity : AppCompatActivity() {
                                 pointsList.add("$set1P1 : $set1P2 | $set2P1 : $set2P2 | $set3P1 : $set3P2")
                             }
 
-                            if (gameSnapshot.hasChildren()) {
-                                for (pointSnapshot in gameSnapshot.children) {
-                                    val co = pointSnapshot.child("co").getValue(String::class.java)
-                                    val czym = pointSnapshot.child("czym").getValue(String::class.java)
-                                    val gdzie = pointSnapshot.child("gdzie").getValue(String::class.java)
-                                    val player = pointSnapshot.child("kto").getValue(String::class.java)
-                                    val score1 = pointSnapshot.child("pkt1").getValue(String::class.java)
-                                    val score2 = pointSnapshot.child("pkt2").getValue(String::class.java)
+                            if(spinner2.selectedItemPosition == 0) {
+                                if (gameSnapshot.hasChildren()) {
+                                    for (pointSnapshot in gameSnapshot.children) {
+                                        val co =
+                                            pointSnapshot.child("co").getValue(String::class.java)
+                                        val czym =
+                                            pointSnapshot.child("czym").getValue(String::class.java)
+                                        val gdzie = pointSnapshot.child("gdzie")
+                                            .getValue(String::class.java)
+                                        val player =
+                                            pointSnapshot.child("kto").getValue(String::class.java)
+                                        val score1 =
+                                            pointSnapshot.child("pkt1").getValue(String::class.java)
+                                        val score2 =
+                                            pointSnapshot.child("pkt2").getValue(String::class.java)
 
-                                    /*val inName=firstLetters(player)*/
-                                    val pointString = if (player == player1) {
-                                        "$score1:$score2 ◁ $co $czym $gdzie" // symbol X dla player1
-                                    } else {
-                                        "$score1:$score2 ▶ $co $czym $gdzie" // symbol O dla player2
-                                    }
+                                        /*val inName=firstLetters(player)*/
+                                        val pointString = if (player == player1) {
+                                            "$score1:$score2 ◁ $co $czym $gdzie" // symbol X dla player1
+                                        } else {
+                                            "$score1:$score2 ▶ $co $czym $gdzie" // symbol O dla player2
+                                        }
 
 
-                                    if (score1 != null && score2 != null && player != null && co != null && czym != null && gdzie != null) {
-                                        pointsList.add(pointString)
+                                        if (score1 != null && score2 != null && player != null && co != null && czym != null && gdzie != null) {
+                                            pointsList.add(pointString)
+                                        }
                                     }
                                 }
                             }
