@@ -156,12 +156,10 @@
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:textSize="@dimen/_13ssp"
-                    android:textColor="@color/general_text_color"
-                    android:background="@drawable/bg_spinner_left"
+                    android:background="@drawable/rectangle_button"
                     style="?android:attr/buttonBarButtonStyle"
                     android:paddingStart="@dimen/_13sdp"
                     android:drawablePadding="@dimen/_5sdp"
-                    android:drawableTint="@color/white"
                     android:spinnerMode="dropdown"/>
 
                 <Spinner
@@ -171,12 +169,10 @@
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:textSize="@dimen/_13ssp"
-                    android:textColor="@color/general_text_color"
-                    android:background="@drawable/bg_spinner_stats_right"
+                    android:background="@drawable/rec_btn_not_selected"
                     style="?android:attr/buttonBarButtonStyle"
                     android:paddingStart="@dimen/_11sdp"
-                    android:drawablePadding="@dimen/_5sdp"
-                    android:drawableTint="@color/general_text_color"/>
+                    android:drawablePadding="@dimen/_5sdp"/>
 
 <!--                <Button-->
 <!--                    android:layout_width="0dp"-->

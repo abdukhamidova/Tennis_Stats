@@ -12,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import com.anw.tenistats.databinding.ActivityBallInPlayBinding
+import com.anw.tenistats.databinding.ActivityViewStatsBinding
 import com.anw.tenistats.ui.theme.NavigationDrawerHelper
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
@@ -19,6 +21,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
 class ActivityBallInPlay : AppCompatActivity() {
+    private lateinit var binding: ActivityBallInPlayBinding
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var navigationDrawerHelper: NavigationDrawerHelper
     private lateinit var drawerLayout: DrawerLayout
@@ -28,7 +31,9 @@ class ActivityBallInPlay : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_ball_in_play)
+        binding = ActivityBallInPlayBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -63,19 +68,19 @@ class ActivityBallInPlay : AppCompatActivity() {
         //MENU
 
         val app = application as Stats
-        val serve1 = findViewById<TextView>(R.id.textViewServe1BIP)
-        val serve2 = findViewById<TextView>(R.id.textViewServe2BIP)
-        val pkt1 = findViewById<TextView>(R.id.textViewPlayer1PktBIP)
-        val set1p1 = findViewById<TextView>(R.id.textViewPlayer1Set1BIP)
-        val set2p1 = findViewById<TextView>(R.id.textViewPlayer1Set2BIP)
-        val set3p1 = findViewById<TextView>(R.id.textViewPlayer1Set3BIP)
-        val pkt2 = findViewById<TextView>(R.id.textViewPlayer2PktBIP)
-        val set1p2 = findViewById<TextView>(R.id.textViewPlayer2Set1BIP)
-        val set2p2 = findViewById<TextView>(R.id.textViewPlayer2Set2BIP)
-        val set3p2 = findViewById<TextView>(R.id.textViewPlayer2Set3BIP)
+        val serve1 = binding.textViewServe1BIP
+        val serve2 = binding.textViewServe2BIP
+        val pkt1 = binding.textViewPlayer1PktBIP
+        val set1p1 = binding.textViewPlayer1Set1BIP
+        val set2p1 = binding.textViewPlayer1Set2BIP
+        val set3p1 = binding.textViewPlayer1Set3BIP
+        val pkt2 = binding.textViewPlayer2PktBIP
+        val set1p2 = binding.textViewPlayer2Set1BIP
+        val set2p2 = binding.textViewPlayer2Set2BIP
+        val set3p2 = binding.textViewPlayer2Set3BIP
 
-        val player1 = findViewById<TextView>(R.id.textviewPlayer1)
-        val player2 = findViewById<TextView>(R.id.textviewPlayer2)
+        val player1 = binding.textviewPlayer1
+        val player2 = binding.textviewPlayer2
 
         val user = firebaseAuth.currentUser?.uid
 
@@ -98,7 +103,7 @@ class ActivityBallInPlay : AppCompatActivity() {
 
         fillUpScoreInActivity(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2) //ustawienie poczatkowe wyniku
 
-        findViewById<Button>(R.id.buttonWinner1).setOnClickListener {
+        binding.buttonWinner1.setOnClickListener {
             Intent(this,DetailsActivity::class.java).also{
                 it.putExtra("Pkt1",intent.getStringExtra("Pkt1"))
                 it.putExtra("Pkt2",intent.getStringExtra("Pkt2"))
@@ -112,7 +117,7 @@ class ActivityBallInPlay : AppCompatActivity() {
             }
         }
 
-        findViewById<Button>(R.id.buttonWinner2).setOnClickListener {
+        binding.buttonWinner2.setOnClickListener {
             Intent(this,DetailsActivity::class.java).also{
                 it.putExtra("Pkt1",intent.getStringExtra("Pkt1"))
                 it.putExtra("Pkt2",intent.getStringExtra("Pkt2"))
@@ -126,7 +131,7 @@ class ActivityBallInPlay : AppCompatActivity() {
             }
         }
 
-        findViewById<Button>(R.id.buttonForcedError1).setOnClickListener {
+        binding.buttonForcedError1.setOnClickListener {
             Intent(this,DetailsActivity::class.java).also{
                 it.putExtra("Pkt1",intent.getStringExtra("Pkt1"))
                 it.putExtra("Pkt2",intent.getStringExtra("Pkt2"))
@@ -140,7 +145,7 @@ class ActivityBallInPlay : AppCompatActivity() {
             }
         }
 
-        findViewById<Button>(R.id.buttonForcedError2).setOnClickListener {
+        binding.buttonForcedError2.setOnClickListener {
             Intent(this,DetailsActivity::class.java).also{
                 it.putExtra("Pkt1",intent.getStringExtra("Pkt1"))
                 it.putExtra("Pkt2",intent.getStringExtra("Pkt2"))
@@ -154,7 +159,7 @@ class ActivityBallInPlay : AppCompatActivity() {
             }
         }
 
-        findViewById<Button>(R.id.buttonUnforcedError1).setOnClickListener {
+        binding.buttonUnforcedError1.setOnClickListener {
             Intent(this,DetailsActivity::class.java).also{
                 it.putExtra("Pkt1",intent.getStringExtra("Pkt1"))
                 it.putExtra("Pkt2",intent.getStringExtra("Pkt2"))
@@ -168,7 +173,7 @@ class ActivityBallInPlay : AppCompatActivity() {
             }
         }
 
-        findViewById<Button>(R.id.buttonUnforcedError2).setOnClickListener {
+        binding.buttonUnforcedError2.setOnClickListener {
             Intent(this,DetailsActivity::class.java).also{
                 it.putExtra("Pkt1",intent.getStringExtra("Pkt1"))
                 it.putExtra("Pkt2",intent.getStringExtra("Pkt2"))
@@ -182,14 +187,77 @@ class ActivityBallInPlay : AppCompatActivity() {
             }
         }
     }
-    fun setscore(player1: TextView,player2: TextView,serve1: TextView,serve2: TextView,set1p1: TextView,set2p1: TextView,set3p1: TextView,set1p2: TextView,set2p2: TextView,set3p2: TextView,pkt1:TextView,pkt2:TextView)
+
+    private fun setscore(
+        player1: TextView, player2: TextView, serve1: TextView, serve2: TextView,
+        set1p1: TextView, set2p1: TextView, set3p1: TextView, set1p2: TextView,
+        set2p2: TextView, set3p2: TextView, pkt1: TextView, pkt2: TextView
+    ) {
+        val app = application as Stats
+
+        val fields = listOf(
+            "player1" to player1,
+            "player2" to player2,
+            "set1p1" to set1p1, "set2p1" to set2p1, "set3p1" to set3p1,
+            "set1p2" to set1p2, "set2p2" to set2p2, "set3p2" to set3p2,
+            "pkt1" to pkt1, "pkt2" to pkt2
+        )
+
+        fields.forEach { (key, textView) ->
+            database.child(key).get().addOnSuccessListener { dataSnapshot ->
+                val value = dataSnapshot.getValue(String::class.java) ?: ""
+                textView.text = value
+                app.javaClass.getDeclaredField(key).apply {
+                    isAccessible = true
+                    set(app, value)
+                }
+            }.addOnFailureListener {
+                // Handle failure
+            }
+        }
+
+        database.child("winner").get().addOnSuccessListener { dataSnapshot ->
+            if (dataSnapshot.exists()) {
+                val winner = dataSnapshot.getValue(String::class.java)
+                val goldenLaurel = getGoldenDrawable(applicationContext, R.drawable.icon_laurel3)
+                serve1.setCompoundDrawablesWithIntrinsicBounds(goldenLaurel, null, null, null)
+                serve2.setCompoundDrawablesWithIntrinsicBounds(goldenLaurel, null, null, null)
+                if (winner == player1.text) {
+                    serve1.visibility = View.VISIBLE
+                    serve2.visibility = View.INVISIBLE
+                } else {
+                    serve1.visibility = View.INVISIBLE
+                    serve2.visibility = View.VISIBLE
+                }
+            } else {
+                database.child("LastServePlayer").get().addOnSuccessListener { dataSnapshot ->
+                    val lastServe = dataSnapshot.getValue(String::class.java)
+                    serve1.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ball, 0, 0, 0)
+                    serve2.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ball, 0, 0, 0)
+                    if (lastServe == player1.text) {
+                        serve1.visibility = View.VISIBLE
+                        serve2.visibility = View.INVISIBLE
+                    } else {
+                        serve1.visibility = View.INVISIBLE
+                        serve2.visibility = View.VISIBLE
+                    }
+                }.addOnFailureListener {
+                    // Handle failure
+                }
+            }
+        }.addOnFailureListener {
+            // Handle failure
+        }
+    }
+
+    /*fun setscore(player1: TextView,player2: TextView,serve1: TextView,serve2: TextView,set1p1: TextView,set2p1: TextView,set3p1: TextView,set1p2: TextView,set2p2: TextView,set3p2: TextView,pkt1:TextView,pkt2:TextView)
     {
         database.child("player1").get().addOnSuccessListener { dataSnapshot ->
             // Pobranie wartości "player1" z bazy danych
             val player1Value = dataSnapshot.getValue(String::class.java)
             // Ustawienie wartości w TextView
             player1.text = player1Value.toString()
-            findViewById<TextView>(R.id.textPL1).text = player1Value.toString()
+            binding.textPL1.text = player1Value.toString()
         }.addOnFailureListener { exception ->
             // Obsługa błędów
         }
@@ -199,7 +267,7 @@ class ActivityBallInPlay : AppCompatActivity() {
             val player2Value = dataSnapshot.getValue(String::class.java)
             // Ustawienie wartości w TextView
             player2.text = player2Value.toString()
-            findViewById<TextView>(R.id.textPL2).text = player2Value.toString()
+            binding.textPL2.text = player2Value.toString()
         }.addOnFailureListener { exception ->
             // Obsługa błędów
         }
@@ -308,5 +376,5 @@ class ActivityBallInPlay : AppCompatActivity() {
         }.addOnFailureListener { exception ->
             // Obsługa błędów
         }
-    }
+    }*/
 }

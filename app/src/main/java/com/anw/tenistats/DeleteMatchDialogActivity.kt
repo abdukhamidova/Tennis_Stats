@@ -16,8 +16,6 @@ class DeleteMatchDialogActivity(private val context: Context) {
     private lateinit var database: DatabaseReference
     private lateinit var alertDialog: AlertDialog
 
-
-
     fun show(matchId:String) {
         val dialogView = LayoutInflater.from(context).inflate(R.layout.activity_delete_match, null)
         alertDialog = AlertDialog.Builder(context)

@@ -53,4 +53,5 @@
     <color name="dialog_btnCancel">@color/light_grey</color>
     <color name="scrollView_bg_color">@color/transparent</color>
     <color name="history_bg_color">@color/transparent</color>
+    <color name="inverted_general_text_color">@color/darker_blue</color>
 </resources>

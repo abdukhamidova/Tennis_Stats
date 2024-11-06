@@ -126,7 +126,7 @@ class ViewStatsActivity : AppCompatActivity() {
     //lista rozwijana STATS & HIST
         val spinner1: Spinner = binding.spinnerStats
         val items1 = arrayOf("STATISTICS","HISTORY")
-        val adapter1 = ArrayAdapter(this,R.layout.spinner_item_stats_left,items1)
+        val adapter1 = ArrayAdapter(this,R.layout.spinner_item_stats_left_base,items1)
         adapter1.setDropDownViewResource(R.layout.spinner_item_stats_left)
         spinner1.adapter = adapter1
 
@@ -151,8 +151,8 @@ class ViewStatsActivity : AppCompatActivity() {
     //lista rozwijana TOTAL,RETURN,WINNERS,FORCED ERR.,UNFOR. ERR.
         val spinner2: Spinner = binding.spinnerStatsCategory
         val items2 = arrayOf("TOTAL","RETURN","WINNERS","FORCED ERR.","UNFOR. ERR.")
-        val adapter2 = ArrayAdapter(this,R.layout.spinner_item_stats_right,items2)
-        adapter2.setDropDownViewResource(R.layout.spinner_item_stats_left)
+        val adapter2 = ArrayAdapter(this,R.layout.spinner_item_stats_right_base,items2)
+        adapter2.setDropDownViewResource(R.layout.spinner_item_stats_right)
         spinner2.adapter = adapter2
 
         spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {

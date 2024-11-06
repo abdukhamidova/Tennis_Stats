@@ -128,10 +128,18 @@ class AddPointDialog(private val context: Context, private val openedFromStartPo
 
                 //ustawienie osoby serwujacej w danym gemie
                 val servePlayer: String
-                servePlayer = if(app.serve1=="1"){
-                    app.player1
+                servePlayer = if(app.player1 == player1.text) {
+                    if (app.serve1 == "1") {
+                        app.player1
+                    } else {
+                        app.player2
+                    }
                 } else{
-                    app.player2
+                    if (app.serve1 == "1") {
+                        app.player2
+                    } else {
+                        app.player1
+                    }
                 }
 
                 database.child("pktCount").get().addOnSuccessListener { dataSnapshot ->

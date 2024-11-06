@@ -83,7 +83,7 @@ class ViewHistoryActivity : AppCompatActivity() {
     //lista rozwijana HIST & STATS
         val spinner1: Spinner = findViewById(R.id.spinnerHist)
         val items1 = arrayOf("HISTORY","STATISTICS")
-        val adapter1 = ArrayAdapter(this,R.layout.spinner_item_stats_left,items1)
+        val adapter1 = ArrayAdapter(this,R.layout.spinner_item_stats_left_base,items1)
         adapter1.setDropDownViewResource(R.layout.spinner_item_stats_left)
         spinner1.adapter = adapter1
 
@@ -109,7 +109,7 @@ class ViewHistoryActivity : AppCompatActivity() {
     //lista rozwijana POINTS & GAMES
         spinner2= findViewById(R.id.spinnerHistCategory)
         val items2 = arrayOf("POINTS","GAMES")
-        val adapter2 = ArrayAdapter(this,R.layout.spinner_item_stats_right,items2)
+        val adapter2 = ArrayAdapter(this,R.layout.spinner_item_stats_right_base,items2)
         adapter2.setDropDownViewResource(R.layout.spinner_item_stats_right)
         spinner2.adapter = adapter2
 

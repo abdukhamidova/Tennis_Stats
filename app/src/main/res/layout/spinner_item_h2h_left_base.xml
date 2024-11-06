@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="10dp"
-    android:textColor="@color/general_text_color"
+    android:textColor="@color/app_bg_color"
     android:textSize="18sp"
-    android:background="@color/app_bg_color"/>
+    android:drawableRight="@drawable/icon_arrow_down_inverted_general_text_color"
+    android:background="@color/app_player1_color"/>

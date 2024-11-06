@@ -6,4 +6,4 @@
     android:padding="10dp"
     android:textColor="@color/general_text_color"
     android:textSize="18sp"
-    android:background="@color/app_bg_color"/>
+    android:drawableRight="@drawable/icon_arrow_down_general_color"/>

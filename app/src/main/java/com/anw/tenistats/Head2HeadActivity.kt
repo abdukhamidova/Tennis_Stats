@@ -162,13 +162,13 @@ class Head2HeadActivity : AppCompatActivity() {
 
     private fun setSpinners() : Boolean {
         spinner1 = binding.autoNameP1
-        val adapter1 = ArrayAdapter(this, R.layout.spinner_item_stats_left, playersList)//playerList)
-        adapter1.setDropDownViewResource(R.layout.spinner_item_stats_left)
+        val adapter1 = ArrayAdapter(this, R.layout.spinner_item_h2h_left_base, playersList)//playerList)
+        adapter1.setDropDownViewResource(R.layout.spinner_item_h2h_left)
         spinner1.adapter = adapter1
 
         spinner2 = binding.autoNameP2
-        val adapter2 = ArrayAdapter(this, R.layout.spinner_item_stats_left, playersList)//playersList)
-        adapter2.setDropDownViewResource(R.layout.spinner_item_stats_left)
+        val adapter2 = ArrayAdapter(this, R.layout.spinner_item_h2h_right_base, playersList)//playersList)
+        adapter2.setDropDownViewResource(R.layout.spinner_item_h2h_right)
         spinner2.adapter = adapter2
 
         return true

@@ -14,6 +14,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.anw.tenistats.com.anw.tenistats.AddPointDialog
+import com.anw.tenistats.databinding.ActivityStartPointBinding
+import com.anw.tenistats.databinding.ActivityViewStatsBinding
 import com.anw.tenistats.ui.theme.NavigationDrawerHelper
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
@@ -24,6 +26,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
 class ActivityStartPoint : AppCompatActivity() {
+    private lateinit var binding: ActivityStartPointBinding
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var database: DatabaseReference
     private lateinit var navigationDrawerHelper: NavigationDrawerHelper
@@ -43,10 +46,12 @@ class ActivityStartPoint : AppCompatActivity() {
     private lateinit var set1p2: TextView
     private lateinit var set2p2: TextView
     private lateinit var set3p2: TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_start_point)
+        binding = ActivityStartPointBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -88,8 +93,6 @@ class ActivityStartPoint : AppCompatActivity() {
 
             //ustawienie wyniku w tabeli
             setscore(player1,player2,serve1,serve2,set1p1,set2p1,set3p1,set1p2,set2p2,set3p2,pkt1,pkt2)
-            val app = application as Stats
-            //fillUpScore(app,player1,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
         }.addOnFailureListener {
             Toast.makeText(this, "Failed to read Current Match ID", Toast.LENGTH_SHORT).show()
         }
@@ -101,22 +104,22 @@ class ActivityStartPoint : AppCompatActivity() {
          //       .getReference(user.toString()).child("Matches").child(matchId.toString())
 
         val app = application as Stats
-        player1 = findViewById(R.id.textviewPlayer1)
-        player2 = findViewById(R.id.textviewPlayer2)
-        serve1 = findViewById(R.id.textViewBallPl1)
-        serve2 = findViewById(R.id.textViewBallPl2)
-        pkt1 = findViewById(R.id.textViewPktPl1)
-        set1p1 = findViewById(R.id.textViewSet1Pl1)
-        set2p1 = findViewById(R.id.textViewSet2Pl1)
-        set3p1 = findViewById(R.id.textViewSet3Pl1)
-        pkt2 = findViewById(R.id.textViewPktPl2)
-        set1p2 = findViewById(R.id.textViewSet1Pl2)
-        set2p2 = findViewById(R.id.textViewSet2Pl2)
-        set3p2 = findViewById(R.id.textViewSet3Pl2)
+        player1 = binding.textviewPlayer1
+        player2 = binding.textviewPlayer2
+        serve1 = binding.textViewBallPl1
+        serve2 = binding.textViewBallPl2
+        pkt1 = binding.textViewPktPl1
+        set1p1 = binding.textViewSet1Pl1
+        set2p1 = binding.textViewSet2Pl1
+        set3p1 = binding.textViewSet3Pl1
+        pkt2 = binding.textViewPktPl2
+        set1p2 = binding.textViewSet1Pl2
+        set2p2 = binding.textViewSet2Pl2
+        set3p2 = binding.textViewSet3Pl2
         val addPointDialog = AddPointDialog(this,true)
         fillUpScoreInActivity(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
 
-        val btnFault = findViewById<Button>(R.id.buttonFault)
+        val btnFault = binding.buttonFault
         val fault_text = resources.getString(R.string.fault)
         val double_fault_text = resources.getString(R.string.double_fault)
         val first_serve_text = resources.getString(R.string.first_serve)
@@ -124,12 +127,12 @@ class ActivityStartPoint : AppCompatActivity() {
 
        // val (_, _) = calculateGame(set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
 
-        findViewById<Button>(R.id.buttonAce).setOnClickListener {
+        binding.buttonAce.setOnClickListener {
             val (game,set) = calculateGame(set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
             if (app.serve1 != "") { //serwuje player 1
                 if (btnFault.text == double_fault_text) {
                     btnFault.text = fault_text
-                    findViewById<TextView>(R.id.textViewFS).text = first_serve_text
+                    binding.textViewFS.text = first_serve_text
                 }
                 addPointDialog.show(
                     player1, player2, serve1, serve2, pkt1, pkt2, set1p1, set1p2, set2p1, set2p2, set3p1, set3p2,
@@ -146,7 +149,7 @@ class ActivityStartPoint : AppCompatActivity() {
             else { //serwuje player2
                 if (btnFault.text == double_fault_text) {
                     btnFault.text = fault_text
-                    findViewById<TextView>(R.id.textViewFS).text = first_serve_text
+                    binding.textViewFS.text = first_serve_text
                 }
                 addPointDialog.show(
                     player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,
@@ -168,13 +171,13 @@ class ActivityStartPoint : AppCompatActivity() {
                 app.serwis=2
                 btnFault.text = double_fault_text
                 btnFault.textSize = 15.4f
-                findViewById<TextView>(R.id.textViewFS).text = second_serve_text
+                binding.textViewFS.text = second_serve_text
             }
             else if (btnFault.text == double_fault_text) {
                 app.serwis=0
                 btnFault.text = fault_text
                 btnFault.textSize = 19.9f
-                findViewById<TextView>(R.id.textViewFS).text = first_serve_text
+                binding.textViewFS.text = first_serve_text
                 if (app.serve1 != "") {
                     addPointDialog.show(
                         player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,
@@ -204,12 +207,12 @@ class ActivityStartPoint : AppCompatActivity() {
             }
         }
 
-        findViewById<Button>(R.id.buttonRWF).setOnClickListener{
+        binding.buttonRWF.setOnClickListener{
             val (game,set) = calculateGame(set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
             if (app.serve1 != "") { //serwuje player 1
                 if (btnFault.text == double_fault_text) {
                     btnFault.text = fault_text
-                    findViewById<TextView>(R.id.textViewFS).text = first_serve_text
+                    binding.textViewFS.text = first_serve_text
                 }
                 addPointDialog.show(
                     player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,
@@ -226,7 +229,7 @@ class ActivityStartPoint : AppCompatActivity() {
             else {
                 if (btnFault.text == double_fault_text) {
                     btnFault.text = fault_text
-                    findViewById<TextView>(R.id.textViewFS).text = first_serve_text
+                    binding.textViewFS.text = first_serve_text
                 }
                 addPointDialog.show(
                     player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2,
@@ -242,12 +245,12 @@ class ActivityStartPoint : AppCompatActivity() {
             }
         }
 
-        findViewById<Button>(R.id.buttonRWB).setOnClickListener {
+        binding.buttonRWB.setOnClickListener {
             val (game,set) = calculateGame(set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
             if (app.serve1 != "") { //serwuje player 1
                 if (btnFault.text == double_fault_text) {
                     btnFault.text = fault_text
-                    findViewById<TextView>(R.id.textViewFS).text = first_serve_text
+                    binding.textViewFS.text = first_serve_text
                 }
                 addPointDialog.show(
                     player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,
@@ -264,7 +267,7 @@ class ActivityStartPoint : AppCompatActivity() {
             else {
                 if (btnFault.text == double_fault_text) {
                     btnFault.text = fault_text
-                    findViewById<TextView>(R.id.textViewFS).text = first_serve_text
+                    binding.textViewFS.text = first_serve_text
                 }
                 addPointDialog.show(
                     player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2,
@@ -279,12 +282,12 @@ class ActivityStartPoint : AppCompatActivity() {
             }
         }
 
-        findViewById<Button>(R.id.buttonREF).setOnClickListener {
+        binding.buttonREF.setOnClickListener {
             val (game,set) = calculateGame(set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
             if (app.serve1 != "") { //serwuje player 1
                 if (btnFault.text == double_fault_text) {
                     btnFault.text = fault_text
-                    findViewById<TextView>(R.id.textViewFS).text = first_serve_text
+                    binding.textViewFS.text = first_serve_text
                 }
                 addPointDialog.show(
                     player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2,
@@ -301,7 +304,7 @@ class ActivityStartPoint : AppCompatActivity() {
             else {
                 if (btnFault.text == double_fault_text) {
                     btnFault.text = fault_text
-                    findViewById<TextView>(R.id.textViewFS).text = first_serve_text
+                    binding.textViewFS.text = first_serve_text
                 }
                 addPointDialog.show(
                     player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,
@@ -317,12 +320,12 @@ class ActivityStartPoint : AppCompatActivity() {
             }
         }
 
-        findViewById<Button>(R.id.buttonREB).setOnClickListener {
+        binding.buttonREB.setOnClickListener {
             val (game,set) = calculateGame(set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
             if (app.serve1 != "") { //serwuje player 1
                 if (btnFault.text == double_fault_text) {
                     btnFault.text = fault_text
-                    findViewById<TextView>(R.id.textViewFS).text = first_serve_text
+                    binding.textViewFS.text = first_serve_text
                 }
                 addPointDialog.show(
                     player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2,
@@ -339,7 +342,7 @@ class ActivityStartPoint : AppCompatActivity() {
             else {
                 if (btnFault.text == double_fault_text) {
                     btnFault.text = fault_text
-                    findViewById<TextView>(R.id.textViewFS).text = first_serve_text
+                    binding.textViewFS.text = first_serve_text
                 }
                 addPointDialog.show (
                     player2,player1,serve2,serve1,pkt2,pkt1,set1p2,set1p1,set2p2,set2p1,set3p2,set3p1,
@@ -355,18 +358,18 @@ class ActivityStartPoint : AppCompatActivity() {
             }
         }
 
-        findViewById<Button>(R.id.buttonBIP).setOnClickListener {
+        binding.buttonBIP.setOnClickListener {
             val (game,set) = calculateGame(set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
             if(app.serve1 != ""){
                 if (btnFault.text == double_fault_text) {
                     btnFault.text = fault_text
-                    findViewById<TextView>(R.id.textViewFS).text = first_serve_text
+                    binding.textViewFS.text = first_serve_text
                 }
             }
             else {
                 if (btnFault.text == double_fault_text) {
                     btnFault.text = fault_text
-                    findViewById<TextView>(R.id.textViewFS).text = first_serve_text
+                    binding.textViewFS.text = first_serve_text
                 }
             }
 
@@ -406,140 +409,72 @@ class ActivityStartPoint : AppCompatActivity() {
         }
     }
 
-    private fun setscore(player1: TextView, player2: TextView, serve1: TextView, serve2: TextView, set1p1: TextView, set2p1: TextView, set3p1: TextView, set1p2: TextView, set2p2: TextView, set3p2: TextView, pkt1:TextView, pkt2:TextView)
-    {
+    private fun setscore(
+        player1: TextView, player2: TextView, serve1: TextView, serve2: TextView,
+        set1p1: TextView, set2p1: TextView, set3p1: TextView, set1p2: TextView,
+        set2p2: TextView, set3p2: TextView, pkt1: TextView, pkt2: TextView
+    ) {
         val app = application as Stats
-        database.child("player1").get().addOnSuccessListener { dataSnapshot ->
-            // Pobranie wartości "player1" z bazy danych
-            val player1Value = dataSnapshot.getValue(String::class.java)
-            // Ustawienie wartości w TextView
-            player1.text = player1Value.toString()
-            app.player1 = player1Value.toString()
-        }.addOnFailureListener { exception ->
-            // Obsługa błędów
+
+        val fields = listOf(
+            "player1" to player1,
+            "player2" to player2,
+            "set1p1" to set1p1, "set2p1" to set2p1, "set3p1" to set3p1,
+            "set1p2" to set1p2, "set2p2" to set2p2, "set3p2" to set3p2,
+            "pkt1" to pkt1, "pkt2" to pkt2
+        )
+
+        fields.forEach { (key, textView) ->
+            database.child(key).get().addOnSuccessListener { dataSnapshot ->
+                val value = dataSnapshot.getValue(String::class.java) ?: ""
+                textView.text = value
+                app.javaClass.getDeclaredField(key).apply {
+                    isAccessible = true
+                    set(app, value)
+                }
+            }.addOnFailureListener {
+                // Handle failure
+            }
         }
 
-        database.child("player2").get().addOnSuccessListener { dataSnapshot ->
-            // Pobranie wartości "player1" z bazy danych
-            val player2Value = dataSnapshot.getValue(String::class.java)
-            // Ustawienie wartości w TextView
-            player2.text = player2Value.toString()
-            app.player2 = player2Value.toString()
-        }.addOnFailureListener { exception ->
-            // Obsługa błędów
-        }
-
-        database.child("set1p1").get().addOnSuccessListener { dataSnapshot ->
-            // Pobranie wartości "player1" z bazy danych
-            val set1p1Value = dataSnapshot.getValue(String::class.java)
-            // Ustawienie wartości w TextView
-            set1p1.text = set1p1Value
-            app.set1p1 = set1p1Value.toString()
-        }.addOnFailureListener { exception ->
-            // Obsługa błędów
-        }
-        database.child("set2p1").get().addOnSuccessListener { dataSnapshot ->
-            // Pobranie wartości "player1" z bazy danych
-            val set2p1Value = dataSnapshot.getValue(String::class.java)
-            // Ustawienie wartości w TextView
-            set2p1.text = set2p1Value
-            app.set2p1 = set2p1Value.toString()
-        }.addOnFailureListener { exception ->
-            // Obsługa błędów
-        }
-        database.child("set3p1").get().addOnSuccessListener { dataSnapshot ->
-            // Pobranie wartości "player1" z bazy danych
-            val set3p1Value = dataSnapshot.getValue(String::class.java)
-            // Ustawienie wartości w TextView
-            set3p1.text = set3p1Value
-            app.set3p1 = set3p1Value.toString()
-        }.addOnFailureListener { exception ->
-            // Obsługa błędów
-        }
-        database.child("set1p2").get().addOnSuccessListener { dataSnapshot ->
-            // Pobranie wartości "player1" z bazy danych
-            val set1p2Value = dataSnapshot.getValue(String::class.java)
-            // Ustawienie wartości w TextView
-            set1p2.text = set1p2Value
-            app.set1p2 = set1p2Value.toString()
-        }.addOnFailureListener { exception ->
-            // Obsługa błędów
-        }
-        database.child("set2p2").get().addOnSuccessListener { dataSnapshot ->
-            // Pobranie wartości "player1" z bazy danych
-            val set2p2Value = dataSnapshot.getValue(String::class.java)
-            // Ustawienie wartości w TextView
-            set2p2.text = set2p2Value
-            app.set2p2 = set2p2Value.toString()
-        }.addOnFailureListener { exception ->
-            // Obsługa błędów
-        }
-        database.child("set3p2").get().addOnSuccessListener { dataSnapshot ->
-            // Pobranie wartości "player1" z bazy danych
-            val set3p2Value = dataSnapshot.getValue(String::class.java)
-            // Ustawienie wartości w TextView
-            set3p2.text = set3p2Value
-            app.set3p2 = set3p2Value.toString()
-        }.addOnFailureListener { exception ->
-            // Obsługa błędów
-        }
-        database.child("pkt1").get().addOnSuccessListener { dataSnapshot ->
-            // Pobranie wartości "player1" z bazy danych
-            val pkt1Value = dataSnapshot.getValue(String::class.java)
-            // Ustawienie wartości w TextView
-            pkt1.text = pkt1Value
-            app.pkt1 = pkt1Value.toString()
-        }.addOnFailureListener { exception ->
-            // Obsługa błędów
-        }
-        database.child("pkt2").get().addOnSuccessListener { dataSnapshot ->
-            // Pobranie wartości "player1" z bazy danych
-            val pkt2Value = dataSnapshot.getValue(String::class.java)
-            // Ustawienie wartości w TextView
-            pkt2.text = pkt2Value
-            app.pkt2 = pkt2Value.toString()
-        }.addOnFailureListener { exception ->
-            // Obsługa błędów
-        }
         database.child("winner").get().addOnSuccessListener { dataSnapshot ->
-            // Pobranie wartości "player1" z bazy danych
-            if(dataSnapshot.exists()){
-                // Pobranie wartości "player1" z bazy danych
+            if (dataSnapshot.exists()) {
                 val winner = dataSnapshot.getValue(String::class.java)
                 val goldenLaurel = getGoldenDrawable(applicationContext, R.drawable.icon_laurel3)
                 serve1.setCompoundDrawablesWithIntrinsicBounds(goldenLaurel, null, null, null)
                 serve2.setCompoundDrawablesWithIntrinsicBounds(goldenLaurel, null, null, null)
-                // Ustawienie wartości w TextView
-                if(winner==player1.text){
+                if (winner == player1.text) {
                     serve1.visibility = View.VISIBLE
                     serve2.visibility = View.INVISIBLE
-                }
-                else{
+                } else {
                     serve1.visibility = View.INVISIBLE
                     serve2.visibility = View.VISIBLE
                 }
-            }
-            else{
+            } else {
                 database.child("LastServePlayer").get().addOnSuccessListener { dataSnapshot ->
-                    // Pobranie wartości "player1" z bazy danych
-                    val lastserve = dataSnapshot.getValue(String::class.java)
+                    val lastServe = dataSnapshot.getValue(String::class.java)
                     serve1.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ball, 0, 0, 0)
                     serve2.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ball, 0, 0, 0)
-                    // Ustawienie wartości w TextView
-                    if(lastserve==player1.text){
+                    if (lastServe == player1.text) {
                         serve1.visibility = View.VISIBLE
                         serve2.visibility = View.INVISIBLE
-                    }
-                    else{
+                    } else {
                         serve1.visibility = View.INVISIBLE
                         serve2.visibility = View.VISIBLE
                     }
-                }.addOnFailureListener { exception ->
-                    // Obsługa błędów
+                    if(app.player1 == lastServe){
+                        app.serve1="1"
+                        app.serve2=""
+                    } else{
+                        app.serve1=""
+                        app.serve2="1"
+                    }
+                }.addOnFailureListener {
+                    // Handle failure
                 }
             }
-        }.addOnFailureListener { exception ->
-            // Obsługa błędów
+        }.addOnFailureListener {
+            // Handle failure
         }
     }
 
