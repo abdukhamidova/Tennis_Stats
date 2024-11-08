@@ -1,0 +1,77 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/dialog_bg_color">
+
+    <TextView
+        android:id="@+id/textViewChoose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_7sdp"
+        android:layout_gravity="center"
+        android:text="@string/choose_team"
+        android:textColor="@color/dialog_textTitle_color"
+        android:textSize="@dimen/_23ssp"
+        android:textAlignment="center"/>
+
+    <Spinner
+        android:id="@+id/spinnerTeamList"
+        android:layout_width="@dimen/_232sdp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:padding="@dimen/_11sdp" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginBottom="@dimen/_11sdp"
+        android:layout_gravity="center_horizontal">
+
+        <Button
+            android:id="@+id/buttonPlus"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_marginEnd="@dimen/_7sdp"
+            android:background="@drawable/border_button"
+            android:text="@string/plus"
+            android:textColor="@color/dialog_btnCancel"
+            android:textSize="@dimen/_13ssp" />
+
+        <TextView
+            android:id="@+id/buttonAdd"
+            android:layout_width="@dimen/_110sdp"
+            android:layout_height="@dimen/_36sdp"
+            android:layout_toEndOf="@+id/buttonPlus"
+            android:backgroundTint="@color/dialog_textTitle_color"
+            android:textColor="@color/dialog_textTitle_color"
+            android:text="@string/add_new_team"
+            android:textSize="@dimen/_14ssp" />
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/textViewTeamName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:textSize="@dimen/_13ssp"
+        android:hint="@string/hint_team"
+        android:textColor="@color/black"
+        android:layout_gravity="center" />
+
+    <Button
+        android:id="@+id/buttonAddToTeam"
+        android:layout_width="@dimen/_170sdp"
+        android:layout_height="@dimen/_36sdp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="@dimen/_15sdp"
+        android:background="@drawable/border_button"
+        android:text="@string/add_to_team"
+        android:textColor="@color/dialog_btnCancel"
+        android:textSize="@dimen/_13ssp" />
+
+</LinearLayout>
