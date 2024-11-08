@@ -130,9 +130,9 @@ class AddPlayerActivity : AppCompatActivity() {
 
         // Obsługa przycisku rozpoczęcia gry
         binding.buttonAdd.setOnClickListener {
-            var player1 = binding.editTextName.text.toString().trimEnd() //pobiera Imię i Nazwisko gracza
-            val pl1Inticap=getStringWithoutDigits(initcap(player1))
-            val (player1FirstName, player1LastName) = splitNameToFirstAndLastName(pl1Inticap) //zwraca Imię i Nazwisko jako odzielne gracza
+            var player1 = binding.editTextName.text.toString().trimEnd() // Pobiera Imię i Nazwisko gracza
+            val pl1Inticap = getStringWithoutDigits(initcap(player1))
+            val (player1FirstName, player1LastName) = splitNameToFirstAndLastName(pl1Inticap) // Zwraca Imię i Nazwisko jako oddzielne gracza
             val nationality = binding.autoCompleteTextViewNationalityAP.text.toString()
             val dateOfBirth = binding.editTextDateAP.text
             val rbR = binding.radioButtonR
@@ -141,27 +141,29 @@ class AddPlayerActivity : AppCompatActivity() {
             val weakness = binding.autoCompleteTextViewWeaknessAP.text.toString()
             val notes = binding.editTextNote.text.toString()
             var milliseconds: Long? = null
-            if(!dateOfBirth.isNullOrEmpty()) {
+
+            if (player1.isEmpty() ) {
+                Toast.makeText(this, "Don't leave empty fields.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener // Zatrzymujemy dalsze przetwarzanie
+            }
+
+            // Przekształcanie daty na milisekundy
+            if (!dateOfBirth.isNullOrEmpty()) {
                 val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
                 val date = dateFormat.parse(dateOfBirth.toString()) // Sparsowanie daty
-
                 milliseconds = date?.time ?: 0
             }
-            //~ru 14.04 optymalizacja i poprawa dodawania playera do bazy
-            //tak, aby w kolejnym activity obowiązywało nazewnictwo z bazy
-            if (player1.isEmpty()) {
-                Toast.makeText(this, "Don't leave empty fields.", Toast.LENGTH_SHORT).show()
-            }else{
-                //sprawdzenie istnienia player1, jego ewentualne dodanie/duplikowanie
-                checkPlayerExistence(pl1Inticap,player1FirstName, player1LastName,nationality, milliseconds,rbR,rbL,strength,weakness, notes) { updatedPlayer1 ->
-                    player1 = updatedPlayer1
-                }
+
+            checkPlayerExistence(pl1Inticap, player1FirstName, player1LastName, nationality, milliseconds, rbR, rbL, strength, weakness, notes) { updatedPlayer1 ->
+                player1 = updatedPlayer1
             }
-            startActivity(Intent(this,ViewPlayerActivity::class.java))
+            val decisionDialog = DecisionAddToTeamActivity(this)
+            decisionDialog.show(player1)
         }
     }
 
-    private fun splitNameToFirstAndLastName(playerName: String): Pair<String?, String?> {
+
+        private fun splitNameToFirstAndLastName(playerName: String): Pair<String?, String?> {
         var firstName: String? = null
         var lastName: String? = null
 
@@ -261,10 +263,19 @@ class AddPlayerActivity : AppCompatActivity() {
 
                             database.child(playerToReturn).setValue(player)
                                 .addOnSuccessListener {
+                                    // Zawodnik pomyślnie zapisany, wywołujemy callback
                                     callback(playerToReturn)
+                                    // Teraz wyświetlamy okno dialogowe, ponieważ zawodnik został pomyślnie dodany
+                                    val decisionDialog = DecisionAddToTeamActivity(this@AddPlayerActivity)
+                                    decisionDialog.show(playerToReturn)
                                 }.addOnFailureListener {
                                     Log.e(TAG, "Failed to save player $playerName", it)
-                                    // Obsługa błędu zapisu
+                                    // Obsługa błędu zapisu, nie wyświetlamy okna dialogowego
+                                    Toast.makeText(
+                                        this@AddPlayerActivity,
+                                        "Failed to save player. Please try again.",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
                                 }
                         }
 
@@ -274,6 +285,7 @@ class AddPlayerActivity : AppCompatActivity() {
                         }
                     })
             } else {
+                // Zawodnik nie istnieje, dodajemy go
                 val player: Player
                 if (rbF.isChecked) {
                     player = Player(
@@ -307,22 +319,32 @@ class AddPlayerActivity : AppCompatActivity() {
 
                 database.child(playerName).setValue(player)
                     .addOnSuccessListener {
-                        Toast.makeText(
-                            this@AddPlayerActivity,
-                            "Player $playerName Successfully Saved",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        // Zawodnik pomyślnie zapisany, wywołujemy callback
                         callback(playerName)
+                        // Teraz wyświetlamy okno dialogowe, ponieważ zawodnik został pomyślnie dodany
+                        val decisionDialog = DecisionAddToTeamActivity(this@AddPlayerActivity)
+                        decisionDialog.show(playerName)
                     }.addOnFailureListener {
                         Log.e(TAG, "Failed to save player $playerName", it)
-                        // Obsługa błędu zapisu
+                        // Obsługa błędu zapisu, nie wyświetlamy okna dialogowego
+                        Toast.makeText(
+                            this@AddPlayerActivity,
+                            "Failed to save player. Please try again.",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
             }
         }.addOnFailureListener{
             Log.e(TAG, "Failed to get player $playerName", it)
             // Obsługa błędu pobierania danych
+            Toast.makeText(
+                this@AddPlayerActivity,
+                "Failed to check player existence. Please try again.",
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
+
     fun initcap(input: String): String {
         if (input.isEmpty()) {
             return ""
