@@ -34,223 +34,243 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.108" />
 
-        <LinearLayout
-            android:id="@+id/linearLayoutForm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <ScrollView
+            android:id="@+id/scrollViewContainer"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/_30sdp"
+            app:layout_constraintBottom_toTopOf="@id/buttonAdd"
             app:layout_constraintEnd_toEndOf="@id/textViewName"
-            app:layout_constraintStart_toStartOf="@+id/textViewName"
+            app:layout_constraintStart_toStartOf="@id/textViewName"
             app:layout_constraintTop_toBottomOf="@id/textViewName"
-            app:layout_constraintVertical_bias="0.100000024">
+            app:layout_constraintVertical_bias="0.0">
 
-            <LinearLayout
-                android:id="@+id/linearLayoutName"
-                android:layout_width="@dimen/_265sdp"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="@dimen/_7sdp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/enter_name"
-                    android:textSize="@dimen/_13ssp"
-                    android:textColor="@color/general_text_color" />
-
-                <EditText
-                    android:id="@+id/editTextName"
-                    android:layout_width="@dimen/_165sdp"
-                    android:layout_height="@dimen/_36sdp"
-                    android:backgroundTint="@color/general_text_color"
-                    android:completionHintView="@color/general_text_color"
-                    android:hint="@string/name"
-                    android:drawableStart="@drawable/icon_person"
-                    android:drawablePadding="@dimen/_3sdp"
-                    android:drawableTint="@color/app_hint_color"
-                    android:textSize="@dimen/_12ssp"
-                    android:textColor="@color/general_text_color"
-                    android:textColorHint="@color/app_hint_color"
-                    android:autofillHints="name"
-                    android:inputType="text"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayoutNationality"
-                android:layout_width="345dp"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="10dp">
-
-                <TextView
-                    android:id="@+id/textView3"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/nationality"
-                    android:textSize="@dimen/_13ssp"
-                    android:textColor="@color/general_text_color" />
-
-                <AutoCompleteTextView
-                    android:id="@+id/autoCompleteTextViewNationalityAP"
-                    android:layout_width="@dimen/_165sdp"
-                    android:layout_height="@dimen/_36sdp"
-                    android:backgroundTint="@color/general_text_color"
-                    android:completionHintView="@color/general_text_color"
-                    android:hint="@string/enter_nationality"
-                    android:drawableStart="@drawable/icon_flag"
-                    android:drawablePadding="@dimen/_3sdp"
-                    android:drawableTint="@color/app_hint_color"
-                    android:textSize="@dimen/_12ssp"
-                    android:textColor="@color/general_text_color"
-                    android:textColorHint="@color/app_hint_color" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayoutBDay"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/_7sdp">
-
-                <TextView
-                    android:id="@+id/textView6"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/date_of_birth"
-                    android:textSize="@dimen/_12ssp"
-                    android:textColor="@color/general_text_color" />
-
-                <EditText
-                    android:id="@+id/editTextDateAP"
-                    android:layout_width="@dimen/_165sdp"
-                    android:layout_height="@dimen/_36sdp"
-                    android:backgroundTint="@color/general_text_color"
-                    android:completionHintView="@color/general_text_color"
-                    android:autofillHints="date of birthday"
-                    android:focusable="false"
-                    android:hint="@string/select_date_of_birth"
-                    android:drawableStart="@drawable/icon_calendar"
-                    android:drawableTint="@color/app_hint_color"
-                    android:drawablePadding="@dimen/_3sdp"
-                    android:inputType="date"
-                    android:textSize="@dimen/_12ssp"
-                    android:textColor="@color/general_text_color"
-                    android:textColorHint="@color/app_hint_color" />
-            </LinearLayout>
-
-                <RadioGroup
-                    android:id="@+id/radioGroupAddPlayer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="@dimen/_3sdp"
-                    android:layout_marginBottom="@dimen/_7sdp">
-
-                    <RadioButton
-                        android:id="@+id/radioButtonR"
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/_30sdp"
-                        android:layout_marginEnd="@dimen/_15sdp"
-                        android:buttonTint="@color/accent_text_color"
-                        android:text="@string/right_handed"
-                        android:textColor="@color/general_text_color"
-                        android:textSize="@dimen/_15sdp"/>
-
-                    <RadioButton
-                        android:id="@+id/radioButtonL"
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/_30sdp"
-                        android:buttonTint="@color/accent_text_color"
-                        android:text="@string/left_handed"
-                        android:textColor="@color/general_text_color"
-                        android:textSize="@dimen/_15sdp"/>
-                </RadioGroup>
-            <!--</LinearLayout>-->
-
-            <LinearLayout
-                android:id="@+id/linearLayoutStrength"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/_7sdp">
-
-                <TextView
-                    android:id="@+id/textView4"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/strength"
-                    android:textSize="@dimen/_13sdp"
-                    android:textColor="@color/general_text_color" />
-
-                <AutoCompleteTextView
-                    android:id="@+id/autoCompleteTextViewStrengthAP"
-                    android:layout_width="@dimen/_165sdp"
-                    android:layout_height="@dimen/_36sdp"
-                    android:backgroundTint="@color/general_text_color"
-                    android:completionHintView="@color/general_text_color"
-                    android:hint="@string/enter_strength"
-                    android:drawableStart="@drawable/icon_strength"
-                    android:drawablePadding="@dimen/_3sdp"
-                    android:drawableTint="@color/app_hint_color"
-                    android:textColor="@color/general_text_color"
-                    android:textColorHint="@color/app_hint_color" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayoutWeakness"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/textView5"
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:id="@+id/linearLayoutForm"
+                    android:layout_width="@dimen/_265sdp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/weakness"
-                    android:textSize="@dimen/_13sdp"
-                    android:textColor="@color/general_text_color" />
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
 
-                <AutoCompleteTextView
-                    android:id="@+id/autoCompleteTextViewWeaknessAP"
-                    android:layout_width="@dimen/_165sdp"
-                    android:layout_height="@dimen/_36sdp"
-                    android:backgroundTint="@color/general_text_color"
-                    android:completionHintView="@color/general_text_color"
-                    android:hint="@string/enter_weakness"
-                    android:drawableStart="@drawable/icon_weakness"
-                    android:drawablePadding="@dimen/_3sdp"
-                    android:drawableTint="@color/app_hint_color"
-                    android:textColor="@color/general_text_color"
-                    android:textColorHint="@color/app_hint_color" />
-            </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/linearLayoutName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/_7sdp"
+                        android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/enter_name"
+                            android:textColor="@color/general_text_color"
+                            android:textSize="@dimen/_13ssp" />
 
-                <TextView
-                    android:id="@+id/textViewNote"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Additional note:"
-                    android:textSize="@dimen/_13sdp"
-                    android:textColor="@color/general_text_color" />
-                <EditText
-                    android:id="@+id/editTextNote"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Enter your additional notes"
-                    android:textColorHint="@color/app_hint_color"/>
+                        <EditText
+                            android:id="@+id/editTextName"
+                            android:layout_width="@dimen/_165sdp"
+                            android:layout_height="@dimen/_36sdp"
+                            android:autofillHints="name"
+                            android:backgroundTint="@color/general_text_color"
+                            android:completionHintView="@color/general_text_color"
+                            android:drawableStart="@drawable/icon_person"
+                            android:drawablePadding="@dimen/_3sdp"
+                            android:drawableTint="@color/app_hint_color"
+                            android:hint="@string/name"
+                            android:inputType="text"
+                            android:textColor="@color/general_text_color"
+                            android:textColorHint="@color/app_hint_color"
+                            android:textSize="@dimen/_12ssp" />
+                    </LinearLayout>
 
-            </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/linearLayoutNationality"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="horizontal">
 
+                        <TextView
+                            android:id="@+id/textView3"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/nationality"
+                            android:textColor="@color/general_text_color"
+                            android:textSize="@dimen/_13ssp" />
 
-        </LinearLayout>
+                        <AutoCompleteTextView
+                            android:id="@+id/autoCompleteTextViewNationalityAP"
+                            android:layout_width="@dimen/_165sdp"
+                            android:layout_height="@dimen/_36sdp"
+                            android:backgroundTint="@color/general_text_color"
+                            android:completionHintView="@color/general_text_color"
+                            android:drawableStart="@drawable/icon_flag"
+                            android:drawablePadding="@dimen/_3sdp"
+                            android:drawableTint="@color/app_hint_color"
+                            android:hint="@string/enter_nationality"
+                            android:textColor="@color/general_text_color"
+                            android:textColorHint="@color/app_hint_color"
+                            android:textSize="@dimen/_12ssp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearLayoutBDay"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/_7sdp">
+
+                        <TextView
+                            android:id="@+id/textView6"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/date_of_birth"
+                            android:textColor="@color/general_text_color"
+                            android:textSize="@dimen/_12ssp" />
+
+                        <EditText
+                            android:id="@+id/editTextDateAP"
+                            android:layout_width="@dimen/_165sdp"
+                            android:layout_height="@dimen/_36sdp"
+                            android:autofillHints="date of birthday"
+                            android:backgroundTint="@color/general_text_color"
+                            android:completionHintView="@color/general_text_color"
+                            android:drawableStart="@drawable/icon_calendar"
+                            android:drawablePadding="@dimen/_3sdp"
+                            android:drawableTint="@color/app_hint_color"
+                            android:focusable="false"
+                            android:hint="@string/select_date_of_birth"
+                            android:inputType="date"
+                            android:textColor="@color/general_text_color"
+                            android:textColorHint="@color/app_hint_color"
+                            android:textSize="@dimen/_12ssp" />
+                    </LinearLayout>
+
+                    <RadioGroup
+                        android:id="@+id/radioGroupAddPlayer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:layout_marginBottom="@dimen/_7sdp"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/radioButtonR"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/_30sdp"
+                            android:layout_marginEnd="@dimen/_15sdp"
+                            android:buttonTint="@color/accent_text_color"
+                            android:text="@string/right_handed"
+                            android:textColor="@color/general_text_color"
+                            android:textSize="@dimen/_15sdp" />
+
+                        <RadioButton
+                            android:id="@+id/radioButtonL"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/_30sdp"
+                            android:buttonTint="@color/accent_text_color"
+                            android:text="@string/left_handed"
+                            android:textColor="@color/general_text_color"
+                            android:textSize="@dimen/_15sdp" />
+                    </RadioGroup>
+                    <!--</LinearLayout>-->
+
+                    <LinearLayout
+                        android:id="@+id/linearLayoutStrength"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/_7sdp">
+
+                        <TextView
+                            android:id="@+id/textView4"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/strength"
+                            android:textColor="@color/general_text_color"
+                            android:textSize="@dimen/_13sdp" />
+
+                        <AutoCompleteTextView
+                            android:id="@+id/autoCompleteTextViewStrengthAP"
+                            android:layout_width="@dimen/_165sdp"
+                            android:layout_height="@dimen/_36sdp"
+                            android:backgroundTint="@color/general_text_color"
+                            android:completionHintView="@color/general_text_color"
+                            android:drawableStart="@drawable/icon_strength"
+                            android:drawablePadding="@dimen/_3sdp"
+                            android:drawableTint="@color/app_hint_color"
+                            android:hint="@string/enter_strength"
+                            android:textColor="@color/general_text_color"
+                            android:textColorHint="@color/app_hint_color" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearLayoutWeakness"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/textView5"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/weakness"
+                            android:textColor="@color/general_text_color"
+                            android:textSize="@dimen/_13sdp" />
+
+                        <AutoCompleteTextView
+                            android:id="@+id/autoCompleteTextViewWeaknessAP"
+                            android:layout_width="@dimen/_165sdp"
+                            android:layout_height="@dimen/_36sdp"
+                            android:backgroundTint="@color/general_text_color"
+                            android:completionHintView="@color/general_text_color"
+                            android:drawableStart="@drawable/icon_weakness"
+                            android:drawablePadding="@dimen/_3sdp"
+                            android:drawableTint="@color/app_hint_color"
+                            android:hint="@string/enter_weakness"
+                            android:textColor="@color/general_text_color"
+                            android:textColorHint="@color/app_hint_color" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textViewNote"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Additional note:"
+                            android:textColor="@color/general_text_color"
+                            android:textSize="@dimen/_13sdp" />
+
+                        <EditText
+                            android:id="@+id/editTextNote"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Enter your additional notes"
+                            android:textColorHint="@color/app_hint_color"
+                            android:gravity="top"
+                            android:overScrollMode="always"
+                            android:inputType="textMultiLine"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
 
         <Button
             android:id="@+id/buttonAdd"
@@ -260,10 +280,11 @@
             android:textSize="@dimen/_16ssp"
             android:textColor="@color/white"
             android:backgroundTint="@color/darker_blue"
+            android:layout_marginBottom="@dimen/_30sdp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/linearLayoutForm"
-            app:layout_constraintStart_toStartOf="@+id/linearLayoutForm"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayoutForm"
+            app:layout_constraintEnd_toEndOf="@+id/scrollViewContainer"
+            app:layout_constraintStart_toStartOf="@+id/scrollViewContainer"
+            app:layout_constraintTop_toBottomOf="@+id/scrollViewContainer"
             app:layout_constraintVertical_bias="0.182" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

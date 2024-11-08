@@ -95,7 +95,7 @@
     <string name="second_serve">2st Serve</string>
     <string name="user_email">user_email@smth.com</string>
     <string name="add_player">Add Player</string>
-    <string name="enter_name">Name</string>
+    <string name="enter_name">Name:</string>
     <string name="left_handed">left-handed</string>
     <string name="right_handed">right-handed</string>
     <string name="delete">Delete</string>

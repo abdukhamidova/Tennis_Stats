@@ -39,6 +39,16 @@
             android:text="@string/resume_match"
             android:textSize="@dimen/_15ssp" />
         <Button
+            android:id="@+id/buttonShortSummary"
+            android:layout_width="@dimen/_153sdp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_7sdp"
+            android:backgroundTint="@color/dialog_textTitle_color"
+            android:textColor="@color/dialog_text_color"
+            android:text="Short Summary"
+            android:textSize="@dimen/_15ssp" />
+        <Button
             android:id="@+id/buttonViewStatsRoS"
             android:layout_width="@dimen/_153sdp"
             android:layout_height="wrap_content"
