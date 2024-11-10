@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Tennis Stats</string>
     <string name="open_nav">Open</string>
     <string name="close_nav">Close</string>
@@ -118,5 +118,7 @@
     <string name="no">NO</string>
     <string name="d_add_player_to_team">Would you like to add a player to your team?</string>
     <string name="hint_team">Enter team name</string>
+    <string name="finished">Finished</string>
+    <string name="inprogress" tools:ignore="PrivateResource">In Progress</string>
 
 </resources>

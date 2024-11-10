@@ -158,19 +158,12 @@ class ViewStatsActivity : AppCompatActivity() {
         spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
                 setAppValues(app,selectedSetNumber,player1name,player2name,spinner2.selectedItemPosition)
-                setTableValue(app,spinner2.selectedItemPosition)
             }
             override fun onNothingSelected(parent: AdapterView<*>) {
 
             }
         }
     //lista rozwijana TOTAL,RETURN,WINNERS,FORCED ERR.,UNFOR. ERR.
-
-    //Wartosci poczatkowe: TOTAL POINTS i ALL
-        Handler(Looper.getMainLooper()).postDelayed({
-            setAppValues(app,selectedSetNumber,player1name,player2name,spinner2.selectedItemPosition)
-            setTableValue(app, spinner2.selectedItemPosition)
-        },900)
 
         binding.buttonAllStats.setOnClickListener {
             selectedSetNumber = 0
@@ -185,7 +178,6 @@ class ViewStatsActivity : AppCompatActivity() {
             binding.buttonSet3Stats.setTextColor(ContextCompat.getColor(this, R.color.general_text_color))
             //ustawienie statystyk ALL
             setAppValues(app,selectedSetNumber,player1name,player2name,spinner2.selectedItemPosition)
-            setTableValue(app,spinner2.selectedItemPosition)
         }
         binding.buttonSet1Stats.setOnClickListener {
             Log.d("ViewStatsActivity", "Button clicked")
@@ -201,7 +193,6 @@ class ViewStatsActivity : AppCompatActivity() {
             binding.buttonSet3Stats.setTextColor(ContextCompat.getColor(this, R.color.general_text_color))
             //ustawienie statystyk SET1
             setAppValues(app,selectedSetNumber,player1name,player2name,spinner2.selectedItemPosition)
-            setTableValue(app,spinner2.selectedItemPosition)
         }
         binding.buttonSet2Stats.setOnClickListener {
             if (set2p1.text != ""){
@@ -217,7 +208,6 @@ class ViewStatsActivity : AppCompatActivity() {
                 binding.buttonSet3Stats.setTextColor(ContextCompat.getColor(this, R.color.general_text_color))
                 //ustawienie statystyk SET2
                 setAppValues(app, selectedSetNumber, player1name, player2name,spinner2.selectedItemPosition)
-                setTableValue(app,spinner2.selectedItemPosition)
             }
             else{
                 Toast.makeText(this, "Set2 does not exist", Toast.LENGTH_SHORT).show()
@@ -237,7 +227,6 @@ class ViewStatsActivity : AppCompatActivity() {
                 binding.buttonSet3Stats.setTextColor(ContextCompat.getColor(this, R.color.white))
                 //ustawienie statystyk SET3
                 setAppValues(app,selectedSetNumber,player1name,player2name,spinner2.selectedItemPosition)
-                setTableValue(app,spinner2.selectedItemPosition)
             }
             else{
                 Toast.makeText(this, "Set3 does not exist", Toast.LENGTH_SHORT).show()
@@ -651,11 +640,13 @@ class ViewStatsActivity : AppCompatActivity() {
                     app.unforcederrorlobBH2 = unforcedErrorLobBH2Deferred.await().also { app.totalpoints1 += it }
                 } //UNFORCED ERRORS
             }
+            setTableValue(app,binding.spinnerStatsCategory.selectedItemPosition)
         }
     }
 
     fun setTableValue(app: Stats,position: Int){
         val scale = resources.displayMetrics.density
+        val minBarWidth = (4 * scale + 0.5f).toInt()
         when(position){
             0 -> {
                 binding.totalPlayer1.text = app.totalpoints1.toString()

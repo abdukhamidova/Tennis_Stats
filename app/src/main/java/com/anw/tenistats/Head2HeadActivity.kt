@@ -5,6 +5,8 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ImageButton
+import android.widget.ListPopupWindow
+import android.widget.PopupWindow
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
@@ -13,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import com.anw.tenistats.com.anw.tenistats.ResumeOrStatsDialogActivity
 import com.anw.tenistats.databinding.ActivityHead2HeadBinding
 import com.anw.tenistats.ui.theme.NavigationDrawerHelper
 import com.google.android.material.navigation.NavigationView
@@ -37,6 +40,8 @@ class Head2HeadActivity : AppCompatActivity() {
     private lateinit var spinner2: Spinner
     private val finishedMatches = mutableListOf<String>()
     private val inProgressMatches = mutableListOf<String>()
+    private val finishedDates = mutableListOf<Long>()
+    private val inProgressDates = mutableListOf<Long>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,7 +83,6 @@ class Head2HeadActivity : AppCompatActivity() {
             FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
                 .getReference(user.toString()).child("Players")
 
-        var isSpinnersSet = false
         database.orderByChild("active").equalTo(true).addValueEventListener(object :
             ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -87,7 +91,7 @@ class Head2HeadActivity : AppCompatActivity() {
                     val playerName = playerSnapshot.key
                     playerName?.let { playersList.add(it)}
                 }
-                isSpinnersSet = setSpinners()
+                setSpinners()
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -99,68 +103,32 @@ class Head2HeadActivity : AppCompatActivity() {
                 ).show()
             }
         })
-
-        if(isSpinnersSet) {
-            //lista rozwijana player1
-            spinner1.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(
-                    parent: AdapterView<*>,
-                    view: View?,
-                    position: Int,
-                    id: Long
-                ) {
-
-                }
-
-                override fun onNothingSelected(parent: AdapterView<*>) {
-                    // Code to perform if nothing is selected
-
-                }
-            }
-            //lista rozwijana player1
-
-            //lista rozwijana player2
-            spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(
-                    parent: AdapterView<*>,
-                    view: View?,
-                    position: Int,
-                    id: Long
-                ) {
-                }
-
-                override fun onNothingSelected(parent: AdapterView<*>) {
-                    // Code to perform if nothing is selected
-                }
-            }
-            //lista rozwijana player2
-        }
-
-        // Obsługa przycisku SUBMIT
-        binding.buttonSubmit.setOnClickListener {
-            var player1 = binding.autoNameP1?.selectedItem.toString() //pobiera Imię i Nazwisko gracza
-            var player2 = binding.autoNameP2?.selectedItem.toString()
-            if (player1.isEmpty() || player2.isEmpty()) {
-                Toast.makeText(this, "Don't leave empty fields.", Toast.LENGTH_SHORT).show()
-                binding.layoutH2H.visibility = View.GONE
-            } else if (player1 == player2) {
-                Toast.makeText(
-                    this,
-                    "You chose the same player. Choose another opponent.",
-                    Toast.LENGTH_SHORT
-                ).show()
-                binding.layoutH2H.visibility = View.GONE
-            } else {
-                binding.layoutH2H.visibility = View.VISIBLE
-                //czyszczenie listy przed kolejnym liczeniem
-                finishedMatches.clear()
-                inProgressMatches.clear()
-                fetchMatches()
-            }
+    }
+    private fun setData(){
+        var player1 = binding.autoNameP1?.selectedItem.toString() //pobiera Imię i Nazwisko gracza
+        var player2 = binding.autoNameP2?.selectedItem.toString()
+        if (player1.isEmpty() || player2.isEmpty()) {
+            Toast.makeText(this, "Don't leave empty fields.", Toast.LENGTH_SHORT).show()
+            binding.layoutH2H.visibility = View.GONE
+        } else if (player1 == player2) {
+            Toast.makeText(
+                this,
+                "You chose the same player. Choose another opponent.",
+                Toast.LENGTH_SHORT
+            ).show()
+            binding.layoutH2H.visibility = View.GONE
+        } else {
+            binding.layoutH2H.visibility = View.VISIBLE
+            //czyszczenie listy przed kolejnym liczeniem
+            finishedMatches.clear()
+            finishedDates.clear()
+            inProgressMatches.clear()
+            inProgressDates.clear()
+            fetchMatches()
         }
     }
 
-    private fun setSpinners() : Boolean {
+    private fun setSpinners() {
         spinner1 = binding.autoNameP1
         val adapter1 = ArrayAdapter(this, R.layout.spinner_item_h2h_left_base, playersList)//playerList)
         adapter1.setDropDownViewResource(R.layout.spinner_item_h2h_left)
@@ -171,7 +139,40 @@ class Head2HeadActivity : AppCompatActivity() {
         adapter2.setDropDownViewResource(R.layout.spinner_item_h2h_right)
         spinner2.adapter = adapter2
 
-        return true
+        //lista rozwijana player1
+        spinner1.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                setData()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // Code to perform if nothing is selected
+
+            }
+        }
+        //lista rozwijana player1
+
+        //lista rozwijana player2
+        spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                setData()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // Code to perform if nothing is selected
+            }
+        }
+        //lista rozwijana player2
     }
 
     private fun fetchMatches() {
@@ -199,25 +200,29 @@ class Head2HeadActivity : AppCompatActivity() {
                             val score = formatScore(it,isFirstPl1)
                             if (it.winner != null) {
                                 // Finished match: display date and score
-                                finishedMatches.add("$formattedDate \t $score")
+                                //finishedMatches.add("$formattedDate \t $score")
                                 if(it.winner == binding.autoNameP1.selectedItem){
                                     matches_won_pl1++
+                                    finishedMatches.add("◁ $formattedDate \t $score")
                                 }
                                 else{
                                     matches_won_pl2++
+                                    finishedMatches.add("▶ $formattedDate \t $score")
                                 }
+                                finishedDates.add(it.data)
                             } else {
                                 // In Progress: include points in score
                                 val scoreWithPoints = if(isFirstPl1)
                                     { "$score (${it.pkt1}:${it.pkt2})" }
                                     else{ "$score (${it.pkt2}:${it.pkt1})" }
                                 inProgressMatches.add("$formattedDate \t $scoreWithPoints")
+                                inProgressDates.add(it.data)
                             }
                         }
                     }
                 }
                 setMatchesWonGraphs(matches_won_pl1, matches_won_pl2)
-                displayMatches()
+                //displayMatches()
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
@@ -235,18 +240,23 @@ class Head2HeadActivity : AppCompatActivity() {
         binding.matchesWonPlayer1.text = matches_won_pl1.toString()
         binding.matchesWonPlayer2.text = matches_won_pl2.toString()
 
+        val minBarWidth = (4 * scale + 0.5f).toInt()
+
         if (matches_won_pl1 == matches_won_pl2 && matches_won_pl1 == 0) {
             binding.graphMatchesWonPlayer1.layoutParams.width = 0
             binding.graphMatchesWonPlayer2.layoutParams.width = 0
         } else if (matches_won_pl1 > matches_won_pl2) {
             binding.graphMatchesWonPlayer1.layoutParams.width = (100 * scale + 0.5f).toInt()
-            val wyn = (matches_won_pl2.toDouble() * 100 / matches_won_pl1.toDouble()).toInt()
-            binding.graphMatchesWonPlayer2.layoutParams.width = (wyn * scale + 0.5f).toInt()
+            val proportionWidth = ((matches_won_pl2.toDouble() / matches_won_pl1.toDouble()) * 100 * scale + 0.5f).toInt()
+            binding.graphMatchesWonPlayer2.layoutParams.width = maxOf(proportionWidth, minBarWidth)
         } else {
             binding.graphMatchesWonPlayer2.layoutParams.width = (100 * scale + 0.5f).toInt()
-            val wyn = (matches_won_pl1.toDouble() * 100 / matches_won_pl2.toDouble()).toInt()
-            binding.graphMatchesWonPlayer1.layoutParams.width = (wyn * scale + 0.5f).toInt()
+            val proportionWidth = ((matches_won_pl1.toDouble() / matches_won_pl2.toDouble()) * 100 * scale + 0.5f).toInt()
+            binding.graphMatchesWonPlayer1.layoutParams.width = maxOf(proportionWidth, minBarWidth)
         }
+        binding.graphMatchesWonPlayer1.requestLayout()
+        binding.graphMatchesWonPlayer2.requestLayout()
+        displayMatches()
     }
 
     private fun formatDate(dateInMillis: Long): String {
@@ -273,10 +283,27 @@ class Head2HeadActivity : AppCompatActivity() {
 
     private fun displayMatches() {
         // Combine finished and in-progress matches
-        val allMatches = listOf("Finished") + finishedMatches + listOf("In Progress") + inProgressMatches
+        //val finished = listOf("Finished") + finishedMatches + listOf("In Progress") + inProgressMatches
 
         // Set up the ListView with ArrayAdapter
-        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, allMatches)
-        binding.matchesList.adapter = adapter
+        val adapter1 = ArrayAdapter(this, android.R.layout.simple_list_item_1, finishedMatches)
+        binding.finishedList.adapter = adapter1
+        binding.finishedList.setOnItemClickListener { parent, view, position, id ->
+            val dateInMillis = finishedDates.get(position)
+            val ResumeOrStatsDialog = ResumeOrStatsDialogActivity(this)
+            ResumeOrStatsDialog.show(
+                dateInMillis
+            )
+        }
+
+        val adapter2 = ArrayAdapter(this, android.R.layout.simple_list_item_1, inProgressMatches)
+        binding.inProgressList.adapter = adapter2
+        binding.inProgressList.setOnItemClickListener { parent, view, position, id ->
+            val dateInMillis = inProgressDates.get(position)
+            val ResumeOrStatsDialog = ResumeOrStatsDialogActivity(this)
+            ResumeOrStatsDialog.show(
+                dateInMillis
+            )
+        }
     }
 }

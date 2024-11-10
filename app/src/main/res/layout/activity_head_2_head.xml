@@ -74,21 +74,6 @@
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/buttonSubmit"
-            android:layout_width="@dimen/_230sdp"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/darker_blue"
-            android:text="@string/submit"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_16ssp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/searchPlayersLayout"
-            app:layout_constraintHorizontal_bias="0.521"
-            app:layout_constraintStart_toStartOf="@+id/searchPlayersLayout"
-            app:layout_constraintTop_toBottomOf="@+id/searchPlayersLayout"
-            app:layout_constraintVertical_bias="0.03" />
-
         <LinearLayout
             android:id="@+id/layoutH2H"
             android:layout_width="match_parent"
@@ -100,9 +85,9 @@
             android:background="@color/scrollView_bg_color"
             android:theme="@style/scrollViewTextAppearance"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/buttonSubmit"
-            app:layout_constraintStart_toStartOf="@id/buttonSubmit"
-            app:layout_constraintTop_toBottomOf="@id/buttonSubmit"
+            app:layout_constraintEnd_toEndOf="@id/searchPlayersLayout"
+            app:layout_constraintStart_toStartOf="@id/searchPlayersLayout"
+            app:layout_constraintTop_toBottomOf="@id/searchPlayersLayout"
             app:layout_constraintVertical_bias="0.0"
             android:orientation="vertical"
             android:visibility="gone">
@@ -184,22 +169,48 @@
                 app:layout_constraintTop_toBottomOf="@+id/layoutH2H"
                 app:layout_constraintVertical_bias="0.021" /> <!--scores text-->
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_20sdp"
+                android:text="@string/finished"
+                android:textAlignment="textStart"
+                android:textStyle="bold"
+                android:textColor="@color/inverted_general_text_color"
+                android:textSize="@dimen/_13sdp"
+                android:paddingLeft="@dimen/_6sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/textViewScores"
+                app:layout_constraintStart_toStartOf="@+id/textViewScores"
+                app:layout_constraintTop_toBottomOf="@+id/textViewScores"
+                app:layout_constraintVertical_bias="0.021"
+                android:background="@color/general_text_color"/>
+
             <ListView
-                android:id="@+id/matchesList"
+                android:id="@+id/finishedList"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
-<!--                android:layout_marginStart="@dimen/_15sdp"-->
-<!--                android:layout_marginEnd="@dimen/_15sdp"-->
-<!--                android:layout_marginBottom="@dimen/_2sdp"-->
-<!--                android:background="@color/transparent"-->
-<!--                android:padding="@dimen/_3sdp"-->
-<!--                app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                app:layout_constraintEnd_toEndOf="@+id/textViewScores"-->
-<!--                app:layout_constraintHorizontal_bias="1.0"-->
-<!--                app:layout_constraintStart_toStartOf="@+id/textViewScores"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/textViewScores"-->
-<!--                app:layout_constraintVertical_bias="0.0" /> &lt;!&ndash;matches score&ndash;&gt;-->
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_20sdp"
+                android:text="@string/inprogress"
+                android:textAlignment="textStart"
+                android:textStyle="bold"
+                android:textColor="@color/inverted_general_text_color"
+                android:textSize="@dimen/_13sdp"
+                android:paddingLeft="@dimen/_6sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/textViewScores"
+                app:layout_constraintStart_toStartOf="@+id/textViewScores"
+                app:layout_constraintTop_toBottomOf="@+id/textViewScores"
+                app:layout_constraintVertical_bias="0.021"
+                android:background="@color/general_text_color"
+                tools:ignore="PrivateResource" />
+
+            <ListView
+                android:id="@+id/inProgressList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

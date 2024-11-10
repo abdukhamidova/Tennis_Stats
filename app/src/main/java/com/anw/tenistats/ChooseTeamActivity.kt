@@ -106,8 +106,8 @@ class ChooseTeamDialog(private val context: Context, private val playerName: Str
                 }
 
                 // Aktualizacja adaptera Spinnera
-                val adapter = ArrayAdapter(context, android.R.layout.simple_spinner_item, teamList.map { it.name })
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                val adapter = ArrayAdapter(context, R.layout.spinner_item_team_base, teamList.map { it.name })
+                adapter.setDropDownViewResource(R.layout.spinner_item_team)
                 spinnerTeamList.adapter = adapter
             }
         }.addOnFailureListener { exception ->

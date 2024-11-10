@@ -37,7 +37,8 @@
             android:backgroundTint="@color/dialog_textTitle_color"
             android:textColor="@color/dialog_text_color"
             android:text="@string/resume_match"
-            android:textSize="@dimen/_15ssp" />
+            android:textSize="@dimen/_15ssp"
+            android:visibility="gone"/>
         <Button
             android:id="@+id/buttonShortSummary"
             android:layout_width="@dimen/_153sdp"
