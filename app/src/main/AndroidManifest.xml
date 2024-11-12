@@ -83,6 +83,10 @@
             android:exported="false"
             android:screenOrientation="portrait"/>
         <activity
+            android:name=".ActivityMatchShortSummary"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
             android:name=".mainpage.MenuActivity"
             android:exported="false"
             android:screenOrientation="portrait"/>

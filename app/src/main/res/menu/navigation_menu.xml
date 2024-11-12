@@ -27,7 +27,7 @@
 
         <item
             android:id="@+id/nav_h2h"
-            android:icon="@drawable/icon_players"
+            android:icon="@drawable/icon_head2head"
             android:title="Head 2 Head" />
     </group>
 

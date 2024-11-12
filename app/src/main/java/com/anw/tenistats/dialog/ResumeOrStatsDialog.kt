@@ -12,6 +12,7 @@ import android.widget.TextView
 import android.widget.Toast
 //import com.anw.tenistats.ActivityMatchShortSummary
 import androidx.transition.Visibility
+import com.anw.tenistats.ActivityMatchShortSummary
 import com.anw.tenistats.R
 import com.anw.tenistats.stats.StatsClass
 import com.anw.tenistats.stats.ViewHistoryActivity
@@ -83,6 +84,13 @@ class ResumeOrStatsDialog(private val context: Context, private val openedFromSt
 
                     val btnDelete : ImageView = dialogView.findViewById(R.id.buttonDelete)
 
+                    if(matchSnapshot.child("winner").exists()){
+                        btnResume.visibility = View.GONE
+                    }
+                    else{
+                        btnResume.visibility = View.VISIBLE
+                    }
+
                     btnResume.setOnClickListener {
                         //zapisanie wyniku w zmiennych globalnych
                         /*if (app != null){
@@ -132,7 +140,7 @@ class ResumeOrStatsDialog(private val context: Context, private val openedFromSt
                         alertDialog.dismiss()
                     }
                     btnSummary.setOnClickListener {
-                        val intent = Intent(context, ViewMatchesActivity::class.java)   //należy zmienić przejście do Stats
+                        val intent = Intent(context, ActivityMatchShortSummary::class.java)   //należy zmienić przejście do Stats
                         //intent.putExtra("matchDateInMillis", milliseconds)
                         context.startActivity(intent)
                         alertDialog.dismiss()
