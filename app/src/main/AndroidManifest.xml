@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
-        android:name=".Stats"
+        android:name=".stats.StatsClass"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -14,19 +14,19 @@
         android:theme="@style/Theme.TenniStats"
         tools:targetApi="31">
         <activity
-            android:name=".DeletePlayerActivity"
+            android:name=".player.DeletePlayerActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".DeleteMatchDialogActivity"
+            android:name=".dialog.DeleteMatchDialog"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".AddPlayerActivity"
+            android:name=".player.AddPlayerActivity"
             android:exported="false"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".PlayerDetailsActivity"
+            android:name=".player.PlayerDetailsActivity"
             android:exported="false"
             android:screenOrientation="portrait"/>
         <!--
@@ -35,15 +35,15 @@
             android:exported="false" />
         -->
         <activity
-            android:name=".ViewHistoryActivity"
+            android:name=".stats.ViewHistoryActivity"
             android:exported="false"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".ViewStatsActivity"
+            android:name=".stats.ViewStatsActivity"
             android:exported="false"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".ViewPlayerActivity"
+            android:name=".player.ViewPlayerActivity"
             android:exported="false"
             android:label="@string/title_activity_view_player"
             android:theme="@style/Theme.TenniStats"
@@ -54,40 +54,40 @@
             android:exported="false"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".EndOfMatchActivity"
+            android:name=".matchplay.EndOfMatchActivity"
             android:exported="false"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".DetailsActivity"
+            android:name=".matchplay.BallInPlayDetailsActivity"
             android:exported="false"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".ActivityBallInPlay"
+            android:name=".matchplay.BallInPlayActivity"
             android:exported="false"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".ActivityStartPoint"
+            android:name=".matchplay.StartPointActivity"
             android:exported="false"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".ActivityServe"
+            android:name=".matchplay.ServeActivity"
             android:exported="false"
-            android:parentActivityName=".StartNewActivity"
+            android:parentActivityName=".matchplay.StartNewActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".SignUpActivity"
-            android:exported="false"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name=".SignInActivity"
+            android:name=".mainpage.SignUpActivity"
             android:exported="false"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".ActivityMenu"
+            android:name=".mainpage.SignInActivity"
             android:exported="false"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".MainActivity"
+            android:name=".mainpage.MenuActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".mainpage.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -96,12 +96,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Head2HeadActivity"
+            android:name=".stats.Head2HeadActivity"
             android:exported="true"/>
         <activity
-            android:name=".StartNewActivity"
+            android:name=".matchplay.StartNewActivity"
             android:exported="false"
-            android:parentActivityName=".ActivityMenu"
+            android:parentActivityName=".mainpage.MenuActivity"
             android:screenOrientation="portrait"/>
 
         <meta-data

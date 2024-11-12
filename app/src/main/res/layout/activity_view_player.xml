@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:openDrawer="start"
-    tools:context=".ViewPlayerActivity"
+    tools:context=".player.ViewPlayerActivity"
     tools:ignore="HardcodedText">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/app_bg_color"
-        tools:context=".ViewPlayerActivity">
+        tools:context=".player.ViewPlayerActivity">
 
         <include
             android:id="@+id/include"
