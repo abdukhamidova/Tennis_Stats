@@ -1,5 +1,6 @@
 package com.anw.tenistats
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -14,6 +15,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.anw.tenistats.com.anw.tenistats.AddPointDialog
+import com.anw.tenistats.com.anw.tenistats.ResumeOrStatsDialogActivity
 import com.anw.tenistats.databinding.ActivityStartPointBinding
 import com.anw.tenistats.databinding.ActivityViewStatsBinding
 import com.anw.tenistats.ui.theme.NavigationDrawerHelper
@@ -93,6 +95,12 @@ class ActivityStartPoint : AppCompatActivity() {
 
             //ustawienie wyniku w tabeli
             setscore(player1,player2,serve1,serve2,set1p1,set2p1,set3p1,set1p2,set2p2,set3p2,pkt1,pkt2)
+
+            database.child("winner").get().addOnSuccessListener { winnerSnapshot ->
+                if(winnerSnapshot.exists()){
+                    startActivity(Intent(this,ViewMatchesActivity::class.java))
+                }
+            }
         }.addOnFailureListener {
             Toast.makeText(this, "Failed to read Current Match ID", Toast.LENGTH_SHORT).show()
         }
@@ -436,7 +444,6 @@ class ActivityStartPoint : AppCompatActivity() {
                 // Handle failure
             }
         }
-
         database.child("winner").get().addOnSuccessListener { dataSnapshot ->
             if (dataSnapshot.exists()) {
                 val winner = dataSnapshot.getValue(String::class.java)

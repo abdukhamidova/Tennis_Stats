@@ -13,7 +13,6 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.anw.tenistats.databinding.ActivityBallInPlayBinding
-import com.anw.tenistats.databinding.ActivityViewStatsBinding
 import com.anw.tenistats.ui.theme.NavigationDrawerHelper
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
@@ -33,7 +32,6 @@ class ActivityBallInPlay : AppCompatActivity() {
         enableEdgeToEdge()
         binding = ActivityBallInPlayBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -187,7 +185,6 @@ class ActivityBallInPlay : AppCompatActivity() {
             }
         }
     }
-
     private fun setscore(
         player1: TextView, player2: TextView, serve1: TextView, serve2: TextView,
         set1p1: TextView, set2p1: TextView, set3p1: TextView, set1p2: TextView,
@@ -216,165 +213,7 @@ class ActivityBallInPlay : AppCompatActivity() {
             }
         }
 
-        database.child("winner").get().addOnSuccessListener { dataSnapshot ->
-            if (dataSnapshot.exists()) {
-                val winner = dataSnapshot.getValue(String::class.java)
-                val goldenLaurel = getGoldenDrawable(applicationContext, R.drawable.icon_laurel3)
-                serve1.setCompoundDrawablesWithIntrinsicBounds(goldenLaurel, null, null, null)
-                serve2.setCompoundDrawablesWithIntrinsicBounds(goldenLaurel, null, null, null)
-                if (winner == player1.text) {
-                    serve1.visibility = View.VISIBLE
-                    serve2.visibility = View.INVISIBLE
-                } else {
-                    serve1.visibility = View.INVISIBLE
-                    serve2.visibility = View.VISIBLE
-                }
-            } else {
-                database.child("LastServePlayer").get().addOnSuccessListener { dataSnapshot ->
-                    val lastServe = dataSnapshot.getValue(String::class.java)
-                    serve1.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ball, 0, 0, 0)
-                    serve2.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ball, 0, 0, 0)
-                    if (lastServe == player1.text) {
-                        serve1.visibility = View.VISIBLE
-                        serve2.visibility = View.INVISIBLE
-                    } else {
-                        serve1.visibility = View.INVISIBLE
-                        serve2.visibility = View.VISIBLE
-                    }
-                }.addOnFailureListener {
-                    // Handle failure
-                }
-            }
-        }.addOnFailureListener {
-            // Handle failure
-        }
+        binding.textPL1.text = player1.text
+        binding.textPL2.text = player2.text
     }
-
-    /*fun setscore(player1: TextView,player2: TextView,serve1: TextView,serve2: TextView,set1p1: TextView,set2p1: TextView,set3p1: TextView,set1p2: TextView,set2p2: TextView,set3p2: TextView,pkt1:TextView,pkt2:TextView)
-    {
-        database.child("player1").get().addOnSuccessListener { dataSnapshot ->
-            // Pobranie wartości "player1" z bazy danych
-            val player1Value = dataSnapshot.getValue(String::class.java)
-            // Ustawienie wartości w TextView
-            player1.text = player1Value.toString()
-            binding.textPL1.text = player1Value.toString()
-        }.addOnFailureListener { exception ->
-            // Obsługa błędów
-        }
-
-        database.child("player2").get().addOnSuccessListener { dataSnapshot ->
-            // Pobranie wartości "player1" z bazy danych
-            val player2Value = dataSnapshot.getValue(String::class.java)
-            // Ustawienie wartości w TextView
-            player2.text = player2Value.toString()
-            binding.textPL2.text = player2Value.toString()
-        }.addOnFailureListener { exception ->
-            // Obsługa błędów
-        }
-
-        database.child("set1p1").get().addOnSuccessListener { dataSnapshot ->
-            // Pobranie wartości "player1" z bazy danych
-            val set1p1Value = dataSnapshot.getValue(String::class.java)
-            // Ustawienie wartości w TextView
-            set1p1.text = set1p1Value
-        }.addOnFailureListener { exception ->
-            // Obsługa błędów
-        }
-        database.child("set2p1").get().addOnSuccessListener { dataSnapshot ->
-            // Pobranie wartości "player1" z bazy danych
-            val set2p1Value = dataSnapshot.getValue(String::class.java)
-            // Ustawienie wartości w TextView
-            set2p1.text = set2p1Value
-        }.addOnFailureListener { exception ->
-            // Obsługa błędów
-        }
-        database.child("set3p1").get().addOnSuccessListener { dataSnapshot ->
-            // Pobranie wartości "player1" z bazy danych
-            val set3p1Value = dataSnapshot.getValue(String::class.java)
-            // Ustawienie wartości w TextView
-            set3p1.text = set3p1Value
-        }.addOnFailureListener { exception ->
-            // Obsługa błędów
-        }
-        database.child("set1p2").get().addOnSuccessListener { dataSnapshot ->
-            // Pobranie wartości "player1" z bazy danych
-            val set1p2Value = dataSnapshot.getValue(String::class.java)
-            // Ustawienie wartości w TextView
-            set1p2.text = set1p2Value
-        }.addOnFailureListener { exception ->
-            // Obsługa błędów
-        }
-        database.child("set2p2").get().addOnSuccessListener { dataSnapshot ->
-            // Pobranie wartości "player1" z bazy danych
-            val set2p2Value = dataSnapshot.getValue(String::class.java)
-            // Ustawienie wartości w TextView
-            set2p2.text = set2p2Value
-        }.addOnFailureListener { exception ->
-            // Obsługa błędów
-        }
-        database.child("set3p2").get().addOnSuccessListener { dataSnapshot ->
-            // Pobranie wartości "player1" z bazy danych
-            val set3p2Value = dataSnapshot.getValue(String::class.java)
-            // Ustawienie wartości w TextView
-            set3p2.text = set3p2Value
-        }.addOnFailureListener { exception ->
-            // Obsługa błędów
-        }
-        database.child("pkt1").get().addOnSuccessListener { dataSnapshot ->
-            // Pobranie wartości "player1" z bazy danych
-            val pkt1Value = dataSnapshot.getValue(String::class.java)
-            // Ustawienie wartości w TextView
-            pkt1.text = pkt1Value
-        }.addOnFailureListener { exception ->
-            // Obsługa błędów
-        }
-        database.child("pkt2").get().addOnSuccessListener { dataSnapshot ->
-            // Pobranie wartości "player1" z bazy danych
-            val pkt2Value = dataSnapshot.getValue(String::class.java)
-            // Ustawienie wartości w TextView
-            pkt2.text = pkt2Value
-        }.addOnFailureListener { exception ->
-            // Obsługa błędów
-        }
-        database.child("winner").get().addOnSuccessListener { dataSnapshot ->
-            // Pobranie wartości "player1" z bazy danych
-            if(dataSnapshot.exists()){
-                // Pobranie wartości "player1" z bazy danych
-                val winner = dataSnapshot.getValue(String::class.java)
-                val goldenLaurel = getGoldenDrawable(applicationContext, R.drawable.icon_laurel3)
-                serve1.setCompoundDrawablesWithIntrinsicBounds(goldenLaurel, null, null, null)
-                serve2.setCompoundDrawablesWithIntrinsicBounds(goldenLaurel, null, null, null)
-                // Ustawienie wartości w TextView
-                if(winner==player1.text){
-                    serve1.visibility = View.VISIBLE
-                    serve2.visibility = View.INVISIBLE
-                }
-                else{
-                    serve1.visibility = View.INVISIBLE
-                    serve2.visibility = View.VISIBLE
-                }
-            }
-            else{
-                database.child("LastServePlayer").get().addOnSuccessListener { dataSnapshot ->
-                    // Pobranie wartości "player1" z bazy danych
-                    val lastserve = dataSnapshot.getValue(String::class.java)
-                    serve1.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ball, 0, 0, 0)
-                    serve2.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ball, 0, 0, 0)
-                    // Ustawienie wartości w TextView
-                    if(lastserve==player1.text){
-                        serve1.visibility = View.VISIBLE
-                        serve2.visibility = View.INVISIBLE
-                    }
-                    else{
-                        serve1.visibility = View.INVISIBLE
-                        serve2.visibility = View.VISIBLE
-                    }
-                }.addOnFailureListener { exception ->
-                    // Obsługa błędów
-                }
-            }
-        }.addOnFailureListener { exception ->
-            // Obsługa błędów
-        }
-    }*/
 }

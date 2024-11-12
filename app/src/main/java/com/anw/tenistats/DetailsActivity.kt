@@ -14,6 +14,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.anw.tenistats.com.anw.tenistats.AddPointDialog
+import com.anw.tenistats.databinding.ActivityDetailsBinding
 import com.anw.tenistats.ui.theme.NavigationDrawerHelper
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
@@ -21,6 +22,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
 class DetailsActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityDetailsBinding
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var navigationDrawerHelper: NavigationDrawerHelper
     private lateinit var drawerLayout: DrawerLayout
@@ -29,7 +31,8 @@ class DetailsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_details)
+        binding = ActivityDetailsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -64,28 +67,28 @@ class DetailsActivity : AppCompatActivity() {
         //MENU
 
         //ustawienie textView kto i co
-        findViewById<TextView>(R.id.textPlayerName).apply {
+        binding.textPlayerName.apply {
             text = intent.getStringExtra("Kto")
         }
-        findViewById<TextView>(R.id.textShot).apply {
+        binding.textShot.apply {
             text = intent.getStringExtra("Co")
         }
 
         val app = application as Stats
-        val serve1 = findViewById<TextView>(R.id.textViewServe1Details)
-        val serve2 = findViewById<TextView>(R.id.textViewServe2Details)
-        val pkt1 = findViewById<TextView>(R.id.textviewPlayer1PktDetails)
-        val set1p1 = findViewById<TextView>(R.id.textviewPlayer1Set1Details)
-        val set2p1 = findViewById<TextView>(R.id.textviewPlayer1Set2Details)
-        val set3p1 = findViewById<TextView>(R.id.textviewPlayer1Set3Details)
-        val pkt2 = findViewById<TextView>(R.id.textviewPlayer2PktDetails)
-        val set1p2 = findViewById<TextView>(R.id.textviewPlayer2Set1Details)
-        val set2p2 = findViewById<TextView>(R.id.textviewPlayer2Set2Details)
-        val set3p2 = findViewById<TextView>(R.id.textviewPlayer2Set3Details)
+        val serve1 = binding.textViewServe1Details
+        val serve2 = binding.textViewServe2Details
+        val pkt1 = binding.textviewPlayer1PktDetails
+        val set1p1 = binding.textviewPlayer1Set1Details
+        val set2p1 = binding.textviewPlayer1Set2Details
+        val set3p1 = binding.textviewPlayer1Set3Details
+        val pkt2 = binding.textviewPlayer2PktDetails
+        val set1p2 = binding.textviewPlayer2Set1Details
+        val set2p2 = binding.textviewPlayer2Set2Details
+        val set3p2 = binding.textviewPlayer2Set3Details
         val addPointDialog = AddPointDialog(this,false)
 
-        val player1 = findViewById<TextView>(R.id.textviewPlayer1Details)
-        val player2 = findViewById<TextView>(R.id.textviewPlayer2Details)
+        val player1 = binding.textviewPlayer1Details
+        val player2 = binding.textviewPlayer2Details
 
         val user = firebaseAuth.currentUser?.uid
 
@@ -105,14 +108,14 @@ class DetailsActivity : AppCompatActivity() {
 
         fillUpScoreInActivity(app,player1,player2,serve1,serve2,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
 
-        //spr kto serwuje
+        //spr kto gra
         var czyPlayer1 = false
         if(player1.text==intent.getStringExtra("Kto")){
             czyPlayer1 = true
         }
 
-        findViewById<Button>(R.id.buttonGround).setOnClickListener {
-            if(findViewById<RadioButton>(R.id.radioButtonFH).isChecked)
+        binding.buttonGround.setOnClickListener {
+            if(binding.radioButtonFH.isChecked)
             {
                 if(intent.getStringExtra("Co")=="Winner") {
                     if(czyPlayer1) {
@@ -225,8 +228,8 @@ class DetailsActivity : AppCompatActivity() {
             }
         }
 
-        findViewById<Button>(R.id.buttonVolley).setOnClickListener {
-            if(findViewById<RadioButton>(R.id.radioButtonFH).isChecked)
+        binding.buttonVolley.setOnClickListener {
+            if(binding.radioButtonFH.isChecked)
             {
                 if(intent.getStringExtra("Co")=="Winner") {
                     if(czyPlayer1) {
@@ -339,8 +342,8 @@ class DetailsActivity : AppCompatActivity() {
             }
         }
 
-        findViewById<Button>(R.id.buttonLob).setOnClickListener {
-            if(findViewById<RadioButton>(R.id.radioButtonFH).isChecked)
+        binding.buttonLob.setOnClickListener {
+            if(binding.radioButtonFH.isChecked)
             {
                 if(intent.getStringExtra("Co")=="Winner") {
                     if(czyPlayer1) {
@@ -453,8 +456,8 @@ class DetailsActivity : AppCompatActivity() {
             }
         }
 
-        findViewById<Button>(R.id.buttonSlice).setOnClickListener {
-            if(findViewById<RadioButton>(R.id.radioButtonFH).isChecked)
+        binding.buttonSlice.setOnClickListener {
+            if(binding.radioButtonFH.isChecked)
             {
                 if(intent.getStringExtra("Co")=="Winner") {
                     if(czyPlayer1) {
@@ -567,8 +570,8 @@ class DetailsActivity : AppCompatActivity() {
             }
         }
 
-        findViewById<Button>(R.id.buttonSmash).setOnClickListener {
-            if(findViewById<RadioButton>(R.id.radioButtonFH).isChecked)
+        binding.buttonSmash.setOnClickListener {
+            if(binding.radioButtonFH.isChecked)
             {
                 if(intent.getStringExtra("Co")=="Winner") {
                     if(czyPlayer1) {
@@ -681,8 +684,8 @@ class DetailsActivity : AppCompatActivity() {
             }
         }
 
-        findViewById<Button>(R.id.buttonDropshot).setOnClickListener {
-            if(findViewById<RadioButton>(R.id.radioButtonFH).isChecked)
+        binding.buttonDropshot.setOnClickListener {
+            if(binding.radioButtonFH.isChecked)
             {
                 if(intent.getStringExtra("Co")=="Winner") {
                     if(czyPlayer1) {
@@ -795,129 +798,32 @@ class DetailsActivity : AppCompatActivity() {
             }
         }
     }
-    fun setscore(player1: TextView,player2: TextView,serve1: TextView,serve2: TextView,set1p1: TextView,set2p1: TextView,set3p1: TextView,set1p2: TextView,set2p2: TextView,set3p2: TextView,pkt1:TextView,pkt2:TextView)
-    {
-        database.child("player1").get().addOnSuccessListener { dataSnapshot ->
-            // Pobranie wartości "player1" z bazy danych
-            val player1Value = dataSnapshot.getValue(String::class.java)
-            // Ustawienie wartości w TextView
-            player1.text = player1Value.toString()
-        }.addOnFailureListener { exception ->
-            // Obsługa błędów
-        }
+    private fun setscore(
+        player1: TextView, player2: TextView, serve1: TextView, serve2: TextView,
+        set1p1: TextView, set2p1: TextView, set3p1: TextView, set1p2: TextView,
+        set2p2: TextView, set3p2: TextView, pkt1: TextView, pkt2: TextView
+    ) {
+        val app = application as Stats
 
-        database.child("player2").get().addOnSuccessListener { dataSnapshot ->
-            // Pobranie wartości "player1" z bazy danych
-            val player2Value = dataSnapshot.getValue(String::class.java)
-            // Ustawienie wartości w TextView
-            player2.text = player2Value.toString()
-        }.addOnFailureListener { exception ->
-            // Obsługa błędów
-        }
+        val fields = listOf(
+            "player1" to player1,
+            "player2" to player2,
+            "set1p1" to set1p1, "set2p1" to set2p1, "set3p1" to set3p1,
+            "set1p2" to set1p2, "set2p2" to set2p2, "set3p2" to set3p2,
+            "pkt1" to pkt1, "pkt2" to pkt2
+        )
 
-        database.child("set1p1").get().addOnSuccessListener { dataSnapshot ->
-            // Pobranie wartości "player1" z bazy danych
-            val set1p1Value = dataSnapshot.getValue(String::class.java)
-            // Ustawienie wartości w TextView
-            set1p1.text = set1p1Value
-        }.addOnFailureListener { exception ->
-            // Obsługa błędów
-        }
-        database.child("set2p1").get().addOnSuccessListener { dataSnapshot ->
-            // Pobranie wartości "player1" z bazy danych
-            val set2p1Value = dataSnapshot.getValue(String::class.java)
-            // Ustawienie wartości w TextView
-            set2p1.text = set2p1Value
-        }.addOnFailureListener { exception ->
-            // Obsługa błędów
-        }
-        database.child("set3p1").get().addOnSuccessListener { dataSnapshot ->
-            // Pobranie wartości "player1" z bazy danych
-            val set3p1Value = dataSnapshot.getValue(String::class.java)
-            // Ustawienie wartości w TextView
-            set3p1.text = set3p1Value
-        }.addOnFailureListener { exception ->
-            // Obsługa błędów
-        }
-        database.child("set1p2").get().addOnSuccessListener { dataSnapshot ->
-            // Pobranie wartości "player1" z bazy danych
-            val set1p2Value = dataSnapshot.getValue(String::class.java)
-            // Ustawienie wartości w TextView
-            set1p2.text = set1p2Value
-        }.addOnFailureListener { exception ->
-            // Obsługa błędów
-        }
-        database.child("set2p2").get().addOnSuccessListener { dataSnapshot ->
-            // Pobranie wartości "player1" z bazy danych
-            val set2p2Value = dataSnapshot.getValue(String::class.java)
-            // Ustawienie wartości w TextView
-            set2p2.text = set2p2Value
-        }.addOnFailureListener { exception ->
-            // Obsługa błędów
-        }
-        database.child("set3p2").get().addOnSuccessListener { dataSnapshot ->
-            // Pobranie wartości "player1" z bazy danych
-            val set3p2Value = dataSnapshot.getValue(String::class.java)
-            // Ustawienie wartości w TextView
-            set3p2.text = set3p2Value
-        }.addOnFailureListener { exception ->
-            // Obsługa błędów
-        }
-        database.child("pkt1").get().addOnSuccessListener { dataSnapshot ->
-            // Pobranie wartości "player1" z bazy danych
-            val pkt1Value = dataSnapshot.getValue(String::class.java)
-            // Ustawienie wartości w TextView
-            pkt1.text = pkt1Value
-        }.addOnFailureListener { exception ->
-            // Obsługa błędów
-        }
-        database.child("pkt2").get().addOnSuccessListener { dataSnapshot ->
-            // Pobranie wartości "player1" z bazy danych
-            val pkt2Value = dataSnapshot.getValue(String::class.java)
-            // Ustawienie wartości w TextView
-            pkt2.text = pkt2Value
-        }.addOnFailureListener { exception ->
-            // Obsługa błędów
-        }
-        database.child("winner").get().addOnSuccessListener { dataSnapshot ->
-            // Pobranie wartości "player1" z bazy danych
-            if(dataSnapshot.exists()){
-                // Pobranie wartości "player1" z bazy danych
-                val winner = dataSnapshot.getValue(String::class.java)
-                val goldenLaurel = getGoldenDrawable(applicationContext, R.drawable.icon_laurel3)
-                serve1.setCompoundDrawablesWithIntrinsicBounds(goldenLaurel, null, null, null)
-                serve2.setCompoundDrawablesWithIntrinsicBounds(goldenLaurel, null, null, null)
-                // Ustawienie wartości w TextView
-                if(winner==player1.text){
-                    serve1.visibility = View.VISIBLE
-                    serve2.visibility = View.INVISIBLE
+        fields.forEach { (key, textView) ->
+            database.child(key).get().addOnSuccessListener { dataSnapshot ->
+                val value = dataSnapshot.getValue(String::class.java) ?: ""
+                textView.text = value
+                app.javaClass.getDeclaredField(key).apply {
+                    isAccessible = true
+                    set(app, value)
                 }
-                else{
-                    serve1.visibility = View.INVISIBLE
-                    serve2.visibility = View.VISIBLE
-                }
+            }.addOnFailureListener {
+                // Handle failure
             }
-            else{
-                database.child("LastServePlayer").get().addOnSuccessListener { dataSnapshot ->
-                    // Pobranie wartości "player1" z bazy danych
-                    val lastserve = dataSnapshot.getValue(String::class.java)
-                    serve1.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ball, 0, 0, 0)
-                    serve2.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ball, 0, 0, 0)
-                    // Ustawienie wartości w TextView
-                    if(lastserve==player1.text){
-                        serve1.visibility = View.VISIBLE
-                        serve2.visibility = View.INVISIBLE
-                    }
-                    else{
-                        serve1.visibility = View.INVISIBLE
-                        serve2.visibility = View.VISIBLE
-                    }
-                }.addOnFailureListener { exception ->
-                    // Obsługa błędów
-                }
-            }
-        }.addOnFailureListener { exception ->
-            // Obsługa błędów
         }
     }
 }

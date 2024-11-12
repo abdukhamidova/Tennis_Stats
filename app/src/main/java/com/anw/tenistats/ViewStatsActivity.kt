@@ -150,7 +150,7 @@ class ViewStatsActivity : AppCompatActivity() {
 
     //lista rozwijana TOTAL,RETURN,WINNERS,FORCED ERR.,UNFOR. ERR.
         val spinner2: Spinner = binding.spinnerStatsCategory
-        val items2 = arrayOf("TOTAL","RETURN","WINNERS","FORCED ERR.","UNFOR. ERR.")
+        val items2 = arrayOf("TOTAL","RETURN","WINNERS","FORCED ERRORS","UNFORCED ERRORS")
         val adapter2 = ArrayAdapter(this,R.layout.spinner_item_stats_right_base,items2)
         adapter2.setDropDownViewResource(R.layout.spinner_item_stats_right)
         spinner2.adapter = adapter2
@@ -254,16 +254,44 @@ class ViewStatsActivity : AppCompatActivity() {
                 pkt2.text = dataSnapshot.child("pkt2").getValue(String::class.java) ?: ""
 
                 // Ustawienie grafiki lauru lub serwisu
-                val winner = dataSnapshot.child("winner").getValue(String::class.java)
-                val goldenLaurel = getGoldenDrawable(applicationContext, R.drawable.icon_laurel3)
-                if (winner == player1.text.toString()) {
-                    serve1.visibility = View.VISIBLE
-                    serve2.visibility = View.INVISIBLE
-                    serve1.setCompoundDrawablesWithIntrinsicBounds(goldenLaurel, null, null, null)
-                } else {
-                    serve1.visibility = View.INVISIBLE
-                    serve2.visibility = View.VISIBLE
-                    serve2.setCompoundDrawablesWithIntrinsicBounds(goldenLaurel, null, null, null)
+                if(dataSnapshot.child("winner").exists()) {
+                    val winner = dataSnapshot.child("winner").getValue(String::class.java)
+                    val goldenLaurel =
+                        getGoldenDrawable(applicationContext, R.drawable.icon_laurel3)
+                    if (winner == player1.text.toString()) {
+                        serve1.visibility = View.VISIBLE
+                        serve2.visibility = View.INVISIBLE
+                        serve1.setCompoundDrawablesWithIntrinsicBounds(
+                            goldenLaurel,
+                            null,
+                            null,
+                            null
+                        )
+                    } else {
+                        serve1.visibility = View.INVISIBLE
+                        serve2.visibility = View.VISIBLE
+                        serve2.setCompoundDrawablesWithIntrinsicBounds(
+                            goldenLaurel,
+                            null,
+                            null,
+                            null
+                        )
+                    }
+                }
+                else{
+                    // Pobranie wartości "LastServePlayer" z bazy danych
+                    val lastserve = dataSnapshot.child("LastServePlayer").getValue(String::class.java)
+                    serve1.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ball, 0, 0, 0)
+                    serve2.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ball, 0, 0, 0)
+                    // Ustawienie wartości w TextView
+                    if(lastserve==player1.text.toString()){
+                        serve1.visibility = View.VISIBLE
+                        serve2.visibility = View.INVISIBLE
+                    }
+                    else{
+                        serve1.visibility = View.INVISIBLE
+                        serve2.visibility = View.VISIBLE
+                    }
                 }
             }
         }
@@ -339,6 +367,7 @@ class ViewStatsActivity : AppCompatActivity() {
     }
 
     fun setAppValues(app: Stats, setNumber: Int, player1name: TextView, player2name: TextView, position: Int){
+        refreshNumbers(app,position)
         lifecycleScope.launch {
             when(position){
                 0 -> {
@@ -348,7 +377,7 @@ class ViewStatsActivity : AppCompatActivity() {
                     binding.forcedErrorsLayout.visibility = View.GONE;
                     binding.unforcedErrorsLayout.visibility = View.GONE;
 
-                    val ace1Deferred = async { countForPlayer(setNumber, player1name.text.toString(), "Ace", "", "") }
+                    /*val ace1Deferred = async { countForPlayer(setNumber, player1name.text.toString(), "Ace", "", "") }
                     val ace2Deferred = async { countForPlayer(setNumber, player2name.text.toString(), "Ace", "", "") }
                     val doubleFault1Deferred = async { countForPlayer(setNumber, player1name.text.toString(), "Double Fault", "", "") }
                     val doubleFault2Deferred = async { countForPlayer(setNumber, player2name.text.toString(), "Double Fault", "", "") }
@@ -369,7 +398,7 @@ class ViewStatsActivity : AppCompatActivity() {
                     app.secondserve1 = app.secondservein1 + app.doublefault1
                     app.secondserve2 = app.secondservein2 + app.doublefault2
                     app.firstserve1 = app.firstservein1 + app.secondserve1
-                    app.firstserve2 = app.firstservein2 + app.secondserve2
+                    app.firstserve2 = app.firstservein2 + app.secondserve2*/
                 } //TOTAL
                 1 -> {
                     binding.totalPointsLayout.visibility = View.GONE;
@@ -378,7 +407,7 @@ class ViewStatsActivity : AppCompatActivity() {
                     binding.forcedErrorsLayout.visibility = View.GONE;
                     binding.unforcedErrorsLayout.visibility = View.GONE;
 
-                    val returnWinnerFH1 = async { countForPlayer(setNumber, player1name.text.toString(), "Winner", "Return", "Forehand") }
+                    /*val returnWinnerFH1 = async { countForPlayer(setNumber, player1name.text.toString(), "Winner", "Return", "Forehand") }
                     val returnWinnerFH2 = async { countForPlayer(setNumber, player2name.text.toString(), "Winner", "Return", "Forehand") }
 
                     app.returnwinnerFH1 = returnWinnerFH1.await().also { app.totalpoints1 += it }
@@ -400,7 +429,7 @@ class ViewStatsActivity : AppCompatActivity() {
                     val returnErrorBH2 = async { countForPlayer(setNumber, player2name.text.toString(), "Error", "Return", "Backhand") }
 
                     app.returnerrorBH1 = returnErrorBH1.await().also { app.totalpoints2 += it }
-                    app.returnerrorBH2 = returnErrorBH2.await().also { app.totalpoints1 += it }
+                    app.returnerrorBH2 = returnErrorBH2.await().also { app.totalpoints1 += it }*/
                 } //RETURN
                 2 -> {
                     binding.totalPointsLayout.visibility = View.GONE;
@@ -409,7 +438,7 @@ class ViewStatsActivity : AppCompatActivity() {
                     binding.forcedErrorsLayout.visibility = View.GONE;
                     binding.unforcedErrorsLayout.visibility = View.GONE;
 
-                    val winnerGroundFH1Deferred = async { countForPlayer(setNumber, player1name.text.toString(), "Winner", "Ground", "Forehand") }
+                    /*val winnerGroundFH1Deferred = async { countForPlayer(setNumber, player1name.text.toString(), "Winner", "Ground", "Forehand") }
                     val winnerGroundFH2Deferred = async { countForPlayer(setNumber, player2name.text.toString(), "Winner", "Ground", "Forehand") }
 
                     app.winnergroundFH1 = winnerGroundFH1Deferred.await().also { app.totalpoints1 += it }
@@ -479,7 +508,7 @@ class ViewStatsActivity : AppCompatActivity() {
                     val winnerLobBH2Deferred = async { countForPlayer(setNumber, player2name.text.toString(), "Winner", "Lob", "Backhand") }
 
                     app.winnerlobBH1 = winnerLobBH1Deferred.await().also { app.totalpoints1 += it }
-                    app.winnerlobBH2 = winnerLobBH2Deferred.await().also { app.totalpoints2 += it }
+                    app.winnerlobBH2 = winnerLobBH2Deferred.await().also { app.totalpoints2 += it }*/
                 } //WINNERS
                 3 -> {
                     binding.totalPointsLayout.visibility = View.GONE;
@@ -488,7 +517,7 @@ class ViewStatsActivity : AppCompatActivity() {
                     binding.forcedErrorsLayout.visibility = View.VISIBLE;
                     binding.unforcedErrorsLayout.visibility = View.GONE;
 
-                    val forcedErrorFH1Deferred = async { countForPlayer(setNumber, player1name.text.toString(), "Forced Error", "Ground", "Forehand") }
+                    /*val forcedErrorFH1Deferred = async { countForPlayer(setNumber, player1name.text.toString(), "Forced Error", "Ground", "Forehand") }
                     val forcedErrorFH2Deferred = async { countForPlayer(setNumber, player2name.text.toString(), "Forced Error", "Ground", "Forehand") }
 
                     app.forcederrorgroundFH1 = forcedErrorFH1Deferred.await().also { app.totalpoints2 += it }
@@ -558,7 +587,7 @@ class ViewStatsActivity : AppCompatActivity() {
                     val forcedErrorLobBH2Deferred = async { countForPlayer(setNumber, player2name.text.toString(), "Forced Error", "Lob", "Backhand") }
 
                     app.forcederrorlobBH1 = forcedErrorLobBH1Deferred.await().also { app.totalpoints2 += it }
-                    app.forcederrorlobBH2 = forcedErrorLobBH2Deferred.await().also { app.totalpoints1 += it }
+                    app.forcederrorlobBH2 = forcedErrorLobBH2Deferred.await().also { app.totalpoints1 += it }*/
                 } //FORCED ERRORS
                 4 -> {
                     binding.totalPointsLayout.visibility = View.GONE;
@@ -567,7 +596,7 @@ class ViewStatsActivity : AppCompatActivity() {
                     binding.forcedErrorsLayout.visibility = View.GONE;
                     binding.unforcedErrorsLayout.visibility = View.VISIBLE;
 
-                    val unforcedErrorFH1Deferred = async { countForPlayer(setNumber, player1name.text.toString(), "Unforced Error", "Ground", "Forehand") }
+                    /*val unforcedErrorFH1Deferred = async { countForPlayer(setNumber, player1name.text.toString(), "Unforced Error", "Ground", "Forehand") }
                     val unforcedErrorFH2Deferred = async { countForPlayer(setNumber, player2name.text.toString(), "Unforced Error", "Ground", "Forehand") }
 
                     app.unforcederrorgroundFH1 = unforcedErrorFH1Deferred.await().also { app.totalpoints2 += it }
@@ -637,9 +666,985 @@ class ViewStatsActivity : AppCompatActivity() {
                     val unforcedErrorLobBH2Deferred = async { countForPlayer(setNumber, player2name.text.toString(), "Unforced Error", "Lob", "Backhand") }
 
                     app.unforcederrorlobBH1 = unforcedErrorLobBH1Deferred.await().also { app.totalpoints2 += it }
-                    app.unforcederrorlobBH2 = unforcedErrorLobBH2Deferred.await().also { app.totalpoints1 += it }
+                    app.unforcederrorlobBH2 = unforcedErrorLobBH2Deferred.await().also { app.totalpoints1 += it }*/
                 } //UNFORCED ERRORS
             }
+            val ace1Deferred =
+                async { countForPlayer(setNumber, player1name.text.toString(), "Ace", "", "") }
+            val ace2Deferred =
+                async { countForPlayer(setNumber, player2name.text.toString(), "Ace", "", "") }
+            val doubleFault1Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player1name.text.toString(),
+                    "Double Fault",
+                    "",
+                    ""
+                )
+            }
+            val doubleFault2Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player2name.text.toString(),
+                    "Double Fault",
+                    "",
+                    ""
+                )
+            }
+
+            app.ace1 = ace1Deferred.await().also { app.totalpoints1 += it }
+            app.ace2 = ace2Deferred.await().also { app.totalpoints2 += it }
+            app.doublefault1 = doubleFault1Deferred.await().also { app.totalpoints2 += it }
+            app.doublefault2 = doubleFault2Deferred.await().also { app.totalpoints1 += it }
+
+            val firstServeIn1Deferred =
+                async { countServeForPlayer(setNumber, player1name.text.toString(), 1) }
+            val firstServeIn2Deferred =
+                async { countServeForPlayer(setNumber, player2name.text.toString(), 1) }
+
+            app.firstservein1 = firstServeIn1Deferred.await()
+            app.firstservein2 = firstServeIn2Deferred.await()
+            app.secondservein1 =
+                async { countServeForPlayer(setNumber, player1name.text.toString(), 2) }.await()
+            app.secondservein2 =
+                async { countServeForPlayer(setNumber, player2name.text.toString(), 2) }.await()
+
+            app.secondserve1 = app.secondservein1 + app.doublefault1
+            app.secondserve2 = app.secondservein2 + app.doublefault2
+            app.firstserve1 = app.firstservein1 + app.secondserve1
+            app.firstserve2 = app.firstservein2 + app.secondserve2
+
+            val returnWinnerFH1 = async {
+                countForPlayer(
+                    setNumber,
+                    player1name.text.toString(),
+                    "Winner",
+                    "Return",
+                    "Forehand"
+                )
+            }
+            val returnWinnerFH2 = async {
+                countForPlayer(
+                    setNumber,
+                    player2name.text.toString(),
+                    "Winner",
+                    "Return",
+                    "Forehand"
+                )
+            }
+
+            app.returnwinnerFH1 = returnWinnerFH1.await().also { app.totalpoints1 += it }
+            app.returnwinnerFH2 = returnWinnerFH2.await().also { app.totalpoints2 += it }
+
+            val returnWinnerBH1 = async {
+                countForPlayer(
+                    setNumber,
+                    player1name.text.toString(),
+                    "Winner",
+                    "Return",
+                    "Backhand"
+                )
+            }
+            val returnWinnerBH2 = async {
+                countForPlayer(
+                    setNumber,
+                    player2name.text.toString(),
+                    "Winner",
+                    "Return",
+                    "Backhand"
+                )
+            }
+
+            app.returnwinnerBH1 = returnWinnerBH1.await().also { app.totalpoints1 += it }
+            app.returnwinnerBH2 = returnWinnerBH2.await().also { app.totalpoints2 += it }
+
+            val returnErrorFH1 = async {
+                countForPlayer(
+                    setNumber,
+                    player1name.text.toString(),
+                    "Error",
+                    "Return",
+                    "Forehand"
+                )
+            }
+            val returnErrorFH2 = async {
+                countForPlayer(
+                    setNumber,
+                    player2name.text.toString(),
+                    "Error",
+                    "Return",
+                    "Forehand"
+                )
+            }
+
+            app.returnerrorFH1 = returnErrorFH1.await().also { app.totalpoints2 += it }
+            app.returnerrorFH2 = returnErrorFH2.await().also { app.totalpoints1 += it }
+
+            val returnErrorBH1 = async {
+                countForPlayer(
+                    setNumber,
+                    player1name.text.toString(),
+                    "Error",
+                    "Return",
+                    "Backhand"
+                )
+            }
+            val returnErrorBH2 = async {
+                countForPlayer(
+                    setNumber,
+                    player2name.text.toString(),
+                    "Error",
+                    "Return",
+                    "Backhand"
+                )
+            }
+
+            app.returnerrorBH1 = returnErrorBH1.await().also { app.totalpoints2 += it }
+            app.returnerrorBH2 = returnErrorBH2.await().also { app.totalpoints1 += it }
+
+            val winnerGroundFH1Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player1name.text.toString(),
+                    "Winner",
+                    "Ground",
+                    "Forehand"
+                )
+            }
+            val winnerGroundFH2Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player2name.text.toString(),
+                    "Winner",
+                    "Ground",
+                    "Forehand"
+                )
+            }
+
+            app.winnergroundFH1 = winnerGroundFH1Deferred.await().also { app.totalpoints1 += it }
+            app.winnergroundFH2 = winnerGroundFH2Deferred.await().also { app.totalpoints2 += it }
+
+            val winnerGroundBH1Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player1name.text.toString(),
+                    "Winner",
+                    "Ground",
+                    "Backhand"
+                )
+            }
+            val winnerGroundBH2Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player2name.text.toString(),
+                    "Winner",
+                    "Ground",
+                    "Backhand"
+                )
+            }
+
+            app.winnergroundBH1 = winnerGroundBH1Deferred.await().also { app.totalpoints1 += it }
+            app.winnergroundBH2 = winnerGroundBH2Deferred.await().also { app.totalpoints2 += it }
+
+            val winnerSliceFH1Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player1name.text.toString(),
+                    "Winner",
+                    "Slice",
+                    "Forehand"
+                )
+            }
+            val winnerSliceFH2Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player2name.text.toString(),
+                    "Winner",
+                    "Slice",
+                    "Forehand"
+                )
+            }
+
+            app.winnersliceFH1 = winnerSliceFH1Deferred.await().also { app.totalpoints1 += it }
+            app.winnersliceFH2 = winnerSliceFH2Deferred.await().also { app.totalpoints2 += it }
+
+            val winnerSliceBH1Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player1name.text.toString(),
+                    "Winner",
+                    "Slice",
+                    "Backhand"
+                )
+            }
+            val winnerSliceBH2Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player2name.text.toString(),
+                    "Winner",
+                    "Slice",
+                    "Backhand"
+                )
+            }
+
+            app.winnersliceBH1 = winnerSliceBH1Deferred.await().also { app.totalpoints1 += it }
+            app.winnersliceBH2 = winnerSliceBH2Deferred.await().also { app.totalpoints2 += it }
+
+            val winnerSmashFH1Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player1name.text.toString(),
+                    "Winner",
+                    "Smash",
+                    "Forehand"
+                )
+            }
+            val winnerSmashFH2Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player2name.text.toString(),
+                    "Winner",
+                    "Smash",
+                    "Forehand"
+                )
+            }
+
+            app.winnersmashFH1 = winnerSmashFH1Deferred.await().also { app.totalpoints1 += it }
+            app.winnersmashFH2 = winnerSmashFH2Deferred.await().also { app.totalpoints2 += it }
+
+            val winnerSmashBH1Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player1name.text.toString(),
+                    "Winner",
+                    "Smash",
+                    "Backhand"
+                )
+            }
+            val winnerSmashBH2Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player2name.text.toString(),
+                    "Winner",
+                    "Smash",
+                    "Backhand"
+                )
+            }
+
+            app.winnersmashBH1 = winnerSmashBH1Deferred.await().also { app.totalpoints1 += it }
+            app.winnersmashBH2 = winnerSmashBH2Deferred.await().also { app.totalpoints2 += it }
+
+            val winnerVolleyFH1Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player1name.text.toString(),
+                    "Winner",
+                    "Volley",
+                    "Forehand"
+                )
+            }
+            val winnerVolleyFH2Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player2name.text.toString(),
+                    "Winner",
+                    "Volley",
+                    "Forehand"
+                )
+            }
+
+            app.winnervolleyFH1 = winnerVolleyFH1Deferred.await().also { app.totalpoints1 += it }
+            app.winnervolleyFH2 = winnerVolleyFH2Deferred.await().also { app.totalpoints2 += it }
+
+            val winnerVolleyBH1Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player1name.text.toString(),
+                    "Winner",
+                    "Volley",
+                    "Backhand"
+                )
+            }
+            val winnerVolleyBH2Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player2name.text.toString(),
+                    "Winner",
+                    "Volley",
+                    "Backhand"
+                )
+            }
+
+            app.winnervolleyBH1 = winnerVolleyBH1Deferred.await().also { app.totalpoints1 += it }
+            app.winnervolleyBH2 = winnerVolleyBH2Deferred.await().also { app.totalpoints2 += it }
+
+            val winnerDropshotFH1Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player1name.text.toString(),
+                    "Winner",
+                    "Dropshot",
+                    "Forehand"
+                )
+            }
+            val winnerDropshotFH2Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player2name.text.toString(),
+                    "Winner",
+                    "Dropshot",
+                    "Forehand"
+                )
+            }
+
+            app.winnerdropshotFH1 =
+                winnerDropshotFH1Deferred.await().also { app.totalpoints1 += it }
+            app.winnerdropshotFH2 =
+                winnerDropshotFH2Deferred.await().also { app.totalpoints2 += it }
+
+            val winnerDropshotBH1Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player1name.text.toString(),
+                    "Winner",
+                    "Dropshot",
+                    "Backhand"
+                )
+            }
+            val winnerDropshotBH2Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player2name.text.toString(),
+                    "Winner",
+                    "Dropshot",
+                    "Backhand"
+                )
+            }
+
+            app.winnerdropshotBH1 =
+                winnerDropshotBH1Deferred.await().also { app.totalpoints1 += it }
+            app.winnerdropshotBH2 =
+                winnerDropshotBH2Deferred.await().also { app.totalpoints2 += it }
+
+            val winnerLobFH1Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player1name.text.toString(),
+                    "Winner",
+                    "Lob",
+                    "Forehand"
+                )
+            }
+            val winnerLobFH2Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player2name.text.toString(),
+                    "Winner",
+                    "Lob",
+                    "Forehand"
+                )
+            }
+
+            app.winnerlobFH1 = winnerLobFH1Deferred.await().also { app.totalpoints1 += it }
+            app.winnerlobFH2 = winnerLobFH2Deferred.await().also { app.totalpoints2 += it }
+
+            val winnerLobBH1Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player1name.text.toString(),
+                    "Winner",
+                    "Lob",
+                    "Backhand"
+                )
+            }
+            val winnerLobBH2Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player2name.text.toString(),
+                    "Winner",
+                    "Lob",
+                    "Backhand"
+                )
+            }
+
+            app.winnerlobBH1 = winnerLobBH1Deferred.await().also { app.totalpoints1 += it }
+            app.winnerlobBH2 = winnerLobBH2Deferred.await().also { app.totalpoints2 += it }
+
+            val forcedErrorFH1Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player1name.text.toString(),
+                    "Forced Error",
+                    "Ground",
+                    "Forehand"
+                )
+            }
+            val forcedErrorFH2Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player2name.text.toString(),
+                    "Forced Error",
+                    "Ground",
+                    "Forehand"
+                )
+            }
+
+            app.forcederrorgroundFH1 =
+                forcedErrorFH1Deferred.await().also { app.totalpoints2 += it }
+            app.forcederrorgroundFH2 =
+                forcedErrorFH2Deferred.await().also { app.totalpoints1 += it }
+
+            val forcedErrorBH1Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player1name.text.toString(),
+                    "Forced Error",
+                    "Ground",
+                    "Backhand"
+                )
+            }
+            val forcedErrorBH2Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player2name.text.toString(),
+                    "Forced Error",
+                    "Ground",
+                    "Backhand"
+                )
+            }
+
+            app.forcederrorgroundBH1 =
+                forcedErrorBH1Deferred.await().also { app.totalpoints2 += it }
+            app.forcederrorgroundBH2 =
+                forcedErrorBH2Deferred.await().also { app.totalpoints1 += it }
+
+            val forcedErrorSliceFH1Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player1name.text.toString(),
+                    "Forced Error",
+                    "Slice",
+                    "Forehand"
+                )
+            }
+            val forcedErrorSliceFH2Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player2name.text.toString(),
+                    "Forced Error",
+                    "Slice",
+                    "Forehand"
+                )
+            }
+
+            app.forcederrorsliceFH1 =
+                forcedErrorSliceFH1Deferred.await().also { app.totalpoints2 += it }
+            app.forcederrorsliceFH2 =
+                forcedErrorSliceFH2Deferred.await().also { app.totalpoints1 += it }
+
+            val forcedErrorSliceBH1Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player1name.text.toString(),
+                    "Forced Error",
+                    "Slice",
+                    "Backhand"
+                )
+            }
+            val forcedErrorSliceBH2Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player2name.text.toString(),
+                    "Forced Error",
+                    "Slice",
+                    "Backhand"
+                )
+            }
+
+            app.forcederrorsliceBH1 =
+                forcedErrorSliceBH1Deferred.await().also { app.totalpoints2 += it }
+            app.forcederrorsliceBH2 =
+                forcedErrorSliceBH2Deferred.await().also { app.totalpoints1 += it }
+
+            val forcedErrorSmashFH1Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player1name.text.toString(),
+                    "Forced Error",
+                    "Smash",
+                    "Forehand"
+                )
+            }
+            val forcedErrorSmashFH2Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player2name.text.toString(),
+                    "Forced Error",
+                    "Smash",
+                    "Forehand"
+                )
+            }
+
+            app.forcederrorsmashFH1 =
+                forcedErrorSmashFH1Deferred.await().also { app.totalpoints2 += it }
+            app.forcederrorsmashFH2 =
+                forcedErrorSmashFH2Deferred.await().also { app.totalpoints1 += it }
+
+            val forcedErrorSmashBH1Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player1name.text.toString(),
+                    "Forced Error",
+                    "Smash",
+                    "Backhand"
+                )
+            }
+            val forcedErrorSmashBH2Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player2name.text.toString(),
+                    "Forced Error",
+                    "Smash",
+                    "Backhand"
+                )
+            }
+
+            app.forcederrorsmashBH1 =
+                forcedErrorSmashBH1Deferred.await().also { app.totalpoints2 += it }
+            app.forcederrorsmashBH2 =
+                forcedErrorSmashBH2Deferred.await().also { app.totalpoints1 += it }
+
+            val forcedErrorVolleyFH1Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player1name.text.toString(),
+                    "Forced Error",
+                    "Volley",
+                    "Forehand"
+                )
+            }
+            val forcedErrorVolleyFH2Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player2name.text.toString(),
+                    "Forced Error",
+                    "Volley",
+                    "Forehand"
+                )
+            }
+
+            app.forcederrorvolleyFH1 =
+                forcedErrorVolleyFH1Deferred.await().also { app.totalpoints2 += it }
+            app.forcederrorvolleyFH2 =
+                forcedErrorVolleyFH2Deferred.await().also { app.totalpoints1 += it }
+
+            val forcedErrorVolleyBH1Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player1name.text.toString(),
+                    "Forced Error",
+                    "Volley",
+                    "Backhand"
+                )
+            }
+            val forcedErrorVolleyBH2Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player2name.text.toString(),
+                    "Forced Error",
+                    "Volley",
+                    "Backhand"
+                )
+            }
+
+            app.forcederrorvolleyBH1 =
+                forcedErrorVolleyBH1Deferred.await().also { app.totalpoints2 += it }
+            app.forcederrorvolleyBH2 =
+                forcedErrorVolleyBH2Deferred.await().also { app.totalpoints1 += it }
+
+            val forcedErrorDropshotFH1Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player1name.text.toString(),
+                    "Forced Error",
+                    "Dropshot",
+                    "Forehand"
+                )
+            }
+            val forcedErrorDropshotFH2Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player2name.text.toString(),
+                    "Forced Error",
+                    "Dropshot",
+                    "Forehand"
+                )
+            }
+
+            app.forcederrordropshotFH1 =
+                forcedErrorDropshotFH1Deferred.await().also { app.totalpoints2 += it }
+            app.forcederrordropshotFH2 =
+                forcedErrorDropshotFH2Deferred.await().also { app.totalpoints1 += it }
+
+            val forcedErrorDropshotBH1Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player1name.text.toString(),
+                    "Forced Error",
+                    "Dropshot",
+                    "Backhand"
+                )
+            }
+            val forcedErrorDropshotBH2Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player2name.text.toString(),
+                    "Forced Error",
+                    "Dropshot",
+                    "Backhand"
+                )
+            }
+
+            app.forcederrordropshotBH1 =
+                forcedErrorDropshotBH1Deferred.await().also { app.totalpoints2 += it }
+            app.forcederrordropshotBH2 =
+                forcedErrorDropshotBH2Deferred.await().also { app.totalpoints1 += it }
+
+            val forcedErrorLobFH1Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player1name.text.toString(),
+                    "Forced Error",
+                    "Lob",
+                    "Forehand"
+                )
+            }
+            val forcedErrorLobFH2Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player2name.text.toString(),
+                    "Forced Error",
+                    "Lob",
+                    "Forehand"
+                )
+            }
+
+            app.forcederrorlobFH1 =
+                forcedErrorLobFH1Deferred.await().also { app.totalpoints2 += it }
+            app.forcederrorlobFH2 =
+                forcedErrorLobFH2Deferred.await().also { app.totalpoints1 += it }
+
+            val forcedErrorLobBH1Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player1name.text.toString(),
+                    "Forced Error",
+                    "Lob",
+                    "Backhand"
+                )
+            }
+            val forcedErrorLobBH2Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player2name.text.toString(),
+                    "Forced Error",
+                    "Lob",
+                    "Backhand"
+                )
+            }
+
+            app.forcederrorlobBH1 =
+                forcedErrorLobBH1Deferred.await().also { app.totalpoints2 += it }
+            app.forcederrorlobBH2 =
+                forcedErrorLobBH2Deferred.await().also { app.totalpoints1 += it }
+
+            val unforcedErrorFH1Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player1name.text.toString(),
+                    "Unforced Error",
+                    "Ground",
+                    "Forehand"
+                )
+            }
+            val unforcedErrorFH2Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player2name.text.toString(),
+                    "Unforced Error",
+                    "Ground",
+                    "Forehand"
+                )
+            }
+
+            app.unforcederrorgroundFH1 =
+                unforcedErrorFH1Deferred.await().also { app.totalpoints2 += it }
+            app.unforcederrorgroundFH2 =
+                unforcedErrorFH2Deferred.await().also { app.totalpoints1 += it }
+
+            val unforcedErrorBH1Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player1name.text.toString(),
+                    "Unforced Error",
+                    "Ground",
+                    "Backhand"
+                )
+            }
+            val unforcedErrorBH2Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player2name.text.toString(),
+                    "Unforced Error",
+                    "Ground",
+                    "Backhand"
+                )
+            }
+
+            app.unforcederrorgroundBH1 =
+                unforcedErrorBH1Deferred.await().also { app.totalpoints2 += it }
+            app.unforcederrorgroundBH2 =
+                unforcedErrorBH2Deferred.await().also { app.totalpoints1 += it }
+
+            val unforcedErrorSliceFH1Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player1name.text.toString(),
+                    "Unforced Error",
+                    "Slice",
+                    "Forehand"
+                )
+            }
+            val unforcedErrorSliceFH2Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player2name.text.toString(),
+                    "Unforced Error",
+                    "Slice",
+                    "Forehand"
+                )
+            }
+
+            app.unforcederrorsliceFH1 =
+                unforcedErrorSliceFH1Deferred.await().also { app.totalpoints2 += it }
+            app.unforcederrorsliceFH2 =
+                unforcedErrorSliceFH2Deferred.await().also { app.totalpoints1 += it }
+
+            val unforcedErrorSliceBH1Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player1name.text.toString(),
+                    "Unforced Error",
+                    "Slice",
+                    "Backhand"
+                )
+            }
+            val unforcedErrorSliceBH2Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player2name.text.toString(),
+                    "Unforced Error",
+                    "Slice",
+                    "Backhand"
+                )
+            }
+
+            app.unforcederrorsliceBH1 =
+                unforcedErrorSliceBH1Deferred.await().also { app.totalpoints2 += it }
+            app.unforcederrorsliceBH2 =
+                unforcedErrorSliceBH2Deferred.await().also { app.totalpoints1 += it }
+
+            val unforcedErrorSmashFH1Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player1name.text.toString(),
+                    "Unforced Error",
+                    "Smash",
+                    "Forehand"
+                )
+            }
+            val unforcedErrorSmashFH2Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player2name.text.toString(),
+                    "Unforced Error",
+                    "Smash",
+                    "Forehand"
+                )
+            }
+
+            app.unforcederrorsmashFH1 =
+                unforcedErrorSmashFH1Deferred.await().also { app.totalpoints2 += it }
+            app.unforcederrorsmashFH2 =
+                unforcedErrorSmashFH2Deferred.await().also { app.totalpoints1 += it }
+
+            val unforcedErrorSmashBH1Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player1name.text.toString(),
+                    "Unforced Error",
+                    "Smash",
+                    "Backhand"
+                )
+            }
+            val unforcedErrorSmashBH2Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player2name.text.toString(),
+                    "Unforced Error",
+                    "Smash",
+                    "Backhand"
+                )
+            }
+
+            app.unforcederrorsmashBH1 =
+                unforcedErrorSmashBH1Deferred.await().also { app.totalpoints2 += it }
+            app.unforcederrorsmashBH2 =
+                unforcedErrorSmashBH2Deferred.await().also { app.totalpoints1 += it }
+
+            val unforcedErrorVolleyFH1Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player1name.text.toString(),
+                    "Unforced Error",
+                    "Volley",
+                    "Forehand"
+                )
+            }
+            val unforcedErrorVolleyFH2Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player2name.text.toString(),
+                    "Unforced Error",
+                    "Volley",
+                    "Forehand"
+                )
+            }
+
+            app.unforcederrorvolleyFH1 =
+                unforcedErrorVolleyFH1Deferred.await().also { app.totalpoints2 += it }
+            app.unforcederrorvolleyFH2 =
+                unforcedErrorVolleyFH2Deferred.await().also { app.totalpoints1 += it }
+
+            val unforcedErrorVolleyBH1Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player1name.text.toString(),
+                    "Unforced Error",
+                    "Volley",
+                    "Backhand"
+                )
+            }
+            val unforcedErrorVolleyBH2Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player2name.text.toString(),
+                    "Unforced Error",
+                    "Volley",
+                    "Backhand"
+                )
+            }
+
+            app.unforcederrorvolleyBH1 =
+                unforcedErrorVolleyBH1Deferred.await().also { app.totalpoints2 += it }
+            app.unforcederrorvolleyBH2 =
+                unforcedErrorVolleyBH2Deferred.await().also { app.totalpoints1 += it }
+
+            val unforcedErrorDropshotFH1Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player1name.text.toString(),
+                    "Unforced Error",
+                    "Dropshot",
+                    "Forehand"
+                )
+            }
+            val unforcedErrorDropshotFH2Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player2name.text.toString(),
+                    "Unforced Error",
+                    "Dropshot",
+                    "Forehand"
+                )
+            }
+
+            app.unforcederrordropshotFH1 =
+                unforcedErrorDropshotFH1Deferred.await().also { app.totalpoints2 += it }
+            app.unforcederrordropshotFH2 =
+                unforcedErrorDropshotFH2Deferred.await().also { app.totalpoints1 += it }
+
+            val unforcedErrorDropshotBH1Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player1name.text.toString(),
+                    "Unforced Error",
+                    "Dropshot",
+                    "Backhand"
+                )
+            }
+            val unforcedErrorDropshotBH2Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player2name.text.toString(),
+                    "Unforced Error",
+                    "Dropshot",
+                    "Backhand"
+                )
+            }
+
+            app.unforcederrordropshotBH1 =
+                unforcedErrorDropshotBH1Deferred.await().also { app.totalpoints2 += it }
+            app.unforcederrordropshotBH2 =
+                unforcedErrorDropshotBH2Deferred.await().also { app.totalpoints1 += it }
+
+            val unforcedErrorLobFH1Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player1name.text.toString(),
+                    "Unforced Error",
+                    "Lob",
+                    "Forehand"
+                )
+            }
+            val unforcedErrorLobFH2Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player2name.text.toString(),
+                    "Unforced Error",
+                    "Lob",
+                    "Forehand"
+                )
+            }
+
+            app.unforcederrorlobFH1 =
+                unforcedErrorLobFH1Deferred.await().also { app.totalpoints2 += it }
+            app.unforcederrorlobFH2 =
+                unforcedErrorLobFH2Deferred.await().also { app.totalpoints1 += it }
+
+            val unforcedErrorLobBH1Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player1name.text.toString(),
+                    "Unforced Error",
+                    "Lob",
+                    "Backhand"
+                )
+            }
+            val unforcedErrorLobBH2Deferred = async {
+                countForPlayer(
+                    setNumber,
+                    player2name.text.toString(),
+                    "Unforced Error",
+                    "Lob",
+                    "Backhand"
+                )
+            }
+
+            app.unforcederrorlobBH1 =
+                unforcedErrorLobBH1Deferred.await().also { app.totalpoints2 += it }
+            app.unforcederrorlobBH2 =
+                unforcedErrorLobBH2Deferred.await().also { app.totalpoints1 += it }
             setTableValue(app,binding.spinnerStatsCategory.selectedItemPosition)
         }
     }
@@ -1599,6 +2604,138 @@ class ViewStatsActivity : AppCompatActivity() {
                 binding.graphUnforcedErrorDropshotbhPlayer1.requestLayout()
                 binding.graphUnforcedErrorDropshotbhPlayer2.requestLayout()
             } //UNFORCED ERRORS
+        }
+    }
+
+    fun refreshNumbers(app: Stats, position: Int) {
+        when (position){
+            0 -> {
+                app.totalpoints1 = 0   //ostatecznie kto ile wygrał punktów
+                app.totalpoints2 = 0
+
+                app.firstserve1 =
+                    0 //ilosc ogolnie zagranych 1 serwisow (firstservein1 + secondserve1)
+                app.firstserve2 = 0
+                app.firstservein1 =
+                    0 //ilosc trafionych 1 serwisow (w procentach: firstservein1/firstserve1 * 100%)
+                app.firstservein2 = 0
+
+                app.secondserve1 =
+                    0 //ilosc ogolnie zagranych 2 serwisow (secondservein1 + doublefault1)
+                app.secondserve2 = 0
+                app.secondservein1 =
+                    0 //ilosc trafionych 2 serwisow (w procentach: secondservein1/secondserve1 * 100%)
+                app.secondservein2 = 0
+
+                app.ace1 = 0 //ilosc zagranych asow playera 1
+                app.ace2 = 0
+                app.doublefault1 = 0 //ilosc podwojnych bledow
+                app.doublefault2 = 0
+            }
+            1 -> {
+                app.returnwinnerFH1 = 0
+                app.returnwinnerFH2 = 0
+                app.returnwinnerBH1 = 0
+                app.returnwinnerBH2 = 0
+
+                app.returnerrorFH1 = 0
+                app.returnerrorFH2 = 0
+                app.returnerrorBH1 = 0
+                app.returnerrorBH2 = 0
+            }
+            2 -> {
+                app.winnergroundFH1 = 0
+                app.winnergroundFH2 = 0
+                app.winnergroundBH1 = 0
+                app.winnergroundBH2 = 0
+
+                app.winnersliceFH1 = 0
+                app.winnersliceFH2 = 0
+                app.winnersliceBH1 = 0
+                app.winnersliceBH2 = 0
+
+                app.winnervolleyFH1 = 0
+                app.winnervolleyFH2 = 0
+                app.winnervolleyBH1 = 0
+                app.winnervolleyBH2 = 0
+
+                app.winnersmashFH1 = 0
+                app.winnersmashFH2 = 0
+                app.winnersmashBH1 = 0
+                app.winnersmashBH2 = 0
+
+                app.winnerlobFH1 = 0
+                app.winnerlobFH2 = 0
+                app.winnerlobBH1 = 0
+                app.winnerlobBH2 = 0
+
+                app.winnerdropshotFH1 = 0
+                app.winnerdropshotFH2 = 0
+                app.winnerdropshotBH1 = 0
+                app.winnerdropshotBH2 = 0
+            }
+            3 -> {
+                app.forcederrorgroundFH1 = 0
+                app.forcederrorgroundFH2 = 0
+                app.forcederrorgroundBH1 = 0
+                app.forcederrorgroundBH2 = 0
+
+                app.forcederrorsliceFH1 = 0
+                app.forcederrorsliceFH2 = 0
+                app.forcederrorsliceBH1 = 0
+                app.forcederrorsliceBH2 = 0
+
+                app.forcederrorvolleyFH1 = 0
+                app.forcederrorvolleyFH2 = 0
+                app.forcederrorvolleyBH1 = 0
+                app.forcederrorvolleyBH2 = 0
+
+                app.forcederrorsmashFH1 = 0
+                app.forcederrorsmashFH2 = 0
+                app.forcederrorsmashBH1 = 0
+                app.forcederrorsmashBH2 = 0
+
+                app.forcederrorlobFH1 = 0
+                app.forcederrorlobFH2 = 0
+                app.forcederrorlobBH1 = 0
+                app.forcederrorlobBH2 = 0
+
+                app.forcederrordropshotFH1 = 0
+                app.forcederrordropshotFH2 = 0
+                app.forcederrordropshotBH1 = 0
+                app.forcederrordropshotBH2 = 0
+            }
+            4 -> {
+                app.unforcederrorgroundFH1 = 0
+                app.unforcederrorgroundFH2 = 0
+                app.unforcederrorgroundBH1 = 0
+                app.unforcederrorgroundBH2 = 0
+
+                app.unforcederrorsliceFH1 = 0
+                app.unforcederrorsliceFH2 = 0
+                app.unforcederrorsliceBH1 = 0
+                app.unforcederrorsliceBH2 = 0
+
+                app.unforcederrorvolleyFH1 = 0
+                app.unforcederrorvolleyFH2 = 0
+                app.unforcederrorvolleyBH1 = 0
+                app.unforcederrorvolleyBH2 = 0
+
+                app.unforcederrorsmashFH1 = 0
+                app.unforcederrorsmashFH2 = 0
+                app.unforcederrorsmashBH1 = 0
+                app.unforcederrorsmashBH2 = 0
+
+                app.unforcederrorlobFH1 = 0
+                app.unforcederrorlobFH2 = 0
+                app.unforcederrorlobBH1 = 0
+                app.unforcederrorlobBH2 = 0
+
+                app.unforcederrordropshotFH1 = 0
+                app.unforcederrordropshotFH2 = 0
+                app.unforcederrordropshotBH1 = 0
+                app.unforcederrordropshotBH2 = 0
+            }
         }
     }
 }

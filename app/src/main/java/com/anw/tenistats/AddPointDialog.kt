@@ -42,190 +42,103 @@ class AddPointDialog(private val context: Context, private val openedFromStartPo
         collectedPoint.text = "Player: $kto\n\n$co\n\n$gdzie\n\n$czym"
 
         btnAdd.setOnClickListener {
-            // Dodaj punkt do bazy danych
-            firebaseAuth=FirebaseAuth.getInstance()
-            val user = firebaseAuth.currentUser?.uid
-            database = FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
-                .getReference(user.toString()).child("Matches").child(matchId)
+            firebaseAuth = FirebaseAuth.getInstance()
+            val user = firebaseAuth.currentUser?.uid ?: return@setOnClickListener
+
+            // Database reference setup
+            val database = FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
+                .getReference(user).child("Matches").child(matchId)
 
             if (app != null) {
-                //ustawienie wyniku w danym gemie
-                var set1P1: String
-                var set1P2: String
-                var set2P1: String
-                var set2P2: String
-                var set3P1: String
-                var set3P2: String
                 val gameString = addZeros(gameId.toInt())
 
-                database.child("set1p1").get().addOnSuccessListener { dataSnapshot ->
-                    // Pobranie wartości "player1" z bazy danych
-                    val set1p1Value = dataSnapshot.getValue(String::class.java).toString()
-                    // Ustawienie wartości w TextView
-                    set1P1 = set1p1Value
-                    app.set1p1=set1P1
-                    database.child(("set "+ setId)).child(("game "+gameString)).child("score").child("player1set1").setValue(set1P1)
-                }.addOnFailureListener { exception ->
-                    // Obsługa błędów
-                }
-                database.child("set2p1").get().addOnSuccessListener { dataSnapshot ->
-                    // Pobranie wartości "player1" z bazy danych
-                    val set2p1Value = dataSnapshot.getValue(String::class.java).toString()
-                    // Ustawienie wartości w TextView
-                    set2P1 = set2p1Value
-                    app.set2p1=set2P1
-                    database.child(("set "+ setId)).child(("game "+gameString)).child("score").child("player1set2").setValue(set2P1)
-                }.addOnFailureListener { exception ->
-                    // Obsługa błędów
-                }
-                database.child("set3p1").get().addOnSuccessListener { dataSnapshot ->
-                    // Pobranie wartości "player1" z bazy danych
-                    val set3p1Value = dataSnapshot.getValue(String::class.java).toString()
-                    // Ustawienie wartości w TextView
-                    set3P1 = set3p1Value
-                    app.set3p1=set3P1
-                    database.child(("set "+ setId)).child(("game "+gameString)).child("score").child("player1set3").setValue(set3P1)
-                }.addOnFailureListener { exception ->
-                    // Obsługa błędów
-                }
-                database.child("set1p2").get().addOnSuccessListener { dataSnapshot ->
-                    // Pobranie wartości "player1" z bazy danych
-                    val set1p2Value = dataSnapshot.getValue(String::class.java).toString()
-                    // Ustawienie wartości w TextView
-                    set1P2 = set1p2Value
-                    app.set1p2=set1P2
-                    database.child(("set "+ setId)).child(("game "+gameString)).child("score").child("player2set1").setValue(set1P2)
-                }.addOnFailureListener { exception ->
-                    // Obsługa błędów
-                }
-                database.child("set2p2").get().addOnSuccessListener { dataSnapshot ->
-                    // Pobranie wartości "player1" z bazy danych
-                    val set2p2Value = dataSnapshot.getValue(String::class.java).toString()
-                    // Ustawienie wartości w TextView
-                    set2P2 = set2p2Value
-                    app.set2p2=set2P2
-                    database.child(("set "+ setId)).child(("game "+gameString)).child("score").child("player2set2").setValue(set2P2)
-                }.addOnFailureListener { exception ->
-                    // Obsługa błędów
-                }
-                database.child("set3p2").get().addOnSuccessListener { dataSnapshot ->
-                    // Pobranie wartości "player1" z bazy danych
-                    val set3p2Value = dataSnapshot.getValue(String::class.java).toString()
-                    // Ustawienie wartości w TextView
-                    set3P2 = set3p2Value
-                    app.set3p2=set3P2
-                    database.child(("set "+ setId)).child(("game "+gameString)).child("score").child("player2set3").setValue(set3P2)
-                }.addOnFailureListener { exception ->
-                    // Obsługa błędów
-                }
-
-                /*database.child(("set "+ setId)).child(("game "+gameId)).child("score").child("player1set1").setValue(set1P1)
-                database.child(("set "+ setId)).child(("game "+gameId)).child("score").child("player2set1").setValue(set1P2)
-                database.child(("set "+ setId)).child(("game "+gameId)).child("score").child("player1set2").setValue(set2P1)
-                database.child(("set "+ setId)).child(("game "+gameId)).child("score").child("player2set2").setValue(set2P2)
-                database.child(("set "+ setId)).child(("game "+gameId)).child("score").child("player1set3").setValue(set3P1)
-                database.child(("set "+ setId)).child(("game "+gameId)).child("score").child("player2set3").setValue(set3P2)*/
-
-                //ustawienie osoby serwujacej w danym gemie
-                val servePlayer: String
-                servePlayer = if(app.player1 == player1.text) {
-                    if (app.serve1 == "1") {
-                        app.player1
-                    } else {
-                        app.player2
-                    }
-                } else{
-                    if (app.serve1 == "1") {
-                        app.player2
-                    } else {
-                        app.player1
+                // Helper function to fetch a value and update UI or set in database
+                fun updateScore(setKey: String, targetKey: String, updateAppField: (String) -> Unit) {
+                    database.child(setKey).get().addOnSuccessListener { snapshot ->
+                        snapshot.getValue(String::class.java)?.let { value ->
+                            updateAppField(value)
+                            database.child("set $setId").child("game $gameString").child("score").child(targetKey).setValue(value)
+                        }
                     }
                 }
 
+                // Fetching scores and updating database with the helper function
+                updateScore("set1p1", "player1set1") { app.set1p1 = it }
+                updateScore("set2p1", "player1set2") { app.set2p1 = it }
+                updateScore("set3p1", "player1set3") { app.set3p1 = it }
+                updateScore("set1p2", "player2set1") { app.set1p2 = it }
+                updateScore("set2p2", "player2set2") { app.set2p2 = it }
+                updateScore("set3p2", "player2set3") { app.set3p2 = it }
+
+                // Determine the serving player
+                val servePlayer = if ((app.player1 == player1.text && app.serve1 == "1") ||
+                    (app.player2 == player1.text && app.serve1 != "1")
+                ) app.player1 else app.player2
+
+                // Updating scores in the database
                 database.child("pktCount").get().addOnSuccessListener { dataSnapshot ->
-                    if (dataSnapshot.exists()) {
-                        score(app,player1,serve1,serve2,pkt1txt,pkt2txt,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
-                        database = FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
-                            .getReference(user.toString()).child("Matches").child(matchId)
+                    val currentCount = dataSnapshot.getValue(Int::class.java) ?: 0
+                    score(app, player1, serve1, serve2, pkt1txt, pkt2txt, set1p1, set1p2, set2p1, set2p2, set3p1, set3p2)
 
-                        database.child("pkt1").setValue(app.pkt1)
-                        database.child("pkt2").setValue(app.pkt2)
-                        database.child("set1p1").setValue(app.set1p1)
-                        database.child("set2p1").setValue(app.set2p1)
-                        database.child("set3p1").setValue(app.set3p1)
-                        database.child("set1p2").setValue(app.set1p2)
-                        database.child("set2p2").setValue(app.set2p2)
-                        database.child("set3p2").setValue(app.set3p2)
-                        //ustawienie osoby serwujacej aktualnie (potrzebne do wznowienia meczu)
-                        var lastServePlayer: String
-                        if(app.serve1=="1"){
-                            database.child("LastServePlayer").setValue(app.player1)
-                            lastServePlayer=app.player1
-                        }
-                        else{
-                            database.child("LastServePlayer").setValue(app.player2)
-                            lastServePlayer=app.player2
-                        }
+                    val scoreUpdates = mapOf(
+                        "pkt1" to app.pkt1,
+                        "pkt2" to app.pkt2,
+                        "set1p1" to app.set1p1,
+                        "set2p1" to app.set2p1,
+                        "set3p1" to app.set3p1,
+                        "set1p2" to app.set1p2,
+                        "set2p2" to app.set2p2,
+                        "set3p2" to app.set3p2,
+                        "LastServePlayer" to servePlayer
+                    )
+                    database.updateChildren(scoreUpdates)
 
-                        val currentCount = dataSnapshot.getValue(Int::class.java) ?: 0
-                        val count = addZeros(currentCount)
-                        /*if(currentCount<10){
-                            count = "point 0" + currentCount.toString()
-                        }
-                        else{
-                            count = "point " + currentCount.toString()
-                        }*/
-
-                        // Zapis punktu do bazy danych
-                        val pointDatabase =
-                            database.child(("set " + setId)).child(("game " + gameString))
-                                .child("point $count")
-                        val point = Point(
-                            pkt1, pkt2, kto,
-                            co, gdzie, czym, app.serwis, servePlayer
+                    // Point entry update
+                    val pointDatabase = database.child("set $setId").child("game $gameString")
+                        .child("point ${addZeros(currentCount)}")
+                    val point = Point(pkt1, pkt2, kto, co, gdzie, czym, app.serwis, servePlayer)
+                    pointDatabase.setValue(point).addOnSuccessListener {
+                        pointDatabase.child("score").updateChildren(
+                            mapOf(
+                                "servePlayer" to servePlayer,
+                                "pkt1" to app.pkt1,
+                                "pkt2" to app.pkt2,
+                                "set1p1" to app.set1p1,
+                                "set1p2" to app.set1p2,
+                                "set2p1" to app.set2p1,
+                                "set2p2" to app.set2p2,
+                                "set3p1" to app.set3p1,
+                                "set3p2" to app.set3p2
+                            )
                         )
-                        pointDatabase.setValue(point)
-                        pointDatabase.child("score").child("servePlayer").setValue(lastServePlayer)
-                        pointDatabase.child("score").child("pkt1").setValue(app.pkt1)
-                        pointDatabase.child("score").child("pkt2").setValue(app.pkt2)
-                        pointDatabase.child("score").child("set1p1")
-                            .setValue(app.set1p1)//.text.toString())
-                        pointDatabase.child("score").child("set1p2")
-                            .setValue(app.set1p2)//.text.toString())
-                        pointDatabase.child("score").child("set2p1")
-                            .setValue(app.set2p1)//.text.toString())
-                        pointDatabase.child("score").child("set2p2")
-                            .setValue(app.set2p2)//.text.toString())
-                        pointDatabase.child("score").child("set3p1")
-                            .setValue(app.set3p1)//.text.toString())
-                        pointDatabase.child("score").child("set3p2")
-                            .setValue(app.set3p2)//.text.toString())
+                    }
 
-                        // Inkrementacja i zapisanie wartości pktCount
-                        val newCount = currentCount + 1
-                        database.child("pktCount").setValue(newCount)
+                    // Incrementing the point count
+                    database.child("pktCount").setValue(currentCount + 1)
+
+                    // Check if the match has ended
+                    if (!app.isEnd) {
+                        if (!openedFromStartPoint) {
+                            val intent = Intent(context, ActivityStartPoint::class.java).apply {
+                                putExtra("matchID", matchId)
+                            }
+                            context.startActivity(intent)
+                            (context as Activity).finish()
+                        }
+                    } else {
+                        val intent = Intent(context, EndOfMatchActivity::class.java).apply {
+                            putExtra("matchID", matchId)
+                        }
+                        context.startActivity(intent)
+                        (context as Activity).finish()
                     }
                 }
-                app.serwis=1
 
-                if(!app.isEnd){
-                    if(!openedFromStartPoint) {
-                        val intent = Intent(context, ActivityStartPoint::class.java)
-                        intent.putExtra("matchID", matchId)
-                        (context as Activity).startActivity(intent)
-                        context.finish()
-
-                    }
-                }else{
-                    val intent = Intent(context, EndOfMatchActivity::class.java)
-                    intent.putExtra("matchID", matchId)
-                    (context as Activity).startActivity(intent)
-                    context.finish()
-
-                }
+                app.serwis = 1
+                alertDialog.dismiss()
             }
-            alertDialog.dismiss()
         }
+
 
         btnCancel.setOnClickListener {
             if(!openedFromStartPoint) {

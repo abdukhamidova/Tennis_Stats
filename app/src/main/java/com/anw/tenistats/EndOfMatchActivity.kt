@@ -76,18 +76,20 @@ class EndOfMatchActivity : AppCompatActivity() {
         val matchId = intent.getStringExtra("matchID")
         val winner: String
         //sprawdzenie kto wygral
-
         winner = if(serve1.text==""){ //wygral player2
             player2.text.toString()
         } //wygral player2
         else{
             player1.text.toString()
         }
+        val goldenLaurel = getGoldenDrawable(applicationContext, R.drawable.icon_laurel3)
         if(winner == player2.text)
         {
+            serve2.text = ""
             serve2.visibility = View.VISIBLE
             serve1.visibility = View.INVISIBLE
         }else {
+            serve1.text = ""
             serve1.visibility = View.VISIBLE
             serve2.visibility = View.INVISIBLE
         }

@@ -133,8 +133,8 @@ fun score(app: Stats,player1: TextView, serve1: TextView, serve2: TextView, pkt1
                     serwis2 = ""
                     serve1.visibility = View.VISIBLE
                     serve2.visibility = View.INVISIBLE
-                    fillUpScore(app,player1,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
                     app.isEnd=true
+                    fillUpScore(app,player1,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
                 }
                 else {
                     set3p1.text = "0"
@@ -153,8 +153,8 @@ fun score(app: Stats,player1: TextView, serve1: TextView, serve2: TextView, pkt1
                 serwis2 = ""
                 serve1.visibility = View.VISIBLE
                 serve2.visibility = View.INVISIBLE
-                fillUpScore(app,player1,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
                 app.isEnd=true
+                fillUpScore(app,player1,pkt1,pkt2,set1p1,set1p2,set2p1,set2p2,set3p1,set3p2)
             }
             else {
                 if (set3p1.text == "6" && set3p2.text == "6") { //jesli prawda to bedzie tiebreak
@@ -289,6 +289,7 @@ fun fillUpScore(app: Stats,player1: TextView, pkt1: TextView, pkt2: TextView,
         app.set3p1 = set3p2.text.toString()
     }
 }
+
 fun fillUpScoreUndoCustom(app: Stats,player1: String, pkt1: String, pkt2: String,
                 set1p1: String, set1p2: String, set2p1: String,
                 set2p2: String, set3p1: String, set3p2: String){

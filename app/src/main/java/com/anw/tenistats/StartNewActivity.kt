@@ -179,12 +179,14 @@ class StartNewActivity : AppCompatActivity() {
             threshold = 0
             onFocusChangeListener = View.OnFocusChangeListener { _, b -> if (b) showDropDown() }
         }
+        binding.autoNamePlayer1.setDropDownBackgroundResource(R.color.app_bg_color)
 
         binding.autoNamePlayer2.apply {
             setAdapter(adapter)
             threshold = 0
             onFocusChangeListener = View.OnFocusChangeListener { _, b -> if (b) showDropDown() }
         }
+        binding.autoNamePlayer1.setDropDownBackgroundResource(R.color.app_bg_color)
     }
 
     private fun splitNameToFirstAndLastName(playerName: String): Pair<String?, String?> {
