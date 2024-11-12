@@ -57,7 +57,7 @@ class ChooseTeamDialog(private val context: Context, private val playerName: Str
             val selectedTeam = if (textTeamName.visibility == View.VISIBLE && textTeamName.text.isNotEmpty()) {
                 // Dodanie nowej drużyny
                 val newTeamName = textTeamName.text.toString()
-                val newTeam = TeamView(name = newTeamName, numberOfPeople = 1, players = arrayListOf(playerName))
+                val newTeam = TeamView(name = newTeamName, players = arrayListOf(playerName))
 
                 // Dodanie nowej drużyny do Firebase
                 addNewTeamToDatabase(newTeam)
@@ -72,9 +72,6 @@ class ChooseTeamDialog(private val context: Context, private val playerName: Str
                 if (!selectedTeam.players.contains(playerName)) {
                     selectedTeam.players.add(playerName)  // Dodaj zawodnika do listy
                 }
-
-                // Zwiększenie liczby graczy w drużynie
-                selectedTeam.numberOfPeople++
 
                 // Aktualizacja drużyny w bazie
                 updateTeamInDatabase(selectedTeam)
@@ -137,12 +134,8 @@ class ChooseTeamDialog(private val context: Context, private val playerName: Str
             if (!players.contains(playerName)) {
                 players.add(playerName)  // Dodajemy zawodnika do listy
 
-                // Zwiększamy liczbę graczy
-                team.numberOfPeople = players.size
-
                 // Aktualizujemy drużynę i jej listę graczy w bazie
                 teamRef.child("players").setValue(players)
-                teamRef.child("numberOfPeople").setValue(team.numberOfPeople)
 
                 Log.d("ChooseTeamDialog", "Zaktualizowano drużynę: ${team.name}")
             }

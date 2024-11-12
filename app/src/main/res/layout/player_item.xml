@@ -9,17 +9,20 @@
     android:layout_marginEnd="@dimen/_3sdp"
     app:cardCornerRadius="@dimen/_7sdp"
     android:backgroundTint="@color/app_item_color">
+
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/_38sdp"
-        android:layout_marginVertical="@dimen/_4sdp"
-        android:layout_marginStart="@dimen/_12sdp"
-        android:orientation="horizontal">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingVertical="@dimen/_4sdp"
+        android:paddingStart="@dimen/_12sdp">
+
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:orientation="horizontal">
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
 
             <TextView
                 android:layout_width="@dimen/_31sdp"
@@ -27,21 +30,30 @@
                 android:background="@drawable/circle"
                 android:gravity="center"
                 app:drawableEndCompat="@drawable/icon_person_settings"
-                app:drawableTint="@color/item_textColor"/>
+                app:drawableTint="@color/item_textColor" />
 
             <TextView
                 android:id="@+id/textviewPlayer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:layout_marginStart="@dimen/_7sdp"
                 android:text="@string/player"
                 android:textColor="@color/item_textColor"
                 android:textSize="@dimen/_15ssp" />
 
-
-
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/buttonAddToFavorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:contentDescription="@string/add_to_team"
+            android:focusable="true"
+            android:drawableEnd="@mipmap/star"
+             />
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

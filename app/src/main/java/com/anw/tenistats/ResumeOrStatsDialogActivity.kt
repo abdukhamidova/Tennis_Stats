@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+//import com.anw.tenistats.ActivityMatchShortSummary
 import androidx.transition.Visibility
 import com.anw.tenistats.ActivityStartPoint
 import com.anw.tenistats.DeleteMatchDialogActivity
@@ -84,19 +85,37 @@ class ResumeOrStatsDialogActivity(private val context: Context,private val opene
 
                     val btnDelete : ImageView = dialogView.findViewById(R.id.buttonDelete)
 
-                    if(matchSnapshot.child("winner").exists()){
-                        btnResume.visibility = View.GONE
-                    }
-                    else{
-                        btnResume.visibility = View.VISIBLE
-                    }
                     btnResume.setOnClickListener {
+                        //zapisanie wyniku w zmiennych globalnych
+                        /*if (app != null){
+                            app.player1=player1.text.toString()
+                            app.player2=player2.text.toString()
+                            app.pkt1 = pkt1.text.toString()
+                            app.pkt2 = pkt2.text.toString()
+                            app.set1p1 = set1p1.text.toString()
+                            app.set1p2 = set1p2.text.toString()
+                            app.set2p1 = set2p1.text.toString()
+                            app.set2p2 = set2p2.text.toString()
+                            app.set3p1 = set3p1.text.toString()
+                            app.set3p2 = set3p2.text.toString()
+                            if(serve1.visibility == View.VISIBLE){
+                                app.serve1 = "1"
+                                app.serve2 = ""
+                            }
+                            else{
+                                app.serve1 = ""
+                                app.serve2 = "1"
+                            }
+                        }*/
+
                         val intent = Intent(context, ActivityStartPoint::class.java)
                         intent.putExtra("matchID", matchId.text.toString())
                         database =
                             FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
                                 .getReference(user.toString()).child("Current match")
                         database.setValue(matchId.text.toString())
+
+                        //setScoreInApp()
 
                         context.startActivity(intent)
                         alertDialog.dismiss()

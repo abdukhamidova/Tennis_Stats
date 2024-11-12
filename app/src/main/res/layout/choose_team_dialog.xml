@@ -42,7 +42,7 @@
             android:textSize="@dimen/_13ssp" />
 
         <TextView
-            android:id="@+id/buttonAdd"
+            android:id="@+id/TextViewAdd"
             android:layout_width="@dimen/_110sdp"
             android:layout_height="@dimen/_36sdp"
             android:layout_toEndOf="@+id/buttonPlus"

@@ -2,11 +2,9 @@ package com.anw.tenistats
 
 import android.app.AlertDialog
 import android.content.Context
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase

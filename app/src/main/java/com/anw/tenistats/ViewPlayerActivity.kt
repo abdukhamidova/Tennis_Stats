@@ -2,6 +2,7 @@ package com.anw.tenistats
 
 import MyAdapterPlayer
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
@@ -82,12 +83,12 @@ class ViewPlayerActivity : AppCompatActivity(), MyAdapterPlayer.OnItemClickListe
         // Inicjalizacja pola playerArrayList pustą listą
         playerArrayList = arrayListOf<PlayerView>()
 
-
+        getPlayerData()
         // Inicjalizacja widoku RecyclerView
         adapter = MyAdapterPlayer(playerArrayList, firebaseAuth)
         adapter.setOnItemClickListener(this)
-        playerRecyclerView.adapter = adapter
-        getPlayerData()
+       playerRecyclerView.adapter = adapter
+
 
         playerRecyclerView.isEnabled = true
 
@@ -112,22 +113,24 @@ class ViewPlayerActivity : AppCompatActivity(), MyAdapterPlayer.OnItemClickListe
 
         dbref.addValueEventListener(object : ValueEventListener {
             @SuppressLint("NotifyDataSetChanged")
+            @Override
             override fun onDataChange(snapshot: DataSnapshot) {
+                playerArrayList.clear() // Wyczyść listę, aby uniknąć duplikatów
+
                 if (snapshot.exists()) {
                     for (playerSnapshot in snapshot.children) {
                         val player = playerSnapshot.getValue(PlayerView::class.java)
                         if (player != null) {
                             findViewById<TextView>(R.id.textViewNotFound).visibility = View.INVISIBLE
                             playerArrayList.add(player)
-                        }else{
+                        } else {
                             findViewById<TextView>(R.id.textViewNotFound).visibility = View.VISIBLE
                         }
                     }
-                    // Inicjalizacja adaptera
+                    // Odśwież adapter po zmianie danych
                     adapter = MyAdapterPlayer(playerArrayList, firebaseAuth)
-                    // Podpięcie adaptera do RecyclerView
-                   playerRecyclerView.adapter = adapter
-                    // Poinformuj adapter o zmianach w danych
+// Podpięcie adaptera do RecyclerView
+                    playerRecyclerView.adapter = adapter
                     adapter.notifyDataSetChanged()
                 }
             }
@@ -138,8 +141,11 @@ class ViewPlayerActivity : AppCompatActivity(), MyAdapterPlayer.OnItemClickListe
         })
     }
 
-    override fun onItemClick(playerView: PlayerView) {
-        val intent = Intent(this, PlayerDetailsActivity::class.java)
-        startActivity(intent)
-    }
+   //zmienić tu funkcje onItemClick
+   override fun onItemClick(playerView: PlayerView) {
+       // Przykładowa obsługa kliknięcia na zawodnika
+       val intent = Intent(this, PlayerDetailsActivity::class.java)
+       intent.putExtra("playerId", playerView.player) // Przekazanie ID zawodnika
+       startActivity(intent) // Uruchomienie nowej aktywności
+   }
 }
