@@ -32,8 +32,7 @@ class ChooseTeamDialog(private val context: Context, private val playerName: Str
 
         firebaseAuth = FirebaseAuth.getInstance()
         val user = firebaseAuth.currentUser?.uid
-        database = FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
-            .getReference(user.toString())
+        database = FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/").getReference(user.toString())
 
         val textPlayerName: TextView = dialogView.findViewById(R.id.textViewChoose)
         textPlayerName.text = "Choose a team for $playerName"

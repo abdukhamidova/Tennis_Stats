@@ -22,7 +22,7 @@ class DecisionAddToTeamActivity(private val context: Context) {
         val btnYes: Button = dialogView.findViewById(R.id.buttonYes)
         val textPlayerName: TextView = dialogView.findViewById(R.id.textViewConfirm)
 
-        textPlayerName.text = "Would you like to add $playerName to your team?"
+        textPlayerName.text = "Would you like to add $playerName to your group?"
 
         btnNo.setOnClickListener {
             alertDialog.dismiss()

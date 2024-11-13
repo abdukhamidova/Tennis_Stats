@@ -31,25 +31,14 @@
         android:layout_marginBottom="@dimen/_11sdp"
         android:layout_gravity="center_horizontal">
 
-        <Button
-            android:id="@+id/buttonPlus"
-            android:layout_width="@dimen/_25sdp"
-            android:layout_height="@dimen/_25sdp"
-            android:layout_marginEnd="@dimen/_7sdp"
-            android:background="@drawable/border_button"
-            android:text="@string/plus"
-            android:textColor="@color/dialog_btnCancel"
-            android:textSize="@dimen/_13ssp" />
-
         <TextView
-            android:id="@+id/TextViewAdd"
+            android:id="@+id/buttonPlus"
             android:layout_width="@dimen/_110sdp"
             android:layout_height="@dimen/_36sdp"
-            android:layout_toEndOf="@+id/buttonPlus"
             android:backgroundTint="@color/dialog_textTitle_color"
-            android:textColor="@color/dialog_textTitle_color"
             android:text="@string/add_new_team"
-            android:textSize="@dimen/_14ssp" />
+            android:textColor="@color/dialog_textTitle_color"
+            android:textSize="@dimen/_13ssp" />
     </RelativeLayout>
 
     <EditText

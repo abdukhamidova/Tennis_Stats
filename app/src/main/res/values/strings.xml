@@ -110,16 +110,19 @@
     <string name="scores">SCORES</string>
     <string name="select_player1">Select Player1</string>
     <string name="select_player2">Select Player2</string>
-    <string name="choose_team">Choose a team</string>
+    <string name="choose_team">Choose a group</string>
     <string name="plus">+</string>
-    <string name="add_new_team">Add new team</string>
-    <string name="add_to_team">Add a player to the team</string>
+    <string name="add_new_team">+ Add new group</string>
+    <string name="add_to_team">Add a player to the group</string>
+    <string name="plus_add_to_team">+ Add a player to the group</string>
     <string name="yes">YES</string>
     <string name="no">NO</string>
-    <string name="d_add_player_to_team">Would you like to add a player to your team?</string>
+    <string name="d_add_player_to_team">Would you like to add a player to your group?</string>
     <string name="d_add_player_to_favorite">Would you like to add a player to your favorites?</string>
     <string name="hint_team">Enter team name</string>
     <string name="finished">Finished</string>
     <string name="inprogress">In progress</string>
+    <string name="team">Team:</string>
+
 
 </resources>

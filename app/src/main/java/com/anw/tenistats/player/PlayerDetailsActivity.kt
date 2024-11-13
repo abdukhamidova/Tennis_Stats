@@ -3,13 +3,16 @@ package com.anw.tenistats.player
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
+import android.text.Layout
 import android.util.Log
+import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.DatePicker
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.LinearLayout
 import android.widget.RadioButton
 import android.widget.TextView
 import android.widget.Toast
@@ -27,6 +30,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.GenericTypeIndicator
 import com.google.firebase.database.ValueEventListener
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
@@ -38,11 +42,14 @@ import java.util.Date
 import java.util.Locale
 
 
+
 class PlayerDetailsActivity : AppCompatActivity() {
+    private lateinit var playerId: String
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var navigationDrawerHelper: NavigationDrawerHelper
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var database: DatabaseReference
+    private lateinit var databaseT: DatabaseReference
 
     @OptIn(DelicateCoroutinesApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -82,9 +89,47 @@ class PlayerDetailsActivity : AppCompatActivity() {
         //MENU
 
         val user = firebaseAuth.currentUser?.uid
-        val playerId = intent.getStringExtra("playerId").toString()
+        playerId = intent.getStringExtra("playerId").toString()
         database = FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
             .getReference(user.toString()).child("Players").child(playerId)
+
+        val starImageButton=findViewById<ImageButton>(R.id.buttonStar)
+        starImageButton.visibility = View.VISIBLE
+        database.child("isFavorite")
+            .get()
+            .addOnSuccessListener { snapshot ->
+                val isFavoriteInDatabase = snapshot.getValue(Boolean::class.java) ?: false
+                if (isFavoriteInDatabase) {
+                    starImageButton.setImageResource(R.mipmap.star_full)
+                } else {
+                    starImageButton.setImageResource(R.mipmap.star)
+                }
+            }
+        databaseT = FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
+            .getReference(user.toString()).child("Teams").child("Favorites")
+        starImageButton.setOnClickListener {
+            database.child("isFavorite").get().addOnSuccessListener { snapshot ->
+                val isFavorite = snapshot.getValue(Boolean::class.java) ?: false
+                val favoriteTeamRef = databaseT.child("players")
+
+                favoriteTeamRef.get().addOnSuccessListener { teamSnapshot ->
+                    val playersList = teamSnapshot.getValue(object : GenericTypeIndicator<MutableList<String>>() {}) ?: mutableListOf()
+
+                    if (isFavorite) {
+                        playersList.remove(playerId)
+                        Toast.makeText(this, "$playerId removed from favorites", Toast.LENGTH_SHORT).show()
+                    } else {
+                        playersList.add(playerId)
+                        Toast.makeText(this, "$playerId added to favorites", Toast.LENGTH_SHORT).show()
+                    }
+
+                    favoriteTeamRef.setValue(playersList)
+                    database.child("isFavorite").setValue(!isFavorite)
+                    starImageButton.setImageResource(if (!isFavorite) R.mipmap.star_full else R.mipmap.star)
+                }
+            }
+        }
+
 
         //ustawienie poczatkowe
         start()
@@ -224,6 +269,34 @@ class PlayerDetailsActivity : AppCompatActivity() {
                 // Obsługa błędu
             }
         })
+        database.child("team").addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    val team = dataSnapshot.getValue(String::class.java)
+
+                    if (team != null) {
+                        val teamLayout = findViewById<LinearLayout>(R.id.linearLayoutTeam)
+                        teamLayout.visibility = View.VISIBLE
+                        val teamText = findViewById<TextView>(R.id.TextViewTeam)
+                        teamText.text = team
+                    }
+                }else {
+                    val addTeamLayout = findViewById<LinearLayout>(R.id.linearLayoutAddTeam)
+                    addTeamLayout.visibility = View.VISIBLE
+                    val textViewAdd=findViewById<TextView>(R.id.textViewAddToTeam)
+                    textViewAdd.setOnClickListener {
+                        val decisionDialog = DecisionAddToTeamActivity(this@PlayerDetailsActivity)
+                        decisionDialog.show(playerId)
+                    }
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Handle any potential database error here
+                Log.e("DatabaseError", "Error fetching team data: ${databaseError.message}")
+            }
+        })
+
         database.child("note").addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {

@@ -12,35 +12,50 @@
         android:background="@drawable/toolbar_bg"
         android:layout_height="@dimen/_43sdp">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="@dimen/_11sdp"
-        android:layout_marginEnd="@dimen/_11sdp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/_11sdp"
+            android:layout_marginEnd="@dimen/_11sdp">
 
-        <ImageButton
-            android:id="@+id/buttonMenu"
-            android:layout_width="@dimen/_36sdp"
-            android:layout_height="@dimen/_36sdp"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:backgroundTint="@color/transparent"
-            android:padding="@dimen/_1sdp"
-            android:src="@drawable/menu_button35"
-            android:visibility="visible"
-            app:tint="@color/app_menu_buttons"/>
+            <ImageButton
+                android:id="@+id/buttonMenu"
+                android:layout_width="@dimen/_36sdp"
+                android:layout_height="@dimen/_36sdp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:backgroundTint="@color/transparent"
+                android:padding="@dimen/_1sdp"
+                android:src="@drawable/menu_button35"
+                android:visibility="visible"
+                app:tint="@color/app_menu_buttons"/>
 
-        <ImageButton
-            android:id="@+id/buttonUndo"
-            android:layout_width="@dimen/_36sdp"
-            android:layout_height="@dimen/_36sdp"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:backgroundTint="@color/transparent"
-            android:padding="@dimen/_1sdp"
-            android:src="@drawable/icon_undo_30"
-            android:visibility="visible"
-            app:tint="@color/app_menu_buttons"/>
-    </RelativeLayout>
+            <ImageButton
+                android:id="@+id/buttonUndo"
+                android:layout_width="@dimen/_36sdp"
+                android:layout_height="@dimen/_36sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:backgroundTint="@color/transparent"
+                android:padding="@dimen/_1sdp"
+                android:src="@drawable/icon_undo_30"
+                android:visibility="visible"
+                app:tint="@color/app_menu_buttons"/>
+
+            <ImageButton
+                android:id="@+id/buttonStar"
+                android:layout_width="@dimen/_36sdp"
+                android:layout_height="@dimen/_36sdp"
+                android:layout_marginEnd="0dp"
+                android:layout_toStartOf="@id/buttonUndo"
+                android:clickable="true"
+                android:contentDescription="@string/d_add_player_to_favorite"
+                android:focusable="true"
+                android:focusableInTouchMode="false"
+                android:padding="@dimen/_1sdp"
+                android:src="@mipmap/star"
+                android:visibility="invisible"
+                android:backgroundTint="@color/transparent"/>
+        </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
 </LinearLayout>
