@@ -107,6 +107,8 @@
             android:exported="false"
             android:parentActivityName=".mainpage.MenuActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".player.ViewTeamActivity">
+        </activity>
 
         <meta-data
             android:name="preloaded_fonts"

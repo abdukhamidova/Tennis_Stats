@@ -11,6 +11,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
 import android.widget.TextView
+import android.widget.Toast
 import com.anw.tenistats.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -21,7 +22,7 @@ class ChooseTeamDialog(private val context: Context, private val playerName: Str
     private lateinit var alertDialog: AlertDialog
     private lateinit var database: DatabaseReference
     private lateinit var firebaseAuth: FirebaseAuth
-    private val teamList = ArrayList<TeamView>() // Lista drużyn z bazy
+    private val teamList = ArrayList<TeamView>()
     private lateinit var spinnerTeamList: Spinner
 
     fun show() {
@@ -37,48 +38,37 @@ class ChooseTeamDialog(private val context: Context, private val playerName: Str
         val textPlayerName: TextView = dialogView.findViewById(R.id.textViewChoose)
         textPlayerName.text = "Choose a team for $playerName"
 
-        // Przygotowanie Spinnera
+
         spinnerTeamList = dialogView.findViewById(R.id.spinnerTeamList)
 
-        // Pobieranie listy drużyn z Firebase
         getTeamsFromDatabase()
 
-        // Wyświetlenie pola do wpisania nowej drużyny
-        val buttonPlus: Button = dialogView.findViewById(R.id.buttonPlus)
+        val buttonPlus: TextView = dialogView.findViewById(R.id.buttonPlus)
         val textTeamName: EditText = dialogView.findViewById(R.id.textViewTeamName)
         buttonPlus.setOnClickListener {
             textTeamName.visibility = View.VISIBLE
         }
 
-        // Dodanie drużyny do listy (po kliknięciu "Add to team")
         val buttonAddToTeam: Button = dialogView.findViewById(R.id.buttonAddToTeam)
         buttonAddToTeam.setOnClickListener {
             val selectedTeam = if (textTeamName.visibility == View.VISIBLE && textTeamName.text.isNotEmpty()) {
-                // Dodanie nowej drużyny
                 val newTeamName = textTeamName.text.toString()
                 val newTeam = TeamView(name = newTeamName, players = arrayListOf(playerName))
 
-                // Dodanie nowej drużyny do Firebase
                 addNewTeamToDatabase(newTeam)
 
                 newTeam
             } else {
-                // Wybranie istniejącej drużyny
                 val selectedPosition = spinnerTeamList.selectedItemPosition
                 val selectedTeam = teamList[selectedPosition]
 
-                // Dodanie nowego zawodnika do listy graczy drużyny, jeśli nie ma go już na liście
                 if (!selectedTeam.players.contains(playerName)) {
-                    selectedTeam.players.add(playerName)  // Dodaj zawodnika do listy
+                    selectedTeam.players.add(playerName)
                 }
-
-                // Aktualizacja drużyny w bazie
                 updateTeamInDatabase(selectedTeam)
 
                 selectedTeam
             }
-
-            // Aktualizowanie drużyny gracza w bazie
             updatePlayerTeamInDatabase(selectedTeam.name)
 
             val intent = Intent(context, ViewPlayerActivity::class.java)
@@ -91,17 +81,18 @@ class ChooseTeamDialog(private val context: Context, private val playerName: Str
         alertDialog.show()
     }
 
-    // Funkcja do pobierania drużyn z bazy danych Firebase
     private fun getTeamsFromDatabase() {
         database.child("Teams").get().addOnSuccessListener { snapshot ->
             if (snapshot.exists()) {
                 teamList.clear()
                 for (teamSnapshot in snapshot.children) {
                     val team = teamSnapshot.getValue(TeamView::class.java)
-                    team?.let { teamList.add(it) }
+                    team?.let {
+                        if (it.name != "Favorites") {
+                            teamList.add(it)
+                        }
+                    }
                 }
-
-                // Aktualizacja adaptera Spinnera
                 val adapter = ArrayAdapter(context, R.layout.spinner_item_team_base, teamList.map { it.name })
                 adapter.setDropDownViewResource(R.layout.spinner_item_team)
                 spinnerTeamList.adapter = adapter
@@ -111,29 +102,33 @@ class ChooseTeamDialog(private val context: Context, private val playerName: Str
         }
     }
 
-    // Funkcja do dodawania nowej drużyny do bazy
     private fun addNewTeamToDatabase(team: TeamView) {
-        val teamId = team.name // Zakładając, że nazwa drużyny jest unikalna
-        database.child("Teams").child(teamId).setValue(team).addOnSuccessListener {
-            Log.d("ChooseTeamDialog", "Dodano nową drużynę: ${team.name}")
+        val teamId = team.name
+
+
+        database.child("Teams").child(teamId.trim()).get().addOnSuccessListener { snapshot ->
+            if (snapshot.exists()) {
+                Toast.makeText(context, "Drużyna o nazwie '$teamId' już istnieje!", Toast.LENGTH_SHORT).show()
+            } else {
+
+                database.child("Teams").child(teamId).setValue(team).addOnSuccessListener {
+                }.addOnFailureListener {
+                }
+            }
         }.addOnFailureListener { exception ->
-            Log.e("ChooseTeamDialog", "Błąd podczas dodawania nowej drużyny: $exception")
         }
     }
 
-    // Funkcja do aktualizacji drużyny w bazie danych
     private fun updateTeamInDatabase(team: TeamView) {
         val teamId = team.name
         val teamRef = database.child("Teams").child(teamId)
 
-        // Dodajemy zawodnika do drużyny, jeśli jeszcze go tam nie ma
         teamRef.child("players").get().addOnSuccessListener { snapshot ->
             val players = snapshot.value as? ArrayList<String> ?: ArrayList()
 
             if (!players.contains(playerName)) {
-                players.add(playerName)  // Dodajemy zawodnika do listy
+                players.add(playerName)
 
-                // Aktualizujemy drużynę i jej listę graczy w bazie
                 teamRef.child("players").setValue(players)
 
                 Log.d("ChooseTeamDialog", "Zaktualizowano drużynę: ${team.name}")
@@ -143,15 +138,20 @@ class ChooseTeamDialog(private val context: Context, private val playerName: Str
         }
     }
 
-    // Funkcja do aktualizacji drużyny gracza w bazie danych
     private fun updatePlayerTeamInDatabase(teamName: String) {
+        if (teamName.trim() == "Favorites") {
+            Log.e("ChooseTeamDialog", "Nie można przypisać drużyny 'Favorites' dla zawodnika: $playerName")
+            Toast.makeText(context, "You cannot assign the 'Favorites' team to a player.", Toast.LENGTH_SHORT).show()
+            return
+        }
+
         val playerRef = database.child("Players").child(playerName)
 
-        // Sprawdzamy, czy zawodnik istnieje w bazie, jeśli tak, przypisujemy drużynę
         playerRef.child("team").setValue(teamName).addOnSuccessListener {
             Log.d("ChooseTeamDialog", "Zaktualizowano drużynę dla zawodnika: $playerName")
         }.addOnFailureListener { exception ->
             Log.e("ChooseTeamDialog", "Błąd podczas aktualizacji drużyny zawodnika: $exception")
         }
     }
+
 }

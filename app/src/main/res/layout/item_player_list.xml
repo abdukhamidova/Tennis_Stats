@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/_3sdp"
+    android:layout_marginTop="@dimen/_7sdp"
+    android:layout_marginEnd="@dimen/_3sdp"
+    app:cardCornerRadius="@dimen/_7sdp"
+    android:backgroundTint="@color/greyish">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingVertical="@dimen/_4sdp"
+        android:paddingStart="@dimen/_12sdp"
+        android:paddingEnd="@dimen/_12sdp">
+
+        <!-- Sekcja nazwy zawodnika -->
+        <TextView
+            android:id="@+id/tvPlayerName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Player Name"
+            android:textColor="@color/item_textColor"
+            android:textSize="@dimen/_15ssp" />
+
+        <!-- Ikona usuwania zawodnika -->
+        <ImageView
+            android:id="@+id/ivDeletePlayer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_6sdp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/icon_delete_30"
+            android:contentDescription="@string/delete_player"
+            app:tint="@color/item_textColor" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

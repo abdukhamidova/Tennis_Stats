@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/dialog_bg_color">
+
+
+    <EditText
+        android:id="@+id/textViewTeamName"
+        android:layout_width="294dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="@dimen/_24sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginEnd="@dimen/_24sdp"
+        android:backgroundTint="@color/autoFill_field"
+        android:drawableStart="@drawable/icon_team"
+        android:drawablePadding="@dimen/_5sdp"
+        android:drawableTint="@color/app_hint_color"
+        android:hint="@string/enter_team"
+        android:padding="@dimen/_11sdp"
+        android:textAlignment="center"
+        android:textColor="@color/autoFill_field"
+        android:textColorHint="@color/app_hint_color"
+        android:textSize="@dimen/_18sdp" />
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginBottom="@dimen/_11sdp"
+        android:layout_gravity="center_horizontal">
+        <Button
+            android:id="@+id/buttonCancel"
+            android:layout_width="@dimen/_99sdp"
+            android:layout_height="@dimen/_36sdp"
+            android:layout_marginEnd="@dimen/_7sdp"
+            android:background="@drawable/border_button"
+            android:text="@string/cancel"
+            android:textSize="@dimen/_14ssp"
+            android:textColor="@color/dialog_btnCancel"/>
+
+        <Button
+            android:id="@+id/buttonAdd"
+            android:layout_width="@dimen/_99sdp"
+            android:layout_height="@dimen/_36sdp"
+            android:layout_toEndOf="@+id/buttonCancel"
+            android:backgroundTint="@color/dialog_textTitle_color"
+            android:text="@string/add"
+            android:textColor="@color/dialog_text_color"
+            android:textSize="@dimen/_14ssp"  />
+    </RelativeLayout>
+</LinearLayout>

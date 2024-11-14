@@ -204,7 +204,7 @@
                     android:id="@+id/linearLayoutTeam"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:visibility="visible">
+                    android:visibility="invisible">
 
                     <TextView
                         android:id="@+id/textView6"

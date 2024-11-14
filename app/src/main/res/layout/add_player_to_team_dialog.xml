@@ -11,18 +11,24 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_7sdp"
         android:layout_gravity="center"
-        android:text="@string/choose_team"
+        android:text="@string/choose_player"
         android:textColor="@color/dialog_textTitle_color"
         android:textSize="@dimen/_23ssp"
         android:textAlignment="center"/>
 
-    <Spinner
-        android:id="@+id/spinnerTeamList"
-        android:layout_width="@dimen/_232sdp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="@dimen/_15sdp"
-        android:padding="@dimen/_11sdp" />
+    <AutoCompleteTextView
+        android:id="@+id/autoNamePlayer"
+        android:layout_width="195dp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginStart="@dimen/_24sdp"
+        android:layout_marginEnd="@dimen/_24sdp"
+        android:backgroundTint="@color/autoFill_field"
+        android:drawableStart="@drawable/icon_person"
+        android:drawablePadding="@dimen/_5sdp"
+        android:drawableTint="@color/app_hint_color"
+        android:hint="@string/name"
+        android:textColor="@color/autoFill_field"
+        android:textColorHint="@color/app_hint_color" />
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -31,25 +37,8 @@
         android:layout_marginBottom="@dimen/_11sdp"
         android:layout_gravity="center_horizontal">
 
-        <TextView
-            android:id="@+id/buttonPlus"
-            android:layout_width="@dimen/_110sdp"
-            android:layout_height="@dimen/_36sdp"
-            android:backgroundTint="@color/dialog_textTitle_color"
-            android:text="@string/add_new_team"
-            android:textColor="@color/dialog_textTitle_color"
-            android:textSize="@dimen/_13ssp" />
-    </RelativeLayout>
 
-    <EditText
-        android:id="@+id/textViewTeamName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:textSize="@dimen/_13ssp"
-        android:hint="@string/hint_team"
-        android:textColor="@color/dialog_textTitle_color"
-        android:layout_gravity="center" />
+    </RelativeLayout>
 
     <Button
         android:id="@+id/buttonAddToTeam"

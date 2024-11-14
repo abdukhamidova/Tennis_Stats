@@ -29,6 +29,10 @@
             android:id="@+id/nav_h2h"
             android:icon="@drawable/icon_head2head"
             android:title="Head 2 Head" />
+        <item
+            android:id="@+id/nav_viewTeam"
+            android:icon="@drawable/icon_team"
+            android:title="View Team" />
     </group>
 
     <group

@@ -123,6 +123,14 @@
     <string name="finished">Finished</string>
     <string name="inprogress">In progress</string>
     <string name="team">Team:</string>
+    <string name="edit_team">Edit team name</string>
+    <string name="delete_team">Delete team</string>
+    <string name="delete_player">Delete player from team</string>
+    <string name="error_empty_name">Error  - empty name</string>
+    <string name="deleteTeam">Do you want to delete group?</string>
+    <string name="deletePlayerFromTeam">Do you want to delete player from group?</string>
+    <string name="choose_player">Choose player</string>
+    <string name="enter_team">Enter new group</string>
 
 
 </resources>
