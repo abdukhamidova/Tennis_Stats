@@ -2,6 +2,7 @@ package com.anw.tenistats.player
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -59,6 +60,12 @@ class TeamExpandableListAdapter(
 
         playerName.text = "${player.firstName} ${player.lastName}"
 
+        childView.setOnClickListener {
+            val intent = Intent(context, PlayerDetailsActivity::class.java)
+            intent.putExtra("playerId", player.player)
+            context.startActivity(intent)
+        }
+
         val ivDeletePlayer = childView.findViewById<ImageView>(R.id.ivDeletePlayer)
         ivDeletePlayer.setOnClickListener {
             val deletePlayerDialog = DeletePlayerFromTeamDialog(
@@ -71,6 +78,7 @@ class TeamExpandableListAdapter(
 
         return childView
     }
+
 
     override fun getGroupView(
         groupPosition: Int,
