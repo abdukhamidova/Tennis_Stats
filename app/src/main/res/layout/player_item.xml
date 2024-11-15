@@ -54,8 +54,8 @@
             android:contentDescription="@string/d_add_player_to_favorite"
             android:focusable="true"
             android:focusableInTouchMode="false"
-            android:drawableEnd="@drawable/icon_star30"
-             />
+            app:drawableEndCompat="@drawable/icon_star30"
+            app:drawableTint="@color/gold" />
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

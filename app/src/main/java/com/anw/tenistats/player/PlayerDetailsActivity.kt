@@ -139,7 +139,7 @@ class PlayerDetailsActivity : AppCompatActivity() {
 
                     favoriteTeamRef.setValue(playersList)
                     database.child("isFavorite").setValue(!isFavorite)
-                    starImageButton.setImageResource(if (!isFavorite) R.drawable.icon_star30gold else R.drawable.icon_star)
+                    starImageButton.setImageResource(if (!isFavorite) R.drawable.icon_star30gold else R.drawable.icon_star30)
                 }
             }
         }
@@ -189,10 +189,6 @@ class PlayerDetailsActivity : AppCompatActivity() {
                 "Updated player",
                 Toast.LENGTH_SHORT
             ).show()
-            val intent = Intent(this, PlayerDetailsActivity::class.java).apply {
-                putExtra("playerId", playerId)
-            }
-            startActivity(intent)
         }
 
         //potrzebna jest zgoda na tworzenie pdf
@@ -205,7 +201,6 @@ class PlayerDetailsActivity : AppCompatActivity() {
             countMatches(user, player.text.toString()) { matchesPlayed, matchesWon ->
                 createPdf(matchesWon, matchesPlayed)
             }
-
         }
     }
 

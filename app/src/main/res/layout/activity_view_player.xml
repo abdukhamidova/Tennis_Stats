@@ -39,7 +39,7 @@
                     android:layout_height="@dimen/_40sdp"
                     android:layout_marginStart="@dimen/_3sdp"
                     android:layout_marginEnd="@dimen/_3sdp"
-                    android:textColor="@color/white"
+                    android:textColor="@color/general_text_color"
                     android:inputType="text"
                     android:maxLines="1"
                     android:backgroundTint="@color/autoFill_field"

@@ -18,12 +18,17 @@
         android:background="@color/app_bg_color"
         tools:ignore="HardCodedText">
 
-        <include layout="@layout/toolbar" />
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
         <TextView
             android:id="@+id/textViewName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_15sdp"
             android:text="@string/add_player"
             android:textColor="@color/general_text_color"
             android:textSize="@dimen/_30ssp"
@@ -31,14 +36,15 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.108" />
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            app:layout_constraintVertical_bias="0.0" />
 
         <ScrollView
             android:id="@+id/scrollViewContainer"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginBottom="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginBottom="@dimen/_3sdp"
             app:layout_constraintBottom_toTopOf="@id/buttonAdd"
             app:layout_constraintEnd_toEndOf="@id/textViewName"
             app:layout_constraintStart_toStartOf="@id/textViewName"
@@ -47,7 +53,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="0dp">
 
                 <LinearLayout
                     android:id="@+id/linearLayoutForm"

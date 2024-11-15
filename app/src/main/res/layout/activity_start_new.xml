@@ -35,106 +35,78 @@
             app:layout_constraintTop_toBottomOf="@+id/include3"
             app:layout_constraintVertical_bias="0.059" />
 
-        <TextView
-            android:id="@+id/textPlayer1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/player_1"
-            android:textColor="@color/app_mainTitles_color"
-            android:textSize="@dimen/_20sdp"
-            app:layout_constraintBottom_toTopOf="@+id/autoNamePlayer1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.072"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textStartNew"
-            app:layout_constraintVertical_bias="0.753" />
-
-        <AutoCompleteTextView
-            android:id="@+id/autoNamePlayer1"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_40sdp"
-            android:layout_marginStart="@dimen/_24sdp"
-            android:layout_marginEnd="@dimen/_24sdp"
-            android:backgroundTint="@color/autoFill_field"
-            android:drawableStart="@drawable/icon_person"
-            android:drawablePadding="@dimen/_5sdp"
-            android:drawableTint="@color/app_hint_color"
-            android:hint="@string/name"
-            android:textColor="@color/autoFill_field"
-            android:textColorHint="@color/app_hint_color"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textStartNew"
-            app:layout_constraintVertical_bias="0.13" />
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/textStartNew"
+            app:layout_constraintStart_toStartOf="@id/textStartNew"
+            app:layout_constraintEnd_toEndOf="@id/textStartNew"
+            app:layout_constraintBottom_toTopOf="@id/buttonStartGame"
+            android:padding="@dimen/_15sdp">
 
-        <CheckBox
-            android:id="@+id/checkBoxPlayer1New"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/_36sdp"
-            android:layout_marginStart="@dimen/_24sdp"
-            android:text="@string/create_player"
-            android:textColor="@color/accent_text_color2"
-            app:buttonTint="@color/app_mainTitles_color"
-            app:layout_constraintBottom_toTopOf="@+id/textPlayer2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/autoNamePlayer1"
-            app:layout_constraintVertical_bias="0.027"/>
+            <TextView
+                android:id="@+id/textPlayer1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/player_1"
+                android:textColor="@color/app_mainTitles_color"
+                android:textSize="@dimen/_20sdp"/>
 
-        <TextView
-            android:id="@+id/textPlayer2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_24sdp"
-            android:layout_marginTop="@dimen/_200sdp"
-            android:layout_marginEnd="@dimen/_329sdp"
-            android:text="@string/player_2"
-            android:textColor="@color/app_mainTitles_color"
-            android:textSize="@dimen/_20sdp"
-            app:layout_constraintBottom_toTopOf="@+id/autoNamePlayer2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.893" />
+            <AutoCompleteTextView
+                android:id="@+id/autoNamePlayer1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:backgroundTint="@color/autoFill_field"
+                android:drawableStart="@drawable/icon_person"
+                android:drawablePadding="@dimen/_5sdp"
+                android:drawableTint="@color/app_hint_color"
+                android:hint="@string/name"
+                android:textColor="@color/autoFill_field"
+                android:textColorHint="@color/app_hint_color"/>
 
-        <AutoCompleteTextView
-            android:id="@+id/autoNamePlayer2"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_40sdp"
-            android:layout_marginStart="@dimen/_24sdp"
-            android:layout_marginEnd="@dimen/_24sdp"
-            android:backgroundTint="@color/autoFill_field"
-            android:drawableStart="@drawable/icon_person"
-            android:drawablePadding="@dimen/_5sdp"
-            android:drawableTint="@color/app_hint_color"
-            android:hint="@string/name"
-            android:textColor="@color/autoFill_field"
-            android:textColorHint="@color/app_hint_color"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/autoNamePlayer1"
-            app:layout_constraintVertical_bias="0.149" />
+            <CheckBox
+                android:id="@+id/checkBoxPlayer1New"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:text="@string/create_player"
+                android:textColor="@color/accent_text_color2"
+                app:buttonTint="@color/app_mainTitles_color"/>
 
-        <CheckBox
-            android:id="@+id/checkBoxPlayer2New"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/_36sdp"
-            android:layout_marginStart="@dimen/_24sdp"
-            android:text="@string/create_player"
-            android:textColor="@color/accent_text_color2"
-            app:buttonTint = "@color/app_mainTitles_color"
-            app:layout_constraintBottom_toTopOf="@+id/buttonStartGame"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/autoNamePlayer2"
-            app:layout_constraintVertical_bias="0.137" />
+            <TextView
+                android:id="@+id/textPlayer2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/player_2"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:textColor="@color/app_mainTitles_color"
+                android:textSize="@dimen/_20sdp" />
+
+            <AutoCompleteTextView
+                android:id="@+id/autoNamePlayer2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:backgroundTint="@color/autoFill_field"
+                android:drawableStart="@drawable/icon_person"
+                android:drawablePadding="@dimen/_5sdp"
+                android:drawableTint="@color/app_hint_color"
+                android:hint="@string/name"
+                android:textColor="@color/autoFill_field"
+                android:textColorHint="@color/app_hint_color" />
+
+            <CheckBox
+                android:id="@+id/checkBoxPlayer2New"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:text="@string/create_player"
+                android:textColor="@color/accent_text_color2"
+                app:buttonTint = "@color/app_mainTitles_color"/>
+
+        </LinearLayout>
 
         <Button
             android:id="@+id/buttonStartGame"
@@ -151,7 +123,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.696" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigationViewMenu"
         android:layout_width="wrap_content"

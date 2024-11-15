@@ -64,7 +64,7 @@ class PlayerAdapter(
                 }
             }
 
-        holder.itemView.setOnClickListener {
+       holder.itemView.setOnClickListener {
             listener?.onItemClick(currentItem)
             val intent = Intent(context, PlayerDetailsActivity::class.java)
             intent.putExtra("playerId", currentItem.player)
@@ -82,7 +82,7 @@ class PlayerAdapter(
                     favoriteTeamRef.setValue(playersList)
                         .addOnSuccessListener {
                             Toast.makeText(context, "${currentItem.player} removed from favorites", Toast.LENGTH_SHORT).show()
-                            holder.buttonAddToTeam.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.mipmap.star, 0)
+                            holder.buttonAddToTeam.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.icon_star30, 0)
                         }
                         .addOnFailureListener {
                             Toast.makeText(context, "Failed to remove ${currentItem.player} from favorites", Toast.LENGTH_SHORT).show()
@@ -93,7 +93,7 @@ class PlayerAdapter(
                     favoriteTeamRef.setValue(playersList)
                         .addOnSuccessListener {
                             Toast.makeText(context, "${currentItem.player} added to favorites", Toast.LENGTH_SHORT).show()
-                            holder.buttonAddToTeam.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.mipmap.star_full, 0)
+                            holder.buttonAddToTeam.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.icon_star30gold, 0)
                         }
                         .addOnFailureListener {
                             Toast.makeText(context, "Failed to add ${currentItem.player} to favorites", Toast.LENGTH_SHORT).show()
