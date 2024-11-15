@@ -113,9 +113,9 @@ class PlayerDetailsActivity : AppCompatActivity() {
             .addOnSuccessListener { snapshot ->
                 val isFavoriteInDatabase = snapshot.getValue(Boolean::class.java) ?: false
                 if (isFavoriteInDatabase) {
-                    starImageButton.setImageResource(R.mipmap.star_full)
+                    starImageButton.setImageResource(R.drawable.icon_star30gold)
                 } else {
-                    starImageButton.setImageResource(R.mipmap.star)
+                    starImageButton.setImageResource(R.drawable.icon_star30)
                 }
             }
         databaseT = FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
@@ -138,7 +138,7 @@ class PlayerDetailsActivity : AppCompatActivity() {
 
                     favoriteTeamRef.setValue(playersList)
                     database.child("isFavorite").setValue(!isFavorite)
-                    starImageButton.setImageResource(if (!isFavorite) R.mipmap.star_full else R.mipmap.star)
+                    starImageButton.setImageResource(if (!isFavorite) R.drawable.icon_star30gold else R.drawable.icon_star)
                 }
             }
         }

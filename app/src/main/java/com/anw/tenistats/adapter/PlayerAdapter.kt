@@ -58,9 +58,9 @@ class PlayerAdapter(
             .addOnSuccessListener { snapshot ->
                 val isFavoriteInDatabase = snapshot.getValue(Boolean::class.java) ?: false
                 if (isFavoriteInDatabase) {
-                    holder.buttonAddToTeam.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.mipmap.star_full, 0)
+                    holder.buttonAddToTeam.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.icon_star30gold, 0)
                 } else {
-                    holder.buttonAddToTeam.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.mipmap.star, 0)
+                    holder.buttonAddToTeam.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.icon_star30, 0)
                 }
             }
 

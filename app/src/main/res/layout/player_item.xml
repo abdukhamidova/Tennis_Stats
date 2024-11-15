@@ -54,7 +54,7 @@
             android:contentDescription="@string/d_add_player_to_favorite"
             android:focusable="true"
             android:focusableInTouchMode="false"
-            android:drawableEnd="@mipmap/star"
+            android:drawableEnd="@drawable/icon_star30"
              />
     </LinearLayout>
 

@@ -54,7 +54,7 @@
                 android:focusable="true"
                 android:focusableInTouchMode="false"
                 android:padding="@dimen/_1sdp"
-                android:src="@mipmap/star"
+                android:src="@drawable/icon_star30"
                 android:visibility="invisible"
                 android:backgroundTint="@color/transparent"/>
         </RelativeLayout>
