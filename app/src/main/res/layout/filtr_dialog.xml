@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/_16sdp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Filter Players"
+        android:textStyle="bold"
+        android:textSize="@dimen/_18sdp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Handedness" />
+
+    <RadioGroup
+        android:id="@+id/radioGroupHandedness"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/radioLeftHanded"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lefthanded" />
+
+        <RadioButton
+            android:id="@+id/radioRightHanded"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Righthanded" />
+    </RadioGroup>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Match Date Range" />
+
+    <DatePicker
+        android:id="@+id/datePickerStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:datePickerMode="spinner"
+        android:calendarViewShown="false" />
+
+    <DatePicker
+        android:id="@+id/datePickerEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:datePickerMode="spinner"
+        android:calendarViewShown="false" />
+
+    <Button
+        android:id="@+id/buttonApplyFilter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Apply Filter" />
+
+</LinearLayout>

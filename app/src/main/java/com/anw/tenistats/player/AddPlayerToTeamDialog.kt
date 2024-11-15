@@ -31,7 +31,7 @@ class AddPlayerToTeamDialog(
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         setContentView(R.layout.add_player_to_team_dialog)
 
-        autoCompleteTextView = findViewById(R.id.autoNamePlayer)
+        autoCompleteTextView = findViewById(R.id.playerSpinner)
         buttonAddToTeam = findViewById(R.id.buttonAddToTeam)
 
 
@@ -51,33 +51,39 @@ class AddPlayerToTeamDialog(
     }
 
     private fun loadAvailablePlayers() {
-        // Pobranie listy zawodników z węzła "Players"
-        database.child("Players").addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                availablePlayers.clear()
-                snapshot.children.forEach { playerSnapshot ->
-                    val playerName = playerSnapshot.key ?: ""
-                    val playerTeam = playerSnapshot.child("team").getValue(String::class.java)
+        database.child("Players").orderByChild("active").equalTo(true)
+            .addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    availablePlayers.clear()
+                    snapshot.children.forEach { playerSnapshot ->
+                        val playerName = playerSnapshot.key ?: ""
+                        val playerTeam = playerSnapshot.child("team").getValue(String::class.java)
 
-                    // Dodaj zawodnika tylko jeśli nie jest już w tej drużynie
-                    if (playerTeam.isNullOrEmpty() && !teamView.players.contains(playerName)) {
-                        availablePlayers.add(playerName)
+                        if (playerTeam.isNullOrEmpty() && !teamView.players.contains(playerName)) {
+                            availablePlayers.add(playerName)
+                        }
                     }
+                    setupAutoCompleteTextView()
                 }
-                setupAutoCompleteTextView()
-            }
 
-            override fun onCancelled(error: DatabaseError) {
-                Log.e("AddPlayerToTeamDialog", "Database error: ${error.message}")
-            }
-        })
+                override fun onCancelled(error: DatabaseError) {
+                    Log.e("AddPlayerToTeamDialog", "Database error: ${error.message}")
+                }
+            })
     }
+
 
     private fun setupAutoCompleteTextView() {
-        // Konfiguracja listy rozwijanej z dostępnych zawodników
-        val adapter = ArrayAdapter(context, android.R.layout.simple_dropdown_item_1line, availablePlayers)
-        autoCompleteTextView.setAdapter(adapter)
+        val adapter = ArrayAdapter(context, R.layout.spinner_item_team, availablePlayers)
+        autoCompleteTextView.apply {
+            setAdapter(adapter)
+            threshold = 0 // Pokazuje listę od razu, niezależnie od liczby wpisanych znaków
+            setOnFocusChangeListener { _, hasFocus ->
+                if (hasFocus) showDropDown()
+            }
+        }
     }
+
 
     private fun addPlayerToTeam(playerName: String) {
         // Dodanie zawodnika do drużyny w węźle "Teams"
