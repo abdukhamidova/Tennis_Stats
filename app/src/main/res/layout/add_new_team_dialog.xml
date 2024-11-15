@@ -16,12 +16,11 @@
         android:layout_marginTop="@dimen/_15sdp"
         android:layout_marginEnd="@dimen/_24sdp"
         android:backgroundTint="@color/autoFill_field"
-        android:drawableStart="@drawable/icon_team"
+        android:drawableStart="@drawable/icon_group"
         android:drawablePadding="@dimen/_5sdp"
         android:drawableTint="@color/app_hint_color"
         android:hint="@string/enter_team"
         android:padding="@dimen/_11sdp"
-        android:textAlignment="center"
         android:textColor="@color/autoFill_field"
         android:textColorHint="@color/app_hint_color"
         android:textSize="@dimen/_18sdp" />

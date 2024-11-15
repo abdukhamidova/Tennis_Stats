@@ -131,6 +131,9 @@
     <string name="deletePlayerFromTeam">Do you want to delete player from group?</string>
     <string name="choose_player">Choose player</string>
     <string name="enter_team">Enter new group</string>
+    <string name="change">Change</string>
+    <string name="enter_team_name">Enter team name</string>
+    <string name="change_group_name">Change group name</string>
 
 
 </resources>

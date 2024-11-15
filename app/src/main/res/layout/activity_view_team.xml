@@ -55,7 +55,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:backgroundTint="@color/transparent"
-                android:src="@drawable/icon_person_add"
+                android:src="@drawable/icon_add_group"
                 app:tint="@color/autoFill_field" />
 
         </LinearLayout>

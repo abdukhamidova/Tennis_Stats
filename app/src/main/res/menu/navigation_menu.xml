@@ -31,7 +31,7 @@
             android:title="Head 2 Head" />
         <item
             android:id="@+id/nav_viewTeam"
-            android:icon="@drawable/icon_team"
+            android:icon="@drawable/icon_group"
             android:title="View Team" />
     </group>
 

@@ -48,6 +48,7 @@
                 android:layout_height="@dimen/_36sdp"
                 android:layout_marginEnd="0dp"
                 android:layout_toStartOf="@id/buttonUndo"
+                android:layout_centerVertical="true"
                 android:clickable="true"
                 android:contentDescription="@string/d_add_player_to_favorite"
                 android:focusable="true"

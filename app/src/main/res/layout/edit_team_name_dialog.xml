@@ -12,7 +12,7 @@
         android:id="@+id/textViewTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Zmiana nazwy drużyny"
+        android:text="@string/change_group_name"
         android:textSize="20sp"
         android:textStyle="bold"
         android:layout_gravity="center"
@@ -24,33 +24,62 @@
         android:id="@+id/editTextNewTeamName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Nowa nazwa drużyny"
+        android:hint="@string/enter_team_name"
         android:inputType="text"
         android:padding="8dp"
         android:backgroundTint="@color/black"
-        android:textColor="@color/dialog_text_color" />
+        android:textColor="@color/dialog_textTitle_color" />
 
     <!-- Przycisk zmiany nazwy -->
-    <Button
+    <!--<Button
         android:id="@+id/buttonChangeName"
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/_153sdp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="Zmień nazwę"
+        android:text="@string/change"
         android:textAllCaps="false"
+        android:textSize="@dimen/_14ssp"
         android:backgroundTint="@color/dialog_textTitle_color"
         android:textColor="@android:color/white"
-        android:padding="12dp" />
+        android:padding="12dp"
+        android:layout_gravity="center"/>
 
-    <!-- Przycisk anulowania -->
+    &lt;!&ndash; Przycisk anulowania &ndash;&gt;
     <Button
         android:id="@+id/buttonCancelChange"
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/_153sdp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Anuluj"
+        android:text="@string/cancel"
         android:background="@drawable/border_button"
         android:textColor="@color/dialog_btnCancel"
-        android:textSize="15sp"
-        android:padding="12dp" />
+        android:textSize="@dimen/_14ssp"
+        android:padding="12dp"
+        android:layout_gravity="center"/>-->
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginBottom="@dimen/_11sdp"
+        android:layout_gravity="center_horizontal">
+        <Button
+            android:id="@+id/buttonCancelChange"
+            android:layout_width="@dimen/_99sdp"
+            android:layout_height="@dimen/_36sdp"
+            android:background="@drawable/border_button"
+            android:layout_marginEnd="@dimen/_7sdp"
+            android:text="@string/cancel"
+            android:textSize="@dimen/_14ssp"
+            android:textColor="@color/dialog_btnCancel"/>
+        <Button
+            android:id="@+id/buttonChangeName"
+            android:layout_width="@dimen/_99sdp"
+            android:layout_height="@dimen/_36sdp"
+            android:backgroundTint="@color/dialog_textTitle_color"
+            android:text="@string/change"
+            android:layout_toEndOf="@+id/buttonCancelChange"
+            android:textColor="@color/dialog_text_color"
+            android:textSize="@dimen/_14ssp"  />
+    </RelativeLayout>
 </LinearLayout>
