@@ -8,6 +8,7 @@ class PlayerView {
     var active : Boolean=true
     var team : String=""
     var isFavorite: Boolean = false
+    var handedness:String=""
 
     constructor()
 

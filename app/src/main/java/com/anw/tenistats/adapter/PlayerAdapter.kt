@@ -1,5 +1,6 @@
 package com.anw.tenistats.adapter
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -13,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.anw.tenistats.player.PlayerDetailsActivity
 import com.anw.tenistats.player.PlayerView
 import com.anw.tenistats.R
+import com.anw.tenistats.player.ViewPlayerActivity
+import com.anw.tenistats.player.ViewTeamActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -28,6 +31,7 @@ class PlayerAdapter(
     private lateinit var context: Context
     private var listener: OnItemClickListener? = null
     private lateinit var database: DatabaseReference
+
 
     fun setOnItemClickListener(listener: OnItemClickListener) {
         this.listener = listener
@@ -95,6 +99,8 @@ class PlayerAdapter(
                             Toast.makeText(context, "Failed to add ${currentItem.player} to favorites", Toast.LENGTH_SHORT).show()
                         }
                 }
+                /*val intent = Intent(context, ViewPlayerActivity   ::class.java)
+                context.startActivity(intent)*/
             }
                 .addOnFailureListener {
                     Toast.makeText(context, "Failed to retrieve players list", Toast.LENGTH_SHORT).show()
@@ -124,7 +130,15 @@ class PlayerAdapter(
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
                 filteredList = results?.values as? List<PlayerView> ?: emptyList()
                 notifyDataSetChanged()
+
+                // Ustaw widoczność komunikatu w zależności od liczby wyników
+                if (filteredList.isEmpty()) {
+                    (context as? Activity)?.findViewById<TextView>(R.id.textViewNotFound)?.visibility = View.VISIBLE
+                } else {
+                    (context as? Activity)?.findViewById<TextView>(R.id.textViewNotFound)?.visibility = View.GONE
+                }
             }
+
         }
     }
 
