@@ -4,6 +4,7 @@ import com.anw.tenistats.adapter.PlayerAdapter
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
+import java.util.Locale
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -38,6 +39,7 @@ class ViewPlayerActivity : AppCompatActivity(), PlayerAdapter.OnItemClickListene
         private lateinit var navigationDrawerHelper: NavigationDrawerHelper
         private lateinit var drawerLayout: DrawerLayout
         private var isAdapterSet = false
+        private lateinit var noPlayerFoundTextView: TextView
 
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
@@ -78,11 +80,12 @@ class ViewPlayerActivity : AppCompatActivity(), PlayerAdapter.OnItemClickListene
             }
             //------------ MENU
 
+
             playerRecyclerView = findViewById(R.id.playerList)
             playerRecyclerView.layoutManager = LinearLayoutManager(this)
             playerRecyclerView.setHasFixedSize(true)
 
-
+            noPlayerFoundTextView = findViewById(R.id.textViewNotFound)
             playerArrayList = arrayListOf<PlayerView>()
 
             getPlayerData()
@@ -108,49 +111,65 @@ class ViewPlayerActivity : AppCompatActivity(), PlayerAdapter.OnItemClickListene
             })
         }
 
-        private fun getPlayerData() {
-            val user = firebaseAuth.currentUser?.uid
-            dbref = FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
-                .getReference(user.toString())
-                .child("Players")
+    private fun getPlayerData() {
+        val user = firebaseAuth.currentUser?.uid
+        dbref = FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
+            .getReference(user.toString())
+            .child("Players")
 
-            dbref.addValueEventListener(object : ValueEventListener {
-                @SuppressLint("NotifyDataSetChanged")
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    playerArrayList.clear() // Wyczyść listę, aby uniknąć duplikatów
+        dbref.addValueEventListener(object : ValueEventListener {
+            @SuppressLint("NotifyDataSetChanged")
+            override fun onDataChange(snapshot: DataSnapshot) {
+                playerArrayList.clear() // Wyczyść listę, aby uniknąć duplikatów
 
-                    if (snapshot.exists()) {
-                        for (playerSnapshot in snapshot.children) {
-                            val player = playerSnapshot.getValue(PlayerView::class.java)
-                            if (player != null) {
-                                findViewById<TextView>(R.id.textViewNotFound).visibility = View.INVISIBLE
-                                playerArrayList.add(player)
-                            } else {
-                                findViewById<TextView>(R.id.textViewNotFound).visibility = View.VISIBLE
-                            }
-                        }
+                if (snapshot.exists()) {
+                    var playersProcessed = 0 // Licznik przetworzonych graczy
 
-                        if (!isAdapterSet) {
-                            // Przypisanie adaptera tylko raz
-                            adapter = PlayerAdapter(playerArrayList, firebaseAuth)
-                            playerRecyclerView.adapter = adapter
-                            adapter.setOnItemClickListener(this@ViewPlayerActivity)
-                            isAdapterSet = true
-                        } else {
-                            // Aktualizujemy widok bez przypisywania nowego adaptera
-                            adapter.notifyDataSetChanged()
+                    for (playerSnapshot in snapshot.children) {
+                        val player = playerSnapshot.getValue(PlayerView::class.java)
+                        if (player != null) {
+                            // Pobieramy wartość "isFavorite" dla każdego gracza
+                            dbref.child(player.player).child("isFavorite")
+                                .get()
+                                .addOnSuccessListener { isFavoriteSnapshot ->
+                                    player.isFavorite = isFavoriteSnapshot.getValue(Boolean::class.java) ?: false
+                                    playerArrayList.add(player)
+                                }
+                                .addOnFailureListener {
+                                    player.isFavorite = false // Domyślna wartość, jeśli pobieranie nie powiedzie się
+                                    playerArrayList.add(player)
+                                }
+                                .addOnCompleteListener {
+                                    playersProcessed++
+                                    if (playersProcessed == snapshot.childrenCount.toInt()) {
+                                        // Posortuj listę: najpierw według isFavorite, potem alfabetycznie po firstName
+                                        playerArrayList.sortWith(compareByDescending<PlayerView> { it.isFavorite }
+                                            .thenBy { it.firstName.toLowerCase(Locale.getDefault()) })
+
+                                        // Aktualizuj adapter dopiero po zakończeniu przetwarzania wszystkich danych
+                                        if (!isAdapterSet) {
+                                            adapter = PlayerAdapter(playerArrayList, firebaseAuth)
+                                            playerRecyclerView.adapter = adapter
+                                            adapter.setOnItemClickListener(this@ViewPlayerActivity)
+                                            isAdapterSet = true
+                                        } else {
+                                            adapter.notifyDataSetChanged()
+                                        }
+                                    }
+                                }
                         }
                     }
                 }
+            }
 
-                override fun onCancelled(error: DatabaseError) {
-                    // Obsłużenie błędu zapytania do bazy danych
-                }
-            })
-        }
+            override fun onCancelled(error: DatabaseError) {
+                // Obsłużenie błędu zapytania do bazy danych
+            }
+        })
+    }
 
 
-        override fun onItemClick(playerView: PlayerView) {
+    override fun onItemClick(playerView: PlayerView) {
             // Przykładowa obsługa kliknięcia na zawodnika
             val intent = Intent(this, PlayerDetailsActivity::class.java)
             intent.putExtra("playerId", playerView.player) // Przekazanie ID zawodnika
