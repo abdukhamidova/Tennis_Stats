@@ -2,8 +2,11 @@ package com.anw.tenistats.player
 
 import android.app.DatePickerDialog
 import android.content.Intent
+import android.graphics.Paint
+import android.graphics.Typeface
+import android.graphics.pdf.PdfDocument
 import android.os.Bundle
-import android.text.Layout
+import android.os.Environment
 import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
@@ -36,12 +39,12 @@ import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.io.File
+import java.io.FileOutputStream
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
-
-
 
 class PlayerDetailsActivity : AppCompatActivity() {
     private lateinit var playerId: String
@@ -50,6 +53,16 @@ class PlayerDetailsActivity : AppCompatActivity() {
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var database: DatabaseReference
     private lateinit var databaseT: DatabaseReference
+
+    private lateinit var nat : TextView
+    private lateinit var player: TextView
+    private lateinit var bday: TextView
+    private lateinit var handedness: String
+    private lateinit var strong: TextView
+    private lateinit var weak: TextView
+    private lateinit var note: TextView
+
+    private val PERMISSION_REQUEST_CODE = 100
 
     @OptIn(DelicateCoroutinesApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -130,7 +143,12 @@ class PlayerDetailsActivity : AppCompatActivity() {
             }
         }
 
-
+        nat =  findViewById(R.id.autoCompleteTextViewNationality)
+        player = findViewById(R.id.textViewName)
+        bday = findViewById(R.id.editTextDate)
+        strong = findViewById(R.id.autoCompleteTextViewStrength)
+        weak = findViewById(R.id.autoCompleteTextViewWeakness)
+        note = findViewById(R.id.editTextNote)
         //ustawienie poczatkowe
         start()
 
@@ -151,7 +169,7 @@ class PlayerDetailsActivity : AppCompatActivity() {
                     findViewById<AutoCompleteTextView>(R.id.autoCompleteTextViewNationality).setAdapter(adapter)
                 } catch (e: Exception) {
                     // Obsługa błędu
-                    Log.e("CountryRepository", "Błąd podczas pobierania listy krajów", e)
+                    Log.e("CountryRepository", "The error occurred while fetching the list of countries.", e)
                 }
             }
         }
@@ -172,6 +190,163 @@ class PlayerDetailsActivity : AppCompatActivity() {
             ).show()
             startActivity(Intent(this, ViewPlayerActivity::class.java))
         }
+
+        //potrzebna jest zgoda na tworzenie pdf
+        /*if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), PERMISSION_REQUEST_CODE)
+        }*/
+        findViewById<Button>(R.id.buttonRaport).setOnClickListener {
+            countMatches(user, player.text.toString()) { matchesPlayed, matchesWon ->
+                createPdf(matchesWon, matchesPlayed)
+            }
+
+        }
+    }
+
+    private fun createPdf(matchesWon: Int, matchesPlayed: Int) {
+        val docsFolder = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).absolutePath + "/TennisStats/")
+        if(!docsFolder.exists()){
+            docsFolder.mkdir()
+        }
+        val horizontalMargin = 50f
+        val verticalMargin = 100f
+        val lineHeight = 20f
+
+        //otwieranie dokumentu
+        val file = File(docsFolder, "${player.text}.pdf")
+        val pdfDocument = PdfDocument()
+        val pageInfo = PdfDocument.PageInfo.Builder(500,800,1).create()
+
+        //tworzenie 1. strony
+        val page = pdfDocument.startPage(pageInfo)
+        val canvas = page.canvas
+        val paint = Paint()
+
+        //ustawienie tekstu
+        paint.textSize = 14f
+        paint.textAlign = Paint.Align.LEFT
+
+        //imie i nazwisko
+        paint.typeface = Typeface.create(Typeface.SERIF, Typeface.BOLD)
+
+        var xPos = horizontalMargin
+        var yPos = verticalMargin
+        val title = player.text.toString()
+        canvas.drawText(title,xPos,yPos,paint)
+
+        paint.typeface = Typeface.SERIF
+        paint.textSize = 12f
+        //kolumna z bday, nationality
+        yPos += lineHeight
+        canvas.drawText("Birthday: ${bday.text}",horizontalMargin,yPos, paint)
+        yPos += lineHeight
+        canvas.drawText("Home Country: ${nat.text}",horizontalMargin,yPos, paint)
+
+        //kolumna z hand, strength, weakness
+        yPos += lineHeight*2
+        canvas.drawText("Dominant hand: $handedness", horizontalMargin, yPos, paint)
+        yPos += lineHeight
+        canvas.drawText("Strength: ${strong.text}", horizontalMargin,yPos, paint)
+        yPos += lineHeight
+        canvas.drawText("Weakness: ${weak.text}", horizontalMargin,yPos, paint)
+
+        //notatka
+        paint.textSize = 11f
+        yPos += lineHeight*2
+        canvas.drawText("Personal notes:", horizontalMargin, yPos,paint)
+        yPos += lineHeight
+        val noteWidth = pageInfo.pageWidth - (2*horizontalMargin)
+        val noteText = wrapText(note.text?.toString() ?: "",paint, noteWidth)
+        for(line in noteText){
+            canvas.drawText(line, horizontalMargin, yPos,paint)
+            yPos += lineHeight
+        }
+
+        //wygrane mecze
+        paint.typeface = Typeface.create(Typeface.SERIF, Typeface.BOLD)
+        paint.textSize = 12f
+        yPos += lineHeight*2
+        canvas.drawText("Matches", horizontalMargin,yPos,paint)
+
+        paint.typeface = Typeface.SERIF
+        yPos += lineHeight
+        canvas.drawText("Played: $matchesPlayed", horizontalMargin,yPos,paint)
+        xPos = horizontalMargin + 100f
+        val percentage = if(matchesPlayed!=0 && matchesWon !=0) {
+            "%.2f%".format((matchesWon.toFloat() / matchesPlayed) * 100)
+        } else "0"
+        canvas.drawText("$percentage%", xPos, yPos,paint)
+        yPos += lineHeight
+        canvas.drawText("Won: $matchesWon", horizontalMargin,yPos,paint)
+
+        pdfDocument.finishPage(page)
+        try {
+            pdfDocument.writeTo(FileOutputStream(file))
+            pdfDocument.close()
+            Toast.makeText(this, "PDF created successfully", Toast.LENGTH_SHORT).show()
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Toast.makeText(this, "Error generating PDF", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun wrapText(text: String, paint: Paint, maxWidth: Float): List<String> {
+        val lines = mutableListOf<String>()
+        val words = text.split(" ")
+        var currentLine = ""
+        for(word in words){
+            val testLine = if(currentLine.isEmpty()) word else "$currentLine $word"
+            currentLine = if(paint.measureText(testLine) <= maxWidth){
+                testLine
+            }else{
+                lines.add(currentLine)
+                word
+            }
+        }
+
+        if(currentLine.isNotEmpty()){
+            lines.add(currentLine)
+        }
+        return lines.flatMap{it.split("\n")}
+    }
+
+    // Function to count the matches played and won by a player
+    fun countMatches(user: String?,playerName: String, callback: (matchesPlayed: Int, matchesWon: Int) -> Unit) {
+        var matchesPlayed = 0
+        var matchesWon = 0
+        val matchesRef = FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
+            .getReference(user.toString()).child("Matches")
+
+        //przeliczanie zagranych i przegranych meczy
+        matchesRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                // przeszukiwanie każdego meczu w bazie
+                for (matchSnapshot in snapshot.children) {
+                    val player1 = matchSnapshot.child("player1").getValue(String::class.java)
+                    val player2 = matchSnapshot.child("player2").getValue(String::class.java)
+                    val winner = matchSnapshot.child("winner").getValue(String::class.java)
+
+                    //sprawdzenie czy to potrzebny nam mecz
+                    if (player1 == playerName || player2 == playerName) {
+                        matchesPlayed++
+
+                        //czy mecz był wygrany
+                        if (winner == playerName) {
+                            matchesWon++
+                        }
+                    }
+                }
+
+                // Call the callback with the results
+                callback(matchesPlayed, matchesWon)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.e("Firebase", "Failed to read matches data: ${error.message}")
+            }
+        })
     }
 
     fun start() {
@@ -183,9 +358,8 @@ class PlayerDetailsActivity : AppCompatActivity() {
 
                 // Ustawienie tekstu w TextView
                 //findViewById<TextView>(R.id.textViewName).text = "$firstName $lastName"
-                findViewById<TextView>(R.id.textViewName).text = Name
+                player.text = Name
             }
-
             override fun onCancelled(databaseError: DatabaseError) {
                 // Obsługa błędu
             }
@@ -193,15 +367,12 @@ class PlayerDetailsActivity : AppCompatActivity() {
         database.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val nationality = dataSnapshot.child("nationality").getValue(String::class.java)
-
                 // Ustawienie tekstu w TextView
                 if(nationality!=null) {
-
                     // Ustawienie tekstu w TextView
-                    findViewById<TextView>(R.id.autoCompleteTextViewNationality).text = nationality
+                   nat.text = nationality
                 }
             }
-
             override fun onCancelled(databaseError: DatabaseError) {
                 // Obsługa błędu
             }
@@ -209,32 +380,28 @@ class PlayerDetailsActivity : AppCompatActivity() {
         database.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val milliseconds = dataSnapshot.child("dateOfBirth").getValue(Long::class.java)
-
                 // Ustawienie tekstu w TextView
                 if(milliseconds!=null) {
                     val date = Date(milliseconds)
                     val formattedDate = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(date)
-                    findViewById<TextView>(R.id.editTextDate).text = formattedDate
+                    bday.text = formattedDate
                 }
             }
-
             override fun onCancelled(databaseError: DatabaseError) {
                 // Obsługa błędu
             }
         })
         database.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val handedness = dataSnapshot.child("handedness").getValue()
-
+                handedness = dataSnapshot.child("handedness").getValue(String::class.java) ?: "Unknown"
                 // Ustawienie tekstu w TextView
-                if(handedness == "Righthanded") {// Ustawienie tekstu w TextView
+                if(handedness == "right") {// Ustawienie tekstu w TextView
                     findViewById<RadioButton>(R.id.radioButtonR).isChecked = true
                 }
-                else if(handedness == "Lefthanded") {// Ustawienie tekstu w TextView
+                else if(handedness == "left") {// Ustawienie tekstu w TextView
                     findViewById<RadioButton>(R.id.radioButtonL).isChecked = true
                 }
             }
-
             override fun onCancelled(databaseError: DatabaseError) {
                 // Obsługa błędu
             }
@@ -242,13 +409,11 @@ class PlayerDetailsActivity : AppCompatActivity() {
         database.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val strength = dataSnapshot.child("strength").getValue(String::class.java)
-
                 // Ustawienie tekstu w TextView
                 if (strength != null) {
-                    findViewById<TextView>(R.id.autoCompleteTextViewStrength).text = strength
+                    strong.text = strength
                 }
             }
-
             override fun onCancelled(databaseError: DatabaseError) {
                 // Obsługa błędu
             }
@@ -257,14 +422,12 @@ class PlayerDetailsActivity : AppCompatActivity() {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
                     val weakness = dataSnapshot.getValue(String::class.java)
-
                     // Ustawienie tekstu w TextView
                     if (weakness != null) {
-                        findViewById<TextView>(R.id.autoCompleteTextViewWeakness).text = weakness
+                        weak.text = weakness
                     }
                 }
             }
-
             override fun onCancelled(databaseError: DatabaseError) {
                 // Obsługa błędu
             }
@@ -296,15 +459,13 @@ class PlayerDetailsActivity : AppCompatActivity() {
                 Log.e("DatabaseError", "Error fetching team data: ${databaseError.message}")
             }
         })
-
         database.child("note").addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
                     val notes = dataSnapshot.getValue(String::class.java)
-
                     // Ustawienie tekstu w TextView
                     if (notes != null) {
-                        findViewById<TextView>(R.id.editTextNote).text = notes
+                        note.text = notes
                     }
                 }
             }
@@ -324,7 +485,7 @@ class PlayerDetailsActivity : AppCompatActivity() {
         val datePickerDialog = DatePickerDialog(
             this,
             R.style.CustomDatePickerDialog,
-            DatePickerDialog.OnDateSetListener { view: DatePicker?, year: Int, monthOfYear: Int, dayOfMonth: Int ->
+            { view: DatePicker?, year: Int, monthOfYear: Int, dayOfMonth: Int ->
                 val selectedDate = "$dayOfMonth/${monthOfYear + 1}/$year"
                 findViewById<EditText>(R.id.editTextDate).setText(selectedDate)
             },
@@ -361,10 +522,10 @@ class PlayerDetailsActivity : AppCompatActivity() {
             database.child("dateOfBirth").setValue(milliseconds)
         }
         if(right.isChecked){
-            database.child("handedness").setValue("Righthanded")
+            database.child("handedness").setValue("right")
         }
         else if(left.isChecked){
-            database.child("handedness").setValue("Lefthanded")
+            database.child("handedness").setValue("left")
         }
         if(strength.isNotEmpty()){
             database.child("strength").setValue(strength)
@@ -375,6 +536,5 @@ class PlayerDetailsActivity : AppCompatActivity() {
         if(notes.isNotEmpty()){
             database.child("note").setValue(notes)
         }
-
     }
 }

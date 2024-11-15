@@ -141,7 +141,7 @@ class ResumeOrStatsDialog(private val context: Context, private val openedFromSt
                     }
                     btnSummary.setOnClickListener {
                         val intent = Intent(context, ActivityMatchShortSummary::class.java)   //należy zmienić przejście do Stats
-                        //intent.putExtra("matchDateInMillis", milliseconds)
+                        intent.putExtra("matchDateInMillis", milliseconds)
                         context.startActivity(intent)
                         alertDialog.dismiss()
                     }
