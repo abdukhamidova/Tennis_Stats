@@ -200,7 +200,8 @@ class PlayerDetailsActivity : AppCompatActivity() {
             != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), PERMISSION_REQUEST_CODE)
         }*/
-        findViewById<Button>(R.id.buttonRaport).setOnClickListener {
+        findViewById<ImageButton>(R.id.buttonRaport).visibility = View.VISIBLE
+        findViewById<ImageButton>(R.id.buttonRaport).setOnClickListener {
             countMatches(user, player.text.toString()) { matchesPlayed, matchesWon ->
                 createPdf(matchesWon, matchesPlayed)
             }

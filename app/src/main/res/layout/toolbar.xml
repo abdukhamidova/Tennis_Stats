@@ -57,6 +57,23 @@
                 android:src="@drawable/icon_star30"
                 android:visibility="invisible"
                 android:backgroundTint="@color/transparent"/>
+
+            <ImageButton
+                android:id="@+id/buttonRaport"
+                android:layout_width="@dimen/_36sdp"
+                android:layout_height="@dimen/_36sdp"
+                android:layout_marginEnd="0dp"
+                android:layout_toStartOf="@id/buttonStar"
+                android:layout_centerVertical="true"
+                android:clickable="true"
+                android:contentDescription="@string/d_add_player_to_favorite"
+                android:focusable="true"
+                android:focusableInTouchMode="false"
+                android:padding="@dimen/_1sdp"
+                android:src="@drawable/icon_pdf30"
+                android:visibility="invisible"
+                app:tint="@color/app_menu_buttons"
+                android:backgroundTint="@color/transparent"/>
         </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
 </LinearLayout>

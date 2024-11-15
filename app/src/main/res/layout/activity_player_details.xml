@@ -37,7 +37,7 @@
             android:id="@+id/scrollViewContainer"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginBottom="@dimen/_50sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
             android:padding="@dimen/_15sdp"
             app:layout_constraintBottom_toTopOf="@id/buttonSubmit"
             app:layout_constraintEnd_toEndOf="@id/textViewName"
@@ -281,13 +281,13 @@
             android:text="@string/submit"
             android:textColor="@color/white"
             android:textSize="@dimen/_16ssp"
-            android:layout_marginBottom="@dimen/_5sdp"
-            app:layout_constraintBottom_toTopOf="@id/buttonRaport"
+            android:layout_marginBottom="@dimen/_20sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/scrollViewContainer"
             app:layout_constraintStart_toStartOf="@+id/scrollViewContainer"
             app:layout_constraintTop_toBottomOf="@+id/scrollViewContainer" />
 
-        <Button
+        <!--<Button
             android:id="@+id/buttonRaport"
             android:layout_width="@dimen/_230sdp"
             android:layout_height="wrap_content"
@@ -300,7 +300,7 @@
             app:layout_constraintEnd_toEndOf="@+id/buttonSubmit"
             app:layout_constraintStart_toStartOf="@+id/buttonSubmit"
             app:layout_constraintTop_toBottomOf="@+id/buttonSubmit"
-            app:layout_constraintVertical_bias="0.18" />
+            app:layout_constraintVertical_bias="0.18" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
