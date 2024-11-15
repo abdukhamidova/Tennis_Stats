@@ -222,7 +222,9 @@
                         android:layout_height="@dimen/_36sdp"
                         android:backgroundTint="@color/general_text_color"
                         android:drawablePadding="@dimen/_3sdp"
-                        android:textColor="@color/general_text_color" />
+                        android:textColor="@color/general_text_color"
+                        android:textSize="@dimen/_15sdp"
+                        android:gravity="center_vertical"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -230,7 +232,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:visibility="invisible"
-                    android:layout_marginBottom="@dimen/_30sdp">
+                    android:layout_marginBottom="@dimen/_10sdp">
 
                     <TextView
                         android:id="@+id/textViewAddToTeam"
