@@ -13,11 +13,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/change_group_name"
-        android:textSize="20sp"
+        android:textSize="@dimen/_23sdp"
         android:textStyle="bold"
         android:layout_gravity="center"
         android:textColor="@color/dialog_textTitle_color"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginBottom="16dp"
+        android:textAlignment="center" />
 
     <!-- EditText dla nowej nazwy drużyny -->
     <EditText
@@ -26,7 +27,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/enter_team_name"
         android:inputType="text"
-        android:padding="8dp"
+        android:padding="@dimen/_11sdp"
         android:backgroundTint="@color/black"
         android:textColor="@color/dialog_textTitle_color" />
 

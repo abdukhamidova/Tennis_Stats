@@ -30,11 +30,6 @@
             android:name=".player.PlayerDetailsActivity"
             android:exported="false"
             android:screenOrientation="portrait"/>
-        <!--
-        <activity
-            android:name=".ViewHistoryActivity"
-            android:exported="false" />
-        -->
         <activity
             android:name=".stats.ViewHistoryActivity"
             android:exported="false"

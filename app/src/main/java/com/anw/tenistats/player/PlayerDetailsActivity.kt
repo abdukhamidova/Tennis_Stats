@@ -62,7 +62,7 @@ class PlayerDetailsActivity : AppCompatActivity() {
     private lateinit var weak: TextView
     private lateinit var note: TextView
 
-    private val PERMISSION_REQUEST_CODE = 100
+   // private val PERMISSION_REQUEST_CODE = 100
 
     @OptIn(DelicateCoroutinesApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
