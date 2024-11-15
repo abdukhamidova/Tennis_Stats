@@ -27,6 +27,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.anw.tenistats.R
 import com.anw.tenistats.data.CountryRepository
 import com.anw.tenistats.mainpage.NavigationDrawerHelper
+import com.anw.tenistats.matchplay.ServeActivity
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -188,7 +189,10 @@ class PlayerDetailsActivity : AppCompatActivity() {
                 "Updated player",
                 Toast.LENGTH_SHORT
             ).show()
-            startActivity(Intent(this, ViewPlayerActivity::class.java))
+            val intent = Intent(this, PlayerDetailsActivity::class.java).apply {
+                putExtra("playerId", playerId)
+            }
+            startActivity(intent)
         }
 
         //potrzebna jest zgoda na tworzenie pdf

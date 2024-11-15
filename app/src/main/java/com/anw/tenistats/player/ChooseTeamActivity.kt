@@ -71,8 +71,8 @@ class ChooseTeamDialog(private val context: Context, private val playerName: Str
             }
             updatePlayerTeamInDatabase(selectedTeam.name)
 
-            val intent = Intent(context, ViewPlayerActivity::class.java)
-            intent.putExtra("PLAYER_NAME", playerName)
+            val intent = Intent(context, PlayerDetailsActivity::class.java)
+            intent.putExtra("playerId", playerName)
             context.startActivity(intent)
 
             alertDialog.dismiss()
