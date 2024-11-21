@@ -11,6 +11,7 @@ import android.widget.TextView
 import com.anw.tenistats.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.GenericTypeIndicator
 
 class DeletePlayerFromTeamDialog(
     context: Context,
@@ -60,38 +61,23 @@ class DeletePlayerFromTeamDialog(
         val teamRef = database.child("Teams").child(teamName).child("players")
 
         teamRef.get().addOnSuccessListener { snapshot ->
-            // Log do sprawdzenia faktycznego obiektu snapshot.value
             Log.d("DeletePlayerDialog", "Snapshot value: ${snapshot.value}")
 
-            // Konwertowanie na List<String>
             val playersList = snapshot.value as? List<String>
 
             if (playersList != null) {
                 Log.d("DeletePlayerDialog", "Fetched players list: $playersList")
                 Log.d("DeletePlayerDialog", "Player name to remove: $playerName")
 
-                // Trimming spaces and comparing names ignoring case
-                val trimmedPlayersList = playersList.map { it.trim() }
-                val playerNameToRemove = playerName.trim()
+                val updatedPlayersList = playersList.filterNot { it.equals(playerName, ignoreCase = true) }
 
-                // Szukamy gracza na liście, ignorując wielkość liter
-                val playerIndex = trimmedPlayersList.indexOfFirst { it.equals(playerNameToRemove, ignoreCase = true) }
-
-                if (playerIndex != -1) {
-                    // Jeśli gracz jest na liście, usuwamy go
-                    val updatedPlayersList = trimmedPlayersList.toMutableList()
-                    updatedPlayersList.removeAt(playerIndex)
-
-                    // Zapisujemy zaktualizowaną listę w Firebase
-                    teamRef.setValue(updatedPlayersList).addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            Log.d("DeletePlayerDialog", "$playerName removed from $teamName's players list.")
-                        } else {
-                            Log.e("DeletePlayerDialog", "Failed to remove player from team: ${task.exception?.message}")
-                        }
+                // Zapisujemy zaktualizowaną listę w Firebase
+                teamRef.setValue(updatedPlayersList).addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        Log.d("DeletePlayerDialog", "$playerName removed from $teamName's players list.")
+                    } else {
+                        Log.e("DeletePlayerDialog", "Failed to remove player from team: ${task.exception?.message}")
                     }
-                } else {
-                    Log.e("DeletePlayerDialog", "Player not found in team. Players list: $trimmedPlayersList, Target player: $playerNameToRemove")
                 }
             } else {
                 Log.e("DeletePlayerDialog", "Failed to retrieve players list or list is empty. Snapshot value: ${snapshot.value}")
@@ -103,34 +89,42 @@ class DeletePlayerFromTeamDialog(
         // Usunięcie drużyny z referencji zawodnika
         val playerRef = database.child("Players").child(playerName.trim())
 
-// Najpierw pobieramy aktualną drużynę zawodnika
-        playerRef.child("isFavorite").get().addOnSuccessListener { snapshot ->
-            val teamName = snapshot.getValue(Boolean::class.java)
+        // Pobierz drużyny zawodnika
+        playerRef.child("team").get().addOnSuccessListener { snapshot ->
+            val teamsList = snapshot.getValue(object : GenericTypeIndicator<List<String>>() {}) ?: emptyList()
 
-            if (teamName == true) {
-                // Jeśli drużyna to "Favorites", ustawiamy isFavorite na false
-                playerRef.child("isFavorite").setValue(false).addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        Log.d("DeletePlayerDialog", "Set isFavorite to false for player ${playerName.trim()}.")
-                    } else {
-                        Log.e("DeletePlayerDialog", "Failed to set isFavorite to false: ${task.exception?.message}")
+            if (teamsList.isNotEmpty()) {
+                Log.d("DeletePlayerDialog", "Fetched teams for player: $teamsList")
+
+                if (teamName == "Favorites") {
+                    // Jeśli drużyna to "Favorites", ustawiamy isFavorite na false
+                    playerRef.child("isFavorite").setValue(false).addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            Log.d("DeletePlayerDialog", "Set isFavorite to false for player ${playerName.trim()}.")
+                        } else {
+                            Log.e("DeletePlayerDialog", "Failed to set isFavorite to false: ${task.exception?.message}")
+                        }
+                    }
+                } else {
+                    // Jeśli drużyna nie jest "Favorites", usuń ją z listy
+                    val updatedTeamsList = teamsList.filterNot { it.equals(teamName, ignoreCase = true) }
+
+                    playerRef.child("team").setValue(updatedTeamsList).addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            Log.d("DeletePlayerDialog", "$teamName removed from player's team list.")
+                        } else {
+                            Log.e("DeletePlayerDialog", "Failed to update team list for player: ${task.exception?.message}")
+                        }
                     }
                 }
             } else {
-                // Jeśli drużyna nie jest "Favorites", usuwamy węzeł team
-                playerRef.child("team").removeValue().addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        Log.d("DeletePlayerDialog", "Team removed from player ${playerName.trim()}.")
-                    } else {
-                        Log.e("DeletePlayerDialog", "Failed to remove team from player: ${task.exception?.message}")
-                    }
-                }
+                Log.e("DeletePlayerDialog", "Player has no teams assigned or failed to fetch teams.")
             }
         }.addOnFailureListener { exception ->
-            Log.e("DeletePlayerDialog", "Failed to retrieve team for player: ${exception.message}")
+            Log.e("DeletePlayerDialog", "Failed to retrieve team list for player: ${exception.message}")
         }
-
     }
+
 
 
 }

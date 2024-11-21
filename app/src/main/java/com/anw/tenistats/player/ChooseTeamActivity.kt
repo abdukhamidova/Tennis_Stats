@@ -147,11 +147,22 @@ class ChooseTeamDialog(private val context: Context, private val playerName: Str
 
         val playerRef = database.child("Players").child(playerName)
 
-        playerRef.child("team").setValue(teamName).addOnSuccessListener {
-            Log.d("ChooseTeamDialog", "Zaktualizowano drużynę dla zawodnika: $playerName")
+        playerRef.child("team").get().addOnSuccessListener { snapshot ->
+            val currentTeams = snapshot.value as? ArrayList<String> ?: ArrayList()
+
+            if (!currentTeams.contains(teamName)) {
+                currentTeams.add(teamName)
+
+                playerRef.child("team").setValue(currentTeams).addOnSuccessListener {
+                    Log.d("ChooseTeamDialog", "Zaktualizowano drużynę dla zawodnika: $playerName")
+                }.addOnFailureListener { exception ->
+                    Log.e("ChooseTeamDialog", "Błąd podczas aktualizacji drużyny zawodnika: $exception")
+                }
+            }
         }.addOnFailureListener { exception ->
-            Log.e("ChooseTeamDialog", "Błąd podczas aktualizacji drużyny zawodnika: $exception")
+            Log.e("ChooseTeamDialog", "Błąd podczas pobierania drużyn gracza: $exception")
         }
     }
+
 
 }

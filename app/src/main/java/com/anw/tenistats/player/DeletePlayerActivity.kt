@@ -12,6 +12,7 @@ import com.anw.tenistats.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.GenericTypeIndicator
 
 class DeletePlayerActivity(private val context: Context) {
     private lateinit var firebaseAuth: FirebaseAuth
@@ -39,10 +40,31 @@ class DeletePlayerActivity(private val context: Context) {
             firebaseAuth = FirebaseAuth.getInstance()
             val user = firebaseAuth.currentUser?.uid
             database = FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
-                .getReference(user.toString()).child("Players").child(playerName)
+                .getReference(user.toString())
 
-            database.child("active").setValue(false)
+            val playerRef = database.child("Players").child(playerName)
+            val teamRef = database.child("Teams") // Referencja do wszystkich drużyn
+
+            playerRef.child("active").setValue(false)
                 .addOnSuccessListener {
+                    // Pobierz drużyny, w których zawodnik występuje
+                    playerRef.child("teams").get()
+                        .addOnSuccessListener { snapshot ->
+                            val teams = snapshot.getValue(object : GenericTypeIndicator<List<String>>() {}) ?: emptyList()
+                            for (teamName in teams) {
+                                val playersRef = teamRef.child(teamName).child("players")
+                                playersRef.get()
+                                    .addOnSuccessListener { playersSnapshot ->
+                                        val players = playersSnapshot.getValue(object : GenericTypeIndicator<MutableList<String>>() {}) ?: mutableListOf()
+                                        if (players.contains(playerName)) {
+                                            players.remove(playerName)
+                                            playersRef.setValue(players)
+                                        }
+
+                                    }
+                            }
+                        }
+
                     Toast.makeText(
                         context,
                         "Player successfully deleted",
@@ -52,7 +74,6 @@ class DeletePlayerActivity(private val context: Context) {
 
                     val intent = Intent(context, ViewPlayerActivity::class.java)
                     context.startActivity(intent) // Uruchomienie nowej aktywności
-
                 }
                 .addOnFailureListener {
                     Toast.makeText(
@@ -62,6 +83,7 @@ class DeletePlayerActivity(private val context: Context) {
                     ).show()
                 }
         }
+
 
         alertDialog.show()
     }

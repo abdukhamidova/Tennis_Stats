@@ -435,18 +435,30 @@ class PlayerDetailsActivity : AppCompatActivity() {
         database.child("team").addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    val team = dataSnapshot.getValue(String::class.java)
-
-                    if (team != null) {
-                        val teamLayout = findViewById<LinearLayout>(R.id.linearLayoutTeam)
-                        teamLayout.visibility = View.VISIBLE
-                        val teamText = findViewById<TextView>(R.id.TextViewTeam)
-                        teamText.text = team
+                    // Pobranie listy zawodników z bazy danych
+                    val playersList = mutableListOf<String>()
+                    for (playerSnapshot in dataSnapshot.children) {
+                        val playerName = playerSnapshot.getValue(String::class.java)
+                        if (playerName != null) {
+                            playersList.add(playerName)
+                        }
                     }
-                }else {
+
+                    // Łączenie nazw zawodników w jeden ciąg, oddzielony przecinkami
+                    val playersText = playersList.joinToString(", ")
+
+                    // Wyświetlenie listy zawodników w TextView
+                    val teamTextView = findViewById<TextView>(R.id.TextViewTeam)
+                    teamTextView.text = playersText
+
+                    // Ustawienie widoczności dla ukrytych elementów
+                    val teamLayout = findViewById<LinearLayout>(R.id.linearLayoutTeam)
+                    teamLayout.visibility = View.VISIBLE
+                } else {
+                    // Jeśli drużyna nie istnieje, wyświetl możliwość dodania do drużyny
                     val addTeamLayout = findViewById<LinearLayout>(R.id.linearLayoutAddTeam)
                     addTeamLayout.visibility = View.VISIBLE
-                    val textViewAdd=findViewById<TextView>(R.id.textViewAddToTeam)
+                    val textViewAdd = findViewById<TextView>(R.id.textViewAddToTeam)
                     textViewAdd.setOnClickListener {
                         val decisionDialog = DecisionAddToTeamActivity(this@PlayerDetailsActivity)
                         decisionDialog.show(playerId)
@@ -455,10 +467,11 @@ class PlayerDetailsActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
-                // Handle any potential database error here
+                // Obsługa błędu
                 Log.e("DatabaseError", "Error fetching team data: ${databaseError.message}")
             }
         })
+
         database.child("note").addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
@@ -509,6 +522,7 @@ class PlayerDetailsActivity : AppCompatActivity() {
         val left = findViewById<RadioButton>(R.id.radioButtonL)
         val strength = findViewById<TextView>(R.id.autoCompleteTextViewStrength).text.toString()
         val weakness = findViewById<TextView>(R.id.autoCompleteTextViewWeakness).text.toString()
+        val team=findViewById<TextView>(R.id.TextViewTeam).text.toString()
         val notes = findViewById<EditText>(R.id.editTextNote).text.toString()
 
         if(nationality.isNotEmpty()){
@@ -532,6 +546,9 @@ class PlayerDetailsActivity : AppCompatActivity() {
         }
         if(weakness.isNotEmpty()){
             database.child("weakness").setValue(weakness)
+        }
+        if(team.isNotEmpty()){
+            database.child("team").setValue(team)
         }
         if(notes.isNotEmpty()){
             database.child("note").setValue(notes)

@@ -36,13 +36,13 @@ data class Player(
     var weakness: String? = null,
     var active: Boolean? = null,
     var note: String? = null,
-    var team: String?=null,
+    val team: List<String> = emptyList(),
     var isFavorite: Boolean = false
 )
 
 {
     //constructor() : this(null, null, null, null, null, null, null, null, null)
-    constructor() : this(null, null, null, null, null, null, null, null, null, null,null,null,false)
+    //constructor() : this(null, null, null, null, null, null, null, null, null, null,null,null,false)
 }
 
 /*data class Set(

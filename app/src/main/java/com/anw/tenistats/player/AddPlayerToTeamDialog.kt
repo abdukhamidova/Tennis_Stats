@@ -57,9 +57,8 @@ class AddPlayerToTeamDialog(
                     availablePlayers.clear()
                     snapshot.children.forEach { playerSnapshot ->
                         val playerName = playerSnapshot.key ?: ""
-                        val playerTeam = playerSnapshot.child("team").getValue(String::class.java)
-
-                        if (playerTeam.isNullOrEmpty() && !teamView.players.contains(playerName)) {
+                        val playerTeams = playerSnapshot.child("team").getValue(object : GenericTypeIndicator<List<String>>() {}) ?: emptyList()
+                        if (!playerTeams.contains(teamView.name) && !teamView.players.contains(playerName)) {
                             availablePlayers.add(playerName)
                         }
                     }
@@ -73,11 +72,12 @@ class AddPlayerToTeamDialog(
     }
 
 
+
     private fun setupAutoCompleteTextView() {
         val adapter = ArrayAdapter(context, R.layout.spinner_item_team, availablePlayers)
         autoCompleteTextView.apply {
             setAdapter(adapter)
-            threshold = 0 // Pokazuje listę od razu, niezależnie od liczby wpisanych znaków
+            threshold = 0
             setOnFocusChangeListener { _, hasFocus ->
                 if (hasFocus) showDropDown()
             }
@@ -86,27 +86,33 @@ class AddPlayerToTeamDialog(
 
 
     private fun addPlayerToTeam(playerName: String) {
-        // Dodanie zawodnika do drużyny w węźle "Teams"
         val teamName = teamView.name
         database.child("Teams").child(teamName).child("players").get().addOnSuccessListener { snapshot ->
             val players = snapshot.getValue(object : GenericTypeIndicator<MutableList<String>>() {}) ?: mutableListOf()
+
             if (!players.contains(playerName)) {
                 players.add(playerName)
                 database.child("Teams").child(teamName).child("players").setValue(players)
                     .addOnSuccessListener {
                         Log.d("AddPlayerToTeamDialog", "Player $playerName added to team $teamName.")
 
-                        // Zaktualizowanie teamu u zawodnika
-                        database.child("Players").child(playerName).child("team").setValue(teamName)
-                            .addOnSuccessListener {
-                                Log.d("AddPlayerToTeamDialog", "Team updated for player $playerName.")
-                                val intent = Intent(context, ViewTeamActivity   ::class.java)
-                                context.startActivity(intent)
-                                dismiss()
+                        database.child("Players").child(playerName).child("team").get().addOnSuccessListener { playerSnapshot ->
+                            val currentTeams = playerSnapshot.getValue(object : GenericTypeIndicator<MutableList<String>>() {}) ?: mutableListOf()
+
+                            if (!currentTeams.contains(teamName)) {
+                                currentTeams.add(teamName)
+                                database.child("Players").child(playerName).child("team").setValue(currentTeams)
+                                    .addOnSuccessListener {
+                                        Log.d("AddPlayerToTeamDialog", "Team updated for player $playerName.")
+                                        val intent = Intent(context, ViewTeamActivity::class.java)
+                                        context.startActivity(intent)
+                                        dismiss()
+                                    }
+                                    .addOnFailureListener { e ->
+                                        Log.e("AddPlayerToTeamDialog", "Failed to update player's team: ${e.message}")
+                                    }
                             }
-                            .addOnFailureListener { e ->
-                                Log.e("AddPlayerToTeamDialog", "Failed to update player's team: ${e.message}")
-                            }
+                        }
                     }
                     .addOnFailureListener { e ->
                         Log.e("AddPlayerToTeamDialog", "Failed to add player to team: ${e.message}")
@@ -116,4 +122,5 @@ class AddPlayerToTeamDialog(
             }
         }
     }
+
 }

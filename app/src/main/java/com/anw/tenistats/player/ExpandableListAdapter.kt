@@ -24,7 +24,7 @@ class TeamExpandableListAdapter(
 ) : BaseExpandableListAdapter(), Filterable {
 
     private val mutableTeamList: MutableList<TeamView> = teamList.toMutableList()
-    private val originalTeamList: List<TeamView> = teamList // Dla przechowania oryginalnej listy
+    private val originalTeamList: List<TeamView> = teamList
     private val expandableListView: ExpandableListView = (context as Activity).findViewById(R.id.expandableListView)
 
     override fun getGroupCount(): Int = mutableTeamList.size

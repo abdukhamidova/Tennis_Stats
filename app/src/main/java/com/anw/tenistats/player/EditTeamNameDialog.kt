@@ -12,6 +12,7 @@ import com.anw.tenistats.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.GenericTypeIndicator
 
 class EditTeamNameDialog(private val context: Context, private val team: TeamView) {
 
@@ -56,12 +57,10 @@ class EditTeamNameDialog(private val context: Context, private val team: TeamVie
                 editTextNewTeamName.error = context.getString(R.string.error_empty_name)
             }
         }
-
-
         alertDialog.show()
     }
 
-    // Method to set the listener
+
     fun setTeamUpdateListener(listener: TeamUpdateListener) {
         teamUpdateListener = listener
     }
@@ -69,30 +68,20 @@ class EditTeamNameDialog(private val context: Context, private val team: TeamVie
     private fun updateTeamNameInDatabase(newTeamName: String) {
         val oldTeamName = team.name
 
-        // Create the new team and copy players
         val updatedPlayers = ArrayList(team.players) // Copy the player list
-
-        // Create new team
         val newTeam = TeamView(newTeamName, updatedPlayers)
-
-        // Reference to the new team in "Teams"
         val newTeamRef = database.child("Teams").child(newTeamName)
 
-        // Save the new team in Firebase
         newTeamRef.setValue(newTeam).addOnSuccessListener {
-            // Copy players to the new team
-            copyPlayersToNewTeam(oldTeamName, newTeamName)
+            updatePlayersTeamName(oldTeamName, newTeamName)
 
-            // Delete the old team from the database
             database.child("Teams").child(oldTeamName).removeValue().addOnSuccessListener {
                 Log.d("EditTeamNameDialog", "Team name changed from $oldTeamName to $newTeamName")
 
-                // Notify the listener that the team has been updated
-                teamUpdateListener?.onTeamUpdated(newTeam)  // Call the listener in ViewTeamActivity
+                teamUpdateListener?.onTeamUpdated(newTeam)
 
-                // Update the local team list and refresh the UI in the activity
                 val activity = context as? ViewTeamActivity
-                activity?.onTeamUpdated(newTeam)  // Update the activity with the new team
+                activity?.onTeamUpdated(newTeam)
             }.addOnFailureListener { exception ->
                 Log.e("EditTeamNameDialog", "Error deleting old team: $exception")
             }
@@ -101,39 +90,20 @@ class EditTeamNameDialog(private val context: Context, private val team: TeamVie
         }
     }
 
-    private fun copyPlayersToNewTeam(oldTeamName: String, newTeamName: String) {
-        val oldTeamPlayersRef = database.child("Teams").child(oldTeamName).child("players")
-        val newTeamPlayersRef = database.child("Teams").child(newTeamName).child("players")
-
-        // Get the list of players from the old team
-        oldTeamPlayersRef.get().addOnSuccessListener { snapshot ->
-            if (snapshot.exists()) {
-                // Save the list of players in the new team
-                newTeamPlayersRef.setValue(snapshot.value).addOnSuccessListener {
-                    Log.d("EditTeamNameDialog", "Players list copied to the new team")
-                }.addOnFailureListener { exception ->
-                    Log.e("EditTeamNameDialog", "Error copying players to the new team: $exception")
-                }
-            } else {
-                Log.d("EditTeamNameDialog", "No players found in team: $oldTeamName")
-            }
-        }.addOnFailureListener { exception ->
-            Log.e("EditTeamNameDialog", "Error retrieving players from team: $exception")
-        }
-    }
-
     private fun updatePlayersTeamName(oldTeamName: String, newTeamName: String) {
-        // Get reference to the players node
         userRef.get().addOnSuccessListener { snapshot ->
             for (playerSnapshot in snapshot.children) {
-                // Check if the player's team is the old team
-                val playerTeamName = playerSnapshot.child("team").getValue(String::class.java)
-                if (playerTeamName == oldTeamName) {
-                    // Update the player's team name
-                    playerSnapshot.ref.child("team").setValue(newTeamName).addOnSuccessListener {
-                        Log.d("EditTeamNameDialog", "Updated player ${playerSnapshot.key}'s team")
+                val teamsList = playerSnapshot.child("team").getValue(object : GenericTypeIndicator<List<String>>() {}) ?: emptyList()
+
+                if (teamsList.contains(oldTeamName)) {
+                    val updatedTeamsList = teamsList.map { teamName ->
+                        if (teamName == oldTeamName) newTeamName else teamName
+                    }
+
+                    playerSnapshot.ref.child("team").setValue(updatedTeamsList).addOnSuccessListener {
+                        Log.d("EditTeamNameDialog", "Updated player ${playerSnapshot.key}'s team list: $updatedTeamsList")
                     }.addOnFailureListener { exception ->
-                        Log.e("EditTeamNameDialog", "Error updating player's team: $exception")
+                        Log.e("EditTeamNameDialog", "Error updating player's team list: $exception")
                     }
                 }
             }
@@ -142,7 +112,6 @@ class EditTeamNameDialog(private val context: Context, private val team: TeamVie
         }
     }
 
-    // Listener interface to notify the activity
     interface TeamUpdateListener {
         fun onTeamUpdated(updatedTeam: TeamView)
     }
