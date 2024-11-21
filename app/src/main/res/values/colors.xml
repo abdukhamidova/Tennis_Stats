@@ -39,6 +39,10 @@
     <color name="txt_players">#ffffff</color>
 <!--    <color name="general_text_color">@color/darker_blue</color>-->
     <color name="app_item_color">#FBFBFB</color>
+    <color name="hard_court_color">#336699</color>
+    <color name="clay_court_color">#a9765d</color>
+    <color name="grass_court_color">#088d46</color>
+    <color name="carpet_court_color">#993300</color>
     <color name="app_menu_buttons">@color/white</color>
     <color name="menu_textColor">@color/darkest_blue</color>
     <color name="accent_text_color">@color/turquoise</color>

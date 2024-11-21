@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:openDrawer="start"
-    tools:context=".player.ViewPlayerActivity"
+    tools:context=".tournament.ViewTournamentsActivity"
     tools:ignore="HardcodedText">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -33,30 +33,30 @@
             app:layout_constraintTop_toBottomOf="@+id/include"
             app:layout_constraintVertical_bias="0.0" >
 
-                <EditText
-                    android:id="@+id/searchPlayer"
-                    android:layout_width="@dimen/_259sdp"
-                    android:layout_height="@dimen/_40sdp"
-                    android:layout_marginStart="@dimen/_3sdp"
-                    android:layout_marginEnd="@dimen/_3sdp"
-                    android:textColor="@color/general_text_color"
-                    android:inputType="text"
-                    android:maxLines="1"
-                    android:backgroundTint="@color/autoFill_field"
-                    android:hint="@string/search"
-                    android:autofillHints="Search"
-                    android:textColorHint="@color/app_hint_color"
-                    android:drawableStart="@drawable/icon_search"
-                    android:drawablePadding="@dimen/_7sdp"
-                    android:drawableTint="@color/app_hint_color"/>
+            <EditText
+                android:id="@+id/searchTornament"
+                android:layout_width="@dimen/_259sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginStart="@dimen/_3sdp"
+                android:layout_marginEnd="@dimen/_3sdp"
+                android:textColor="@color/general_text_color"
+                android:inputType="text"
+                android:maxLines="1"
+                android:backgroundTint="@color/autoFill_field"
+                android:hint="@string/search"
+                android:autofillHints="Search"
+                android:textColorHint="@color/app_hint_color"
+                android:drawableStart="@drawable/icon_search"
+                android:drawablePadding="@dimen/_7sdp"
+                android:drawableTint="@color/app_hint_color"/>
 
-                <ImageButton
-                    android:id="@+id/buttonAddVP"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:backgroundTint="@color/transparent"
-                    android:src="@drawable/icon_person_add"
-                    app:tint="@color/autoFill_field" />
+            <ImageButton
+                android:id="@+id/buttonAddTournament"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/transparent"
+                android:src="@drawable/icon_plus"
+                app:tint="@color/autoFill_field" />
         </LinearLayout>
 
         <TextView
@@ -65,7 +65,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:visibility="invisible"
-            android:text="@string/no_players_found"
+            android:text="@string/no_tournaments_found"
             android:textColor="@color/textNotFound_color"
             android:drawablePadding="@dimen/_3sdp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -90,12 +90,12 @@
             app:layout_constraintVertical_bias="0.0">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/playerList"
+                android:id="@+id/tournamentsList"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clickable="true"
                 android:focusable="true"
-                tools:listitem="@layout/player_item" />
+                tools:listitem="@layout/tournament_item" />
         </ScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

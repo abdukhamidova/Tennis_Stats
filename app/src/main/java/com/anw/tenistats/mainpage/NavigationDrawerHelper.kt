@@ -11,6 +11,7 @@ import com.anw.tenistats.matchplay.StartNewActivity
 import com.anw.tenistats.ViewMatchesActivity
 import com.anw.tenistats.player.ViewPlayerActivity
 import com.anw.tenistats.player.ViewTeamActivity
+import com.anw.tenistats.tournament.ViewTournamentsActivity
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 
@@ -36,6 +37,7 @@ class NavigationDrawerHelper(private val activity: AppCompatActivity) {
             R.id.nav_h2h -> Intent(activity, Head2HeadActivity::class.java)
             R.id.nav_viewTeam -> Intent(activity,ViewTeamActivity::class.java)
             R.id.nav_return -> Intent(activity, StartPointActivity::class.java)
+            R.id.nav_viewTournaments -> Intent(activity, ViewTournamentsActivity::class.java)
             R.id.buttonLogOut -> {
                 auth.signOut()
                 activity.finish()
@@ -57,6 +59,7 @@ class NavigationDrawerHelper(private val activity: AppCompatActivity) {
             R.id.nav_myPlayer -> Intent(activity, ViewPlayerActivity::class.java)
             R.id.nav_h2h -> Intent(activity, Head2HeadActivity::class.java)
             R.id.nav_viewTeam -> Intent(activity,ViewTeamActivity::class.java)
+            R.id.nav_viewTournaments -> Intent(activity, ViewTournamentsActivity::class.java)
             R.id.buttonLogOut -> {
                 auth.signOut()
                 drawerLayout.closeDrawers()

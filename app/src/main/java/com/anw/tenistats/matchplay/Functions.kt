@@ -329,6 +329,17 @@ fun getGoldenDrawable(context: Context, drawableId: Int): Drawable {
 
     return wrappedDrawable
 }
+fun getDrawable(context: Context, drawableId: Int, color: Int): Drawable {
+    // Pobierz obrazek zasobu
+    val drawable = ContextCompat.getDrawable(context, drawableId)
+
+    // Utwórz kopię obrazka z filtrem koloru
+    val wrappedDrawable = DrawableCompat.wrap(drawable!!)
+    DrawableCompat.setTint(wrappedDrawable.mutate(), ContextCompat.getColor(context, color))
+    DrawableCompat.setTintMode(wrappedDrawable, PorterDuff.Mode.SRC_IN)
+
+    return wrappedDrawable
+}
 
 fun fillUpScoreInActivityEnd(app: StatsClass, player1: TextView, player2: TextView, serve1: TextView, serve2: TextView, set1p1: TextView, set1p2: TextView, set2p1: TextView, set2p2: TextView, set3p1: TextView, set3p2: TextView) {
     player1.text = app.player1

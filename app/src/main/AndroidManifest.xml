@@ -103,8 +103,18 @@
             android:exported="false"
             android:parentActivityName=".mainpage.MenuActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".player.ViewTeamActivity">
+        <activity
+            android:name=".player.ViewTeamActivity">
         </activity>
+        <activity
+            android:name=".tournament.AddTournamentActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".tournament.ViewTournamentsActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".tournament.TournamentDetailsActivity"
+            android:exported="false"/>
 
         <meta-data
             android:name="preloaded_fonts"

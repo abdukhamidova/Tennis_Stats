@@ -88,9 +88,10 @@ class AddPlayerActivity : AppCompatActivity() {
 
                     val adapter = ArrayAdapter(
                         applicationContext,
-                        android.R.layout.simple_dropdown_item_1line,
+                        R.layout.spinner_item_stats_right,
                         countryNames
                     )
+                    adapter.setDropDownViewResource(R.layout.spinner_item_stats_right)
                     binding.autoCompleteTextViewNationalityAP.setAdapter(adapter)
                 } catch (e: Exception) {
                     // Obsługa błędu
@@ -389,7 +390,7 @@ class AddPlayerActivity : AppCompatActivity() {
 
     private fun setupAutoCompleteTextView(countries: List<String>) {
         val autoCompleteTextView = binding.autoCompleteTextViewNationalityAP
-        ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, countries)
+        ArrayAdapter(this, R.layout.spinner_item_stats_right, countries)
         autoCompleteTextView.setOnClickListener {
             autoCompleteTextView.showDropDown()
         }
