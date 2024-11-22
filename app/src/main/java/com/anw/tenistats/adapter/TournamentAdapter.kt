@@ -1,5 +1,6 @@
 package com.anw.tenistats.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -52,23 +53,16 @@ class TournamentAdapter(private val originalList: List<TournamentClass>) :
         holder.date.text = formattedDate
         when(currentItem.surface){
             "Hard" -> {
-                val hardCourt = getDrawable(holder.itemView.context, R.drawable.icon_court, R.color.hard_court_color)
-                holder.icon.setCompoundDrawablesWithIntrinsicBounds(hardCourt, null, null, null)
+                holder.icon.setBackgroundResource(R.color.hard_court_color)
             }
             "Clay" -> {
-                //holder.icon.setColorFilter(ContextCompat.getColor(holder.itemView.context, R.color.clay_court_color))
-                val clayCourt = getDrawable(holder.itemView.context, R.drawable.icon_court, R.color.clay_court_color)
-                holder.icon.setCompoundDrawablesWithIntrinsicBounds(clayCourt, null, null, null)
+                holder.icon.setBackgroundResource(R.color.clay_court_color)
             }
             "Grass" -> {
-                //holder.icon.setColorFilter(ContextCompat.getColor(holder.itemView.context, R.color.grass_court_color))
-                val grassCourt = getDrawable(holder.itemView.context, R.drawable.icon_court, R.color.grass_court_color)
-                holder.icon.setCompoundDrawablesWithIntrinsicBounds(grassCourt, null, null, null)
+                holder.icon.setBackgroundResource(R.color.grass_court_color)
             }
             "Carpet" -> {
-                //holder.icon.setColorFilter(ContextCompat.getColor(holder.itemView.context, R.color.carpet_court_color))
-                val carpetCourt = getDrawable(holder.itemView.context, R.drawable.icon_court, R.color.carpet_court_color)
-                holder.icon.setCompoundDrawablesWithIntrinsicBounds(carpetCourt, null, null, null)
+                holder.icon.setBackgroundResource(R.color.carpet_court_color)
             }
         }
 
@@ -85,7 +79,7 @@ class TournamentAdapter(private val originalList: List<TournamentClass>) :
         val name: TextView = itemView.findViewById(R.id.TextViewTournamentName)
         val city_country: TextView = itemView.findViewById(R.id.TextViewPlace)
         val date: TextView = itemView.findViewById(R.id.textviewDates)
-        val icon: TextView = itemView.findViewById(R.id.ImageViewCourt)
+        val icon: ImageView = itemView.findViewById(R.id.ImageViewCourt)
     }
 
     interface OnItemClickListener {
