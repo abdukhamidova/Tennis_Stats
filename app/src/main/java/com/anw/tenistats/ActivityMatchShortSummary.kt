@@ -1,8 +1,10 @@
 package com.anw.tenistats
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -11,6 +13,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.lifecycleScope
 import com.anw.tenistats.databinding.ActivityMatchShortSummaryBinding
 import com.anw.tenistats.mainpage.NavigationDrawerHelper
 import com.anw.tenistats.matchplay.getGoldenDrawable
@@ -21,14 +24,23 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class ActivityMatchShortSummary : AppCompatActivity() {
     private lateinit var binding: ActivityMatchShortSummaryBinding
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var navigationDrawerHelper: NavigationDrawerHelper
     private lateinit var drawerLayout: DrawerLayout
-    private var matchId = ""
+    private var userId = ""
     private lateinit var database: DatabaseReference
+
+    private lateinit var pl1: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,311 +57,133 @@ class ActivityMatchShortSummary : AppCompatActivity() {
         firebaseAuth = FirebaseAuth.getInstance()
         drawerLayout = findViewById(R.id.drawer_layout)
         val navigationView = findViewById<NavigationView>(R.id.navigationViewMenu)
+        val menu = findViewById<ImageButton>(R.id.buttonMenu)
         val headerView = navigationView.getHeaderView(0)
+        menu.setOnClickListener{
+            drawerLayout.open()
+        }
         navigationDrawerHelper = NavigationDrawerHelper(this)
         navigationDrawerHelper.setupNavigationDrawer(drawerLayout, navigationView, firebaseAuth)
-
+        val backButton = findViewById<ImageButton>(R.id.buttonUndo)
+        backButton.visibility = View.GONE
 
         val userEmail = firebaseAuth.currentUser?.email.toString()
         val userEmailView = headerView.findViewById<TextView>(R.id.textViewUserEmail)
-        if (userEmail.isNotEmpty()) {
+        if(userEmail.isNotEmpty()) {
             userEmailView.text = userEmail
-        } else {
+        }else {
             userEmailView.text = resources.getString(R.string.user_email)
         }
         //MENU
 
+        //pola w tabeli wyniku
+        val player1 = binding.textviewPlayer1Stats
+        val player2 = binding.textviewPlayer2Stats
+        val serve1 = binding.textViewServe1Stats
+        val serve2 = binding.textViewServe2Stats
+        val set1p1 = binding.textViewP1Set1Stats
+        val set2p1 = binding.textViewP1Set2Stats
+        val set3p1 = binding.textViewP1Set3Stats
+        val set1p2 = binding.textViewP2Set1Stats
+        val set2p2 = binding.textViewP2Set2Stats
+        val set3p2 = binding.textViewP2Set3Stats
+        val pkt1 = binding.textViewPlayer1PktStats
+        val pkt2 = binding.textViewPlayer2PktStats
+
         // Odbierz datę meczu w formacie milisekund z poprzedniej aktywności
         val matchDateInMillis = intent.getLongExtra("matchDateInMillis", 0L)
+        // Sformatuj datę
+        val dateFormat = SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.getDefault())
+        val formattedDate = dateFormat.format(Date(matchDateInMillis))
+        // Przypisz do TextView
+        binding.textviewDateVM.text = formattedDate
 
-        // Pobierz mecz na podstawie daty z bazy danych
-        //fetchMatchByDate(matchDateInMillis)
+        userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
+        // Wywołaj funkcję, aby znaleźć MatchID na podstawie daty
+        getMatchIdByDate(userId, matchDateInMillis) { matchId ->
+            if (matchId != null) {
+                Log.d("Firebase", "Found matchId: $matchId")
+                database = FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
+                    .getReference(userId).child("Matches").child(matchId)
+                // Ustaw wynik w tabeli
+                setscore(player1, player2, serve1, serve2, set1p1, set2p1, set3p1, set1p2, set2p2, set3p2, pkt1, pkt2)
 
-    }
-
-/*    private fun fetchMatchByDate(matchDateInMillis: Long) {
-        val user = FirebaseAuth.getInstance().currentUser?.uid
-        val database = FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
-            .getReference(user.toString()).child("Matches")
-
-        // Query w bazie danych Firebase do znalezienia meczu o podanej dacie
-        val query = database.orderByChild("data").equalTo(matchDateInMillis.toDouble())
-
-        query.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    // Pobranie pierwszego pasującego meczu
-                    val matchSnapshot = dataSnapshot.children.first()
-
-                    // Pobranie ID meczu
-                    var matchId = matchSnapshot.key ?: ""
-
-                    // Sprawdzenie czy istnieje trzeci set
-                    val thirdSetExists = matchSnapshot.child("set 3").exists()
-
-                    // Pobierz punkty dla tego meczu
-
-                    val buttonSet1 = findViewById<Button>(R.id.buttonSet1His)
-                    val buttonSet2 = findViewById<Button>(R.id.buttonSet2His)
-                    val buttonSet3 = findViewById<Button>(R.id.buttonSet3His)
-                    val buttonAll = findViewById<Button>(R.id.buttonAllHis)
-
-                    val player1 = findViewById<TextView>(R.id.textviewPlayer1His)
-                    val player2 = findViewById<TextView>(R.id.textviewPlayer2His)
-                    val serve1 = findViewById<TextView>(R.id.textViewServe1His)
-                    val serve2 = findViewById<TextView>(R.id.textViewServe2His)
-                    val set1p1 = findViewById<TextView>(R.id.textViewP1Set1His)
-                    val set2p1 = findViewById<TextView>(R.id.textViewP1Set2His)
-                    val set3p1 = findViewById<TextView>(R.id.textViewP1Set3His)
-                    val set1p2 = findViewById<TextView>(R.id.textViewP2Set1His)
-                    val set2p2 = findViewById<TextView>(R.id.textViewP2Set2His)
-                    val set3p2 = findViewById<TextView>(R.id.textViewP2Set3His)
-                    val pkt1 = findViewById<TextView>(R.id.textViewPlayer1PktHis)
-                    val pkt2 = findViewById<TextView>(R.id.textViewPlayer2PktHis)
-
-                    buttonAll.setOnClickListener {
-                        buttonAll.setBackgroundResource(R.drawable.rectangle_button)
-                        buttonAll.setTextColor(
-                            ContextCompat.getColor(this@ViewHistoryActivity,
-                            R.color.white
-                        ))
-                        buttonSet1.setBackgroundResource(R.drawable.rec_btn_not_selected)
-                        buttonSet1.setTextColor(
-                            ContextCompat.getColor(this@ViewHistoryActivity,
-                            R.color.general_text_color
-                        ))
-                        buttonSet2.setBackgroundResource(R.drawable.rec_btn_not_selected)
-                        buttonSet2.setTextColor(
-                            ContextCompat.getColor(this@ViewHistoryActivity,
-                            R.color.general_text_color
-                        ))
-                        buttonSet3.setBackgroundResource(R.drawable.rec_btn_not_selected)
-                        buttonSet3.setTextColor(
-                            ContextCompat.getColor(this@ViewHistoryActivity,
-                            R.color.general_text_color
-                        ))
-                        fetchMatchPoints(matchId)
-
+                binding.textViewSave.setOnClickListener {
+                    val noteText = binding.editTextNote.text.toString().trim() // Get the text from the EditText
+                    if (noteText.isNotEmpty()) {
+                            val databaseReference = database.child("note")
+                            databaseReference.setValue(noteText) // Save the note
+                                .addOnSuccessListener {
+                                    Toast.makeText(this, "Note saved successfully!", Toast.LENGTH_SHORT).show()
+                                }
+                                .addOnFailureListener { exception ->
+                                    Toast.makeText(this, "Failed to save note: ${exception.message}", Toast.LENGTH_SHORT).show()
+                                }
+                    } else {
+                        Toast.makeText(this, "Note cannot be empty", Toast.LENGTH_SHORT).show()
                     }
-                    buttonSet1.setOnClickListener {
-                        buttonAll.setBackgroundResource(R.drawable.rec_btn_not_selected)
-                        buttonAll.setTextColor(
-                            ContextCompat.getColor(this@ViewHistoryActivity,
-                            R.color.general_text_color
-                        ))
-                        buttonSet1.setBackgroundResource(R.drawable.rectangle_button)
-                        buttonSet1.setTextColor(
-                            ContextCompat.getColor(this@ViewHistoryActivity,
-                            R.color.white
-                        ))
-                        buttonSet2.setBackgroundResource(R.drawable.rec_btn_not_selected)
-                        buttonSet2.setTextColor(
-                            ContextCompat.getColor(this@ViewHistoryActivity,
-                            R.color.general_text_color
-                        ))
-                        buttonSet3.setBackgroundResource(R.drawable.rec_btn_not_selected)
-                        buttonSet3.setTextColor(
-                            ContextCompat.getColor(this@ViewHistoryActivity,
-                            R.color.general_text_color
-                        ))
-                        // Wywołanie funkcji fetchMatchPoints tylko dla seta 1
-                        fetchMatchPoints(matchId, "set 1")
-                    }
-
-                    buttonSet2.setOnClickListener {
-                        if (set2p1.text != "") {
-                            buttonAll.setBackgroundResource(R.drawable.rec_btn_not_selected)
-                            buttonAll.setTextColor(
-                                ContextCompat.getColor(this@ViewHistoryActivity,
-                                R.color.general_text_color
-                            ))
-                            buttonSet1.setBackgroundResource(R.drawable.rec_btn_not_selected)
-                            buttonSet1.setTextColor(
-                                ContextCompat.getColor(this@ViewHistoryActivity,
-                                R.color.general_text_color
-                            ))
-                            buttonSet2.setBackgroundResource(R.drawable.rectangle_button)
-                            buttonSet2.setTextColor(
-                                ContextCompat.getColor(this@ViewHistoryActivity,
-                                R.color.white
-                            ))
-                            buttonSet3.setBackgroundResource(R.drawable.rec_btn_not_selected)
-                            buttonSet3.setTextColor(
-                                ContextCompat.getColor(this@ViewHistoryActivity,
-                                R.color.general_text_color
-                            ))
-                            // Wywołanie funkcji fetchMatchPoints tylko dla seta 2
-                            fetchMatchPoints(matchId, "set 2")
-                        }else{
-                            Toast.makeText(this@ViewHistoryActivity, "Set2 does not exist", Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                    //zrobilam zamiast ukrywania przyciku sprawdzenie czy dany set istnieje i zmienilam przycisk danego seta na nieaktywny ~u
-                    // Ukryj lub pokaż przycisk dla trzeciego seta w zależności od jego istnienia
-                    //if (thirdSetExists) {
-                    //  buttonSet3.visibility = View.VISIBLE
-                    buttonSet3.setOnClickListener {
-                        if (set3p1.text != "") {
-                            buttonAll.setBackgroundResource(R.drawable.rec_btn_not_selected)
-                            buttonAll.setTextColor(
-                                ContextCompat.getColor(this@ViewHistoryActivity,
-                                R.color.general_text_color
-                            ))
-                            buttonSet1.setBackgroundResource(R.drawable.rec_btn_not_selected)
-                            buttonSet1.setTextColor(
-                                ContextCompat.getColor(this@ViewHistoryActivity,
-                                R.color.general_text_color
-                            ))
-                            buttonSet2.setBackgroundResource(R.drawable.rec_btn_not_selected)
-                            buttonSet2.setTextColor(
-                                ContextCompat.getColor(this@ViewHistoryActivity,
-                                R.color.general_text_color
-                            ))
-                            buttonSet3.setBackgroundResource(R.drawable.rectangle_button)
-                            buttonSet3.setTextColor(
-                                ContextCompat.getColor(this@ViewHistoryActivity,
-                                R.color.white
-                            ))
-                            // Wywołanie funkcji fetchMatchPoints tylko dla seta 3
-                            fetchMatchPoints(matchId, "set 3")
-                        }else{
-                            Toast.makeText(this@ViewHistoryActivity, "Set3 does not exist", Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                    //} else {
-                    //textViewSet3.visibility = View.GONE
-                    //  buttonSet3.isClickable=false
-                    //}
-
-                    setscore(player1,player2,serve1,serve2,set1p1,set2p1,set3p1,set1p2,set2p2,set3p2,pkt1,pkt2)
-                } else {
-                    // Obsługa, gdy dane nie istnieją w bazie danych
-                    Toast.makeText(this@ViewHistoryActivity, "Nie znaleziono danych", Toast.LENGTH_SHORT).show()
                 }
-
+            } else {
+                Log.d("Firebase", "No match found for the given date")
+                Toast.makeText(this, "No match found for the given date", Toast.LENGTH_SHORT).show()
             }
-
-            override fun onCancelled(databaseError: DatabaseError) {
-                // Obsługa błędu zapytania do bazy danych
-                Toast.makeText(this@ViewHistoryActivity, "Błąd zapytania do bazy danych", Toast.LENGTH_SHORT).show()
-            }
-        })
+        }
     }
-    fun setscore(player1: TextView,player2: TextView,serve1: TextView,serve2: TextView,set1p1: TextView,set2p1: TextView,set3p1: TextView,set1p2: TextView,set2p2: TextView,set3p2: TextView,pkt1: TextView,pkt2: TextView)
-    {
-        val user = FirebaseAuth.getInstance().currentUser?.uid
-        database = FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
-            .getReference(user.toString()).child("Matches").child(matchId)
-        database.child("player1").get().addOnSuccessListener { dataSnapshot ->
-            // Pobranie wartości "player1" z bazy danych
-            val player1Value = dataSnapshot.getValue(String::class.java)
-            // Ustawienie wartości w TextView
-            player1.text = player1Value
-            pl1 = player1Value.toString()
-        }.addOnFailureListener { exception ->
-            // Obsługa błędów
-        }
 
-        database.child("player2").get().addOnSuccessListener { dataSnapshot ->
-            // Pobranie wartości "player1" z bazy danych
-            val player2Value = dataSnapshot.getValue(String::class.java)
-            // Ustawienie wartości w TextView
-            player2.text = player2Value
-        }.addOnFailureListener { exception ->
-            // Obsługa błędów
-        }
+    private fun setscore(player1: TextView, player2: TextView, serve1: TextView, serve2: TextView,
+                         set1p1: TextView, set2p1: TextView, set3p1: TextView,
+                         set1p2: TextView, set2p2: TextView, set3p2: TextView,
+                         pkt1: TextView, pkt2: TextView) {
+        lifecycleScope.launch(Dispatchers.IO) {
+            val dataSnapshot = database.get().await()
 
-        database.child("set1p1").get().addOnSuccessListener { dataSnapshot ->
-            // Pobranie wartości "player1" z bazy danych
-            val set1p1Value = dataSnapshot.getValue(String::class.java)
-            // Ustawienie wartości w TextView
-            set1p1.text = set1p1Value
-        }.addOnFailureListener { exception ->
-            // Obsługa błędów
-        }
-        database.child("set2p1").get().addOnSuccessListener { dataSnapshot ->
-            // Pobranie wartości "player1" z bazy danych
-            val set2p1Value = dataSnapshot.getValue(String::class.java)
-            // Ustawienie wartości w TextView
-            set2p1.text = set2p1Value
-        }.addOnFailureListener { exception ->
-            // Obsługa błędów
-        }
-        database.child("set3p1").get().addOnSuccessListener { dataSnapshot ->
-            // Pobranie wartości "player1" z bazy danych
-            val set3p1Value = dataSnapshot.getValue(String::class.java)
-            // Ustawienie wartości w TextView
-            set3p1.text = set3p1Value
-        }.addOnFailureListener { exception ->
-            // Obsługa błędów
-        }
-        database.child("set1p2").get().addOnSuccessListener { dataSnapshot ->
-            // Pobranie wartości "player1" z bazy danych
-            val set1p2Value = dataSnapshot.getValue(String::class.java)
-            // Ustawienie wartości w TextView
-            set1p2.text = set1p2Value
-        }.addOnFailureListener { exception ->
-            // Obsługa błędów
-        }
-        database.child("set2p2").get().addOnSuccessListener { dataSnapshot ->
-            // Pobranie wartości "player1" z bazy danych
-            val set2p2Value = dataSnapshot.getValue(String::class.java)
-            // Ustawienie wartości w TextView
-            set2p2.text = set2p2Value
-        }.addOnFailureListener { exception ->
-            // Obsługa błędów
-        }
-        database.child("set3p2").get().addOnSuccessListener { dataSnapshot ->
-            // Pobranie wartości "player1" z bazy danych
-            val set3p2Value = dataSnapshot.getValue(String::class.java)
-            // Ustawienie wartości w TextView
-            set3p2.text = set3p2Value
-        }.addOnFailureListener { exception ->
-            // Obsługa błędów
-        }
-        database.child("pkt1").get().addOnSuccessListener { dataSnapshot ->
-            // Pobranie wartości "player1" z bazy danych
-            val pkt1Value = dataSnapshot.getValue(String::class.java)
-            // Ustawienie wartości w TextView
-            pkt1.text = pkt1Value
-        }.addOnFailureListener { exception ->
-            // Obsługa błędów
-        }
-        database.child("pkt2").get().addOnSuccessListener { dataSnapshot ->
-            // Pobranie wartości "player1" z bazy danych
-            val pkt2Value = dataSnapshot.getValue(String::class.java)
-            // Ustawienie wartości w TextView
-            pkt2.text = pkt2Value
-        }.addOnFailureListener { exception ->
-            // Obsługa błędów
-        }
-        database.child("winner").get().addOnSuccessListener { dataSnapshot ->
-            // Pobranie wartości "player1" z bazy danych
-            if(dataSnapshot.exists()){
-                // Pobranie wartości "player1" z bazy danych
-                val winner = dataSnapshot.getValue(String::class.java)
-                val goldenLaurel = getGoldenDrawable(applicationContext, R.drawable.icon_laurel3)
-                serve1.setCompoundDrawablesWithIntrinsicBounds(goldenLaurel, null, null, null)
-                serve2.setCompoundDrawablesWithIntrinsicBounds(goldenLaurel, null, null, null)
+            withContext(Dispatchers.Main) {
+                Log.d("FirebaseData", "Snapshot: $dataSnapshot")
+                player1.text = dataSnapshot.child("player1").getValue(String::class.java) ?: ""
+                player2.text = dataSnapshot.child("player2").getValue(String::class.java) ?: ""
+                set1p1.text = dataSnapshot.child("set1p1").getValue(String::class.java) ?: ""
+                set2p1.text = dataSnapshot.child("set2p1").getValue(String::class.java) ?: ""
+                set3p1.text = dataSnapshot.child("set3p1").getValue(String::class.java) ?: ""
+                set1p2.text = dataSnapshot.child("set1p2").getValue(String::class.java) ?: ""
+                set2p2.text = dataSnapshot.child("set2p2").getValue(String::class.java) ?: ""
+                set3p2.text = dataSnapshot.child("set3p2").getValue(String::class.java) ?: ""
+                pkt1.text = dataSnapshot.child("pkt1").getValue(String::class.java) ?: ""
+                pkt2.text = dataSnapshot.child("pkt2").getValue(String::class.java) ?: ""
 
-                // Ustawienie wartości w TextView
-                if(winner==pl1){
-                    serve1.visibility = View.VISIBLE
-                    serve2.visibility = View.INVISIBLE
+                Log.d("FirebaseData", "Player 1: ${player1.text}, Player 2: ${player2.text}")
+
+                // Ustawienie grafiki lauru lub serwisu
+                if(dataSnapshot.child("winner").exists()) {
+                    val winner = dataSnapshot.child("winner").getValue(String::class.java)
+                    val goldenLaurel =
+                        getGoldenDrawable(applicationContext, R.drawable.icon_laurel3)
+                    if (winner == player1.text.toString()) {
+                        serve1.visibility = View.VISIBLE
+                        serve2.visibility = View.INVISIBLE
+                        serve1.setCompoundDrawablesWithIntrinsicBounds(
+                            goldenLaurel,
+                            null,
+                            null,
+                            null
+                        )
+                    } else {
+                        serve1.visibility = View.INVISIBLE
+                        serve2.visibility = View.VISIBLE
+                        serve2.setCompoundDrawablesWithIntrinsicBounds(
+                            goldenLaurel,
+                            null,
+                            null,
+                            null
+                        )
+                    }
                 }
                 else{
-                    serve1.visibility = View.INVISIBLE
-                    serve2.visibility = View.VISIBLE
-                }
-            }
-            else{
-                database.child("LastServePlayer").get().addOnSuccessListener { dataSnapshot ->
-                    // Pobranie wartości "player1" z bazy danych
-                    val lastserve = dataSnapshot.getValue(String::class.java)
+                    // Pobranie wartości "LastServePlayer" z bazy danych
+                    val lastserve = dataSnapshot.child("LastServePlayer").getValue(String::class.java)
                     serve1.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ball, 0, 0, 0)
                     serve2.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ball, 0, 0, 0)
                     // Ustawienie wartości w TextView
-                    if(lastserve==pl1){
+                    if(lastserve==player1.text.toString()){
                         serve1.visibility = View.VISIBLE
                         serve2.visibility = View.INVISIBLE
                     }
@@ -357,12 +191,35 @@ class ActivityMatchShortSummary : AppCompatActivity() {
                         serve1.visibility = View.INVISIBLE
                         serve2.visibility = View.VISIBLE
                     }
-                }.addOnFailureListener { exception ->
-                    // Obsługa błędów
                 }
             }
-        }.addOnFailureListener { exception ->
-            // Obsługa błędów
         }
-    }*/
+    }
+
+    private fun getMatchIdByDate(userId: String, targetDateMillis: Long, onResult: (String?) -> Unit) {
+        val database = FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
+            .getReference(userId).child("Matches")
+
+        database.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    for (matchSnapshot in snapshot.children) {
+                        val dataValue = matchSnapshot.child("data").getValue(Long::class.java)
+                        if (dataValue == targetDateMillis) {
+                            onResult(matchSnapshot.key) // Zwróć ID meczu
+                            return
+                        }
+                    }
+                    onResult(null) // Nie znaleziono meczu
+                } else {
+                    onResult(null) // Brak wpisów w bazie danych
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.e("Firebase", "Error reading data: ${error.message}")
+                onResult(null)
+            }
+        })
+    }
 }

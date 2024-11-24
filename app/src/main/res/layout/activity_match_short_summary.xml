@@ -18,6 +18,7 @@
     android:background="@color/app_bg_color"
     tools:ignore="HardCodedText">
     <include layout="@layout/toolbar" />
+
     <TextView
         android:id="@+id/textViewMatchSummary"
         android:layout_width="wrap_content"
@@ -33,18 +34,18 @@
         app:layout_constraintVertical_bias="0.108" />
 
     <TableLayout
-        android:id="@+id/tableLayoutSummary"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_15sdp"
-        android:layout_marginEnd="@dimen/_15sdp"
-        android:background="@drawable/score_table"
-        android:theme="@style/scoreTableTextAppearance"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/textViewMatchSummary"
-        app:layout_constraintStart_toStartOf="@id/textViewMatchSummary"
-        app:layout_constraintTop_toBottomOf="@id/textViewMatchSummary"
-        app:layout_constraintVertical_bias="0.01999998">
+            android:id="@+id/tableLayoutSummary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:background="@drawable/score_table"
+            android:theme="@style/scoreTableTextAppearance"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/textViewMatchSummary"
+            app:layout_constraintStart_toStartOf="@id/textViewMatchSummary"
+            app:layout_constraintTop_toBottomOf="@id/textViewMatchSummary"
+            app:layout_constraintVertical_bias="0.01999998">
 
         <TableRow
             android:layout_marginBottom="0dp"
@@ -132,96 +133,90 @@
     </TableLayout>
 
     <LinearLayout
-        android:id="@+id/linearLayoutDate"
-        android:layout_width="@dimen/_265sdp"
+        android:id="@+id/linearLayoutShortSummary"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:orientation="horizontal"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/tableLayoutSummary"
         app:layout_constraintStart_toStartOf="@id/tableLayoutSummary"
         app:layout_constraintTop_toBottomOf="@id/tableLayoutSummary"
-        app:layout_constraintVertical_bias="0.04000002">
+        app:layout_constraintVertical_bias="0.0">
 
-        <TextView
-            android:layout_width="0dp"
+        <LinearLayout
+            android:id="@+id/linearLayoutDate"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/date_item"
-            android:textColor="@color/item_textColor"
-            android:textSize="@dimen/_16ssp"
-            android:textStyle="bold" />
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/textviewDateVM"
-            android:layout_width="@dimen/_165sdp"
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/date_item"
+                android:textColor="@color/item_textColor"
+                android:textSize="@dimen/_16ssp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textviewDateVM"
+                android:layout_width="@dimen/_165sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_7sdp"
+                android:gravity="end"
+                android:text="12.01.2024 15:28d"
+                android:textColor="@color/item_textColor"
+                android:textSize="@dimen/_17sdp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayoutNote"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_7sdp"
-            android:text="12.01.2024 15:28"
-            android:textColor="@color/item_textColor"
-            android:textSize="@dimen/_17sdp" />
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/_4sdp">
+
+            <TextView
+                android:id="@+id/textViewNote"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Additional note"
+                android:textColor="@color/general_text_color"
+                android:textSize="@dimen/_16ssp" />
+
+            <TextView
+                android:id="@+id/textViewSave"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:paddingEnd="@dimen/_5sdp"
+                android:text="Save"
+                android:textColor="@color/accent_text_color"
+                android:textSize="@dimen/_17ssp" />
+        </LinearLayout>
+
+        <!--additional notes-->
+        <EditText
+            android:id="@+id/editTextNote"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="text"
+            android:gravity="top"
+            android:hint="Enter your additional notes"
+            android:imeOptions="actionDone"
+            android:inputType="textMultiLine"
+            android:lines="15"
+            android:overScrollMode="always"
+            android:scrollbars="vertical"
+            android:scrollHorizontally="false"
+            android:textColorHint="@color/app_hint_color"
+            android:textSize="@dimen/_15ssp"/>
+
     </LinearLayout> <!--data-->
-
-    <TextView
-        android:id="@+id/textViewNote"
-        android:layout_width="202dp"
-        android:layout_height="34dp"
-        android:text="Additional note:"
-        android:textColor="@color/general_text_color"
-        android:textSize="@dimen/_16sdp"
-        app:layout_constraintStart_toStartOf="@id/linearLayoutDate"
-        app:layout_constraintTop_toBottomOf="@id/linearLayoutDate" />
-    <!--additional notes-->
-    <EditText
-        android:id="@+id/editTextNote"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:gravity="top"
-        android:scrollbars="vertical"
-        android:hint="Enter your additional notes"
-        android:textColorHint="@color/app_hint_color"
-        android:textSize="@dimen/_15ssp"
-        android:layout_margin="@dimen/_20sdp"
-        app:layout_constraintBottom_toTopOf="@id/buttonSaveNote"
-        app:layout_constraintEnd_toEndOf="@id/linearLayoutDate"
-        app:layout_constraintHorizontal_bias="0.731"
-        app:layout_constraintStart_toStartOf="@id/linearLayoutDate"
-        app:layout_constraintTop_toBottomOf="@id/linearLayoutDate"
-        app:layout_constraintVertical_bias="0" />
-
-<!--    <ScrollView-->
-<!--        android:id="@+id/scrollViewContainer"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="0dp"-->
-<!--        android:layout_margin="@dimen/_20sdp"-->
-<!--        app:layout_constraintBottom_toTopOf="@id/buttonSaveNote"-->
-<!--        app:layout_constraintEnd_toEndOf="@id/linearLayoutDate"-->
-<!--        app:layout_constraintHorizontal_bias="0.731"-->
-<!--        app:layout_constraintStart_toStartOf="@id/linearLayoutDate"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/linearLayoutDate"-->
-<!--        app:layout_constraintVertical_bias="0">-->
-
-<!--        <EditText-->
-<!--            android:id="@+id/editTextNote"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:hint="Enter your additional notes"-->
-<!--            android:textColorHint="@color/app_hint_color"-->
-<!--            android:textSize="@dimen/_15ssp" />-->
-<!--    </ScrollView>-->
-
-    <Button
-        android:id="@+id/buttonSaveNote"
-        android:layout_width="@dimen/_230sdp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
-        android:backgroundTint="@color/darker_blue"
-        android:text="Save note"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_16ssp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/linearLayoutDate"
-        app:layout_constraintStart_toStartOf="@+id/linearLayoutDate" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
