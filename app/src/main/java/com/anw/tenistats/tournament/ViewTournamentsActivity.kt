@@ -14,13 +14,9 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.anw.tenistats.R
-import com.anw.tenistats.adapter.MatchAdapter
-import com.anw.tenistats.adapter.PlayerAdapter
 import com.anw.tenistats.adapter.TournamentAdapter
 import com.anw.tenistats.databinding.ActivityViewTournamentsBinding
 import com.anw.tenistats.mainpage.NavigationDrawerHelper
-import com.anw.tenistats.player.PlayerView
-import com.anw.tenistats.stats.MatchViewClass
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -33,13 +29,15 @@ class ViewTournamentsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityViewTournamentsBinding
     private lateinit var database: DatabaseReference
     private lateinit var tournamentlayerRecyclerView: RecyclerView
-    private lateinit var tournamentArrayList: ArrayList<TournamentClass>
+    private lateinit var tournamentArrayList: ArrayList<TournamentDataClass>
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var adapter: TournamentAdapter
     private lateinit var navigationDrawerHelper: NavigationDrawerHelper
     private lateinit var drawerLayout: DrawerLayout
-    private var isAdapterSet = false
-    private lateinit var noTournamentsFoundTextView: TextView
+    private lateinit var selectedVenueList: Array<String>
+    private lateinit var selectedCountryList: Array<String>
+    private var selectedDate: Long? = null
+    private lateinit var selectedSurfaceList: Array<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,7 +52,7 @@ class ViewTournamentsActivity : AppCompatActivity() {
 
         firebaseAuth = FirebaseAuth.getInstance()
 
-        //------------ MENU
+        //region ---MENU---
         drawerLayout = findViewById<DrawerLayout>(R.id.drawer_layout)
         val menu = findViewById<ImageButton>(R.id.buttonMenu)
         val navigationView = findViewById<NavigationView>(R.id.navigationViewMenu)
@@ -75,10 +73,23 @@ class ViewTournamentsActivity : AppCompatActivity() {
             findViewById<TextView>(R.id.textViewUserEmail).text =
                 resources.getString(R.string.user_email)
         }
-        //------------ MENU
+        //endregion
+
+        selectedVenueList = intent.getStringArrayExtra("venueFilter") ?: emptyArray()
+        selectedCountryList = intent.getStringArrayExtra("countryFilter") ?: emptyArray()
+        selectedDate = intent.getLongExtra("dateFilter", 0L)
+        selectedSurfaceList = intent.getStringArrayExtra("surfaceFilter") ?: emptyArray()
 
         binding.buttonAddTournament.setOnClickListener {
             startActivity(Intent(this, AddTournamentActivity::class.java))
+        }
+        binding.buttonFilter.setOnClickListener {
+            val intent = Intent(this@ViewTournamentsActivity, TournamentFilterActivity::class.java)
+            intent.putExtra("venueFilter",selectedVenueList)
+            intent.putExtra("countryFilter",selectedCountryList)
+            intent.putExtra("dateFilter",selectedDate)
+            intent.putExtra("surfaceFilter",selectedSurfaceList)
+            startActivity(intent)
         }
 
         tournamentlayerRecyclerView = binding.tournamentsList
@@ -104,7 +115,7 @@ class ViewTournamentsActivity : AppCompatActivity() {
                     tournamentArrayList.clear() // Wyczyść listę przed dodaniem nowych danych
 
                     for (tournamentSnapshot in snapshot.children.reversed()) { // Iteruj odwrotnie, aby najnowsze mecze były na początku
-                        val tournament = tournamentSnapshot.getValue(TournamentClass::class.java)
+                        val tournament = tournamentSnapshot.getValue(TournamentDataClass::class.java)
                         if(tournament != null){
                             tournament?.id = tournamentSnapshot.key.toString()
                             tournamentArrayList.add(tournament)
@@ -121,6 +132,7 @@ class ViewTournamentsActivity : AppCompatActivity() {
                 }else {
                     binding.textViewNotFound.visibility = View.VISIBLE
                 }
+                applyFilters(selectedVenueList, selectedCountryList, selectedDate, selectedSurfaceList)
             }
 
 
@@ -128,5 +140,43 @@ class ViewTournamentsActivity : AppCompatActivity() {
                 // Obsłużenie błędu zapytania do bazy danych
             }
         })
+    }
+
+    private fun applyFilters(selectedVenueList: Array<String>, selectedCountryList: Array<String>, selectedDate: Long?, selectedSurfaceList: Array<String>){
+        val filteredList = tournamentArrayList.filter { tournament ->
+            val venueMatch = if (selectedVenueList.isNotEmpty()) {
+                tournament.place in selectedVenueList
+            } else {
+                true
+            }
+
+            // Check country filter (if selectedCountryList is not empty)
+            val countryMatch = if (selectedCountryList.isNotEmpty()) {
+                tournament.country in selectedCountryList
+            } else {
+                true
+            }
+
+            // Check date range filter (if start or end date is provided)
+            val dateMatch = if (selectedDate != 0L) {
+                val startMatch = selectedDate?.let { tournament.startDate!! <= it } ?: true
+                val endMatch = selectedDate?.let { tournament.endDate!! >= it } ?: true
+                startMatch && endMatch
+            } else {
+                true
+            }
+
+            // Check surface filter (if selectedSurfaceList is not empty)
+            val surfaceMatch = if (selectedSurfaceList.isNotEmpty()) {
+                tournament.surface in selectedSurfaceList
+            } else {
+                true
+            }
+
+            // Only include tournaments that match all conditions
+            venueMatch && countryMatch && dateMatch && surfaceMatch
+        }
+        adapter = TournamentAdapter(filteredList)
+        tournamentlayerRecyclerView.adapter = adapter
     }
 }

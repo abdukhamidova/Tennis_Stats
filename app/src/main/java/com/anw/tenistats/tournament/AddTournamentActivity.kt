@@ -150,6 +150,15 @@ class AddTournamentActivity : AppCompatActivity() {
             datePickerDialog.show()
         }
         binding.buttonAdd.setOnClickListener {
+            if (binding.editTextName.text.isEmpty() ||
+                binding.editTextCity.text.isEmpty() ||
+                binding.autoCompleteTextViewCountry.text.isEmpty() ||
+                binding.editTextStartDate.text.isEmpty() ||
+                binding.editTextEndDate.text.isEmpty() ||
+                binding.autoCompleteTextViewSurface.text.isEmpty()) {
+                Toast.makeText(this, "Don't leave empty fields.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener // Zatrzymujemy dalsze przetwarzanie
+            }
             createAndSaveTournament()
             startActivity(Intent(this,ViewTournamentsActivity::class.java))
         }
@@ -177,7 +186,18 @@ class AddTournamentActivity : AppCompatActivity() {
             millisecondsEnd = date?.time ?: 0
         }
         // Tworzenie danych turnieju
-        val tournamentData = mapOf<String, Any>(
+        val tournamentData = TournamentDataClass(
+            tournamentId,
+            binding.editTextName.text.toString(),
+            binding.editTextCity.text.toString(),
+            binding.autoCompleteTextViewCountry.text.toString(),
+            millisecondsStart,
+            millisecondsEnd,
+            binding.autoCompleteTextViewSurface.text.toString(),
+            binding.editTextNote.text.toString(),
+            user.toString()
+            )
+        /*val tournamentData = mapOf<String, Any>(
             "name" to binding.editTextName.text.toString(),
             "place" to binding.editTextCity.text.toString(),
             "country" to binding.autoCompleteTextViewCountry.text.toString(),
@@ -186,7 +206,7 @@ class AddTournamentActivity : AppCompatActivity() {
             "surface" to binding.autoCompleteTextViewSurface.text.toString(),
             "note" to binding.editTextNote.text.toString(),
             "creator" to user.toString()
-        )
+        )*/
         // Zapisywanie danych meczu do bazy danych pod unikalnym identyfikatorem turnieju
         if (tournamentId != null) {
             database.child(tournamentId.toString()).setValue(tournamentData).addOnCompleteListener { task ->

@@ -108,7 +108,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="@string/city_club"
+                            android:text="@string/venue"
                             android:textColor="@color/general_text_color"
                             android:textSize="@dimen/_13ssp" />
 
@@ -243,12 +243,13 @@
                             android:layout_height="@dimen/_36sdp"
                             android:backgroundTint="@color/general_text_color"
                             android:completionHintView="@color/general_text_color"
-                            android:drawableStart="@drawable/icon_surface30"
+                            android:drawableStart="@drawable/icon_surface"
                             android:drawablePadding="@dimen/_3sdp"
                             android:drawableTint="@color/app_hint_color"
                             android:hint="@string/enter_surface"
                             android:textColor="@color/general_text_color"
-                            android:textColorHint="@color/app_hint_color" />
+                            android:textColorHint="@color/app_hint_color"
+                            android:textSize="@dimen/_12ssp"/>
                     </LinearLayout>
 
                     <LinearLayout

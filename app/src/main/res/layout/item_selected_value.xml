@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/_3sdp"
+    android:layout_marginTop="@dimen/_7sdp"
+    android:layout_marginEnd="@dimen/_3sdp"
+    app:cardCornerRadius="@dimen/_7sdp"
+    android:backgroundTint="@color/greyish">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingVertical="@dimen/_4sdp"
+        android:paddingStart="@dimen/_12sdp">
+
+        <TextView
+            android:id="@+id/textViewValue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Value"
+            android:textColor="@color/item_textColor"
+            android:textSize="@dimen/_15ssp"
+            android:layout_gravity="center"/>
+
+        <!-- Ikona usuwania wartosci -->
+        <ImageView
+            android:id="@+id/imageViewDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_6sdp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/icon_delete_30"
+            app:tint="@color/item_textColor" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

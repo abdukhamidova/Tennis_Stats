@@ -35,7 +35,7 @@
 
             <EditText
                 android:id="@+id/searchTornament"
-                android:layout_width="@dimen/_259sdp"
+                android:layout_width="@dimen/_225sdp"
                 android:layout_height="@dimen/_40sdp"
                 android:layout_marginStart="@dimen/_3sdp"
                 android:layout_marginEnd="@dimen/_3sdp"
@@ -49,6 +49,15 @@
                 android:drawableStart="@drawable/icon_search"
                 android:drawablePadding="@dimen/_7sdp"
                 android:drawableTint="@color/app_hint_color"/>
+
+            <ImageButton
+                android:id="@+id/buttonFilter"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="@dimen/_3sdp"
+                android:backgroundTint="@color/transparent"
+                android:src="@drawable/icon_filter30"
+                app:tint="@color/autoFill_field" />
 
             <ImageButton
                 android:id="@+id/buttonAddTournament"

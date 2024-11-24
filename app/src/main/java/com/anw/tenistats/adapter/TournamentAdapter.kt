@@ -1,30 +1,24 @@
 package com.anw.tenistats.adapter
 
-import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Filter
-import android.widget.Filterable
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.anw.tenistats.R
-import com.anw.tenistats.matchplay.getDrawable
-import com.anw.tenistats.matchplay.getGoldenDrawable
-import com.anw.tenistats.tournament.TournamentClass
+import com.anw.tenistats.tournament.TournamentDataClass
 import com.anw.tenistats.tournament.TournamentDetailsActivity
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-class TournamentAdapter(private val originalList: List<TournamentClass>) :
-    RecyclerView.Adapter<TournamentAdapter.MyViewHolder>() {
+class TournamentAdapter(
+    private val originalList: List<TournamentDataClass>
+) : RecyclerView.Adapter<TournamentAdapter.MyViewHolder>() {
 
-    private var filteredList: List<TournamentClass> = originalList
+    private var filteredList: List<TournamentDataClass> = originalList
     private var listener: OnItemClickListener? = null
 
     fun setOnItemClickListener(listener: OnItemClickListener) {
@@ -44,8 +38,8 @@ class TournamentAdapter(private val originalList: List<TournamentClass>) :
         val currentItem = filteredList[position]
 
         val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
-        val startDate = Date(currentItem.startDate)
-        val endDate = Date(currentItem.endDate)
+        val startDate = currentItem.startDate?.let { Date(it) }
+        val endDate = currentItem.endDate?.let { Date(it) }
         val formattedDate = dateFormat.format(startDate) + " - " + dateFormat.format(endDate)
 
         holder.name.text = currentItem.name
@@ -83,6 +77,6 @@ class TournamentAdapter(private val originalList: List<TournamentClass>) :
     }
 
     interface OnItemClickListener {
-        fun onItemClick(itemView: TournamentClass)
+        fun onItemClick(itemView: TournamentDataClass)
     }
 }

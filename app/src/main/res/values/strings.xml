@@ -137,11 +137,13 @@
     <string name="no_players_found">No Players found</string>
     <string name="no_tournaments_found">No Tournaments found</string>
     <string name="add_tournament">Add Tournament</string>
-    <string name="city_club">City/Club:</string>
+    <string name="venue">Venue:</string>
     <string name="enter_city_club">Enter City/Club</string>
     <string name="country">Country:</string>
     <string name="enter_country">Enter Country</string>
     <string name="date">Date:</string>
+    <string name="start_date">Start Date:</string>
+    <string name="end_date">End Date:</string>
     <string name="select_start_date">Select Start Date</string>
     <string name="select_end_date">Select End Date</string>
     <string name="surface">Surface:</string>
@@ -150,6 +152,8 @@
     <string name="add_to_tournament">Add a player to the tournament</string>
     <string name="tournament_name">Tournament name</string>
     <string name="tournament_place">Tournament place</string>
+    <string name="filters">Filters</string>
+    <string name="add_new_filter">+ Add new filter</string>
 
 
 </resources>
