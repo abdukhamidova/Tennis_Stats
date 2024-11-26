@@ -8,13 +8,14 @@ import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.anw.tenistats.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.GenericTypeIndicator
 
-class DeletePlayerActivity(private val context: Context) {
+class DeletePlayerActivity(private val context: Context)  {
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var database: DatabaseReference
     private lateinit var alertDialog: AlertDialog
@@ -83,8 +84,6 @@ class DeletePlayerActivity(private val context: Context) {
                     ).show()
                 }
         }
-
-
         alertDialog.show()
     }
 }
