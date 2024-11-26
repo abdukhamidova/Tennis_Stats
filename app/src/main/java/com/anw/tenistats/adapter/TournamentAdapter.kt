@@ -1,13 +1,18 @@
 package com.anw.tenistats.adapter
 
+import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.anw.tenistats.R
+import com.anw.tenistats.dialog.ResumeOrStatsDialog
+import com.anw.tenistats.dialog.TournamentDialog
 import com.anw.tenistats.tournament.TournamentDataClass
 import com.anw.tenistats.tournament.TournamentDetailsActivity
 import java.text.SimpleDateFormat
@@ -16,16 +21,18 @@ import java.util.Locale
 
 class TournamentAdapter(
     private val originalList: List<TournamentDataClass>
-) : RecyclerView.Adapter<TournamentAdapter.MyViewHolder>() {
+) : RecyclerView.Adapter<TournamentAdapter.MyViewHolder>(), Filterable {
 
     private var filteredList: List<TournamentDataClass> = originalList
     private var listener: OnItemClickListener? = null
+    private lateinit var context: Context
 
     fun setOnItemClickListener(listener: OnItemClickListener) {
         this.listener = listener
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+        context = parent.context
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.tournament_item, parent, false)
         return MyViewHolder(itemView)
     }
@@ -63,9 +70,10 @@ class TournamentAdapter(
         holder.itemView.setOnClickListener {
             listener?.onItemClick(currentItem)
 
-            val intent = Intent(holder.itemView.context, TournamentDetailsActivity::class.java)
-            intent.putExtra("tournament_id", currentItem.id)
-            holder.itemView.context.startActivity(intent)
+            val TournamentDialog = TournamentDialog(context)
+            TournamentDialog.show(
+                currentItem.id
+            )
         }
     }
 
@@ -78,5 +86,9 @@ class TournamentAdapter(
 
     interface OnItemClickListener {
         fun onItemClick(itemView: TournamentDataClass)
+    }
+
+    override fun getFilter(): Filter {
+        TODO("Not yet implemented")
     }
 }

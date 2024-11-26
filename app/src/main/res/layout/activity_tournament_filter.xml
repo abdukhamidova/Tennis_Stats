@@ -63,18 +63,19 @@
                     android:layout_marginBottom="@dimen/_7sdp">
 
                     <TextView
-                        android:layout_width="0dp"
+                        android:layout_width="@dimen/_1sdp"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
                         android:text="@string/venue"
-                        android:textSize="@dimen/_13ssp"
                         android:textColor="@color/general_text_color"
-                        android:layout_gravity="center"/>
+                        android:textSize="@dimen/_13ssp" />
 
                     <Spinner
                         android:id="@+id/spinnerVenue"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_width="@dimen/_95sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
                         android:textSize="@dimen/_13ssp"
@@ -116,7 +117,7 @@
                     android:layout_marginBottom="@dimen/_7sdp">
 
                     <TextView
-                        android:layout_width="0dp"
+                        android:layout_width="@dimen/_1sdp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/country"
@@ -126,8 +127,9 @@
 
                     <Spinner
                         android:id="@+id/spinnerCountry"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_width="@dimen/_95sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
                         android:textSize="@dimen/_13ssp"
@@ -164,7 +166,7 @@
                 android:layout_marginBottom="@dimen/_7sdp">
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="@dimen/_1sdp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
@@ -211,7 +213,7 @@
                     android:layout_marginBottom="@dimen/_7sdp">
 
                     <TextView
-                        android:layout_width="0dp"
+                        android:layout_width="@dimen/_1sdp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/surface"
@@ -221,8 +223,9 @@
 
                     <Spinner
                         android:id="@+id/spinnerSurface"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_width="@dimen/_95sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
                         android:textSize="@dimen/_13ssp"

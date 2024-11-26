@@ -3,7 +3,10 @@ package com.anw.tenistats.tournament
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
+import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
@@ -25,7 +28,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-class ViewTournamentsActivity : AppCompatActivity() {
+class ViewTournamentsActivity : AppCompatActivity(), TournamentAdapter.OnItemClickListener {
     private lateinit var binding: ActivityViewTournamentsBinding
     private lateinit var database: DatabaseReference
     private lateinit var tournamentlayerRecyclerView: RecyclerView
@@ -98,7 +101,18 @@ class ViewTournamentsActivity : AppCompatActivity() {
 
         tournamentArrayList = arrayListOf()
         adapter = TournamentAdapter(tournamentArrayList)
+        adapter.setOnItemClickListener(this)
         tournamentlayerRecyclerView.adapter = adapter
+
+        binding.searchTornament.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // Filtruj dane w adapterze na podstawie wprowadzonego tekstu
+                adapter.filter.filter(s)
+            }
+            override fun afterTextChanged(s: Editable?) {}
+        })
 
         getTournamentData()
         tournamentlayerRecyclerView.isEnabled = true
@@ -178,5 +192,9 @@ class ViewTournamentsActivity : AppCompatActivity() {
         }
         adapter = TournamentAdapter(filteredList)
         tournamentlayerRecyclerView.adapter = adapter
+    }
+
+    override fun onItemClick(itemView: TournamentDataClass) {
+
     }
 }

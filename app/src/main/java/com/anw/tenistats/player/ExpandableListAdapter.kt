@@ -13,6 +13,9 @@ import com.anw.tenistats.R
 import android.widget.ExpandableListView
 import android.widget.Filter
 import android.widget.Filterable
+import com.anw.tenistats.dialog.AddPlayerToTeamDialog
+import com.anw.tenistats.dialog.DeletePlayerFromTeamDialog
+import com.anw.tenistats.dialog.DeleteTeamDialog
 import java.util.Locale
 
 

@@ -167,14 +167,14 @@ class TournamentFilterActivity : AppCompatActivity() {
             }
         }
         binding.buttonAddSurface.setOnClickListener {
-            var selected = spinnerCountry.selectedItem.toString()
+            var selected = spinnerSurface.selectedItem.toString()
             if(selected == "All"){
-                selectedCountryList.clear()
-                binding.linearLayoutItemsCountry.removeAllViews()
+                selectedSurfaceList.clear()
+                binding.linearLayoutItemsSurface.removeAllViews()
             }
-            else if(!selectedCountryList.contains(selected)) {
-                selectedCountryList.add(selected)
-                addItem(binding.linearLayoutItemsCountry,selected)
+            else if(!selectedSurfaceList.contains(selected)) {
+                selectedSurfaceList.add(selected)
+                addItem(binding.linearLayoutItemsSurface,selected)
             }
             else{
                 Toast.makeText(this,"This value is already selected",Toast.LENGTH_SHORT).show()
@@ -206,16 +206,16 @@ class TournamentFilterActivity : AppCompatActivity() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
                     for (tournamentSnapshot in snapshot.children) {
-                        val tournament = tournamentSnapshot.getValue(TournamentClass::class.java)
+                        val tournament = tournamentSnapshot.getValue(TournamentDataClass::class.java)
                         if(tournament != null){
                             if(!availableVenueList.contains(tournament.place)){
-                                availableVenueList.add(tournament.place)
+                                availableVenueList.add(tournament.place!!)
                             }
                             if(!availableCountryList.contains(tournament.country)){
-                                availableCountryList.add(tournament.country)
+                                availableCountryList.add(tournament.country!!)
                             }
                             if(!availableSurfaceList.contains(tournament.surface)){
-                                availableSurfaceList.add(tournament.surface)
+                                availableSurfaceList.add(tournament.surface!!)
                             }
                         }
                     }

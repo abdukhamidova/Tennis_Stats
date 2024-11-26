@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
 import android.widget.ImageButton
@@ -22,6 +23,7 @@ import com.anw.tenistats.data.CountryRepository
 import com.anw.tenistats.databinding.ActivityAddTournamentBinding
 import com.anw.tenistats.mainpage.NavigationDrawerHelper
 import com.anw.tenistats.player.PlayerView
+import com.anw.tenistats.stats.ViewHistoryActivity
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -55,7 +57,7 @@ class AddTournamentActivity : AppCompatActivity() {
         database =
             FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Tournaments")
 
-        //------------ MENU
+        //region ---MENU---
         drawerLayout = findViewById<DrawerLayout>(R.id.drawer_layout)
         val menu = findViewById<ImageButton>(R.id.buttonMenu)
         val navigationView = findViewById<NavigationView>(R.id.navigationViewMenu)
@@ -76,7 +78,7 @@ class AddTournamentActivity : AppCompatActivity() {
             findViewById<TextView>(R.id.textViewUserEmail).text =
                 resources.getString(R.string.user_email)
         }
-        //------------ MENU
+        //endregion
 
         binding.autoCompleteTextViewCountry.setOnClickListener {
             val countryRepository = CountryRepository()
@@ -100,22 +102,13 @@ class AddTournamentActivity : AppCompatActivity() {
                 }
             }
         }
-        binding.autoCompleteTextViewSurface.setOnClickListener {
-            GlobalScope.launch(Dispatchers.Main) {
-                try {
-                    val surfaces = arrayOf("Hard", "Clay", "Grass", "Carpet")
-                    val adapter = ArrayAdapter(
-                        applicationContext,
-                        R.layout.spinner_item_stats_right,
-                        surfaces
-                    )
-                    adapter.setDropDownViewResource(R.layout.spinner_item_stats_right)
-                    binding.autoCompleteTextViewSurface.setAdapter(adapter)
-                    binding.autoCompleteTextViewSurface.showDropDown()
-                } catch (e: Exception) {
-                    // Obsługa błędu
-                }
-            }
+        val surfaces = arrayOf("Hard", "Clay", "Grass", "Carpet")
+        val adapter = ArrayAdapter(applicationContext,R.layout.spinner_item_stats_right,surfaces)
+        adapter.setDropDownViewResource(R.layout.spinner_item_stats_right)
+        binding.autoCompleteTextViewSurface.adapter = adapter
+        binding.autoCompleteTextViewSurface.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {}
+            override fun onNothingSelected(parent: AdapterView<*>) {}
         }
         binding.editTextStartDate.setOnClickListener {
             val calendar = Calendar.getInstance()
@@ -155,8 +148,13 @@ class AddTournamentActivity : AppCompatActivity() {
                 binding.autoCompleteTextViewCountry.text.isEmpty() ||
                 binding.editTextStartDate.text.isEmpty() ||
                 binding.editTextEndDate.text.isEmpty() ||
-                binding.autoCompleteTextViewSurface.text.isEmpty()) {
+                binding.autoCompleteTextViewSurface.selectedItem == null) {
                 Toast.makeText(this, "Don't leave empty fields.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener // Zatrzymujemy dalsze przetwarzanie
+            }
+            val dateFormat = SimpleDateFormat("dd/MM/yy", Locale.getDefault())
+            if((dateFormat.parse(binding.editTextStartDate.text.toString())?.time!!) > (dateFormat.parse(binding.editTextEndDate.text.toString())?.time!!)){
+                Toast.makeText(this, "Wrong dates", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener // Zatrzymujemy dalsze przetwarzanie
             }
             createAndSaveTournament()
@@ -193,20 +191,10 @@ class AddTournamentActivity : AppCompatActivity() {
             binding.autoCompleteTextViewCountry.text.toString(),
             millisecondsStart,
             millisecondsEnd,
-            binding.autoCompleteTextViewSurface.text.toString(),
+            binding.autoCompleteTextViewSurface.selectedItem.toString(),
             binding.editTextNote.text.toString(),
             user.toString()
             )
-        /*val tournamentData = mapOf<String, Any>(
-            "name" to binding.editTextName.text.toString(),
-            "place" to binding.editTextCity.text.toString(),
-            "country" to binding.autoCompleteTextViewCountry.text.toString(),
-            "startDate" to millisecondsStart.toString(),
-            "endDate" to millisecondsEnd.toString(),
-            "surface" to binding.autoCompleteTextViewSurface.text.toString(),
-            "note" to binding.editTextNote.text.toString(),
-            "creator" to user.toString()
-        )*/
         // Zapisywanie danych meczu do bazy danych pod unikalnym identyfikatorem turnieju
         if (tournamentId != null) {
             database.child(tournamentId.toString()).setValue(tournamentData).addOnCompleteListener { task ->

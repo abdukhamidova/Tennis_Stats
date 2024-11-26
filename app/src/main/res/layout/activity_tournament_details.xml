@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:openDrawer="start"
-    tools:context=".tournament.AddTournamentActivity"
+    tools:context=".tournament.TournamentDetailsActivity"
     tools:ignore="HardcodedText">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -29,7 +29,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_15sdp"
-            android:text="@string/add_tournament"
             android:textColor="@color/general_text_color"
             android:textSize="@dimen/_30ssp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -45,7 +44,7 @@
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/_15sdp"
             android:layout_marginBottom="@dimen/_3sdp"
-            app:layout_constraintBottom_toTopOf="@id/buttonAdd"
+            app:layout_constraintBottom_toTopOf="@id/buttonSubmit"
             app:layout_constraintEnd_toEndOf="@id/textViewName"
             app:layout_constraintStart_toStartOf="@id/textViewName"
             app:layout_constraintTop_toBottomOf="@id/textViewName"
@@ -295,10 +294,10 @@
         </ScrollView>
 
         <Button
-            android:id="@+id/buttonAdd"
+            android:id="@+id/buttonSubmit"
             android:layout_width="@dimen/_230sdp"
             android:layout_height="wrap_content"
-            android:text="@string/add"
+            android:text="@string/submit"
             android:textSize="@dimen/_16ssp"
             android:textColor="@color/white"
             android:backgroundTint="@color/darker_blue"

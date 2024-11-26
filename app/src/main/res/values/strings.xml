@@ -138,7 +138,7 @@
     <string name="no_tournaments_found">No Tournaments found</string>
     <string name="add_tournament">Add Tournament</string>
     <string name="venue">Venue:</string>
-    <string name="enter_city_club">Enter City/Club</string>
+    <string name="enter_venue">Enter Venue</string>
     <string name="country">Country:</string>
     <string name="enter_country">Enter Country</string>
     <string name="date">Date:</string>
@@ -149,11 +149,16 @@
     <string name="surface">Surface:</string>
     <string name="enter_surface">Enter Surface</string>
     <string name="enrolled_players">Enrolled Players:</string>
-    <string name="add_to_tournament">Add a player to the tournament</string>
+    <string name="add_to_tournament">Add player to the tournament</string>
     <string name="tournament_name">Tournament name</string>
     <string name="tournament_place">Tournament place</string>
     <string name="filters">Filters</string>
     <string name="add_new_filter">+ Add new filter</string>
+    <string name="generate_draw">Generate Draw</string>
+    <string name="add_players">Add Players</string>
+    <string name="show_details">Show Details</string>
+    <string name="deleteTournamentInfo">Do you want to delete tournament?</string>
+    <string name="entry_list">Entry List</string>
 
 
 </resources>

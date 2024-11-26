@@ -1,4 +1,4 @@
-package com.anw.tenistats.player
+package com.anw.tenistats.dialog
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
@@ -9,6 +9,8 @@ import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.EditText
 import com.anw.tenistats.R
+import com.anw.tenistats.player.TeamView
+import com.anw.tenistats.player.ViewTeamActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase

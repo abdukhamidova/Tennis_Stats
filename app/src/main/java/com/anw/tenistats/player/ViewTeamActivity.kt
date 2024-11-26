@@ -18,6 +18,9 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import com.anw.tenistats.R
+import com.anw.tenistats.dialog.AddTeamDialog
+import com.anw.tenistats.dialog.DeleteTeamDialog
+import com.anw.tenistats.dialog.EditTeamNameDialog
 import com.anw.tenistats.mainpage.NavigationDrawerHelper
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth

@@ -6,6 +6,7 @@
     android:background="@color/dialog_bg_color">
 
     <TextView
+        android:id="@+id/textViewChoose"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_7sdp"
@@ -16,7 +17,7 @@
         android:textAlignment="center"/>
 
     <AutoCompleteTextView
-        android:id="@+id/AutoCompleteTextViewPlayer"
+        android:id="@+id/playerSpinner"
         android:layout_width="195dp"
         android:layout_height="@dimen/_40sdp"
         android:layout_marginStart="@dimen/_24sdp"

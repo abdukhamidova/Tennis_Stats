@@ -119,6 +119,12 @@
         <activity
             android:name=".tournament.TournamentFilterActivity"
             android:exported="false"/>
+        <activity
+            android:name=".tournament.AddPlayersToTournamentActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".tournament.GenerateDrawActivity"
+            android:exported="false"/>
 
         <meta-data
             android:name="preloaded_fonts"
