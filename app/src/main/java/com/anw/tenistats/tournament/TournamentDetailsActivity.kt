@@ -288,5 +288,14 @@ class TournamentDetailsActivity : AppCompatActivity() {
                 }
             }
         }
+        if (binding.spinnerDrawSize.selectedItem.toString() != "None") {
+            val drawSize = binding.spinnerDrawSize.selectedItem.toString().toIntOrNull()
+
+            if (drawSize != null) {
+                for (i in 0 until drawSize-1) {
+                    database.child((i+1).toString()).setValue("")
+                }
+            }
+        }
     }
 }

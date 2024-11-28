@@ -44,17 +44,20 @@
                 android:textColor="@color/white"
                 android:layout_centerInParent="true"/>
             <ImageButton
+                android:id="@+id/imageButtonNextRound"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:backgroundTint="@color/transparent"
                 android:src="@drawable/icon_right30"/>
             <ImageButton
+                android:id="@+id/imageButtonPreviousRound"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:backgroundTint="@color/transparent"
-                android:src="@drawable/icon_left30"/>
+                android:src="@drawable/icon_left30"
+                android:visibility="invisible"/>
         </RelativeLayout> <!--pasek rundy-->
         <LinearLayout
             android:id="@+id/linearLayoutNoDraw"
@@ -86,7 +89,7 @@
                 android:backgroundTint="@color/darker_blue"
                 android:text="@string/show_details"
                 android:textColor="@color/white"
-                android:textSize="@dimen/_10ssp" /> <!--button show details-->
+                android:textSize="@dimen/_18sdp"/> <!--button show details-->
         </LinearLayout> <!--brak drabinki-->
 
         <ScrollView
@@ -112,7 +115,7 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-<!--    <com.google.android.material.navigation.NavigationView
+    <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigationViewMenu"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
@@ -122,6 +125,6 @@
         app:headerLayout="@layout/navigation_header"
         app:menu="@menu/navigation_menu"
         app:itemIconPadding="@dimen/_15sdp"
-        app:itemHorizontalPadding="@dimen/_23sdp"/>-->
+        app:itemHorizontalPadding="@dimen/_23sdp"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>
