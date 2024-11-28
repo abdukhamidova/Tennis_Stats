@@ -16,7 +16,7 @@ class AddTeamDialog(private val context: Context) {
     fun show() {
         // Tworzymy dialog
         val dialog = Dialog(context)
-        dialog.setContentView(R.layout.add_new_team_dialog) // musisz stworzyć odpowiedni layout XML dla tego dialogu
+        dialog.setContentView(R.layout.dialog_add_new_team) // musisz stworzyć odpowiedni layout XML dla tego dialogu
         dialog.setTitle("Add Team")
 
         // Pobieramy widoki z dialogu

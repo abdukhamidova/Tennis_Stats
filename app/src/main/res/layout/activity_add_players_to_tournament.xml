@@ -112,7 +112,7 @@
                 android:layout_height="wrap_content"
                 android:clickable="true"
                 android:focusable="true"
-                tools:listitem="@layout/player_item" />
+                tools:listitem="@layout/item_player" />
         </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 

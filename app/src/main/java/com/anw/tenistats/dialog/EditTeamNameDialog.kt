@@ -28,7 +28,7 @@ class EditTeamNameDialog(private val context: Context, private val team: TeamVie
 
     @SuppressLint("MissingInflatedId")
     fun show() {
-        val dialogView = LayoutInflater.from(context).inflate(R.layout.edit_team_name_dialog, null)
+        val dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_edit_team_name, null)
         alertDialog = AlertDialog.Builder(context)
             .setView(dialogView)
             .create()

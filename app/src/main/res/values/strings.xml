@@ -154,11 +154,14 @@
     <string name="tournament_place">Tournament place</string>
     <string name="filters">Filters</string>
     <string name="add_new_filter">+ Add new filter</string>
-    <string name="generate_draw">Generate Draw</string>
+    <string name="show_draw">Show Draw</string>
     <string name="add_players">Add Players</string>
     <string name="show_details">Show Details</string>
     <string name="deleteTournamentInfo">Do you want to delete tournament?</string>
     <string name="entry_list">Entry List</string>
+    <string name="draw_size">Draw Size</string>
+    <string name="enter_draw_size">Enter Draw Size</string>
+    <string name="no_draw_found">No draw found\nCreate a draw by clicking button below</string>
 
 
 </resources>

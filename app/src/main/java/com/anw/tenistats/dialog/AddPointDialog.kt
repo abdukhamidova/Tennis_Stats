@@ -29,7 +29,7 @@ class AddPointDialog(private val context: Context, private val openedFromStartPo
              set3p1: TextView, set3p2:TextView, pkt1: String, pkt2: String, kto: String, co: String,
              gdzie: String, czym: String, matchId: String, gameId: String, setId: String){
         //przygotowanie zmiennych
-        val dialogView = LayoutInflater.from(context).inflate(R.layout.add_dialog, null)
+        val dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_add_point, null)
         alertDialog = AlertDialog.Builder(context)
             .setView(dialogView)
             .create()

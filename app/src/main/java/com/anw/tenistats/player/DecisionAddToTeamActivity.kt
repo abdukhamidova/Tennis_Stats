@@ -13,7 +13,7 @@ class DecisionAddToTeamActivity(private val context: Context) {
     private lateinit var alertDialog: AlertDialog
 
     fun show(playerName: String) {
-        val dialogView = LayoutInflater.from(context).inflate(R.layout.decision_add_to_team_dialog, null)
+        val dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_decision_add_to_team, null)
         alertDialog = AlertDialog.Builder(context)
             .setView(dialogView)
             .create()

@@ -89,7 +89,7 @@ class TeamExpandableListAdapter(
         convertView: View?,
         parent: ViewGroup?
     ): View {
-        val groupView = convertView ?: LayoutInflater.from(context).inflate(R.layout.team_item, parent, false)
+        val groupView = convertView ?: LayoutInflater.from(context).inflate(R.layout.item_team, parent, false)
         val teamName = groupView.findViewById<TextView>(R.id.tvTeamName)
         val editButton = groupView.findViewById<ImageView>(R.id.ivEditTeam)
         val deleteButton = groupView.findViewById<ImageView>(R.id.ivDeleteTeam)

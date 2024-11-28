@@ -26,7 +26,7 @@ class ChooseTeamDialog(private val context: Context, private val playerName: Str
     private lateinit var spinnerTeamList: Spinner
 
     fun show() {
-        val dialogView = LayoutInflater.from(context).inflate(R.layout.choose_team_dialog, null)
+        val dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_choose_team, null)
         alertDialog = AlertDialog.Builder(context)
             .setView(dialogView)
             .create()

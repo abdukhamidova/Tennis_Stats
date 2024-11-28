@@ -13,7 +13,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.anw.tenistats.R
 import com.anw.tenistats.matchplay.StartNewActivity
-import com.anw.tenistats.ViewMatchesActivity
+import com.anw.tenistats.stats.ViewMatchesActivity
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 

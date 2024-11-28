@@ -31,7 +31,7 @@ class AddPlayerToTeamDialog(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestWindowFeature(Window.FEATURE_NO_TITLE)
-        setContentView(R.layout.add_player_to_team_dialog)
+        setContentView(R.layout.dialog_add_player_to_team)
 
         autoCompleteTextView = findViewById(R.id.playerSpinner)
         buttonAddToTeam = findViewById(R.id.buttonAddToTeam)

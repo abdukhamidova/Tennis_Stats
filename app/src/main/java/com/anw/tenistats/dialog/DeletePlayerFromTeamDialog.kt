@@ -26,7 +26,7 @@ class DeletePlayerFromTeamDialog(
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.delete_player_from_team_dialog)
+        setContentView(R.layout.dialog_delete_player_from_team)
 
         textViewConfirm = findViewById(R.id.textViewConfirm)
         buttonDeletePlayer = findViewById(R.id.buttonDeletePlayerTeam)

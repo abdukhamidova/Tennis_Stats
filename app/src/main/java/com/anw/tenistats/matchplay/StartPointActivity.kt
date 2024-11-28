@@ -14,7 +14,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.anw.tenistats.R
 import com.anw.tenistats.stats.StatsClass
-import com.anw.tenistats.ViewMatchesActivity
+import com.anw.tenistats.stats.ViewMatchesActivity
 import com.anw.tenistats.dialog.AddPointDialog
 import com.anw.tenistats.databinding.ActivityStartPointBinding
 import com.anw.tenistats.mainpage.NavigationDrawerHelper

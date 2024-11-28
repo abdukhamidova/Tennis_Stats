@@ -1,7 +1,6 @@
 package com.anw.tenistats.adapter
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,10 +10,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.anw.tenistats.R
-import com.anw.tenistats.dialog.ResumeOrStatsDialog
 import com.anw.tenistats.dialog.TournamentDialog
 import com.anw.tenistats.tournament.TournamentDataClass
-import com.anw.tenistats.tournament.TournamentDetailsActivity
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -33,7 +30,7 @@ class TournamentAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         context = parent.context
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.tournament_item, parent, false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_tournament, parent, false)
         return MyViewHolder(itemView)
     }
 

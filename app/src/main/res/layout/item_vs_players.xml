@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingHorizontal="@dimen/_11sdp"
-        android:paddingVertical="@dimen/_7sdp"
+        android:paddingVertical="@dimen/_3sdp"
         tools:ignore="RtlSymmetry">
         <TableRow>
             <TextView
@@ -45,7 +45,8 @@
                 android:layout_width="0dp"
                 android:layout_weight="0.1"
                 android:text="0"
-                android:textAlignment="center"/>
+                android:textAlignment="center"
+                android:visibility="gone"/>
         </TableRow>
         <TableRow
             android:layout_marginTop="@dimen/_3sdp">
@@ -76,7 +77,8 @@
                 android:layout_width="0dp"
                 android:layout_weight="0.1"
                 android:text="0"
-                android:textAlignment="center"/>
+                android:textAlignment="center"
+                android:visibility="gone"/>
         </TableRow>
     </TableLayout>
 </androidx.cardview.widget.CardView>

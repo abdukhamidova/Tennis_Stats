@@ -13,12 +13,6 @@
         android:orientation="vertical"
         android:layout_gravity="center">
 
-        <TextView
-            android:id="@+id/textViewMatchIdRoS"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:visibility="invisible"/>
-
         <ImageView
             android:id="@+id/buttonDelete"
             android:layout_width="wrap_content"
@@ -29,16 +23,6 @@
             app:tint="@color/dialog_textTitle_color"/>
 
         <Button
-            android:id="@+id/buttonGenerateDraw"
-            android:layout_width="@dimen/_153sdp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/_7sdp"
-            android:backgroundTint="@color/dialog_textTitle_color"
-            android:textColor="@color/dialog_text_color"
-            android:text="@string/generate_draw"
-            android:textSize="@dimen/_15ssp"/>
-        <Button
             android:id="@+id/buttonAddPlayers"
             android:layout_width="@dimen/_153sdp"
             android:layout_height="wrap_content"
@@ -48,6 +32,18 @@
             android:textColor="@color/dialog_text_color"
             android:text="@string/add_players"
             android:textSize="@dimen/_15ssp" />
+
+        <Button
+            android:id="@+id/buttonShowDraw"
+            android:layout_width="@dimen/_153sdp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_7sdp"
+            android:backgroundTint="@color/dialog_textTitle_color"
+            android:textColor="@color/dialog_text_color"
+            android:text="@string/show_draw"
+            android:textSize="@dimen/_15ssp"/>
+
         <Button
             android:id="@+id/buttonShowDetails"
             android:layout_width="@dimen/_153sdp"

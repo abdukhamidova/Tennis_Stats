@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
-import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
@@ -31,7 +30,7 @@ import com.google.firebase.database.ValueEventListener
 class ViewTournamentsActivity : AppCompatActivity(), TournamentAdapter.OnItemClickListener {
     private lateinit var binding: ActivityViewTournamentsBinding
     private lateinit var database: DatabaseReference
-    private lateinit var tournamentlayerRecyclerView: RecyclerView
+    private lateinit var tournamentRecyclerView: RecyclerView
     private lateinit var tournamentArrayList: ArrayList<TournamentDataClass>
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var adapter: TournamentAdapter
@@ -95,14 +94,14 @@ class ViewTournamentsActivity : AppCompatActivity(), TournamentAdapter.OnItemCli
             startActivity(intent)
         }
 
-        tournamentlayerRecyclerView = binding.tournamentsList
-        tournamentlayerRecyclerView.layoutManager = LinearLayoutManager(this)
-        tournamentlayerRecyclerView.setHasFixedSize(true)
+        tournamentRecyclerView = binding.tournamentsList
+        tournamentRecyclerView.layoutManager = LinearLayoutManager(this)
+        tournamentRecyclerView.setHasFixedSize(true)
 
         tournamentArrayList = arrayListOf()
         adapter = TournamentAdapter(tournamentArrayList)
         adapter.setOnItemClickListener(this)
-        tournamentlayerRecyclerView.adapter = adapter
+        tournamentRecyclerView.adapter = adapter
 
         binding.searchTornament.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -115,7 +114,7 @@ class ViewTournamentsActivity : AppCompatActivity(), TournamentAdapter.OnItemCli
         })
 
         getTournamentData()
-        tournamentlayerRecyclerView.isEnabled = true
+        tournamentRecyclerView.isEnabled = true
     }
 
     private fun getTournamentData() {
@@ -191,7 +190,7 @@ class ViewTournamentsActivity : AppCompatActivity(), TournamentAdapter.OnItemCli
             venueMatch && countryMatch && dateMatch && surfaceMatch
         }
         adapter = TournamentAdapter(filteredList)
-        tournamentlayerRecyclerView.adapter = adapter
+        tournamentRecyclerView.adapter = adapter
     }
 
     override fun onItemClick(itemView: TournamentDataClass) {

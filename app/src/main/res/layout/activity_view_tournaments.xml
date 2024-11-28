@@ -104,7 +104,7 @@
                 android:layout_height="wrap_content"
                 android:clickable="true"
                 android:focusable="true"
-                tools:listitem="@layout/tournament_item" />
+                tools:listitem="@layout/item_tournament" />
         </ScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

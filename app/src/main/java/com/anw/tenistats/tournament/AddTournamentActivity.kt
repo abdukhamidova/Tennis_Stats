@@ -105,8 +105,8 @@ class AddTournamentActivity : AppCompatActivity() {
         val surfaces = arrayOf("Hard", "Clay", "Grass", "Carpet")
         val adapter = ArrayAdapter(applicationContext,R.layout.spinner_item_stats_right,surfaces)
         adapter.setDropDownViewResource(R.layout.spinner_item_stats_right)
-        binding.autoCompleteTextViewSurface.adapter = adapter
-        binding.autoCompleteTextViewSurface.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        binding.spinnerSurface.adapter = adapter
+        binding.spinnerSurface.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {}
             override fun onNothingSelected(parent: AdapterView<*>) {}
         }
@@ -148,7 +148,7 @@ class AddTournamentActivity : AppCompatActivity() {
                 binding.autoCompleteTextViewCountry.text.isEmpty() ||
                 binding.editTextStartDate.text.isEmpty() ||
                 binding.editTextEndDate.text.isEmpty() ||
-                binding.autoCompleteTextViewSurface.selectedItem == null) {
+                binding.spinnerSurface.selectedItem == null) {
                 Toast.makeText(this, "Don't leave empty fields.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener // Zatrzymujemy dalsze przetwarzanie
             }
@@ -191,7 +191,7 @@ class AddTournamentActivity : AppCompatActivity() {
             binding.autoCompleteTextViewCountry.text.toString(),
             millisecondsStart,
             millisecondsEnd,
-            binding.autoCompleteTextViewSurface.selectedItem.toString(),
+            binding.spinnerSurface.selectedItem.toString(),
             binding.editTextNote.text.toString(),
             user.toString()
             )

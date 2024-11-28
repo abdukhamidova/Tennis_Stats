@@ -1,4 +1,4 @@
-package com.anw.tenistats
+package com.anw.tenistats.stats
 
 import com.anw.tenistats.adapter.MatchAdapter
 import android.annotation.SuppressLint
@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
-import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
@@ -16,10 +15,9 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.anw.tenistats.R
 import com.anw.tenistats.databinding.ActivityViewMatchesBinding
 import com.anw.tenistats.mainpage.NavigationDrawerHelper
-import com.anw.tenistats.stats.MatchViewClass
-import com.anw.tenistats.stats.StatsClass
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot

@@ -8,7 +8,7 @@ import com.anw.tenistats.matchplay.StartPointActivity
 import com.anw.tenistats.stats.Head2HeadActivity
 import com.anw.tenistats.R
 import com.anw.tenistats.matchplay.StartNewActivity
-import com.anw.tenistats.ViewMatchesActivity
+import com.anw.tenistats.stats.ViewMatchesActivity
 import com.anw.tenistats.player.ViewPlayerActivity
 import com.anw.tenistats.player.ViewTeamActivity
 import com.anw.tenistats.tournament.ViewTournamentsActivity

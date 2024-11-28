@@ -238,7 +238,7 @@
                             android:textSize="@dimen/_13sdp" />
 
                         <Spinner
-                            android:id="@+id/autoCompleteTextViewSurface"
+                            android:id="@+id/spinnerSurface"
                             android:layout_width="@dimen/_165sdp"
                             android:layout_height="@dimen/_36sdp"
                             android:backgroundTint="@color/general_text_color"

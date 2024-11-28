@@ -14,8 +14,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.anw.tenistats.player.PlayerDetailsActivity
 import com.anw.tenistats.player.PlayerView
 import com.anw.tenistats.R
-import com.anw.tenistats.player.ViewPlayerActivity
-import com.anw.tenistats.player.ViewTeamActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -39,7 +37,7 @@ class PlayerAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         context = parent.context
-        val itemView = LayoutInflater.from(context).inflate(R.layout.player_item, parent, false)
+        val itemView = LayoutInflater.from(context).inflate(R.layout.item_player, parent, false)
         return MyViewHolder(itemView)
     }
 

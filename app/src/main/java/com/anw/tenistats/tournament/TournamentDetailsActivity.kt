@@ -95,7 +95,8 @@ class TournamentDetailsActivity : AppCompatActivity() {
                     binding.autoCompleteTextViewCountry.isEnabled = false
                     binding.editTextStartDate.isEnabled = false
                     binding.editTextEndDate.isEnabled = false
-                    binding.autoCompleteTextViewSurface.isEnabled = false
+                    binding.spinnerSurface.isEnabled = false
+                    binding.spinnerDrawSize.isEnabled = false
                     binding.editTextNote.isEnabled = false
                 }
                 else{
@@ -104,7 +105,8 @@ class TournamentDetailsActivity : AppCompatActivity() {
                     binding.autoCompleteTextViewCountry.isEnabled = true
                     binding.editTextStartDate.isEnabled = true
                     binding.editTextEndDate.isEnabled = true
-                    binding.autoCompleteTextViewSurface.isEnabled = true
+                    binding.spinnerSurface.isEnabled = true
+                    binding.spinnerDrawSize.isEnabled = true
                     binding.editTextNote.isEnabled = true
                 }
             }
@@ -116,7 +118,7 @@ class TournamentDetailsActivity : AppCompatActivity() {
                 binding.autoCompleteTextViewCountry.text.isEmpty() ||
                 binding.editTextStartDate.text.isEmpty() ||
                 binding.editTextEndDate.text.isEmpty() ||
-                binding.autoCompleteTextViewSurface.selectedItem == null) {
+                binding.spinnerSurface.selectedItem == null) {
                 Toast.makeText(this, "Don't leave empty fields.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener // Zatrzymujemy dalsze przetwarzanie
             }
@@ -153,14 +155,6 @@ class TournamentDetailsActivity : AppCompatActivity() {
                 }
             }
         }
-        val surfaces = arrayOf("Hard", "Clay", "Grass", "Carpet")
-        val adapter = ArrayAdapter(applicationContext,R.layout.spinner_item_stats_right,surfaces)
-        adapter.setDropDownViewResource(R.layout.spinner_item_stats_right)
-        binding.autoCompleteTextViewSurface.adapter = adapter
-        binding.autoCompleteTextViewSurface.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {}
-            override fun onNothingSelected(parent: AdapterView<*>) {}
-        }
         binding.editTextStartDate.setOnClickListener {
             val calendar = Calendar.getInstance()
             val year = calendar.get(Calendar.YEAR)
@@ -193,6 +187,22 @@ class TournamentDetailsActivity : AppCompatActivity() {
             )
             datePickerDialog.show()
         }
+        val surfaces = arrayOf("Hard", "Clay", "Grass", "Carpet")
+        val adapterSurface = ArrayAdapter(applicationContext,R.layout.spinner_item_stats_right,surfaces)
+        adapterSurface.setDropDownViewResource(R.layout.spinner_item_stats_right)
+        binding.spinnerSurface.adapter = adapterSurface
+        binding.spinnerSurface.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {}
+            override fun onNothingSelected(parent: AdapterView<*>) {}
+        }
+        val sizes = arrayOf("None", 4, 8, 16, 32, 64, 128)
+        val adapterDraw = ArrayAdapter(applicationContext,R.layout.spinner_item_stats_right,sizes)
+        adapterDraw.setDropDownViewResource(R.layout.spinner_item_stats_right)
+        binding.spinnerDrawSize.adapter = adapterDraw
+        binding.spinnerDrawSize.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {}
+            override fun onNothingSelected(parent: AdapterView<*>) {}
+        }
     }
 
     private fun setData() {
@@ -215,29 +225,38 @@ class TournamentDetailsActivity : AppCompatActivity() {
                 val formattedEndDate = dateFormat.format(Date(endDate!!))
                 binding.editTextEndDate.setText(formattedEndDate)
 
-                val value = dataSnapshot.child("surface").getValue(String::class.java)
-                val adapter = binding.autoCompleteTextViewSurface.adapter
-                for(i in 0 until adapter.count){
-                    if(value == adapter.getItem(i).toString()){
-                        binding.autoCompleteTextViewSurface.setSelection(i)
+                val valueSurface = dataSnapshot.child("surface").getValue(String::class.java)
+                val adapterSurface = binding.spinnerSurface.adapter
+                for(i in 0 until adapterSurface.count){
+                    if(valueSurface == adapterSurface.getItem(i).toString()){
+                        binding.spinnerSurface.setSelection(i)
                         break
                     }
                 }
+
+                val valueDraw = dataSnapshot.child("drawSize").getValue(String::class.java)
+                val adapterDraw = binding.spinnerDrawSize.adapter
+                for(i in 0 until adapterDraw.count){
+                    if(valueDraw == adapterDraw.getItem(i).toString()){
+                        binding.spinnerDrawSize.setSelection(i)
+                        break
+                    }
+                }
+
                 binding.editTextNote.setText(dataSnapshot.child("note").getValue(String::class.java))
             }
             override fun onCancelled(databaseError: DatabaseError) {}
         })
     }
 
-    private fun setupAutoCompleteTextView(surfaces: List<String>) {
-        ArrayAdapter(this, R.layout.spinner_item_stats_right, surfaces)
+    private fun setupAutoCompleteTextView(countries: List<String>) {
+        ArrayAdapter(this, R.layout.spinner_item_stats_right, countries)
         binding.autoCompleteTextViewCountry.setOnClickListener {
             binding.autoCompleteTextViewCountry.showDropDown()
         }
     }
 
     private fun updateTournament() {
-        val user = firebaseAuth.currentUser?.uid
         var millisecondsStart: Long? = 0
         var millisecondsEnd: Long? = 0
         if (!binding.editTextStartDate.text.isNullOrEmpty()) {
@@ -256,7 +275,8 @@ class TournamentDetailsActivity : AppCompatActivity() {
             "country" to binding.autoCompleteTextViewCountry.text.toString(),
             "startDate" to millisecondsStart,
             "endDate" to millisecondsEnd,
-            "surface" to binding.autoCompleteTextViewSurface.selectedItem.toString(),
+            "surface" to binding.spinnerSurface.selectedItem.toString(),
+            "drawSize" to binding.spinnerDrawSize.selectedItem.toString(),
             "note" to binding.editTextNote.text.toString()
         )
         if (tournamentId != null) {

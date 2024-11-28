@@ -26,7 +26,7 @@ class DeleteTeamDialog(
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.delete_team_dialog) // Użyj odpowiedniego layoutu
+        setContentView(R.layout.dialog_delete_team) // Użyj odpowiedniego layoutu
 
         textViewConfirm = findViewById(R.id.textViewConfirm)
         buttonDeleteTeam = findViewById(R.id.buttonDeleteTeam)

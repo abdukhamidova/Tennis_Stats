@@ -79,7 +79,7 @@
                 android:layout_height="wrap_content"
                 android:clickable="true"
                 android:focusable="true"
-                tools:listitem="@layout/match_item" />
+                tools:listitem="@layout/item_match" />
         </ScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

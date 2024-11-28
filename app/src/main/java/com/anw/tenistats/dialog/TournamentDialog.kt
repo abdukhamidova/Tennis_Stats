@@ -37,24 +37,24 @@ class TournamentDialog(private val context: Context, private val openedFromStart
         database.addListenerForSingleValueEvent(object : ValueEventListener {
             @SuppressLint("MissingInflatedId")
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val btnGenerateDraw : Button = dialogView.findViewById(R.id.buttonGenerateDraw)
+                val btnShowDraw : Button = dialogView.findViewById(R.id.buttonShowDraw)
                 val btnAddPlayers : Button = dialogView.findViewById(R.id.buttonAddPlayers)
                 val btnShowDetails : Button = dialogView.findViewById(R.id.buttonShowDetails)
                 val btnCancel : Button = dialogView.findViewById(R.id.buttonCancel)
                 val btnDelete : ImageView = dialogView.findViewById(R.id.buttonDelete)
 
-                if(dataSnapshot.child("creator").getValue() != user.toString()){
-                    btnGenerateDraw.visibility = View.GONE
+                if(dataSnapshot.child("creator").value != user.toString()){
                     btnDelete.visibility = View.GONE
                 }
                 else{
-                    btnGenerateDraw.visibility = View.VISIBLE
                     btnDelete.visibility = View.VISIBLE
                 }
 
-                btnGenerateDraw.setOnClickListener {
+                btnShowDraw.setOnClickListener {
+                    val drawSize = dataSnapshot.child("drawSize").value.toString()
                     val intent = Intent(context, GenerateDrawActivity::class.java)
                     intent.putExtra("tournament_id", tournamentId)
+                    intent.putExtra("draw_size", drawSize)
                     context.startActivity(intent)
                     alertDialog.dismiss()
                 }

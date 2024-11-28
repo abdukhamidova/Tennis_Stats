@@ -32,10 +32,11 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_15sdp"
             android:background="@color/darker_blue"
-            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             app:layout_constraintTop_toBottomOf="@id/include">
 
             <TextView
+                android:id="@+id/textViewRound"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="round"
@@ -54,23 +55,58 @@
                 android:layout_alignParentStart="true"
                 android:backgroundTint="@color/transparent"
                 android:src="@drawable/icon_left30"/>
-        </RelativeLayout>
+        </RelativeLayout> <!--pasek rundy-->
+        <LinearLayout
+            android:id="@+id/linearLayoutNoDraw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/relativeLayoutRound"
+            app:layout_constraintStart_toStartOf="@id/relativeLayoutRound"
+            app:layout_constraintTop_toBottomOf="@id/relativeLayoutRound"
+            app:layout_constraintVertical_bias="0.32999998">
+
+            <TextView
+                android:id="@+id/textViewNotFound"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/no_draw_found"
+                android:textColor="@color/textNotFound_color"
+                app:drawableTint="@color/textNotFound_color"
+                app:drawableTopCompat="@drawable/icon_cant_find" /> <!--not found-->
+            <Button
+                android:id="@+id/buttonShowDetails"
+                android:layout_width="@dimen/_105sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:backgroundTint="@color/darker_blue"
+                android:text="@string/show_details"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10ssp" /> <!--button show details-->
+        </LinearLayout> <!--brak drabinki-->
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintTop_toBottomOf="@id/relativeLayoutRound"
+            android:layout_marginTop="@dimen/_10sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/relativeLayoutRound"
-            app:layout_constraintStart_toStartOf="@id/relativeLayoutRound">
+            app:layout_constraintHorizontal_bias="0.487"
+            app:layout_constraintStart_toStartOf="@id/relativeLayoutRound"
+            app:layout_constraintTop_toBottomOf="@id/relativeLayoutRound"
+            app:layout_constraintVertical_bias="1.0">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/matchList"
+                android:id="@+id/roundList"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clickable="true"
                 android:focusable="true"
-                tools:listitem="@layout/match_item" />
+                tools:listitem="@layout/item_round" />
         </ScrollView>
 
 

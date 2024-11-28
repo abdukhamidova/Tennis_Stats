@@ -11,50 +11,59 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_120sdp"
-        android:orientation="vertical"
-        android:paddingVertical="@dimen/_5sdp">
+        android:layout_height="wrap_content"
+        android:paddingVertical="@dimen/_3sdp">
 
         <include
             android:id="@+id/vsPlayers1"
             layout="@layout/item_vs_players"
-            android:layout_width="@dimen/_250sdp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_5sdp"/>
-
-        <View
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_1sdp"
-            android:layout_alignStart="@id/vsPlayers1"
-            android:layout_alignTop="@id/vsPlayers1"
-            android:layout_marginTop="@dimen/_25sdp"
-            android:layout_marginEnd="@dimen/_20sdp"
-            android:background="@color/black" />
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_56sdp"/>
 
         <include
             android:id="@+id/vsPlayers2"
             layout="@layout/item_vs_players"
-            android:layout_width="@dimen/_250sdp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/vsPlayers1"
             android:layout_marginTop="@dimen/_5sdp"
-            android:layout_marginStart="@dimen/_5sdp"/>
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_56sdp"/>
+        <View
+            android:id="@+id/viewTopLine"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_alignStart="@id/vsPlayers1"
+            android:layout_alignTop="@id/vsPlayers1"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:background="@color/black" />
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/_1sdp"
             android:background="@color/black"
             android:layout_alignStart="@id/vsPlayers2"
             android:layout_alignTop="@id/vsPlayers2"
-            android:layout_marginTop="@dimen/_25sdp"
+            android:layout_marginTop="@dimen/_20sdp"
             android:layout_marginEnd="@dimen/_20sdp"/>
         <View
+            android:id="@+id/viewVerticalLine"
             android:layout_width="@dimen/_1sdp"
-            android:layout_height="@dimen/_58sdp"
+            android:layout_height="@dimen/_49sdp"
             android:background="@color/black"
             android:layout_alignParentEnd="true"
-            android:layout_alignTop="@id/vsPlayers1"
-            android:layout_marginTop="@dimen/_25sdp"
+            android:layout_alignTop="@id/viewTopLine"
             android:layout_marginEnd="@dimen/_20sdp"/>
+        <View
+            android:layout_width="@dimen/_26sdp"
+            android:layout_height="@dimen/_1sdp"
+            android:background="@color/black"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@id/viewTopLine"
+            android:layout_alignStart="@id/viewVerticalLine"
+            android:layout_marginTop="@dimen/_25sdp"/>
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
