@@ -2,6 +2,7 @@ package com.anw.tenistats.tournament
 
 import android.os.Bundle
 import android.view.View
+import android.widget.ArrayAdapter
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
@@ -11,20 +12,18 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.anw.tenistats.R
 import com.anw.tenistats.databinding.ActivityEditMatchBinding
-import com.anw.tenistats.databinding.ActivityGenerateDrawBinding
 import com.anw.tenistats.mainpage.NavigationDrawerHelper
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
 
 class EditMatchActivity: AppCompatActivity() {
     private lateinit var binding: ActivityEditMatchBinding
-    private lateinit var database: DatabaseReference
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var navigationDrawerHelper: NavigationDrawerHelper
     private lateinit var drawerLayout: DrawerLayout
-    private lateinit var tournamentId: String
-    private lateinit var matchNumber: String
+
+    private lateinit var tournamentId : String;
+    private lateinit var matchNumber : String;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,9 +61,27 @@ class EditMatchActivity: AppCompatActivity() {
         }
         //endregion
 
+        //ustawienie pól wyboru punktów
+        setPointsMenu()
         tournamentId = intent.getStringExtra("tournament_id").toString()
         matchNumber = intent.getStringExtra("match_number").toString()
 
+    }
 
+    private fun setPointsMenu() {
+        val options = listOf("None", "0", "1", "2", "3", "4", "5", "6")
+        //point set1p1
+        val adapter = ArrayAdapter(
+            this, // kontekst (np. activity)
+            android.R.layout.simple_spinner_item, // domyślny układ elementu
+            options // dane do wyświetlenia
+        )
+
+        binding.set1p1Score.adapter = adapter;
+        binding.set1p2Score.adapter = adapter;
+        binding.set2p1Score.adapter = adapter;
+        binding.set2p2Score.adapter = adapter;
+        binding.set3p1Score.adapter = adapter;
+        binding.set3p2Score.adapter = adapter;
     }
 }

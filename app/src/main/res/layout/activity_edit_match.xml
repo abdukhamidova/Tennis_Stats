@@ -183,7 +183,8 @@
                         android:textSize="@dimen/_15ssp"/>
                 </TableRow>
 
-                <TableRow>
+                <TableRow
+                    android:gravity="center">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -193,7 +194,14 @@
                         android:text="set1:"
                         android:textSize="@dimen/_15ssp"/>
 
-                    <EditText
+                    <Spinner
+                        android:id="@+id/set1p1Score"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_37sdp"
+                        android:layout_marginStart="@dimen/_7sdp"
+                        android:layout_marginEnd="@dimen/_2sdp"
+                        android:layout_weight="0.4"/>
+                    <!--<EditText
                         android:id="@+id/set1p1Score"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -201,17 +209,15 @@
                         android:layout_marginEnd="@dimen/_2sdp"
                         android:layout_weight="0.4"
                         android:text="0"
-                        android:textSize="@dimen/_15ssp"/>
+                        android:textSize="@dimen/_15ssp"/>-->
 
-                    <EditText
+                    <Spinner
                         android:id="@+id/set1p2Score"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/_37sdp"
                         android:layout_marginStart="@dimen/_7sdp"
                         android:layout_marginEnd="@dimen/_2sdp"
-                        android:layout_weight="0.4"
-                        android:text="0"
-                        android:textSize="@dimen/_15ssp"/>
+                        android:layout_weight="0.4"/>
                 </TableRow>
 
                 <TableRow>
@@ -223,25 +229,21 @@
                         android:layout_weight="0.2"
                         android:text="set2:"
                         android:textSize="@dimen/_15ssp"/>
-                    <EditText
+                    <Spinner
                         android:id="@+id/set2p1Score"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/_37sdp"
                         android:layout_marginStart="@dimen/_7sdp"
                         android:layout_marginEnd="@dimen/_2sdp"
-                        android:layout_weight="0.4"
-                        android:text="0"
-                        android:textSize="@dimen/_15ssp"/>
+                        android:layout_weight="0.4"/>
 
-                    <EditText
+                    <Spinner
                         android:id="@+id/set2p2Score"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/_37sdp"
                         android:layout_marginStart="@dimen/_7sdp"
                         android:layout_marginEnd="@dimen/_2sdp"
-                        android:layout_weight="0.4"
-                        android:text="0"
-                        android:textSize="@dimen/_15ssp"/>
+                        android:layout_weight="0.4"/>
                 </TableRow>
 
                 <TableRow>
@@ -253,25 +255,22 @@
                         android:layout_weight="0.2"
                         android:text="set2:"
                         android:textSize="@dimen/_15ssp"/>
-                    <EditText
+                    <Spinner
                         android:id="@+id/set3p1Score"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/_37sdp"
                         android:layout_marginStart="@dimen/_7sdp"
                         android:layout_marginEnd="@dimen/_2sdp"
                         android:layout_weight="0.4"
-                        android:text="None"
-                        android:textSize="@dimen/_15ssp"/>
+                        />
 
-                    <EditText
+                    <Spinner
                         android:id="@+id/set3p2Score"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/_37sdp"
                         android:layout_marginStart="@dimen/_7sdp"
                         android:layout_marginEnd="@dimen/_2sdp"
-                        android:layout_weight="0.4"
-                        android:text="None"
-                        android:textSize="@dimen/_15ssp"/>
+                        android:layout_weight="0.4"/>
                 </TableRow>
 
             </TableLayout>
@@ -309,7 +308,7 @@
                 android:layout_height="wrap_content"
                 android:autofillHints="text"
                 android:gravity="top"
-                android:hint="To zostawić i zsynchronizować z notatkami meczu czy usunąć? A ustawienia wyniku setu meczu zrobic jako litę rozwijaną? czy pojedyncze gemu też będzie można ustawiać?"
+                android:hint="Enter additional note"
                 android:imeOptions="actionDone"
                 android:inputType="textMultiLine"
                 android:lines="13"
