@@ -142,13 +142,22 @@ class AddTournamentActivity : AppCompatActivity() {
             )
             datePickerDialog.show()
         }
+        val sizes = arrayOf("None", 4, 8, 16, 32, 64, 128)
+        val adapterDraw = ArrayAdapter(applicationContext,R.layout.spinner_item_stats_right,sizes)
+        adapterDraw.setDropDownViewResource(R.layout.spinner_item_stats_right)
+        binding.spinnerDrawSize.adapter = adapterDraw
+        binding.spinnerDrawSize.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {}
+            override fun onNothingSelected(parent: AdapterView<*>) {}
+        }
         binding.buttonAdd.setOnClickListener {
             if (binding.editTextName.text.isEmpty() ||
                 binding.editTextCity.text.isEmpty() ||
                 binding.autoCompleteTextViewCountry.text.isEmpty() ||
                 binding.editTextStartDate.text.isEmpty() ||
                 binding.editTextEndDate.text.isEmpty() ||
-                binding.spinnerSurface.selectedItem == null) {
+                binding.spinnerSurface.selectedItem == null ||
+                binding.spinnerDrawSize.selectedItem == null) {
                 Toast.makeText(this, "Don't leave empty fields.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener // Zatrzymujemy dalsze przetwarzanie
             }
@@ -192,6 +201,7 @@ class AddTournamentActivity : AppCompatActivity() {
             millisecondsStart,
             millisecondsEnd,
             binding.spinnerSurface.selectedItem.toString(),
+            binding.spinnerDrawSize.selectedItem.toString(),
             binding.editTextNote.text.toString(),
             user.toString()
             )
@@ -202,6 +212,15 @@ class AddTournamentActivity : AppCompatActivity() {
                     Log.d("DatabaseSuccess", "Data saved successfully")
                 } else {
                     Log.e("DatabaseError", "Failed to save data", task.exception)
+                }
+            }
+        }
+        if (binding.spinnerDrawSize.selectedItem.toString() != "None") {
+            val drawSize = binding.spinnerDrawSize.selectedItem.toString().toIntOrNull()
+
+            if (drawSize != null) {
+                for (i in 0 until drawSize-1) {
+                    database.child((i+1).toString()).setValue("")
                 }
             }
         }

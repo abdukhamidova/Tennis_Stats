@@ -250,19 +250,35 @@
                             android:textColor="@color/general_text_color"
                             android:textColorHint="@color/app_hint_color"
                             android:textSize="@dimen/_12ssp"/>
-<!--                        <AutoCompleteTextView-->
-<!--                            android:id="@+id/autoCompleteTextViewSurface"-->
-<!--                            android:layout_width="@dimen/_165sdp"-->
-<!--                            android:layout_height="@dimen/_36sdp"-->
-<!--                            android:backgroundTint="@color/general_text_color"-->
-<!--                            android:completionHintView="@color/general_text_color"-->
-<!--                            android:drawableStart="@drawable/icon_surface"-->
-<!--                            android:drawablePadding="@dimen/_3sdp"-->
-<!--                            android:drawableTint="@color/app_hint_color"-->
-<!--                            android:hint="@string/enter_surface"-->
-<!--                            android:textColor="@color/general_text_color"-->
-<!--                            android:textColorHint="@color/app_hint_color"-->
-<!--                            android:textSize="@dimen/_12ssp"/>-->
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearLayoutDrawSize"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/_7sdp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/draw_size"
+                            android:textColor="@color/general_text_color"
+                            android:textSize="@dimen/_13sdp" />
+
+                        <Spinner
+                            android:id="@+id/spinnerDrawSize"
+                            android:layout_width="@dimen/_165sdp"
+                            android:layout_height="@dimen/_36sdp"
+                            android:backgroundTint="@color/general_text_color"
+                            android:completionHintView="@color/general_text_color"
+                            android:drawableStart="@drawable/icon_surface"
+                            android:drawablePadding="@dimen/_3sdp"
+                            android:drawableTint="@color/app_hint_color"
+                            android:hint="@string/enter_draw_size"
+                            android:textColor="@color/general_text_color"
+                            android:textColorHint="@color/app_hint_color"
+                            android:textSize="@dimen/_12ssp"/>
                     </LinearLayout>
 
                     <LinearLayout

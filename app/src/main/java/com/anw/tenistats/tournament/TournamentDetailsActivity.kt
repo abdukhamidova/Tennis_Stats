@@ -118,7 +118,8 @@ class TournamentDetailsActivity : AppCompatActivity() {
                 binding.autoCompleteTextViewCountry.text.isEmpty() ||
                 binding.editTextStartDate.text.isEmpty() ||
                 binding.editTextEndDate.text.isEmpty() ||
-                binding.spinnerSurface.selectedItem == null) {
+                binding.spinnerSurface.selectedItem == null ||
+                binding.spinnerDrawSize.selectedItem == null) {
                 Toast.makeText(this, "Don't leave empty fields.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener // Zatrzymujemy dalsze przetwarzanie
             }

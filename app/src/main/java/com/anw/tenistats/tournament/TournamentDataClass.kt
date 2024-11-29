@@ -8,6 +8,7 @@ data class TournamentDataClass(
     var startDate: Long? = null,
     var endDate: Long? = null,
     var surface: String? = null,
+    var drawSize: String? = null,
     var note: String? = null,
     var creator: String? = null
 )

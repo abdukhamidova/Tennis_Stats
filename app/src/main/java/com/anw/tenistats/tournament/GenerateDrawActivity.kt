@@ -86,9 +86,10 @@ class GenerateDrawActivity : AppCompatActivity() {
         drawRecyclerView.layoutManager = LinearLayoutManager(this)
         drawRecyclerView.setHasFixedSize(true)
 
-        if(drawSize == "null" || drawSize == "None"){
-            binding.relativeLayoutRound.visibility = View.INVISIBLE
+        if(drawSize == "null" || drawSize == "None" || drawSize.isNullOrEmpty()){
+            binding.relativeLayoutRound.visibility = View.GONE
             binding.linearLayoutNoDraw.visibility = View.VISIBLE
+            binding.scrollView.visibility = View.GONE
             binding.buttonShowDetails.setOnClickListener {
                 val intent = Intent(this, TournamentDetailsActivity::class.java)
                 intent.putExtra("tournament_id", tournamentId)
@@ -97,8 +98,8 @@ class GenerateDrawActivity : AppCompatActivity() {
         }
         else{
             binding.relativeLayoutRound.visibility = View.VISIBLE
-            binding.linearLayoutNoDraw.visibility = View.INVISIBLE
-            binding.roundList.visibility = View.VISIBLE
+            binding.linearLayoutNoDraw.visibility = View.GONE
+            binding.scrollView.visibility = View.VISIBLE
             //val round = drawSize.toInt()/2
             //binding.textViewRound.text = "1/$round"
 
