@@ -26,7 +26,7 @@
         android:layout_marginBottom="@dimen/_11sdp"
         android:layout_gravity="center_horizontal">
         <Button
-            android:id="@+id/buttonNo"
+            android:id="@+id/buttonPlay"
             android:layout_width="@dimen/_99sdp"
             android:layout_height="@dimen/_36sdp"
             android:layout_marginEnd="@dimen/_7sdp"
@@ -39,7 +39,7 @@
             android:id="@+id/buttonYes"
             android:layout_width="@dimen/_99sdp"
             android:layout_height="@dimen/_36sdp"
-            android:layout_toEndOf="@+id/buttonNo"
+            android:layout_toEndOf="@+id/buttonPlay"
             android:backgroundTint="@color/dialog_textTitle_color"
             android:text="@string/yes"
             android:textColor="@color/dialog_text_color"

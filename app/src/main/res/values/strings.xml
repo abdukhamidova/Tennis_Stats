@@ -162,6 +162,8 @@
     <string name="draw_size">Draw Size</string>
     <string name="enter_draw_size">Enter Draw Size</string>
     <string name="no_draw_found">No draw found\nCreate a draw by clicking button below</string>
+    <string name="play_new_match">Play new match</string>
+    <string name="add_from_matches">Add from matches</string>
 
 
 </resources>

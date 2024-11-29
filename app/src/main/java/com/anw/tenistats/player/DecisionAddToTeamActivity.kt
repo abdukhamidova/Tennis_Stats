@@ -18,7 +18,7 @@ class DecisionAddToTeamActivity(private val context: Context) {
             .setView(dialogView)
             .create()
 
-        val btnNo: Button = dialogView.findViewById(R.id.buttonNo)
+        val btnNo: Button = dialogView.findViewById(R.id.buttonPlay)
         val btnYes: Button = dialogView.findViewById(R.id.buttonYes)
         val textPlayerName: TextView = dialogView.findViewById(R.id.textViewConfirm)
 

@@ -148,7 +148,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="end"
                     android:paddingEnd="@dimen/_5sdp"
-                    android:text="Play match"
+                    android:text="Attach match"
                     android:textColor="@color/accent_text_color"
                     android:textSize="@dimen/_17ssp" />
             </LinearLayout>

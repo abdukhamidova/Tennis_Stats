@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/dialog_bg_color">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/_11sdp"
+        android:layout_marginHorizontal="@dimen/_5sdp"
+        android:layout_gravity="center_horizontal"
+        android:padding="@dimen/_10sdp">
+        <Button
+            android:id="@+id/buttonPlay"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/dialog_textTitle_color"
+            android:text="@string/play_new_match"
+            android:textSize="@dimen/_14ssp"
+            android:textColor="@color/dialog_text_color"/>
+
+        <Button
+            android:id="@+id/buttonAdd"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_below="@id/buttonPlay"
+            android:backgroundTint="@color/dialog_textTitle_color"
+            android:text="@string/add_from_matches"
+            android:textColor="@color/dialog_text_color"
+            android:textSize="@dimen/_14ssp"  />
+        <Button
+            android:id="@+id/buttonCancel"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_below="@id/buttonAdd"
+            android:background="@drawable/border_button"
+            android:text="@string/cancel"
+            android:textColor="@color/dialog_btnCancel"
+            android:textSize="@dimen/_14ssp"  />
+    </RelativeLayout>
+</LinearLayout>

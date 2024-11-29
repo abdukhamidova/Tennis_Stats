@@ -220,7 +220,7 @@ class AddTournamentActivity : AppCompatActivity() {
 
             if (drawSize != null) {
                 for (i in 0 until drawSize-1) {
-                    database.child((i+1).toString()).setValue("")
+                    database.child(tournamentId.toString()).child((i+1).toString()).setValue("")
                 }
             }
         }
