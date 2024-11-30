@@ -48,13 +48,6 @@
     </group>
 
     <group
-        android:id="@+id/group_editMatch">
-        <item
-            android:id="@+id/nav_edit_match"
-            android:title="EditMatchActivity"/>
-    </group>
-
-    <group
         android:id="@+id/group_logout">
         <item
             android:id="@+id/buttonLogOut"
