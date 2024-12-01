@@ -111,88 +111,87 @@ class EditMatchActivity: AppCompatActivity() {
             }
 
             p1.setOnFocusChangeListener { _, hasFocus ->
-                if (!hasFocus) {
-                    // Jeśli EditText zyska fokus, ustawiamy kursor na końcu tekstu
-                    updateValueInDatabase(database.child("player1"), p1.text.toString())
+                if (!hasFocus && firstUpdate["p1"]==true) {
+                        updateValueInDatabase(database.child("player1"), p1.text.toString())
+                        firstUpdate["p1"] = false
                 }
             }
             p2.setOnFocusChangeListener { _, hasFocus ->
-                if (!hasFocus) {
-                    // Jeśli EditText zyska fokus, ustawiamy kursor na końcu tekstu
+                if (!hasFocus && firstUpdate["p2"]==true) {
                     updateValueInDatabase(database.child("player2"), p2.text.toString())
+                    firstUpdate["p2"] = false
                 }
             }
 
             set1p1.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                    // Pobierz wybraną wartość
                     val selectedItem = parent?.getItemAtPosition(position).toString()
-                    //if (firstUpdate["set1p1"] == true)
+                    if (firstUpdate["set1p1"] == true) {
                         updateValueInDatabase(database.child("set1p1"), selectedItem)
+                        firstUpdate["set1p1"] = false
+                    }
                 }
                 override fun onNothingSelected(parent: AdapterView<*>?) {
-                    // Obsługa przypadku, gdy nic nie zostanie wybrane
                     Log.d("Spinner", "Nic nie zostało wybrane")
                 }
             }
             set1p2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                    // Pobierz wybraną wartość
                     val selectedItem = parent?.getItemAtPosition(position).toString()
-                    //if (firstUpdate["set1p2"] == true)
+                    if (firstUpdate["set1p2"] == true) {
                         updateValueInDatabase(database.child("set1p2"), selectedItem)
+                        firstUpdate["set1p2"] = false
+                    }
                 }
                 override fun onNothingSelected(parent: AdapterView<*>?) {
-                    // Obsługa przypadku, gdy nic nie zostanie wybrane
                     Log.d("Spinner", "Nic nie zostało wybrane")
                 }
             }
             set2p1.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                    // Pobierz wybraną wartość
                     val selectedItem = parent?.getItemAtPosition(position).toString()
-                    //if (firstUpdate["set2p1"] == true)
+                    if (firstUpdate["set2p1"] == true) {
                         updateValueInDatabase(database.child("set2p1"), selectedItem)
+                        firstUpdate["set2p1"] = false
+                    }
                 }
                 override fun onNothingSelected(parent: AdapterView<*>?) {
-                    // Obsługa przypadku, gdy nic nie zostanie wybrane
                     Log.d("Spinner", "Nic nie zostało wybrane")
                 }
             }
             set2p2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                    // Pobierz wybraną wartość
                     val selectedItem = parent?.getItemAtPosition(position).toString()
-                    //if (firstUpdate["set2p2"] == true)
+                    if (firstUpdate["set2p2"] == true) {
                         updateValueInDatabase(database.child("set2p2"), selectedItem)
-
+                        firstUpdate["set2p2"] = false
+                    }
                 }
                 override fun onNothingSelected(parent: AdapterView<*>?) {
-                    // Obsługa przypadku, gdy nic nie zostanie wybrane
                     Log.d("Spinner", "Nic nie zostało wybrane")
                 }
             }
             set3p1.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                    // Pobierz wybraną wartość
                     val selectedItem = parent?.getItemAtPosition(position).toString()
-                    //if (firstUpdate["set3p1"] == true)
+                    if (firstUpdate["set3p1"] == true) {
                         updateValueInDatabase(database.child("set3p1"), selectedItem)
+                        firstUpdate["set3p1"] = false
+                    }
                 }
                 override fun onNothingSelected(parent: AdapterView<*>?) {
-                    // Obsługa przypadku, gdy nic nie zostanie wybrane
                     Log.d("Spinner", "Nic nie zostało wybrane")
                 }
             }
             set3p2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                    // Pobierz wybraną wartość
                     val selectedItem = parent?.getItemAtPosition(position).toString()
-                    //if (firstUpdate["set3p2"] == true)
+                    if (firstUpdate["set3p2"] == true) {
                         updateValueInDatabase(database.child("set3p2"), selectedItem)
+                        firstUpdate["set3p2"] = false
+                    }
                 }
                 override fun onNothingSelected(parent: AdapterView<*>?) {
-                    // Obsługa przypadku, gdy nic nie zostanie wybrane
                     Log.d("Spinner", "Nic nie zostało wybrane")
                 }
             }
@@ -206,7 +205,6 @@ class EditMatchActivity: AppCompatActivity() {
         db.setValue(value)
             .addOnCompleteListener { task: Task<Void?> ->
                 if (task.isSuccessful) {
-                    // Zmiana wartości zakończona sukcesem
                     Log.d("Firebase", "Wartość została zmieniona!")
                 } else {
                     // Obsługa błędu
@@ -218,7 +216,6 @@ class EditMatchActivity: AppCompatActivity() {
         val keys = listOf("p1", "p2", "set1p1", "set1p2", "set2p1", "set2p2", "set3p1", "set3p2")
         val firstUpdate = keys.associateWith { false }.toMutableMap()
         val options = listOf("None", "0", "1", "2", "3", "4", "5", "6")
-
         database.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 // Pobieramy wartości z bazy danych
@@ -231,27 +228,25 @@ class EditMatchActivity: AppCompatActivity() {
                 val set3p1Value = snapshot.child("set3p1").getValue(String::class.java)
                 val set3p2Value = snapshot.child("set3p2").getValue(String::class.java)
 
-                // Modyfikowanie wartości w mapie
-                if (player1Value.isNullOrEmpty()) firstUpdate["p1"] = true
-                if (player2Value.isNullOrEmpty()) firstUpdate["p2"] = true
-                if (set1p1Value == "None") firstUpdate["set1p1"] = true
-                if (set1p2Value == "None") firstUpdate["set1p2"] = true
-                if (set2p1Value.isNullOrEmpty()) firstUpdate["set2p1"] = true
-                if (set2p2Value.isNullOrEmpty()) firstUpdate["set2p2"] = true
-                if (set3p1Value.isNullOrEmpty()) firstUpdate["set3p1"] = true
-                if (set3p2Value.isNullOrEmpty()) firstUpdate["set3p2"] = true
+                // ustawienie pierwsze edycji (potrzebne dla komunikatów)
+                if (player1Value == null || player1Value == "") firstUpdate["p1"] = true
+                if (player2Value == null || player2Value == "") firstUpdate["p2"] = true
+                if (set1p1Value == "None" || set1p1Value == null) firstUpdate["set1p1"] = true
+                if (set1p2Value == "None" || set1p2Value == null) firstUpdate["set1p2"] = true
+                if (set2p1Value == "None" || set2p1Value == null) firstUpdate["set2p1"] = true
+                if (set2p2Value == "None" || set2p2Value == null) firstUpdate["set2p2"] = true
+                if (set3p1Value == "None" || set3p1Value == null) firstUpdate["set3p1"] = true
+                if (set3p2Value == "None" || set3p2Value == null) firstUpdate["set3p2"] = true
 
                 // Przypisanie danych do widoków
                 p1.setText(player1Value)
                 p2.setText(player2Value)
-                //jeżeli punkty już były wprowadzaone to wstawiane są wartości z bazy
-                //w przeciwnym razie będą dostępne do jednokrotnej edycji
-                if (firstUpdate["set1p1"] == false) set1p1.setSelection(options.indexOf(set1p1Value))
-                if (firstUpdate["set1p2"] == false) set1p2.setSelection(options.indexOf(set1p2Value))
-                if (firstUpdate["set2p1"] == false) set2p1.setSelection(options.indexOf(set2p1Value))
-                if (firstUpdate["set2p2"] == false) set2p2.setSelection(options.indexOf(set2p2Value))
-                if (firstUpdate["set3p1"] == false) set3p1.setSelection(options.indexOf(set3p1Value))
-                if (firstUpdate["set3p2"] == false) set3p2.setSelection(options.indexOf(set3p2Value))
+                set1p1.setSelection(options.indexOf(set1p1Value))
+                set1p2.setSelection(options.indexOf(set1p2Value))
+                set2p1.setSelection(options.indexOf(set2p1Value))
+                set2p2.setSelection(options.indexOf(set2p2Value))
+                set3p1.setSelection(options.indexOf(set3p1Value))
+                set3p2.setSelection(options.indexOf(set3p2Value))
 
                 // Wywołanie callbacka z zaktualizowaną mapą
                 callback(firstUpdate)
@@ -266,9 +261,8 @@ class EditMatchActivity: AppCompatActivity() {
 
     private fun pointsList() {
         val options = listOf("None", "0", "1", "2", "3", "4", "5", "6")
-        //point set1p1
         val adapter = ArrayAdapter(
-            this, // kontekst (np. activity)
+            this,
             android.R.layout.simple_spinner_item, // domyślny układ elementu
             options // dane do wyświetlenia
         )

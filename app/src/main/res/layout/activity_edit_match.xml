@@ -73,7 +73,8 @@
                     android:textSize="@dimen/_15ssp"
                     android:textColor="@color/general_text_color"
                     android:textColorHint="@color/app_hint_color"
-                    android:textDirection="ltr"/>
+                    android:textDirection="ltr"
+                    android:focusable="true"/>
             </LinearLayout>
 
             <LinearLayout
