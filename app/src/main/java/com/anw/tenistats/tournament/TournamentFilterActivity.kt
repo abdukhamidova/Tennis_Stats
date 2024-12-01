@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
 import android.widget.ImageButton
@@ -138,48 +139,74 @@ class TournamentFilterActivity : AppCompatActivity() {
         binding.buttonDeleteDate.setOnClickListener {
             binding.editTextDate.text.clear()
         }
-        binding.buttonAddVenue.setOnClickListener {
-            var selected = spinnerVenue.selectedItem.toString()
-            if(selected == "All"){
-                selectedVenueList.clear()
-                binding.linearLayoutItemsVenue.removeAllViews()
+        spinnerVenue.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                var selected = spinnerVenue.selectedItem.toString()
+                if(selected == "All"){
+                    selectedVenueList.clear()
+                    binding.linearLayoutItemsVenue.removeAllViews()
+                }
+                else if(!selectedVenueList.contains(selected)) {
+                    selectedVenueList.add(selected)
+                    addItem(binding.linearLayoutItemsVenue,selected)
+                }
+                else{
+                    Toast.makeText(this@TournamentFilterActivity,"This value is already selected",Toast.LENGTH_SHORT).show()
+                }
             }
-            else if(!selectedVenueList.contains(selected)) {
-                selectedVenueList.add(selected)
-                addItem(binding.linearLayoutItemsVenue,selected)
-            }
-            else{
-                Toast.makeText(this,"This value is already selected",Toast.LENGTH_SHORT).show()
-            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) { }
         }
-        binding.buttonAddCountry.setOnClickListener {
-            var selected = spinnerCountry.selectedItem.toString()
-            if(selected == "All"){
-                selectedCountryList.clear()
-                binding.linearLayoutItemsCountry.removeAllViews()
+        spinnerCountry.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                var selected = spinnerCountry.selectedItem.toString()
+                if(selected == "All"){
+                    selectedCountryList.clear()
+                    binding.linearLayoutItemsCountry.removeAllViews()
+                }
+                else if(!selectedCountryList.contains(selected)) {
+                    selectedCountryList.add(selected)
+                    addItem(binding.linearLayoutItemsCountry,selected)
+                }
+                else{
+                    Toast.makeText(this@TournamentFilterActivity,"This value is already selected",Toast.LENGTH_SHORT).show()
+                }
             }
-            else if(!selectedCountryList.contains(selected)) {
-                selectedCountryList.add(selected)
-                addItem(binding.linearLayoutItemsCountry,selected)
-            }
-            else{
-                Toast.makeText(this,"This value is already selected",Toast.LENGTH_SHORT).show()
-            }
+            override fun onNothingSelected(parent: AdapterView<*>) { }
         }
-        binding.buttonAddSurface.setOnClickListener {
-            var selected = spinnerSurface.selectedItem.toString()
-            if(selected == "All"){
-                selectedSurfaceList.clear()
-                binding.linearLayoutItemsSurface.removeAllViews()
+        spinnerSurface.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                var selected = spinnerSurface.selectedItem.toString()
+                if(selected == "All"){
+                    selectedSurfaceList.clear()
+                    binding.linearLayoutItemsSurface.removeAllViews()
+                }
+                else if(!selectedSurfaceList.contains(selected)) {
+                    selectedSurfaceList.add(selected)
+                    addItem(binding.linearLayoutItemsSurface,selected)
+                }
+                else{
+                    Toast.makeText(this@TournamentFilterActivity,"This value is already selected",Toast.LENGTH_SHORT).show()
+                }
             }
-            else if(!selectedSurfaceList.contains(selected)) {
-                selectedSurfaceList.add(selected)
-                addItem(binding.linearLayoutItemsSurface,selected)
-            }
-            else{
-                Toast.makeText(this,"This value is already selected",Toast.LENGTH_SHORT).show()
-            }
+            override fun onNothingSelected(parent: AdapterView<*>) { }
         }
+
 
         binding.buttonSubmit.setOnClickListener {
             val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())

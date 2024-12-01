@@ -58,12 +58,12 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/_40sdp"
                     android:orientation="horizontal"
                     android:layout_marginBottom="@dimen/_7sdp">
 
                     <TextView
-                        android:layout_width="@dimen/_1sdp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_weight="1"
@@ -73,21 +73,13 @@
 
                     <Spinner
                         android:id="@+id/spinnerVenue"
-                        android:layout_width="@dimen/_95sdp"
+                        android:layout_width="@dimen/_133sdp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
                         android:textSize="@dimen/_13ssp"
                         android:drawablePadding="@dimen/_5sdp"/>
-
-                    <ImageButton
-                        android:id="@+id/buttonAddVenue"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="@color/transparent"
-                        android:src="@drawable/icon_plus"
-                        app:tint="@color/autoFill_field" />
                 </LinearLayout>
 
                 <HorizontalScrollView
@@ -112,7 +104,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/_40sdp"
                     android:orientation="horizontal"
                     android:layout_marginBottom="@dimen/_7sdp">
 
@@ -127,21 +119,13 @@
 
                     <Spinner
                         android:id="@+id/spinnerCountry"
-                        android:layout_width="@dimen/_95sdp"
+                        android:layout_width="@dimen/_133sdp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
                         android:textSize="@dimen/_13ssp"
                         android:drawablePadding="@dimen/_5sdp"/>
-
-                    <ImageButton
-                        android:id="@+id/buttonAddCountry"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="@color/transparent"
-                        android:src="@drawable/icon_plus"
-                        app:tint="@color/autoFill_field" />
                 </LinearLayout>
 
                 <HorizontalScrollView
@@ -166,7 +150,7 @@
                 android:layout_marginBottom="@dimen/_7sdp">
 
                 <TextView
-                    android:layout_width="@dimen/_1sdp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
@@ -208,7 +192,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/_40sdp"
                     android:orientation="horizontal"
                     android:layout_marginBottom="@dimen/_7sdp">
 
@@ -223,21 +207,13 @@
 
                     <Spinner
                         android:id="@+id/spinnerSurface"
-                        android:layout_width="@dimen/_95sdp"
+                        android:layout_width="@dimen/_133sdp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
                         android:textSize="@dimen/_13ssp"
                         android:drawablePadding="@dimen/_5sdp"/>
-
-                    <ImageButton
-                        android:id="@+id/buttonAddSurface"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="@color/transparent"
-                        android:src="@drawable/icon_plus"
-                        app:tint="@color/autoFill_field" />
                 </LinearLayout>
 
                 <HorizontalScrollView
