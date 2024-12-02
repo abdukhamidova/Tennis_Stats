@@ -2,15 +2,23 @@ package com.anw.tenistats.dialog
 
 import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import com.anw.tenistats.R
+import com.anw.tenistats.matchplay.ServeActivity
+import com.anw.tenistats.matchplay.StartNewActivity
+import com.anw.tenistats.tournament.AddRoundMatchActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
-class AttachMatchDialog(private val context: Context) {
+class AttachMatchDialog(
+    private val context: Context,
+    private val tournamentId: String,
+    private val matchNumber: String) {
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var database: DatabaseReference
     private lateinit var alertDialog: AlertDialog
@@ -29,28 +37,21 @@ class AttachMatchDialog(private val context: Context) {
         }
 
         btnPlay.setOnClickListener {
-            /*firebaseAuth = FirebaseAuth.getInstance()
-            val user = firebaseAuth.currentUser?.uid
-            database = FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
-                .getReference("Tournaments").child(tournamentId!!)
-            */
-                    alertDialog.dismiss()
-                    // Optionally, you can notify the user here
+            val intent = Intent(context, StartNewActivity::class.java).apply {
+                putExtra("tournamentId", tournamentId)
+                putExtra("matchNumber", matchNumber)
+            }
+            context.startActivity(intent)
+            alertDialog.dismiss()
         }
         btnAdd.setOnClickListener {
-            /*firebaseAuth = FirebaseAuth.getInstance()
-            val user = firebaseAuth.currentUser?.uid
-            database = FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
-                .getReference("Tournaments").child(tournamentId!!)
-            */
-                    alertDialog.dismiss()
-                    // Optionally, you can notify the user here
-        }
-        btnCancel.setOnClickListener {
+            val intent = Intent(context, AddRoundMatchActivity::class.java).apply {
+                putExtra("tournamentId", tournamentId)
+                putExtra("matchNumber", matchNumber)
+            }
+            context.startActivity(intent)
             alertDialog.dismiss()
-            // Optionally, you can notify the user here
         }
-
         alertDialog.show()
     }
 }

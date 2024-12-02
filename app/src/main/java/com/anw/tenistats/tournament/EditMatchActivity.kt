@@ -18,6 +18,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.anw.tenistats.R
 import com.anw.tenistats.databinding.ActivityEditMatchBinding
+import com.anw.tenistats.dialog.AttachMatchDialog
 import com.anw.tenistats.mainpage.NavigationDrawerHelper
 import com.google.android.gms.tasks.Task
 import com.google.android.material.navigation.NavigationView
@@ -194,6 +195,11 @@ class EditMatchActivity: AppCompatActivity() {
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                     Log.d("Spinner", "Nic nie zostało wybrane")
                 }
+            }
+
+            binding.textViewAttachMatch.setOnClickListener(){
+                val attachMatchDialog = AttachMatchDialog(this, tournamentId, matchNumber)
+                attachMatchDialog.show()
             }
         }
 

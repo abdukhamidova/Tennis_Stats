@@ -13,16 +13,23 @@ import com.anw.tenistats.stats.MatchViewClass
 import com.anw.tenistats.R
 import com.anw.tenistats.dialog.ResumeOrStatsDialog
 import com.anw.tenistats.matchplay.getGoldenDrawable
+import com.anw.tenistats.stats.ViewMatchesActivity
+import com.anw.tenistats.tournament.AddRoundMatchActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import java.text.SimpleDateFormat
 import java.util.*
 
 class MatchAdapter(
     private val originalList: List<MatchViewClass>,
-    private val firebaseAuth: FirebaseAuth
+    private val contextType: Context,
+    private val tournamentId: String?,
+    private val matchNumber: String?
 ) :
     RecyclerView.Adapter<MatchAdapter.MyViewHolder>(), Filterable {
-
     private var filteredList: List<MatchViewClass> = originalList
     private lateinit var context: Context
     private var listener: OnItemClickListener? = null
@@ -47,6 +54,7 @@ class MatchAdapter(
         val dateFormat = SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.getDefault())
         val date = Date(currentItem.data)
         val formattedDate = dateFormat.format(date)
+
 
         Log.d("MyAdapter", "onBindViewHolder - date: $formattedDate, player1: ${currentItem.player1}, player2: ${currentItem.player2}")
 
@@ -93,18 +101,14 @@ class MatchAdapter(
                 holder.iconPlayer2.visibility = View.VISIBLE
             }
         }
-        else
-        {
+        else {
             holder.iconPlayer1.visibility = View.INVISIBLE
             holder.iconPlayer2.visibility = View.INVISIBLE
         }
 
-
-
         holder.itemView.setOnClickListener {
             val match = filteredList[position]
             listener?.onItemClick(match)
-
             // Pobierz datę meczu w formacie milisekund
             val dateInMillis = currentItem.data
             Log.d("MyAdapter", "Date in milliseconds: $dateInMillis")
@@ -112,11 +116,51 @@ class MatchAdapter(
             /*val intent = Intent(context, ViewHistoryActivity::class.java)
             intent.putExtra("matchDateInMillis", dateInMillis)
             context.startActivity(intent)*/
-            // Otwórz ResumeOrStatsDialog i przekaż datę meczu
-            val ResumeOrStatsDialog = ResumeOrStatsDialog(context)
-            ResumeOrStatsDialog.show(
-                dateInMillis
-            )
+
+            if(contextType is ViewMatchesActivity) {// Otwórz ResumeOrStatsDialog i przekaż datę meczu
+                val ResumeOrStatsDialog = ResumeOrStatsDialog(context)
+                ResumeOrStatsDialog.show(
+                    dateInMillis
+                )
+            }else if(contextType is AddRoundMatchActivity){
+                val user = FirebaseAuth.getInstance().currentUser?.uid
+                val dbref = FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
+                    .getReference(user.toString())
+                    .child("Matches")
+
+                var matchId: String? = null // Deklaracja zmiennej
+                val query = dbref.orderByChild("data").equalTo(dateInMillis.toDouble())
+                query.addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        var matchFound = false
+                        if (dataSnapshot.exists()) {
+                            // Pobranie pierwszego pasującego meczu
+                            val matchSnapshot = dataSnapshot.children.first()
+
+                            // Pobranie ID meczu
+                            matchId = matchSnapshot.key ?: ""
+                            matchFound = true
+
+                            // Dodajemy tournamentId i matchNumber do tego meczu
+                            matchId?.let {
+                                dbref.child(it).child("tournamentId").setValue(tournamentId)
+                                dbref.child(it).child("matchNumber").setValue(matchNumber)
+                            }
+
+                            Log.d("Firebase", "Mecz zaktualizowany z tournamentId i matchNumber.")
+                        }
+                        if (!matchFound) {
+                            Log.d("Firebase", "Nie znaleziono meczu z podaną datą.")
+                        }
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        Log.e("Firebase", "Błąd zapytania: ${error.message}")
+                    }
+                })
+
+                contextType.finish()
+            }
         }
     }
 
@@ -161,7 +205,6 @@ class MatchAdapter(
         val set3p2: TextView = itemView.findViewById(R.id.textViewPlayer2Set3Match)
         val iconPlayer1: TextView = itemView.findViewById(R.id.textViewWin1Match)
         val iconPlayer2: TextView = itemView.findViewById(R.id.textViewWin2Match)
-
     }
 
     interface OnItemClickListener {

@@ -78,8 +78,15 @@ class StartNewActivity : AppCompatActivity() {
             userEmailView.text = "user_email@smth.com"
         }
         //MENU
+        //02.12.2024 r. Sprawdzenie czy istnieje intent z widoku edit match w tournament
+        var tournamentId = ""
+        var matchNumber = ""
+        if (intent.hasExtra("tournamentId") && intent.hasExtra("matchNumber")) {
+            tournamentId = intent.getStringExtra("tournamentId").toString()
+            matchNumber = intent.getStringExtra("matchNumber").toString()
+        }
 
-        //Weronika 23 marca ~ zapisywanie danych playera do bazy
+            //Weronika 23 marca ~ zapisywanie danych playera do bazy
         //11.04 ~u
         val user = firebaseAuth.currentUser?.uid
         database =
@@ -133,7 +140,7 @@ class StartNewActivity : AppCompatActivity() {
                     checkPlayerExistence(pl2Inticap, player2FirstName, player2LastName, btn2) { updatedPlayer2 ->
                         player2 = updatedPlayer2
                         //zapisanie meczu do bazy
-                        createAndSaveMatchData(player1, player2)
+                        createAndSaveMatchData(player1, player2, tournamentId, matchNumber)
                         binding.autoNamePlayer1.text.clear()
                         binding.autoNamePlayer2.text.clear()
                         //w nastepnym Activity zachowuje się nazewnictwo z bazy :)
@@ -144,24 +151,41 @@ class StartNewActivity : AppCompatActivity() {
         }
     }
 
-    private fun createAndSaveMatchData(player1: String, player2: String) {
+    private fun createAndSaveMatchData(player1: String, player2: String, tournamentId : String, matchNumber : String) {
         //~u
         // Generowanie unikalnego identyfikatora dla meczu
+
         matchId = database.parent?.child("Matches")?.push()?.key
         firebaseAuth = FirebaseAuth.getInstance()
         val user = firebaseAuth.currentUser?.uid
         // Pobieranie bieżącego czasu
         val currentDate = Calendar.getInstance().timeInMillis
-        // Tworzenie danych meczu
-        val matchData = mapOf<String, Any>(
-            "data" to currentDate,
-            "player1" to player1,
-            "player2" to player2,
-            "set1p1" to "0",
-            "set1p2" to "0",
-            "pkt1" to "0",
-            "pkt2" to "0"
-        )
+        // Tworzenie danych meczu, jeżeli nie ma tournament
+        var matchData : Map<String, Any>
+        if(tournamentId == "" && matchNumber == "") {
+            matchData = mapOf<String, Any>(
+                "data" to currentDate,
+                "player1" to player1,
+                "player2" to player2,
+                "set1p1" to "0",
+                "set1p2" to "0",
+                "pkt1" to "0",
+                "pkt2" to "0"
+            )
+        }
+        else{
+            matchData = mapOf<String, Any>(
+                "data" to currentDate,
+                "player1" to player1,
+                "player2" to player2,
+                "set1p1" to "0",
+                "set1p2" to "0",
+                "pkt1" to "0",
+                "pkt2" to "0",
+                "id_tournament" to tournamentId,
+                "match_number" to matchNumber
+            )
+        }
         // Zapisywanie danych meczu do bazy danych pod unikalnym identyfikatorem meczu
         database.parent?.child("Matches")?.child(matchId!!)?.setValue(matchData)
         //zapisywanie aktualnie rozgrywanego meczu

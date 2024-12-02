@@ -1,6 +1,5 @@
-package com.anw.tenistats.stats
+package com.anw.tenistats.tournament
 
-import com.anw.tenistats.adapter.MatchAdapter
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.Editable
@@ -16,8 +15,10 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.anw.tenistats.R
+import com.anw.tenistats.adapter.MatchAdapter
 import com.anw.tenistats.databinding.ActivityViewMatchesBinding
 import com.anw.tenistats.mainpage.NavigationDrawerHelper
+import com.anw.tenistats.stats.MatchViewClass
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -26,14 +27,14 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-class ViewMatchesActivity : AppCompatActivity(), MatchAdapter.OnItemClickListener {
+class AddRoundMatchActivity : AppCompatActivity(), MatchAdapter.OnItemClickListener{
     private lateinit var binding: ActivityViewMatchesBinding
-    private lateinit var dbref : DatabaseReference
+    private lateinit var dbref: DatabaseReference
+    private lateinit var navigationDrawerHelper: NavigationDrawerHelper
+    private lateinit var drawerLayout: DrawerLayout
     private lateinit var matchRecyclerView: RecyclerView
     private lateinit var matchArrayList: ArrayList<MatchViewClass>
     private lateinit var firebaseAuth: FirebaseAuth
-    private lateinit var navigationDrawerHelper: NavigationDrawerHelper
-    private lateinit var drawerLayout: DrawerLayout
     private lateinit var adapter: MatchAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,17 +42,13 @@ class ViewMatchesActivity : AppCompatActivity(), MatchAdapter.OnItemClickListene
         enableEdgeToEdge()
         binding = ActivityViewMatchesBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
-        val app = application as StatsClass
-        app.matchId = ""
-
         firebaseAuth = FirebaseAuth.getInstance()
-
         //------------ MENU
         drawerLayout = findViewById(R.id.drawer_layout)
         val menu = findViewById<ImageButton>(R.id.buttonMenu)
@@ -74,34 +71,33 @@ class ViewMatchesActivity : AppCompatActivity(), MatchAdapter.OnItemClickListene
         }
         //------------ MENU
 
+        // Pobierz dane z Intentu
+        val tournamentId = intent.getStringExtra("tournamentId")
+        val matchNumber = intent.getStringExtra("matchNumber")
+
+        firebaseAuth = FirebaseAuth.getInstance()
+
         matchRecyclerView = binding.matchList
         matchRecyclerView.layoutManager = LinearLayoutManager(this)
         matchRecyclerView.setHasFixedSize(true)
 
-        matchArrayList = arrayListOf<MatchViewClass>()
-        // Inicjalizacja adaptera i przypisanie do RecyclerView
-        //przekazuje "" ponieważ z widoku ViewMatches nie ma tournamentId i matchNumber
-        adapter = MatchAdapter(matchArrayList, this, "", "")
+        matchArrayList = arrayListOf()
+
+        adapter = MatchAdapter(matchArrayList, this, tournamentId, matchNumber)
         adapter.setOnItemClickListener(this)
         matchRecyclerView.adapter = adapter
-// Podpięcie adaptera do RecyclerView
-        getMatchData()
 
-        matchRecyclerView.isEnabled = true
+        getMatchData()
 
         val searchEditText = binding.searchEditText
         searchEditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                // Filtruj dane w adapterze na podstawie wprowadzonego tekstu
                 adapter.filter.filter(s)
             }
-
             override fun afterTextChanged(s: Editable?) {}
         })
     }
-
 
     private fun getMatchData() {
         val user = firebaseAuth.currentUser?.uid
@@ -113,9 +109,9 @@ class ViewMatchesActivity : AppCompatActivity(), MatchAdapter.OnItemClickListene
             @SuppressLint("NotifyDataSetChanged")
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
-                    matchArrayList.clear() // Wyczyść listę przed dodaniem nowych danych
+                    matchArrayList.clear()
 
-                    for (matchSnapshot in snapshot.children.reversed()) { // Iteruj odwrotnie, aby najnowsze mecze były na początku
+                    for (matchSnapshot in snapshot.children.reversed()) {
                         val match = matchSnapshot.getValue(MatchViewClass::class.java)
                         if (match != null) {
                             binding.textViewNotFound.visibility = View.INVISIBLE
@@ -125,18 +121,16 @@ class ViewMatchesActivity : AppCompatActivity(), MatchAdapter.OnItemClickListene
                         }
                     }
 
-                    // Poinformuj adapter o zmianach w danych
                     adapter.notifyDataSetChanged()
                 }
             }
 
-
-            override fun onCancelled(error: DatabaseError) {
-                // Obsłużenie błędu zapytania do bazy danych
-            }
+            override fun onCancelled(error: DatabaseError) {}
         })
     }
-    override fun onItemClick(matchView: MatchViewClass) {
 
+    override fun onItemClick(matchView: MatchViewClass) {
+        // Zmień zachowanie tutaj
     }
+
 }
