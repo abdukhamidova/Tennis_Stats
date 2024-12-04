@@ -3,15 +3,15 @@ package com.anw.tenistats.tournament
 data class TournamentMatchDataClass(
     var number: String,
     var matchId: String,
-    var player1Name: String,
-    var player2Name: String,
+    var player1: String,
+    var player2: String,
     var winner: String,
-    val player1Set1: String,
-    val player1Set2: String,
-    val player1Set3: String,
-    val player2Set1: String,
-    val player2Set2: String,
-    val player2Set3: String
+    val set1p1: String,
+    val set2p1: String,
+    val set3p1: String,
+    val set1p2: String,
+    val set2p2: String,
+    val set3p2: String
 )
 
 data class Round(

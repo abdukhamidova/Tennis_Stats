@@ -3,6 +3,7 @@ package com.anw.tenistats.tournament
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
@@ -146,67 +147,169 @@ class GenerateDrawActivity : AppCompatActivity() {
         }
     }
     private fun getMatchesInTournamentData() {
+        // Set reference to the correct Firebase location
         database = FirebaseDatabase.getInstance(
             "https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/"
         ).getReference("Tournaments").child(tournamentId)
 
+        // Fetch data from Firebase
         database.addValueEventListener(object : ValueEventListener {
             @SuppressLint("NotifyDataSetChanged")
             override fun onDataChange(snapshot: DataSnapshot) {
                 val roundsList = mutableListOf<Round>()
-                val matchSnapshots = snapshot.children.toList()
+                val matchSnapshots = snapshot.children.toList() // Get all children (matches)
 
-                val itemsCount = (drawSizeInt/((2.0)).pow((roundNumber + 1))).toInt() //ilosc itemow (x2 mecze)
+                // Calculate the number of matches in the current round
+                val itemsCount = if (roundNumber == totalRounds) 1 else (drawSizeInt / (2.0).pow((roundNumber + 1))).toInt()
 
-                //var j = (totalRounds-roundNumber).toDouble().pow(2).toInt()
-                var j = ((2.0).pow(totalRounds-roundNumber)).toInt()
-                // Process matches in pairs to create rounds
+                var j = ((2.0).pow(totalRounds - roundNumber)).toInt() // Set the starting match number
+
+                Log.d("FirebaseData1", "Snapshot size: ${matchSnapshots.size}")
+
+                var matchesLoaded = 0
+
                 for (i in 0 until itemsCount) {
-                    val match1 = matchSnapshots.getOrNull(i)?.let { parseMatch(it,j) }
-                    val match2 = matchSnapshots.getOrNull(i + 1)?.let { parseMatch(it,j+1) }
+                    val match1Index = j + 2 * i
+                    val match2Index = match1Index + 1
 
-                    if (match1 != null && match2 != null) {
-                        roundsList.add(Round(match1, match2))
+                    // If it's the final round, fetch only one match
+                    if (roundNumber == totalRounds) {
+                        parseMatch(match1Index) { match1 ->
+                            if (match1 != null) {
+                                roundsList.add(Round(match1, match1)) // Add the same match twice (final match)
+                            }
+                            matchesLoaded++
+                            if (matchesLoaded == itemsCount) {
+                                updateUI(roundsList) // Update UI after the match is loaded
+                            }
+                        }
+                    } else {
+                        // Parse both matches if it's not the final round
+                        parseMatch(match1Index) { match1 ->
+                            if (match1 != null) {
+                                parseMatch(match2Index) { match2 ->
+                                    if (match2 != null) {
+                                        roundsList.add(Round(match1, match2)) // Add both matches as a pair
+                                    }
+                                    matchesLoaded++
+                                    if (matchesLoaded == itemsCount) {
+                                        updateUI(roundsList) // Update UI after all matches are loaded
+                                    }
+                                }
+                            } else {
+                                matchesLoaded++
+                                if (matchesLoaded == itemsCount) {
+                                    updateUI(roundsList) // Update UI if no match is found
+                                }
+                            }
+                        }
                     }
-                    j+=2
                 }
-
-                if (roundsList.isEmpty()) {
-                    binding.textViewNotFound.visibility = View.VISIBLE
-                } else {
-                    binding.textViewNotFound.visibility = View.INVISIBLE
-                }
-
-                roundsArrayList.clear() // Clear the old rounds
-                roundsArrayList.addAll(roundsList) // Add the new rounds
-                adapter.updateData(roundsList) // Pass data to adapter
-                adapter.notifyDataSetChanged()
             }
 
             override fun onCancelled(error: DatabaseError) {
-
+                // Handle errors
+                Log.d("FirebaseData", "Error fetching data: ${error.message}")
             }
         })
 
+        // Update round label
         val a = (drawSizeInt / 2.0.pow(roundNumber)).toInt()
-        binding.textViewRound.text = "1/$a"
-
-
+        if(a==1)
+            binding.textViewRound.text = "Finale"
+        else
+            binding.textViewRound.text = "1/$a"
     }
 
-    private fun parseMatch(snapshot: DataSnapshot,no: Int): TournamentMatchDataClass {
-        return TournamentMatchDataClass(
-            number = no.toString(),
-            matchId = snapshot.child("matchId").getValue(String::class.java).orEmpty(),
-            player1Name = snapshot.child("player1").getValue(String::class.java).orEmpty(),
-            player2Name = snapshot.child("player2").getValue(String::class.java).orEmpty(),
-            winner = snapshot.child("winner").getValue(String::class.java).toString(),
-            player1Set1 = snapshot.child("player1Set1").getValue(String::class.java).orEmpty(),
-            player1Set2 = snapshot.child("player1Set2").getValue(String::class.java).orEmpty(),
-            player1Set3 = snapshot.child("player1Set3").getValue(String::class.java).orEmpty(),
-            player2Set1 = snapshot.child("player2Set1").getValue(String::class.java).orEmpty(),
-            player2Set2 = snapshot.child("player2Set2").getValue(String::class.java).orEmpty(),
-            player2Set3 = snapshot.child("player2Set3").getValue(String::class.java).orEmpty()
-        )
+    private fun parseMatch(no: Int, callback: (TournamentMatchDataClass) -> Unit) {
+        // Odczytujemy dane z węzła odpowiadającego numerowi meczu
+        val matchSnapshotRef = FirebaseDatabase.getInstance(
+            "https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/"
+        ).getReference("Tournaments").child(tournamentId).child(no.toString())
+
+        matchSnapshotRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                // Sprawdzamy, czy snapshot zawiera dane
+                if (snapshot.exists()) {
+                    // Pobieramy dane meczu i zamieniamy "None" na pusty ciąg
+                    val matchId = snapshot.child("matchId").getValue(String::class.java)?.let {
+                        if (it == "None") "" else it
+                    } ?: ""
+                    val player1 = snapshot.child("player1").getValue(String::class.java)?.let {
+                        if (it == "None") "" else it
+                    } ?: ""
+                    val player2 = snapshot.child("player2").getValue(String::class.java)?.let {
+                        if (it == "None") "" else it
+                    } ?: ""
+                    val winner = snapshot.child("winner").getValue(String::class.java)?.let {
+                        if (it == "None") "" else it
+                    } ?: ""
+                    val set1p1 = snapshot.child("set1p1").getValue(String::class.java)?.let {
+                        if (it == "None") "" else it
+                    } ?: ""
+                    val set2p1 = snapshot.child("set2p1").getValue(String::class.java)?.let {
+                        if (it == "None") "" else it
+                    } ?: ""
+                    val set3p1 = snapshot.child("set3p1").getValue(String::class.java)?.let {
+                        if (it == "None") "" else it
+                    } ?: ""
+                    val set1p2 = snapshot.child("set1p2").getValue(String::class.java)?.let {
+                        if (it == "None") "" else it
+                    } ?: ""
+                    val set2p2 = snapshot.child("set2p2").getValue(String::class.java)?.let {
+                        if (it == "None") "" else it
+                    } ?: ""
+                    val set3p2 = snapshot.child("set3p2").getValue(String::class.java)?.let {
+                        if (it == "None") "" else it
+                    } ?: ""
+
+                    // Logi debugujące
+                    Log.d("FirebaseData", "Parsing match $no: matchId=$matchId, player1=$player1, player2=$player2, winner=$winner, set1p1=$set1p1, set1p2=$set1p2")
+
+                    // Tworzymy obiekt TournamentMatchDataClass i przekazujemy go przez callback
+                    val matchData = TournamentMatchDataClass(
+                        number = no.toString(),
+                        matchId = matchId,
+                        player1 = player1,
+                        player2 = player2,
+                        winner = winner,
+                        set1p1 = set1p1,
+                        set2p1 = set2p1,
+                        set3p1 = set3p1,
+                        set1p2 = set1p2,
+                        set2p2 = set2p2,
+                        set3p2 = set3p2
+                    )
+
+                    // Wywołujemy callback z obiektem meczu
+                    callback(matchData)
+                } else {
+                    // Jeśli dane meczu nie istnieją, logujemy błąd
+                    Log.d("FirebaseData", "No data found for match $no")
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Obsługuje błąd odczytu
+                Log.d("FirebaseData", "Error reading match $no: ${error.message}")
+            }
+        })
     }
+
+    private fun updateUI(roundsList: List<Round>) {
+        // Sprawdzamy, czy lista rund jest pusta
+        Log.d("FirebaseData2", "Rounds list: $roundsList")
+        if (roundsList.isEmpty()) {
+            binding.textViewNotFound.visibility = View.VISIBLE
+        } else {
+            binding.textViewNotFound.visibility = View.INVISIBLE
+        }
+
+        // Zaktualizowanie adaptera
+        roundsArrayList.clear() // Czyszczenie starych rund
+        roundsArrayList.addAll(roundsList) // Dodawanie nowych rund
+        adapter.updateData(roundsList) // Przekazanie danych do adaptera
+        adapter.notifyDataSetChanged() // Powiadomienie adaptera o zmianach
+    }
+
 }

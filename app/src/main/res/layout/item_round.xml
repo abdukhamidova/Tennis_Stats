@@ -42,6 +42,7 @@
             android:background="@color/black" />
         <View
             android:layout_width="match_parent"
+            android:id="@+id/viewButtomLine"
             android:layout_height="@dimen/_1sdp"
             android:background="@color/black"
             android:layout_alignStart="@id/vsPlayers2"
@@ -58,6 +59,7 @@
             android:layout_marginEnd="@dimen/_20sdp"/>
         <View
             android:layout_width="@dimen/_26sdp"
+            android:id="@+id/viewLittleLine"
             android:layout_height="@dimen/_1sdp"
             android:background="@color/black"
             android:layout_alignParentEnd="true"
