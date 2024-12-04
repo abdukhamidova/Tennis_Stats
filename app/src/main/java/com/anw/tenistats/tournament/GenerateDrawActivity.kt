@@ -82,7 +82,7 @@ class GenerateDrawActivity : AppCompatActivity() {
 
         tournamentId = intent.getStringExtra("tournament_id").toString()
         drawSize = intent.getStringExtra("draw_size").toString()
-
+        checkAndAddMissingNodes()
         drawRecyclerView = binding.roundList
         drawRecyclerView.layoutManager = LinearLayoutManager(this)
         drawRecyclerView.setHasFixedSize(true)
@@ -147,22 +147,19 @@ class GenerateDrawActivity : AppCompatActivity() {
         }
     }
     private fun getMatchesInTournamentData() {
-        // Set reference to the correct Firebase location
         database = FirebaseDatabase.getInstance(
             "https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/"
         ).getReference("Tournaments").child(tournamentId)
 
-        // Fetch data from Firebase
         database.addValueEventListener(object : ValueEventListener {
             @SuppressLint("NotifyDataSetChanged")
             override fun onDataChange(snapshot: DataSnapshot) {
                 val roundsList = mutableListOf<Round>()
-                val matchSnapshots = snapshot.children.toList() // Get all children (matches)
+                val matchSnapshots = snapshot.children.toList()
 
-                // Calculate the number of matches in the current round
                 val itemsCount = if (roundNumber == totalRounds) 1 else (drawSizeInt / (2.0).pow((roundNumber + 1))).toInt()
 
-                var j = ((2.0).pow(totalRounds - roundNumber)).toInt() // Set the starting match number
+                var j = ((2.0).pow(totalRounds - roundNumber)).toInt()
 
                 Log.d("FirebaseData1", "Snapshot size: ${matchSnapshots.size}")
 
@@ -172,34 +169,33 @@ class GenerateDrawActivity : AppCompatActivity() {
                     val match1Index = j + 2 * i
                     val match2Index = match1Index + 1
 
-                    // If it's the final round, fetch only one match
                     if (roundNumber == totalRounds) {
                         parseMatch(match1Index) { match1 ->
                             if (match1 != null) {
-                                roundsList.add(Round(match1, match1)) // Add the same match twice (final match)
+                                roundsList.add(Round(match1, match1))
                             }
                             matchesLoaded++
                             if (matchesLoaded == itemsCount) {
-                                updateUI(roundsList) // Update UI after the match is loaded
+                                updateUI(roundsList)
                             }
                         }
                     } else {
-                        // Parse both matches if it's not the final round
                         parseMatch(match1Index) { match1 ->
                             if (match1 != null) {
                                 parseMatch(match2Index) { match2 ->
                                     if (match2 != null) {
-                                        roundsList.add(Round(match1, match2)) // Add both matches as a pair
+                                        roundsList.add(Round(match1, match2))
+                                        handleMatchWinner(match1, match2)
                                     }
                                     matchesLoaded++
                                     if (matchesLoaded == itemsCount) {
-                                        updateUI(roundsList) // Update UI after all matches are loaded
+                                        updateUI(roundsList)
                                     }
                                 }
                             } else {
                                 matchesLoaded++
                                 if (matchesLoaded == itemsCount) {
-                                    updateUI(roundsList) // Update UI if no match is found
+                                    updateUI(roundsList)
                                 }
                             }
                         }
@@ -213,25 +209,20 @@ class GenerateDrawActivity : AppCompatActivity() {
             }
         })
 
-        // Update round label
         val a = (drawSizeInt / 2.0.pow(roundNumber)).toInt()
         if(a==1)
             binding.textViewRound.text = "Finale"
         else
             binding.textViewRound.text = "1/$a"
     }
-
     private fun parseMatch(no: Int, callback: (TournamentMatchDataClass) -> Unit) {
-        // Odczytujemy dane z węzła odpowiadającego numerowi meczu
         val matchSnapshotRef = FirebaseDatabase.getInstance(
             "https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/"
         ).getReference("Tournaments").child(tournamentId).child(no.toString())
 
         matchSnapshotRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                // Sprawdzamy, czy snapshot zawiera dane
                 if (snapshot.exists()) {
-                    // Pobieramy dane meczu i zamieniamy "None" na pusty ciąg
                     val matchId = snapshot.child("matchId").getValue(String::class.java)?.let {
                         if (it == "None") "" else it
                     } ?: ""
@@ -266,7 +257,6 @@ class GenerateDrawActivity : AppCompatActivity() {
                     // Logi debugujące
                     Log.d("FirebaseData", "Parsing match $no: matchId=$matchId, player1=$player1, player2=$player2, winner=$winner, set1p1=$set1p1, set1p2=$set1p2")
 
-                    // Tworzymy obiekt TournamentMatchDataClass i przekazujemy go przez callback
                     val matchData = TournamentMatchDataClass(
                         number = no.toString(),
                         matchId = matchId,
@@ -281,35 +271,115 @@ class GenerateDrawActivity : AppCompatActivity() {
                         set3p2 = set3p2
                     )
 
-                    // Wywołujemy callback z obiektem meczu
                     callback(matchData)
                 } else {
-                    // Jeśli dane meczu nie istnieją, logujemy błąd
                     Log.d("FirebaseData", "No data found for match $no")
                 }
             }
 
             override fun onCancelled(error: DatabaseError) {
-                // Obsługuje błąd odczytu
                 Log.d("FirebaseData", "Error reading match $no: ${error.message}")
             }
         })
     }
 
     private fun updateUI(roundsList: List<Round>) {
-        // Sprawdzamy, czy lista rund jest pusta
-        Log.d("FirebaseData2", "Rounds list: $roundsList")
         if (roundsList.isEmpty()) {
             binding.textViewNotFound.visibility = View.VISIBLE
         } else {
             binding.textViewNotFound.visibility = View.INVISIBLE
         }
 
-        // Zaktualizowanie adaptera
-        roundsArrayList.clear() // Czyszczenie starych rund
-        roundsArrayList.addAll(roundsList) // Dodawanie nowych rund
-        adapter.updateData(roundsList) // Przekazanie danych do adaptera
-        adapter.notifyDataSetChanged() // Powiadomienie adaptera o zmianach
+        roundsArrayList.clear()
+        roundsArrayList.addAll(roundsList)
+        adapter.updateData(roundsList)
+        adapter.notifyDataSetChanged()
+    }
+    private fun handleMatchWinner(match1: TournamentMatchDataClass, match2: TournamentMatchDataClass) {
+        // Check if match1 has a winner, and if so, update the winner in the next round
+        if (match1.winner.isNotEmpty()) {
+            val nextRoundMatchIndex = getNextMatchIndex(match1.number)
+            updateWinnerInNextRound(nextRoundMatchIndex, match1.winner, "player1") // Winner of match1 goes to player1
+        }
+
+        // Check if match2 has a winner, and if so, update the winner in the next round
+        if (match2.winner.isNotEmpty()) {
+            val nextRoundMatchIndex = getNextMatchIndex(match2.number)
+            updateWinnerInNextRound(nextRoundMatchIndex, match2.winner, "player2") // Winner of match2 goes to player2
+        }
+    }
+
+    private fun getNextMatchIndex(currentMatchNumber: String): Int {
+        return currentMatchNumber.toInt() / 2
+    }
+
+    private fun updateWinnerInNextRound(nextMatchIndex: Int, winner: String, playerSlot: String) {
+        val nextMatchRef = FirebaseDatabase.getInstance(
+            "https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/"
+        ).getReference("Tournaments").child(tournamentId).child(nextMatchIndex.toString())
+
+        nextMatchRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    nextMatchRef.child(playerSlot).setValue(winner)
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.d("FirebaseData", "Error updating winner in next round: ${error.message}")
+            }
+        })
+    }
+    private fun checkAndAddMissingNodes() {
+        val expectedMatchCount = drawSize.toInt() - 1
+
+        val matchesRef = FirebaseDatabase.getInstance(
+            "https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/"
+        ).getReference("Tournaments").child(tournamentId)
+
+        matchesRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val existingMatchNumbers = snapshot.children.map { it.key?.toIntOrNull() ?: 0 }.toSet()
+
+                for (matchNumber in 1..expectedMatchCount) {
+                    if (!existingMatchNumbers.contains(matchNumber)) {
+                        createEmptyMatchNode(matchNumber)
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.d("FirebaseData", "Error checking match nodes: ${error.message}")
+            }
+        })
+    }
+
+    private fun createEmptyMatchNode(matchNumber: Int) {
+        val matchRef = FirebaseDatabase.getInstance(
+            "https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/"
+        ).getReference("Tournaments").child(tournamentId).child(matchNumber.toString())
+
+        val emptyMatchData = TournamentMatchDataClass(
+            number = matchNumber.toString(),
+            matchId = "",
+            player1 = "",
+            player2 = "",
+            winner = "",
+            set1p1 = "",
+            set2p1 = "",
+            set3p1 = "",
+            set1p2 = "",
+            set2p2 = "",
+            set3p2 = ""
+        )
+
+        matchRef.setValue(emptyMatchData).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                Log.d("FirebaseData", "Successfully created empty match node for match $matchNumber")
+            } else {
+                Log.d("FirebaseData", "Failed to create empty match node for match $matchNumber")
+            }
+        }
     }
 
 }

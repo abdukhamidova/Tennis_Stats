@@ -146,6 +146,7 @@
                         android:layout_marginEnd="@dimen/_2sdp"
                         android:layout_weight="0.2" />
                     <TextView
+                        android:id="@+id/TextViewPlayer1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_7sdp"
@@ -160,6 +161,7 @@
                         android:layout_marginEnd="@dimen/_2sdp"
                         android:layout_weight="0.4"
                         android:text="Player2"
+                        android:id="@+id/TextViewPlayer2"
                         android:textSize="@dimen/_15ssp"/>
                 </TableRow>
 

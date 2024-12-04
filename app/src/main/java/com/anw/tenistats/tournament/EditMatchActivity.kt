@@ -48,6 +48,8 @@ class EditMatchActivity: AppCompatActivity() {
     private lateinit var set2p2 : Spinner
     private lateinit var set3p1 : Spinner
     private lateinit var set3p2 : Spinner
+    private lateinit var pN1 : TextView
+    private lateinit var pN2 : TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -101,6 +103,9 @@ class EditMatchActivity: AppCompatActivity() {
         set2p2 = binding.set2p2Score
         set3p1 = binding.set3p1Score
         set3p2 = binding.set3p2Score
+
+        pN1 = binding.TextViewPlayer1
+        pN2 = binding.TextViewPlayer2
 
         //pobranie wartość z mapy i ustawienie pól
         setMatchInformation { firstUpdate ->
@@ -253,6 +258,8 @@ class EditMatchActivity: AppCompatActivity() {
                 set2p2.setSelection(options.indexOf(set2p2Value))
                 set3p1.setSelection(options.indexOf(set3p1Value))
                 set3p2.setSelection(options.indexOf(set3p2Value))
+                pN1.setText(player1Value)
+                pN2.setText(player2Value)
 
                 // Wywołanie callbacka z zaktualizowaną mapą
                 callback(firstUpdate)
