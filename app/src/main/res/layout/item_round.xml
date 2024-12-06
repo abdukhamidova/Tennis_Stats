@@ -43,7 +43,8 @@
             android:background="@color/black"
             app:layout_constraintBottom_toBottomOf="@id/vsPlayers1"
             app:layout_constraintEnd_toStartOf="@id/viewVerticalLine"
-            app:layout_constraintTop_toTopOf="@id/vsPlayers1" />
+            app:layout_constraintTop_toTopOf="@id/vsPlayers1"
+            app:layout_constraintStart_toStartOf="@id/vsPlayers1"/>
 
         <View
             android:id="@+id/viewBottomLine"
@@ -52,7 +53,8 @@
             android:background="@color/black"
             app:layout_constraintBottom_toBottomOf="@id/vsPlayers2"
             app:layout_constraintEnd_toStartOf="@id/viewVerticalLine"
-            app:layout_constraintTop_toTopOf="@id/vsPlayers2" />
+            app:layout_constraintTop_toTopOf="@id/vsPlayers2"
+            app:layout_constraintStart_toStartOf="@id/vsPlayers2"/>
 
         <View
             android:id="@+id/viewVerticalLine"

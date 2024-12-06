@@ -49,7 +49,7 @@ class TournamentRoundAdapter(
                     vsPlayers2.root.visibility = View.VISIBLE
                     viewTopLine.visibility = View.VISIBLE
                     viewVerticalLine.visibility = View.VISIBLE
-                    viewButtomLine.visibility = View.VISIBLE
+                    viewBottomLine.visibility = View.VISIBLE
                     viewLittleLine.visibility = View.VISIBLE
                     vsPlayers2.textViewItem1Player1.text = round.match2.player1
                     vsPlayers2.textViewItem1Player2.text = round.match2.player2
@@ -73,7 +73,7 @@ class TournamentRoundAdapter(
                     vsPlayers2.root.visibility = View.GONE
                     viewTopLine.visibility = View.GONE
                     viewVerticalLine.visibility = View.GONE
-                    viewButtomLine.visibility = View.GONE
+                    viewBottomLine.visibility = View.GONE
                     viewLittleLine.visibility = View.GONE
                 }
                 vsPlayers2.notificationIcon.visibility = if (round.match2.changes && creator== FirebaseAuth.getInstance().currentUser?.uid.toString()) View.VISIBLE else View.GONE
