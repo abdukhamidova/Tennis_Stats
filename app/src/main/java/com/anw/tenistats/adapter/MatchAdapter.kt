@@ -143,8 +143,8 @@ class MatchAdapter(
 
                             // Dodajemy tournamentId i matchNumber do tego meczu
                             matchId?.let {
-                                dbref.child(it).child("tournamentId").setValue(tournamentId)
-                                dbref.child(it).child("matchNumber").setValue(matchNumber)
+                                dbref.child(it).child("id_tournament").setValue(tournamentId)
+                                dbref.child(it).child("match_number").setValue(matchNumber)
                             }
 
                             Log.d("Firebase", "Mecz zaktualizowany z tournamentId i matchNumber.")

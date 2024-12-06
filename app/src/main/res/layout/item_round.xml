@@ -9,11 +9,10 @@
     app:cardCornerRadius="@dimen/_7sdp"
     android:backgroundTint="@color/dirty_white">
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingVertical="@dimen/_3sdp">
-
 
         <include
             android:id="@+id/vsPlayers1"
@@ -21,52 +20,59 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_5sdp"
-            android:layout_marginEnd="@dimen/_56sdp"/>
+            android:layout_marginEnd="@dimen/_56sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <include
             android:id="@+id/vsPlayers2"
             layout="@layout/item_vs_players"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/vsPlayers1"
-            android:layout_marginTop="@dimen/_5sdp"
             android:layout_marginStart="@dimen/_5sdp"
-            android:layout_marginEnd="@dimen/_56sdp"/>
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_56sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/vsPlayers1" />
+
         <View
             android:id="@+id/viewTopLine"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_1sdp"
-            android:layout_alignStart="@id/vsPlayers1"
-            android:layout_alignTop="@id/vsPlayers1"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:layout_marginEnd="@dimen/_20sdp"
-            android:background="@color/black" />
-        <View
-            android:layout_width="match_parent"
-            android:id="@+id/viewButtomLine"
+            android:layout_width="0dp"
             android:layout_height="@dimen/_1sdp"
             android:background="@color/black"
-            android:layout_alignStart="@id/vsPlayers2"
-            android:layout_alignTop="@id/vsPlayers2"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:layout_marginEnd="@dimen/_20sdp"/>
+            app:layout_constraintBottom_toBottomOf="@id/vsPlayers1"
+            app:layout_constraintEnd_toStartOf="@id/viewVerticalLine"
+            app:layout_constraintTop_toTopOf="@id/vsPlayers1" />
+
+        <View
+            android:id="@+id/viewBottomLine"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_1sdp"
+            android:background="@color/black"
+            app:layout_constraintBottom_toBottomOf="@id/vsPlayers2"
+            app:layout_constraintEnd_toStartOf="@id/viewVerticalLine"
+            app:layout_constraintTop_toTopOf="@id/vsPlayers2" />
+
         <View
             android:id="@+id/viewVerticalLine"
             android:layout_width="@dimen/_1sdp"
-            android:layout_height="@dimen/_49sdp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="@dimen/_20sdp"
             android:background="@color/black"
-            android:layout_alignParentEnd="true"
-            android:layout_alignTop="@id/viewTopLine"
-            android:layout_marginEnd="@dimen/_20sdp"/>
+            app:layout_constraintTop_toTopOf="@id/viewTopLine"
+            app:layout_constraintBottom_toBottomOf="@id/viewBottomLine"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
         <View
-            android:layout_width="@dimen/_26sdp"
             android:id="@+id/viewLittleLine"
+            android:layout_width="0dp"
             android:layout_height="@dimen/_1sdp"
             android:background="@color/black"
-            android:layout_alignParentEnd="true"
-            android:layout_alignTop="@id/viewTopLine"
-            android:layout_alignStart="@id/viewVerticalLine"
-            android:layout_marginTop="@dimen/_25sdp"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/viewVerticalLine"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
