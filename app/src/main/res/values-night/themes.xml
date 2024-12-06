@@ -76,4 +76,9 @@
         <item name="colorAccent">@color/dirty_white</item>
         <item name="android:background">@color/darkest_blue</item>
     </style>
+
+    <style name="drawTableTextAppearance">
+        <item name="android:textSize">@dimen/_13ssp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
 </resources>

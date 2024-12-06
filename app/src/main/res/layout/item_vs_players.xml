@@ -17,7 +17,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="@dimen/_8sdp"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:background="@color/dark_blue">
 
         <!-- Ikona z lewej strony -->
         <ImageView
@@ -36,6 +37,7 @@
             android:layout_weight="1"
             android:paddingHorizontal="@dimen/_11sdp"
             android:paddingVertical="@dimen/_3sdp"
+            android:theme="@style/drawTableTextAppearance"
             tools:ignore="RtlSymmetry">
 
             <TableRow>
@@ -44,8 +46,7 @@
                     android:layout_height="wrap_content"
                     android:layout_width="0dp"
                     android:layout_weight="0.7"
-                    android:text="@string/player1_item"
-                    android:textSize="@dimen/_12ssp" />
+                    android:text="@string/player1_item"/>
                 <TextView
                     android:id="@+id/textViewItem1P1Set1"
                     android:layout_height="wrap_content"
@@ -76,8 +77,7 @@
                     android:layout_height="wrap_content"
                     android:layout_width="0dp"
                     android:layout_weight="0.7"
-                    android:text="@string/player2_item"
-                    android:textSize="@dimen/_12ssp" />
+                    android:text="@string/player2_item" />
                 <TextView
                     android:id="@+id/textViewItem1P2Set1"
                     android:layout_height="wrap_content"

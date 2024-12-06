@@ -78,6 +78,11 @@
         <item name="colorPrimaryDark">@color/darkest_blue</item>
         <item name="colorAccent">@color/darkest_blue</item>
     </style>
+    <!--draw table text appearance-->
+    <style name="drawTableTextAppearance">
+        <item name="android:textSize">@dimen/_13ssp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
 
 
 </resources>
