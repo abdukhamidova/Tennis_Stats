@@ -128,7 +128,12 @@
         <activity
             android:name=".tournament.AddRoundMatchActivity"
             android:exported="false"/>
-
+        <activity
+            android:name=".tournament.UpdateEditMatchActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".tournament.ChangeEditMatchActivity"
+            android:exported="false"/>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

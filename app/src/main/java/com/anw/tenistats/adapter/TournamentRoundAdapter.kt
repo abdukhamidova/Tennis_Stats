@@ -10,9 +10,11 @@ import com.anw.tenistats.R
 import com.anw.tenistats.databinding.ItemRoundBinding
 import com.anw.tenistats.tournament.Round
 import com.anw.tenistats.tournament.TournamentMatchDataClass
+import com.google.firebase.auth.FirebaseAuth
 
 class TournamentRoundAdapter(
     private var rounds: List<Round>,
+    private var creator :String,
     private val onMatchClick: (TournamentMatchDataClass) -> Unit
 ) : RecyclerView.Adapter<TournamentRoundAdapter.RoundViewHolder>() {
 
@@ -39,6 +41,8 @@ class TournamentRoundAdapter(
                     vsPlayers1.textViewItem1P1Set3.visibility = View.GONE
                     vsPlayers1.textViewItem1P2Set3.visibility = View.GONE
                 }
+                vsPlayers1.notificationIcon.visibility = if (round.match1.changes && creator== FirebaseAuth.getInstance().currentUser?.uid.toString()) View.VISIBLE else View.GONE
+
 
                 // If it's the final round, hide match 2
                 if (round.match1 != round.match2) {
@@ -72,6 +76,8 @@ class TournamentRoundAdapter(
                     viewButtomLine.visibility = View.GONE
                     viewLittleLine.visibility = View.GONE
                 }
+                vsPlayers2.notificationIcon.visibility = if (round.match2.changes && creator== FirebaseAuth.getInstance().currentUser?.uid.toString()) View.VISIBLE else View.GONE
+
 
                 // Add listeners for Match 1
                 root.findViewById<View>(R.id.vsPlayers1).setOnClickListener {

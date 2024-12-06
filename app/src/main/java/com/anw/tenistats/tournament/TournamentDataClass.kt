@@ -10,5 +10,8 @@ data class TournamentDataClass(
     var surface: String? = null,
     var drawSize: String? = null,
     var note: String? = null,
-    var creator: String? = null
+    var creator: String? = null,
+    val changes: Int = 0
 )
+
+

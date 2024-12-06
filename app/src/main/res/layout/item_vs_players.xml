@@ -12,74 +12,95 @@
     app:cardCornerRadius="@dimen/_7sdp"
     android:backgroundTint="@color/greyish">
 
-    <TableLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="@dimen/_11sdp"
-        android:paddingVertical="@dimen/_3sdp"
-        tools:ignore="RtlSymmetry">
-        <TableRow>
-            <TextView
-                android:id="@+id/textViewItem1Player1"
-                android:layout_height="wrap_content"
-                android:layout_width="0dp"
-                android:layout_weight="0.7"
-                android:text="@string/player1_item"
-                android:textSize="@dimen/_12ssp"/>
-            <TextView
-                android:id="@+id/textViewItem1P1Set1"
-                android:layout_height="wrap_content"
-                android:layout_width="0dp"
-                android:layout_weight="0.1"
-                android:text="0"
-                android:textAlignment="center"/>
-            <TextView
-                android:id="@+id/textViewItem1P1Set2"
-                android:layout_height="wrap_content"
-                android:layout_width="0dp"
-                android:layout_weight="0.1"
-                android:text="0"
-                android:textAlignment="center"/>
-            <TextView
-                android:id="@+id/textViewItem1P1Set3"
-                android:layout_height="wrap_content"
-                android:layout_width="0dp"
-                android:layout_weight="0.1"
-                android:text="0"
-                android:textAlignment="center"
-                android:visibility="gone"/>
-        </TableRow>
-        <TableRow
-            android:layout_marginTop="@dimen/_3sdp">
-            <TextView
-                android:id="@+id/textViewItem1Player2"
-                android:layout_height="wrap_content"
-                android:layout_width="0dp"
-                android:layout_weight="0.7"
-                android:text="@string/player2_item"
-                android:textSize="@dimen/_12ssp"/>
-            <TextView
-                android:id="@+id/textViewItem1P2Set1"
-                android:layout_height="wrap_content"
-                android:layout_width="0dp"
-                android:layout_weight="0.1"
-                android:text="0"
-                android:textAlignment="center"/>
-            <TextView
-                android:id="@+id/textViewItem1P2Set2"
-                android:layout_height="wrap_content"
-                android:layout_width="0dp"
-                android:layout_weight="0.1"
-                android:text="0"
-                android:textAlignment="center"/>
-            <TextView
-                android:id="@+id/textViewItem1P2Set3"
-                android:layout_height="wrap_content"
-                android:layout_width="0dp"
-                android:layout_weight="0.1"
-                android:text="0"
-                android:textAlignment="center"
-                android:visibility="gone"/>
-        </TableRow>
-    </TableLayout>
+        android:orientation="horizontal"
+        android:padding="@dimen/_8sdp"
+        android:gravity="center_vertical">
+
+        <!-- Ikona z lewej strony -->
+        <ImageView
+            android:id="@+id/notification_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_notification"
+            android:contentDescription="Icon notification"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:visibility="gone" />
+
+        <!-- TableLayout na prawo od ikony -->
+        <TableLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingHorizontal="@dimen/_11sdp"
+            android:paddingVertical="@dimen/_3sdp"
+            tools:ignore="RtlSymmetry">
+
+            <TableRow>
+                <TextView
+                    android:id="@+id/textViewItem1Player1"
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.7"
+                    android:text="@string/player1_item"
+                    android:textSize="@dimen/_12ssp" />
+                <TextView
+                    android:id="@+id/textViewItem1P1Set1"
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.1"
+                    android:text="0"
+                    android:textAlignment="center" />
+                <TextView
+                    android:id="@+id/textViewItem1P1Set2"
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.1"
+                    android:text="0"
+                    android:textAlignment="center" />
+                <TextView
+                    android:id="@+id/textViewItem1P1Set3"
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.1"
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:visibility="gone" />
+            </TableRow>
+            <TableRow
+                android:layout_marginTop="@dimen/_3sdp">
+                <TextView
+                    android:id="@+id/textViewItem1Player2"
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.7"
+                    android:text="@string/player2_item"
+                    android:textSize="@dimen/_12ssp" />
+                <TextView
+                    android:id="@+id/textViewItem1P2Set1"
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.1"
+                    android:text="0"
+                    android:textAlignment="center" />
+                <TextView
+                    android:id="@+id/textViewItem1P2Set2"
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.1"
+                    android:text="0"
+                    android:textAlignment="center" />
+                <TextView
+                    android:id="@+id/textViewItem1P2Set3"
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.1"
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:visibility="gone" />
+            </TableRow>
+        </TableLayout>
+    </LinearLayout>
 </androidx.cardview.widget.CardView>

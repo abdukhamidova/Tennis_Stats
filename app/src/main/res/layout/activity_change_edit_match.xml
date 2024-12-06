@@ -16,14 +16,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/app_bg_color"
-        tools:ignore="HardCodedText">
+        tools:ignore="HardcodedText">
+
         <include layout="@layout/toolbar" />
 
         <TextView
             android:id="@+id/textAddDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ADD DETAILS"
+            android:text="CHANGE DETAILS"
             android:textColor="@color/general_text_color"
             android:textSize="@dimen/_30ssp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -36,10 +37,11 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/_10sdp"
             android:orientation="vertical"
+            android:padding="@dimen/_10sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/textAddDetails"
+            app:layout_constraintHorizontal_bias="0.493"
             app:layout_constraintStart_toStartOf="@id/textAddDetails"
             app:layout_constraintTop_toBottomOf="@id/textAddDetails"
             app:layout_constraintVertical_bias="0.0">
@@ -47,72 +49,72 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="@dimen/_7sdp">
+                android:layout_marginBottom="@dimen/_7sdp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Player 1"
+                    android:layout_marginEnd="@dimen/_10sdp"
                     android:layout_weight="0.25"
-                    android:textSize="@dimen/_16ssp"
+                    android:text="Player 1"
                     android:textColor="@color/general_text_color"
-                    android:layout_marginEnd="@dimen/_10sdp"/>
+                    android:textSize="@dimen/_16ssp" />
 
-                <EditText
-                    android:id="@+id/editTextPlayer1"
+                <Spinner
+                    android:id="@+id/SpinnerPlayer1"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_37sdp"
                     android:layout_weight="0.8"
                     android:backgroundTint="@color/general_text_color"
                     android:completionHintView="@color/general_text_color"
-                    android:hint="Player name"
                     android:drawableStart="@drawable/icon_person"
                     android:drawablePadding="@dimen/_3sdp"
                     android:drawableTint="@color/app_hint_color"
-                    android:textSize="@dimen/_15ssp"
+                    android:focusable="true"
+                    android:hint="Player name"
                     android:textColor="@color/general_text_color"
                     android:textColorHint="@color/app_hint_color"
                     android:textDirection="ltr"
-                    android:focusable="true"/>
+                    android:textSize="@dimen/_15ssp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="@dimen/_7sdp">
+                android:layout_marginBottom="@dimen/_7sdp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_10sdp"
                     android:layout_weight="0.25"
                     android:text="Player 2"
-                    android:textSize="@dimen/_16ssp"
                     android:textColor="@color/general_text_color"
-                    android:layout_marginEnd="@dimen/_10sdp" />
+                    android:textSize="@dimen/_16ssp" />
 
-                <EditText
-                    android:id="@+id/editTextPlayer2"
+                <Spinner
+                    android:id="@+id/SpinnerPlayer2"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_37sdp"
                     android:layout_weight="0.8"
                     android:backgroundTint="@color/general_text_color"
                     android:completionHintView="@color/general_text_color"
-                    android:hint="Player name"
                     android:drawableStart="@drawable/icon_person"
                     android:drawablePadding="@dimen/_3sdp"
                     android:drawableTint="@color/app_hint_color"
-                    android:textSize="@dimen/_15ssp"
+                    android:hint="Player name"
                     android:textColor="@color/general_text_color"
-                    android:textColorHint="@color/app_hint_color"/>
+                    android:textColorHint="@color/app_hint_color"
+                    android:textSize="@dimen/_15ssp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="@dimen/_10sdp">
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
@@ -122,15 +124,6 @@
                     android:textColor="@color/general_text_color"
                     android:textSize="@dimen/_16ssp" />
 
-                <TextView
-                    android:id="@+id/textViewAttachMatch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="end"
-                    android:paddingEnd="@dimen/_5sdp"
-                    android:text="Attach match"
-                    android:textColor="@color/accent_text_color"
-                    android:textSize="@dimen/_17ssp" />
             </LinearLayout>
 
             <TableLayout
@@ -139,12 +132,14 @@
                 android:layout_marginTop="@dimen/_10sdp">
 
                 <TableRow>
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_7sdp"
                         android:layout_marginEnd="@dimen/_2sdp"
                         android:layout_weight="0.2" />
+
                     <TextView
                         android:id="@+id/TextViewPlayer1"
                         android:layout_width="wrap_content"
@@ -153,20 +148,21 @@
                         android:layout_marginEnd="@dimen/_2sdp"
                         android:layout_weight="0.4"
                         android:text="Player1"
-                        android:textSize="@dimen/_15ssp"/>
+                        android:textSize="@dimen/_15ssp" />
+
                     <TextView
+                        android:id="@+id/TextViewPlayer2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_7sdp"
                         android:layout_marginEnd="@dimen/_2sdp"
                         android:layout_weight="0.4"
                         android:text="Player2"
-                        android:id="@+id/TextViewPlayer2"
-                        android:textSize="@dimen/_15ssp"/>
+                        android:textSize="@dimen/_15ssp" />
                 </TableRow>
 
-                <TableRow
-                    android:gravity="center">
+                <TableRow android:gravity="center">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -174,7 +170,7 @@
                         android:layout_marginEnd="@dimen/_2sdp"
                         android:layout_weight="0.2"
                         android:text="set1:"
-                        android:textSize="@dimen/_15ssp"/>
+                        android:textSize="@dimen/_15ssp" />
 
                     <Spinner
                         android:id="@+id/set1p1Score"
@@ -182,7 +178,7 @@
                         android:layout_height="@dimen/_37sdp"
                         android:layout_marginStart="@dimen/_7sdp"
                         android:layout_marginEnd="@dimen/_2sdp"
-                        android:layout_weight="0.4"/>
+                        android:layout_weight="0.4" />
 
                     <Spinner
                         android:id="@+id/set1p2Score"
@@ -190,10 +186,11 @@
                         android:layout_height="@dimen/_37sdp"
                         android:layout_marginStart="@dimen/_7sdp"
                         android:layout_marginEnd="@dimen/_2sdp"
-                        android:layout_weight="0.4"/>
+                        android:layout_weight="0.4" />
                 </TableRow>
 
                 <TableRow>
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -201,14 +198,15 @@
                         android:layout_marginEnd="@dimen/_2sdp"
                         android:layout_weight="0.2"
                         android:text="set2:"
-                        android:textSize="@dimen/_15ssp"/>
+                        android:textSize="@dimen/_15ssp" />
+
                     <Spinner
                         android:id="@+id/set2p1Score"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/_37sdp"
                         android:layout_marginStart="@dimen/_7sdp"
                         android:layout_marginEnd="@dimen/_2sdp"
-                        android:layout_weight="0.4"/>
+                        android:layout_weight="0.4" />
 
                     <Spinner
                         android:id="@+id/set2p2Score"
@@ -216,10 +214,11 @@
                         android:layout_height="@dimen/_37sdp"
                         android:layout_marginStart="@dimen/_7sdp"
                         android:layout_marginEnd="@dimen/_2sdp"
-                        android:layout_weight="0.4"/>
+                        android:layout_weight="0.4" />
                 </TableRow>
 
                 <TableRow>
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -227,15 +226,15 @@
                         android:layout_marginEnd="@dimen/_2sdp"
                         android:layout_weight="0.2"
                         android:text="set3:"
-                        android:textSize="@dimen/_15ssp"/>
+                        android:textSize="@dimen/_15ssp" />
+
                     <Spinner
                         android:id="@+id/set3p1Score"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/_37sdp"
                         android:layout_marginStart="@dimen/_7sdp"
                         android:layout_marginEnd="@dimen/_2sdp"
-                        android:layout_weight="0.4"
-                        />
+                        android:layout_weight="0.4" />
 
                     <Spinner
                         android:id="@+id/set3p2Score"
@@ -243,16 +242,45 @@
                         android:layout_height="@dimen/_37sdp"
                         android:layout_marginStart="@dimen/_7sdp"
                         android:layout_marginEnd="@dimen/_2sdp"
-                        android:layout_weight="0.4"/>
+                        android:layout_weight="0.4" />
                 </TableRow>
 
             </TableLayout>
 
+            <!-- Przyciski Cancel i Submit na dole, w podobnym stylu -->
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginBottom="@dimen/_11sdp"
+                android:layout_gravity="center_horizontal">
+
+                <Button
+                    android:id="@+id/btnCancel"
+                    android:layout_width="@dimen/_99sdp"
+                    android:layout_height="@dimen/_36sdp"
+                    android:layout_marginEnd="@dimen/_7sdp"
+                    android:backgroundTint="@color/darker_blue"
+                    android:text="Cancel"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_14ssp" />
+
+                <Button
+                    android:id="@+id/btnSubmit"
+                    android:layout_width="@dimen/_99sdp"
+                    android:layout_height="@dimen/_36sdp"
+                    android:layout_toEndOf="@+id/btnCancel"
+                    android:backgroundTint="@color/darker_blue"
+                    android:text="Submit"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_14ssp" />
+            </RelativeLayout>
+
+
+
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigationViewMenu"
         android:layout_width="wrap_content"
@@ -264,4 +292,5 @@
         app:menu="@menu/navigation_menu"
         app:itemIconPadding="@dimen/_15sdp"
         app:itemHorizontalPadding="@dimen/_23sdp"/>
+
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"
         android:paddingVertical="@dimen/_3sdp">
 
+
         <include
             android:id="@+id/vsPlayers1"
             layout="@layout/item_vs_players"

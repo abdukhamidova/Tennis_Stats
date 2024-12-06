@@ -35,8 +35,10 @@
             android:title="View Team" />
         <item
             android:id="@+id/nav_viewTournaments"
-            android:icon="@drawable/icon_trophy"
-            android:title="View Tournaments" />
+            android:title="View Tournaments"
+            android:icon="@drawable/icon_trophy"/>
+
+
     </group>
 
     <group

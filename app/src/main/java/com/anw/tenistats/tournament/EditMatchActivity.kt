@@ -1,5 +1,6 @@
 package com.anw.tenistats.tournament
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -39,6 +40,7 @@ class EditMatchActivity: AppCompatActivity() {
 
     private lateinit var tournamentId : String
     private lateinit var matchNumber : String
+    private lateinit var drawSize : String
 
     private lateinit var p1 : EditText
     private lateinit var p2 : EditText
@@ -76,7 +78,7 @@ class EditMatchActivity: AppCompatActivity() {
         navigationDrawerHelper = NavigationDrawerHelper(this)
         navigationDrawerHelper.setupNavigationDrawer(drawerLayout, navigationView, firebaseAuth)
         val backButton = findViewById<ImageButton>(R.id.buttonUndo)
-        backButton.visibility = View.GONE
+        backButton.setImageResource(R.drawable.icon_updata)
 
         val userEmail = FirebaseAuth.getInstance().currentUser?.email.toString()
         if (userEmail.isNotEmpty()) {
@@ -89,10 +91,13 @@ class EditMatchActivity: AppCompatActivity() {
 
         tournamentId = intent.getStringExtra("tournament_id").toString()
         matchNumber = intent.getStringExtra("match_number").toString()
+        drawSize = intent.getStringExtra("draw_size").toString()
 
         database = FirebaseDatabase.getInstance(
             "https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/"
         ).getReference("Tournaments").child(tournamentId).child(matchNumber)
+
+        checkIfUserIsCreatorAndChangesExist()
 
         p1 = binding.editTextPlayer1
         p2 = binding.editTextPlayer2
@@ -115,6 +120,15 @@ class EditMatchActivity: AppCompatActivity() {
                 if (p1.hasFocus()) p1.clearFocus()
                 else if (p2.hasFocus()) p2.clearFocus()
             }
+
+            backButton.setOnClickListener {
+                val intent = Intent(this, UpdateEditMatchActivity::class.java)
+                intent.putExtra("tournament_id", tournamentId)
+                intent.putExtra("match_number", matchNumber)
+                intent.putExtra("draw_size", drawSize)
+                startActivity(intent)
+            }
+
 
             p1.setOnFocusChangeListener { _, hasFocus ->
                 if (!hasFocus && firstUpdate["p1"]==true) {
@@ -287,4 +301,38 @@ class EditMatchActivity: AppCompatActivity() {
         binding.set3p1Score.adapter = adapter
         binding.set3p2Score.adapter = adapter
     }
+    private fun checkIfUserIsCreatorAndChangesExist() {
+        // Sprawdzamy, kto jest autorem turnieju
+        val tournamentRef = FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
+            .getReference("Tournaments")
+            .child(tournamentId)
+
+        tournamentRef.child("creator").get().addOnSuccessListener { creatorSnapshot ->
+            val creatorEmail = creatorSnapshot.getValue(String::class.java)
+
+            // Jeśli creatorEmail to null, znaczy, że brak tej informacji w bazie
+            if (creatorEmail != null && creatorEmail == FirebaseAuth.getInstance().currentUser?.uid.toString()) {
+                // Użytkownik jest autorem turnieju
+
+                // Sprawdzamy, czy pole 'changes' jest równe true
+                tournamentRef.child(matchNumber).child("changes").get().addOnSuccessListener { changesSnapshot ->
+                    val changes = changesSnapshot.getValue(Boolean::class.java)
+
+                    if (changes == true) {
+                        // Jeśli pole 'changes' jest równe true, wyświetlamy okno dialogowe
+                        ChangesDialog(this, tournamentId, matchNumber).show()
+                    }
+                }.addOnFailureListener { exception ->
+                    Log.e("Firebase", "Error checking changes: ${exception.message}")
+                }
+
+            } else {
+                // Użytkownik nie jest autorem turnieju, nie wykonujemy żadnej akcji
+                Log.d("Check", "Zalogowany użytkownik nie jest autorem tego turnieju.")
+            }
+        }.addOnFailureListener { exception ->
+            Log.e("Firebase", "Error checking creator: ${exception.message}")
+        }
+    }
+
 }

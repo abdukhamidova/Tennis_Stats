@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.anw.tenistats.R
 import com.anw.tenistats.dialog.TournamentDialog
 import com.anw.tenistats.tournament.TournamentDataClass
+import com.google.firebase.auth.FirebaseAuth
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -64,6 +65,9 @@ class TournamentAdapter(
             }
         }
 
+        // Set visibility of the notification icon based on the 'changes' value
+        holder.notificationIcon.visibility = if (currentItem.changes>0 && currentItem.creator== FirebaseAuth.getInstance().currentUser?.uid.toString()) View.VISIBLE else View.GONE
+
         holder.itemView.setOnClickListener {
             listener?.onItemClick(currentItem)
 
@@ -79,6 +83,7 @@ class TournamentAdapter(
         val city_country: TextView = itemView.findViewById(R.id.TextViewPlace)
         val date: TextView = itemView.findViewById(R.id.textviewDates)
         val icon: ImageView = itemView.findViewById(R.id.ImageViewCourt)
+        val notificationIcon: ImageView = itemView.findViewById(R.id.notificationIcon)
     }
 
     interface OnItemClickListener {

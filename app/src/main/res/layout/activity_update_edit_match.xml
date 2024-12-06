@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:openDrawer="start"
-    tools:context=".tournament.EditMatchActivity"
+    tools:context=".tournament.UpdateEditMatchActivity"
     tools:ignore="HardcodedText">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,10 +20,10 @@
         <include layout="@layout/toolbar" />
 
         <TextView
-            android:id="@+id/textAddDetails"
+            android:id="@+id/textEditDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ADD DETAILS"
+            android:text="EDIT DETAILS"
             android:textColor="@color/general_text_color"
             android:textSize="@dimen/_30ssp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -34,14 +34,15 @@
             app:layout_constraintVertical_bias="0.108" />
 
         <LinearLayout
+            android:id="@+id/layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/_10sdp"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/textAddDetails"
-            app:layout_constraintStart_toStartOf="@id/textAddDetails"
-            app:layout_constraintTop_toBottomOf="@id/textAddDetails"
+            app:layout_constraintEnd_toEndOf="@id/textEditDetails"
+            app:layout_constraintStart_toStartOf="@id/textEditDetails"
+            app:layout_constraintTop_toBottomOf="@id/textEditDetails"
             app:layout_constraintVertical_bias="0.0">
 
             <LinearLayout
@@ -60,7 +61,7 @@
                     android:layout_marginEnd="@dimen/_10sdp"/>
 
                 <EditText
-                    android:id="@+id/editTextPlayer1"
+                    android:id="@+id/editTextPlayer1U"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_37sdp"
                     android:layout_weight="0.8"
@@ -93,7 +94,7 @@
                     android:layout_marginEnd="@dimen/_10sdp" />
 
                 <EditText
-                    android:id="@+id/editTextPlayer2"
+                    android:id="@+id/editTextPlayer2U"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_37sdp"
                     android:layout_weight="0.8"
@@ -122,15 +123,6 @@
                     android:textColor="@color/general_text_color"
                     android:textSize="@dimen/_16ssp" />
 
-                <TextView
-                    android:id="@+id/textViewAttachMatch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="end"
-                    android:paddingEnd="@dimen/_5sdp"
-                    android:text="Attach match"
-                    android:textColor="@color/accent_text_color"
-                    android:textSize="@dimen/_17ssp" />
             </LinearLayout>
 
             <TableLayout
@@ -155,13 +147,13 @@
                         android:text="Player1"
                         android:textSize="@dimen/_15ssp"/>
                     <TextView
+                        android:id="@+id/TextViewPlayer2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_7sdp"
                         android:layout_marginEnd="@dimen/_2sdp"
                         android:layout_weight="0.4"
                         android:text="Player2"
-                        android:id="@+id/TextViewPlayer2"
                         android:textSize="@dimen/_15ssp"/>
                 </TableRow>
 
@@ -177,7 +169,7 @@
                         android:textSize="@dimen/_15ssp"/>
 
                     <Spinner
-                        android:id="@+id/set1p1Score"
+                        android:id="@+id/set1p1ScoreU"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/_37sdp"
                         android:layout_marginStart="@dimen/_7sdp"
@@ -185,7 +177,7 @@
                         android:layout_weight="0.4"/>
 
                     <Spinner
-                        android:id="@+id/set1p2Score"
+                        android:id="@+id/set1p2ScoreU"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/_37sdp"
                         android:layout_marginStart="@dimen/_7sdp"
@@ -203,7 +195,7 @@
                         android:text="set2:"
                         android:textSize="@dimen/_15ssp"/>
                     <Spinner
-                        android:id="@+id/set2p1Score"
+                        android:id="@+id/set2p1ScoreU"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/_37sdp"
                         android:layout_marginStart="@dimen/_7sdp"
@@ -211,7 +203,7 @@
                         android:layout_weight="0.4"/>
 
                     <Spinner
-                        android:id="@+id/set2p2Score"
+                        android:id="@+id/set2p2ScoreU"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/_37sdp"
                         android:layout_marginStart="@dimen/_7sdp"
@@ -229,7 +221,7 @@
                         android:text="set3:"
                         android:textSize="@dimen/_15ssp"/>
                     <Spinner
-                        android:id="@+id/set3p1Score"
+                        android:id="@+id/set3p1ScoreU"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/_37sdp"
                         android:layout_marginStart="@dimen/_7sdp"
@@ -238,7 +230,7 @@
                         />
 
                     <Spinner
-                        android:id="@+id/set3p2Score"
+                        android:id="@+id/set3p2ScoreU"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/_37sdp"
                         android:layout_marginStart="@dimen/_7sdp"
@@ -249,6 +241,21 @@
             </TableLayout>
 
         </LinearLayout>
+
+        <Button
+            android:id="@+id/buttonSubmitEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/darker_blue"
+            android:text="Submit changes"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_16sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout"
+            app:layout_constraintVertical_bias="0.201" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

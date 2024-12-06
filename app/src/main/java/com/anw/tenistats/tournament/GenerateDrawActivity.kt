@@ -37,10 +37,11 @@ class GenerateDrawActivity : AppCompatActivity() {
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var tournamentId: String
     private lateinit var drawSize: String
+    private lateinit var creator: String
     private var drawSizeInt: Int = 0
     private var totalRounds: Int = 0
     private lateinit var drawRecyclerView: RecyclerView
-    private lateinit var roundsArrayList: ArrayList<Round>
+    private var roundsArrayList: ArrayList<Round> = arrayListOf()
     private lateinit var adapter: TournamentRoundAdapter
     private var roundNumber: Int = 1
 
@@ -135,15 +136,29 @@ class GenerateDrawActivity : AppCompatActivity() {
             }
 
             getMatchesInTournamentData()
+            database = FirebaseDatabase.getInstance(
+                "https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/"
+            ).getReference("Tournaments").child(tournamentId)
+            database.child("creator").addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    creator = dataSnapshot.getValue(String::class.java).toString()
 
-            roundsArrayList = arrayListOf()
-            adapter = TournamentRoundAdapter(roundsArrayList){ match ->
-                val intent = Intent(this, EditMatchActivity::class.java)
-                intent.putExtra("tournament_id", tournamentId)
-                intent.putExtra("match_number", match.number)
-                startActivity(intent)
-            }
-            drawRecyclerView.adapter = adapter
+                    // Zainicjalizuj adapter dopiero po przypisaniu wartości do creator
+                    adapter = TournamentRoundAdapter(roundsArrayList, creator) { match ->
+                        val intent = Intent(this@GenerateDrawActivity, EditMatchActivity::class.java)
+                        intent.putExtra("tournament_id", tournamentId)
+                        intent.putExtra("match_number", match.number)
+                        intent.putExtra("draw_size", drawSize)
+                        startActivity(intent)
+                    }
+                    drawRecyclerView.adapter = adapter
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    Log.w("EditMatchActivity", "loadWinner:onCancelled", databaseError.toException())
+                }
+            })
+
         }
     }
     private fun getMatchesInTournamentData() {
@@ -173,6 +188,7 @@ class GenerateDrawActivity : AppCompatActivity() {
                         parseMatch(match1Index) { match1 ->
                             if (match1 != null) {
                                 roundsList.add(Round(match1, match1))
+
                             }
                             matchesLoaded++
                             if (matchesLoaded == itemsCount) {
@@ -215,6 +231,7 @@ class GenerateDrawActivity : AppCompatActivity() {
         else
             binding.textViewRound.text = "1/$a"
     }
+
     private fun parseMatch(no: Int, callback: (TournamentMatchDataClass) -> Unit) {
         val matchSnapshotRef = FirebaseDatabase.getInstance(
             "https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/"
@@ -253,6 +270,7 @@ class GenerateDrawActivity : AppCompatActivity() {
                     val set3p2 = snapshot.child("set3p2").getValue(String::class.java)?.let {
                         if (it == "None") "" else it
                     } ?: ""
+                    val changes = snapshot.child("changes").getValue(Boolean::class.java) ?: false
 
                     // Logi debugujące
                     Log.d("FirebaseData", "Parsing match $no: matchId=$matchId, player1=$player1, player2=$player2, winner=$winner, set1p1=$set1p1, set1p2=$set1p2")
@@ -268,7 +286,8 @@ class GenerateDrawActivity : AppCompatActivity() {
                         set3p1 = set3p1,
                         set1p2 = set1p2,
                         set2p2 = set2p2,
-                        set3p2 = set3p2
+                        set3p2 = set3p2,
+                        changes = changes
                     )
 
                     callback(matchData)
@@ -370,7 +389,8 @@ class GenerateDrawActivity : AppCompatActivity() {
             set3p1 = "",
             set1p2 = "",
             set2p2 = "",
-            set3p2 = ""
+            set3p2 = "",
+            changes = false
         )
 
         matchRef.setValue(emptyMatchData).addOnCompleteListener { task ->
@@ -381,5 +401,6 @@ class GenerateDrawActivity : AppCompatActivity() {
             }
         }
     }
+
 
 }

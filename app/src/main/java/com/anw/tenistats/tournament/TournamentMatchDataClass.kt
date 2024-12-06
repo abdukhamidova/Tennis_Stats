@@ -11,8 +11,11 @@ data class TournamentMatchDataClass(
     val set3p1: String,
     val set1p2: String,
     val set2p2: String,
-    val set3p2: String
+    val set3p2: String,
+    val changes: Boolean = false
 )
+
+
 
 data class Round(
     val match1: TournamentMatchDataClass,
