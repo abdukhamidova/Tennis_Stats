@@ -66,15 +66,10 @@
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_37sdp"
                     android:layout_weight="0.8"
-                    android:backgroundTint="@color/general_text_color"
-                    android:completionHintView="@color/general_text_color"
-                    android:drawableStart="@drawable/icon_person"
                     android:drawablePadding="@dimen/_3sdp"
-                    android:drawableTint="@color/app_hint_color"
                     android:focusable="true"
                     android:hint="Player name"
                     android:textColor="@color/general_text_color"
-                    android:textColorHint="@color/app_hint_color"
                     android:textDirection="ltr"
                     android:textSize="@dimen/_15ssp" />
             </LinearLayout>
@@ -99,14 +94,9 @@
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_37sdp"
                     android:layout_weight="0.8"
-                    android:backgroundTint="@color/general_text_color"
-                    android:completionHintView="@color/general_text_color"
-                    android:drawableStart="@drawable/icon_person"
                     android:drawablePadding="@dimen/_3sdp"
-                    android:drawableTint="@color/app_hint_color"
                     android:hint="Player name"
                     android:textColor="@color/general_text_color"
-                    android:textColorHint="@color/app_hint_color"
                     android:textSize="@dimen/_15ssp" />
             </LinearLayout>
 

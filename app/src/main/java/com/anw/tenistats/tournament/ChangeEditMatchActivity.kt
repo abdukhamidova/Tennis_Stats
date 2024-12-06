@@ -133,11 +133,14 @@ class ChangeEditMatchActivity : AppCompatActivity() {
                 if (player1Edit != null) {
                     playerAdapter1.add(player1!!)
                     playerAdapter1.add(player1Edit)
-                    p1.adapter = playerAdapter1
                 } else {
                     playerAdapter1.add(player1!!)
-                    p1.adapter = playerAdapter1
                 }
+                p1.adapter = playerAdapter1
+                if (playerAdapter1.count >1) {
+                    p1.setBackgroundColor(getColor(R.color.app_statsViewButton))
+                }
+
 
                 // Player 2
                 val playerAdapter2 = ArrayAdapter<String>(this@ChangeEditMatchActivity, android.R.layout.simple_spinner_item).apply {
@@ -146,10 +149,12 @@ class ChangeEditMatchActivity : AppCompatActivity() {
                 if (player2Edit != null) {
                     playerAdapter2.add(player2!!)
                     playerAdapter2.add(player2Edit)
-                    p2.adapter = playerAdapter2
                 } else {
                     playerAdapter2.add(player2!!)
-                    p2.adapter = playerAdapter2
+                }
+                p2.adapter = playerAdapter2
+                if (playerAdapter2.count > 1) {
+                    p2.setBackgroundColor(getColor(R.color.app_statsViewButton))
                 }
 
                 // Set 1
@@ -167,10 +172,12 @@ class ChangeEditMatchActivity : AppCompatActivity() {
                 if (set1p1Edit != null) {
                     setAdapter11.add(set1p1!!)
                     setAdapter11.add(set1p1Edit)
-                    Set1p1.adapter = setAdapter11
                 } else {
                     setAdapter11.add(set1p1!!)
-                   Set1p1.adapter = setAdapter11
+                }
+                Set1p1.adapter = setAdapter11
+                if (setAdapter11.count > 1 ) {
+                    Set1p1.setBackgroundColor(getColor(R.color.app_statsViewButton))
                 }
 
                 // Set 1 Player 2
@@ -180,10 +187,12 @@ class ChangeEditMatchActivity : AppCompatActivity() {
                 if (set1p2Edit != null) {
                     setAdapter12.add(set1p2!!)
                     setAdapter12.add(set1p2Edit)
-                    Set1p2.adapter = setAdapter12
                 } else {
                     setAdapter12.add(set1p2!!)
-                    Set1p2.adapter = setAdapter12
+                }
+                Set1p2.adapter = setAdapter12
+                if (setAdapter12.count > 1) {
+                    Set1p2.setBackgroundColor(getColor(R.color.app_statsViewButton))
                 }
 
                 // Set 2
@@ -200,10 +209,12 @@ class ChangeEditMatchActivity : AppCompatActivity() {
                 if (set2p1Edit != null) {
                     setAdapter21.add(set2p1!!)
                     setAdapter21.add(set2p1Edit)
-                    Set2p1.adapter = setAdapter21
                 } else {
                     setAdapter21.add(set2p1!!)
-                    Set2p1.adapter = setAdapter21
+                }
+                Set2p1.adapter = setAdapter21
+                if (setAdapter21.count > 1) {
+                    Set2p1.setBackgroundColor(getColor(R.color.app_statsViewButton))
                 }
 
                 // Set 2 Player 2
@@ -213,10 +224,12 @@ class ChangeEditMatchActivity : AppCompatActivity() {
                 if (set2p2Edit != null) {
                     setAdapter22.add(set2p2!!)
                     setAdapter22.add(set2p2Edit)
-                    Set2p2.adapter = setAdapter22
                 } else {
                     setAdapter22.add(set2p2!!)
-                    Set2p2.adapter = setAdapter22
+                }
+                Set2p2.adapter = setAdapter22
+                if (setAdapter22.count >1 ) {
+                    Set2p2.setBackgroundColor(getColor(R.color.app_statsViewButton))
                 }
                 // Set 3
                 val set3p1 = dataSnapshot.child("set3p1").getValue(String::class.java)
@@ -231,10 +244,12 @@ class ChangeEditMatchActivity : AppCompatActivity() {
                 if (set3p1Edit != null) {
                     setAdapter31.add(set3p1!!)
                     setAdapter31.add(set3p1Edit)
-                    Set3p1.adapter = setAdapter31
                 } else {
                     setAdapter31.add(set3p1!!)
-                    Set3p1.adapter = setAdapter31
+                }
+                Set3p1.adapter = setAdapter31
+                if (setAdapter31.count > 1) {
+                    Set3p1.setBackgroundColor(getColor(R.color.app_statsViewButton))
                 }
 
                 // Set 3 Player 2
@@ -245,10 +260,12 @@ class ChangeEditMatchActivity : AppCompatActivity() {
                 if (set3p2Edit != null) {
                     setAdapter32.add(set3p2!!)
                     setAdapter32.add(set3p2Edit)
-                    Set3p2.adapter = setAdapter32
                 } else {
                     setAdapter32.add(set3p2!!)
-                    Set3p2.adapter = setAdapter32
+                }
+                Set3p2.adapter = setAdapter32
+                if (setAdapter32.count >1 ) {
+                    Set3p2.setBackgroundColor(getColor(R.color.app_statsViewButton))
                 }
             }
 
