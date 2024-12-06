@@ -40,17 +40,18 @@
             android:id="@+id/viewTopLine"
             android:layout_width="0dp"
             android:layout_height="@dimen/_1sdp"
-            android:background="@color/black"
+            android:background="@color/general_text_color"
             app:layout_constraintBottom_toBottomOf="@id/vsPlayers1"
             app:layout_constraintEnd_toStartOf="@id/viewVerticalLine"
             app:layout_constraintTop_toTopOf="@id/vsPlayers1"
-            app:layout_constraintStart_toStartOf="@id/vsPlayers1"/>
+            app:layout_constraintStart_toStartOf="@id/vsPlayers1"
+            android:backgroundTint="@color/general_text_color"/>
 
         <View
             android:id="@+id/viewBottomLine"
             android:layout_width="0dp"
             android:layout_height="@dimen/_1sdp"
-            android:background="@color/black"
+            android:background="@color/general_text_color"
             app:layout_constraintBottom_toBottomOf="@id/vsPlayers2"
             app:layout_constraintEnd_toStartOf="@id/viewVerticalLine"
             app:layout_constraintTop_toTopOf="@id/vsPlayers2"
@@ -61,7 +62,7 @@
             android:layout_width="@dimen/_1sdp"
             android:layout_height="0dp"
             android:layout_marginEnd="@dimen/_20sdp"
-            android:background="@color/black"
+            android:background="@color/general_text_color"
             app:layout_constraintTop_toTopOf="@id/viewTopLine"
             app:layout_constraintBottom_toBottomOf="@id/viewBottomLine"
             app:layout_constraintEnd_toEndOf="parent"/>
@@ -70,7 +71,7 @@
             android:id="@+id/viewLittleLine"
             android:layout_width="0dp"
             android:layout_height="@dimen/_1sdp"
-            android:background="@color/black"
+            android:background="@color/general_text_color"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/viewVerticalLine"
