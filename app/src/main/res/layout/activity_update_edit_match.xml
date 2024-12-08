@@ -109,6 +109,51 @@
                     android:textColorHint="@color/app_hint_color"/>
             </LinearLayout>
 
+            <!--przyciski walkover, retired, ScoreUnknown ~u-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/buttonWalkover"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/border_button"
+                    android:backgroundTint="@color/darker_blue"
+                    android:text="Walkover"
+                    android:textColor="@color/general_text_color"
+                    android:textSize="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_7sdp"
+                    android:layout_marginEnd="@dimen/_2sdp" />
+                <Button
+                    android:id="@+id/buttonRetired"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/border_button"
+                    android:backgroundTint="@color/darker_blue"
+                    android:text="Retired"
+                    android:textColor="@color/general_text_color"
+                    android:textSize="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_7sdp"
+                    android:layout_marginEnd="@dimen/_2sdp" />
+                <Button
+                    android:id="@+id/buttonScoreUnknown"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/border_button"
+                    android:backgroundTint="@color/darker_blue"
+                    android:text="Score\nUnknown"
+                    android:textColor="@color/general_text_color"
+                    android:textSize="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_7sdp"
+                    android:layout_marginEnd="@dimen/_2sdp" />
+
+            </LinearLayout>
+            <!--przyciski walkover, retired, ScoreUnknown ~u-->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -240,6 +285,38 @@
 
             </TableLayout>
 
+            <!--pspinner do wyboru winnera ~u-->
+            <LinearLayout
+                android:id="@+id/linearLayoutWinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="@dimen/_7sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.25"
+                    android:text="Winner"
+                    android:textSize="@dimen/_16ssp"
+                    android:textColor="@color/general_text_color"
+                    android:layout_marginEnd="@dimen/_10sdp" />
+
+                <Spinner
+                    android:id="@+id/spinnerWinner"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_37sdp"
+                    android:layout_weight="0.8"
+                    android:backgroundTint="@color/general_text_color"
+                    android:completionHintView="@color/general_text_color"
+                    android:drawableTint="@color/app_hint_color"
+                    android:textSize="@dimen/_15ssp"
+                    android:textColor="@color/general_text_color"
+                    android:textColorHint="@color/app_hint_color"/>
+            </LinearLayout>
+            <!--pspinner do wyboru winnera ~u-->
         </LinearLayout>
 
         <Button
@@ -259,7 +336,6 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigationViewMenu"
         android:layout_width="wrap_content"
@@ -271,4 +347,5 @@
         app:menu="@menu/navigation_menu"
         app:itemIconPadding="@dimen/_15sdp"
         app:itemHorizontalPadding="@dimen/_23sdp"/>
+
 </androidx.drawerlayout.widget.DrawerLayout>

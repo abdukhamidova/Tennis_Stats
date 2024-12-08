@@ -19,7 +19,6 @@ import com.anw.tenistats.adapter.TournamentRoundAdapter
 import com.anw.tenistats.databinding.ActivityGenerateDrawBinding
 import com.anw.tenistats.mainpage.NavigationDrawerHelper
 import com.google.android.material.navigation.NavigationView
-import com.google.android.play.integrity.internal.i
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError

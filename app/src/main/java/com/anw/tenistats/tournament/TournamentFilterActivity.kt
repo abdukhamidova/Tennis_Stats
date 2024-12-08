@@ -23,7 +23,6 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.anw.tenistats.R
 import com.anw.tenistats.databinding.ActivityTournamentFilterBinding
 import com.anw.tenistats.mainpage.NavigationDrawerHelper
-import com.anw.tenistats.stats.ViewHistoryActivity
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
