@@ -5,17 +5,13 @@ import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.widget.Button
-import android.widget.Toast
-import androidx.core.content.ContextCompat.startActivity
 import com.anw.tenistats.R
-import com.anw.tenistats.matchplay.ServeActivity
 import com.anw.tenistats.matchplay.StartNewActivity
 import com.anw.tenistats.tournament.AddRoundMatchActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 
-class AttachMatchDialog(
+class PlayNewOrAttachMatchDialog(
     private val context: Context,
     private val tournamentId: String,
     private val matchNumber: String) {

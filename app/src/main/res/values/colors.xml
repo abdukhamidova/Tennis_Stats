@@ -62,4 +62,6 @@
     <color name="scrollView_bg_color">@color/very_light_grey</color>
     <color name="history_bg_color">@color/very_light_grey</color>
     <color name="inverted_general_text_color">@color/white</color>
+    <color name="app_item_filter">@color/darker_blue</color>
+    <color name="app_item_filterText">@color/white</color>
 </resources>

@@ -2,8 +2,6 @@ package com.anw.tenistats.tournament
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
@@ -19,7 +17,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.anw.tenistats.R
 import com.anw.tenistats.databinding.ActivityEditMatchBinding
-import com.anw.tenistats.dialog.AttachMatchDialog
+import com.anw.tenistats.dialog.PlayNewOrAttachMatchDialog
 import com.anw.tenistats.mainpage.NavigationDrawerHelper
 import com.google.android.gms.tasks.Task
 import com.google.android.material.navigation.NavigationView
@@ -115,6 +113,7 @@ class EditMatchActivity: AppCompatActivity() {
         //pobranie wartość z mapy i ustawienie pól
         setMatchInformation { firstUpdate ->
 
+            //to tutaj trigeruje zapis imienia playera do bazy, że jak kliknę poza pole to ma sie zapisać
             val layout: View = findViewById(R.id.main) // np. ConstraintLayout, RelativeLayout, itd.
             layout.setOnClickListener {
                 if (p1.hasFocus()) p1.clearFocus()
@@ -129,10 +128,9 @@ class EditMatchActivity: AppCompatActivity() {
                 startActivity(intent)
             }
 
-
             p1.setOnFocusChangeListener { _, hasFocus ->
                 if (!hasFocus && firstUpdate["p1"]==true) {
-                        updateValueInDatabase(database.child("player1"), p1.text.toString())
+                        updateValueInDatabase(database.child("player1"), p1.text.toString())    //a to wysyla wartosc do bazy
                         firstUpdate["p1"] = false
                 }
             }
@@ -217,7 +215,7 @@ class EditMatchActivity: AppCompatActivity() {
             }
 
             binding.textViewAttachMatch.setOnClickListener(){
-                val attachMatchDialog = AttachMatchDialog(this, tournamentId, matchNumber)
+                val attachMatchDialog = PlayNewOrAttachMatchDialog(this, tournamentId, matchNumber)
                 attachMatchDialog.show()
             }
         }

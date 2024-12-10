@@ -144,7 +144,7 @@ class GenerateDrawActivity : AppCompatActivity() {
 
                     // Zainicjalizuj adapter dopiero po przypisaniu wartości do creator
                     adapter = TournamentRoundAdapter(roundsArrayList, creator) { match ->
-                        val intent = Intent(this@GenerateDrawActivity, EditMatchActivity::class.java)
+                        val intent = Intent(this@GenerateDrawActivity, UpdateEditMatchActivity::class.java)
                         intent.putExtra("tournament_id", tournamentId)
                         intent.putExtra("match_number", match.number)
                         intent.putExtra("draw_size", drawSize)

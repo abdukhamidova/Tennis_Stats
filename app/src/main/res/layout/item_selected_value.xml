@@ -15,7 +15,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingVertical="@dimen/_4sdp"
-        android:paddingStart="@dimen/_12sdp">
+        android:paddingStart="@dimen/_12sdp"
+        android:background="@color/app_item_filter">
 
         <TextView
             android:id="@+id/textViewValue"
@@ -23,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Value"
-            android:textColor="@color/item_textColor"
+            android:textColor="@color/app_item_filterText"
             android:textSize="@dimen/_15ssp"
             android:layout_gravity="center"/>
 
@@ -35,6 +36,6 @@
             android:padding="@dimen/_6sdp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/icon_delete_30"
-            app:tint="@color/item_textColor" />
+            app:tint="@color/app_item_filterText" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

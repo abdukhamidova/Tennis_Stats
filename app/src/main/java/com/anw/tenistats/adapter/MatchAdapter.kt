@@ -123,6 +123,11 @@ class MatchAdapter(
                     dateInMillis
                 )
             }else if(contextType is AddRoundMatchActivity){
+                //otwórz dialog_decision_attach_match, wyślij context (?)
+                /*
+               val attachMatchDialog = PlayNewOrAttachMatchDialog(this, tournamentId, matchNumber)
+                attachMatchDialog.show()
+                 */
                 val user = FirebaseAuth.getInstance().currentUser?.uid
                 val dbref = FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
                     .getReference(user.toString())

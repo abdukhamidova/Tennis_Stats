@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/dialog_bg_color">
+
+    <TextView
+        android:id="@+id/textViewConfirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_7sdp"
+        android:layout_gravity="center"
+        android:text="Your changes might need owner's permission to change"
+        android:textColor="@color/dialog_textTitle_color"
+        android:textSize="@dimen/_23sdp"
+        android:textAlignment="center"/>
+
+    <Button
+        android:id="@+id/buttonAttach"
+        android:layout_width="@dimen/_120sdp"
+        android:layout_height="@dimen/_36sdp"
+        android:layout_gravity="center"
+        android:layout_marginVertical="@dimen/_7sdp"
+        android:backgroundTint="@color/dialog_textTitle_color"
+        android:text="OK"
+        android:textColor="@color/dialog_text_color"
+        android:textSize="@dimen/_14ssp"  />
+</LinearLayout>

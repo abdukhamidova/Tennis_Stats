@@ -21,7 +21,7 @@ class TournamentAdapter(
     private val originalList: List<TournamentDataClass>
 ) : RecyclerView.Adapter<TournamentAdapter.MyViewHolder>(), Filterable {
 
-    private var filteredList: List<TournamentDataClass> = originalList
+    private var filteredList: List<TournamentDataClass> = originalList.toMutableList()
     private var listener: OnItemClickListener? = null
     private lateinit var context: Context
 
@@ -91,6 +91,27 @@ class TournamentAdapter(
     }
 
     override fun getFilter(): Filter {
-        TODO("Not yet implemented")
+        return object : Filter() {
+            override fun performFiltering(constraint: CharSequence?): FilterResults {
+                val query = constraint?.toString()?.lowercase(Locale.getDefault()) ?: ""
+                val filtered = if (query.isEmpty()) {
+                    originalList
+                } else {
+                    originalList.filter {
+                        it.name?.lowercase(Locale.getDefault())?.contains(query) == true
+                    }
+                }
+
+                val results = FilterResults()
+                results.values = filtered
+                return results
+            }
+
+            @Suppress("UNCHECKED_CAST")
+            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+                filteredList = results?.values as? List<TournamentDataClass> ?: emptyList()
+                notifyDataSetChanged()
+            }
+        }
     }
 }
