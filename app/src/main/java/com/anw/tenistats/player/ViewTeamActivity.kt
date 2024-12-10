@@ -95,11 +95,15 @@ class ViewTeamActivity : AppCompatActivity(), EditTeamNameDialog.TeamUpdateListe
 
     private fun setupData() {
         teamList = mutableListOf()
-        playerMap = mutableMapOf()  // Initialize the playerMap here
+        playerMap = mutableMapOf() // Initialize the playerMap here
         val user = firebaseAuth.currentUser?.uid
         database = FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
             .getReference(user.toString())
             .child("Teams")
+
+        val playersDatabase = FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
+            .getReference(user.toString())
+            .child("Players")
 
         // Fetching teams and players
         database.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -119,40 +123,57 @@ class ViewTeamActivity : AppCompatActivity(), EditTeamNameDialog.TeamUpdateListe
 
                     // Sprawdzamy, czy są jacyś gracze
                     if (playerNames.isNotEmpty()) {
-                        // Mapowanie graczy na widoki
-                        val playerViewList = playerNames.map { playerName ->
-                            val (firstName, lastName) = if (playerName.contains(" ")) {
-                                val nameParts = playerName.split(" ")
-                                Pair(nameParts[0], nameParts.getOrElse(1) { "" })
-                            } else {
-                                Pair(playerName, "")
-                            }
+                        val playerViewList = mutableListOf<PlayerView>() // Lista do przechowywania graczy tej drużyny
 
-                            // Tworzymy PlayerView z odpowiednimi danymi
-                            PlayerView(playerName, firstName, lastName, true, listOf(teamId), false)
+                        // Pobierz szczegóły każdego gracza
+                        playerNames.forEach { playerName ->
+                            playersDatabase.child(playerName).addListenerForSingleValueEvent(object : ValueEventListener {
+                                override fun onDataChange(playerSnapshot: DataSnapshot) {
+                                    val tournaments = playerSnapshot.child("tournaments")
+                                        .getValue(object : GenericTypeIndicator<List<String>>() {}) ?: listOf()
+
+                                    val (firstName, lastName) = if (playerName.contains(" ")) {
+                                        val nameParts = playerName.split(" ")
+                                        Pair(nameParts[0], nameParts.getOrElse(1) { "" })
+                                    } else {
+                                        Pair(playerName, "")
+                                    }
+
+                                    // Tworzymy PlayerView z odpowiednimi danymi
+                                    val playerView = PlayerView(playerName, firstName, lastName, true, listOf(teamId), false, tournaments)
+
+                                    playerViewList.add(playerView) // Dodajemy gracza do tymczasowej listy
+
+                                    // Jeśli wszyscy gracze zostali załadowani, aktualizujemy mapę
+                                    if (playerViewList.size == playerNames.size) {
+                                        playerMap[teamId] = playerViewList
+
+                                        teamsLoaded++
+                                        if (teamsLoaded == snapshot.childrenCount.toInt()) {
+                                            setupListAdapter() // Wywołujemy metodę, gdy wszystko jest załadowane
+                                        }
+                                    }
+                                }
+
+                                override fun onCancelled(error: DatabaseError) {
+                                    // Obsługa błędów
+                                }
+                            })
                         }
-
-                        // Dodajemy graczy do mapy (gracze przypisani do drużyny)
-                        playerMap[teamId] = playerViewList
                     }
 
                     // Aktualizujemy drużynę z listą graczy
                     teamView.players = playerNames
-
-                    teamsLoaded++
-                    if (teamsLoaded == snapshot.childrenCount.toInt()) {
-                        setupListAdapter()
-                    }
                 }
             }
 
-            override fun onCancelled(databaseError: DatabaseError) {
-                // Obsługa błędu
-                Log.e("DatabaseError", "Błąd podczas pobierania danych drużyn: ${databaseError.message}")
+            override fun onCancelled(error: DatabaseError) {
+                // Obsługa błędów
             }
         })
-
     }
+
+
 
     private fun setupListAdapter() {
         if (teamList.isEmpty()) {
@@ -224,23 +245,49 @@ class ViewTeamActivity : AppCompatActivity(), EditTeamNameDialog.TeamUpdateListe
                     teamList.add(teamView)
 
                     val playerNamesSnapshot = teamSnapshot.child("players")
-                    val playerNames = playerNamesSnapshot.getValue(object : GenericTypeIndicator<ArrayList<String>>() {}) ?: ArrayList<String>()
+                    val playerNames = playerNamesSnapshot.getValue(object : GenericTypeIndicator<ArrayList<String>>() {}) ?: ArrayList()
 
                     if (playerNames.isNotEmpty()) {
-                        val playerViewList = playerNames.map { playerName ->
-                            val (firstName, lastName) = if (playerName.contains(" ")) {
-                                val nameParts = playerName.split(" ")
-                                Pair(nameParts[0], nameParts.getOrElse(1) { "" })
-                            } else {
-                                Pair(playerName, "")
-                            }
-                            PlayerView(playerName, firstName, lastName, true, listOf(teamId) , false)
+                        val playerViewList = mutableListOf<PlayerView>() // Tymczasowa lista dla graczy
+
+                        playerNames.forEach { playerName ->
+                            val playersDatabase = FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
+                                .getReference(firebaseAuth.currentUser?.uid.toString())
+                                .child("Players")
+                                .child(playerName)
+
+                            // Pobieranie szczegółów zawodnika
+                            playersDatabase.addListenerForSingleValueEvent(object : ValueEventListener {
+                                override fun onDataChange(playerSnapshot: DataSnapshot) {
+                                    val tournaments = playerSnapshot.child("tournaments")
+                                        .getValue(object : GenericTypeIndicator<List<String>>() {}) ?: listOf()
+
+                                    val (firstName, lastName) = if (playerName.contains(" ")) {
+                                        val nameParts = playerName.split(" ")
+                                        Pair(nameParts[0], nameParts.getOrElse(1) { "" })
+                                    } else {
+                                        Pair(playerName, "")
+                                    }
+
+                                    // Tworzenie PlayerView z turniejami
+                                    val playerView = PlayerView(playerName, firstName, lastName, true, listOf(teamId), false, tournaments)
+                                    playerViewList.add(playerView)
+
+                                    // Jeśli załadowano wszystkich graczy, przypisz listę do mapy
+                                    if (playerViewList.size == playerNames.size) {
+                                        playerMap[teamId] = playerViewList
+                                        setupListAdapterIfReady()
+                                    }
+                                }
+
+                                override fun onCancelled(error: DatabaseError) {
+                                    Log.e("ViewTeamActivity", "Database error: ${error.message}")
+                                }
+                            })
                         }
-                        playerMap[teamId] = playerViewList
+                        teamView.players = playerNames // Aktualizujemy listę graczy w drużynie
                     }
-                    teamView.players = playerNames
                 }
-                setupListAdapter()
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -248,6 +295,14 @@ class ViewTeamActivity : AppCompatActivity(), EditTeamNameDialog.TeamUpdateListe
             }
         })
     }
+
+    private fun setupListAdapterIfReady() {
+        // Sprawdza, czy wszystkie drużyny są załadowane, i wtedy ustawia adapter
+        if (teamList.size == playerMap.size) {
+            setupListAdapter()
+        }
+    }
+
 
 
 }

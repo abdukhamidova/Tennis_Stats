@@ -10,6 +10,8 @@ import android.view.Window
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
+import android.widget.CheckBox
+import android.widget.LinearLayout
 import android.widget.Toast
 import com.anw.tenistats.R
 import com.anw.tenistats.player.TeamView
@@ -26,85 +28,94 @@ class AddPlayerToTournamentDialog(
     context: Context,
     private val tournamentId: String
 ) : Dialog(context) {
+
     private lateinit var database: DatabaseReference
-    private lateinit var autoCompleteTextView: AutoCompleteTextView
-    private lateinit var buttonAddToTournament: Button
+    private val selectedPlayers = mutableSetOf<String>()
     private lateinit var firebaseAuth: FirebaseAuth
 
-    // Lista zawodników dostępnych do przypisania
-    private val availablePlayers: MutableList<String> = mutableListOf()
-
-    @SuppressLint("MissingInflatedId")
+    @SuppressLint("InflateParams")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestWindowFeature(Window.FEATURE_NO_TITLE)
-        setContentView(R.layout.dialog_add_player_to_tournament)
-
-        autoCompleteTextView = findViewById(R.id.playerSpinner)
-        buttonAddToTournament = findViewById(R.id.buttonAddToTournament)
-
+        setContentView(R.layout.dialog_add_players_to_tournament)
 
         firebaseAuth = FirebaseAuth.getInstance()
         val user = firebaseAuth.currentUser?.uid
         database = FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/").getReference(user.toString()).child("Players")
 
+        val playersContainer = findViewById<LinearLayout>(R.id.playersContainer)
+        val buttonCancel = findViewById<Button>(R.id.buttonCancel)
+        val buttonAdd = findViewById<Button>(R.id.buttonAddPTT)
 
-        loadAvailablePlayers(tournamentId)
+        // Fetch players and populate the list
+        fetchAndDisplayPlayers(playersContainer)
 
-        buttonAddToTournament.setOnClickListener {
-            val selectedPlayerName = autoCompleteTextView.text.toString().trim()
-            if (selectedPlayerName.isNotEmpty()) {
-                addPlayerToTournament(selectedPlayerName,tournamentId)
-            }
+        buttonCancel.setOnClickListener {
+            dismiss()
+        }
+
+        buttonAdd.setOnClickListener {
+            addSelectedPlayersToTournament()
         }
     }
 
-    private fun loadAvailablePlayers(tournamentId: String) {
-        database.child("Players").addValueEventListener(object : ValueEventListener {
+    private fun fetchAndDisplayPlayers(playersContainer: LinearLayout) {
+        database.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                availablePlayers.clear()
-                if (snapshot.exists()) {
-                    for (playerSnapshot in snapshot.children) {
-                        // Access the Tournaments node for the current player
-                        val tournamentsSnapshot = playerSnapshot.child("Tournaments")
+                playersContainer.removeAllViews()
 
-                        // Check if tournamentId does not exist for this player
-                        if (!tournamentsSnapshot.hasChild(tournamentId)) {
-                            // Retrieve player details and add to the list
-                            val playerName = playerSnapshot.key.toString()
-                            availablePlayers.add(playerName)
+                for (playerSnapshot in snapshot.children) {
+                    val playerName = playerSnapshot.child("player").getValue(String::class.java)
+                    val active = playerSnapshot.child("active").getValue(Boolean::class.java)
+                    val tournaments = playerSnapshot.child("tournaments").getValue(object :
+                        GenericTypeIndicator<List<String>>() {}) ?: emptyList()
+
+                    if (playerName != null && !tournaments.contains(tournamentId)&&active==true) {
+                        val checkBox = CheckBox(context).apply {
+                            text = playerName
+                            setOnCheckedChangeListener { _, isChecked ->
+                                if (isChecked) {
+                                    selectedPlayers.add(playerSnapshot.key!!)
+                                } else {
+                                    selectedPlayers.remove(playerSnapshot.key!!)
+                                }
+                            }
                         }
+                        playersContainer.addView(checkBox)
                     }
-                    setupAutoCompleteTextView()
                 }
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Log.e("AddPlayerToTeamDialog", "Database error: ${error.message}")
+                Toast.makeText(context, "Failed to load players: ${error.message}", Toast.LENGTH_SHORT).show()
             }
         })
     }
 
-    private fun setupAutoCompleteTextView() {
-        val adapter = ArrayAdapter(context, R.layout.spinner_item_team, availablePlayers)
-        autoCompleteTextView.apply {
-            setAdapter(adapter)
-            threshold = 0
-            setOnFocusChangeListener { _, hasFocus ->
-                if (hasFocus) showDropDown()
-            }
-        }
-    }
+    private fun addSelectedPlayersToTournament() {
+        for (playerId in selectedPlayers) {
+            val tournamentsRef = database.child(playerId).child("tournaments")
+            tournamentsRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val tournaments = snapshot.getValue(object : GenericTypeIndicator<MutableList<String>>() {})
+                        ?: mutableListOf()
+                    if (!tournaments.contains(tournamentId)) {
+                        tournaments.add(tournamentId)
+                        tournamentsRef.setValue(tournaments).addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+                                Log.d("Dialog", "Tournament added for player $playerId")
+                            } else {
+                                Log.e("Dialog", "Failed to update player $playerId")
+                            }
+                        }
+                    }
+                }
 
-    private fun addPlayerToTournament(playerName: String,tournamentId: String) {
-        database.child("Tournaments").setValue(tournamentId).addOnSuccessListener{
-            Log.d("AddPlayerToTournamentDialog", "Add player $playerName to the tournament.")
-            val intent = Intent(context, AddPlayerToTournamentDialog::class.java)
-            context.startActivity(intent)
-            dismiss()
+                override fun onCancelled(error: DatabaseError) {
+                    Log.e("Dialog", "Database error: ${error.message}")
+                }
+            })
         }
-        .addOnFailureListener { e ->
-            Log.e("AddPlayerToTournamentDialog", "Failed to add player to tournament: ${e.message}")
-        }
+        dismiss()
     }
 }

@@ -226,7 +226,7 @@ class GenerateDrawActivity : AppCompatActivity() {
 
         val a = (drawSizeInt / 2.0.pow(roundNumber)).toInt()
         if(a==1)
-            binding.textViewRound.text = "Finale"
+            binding.textViewRound.text = "Final"
         else
             binding.textViewRound.text = "1/$a"
     }

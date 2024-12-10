@@ -165,6 +165,7 @@
     <string name="play_new_match">Play new match</string>
     <string name="add_from_matches">Add from matches</string>
     <string name="attach_match_sure">Would you like to attach this match?</string>
+    <string name="remove_player">Remove Player from tournament</string>
 
 
 </resources>

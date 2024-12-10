@@ -9,6 +9,7 @@ class PlayerView {
     var team: List<String> = emptyList()
     var isFavorite: Boolean = false
     var handedness: String = ""
+    var tournaments: List<String> = emptyList()
 
     constructor()
 
@@ -18,7 +19,8 @@ class PlayerView {
         lastName: String,
         active: Boolean,
         team: List<String>,
-        isFavorite: Boolean
+        isFavorite: Boolean,
+        tournaments: List<String>
     ) {
         this.player = player
         this.firstName = firstName
@@ -26,5 +28,6 @@ class PlayerView {
         this.active = active
         this.team = team
         this.isFavorite = isFavorite
+        this.tournaments =  tournaments
     }
 }

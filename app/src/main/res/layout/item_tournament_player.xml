@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/_3sdp"
+    android:layout_marginTop="@dimen/_10sdp"
+    android:layout_marginEnd="@dimen/_3sdp"
+    app:cardCornerRadius="@dimen/_7sdp"
+    android:backgroundTint="@color/app_item_color">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingVertical="@dimen/_8sdp"
+        android:paddingStart="@dimen/_12sdp"
+        android:paddingEnd="@dimen/_12sdp">>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.9"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <TextView
+                android:layout_width="@dimen/_31sdp"
+                android:layout_height="@dimen/_31sdp"
+                android:background="@drawable/circle"
+                android:gravity="center"
+                app:drawableEndCompat="@drawable/icon_person_settings"
+                app:drawableTint="@color/item_textColor" />
+            <TextView
+                android:id="@+id/TextViewTournamentPlayer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Player Name"
+                android:textColor="@color/item_textColor"
+                android:textSize="@dimen/_15ssp"
+                android:layout_marginEnd="@dimen/_15sdp" />
+        </LinearLayout>
+
+
+        <ImageView
+            android:id="@+id/ImageViewDeletePlayer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_6sdp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/icon_delete_30"
+            android:contentDescription="@string/delete_team"
+            app:tint="@color/item_textColor" />
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

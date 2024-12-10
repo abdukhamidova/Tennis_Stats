@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
+import androidx.core.content.ContextCompat.startActivity
 import com.anw.tenistats.R
 import com.anw.tenistats.tournament.AddPlayersToTournamentActivity
 import com.anw.tenistats.tournament.GenerateDrawActivity
@@ -60,10 +61,9 @@ class TournamentDialog(private val context: Context, private val openedFromStart
                 }
 
                 btnAddPlayers.setOnClickListener {
-                    val intent = Intent(context, AddPlayersToTournamentActivity::class.java)   //należy zmienić przejście do Stats
+                    val intent = Intent(context,AddPlayersToTournamentActivity::class.java)  //należy zmienić przejście do Stats
                     intent.putExtra("tournament_id", tournamentId)
                     context.startActivity(intent)
-                    alertDialog.dismiss()
                 }
 
                 btnShowDetails.setOnClickListener {
