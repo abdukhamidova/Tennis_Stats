@@ -54,6 +54,7 @@ class ChangeEditMatchActivity : AppCompatActivity() {
 
     private lateinit var submitButton : Button
     private lateinit var cancelButton : Button
+    private lateinit var rejectButton : Button
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -113,8 +114,8 @@ class ChangeEditMatchActivity : AppCompatActivity() {
         Set3p1 = binding.set3p1Score
         Set3p2 = binding.set3p2Score
 
-        pN1 = binding.TextViewPlayer1
-        pN2 = binding.TextViewPlayer2
+        /*pN1 = binding.TextViewPlayer1
+        pN2 = binding.TextViewPlayer2*/
 
         database.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -131,8 +132,8 @@ class ChangeEditMatchActivity : AppCompatActivity() {
 
                 // Player 1
                 if (player1Edit != null) {
-                    playerAdapter1.add(player1!!)
                     playerAdapter1.add(player1Edit)
+                    playerAdapter1.add(player1!!)
                 } else {
                     playerAdapter1.add(player1!!)
                 }
@@ -147,8 +148,8 @@ class ChangeEditMatchActivity : AppCompatActivity() {
                     setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                 }
                 if (player2Edit != null) {
-                    playerAdapter2.add(player2!!)
                     playerAdapter2.add(player2Edit)
+                    playerAdapter2.add(player2!!)
                 } else {
                     playerAdapter2.add(player2!!)
                 }
@@ -170,8 +171,8 @@ class ChangeEditMatchActivity : AppCompatActivity() {
 
                 // Set 1 Player 1
                 if (set1p1Edit != null) {
-                    setAdapter11.add(set1p1!!)
                     setAdapter11.add(set1p1Edit)
+                    setAdapter11.add(set1p1!!)
                 } else {
                     setAdapter11.add(set1p1!!)
                 }
@@ -185,8 +186,8 @@ class ChangeEditMatchActivity : AppCompatActivity() {
                     setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                 }
                 if (set1p2Edit != null) {
-                    setAdapter12.add(set1p2!!)
                     setAdapter12.add(set1p2Edit)
+                    setAdapter12.add(set1p2!!)
                 } else {
                     setAdapter12.add(set1p2!!)
                 }
@@ -207,8 +208,8 @@ class ChangeEditMatchActivity : AppCompatActivity() {
                     setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                 }
                 if (set2p1Edit != null) {
-                    setAdapter21.add(set2p1!!)
                     setAdapter21.add(set2p1Edit)
+                    setAdapter21.add(set2p1!!)
                 } else {
                     setAdapter21.add(set2p1!!)
                 }
@@ -222,8 +223,8 @@ class ChangeEditMatchActivity : AppCompatActivity() {
                     setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                 }
                 if (set2p2Edit != null) {
-                    setAdapter22.add(set2p2!!)
                     setAdapter22.add(set2p2Edit)
+                    setAdapter22.add(set2p2!!)
                 } else {
                     setAdapter22.add(set2p2!!)
                 }
@@ -241,31 +242,41 @@ class ChangeEditMatchActivity : AppCompatActivity() {
                 val setAdapter31 = ArrayAdapter<String>(this@ChangeEditMatchActivity, android.R.layout.simple_spinner_item).apply {
                     setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                 }
-                if (set3p1Edit != null) {
-                    setAdapter31.add(set3p1!!)
-                    setAdapter31.add(set3p1Edit)
-                } else {
-                    setAdapter31.add(set3p1!!)
-                }
-                Set3p1.adapter = setAdapter31
-                if (setAdapter31.count > 1) {
-                    Set3p1.setBackgroundColor(getColor(R.color.app_statsViewButton))
-                }
+                if(set3p1!=null && set3p2!=null) {
+                    if (set3p1Edit != null) {
+                        setAdapter31.add(set3p1Edit)
+                        setAdapter31.add(set3p1!!)
+                    } else {
+                        setAdapter31.add(set3p1!!)
+                    }
+                    Set3p1.adapter = setAdapter31
+                    if (setAdapter31.count > 1) {
+                        Set3p1.setBackgroundColor(getColor(R.color.app_statsViewButton))
+                    }
 
-                // Set 3 Player 2
-                val setAdapter32 = ArrayAdapter<String>(this@ChangeEditMatchActivity, android.R.layout.simple_spinner_item).apply {
-                    setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                    // Set 3 Player 2
+                    val setAdapter32 = ArrayAdapter<String>(
+                        this@ChangeEditMatchActivity,
+                        android.R.layout.simple_spinner_item
+                    ).apply {
+                        setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                    }
+                    setAdapter32.clear()
+                    if (set3p2Edit != null) {
+                        setAdapter32.add(set3p2Edit)
+                        setAdapter32.add(set3p2!!)
+                    } else {
+                        setAdapter32.add(set3p2!!)
+                    }
+                    Set3p2.adapter = setAdapter32
+                    if (setAdapter32.count > 1) {
+                        Set3p2.setBackgroundColor(getColor(R.color.app_statsViewButton))
+                    }
                 }
-                setAdapter32.clear()
-                if (set3p2Edit != null) {
-                    setAdapter32.add(set3p2!!)
-                    setAdapter32.add(set3p2Edit)
-                } else {
-                    setAdapter32.add(set3p2!!)
-                }
-                Set3p2.adapter = setAdapter32
-                if (setAdapter32.count >1 ) {
-                    Set3p2.setBackgroundColor(getColor(R.color.app_statsViewButton))
+                else
+                {
+                    Set3p1.isEnabled = false
+                    Set3p2.isEnabled = false
                 }
             }
 
@@ -273,15 +284,56 @@ class ChangeEditMatchActivity : AppCompatActivity() {
                 Log.w("EditMatchActivity", "loadPost:onCancelled", databaseError.toException())
             }
         })
+
+        rejectButton = binding.btnReject
+        rejectButton.setOnClickListener {
+            database.child("changes").setValue(false)
+
+            // Zmniejszenie wartości węzła "changes"
+            databaseT.child("changes").addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    val changes = dataSnapshot.getValue(Int::class.java) ?: 0
+                    databaseT.child("changes").setValue(changes - 1)
+
+                    // Usunięcie niepotrzebnych wartości z bazy danych
+                    database.child("player1Edit").removeValue()
+                    database.child("player2Edit").removeValue()
+                    database.child("set1p1Edit").removeValue()
+                    database.child("set1p2Edit").removeValue()
+                    database.child("set2p1Edit").removeValue()
+                    database.child("set2p2Edit").removeValue()
+                    database.child("set3p1Edit").removeValue()
+                    database.child("set3p2Edit").removeValue()
+
+                    // Przejście do EditMatchActivity
+                    val intent = Intent(this@ChangeEditMatchActivity, EditMatchActivity::class.java)
+                    intent.putExtra("tournament_id", tournamentId)
+                    intent.putExtra("match_number", matchNumber)
+                    intent.putExtra("draw_size", drawSize)
+                    startActivity(intent)
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    // Obsługa błędu bazy danych
+                    Log.e("DatabaseError", "onCancelled: ${databaseError.message}")
+                }
+            })
+        }
+
+
         submitButton = binding.btnSubmit
-        submitButton.setOnClickListener {val selectedPlayer1 = p1.selectedItem.toString()
+        submitButton.setOnClickListener {
+            val selectedPlayer1 = p1.selectedItem.toString()
             val selectedPlayer2 = p2.selectedItem.toString()
             val selectedSet1p1 = Set1p1.selectedItem.toString()
             val selectedSet1p2 = Set1p2.selectedItem.toString()
             val selectedSet2p1 = Set2p1.selectedItem.toString()
             val selectedSet2p2 = Set2p2.selectedItem.toString()
-            val selectedSet3p1 = Set3p1.selectedItem.toString()
-            val selectedSet3p2 = Set3p2.selectedItem.toString()
+
+            // Sprawdzanie, czy set 3 jest rozgrywany
+            val selectedSet3p1 = if (Set3p1.isEnabled) Set3p1.selectedItem.toString() else null
+            val selectedSet3p2 = if (Set3p2.isEnabled) Set3p2.selectedItem.toString() else null
+
             database.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     val winner = dataSnapshot.child("winner").getValue(String::class.java)
@@ -307,8 +359,12 @@ class ChangeEditMatchActivity : AppCompatActivity() {
             database.child("set1p2").setValue(selectedSet1p2)
             database.child("set2p1").setValue(selectedSet2p1)
             database.child("set2p2").setValue(selectedSet2p2)
-            database.child("set3p1").setValue(selectedSet3p1)
-            database.child("set3p2").setValue(selectedSet3p2)
+
+            // Zapis danych dla setu 3 tylko, jeśli są dostępne
+            if (selectedSet3p1 != null && selectedSet3p2 != null) {
+                database.child("set3p1").setValue(selectedSet3p1)
+                database.child("set3p2").setValue(selectedSet3p2)
+            }
 
             // Zmiana wartości "changed" na false
             database.child("changes").setValue(false)
@@ -324,6 +380,8 @@ class ChangeEditMatchActivity : AppCompatActivity() {
                     Log.w("EditMatchActivity", "loadPost:onCancelled", databaseError.toException())
                 }
             })
+
+            // Usuwanie wartości edytowanych z bazy
             database.child("player1Edit").removeValue()
             database.child("player2Edit").removeValue()
             database.child("set1p1Edit").removeValue()
@@ -333,13 +391,13 @@ class ChangeEditMatchActivity : AppCompatActivity() {
             database.child("set3p1Edit").removeValue()
             database.child("set3p2Edit").removeValue()
 
-
             val intent = Intent(this, EditMatchActivity::class.java)
             intent.putExtra("tournament_id", tournamentId)
             intent.putExtra("match_number", matchNumber)
             intent.putExtra("draw_size", drawSize)
             startActivity(intent)
         }
+
         cancelButton = binding.btnCancel
         cancelButton.setOnClickListener {
             val intent = Intent(this, EditMatchActivity::class.java)

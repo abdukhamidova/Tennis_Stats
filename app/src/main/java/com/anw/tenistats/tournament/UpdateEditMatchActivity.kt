@@ -174,6 +174,7 @@ class UpdateEditMatchActivity : AppCompatActivity() {
         buttonRetired = binding.buttonRetired
         buttonUnknown = binding.buttonScoreUnknown
 
+        submitChanges()
         // Ładowanie danych z Firebase do pól
         loadMatchData() //uzupełnia firstUpdate
 
@@ -308,6 +309,29 @@ class UpdateEditMatchActivity : AppCompatActivity() {
             intent.putExtra("draw_size", drawSize)
             startActivity(intent)
         }
+    }
+
+    private fun submitChanges() {
+        databaseT.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val creator=snapshot.child("creator").getValue(String::class.java)
+                val changes=snapshot.child(matchNumber).child("changes").getValue(Boolean::class.java)
+                val user=FirebaseAuth.getInstance().currentUser?.uid.toString()
+                if(creator==user && changes==true)
+                {
+                    val dialog = ChangesDialog(
+                        context = this@UpdateEditMatchActivity,
+                        tournamentId = tournamentId,
+                        matchNumber = matchNumber
+                    )
+                    dialog.show()
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.e("Firebase", "Error: ${error.message}")
+            }
+        })
     }
 
     private fun loadMatchData() {

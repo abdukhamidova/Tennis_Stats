@@ -8,17 +8,19 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:openDrawer="start"
-    tools:context=".tournament.EditMatchActivity"
-    tools:ignore="HardcodedText">
+    tools:context=".tournament.EditMatchActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/app_bg_color"
-        tools:ignore="HardcodedText">
+        android:background="@color/app_bg_color">
 
-        <include layout="@layout/toolbar" />
+        <include
+            layout="@layout/toolbar"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
             android:id="@+id/textAddDetails"
@@ -27,7 +29,7 @@
             android:text="CHANGE DETAILS"
             android:textColor="@color/general_text_color"
             android:textSize="@dimen/_30ssp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/layout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
@@ -35,148 +37,98 @@
             app:layout_constraintVertical_bias="0.108" />
 
         <LinearLayout
+            android:id="@+id/layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:padding="@dimen/_10sdp"
+            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/textAddDetails"
-            app:layout_constraintHorizontal_bias="0.493"
             app:layout_constraintStart_toStartOf="@id/textAddDetails"
-            app:layout_constraintTop_toBottomOf="@id/textAddDetails"
-            app:layout_constraintVertical_bias="0.0">
+            app:layout_constraintTop_toBottomOf="@id/textAddDetails">
 
+            <!-- Player 1 Selection -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/_7sdp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginBottom="@dimen/_7sdp">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/_10sdp"
                     android:layout_weight="0.25"
                     android:text="Player 1"
                     android:textColor="@color/general_text_color"
-                    android:textSize="@dimen/_16ssp" />
+                    android:textSize="@dimen/_16ssp"
+                    android:layout_marginEnd="@dimen/_10sdp" />
 
                 <Spinner
                     android:id="@+id/SpinnerPlayer1"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_37sdp"
-                    android:layout_weight="0.8"
-                    android:drawablePadding="@dimen/_3sdp"
-                    android:focusable="true"
+                    android:layout_weight="0.7"
                     android:hint="Player name"
                     android:textColor="@color/general_text_color"
-                    android:textDirection="ltr"
                     android:textSize="@dimen/_15ssp" />
             </LinearLayout>
 
+            <!-- Player 2 Selection -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/_7sdp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginBottom="@dimen/_7sdp">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/_10sdp"
                     android:layout_weight="0.25"
                     android:text="Player 2"
                     android:textColor="@color/general_text_color"
-                    android:textSize="@dimen/_16ssp" />
+                    android:textSize="@dimen/_16ssp"
+                    android:layout_marginEnd="@dimen/_10sdp" />
 
                 <Spinner
                     android:id="@+id/SpinnerPlayer2"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_37sdp"
-                    android:layout_weight="0.8"
-                    android:drawablePadding="@dimen/_3sdp"
+                    android:layout_weight="0.7"
                     android:hint="Player name"
                     android:textColor="@color/general_text_color"
                     android:textSize="@dimen/_15ssp" />
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <!-- Score Section -->
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Score:"
-                    android:textColor="@color/general_text_color"
-                    android:textSize="@dimen/_16ssp" />
-
-            </LinearLayout>
+                android:text="Score:"
+                android:textColor="@color/general_text_color"
+                android:textSize="@dimen/_16ssp" />
 
             <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp">
 
+                <!-- Repeated rows for scores -->
                 <TableRow>
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_7sdp"
-                        android:layout_marginEnd="@dimen/_2sdp"
-                        android:layout_weight="0.2" />
-
-                    <TextView
-                        android:id="@+id/TextViewPlayer1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_7sdp"
-                        android:layout_marginEnd="@dimen/_2sdp"
-                        android:layout_weight="0.4"
-                        android:text="Player1"
-                        android:textSize="@dimen/_15ssp" />
-
-                    <TextView
-                        android:id="@+id/TextViewPlayer2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_7sdp"
-                        android:layout_marginEnd="@dimen/_2sdp"
-                        android:layout_weight="0.4"
-                        android:text="Player2"
-                        android:textSize="@dimen/_15ssp" />
-                </TableRow>
-
-                <TableRow android:gravity="center">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_7sdp"
-                        android:layout_marginEnd="@dimen/_2sdp"
-                        android:layout_weight="0.2"
-                        android:text="set1:"
+                        android:text="Set 1:"
                         android:textSize="@dimen/_15ssp" />
 
                     <Spinner
                         android:id="@+id/set1p1Score"
                         android:layout_width="wrap_content"
-                        android:layout_height="@dimen/_37sdp"
-                        android:layout_marginStart="@dimen/_7sdp"
-                        android:layout_marginEnd="@dimen/_2sdp"
-                        android:layout_weight="0.4" />
+                        android:layout_height="@dimen/_37sdp" />
 
                     <Spinner
                         android:id="@+id/set1p2Score"
                         android:layout_width="wrap_content"
-                        android:layout_height="@dimen/_37sdp"
-                        android:layout_marginStart="@dimen/_7sdp"
-                        android:layout_marginEnd="@dimen/_2sdp"
-                        android:layout_weight="0.4" />
+                        android:layout_height="@dimen/_37sdp" />
                 </TableRow>
 
                 <TableRow>
@@ -184,27 +136,18 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_7sdp"
-                        android:layout_marginEnd="@dimen/_2sdp"
-                        android:layout_weight="0.2"
-                        android:text="set2:"
+                        android:text="Set 2:"
                         android:textSize="@dimen/_15ssp" />
 
                     <Spinner
                         android:id="@+id/set2p1Score"
                         android:layout_width="wrap_content"
-                        android:layout_height="@dimen/_37sdp"
-                        android:layout_marginStart="@dimen/_7sdp"
-                        android:layout_marginEnd="@dimen/_2sdp"
-                        android:layout_weight="0.4" />
+                        android:layout_height="@dimen/_37sdp" />
 
                     <Spinner
                         android:id="@+id/set2p2Score"
                         android:layout_width="wrap_content"
-                        android:layout_height="@dimen/_37sdp"
-                        android:layout_marginStart="@dimen/_7sdp"
-                        android:layout_marginEnd="@dimen/_2sdp"
-                        android:layout_weight="0.4" />
+                        android:layout_height="@dimen/_37sdp" />
                 </TableRow>
 
                 <TableRow>
@@ -212,75 +155,71 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_7sdp"
-                        android:layout_marginEnd="@dimen/_2sdp"
-                        android:layout_weight="0.2"
-                        android:text="set3:"
+                        android:text="Set 3:"
                         android:textSize="@dimen/_15ssp" />
 
                     <Spinner
                         android:id="@+id/set3p1Score"
                         android:layout_width="wrap_content"
-                        android:layout_height="@dimen/_37sdp"
-                        android:layout_marginStart="@dimen/_7sdp"
-                        android:layout_marginEnd="@dimen/_2sdp"
-                        android:layout_weight="0.4" />
+                        android:layout_height="@dimen/_37sdp" />
 
                     <Spinner
                         android:id="@+id/set3p2Score"
                         android:layout_width="wrap_content"
-                        android:layout_height="@dimen/_37sdp"
-                        android:layout_marginStart="@dimen/_7sdp"
-                        android:layout_marginEnd="@dimen/_2sdp"
-                        android:layout_weight="0.4" />
+                        android:layout_height="@dimen/_37sdp" />
                 </TableRow>
-
             </TableLayout>
+        </LinearLayout>
 
-            <!-- Przyciski Cancel i Submit na dole, w podobnym stylu -->
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_15sdp"
-                android:layout_marginBottom="@dimen/_11sdp"
-                android:layout_gravity="center_horizontal">
+        <LinearLayout
+            android:id="@+id/buttonContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent">
 
-                <Button
-                    android:id="@+id/btnCancel"
-                    android:layout_width="@dimen/_99sdp"
-                    android:layout_height="@dimen/_36sdp"
-                    android:layout_marginEnd="@dimen/_7sdp"
-                    android:backgroundTint="@color/darker_blue"
-                    android:text="Cancel"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_14ssp" />
+            <Button
+                android:id="@+id/btnCancel"
+                android:layout_width="@dimen/_99sdp"
+                android:layout_height="48dp"
+                android:layout_marginBottom="@dimen/_7sdp"
+                android:backgroundTint="@color/darker_blue"
+                android:text="Cancel"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14ssp" />
 
-                <Button
-                    android:id="@+id/btnSubmit"
-                    android:layout_width="@dimen/_99sdp"
-                    android:layout_height="@dimen/_36sdp"
-                    android:layout_toEndOf="@+id/btnCancel"
-                    android:backgroundTint="@color/darker_blue"
-                    android:text="Submit"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_14ssp" />
-            </RelativeLayout>
+            <Button
+                android:id="@+id/btnReject"
+                android:layout_width="@dimen/_99sdp"
+                android:layout_height="48dp"
+                android:layout_marginBottom="@dimen/_7sdp"
+                android:backgroundTint="@color/darker_blue"
+                android:text="Reject"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14ssp" />
 
-
-
+            <Button
+                android:id="@+id/btnSubmit"
+                android:layout_width="@dimen/_99sdp"
+                android:layout_height="@dimen/_36sdp"
+                android:backgroundTint="@color/darker_blue"
+                android:text="Submit"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14ssp" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigationViewMenu"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:background="@color/app_bg_color"
-        android:theme="@style/NavigationViewTheme"
         app:headerLayout="@layout/navigation_header"
         app:menu="@menu/navigation_menu"
         app:itemIconPadding="@dimen/_15sdp"
-        app:itemHorizontalPadding="@dimen/_23sdp"/>
+        app:itemHorizontalPadding="@dimen/_23sdp" />
 
 </androidx.drawerlayout.widget.DrawerLayout>
