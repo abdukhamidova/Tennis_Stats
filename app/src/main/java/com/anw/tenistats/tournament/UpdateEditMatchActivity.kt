@@ -52,16 +52,14 @@ class UpdateEditMatchActivity : AppCompatActivity() {
     private lateinit var pN1 : TextView
     private lateinit var pN2 : TextView
     private lateinit var submitButton : Button
-    private lateinit var winner: Spinner //TODO: ~u
+    private lateinit var winner: Spinner
 
-    //TODO: przyciski: Walkover, Retired (krecz) i ScoreUnknown ~u
     private lateinit var buttonWalkover: Button
     private var buttonWalkoverClicked: Boolean = false
     private lateinit var buttonRetired: Button
     private var buttonRetiredClicked: Boolean = false
     private lateinit var buttonUnknown: Button
     private var buttonUnknownClicked: Boolean = false
-    //TODO: przyciski: Walkover, Retired (krecz) i ScoreUnknown ~u
 
     // Declare variables to store original values
     private var originalPlayer1Value: String? = null
@@ -72,7 +70,7 @@ class UpdateEditMatchActivity : AppCompatActivity() {
     private var originalSet2p2Value: String? = null
     private var originalSet3p1Value: String? = null
     private var originalSet3p2Value: String? = null
-    private var originalWinnerValue: String? = null //TODO: ~u
+    private var originalWinnerValue: String? = null
 
     //firstUpdate - globalna mapa pilnująca pierwszy update
     val keys = listOf("p1", "p2", "set1p1", "set1p2", "set2p1", "set2p2", "set3p1", "set3p2", "winner")
@@ -148,31 +146,41 @@ class UpdateEditMatchActivity : AppCompatActivity() {
         p1 = binding.editTextPlayer1U
         p2 = binding.editTextPlayer2U
 
+        val layout: View = findViewById(R.id.main) // np. ConstraintLayout, RelativeLayout, itd.
+        layout.setOnClickListener {
+            if (p1.hasFocus()) p1.clearFocus()
+            else if (p2.hasFocus()) p2.clearFocus()
+        }
+        p1.setOnFocusChangeListener { _, hasFocus ->
+            winnersList()
+        }
+        p2.setOnFocusChangeListener { _, hasFocus ->
+            winnersList()
+        }
+
         set1p1 = binding.set1p1ScoreU
         set1p2 = binding.set1p2ScoreU
         set2p1 = binding.set2p1ScoreU
         set2p2 = binding.set2p2ScoreU
         set3p1 = binding.set3p1ScoreU
         set3p2 = binding.set3p2ScoreU
-        winner = binding.spinnerWinner //TODO: ~u
-        winner.isEnabled = false ////TODO: spinner winnera do wybrania tylko gdy user wybierze walkover, retider lub scoreUnknown - inaczej niedostępny, bo z samego wyniku wyliczany jest winner ~u
+        winner = binding.spinnerWinner
+        winner.isEnabled = false //spinner winnera do wybrania tylko gdy user wybierze walkover, retider lub scoreUnknown - inaczej niedostępny, bo z samego wyniku wyliczany jest winner ~u
 
         pN1 = binding.TextViewPlayer1
         pN2 = binding.TextViewPlayer2
 
-        //TODO: ~u
         buttonWalkover = binding.buttonWalkover
         buttonRetired = binding.buttonRetired
         buttonUnknown = binding.buttonScoreUnknown
-        //TODO: ~u
 
         // Ładowanie danych z Firebase do pól
         loadMatchData() //uzupełnia firstUpdate
 
-        winnersList() //TODO: ustawianie w spinnerze odpowiednich nazwisk ~u
+        winnersList() //ustawianie w spinnerze odpowiednich nazwisk ~u
         pointsList()
 
-        //TODO: obsluga przyciskow Walkover, Retider i ScoreUnknown ~u
+        //obsluga przyciskow Walkover, Retider i ScoreUnknown ~u
         buttonWalkover.setOnClickListener { 
             if(buttonWalkoverClicked){ //odznaczono "walkover"
                 buttonWalkoverClicked = false //zmiana na odklikniety
@@ -279,12 +287,11 @@ class UpdateEditMatchActivity : AppCompatActivity() {
                 winnersList()
             }
         }
-        //TODO: obsluga przyciskow Walkover, Retider i ScoreUnknown ~u
         
         submitButton = binding.buttonSubmitEdit
         //w submit włączany saveMatchData
         submitButton.setOnClickListener {
-            //TODO: walidacja wprowadzonego wyniku ~u
+            //walidacja wprowadzonego wyniku
             if(p1.text.isNullOrEmpty() || p2.text.isNullOrEmpty()){
                 Toast.makeText(this, "Don't leave empty fields of players name.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener // Zatrzymujemy dalsze przetwarzanie
@@ -294,7 +301,6 @@ class UpdateEditMatchActivity : AppCompatActivity() {
                 Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
                 return@setOnClickListener // Zatrzymujemy dalsze przetwarzanie
             }
-            //TODO: walidacja wprowadzonego wyniku ~u
             saveMatchData()
             val intent = Intent(this, GenerateDrawActivity::class.java)
             intent.putExtra("tournament_id", tournamentId)
@@ -317,7 +323,7 @@ class UpdateEditMatchActivity : AppCompatActivity() {
                 val set2p2Value = snapshot.child("set2p2").getValue(String::class.java)
                 val set3p1Value = snapshot.child("set3p1").getValue(String::class.java)
                 val set3p2Value = snapshot.child("set3p2").getValue(String::class.java)
-                val winnerValue = snapshot.child("winner").getValue(String::class.java) //TODO: ~u
+                val winnerValue = snapshot.child("winner").getValue(String::class.java)
 
                 // ustawienie pierwszej edycji (potrzebne dla komunikatów)
                 if (player1Value == null || player1Value == "") firstUpdate["p1"] = true
@@ -333,7 +339,7 @@ class UpdateEditMatchActivity : AppCompatActivity() {
                 // Ustawienie pól w UI
                 p1.setText(player1Value)
                 p2.setText(player2Value)
-                winnersList() //TODO: ustawianie w spinnerze odpowiednich nazwisk  ~u
+                winnersList() //ustawianie w spinnerze odpowiednich nazwisk
                 set1p1.setSelection(getIndexOfOption(set1p1Value))
                 set1p2.setSelection(getIndexOfOption(set1p2Value))
                 set2p1.setSelection(getIndexOfOption(set2p1Value))
@@ -341,7 +347,7 @@ class UpdateEditMatchActivity : AppCompatActivity() {
                 set3p1.setSelection(getIndexOfOption(set3p1Value))
                 set3p2.setSelection(getIndexOfOption(set3p2Value))
                 set3p2.setSelection(getIndexOfOption(set3p2Value))
-                winner.setSelection(getIndexOfWinnersOption(winnerValue)) //TODO: ~u
+                winner.setSelection(getIndexOfWinnersOption(winnerValue))
 
                 /*//ustawienie imion w tabeli punktów
                 //komentujemy, bo tabela się rozrzuca przy długich imionach
@@ -358,7 +364,7 @@ class UpdateEditMatchActivity : AppCompatActivity() {
                 originalSet2p2Value = set2p2Value
                 originalSet3p1Value = set3p1Value
                 originalSet3p2Value = set3p2Value
-                originalWinnerValue = winnerValue //TODO: ~u
+                originalWinnerValue = winnerValue
             }
             //ta funckja musi zwrócić firstUpdate
 
@@ -368,7 +374,6 @@ class UpdateEditMatchActivity : AppCompatActivity() {
         })
     }
 
-    //TODO: dodolam "7" do spinnera gemów i zmieniłam kolor spinnera ~u
     private fun getIndexOfOption(value: String?): Int {
         val options = listOf("None", "0", "1", "2", "3", "4", "5", "6","7")
         return options.indexOf(value)
@@ -388,9 +393,8 @@ class UpdateEditMatchActivity : AppCompatActivity() {
         binding.set3p1ScoreU.adapter = adapter
         binding.set3p2ScoreU.adapter = adapter
     }
-    //TODO: dodolam "7" do spinnera gemów i zmieniłam kolor spinnera ~u
 
-    //TODO: ustawienie spinnera do Winnera ~u
+    //ustawienie spinnera do Winnera
     private fun getIndexOfWinnersOption(value: String?): Int {
         val winnersOptions = listOf("None",p1.text.toString(),p2.text.toString())
         when(value){
@@ -408,7 +412,6 @@ class UpdateEditMatchActivity : AppCompatActivity() {
         )
         binding.spinnerWinner.adapter = adapter
     }
-    //TODO: ustawienie spinnera do Winnera ~u
 
     private fun saveMatchData() {
         // Zbieranie danych z pól
@@ -420,12 +423,11 @@ class UpdateEditMatchActivity : AppCompatActivity() {
         val set2p2Value = set2p2.selectedItem?.toString() ?: "None"
         val set3p1Value = set3p1.selectedItem?.toString() ?: "None"
         val set3p2Value = set3p2.selectedItem?.toString() ?: "None"
-        //TODO: zmiana z nazwiska na "player1" lub "player2" ze spinnera Winner ~u
+        //zmiana z nazwiska na "player1" lub "player2" ze spinnera Winner
         var winnerValue: String
         if(winner.selectedItem?.toString() == p1.text.toString()) winnerValue = "player1"
         else if(winner.selectedItem?.toString() == p2.text.toString()) winnerValue = "player2"
         else winnerValue = "None"
-        //TODO: zmiana z nazwiska na "player1" lub "player2" ze spinnera Winner ~u
 
         // Sprawdzenie, czy wartości zostały zmienione, jeśli tak to zapisujemy je w Firebase
         //pole zostało zmienione, zatem trzeba sprawdzić czy to firstUpdate
@@ -569,7 +571,6 @@ class UpdateEditMatchActivity : AppCompatActivity() {
                 }
             }
         }
-        //TODO: ~u
         if (winnerValue != originalWinnerValue && winnerValue != "None") {
             if(firstUpdate["winner"]==true) {
                 database.child("winner").setValue(winnerValue)
@@ -587,13 +588,12 @@ class UpdateEditMatchActivity : AppCompatActivity() {
                 }
             }
         }
-        //TODO: ~u
 
         // Informacja o zapisaniu danych
         Log.d("Firebase", "Dane zostały zapisane!")
     }
 
-    //TODO: walidacja wyniku i wyliczanie winnera z wyniku
+    //walidacja wyniku i wyliczanie winnera z wyniku
     private fun checkMatchScoreAndWinner() : String{
         val s1p1: String = binding.set1p1ScoreU.selectedItem.toString()
         val s1p2: String = binding.set1p2ScoreU.selectedItem.toString()

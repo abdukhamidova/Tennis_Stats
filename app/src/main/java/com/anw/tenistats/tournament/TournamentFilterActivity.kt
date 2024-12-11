@@ -47,6 +47,7 @@ class TournamentFilterActivity : AppCompatActivity() {
     private var selectedVenueList = mutableListOf<String>()
     private var selectedCountryList = mutableListOf<String>()
     private var selectedSurfaceList = mutableListOf<String>()
+    private var selectedDate: Long = 0
     private lateinit var spinnerVenue: Spinner
     private lateinit var spinnerCountry: Spinner
     private lateinit var spinnerSurface: Spinner
@@ -94,17 +95,15 @@ class TournamentFilterActivity : AppCompatActivity() {
 
         selectedVenueList = (intent.getStringArrayExtra("venueFilter") ?: emptyArray()).toMutableList()
         selectedCountryList = (intent.getStringArrayExtra("countryFilter") ?: emptyArray()).toMutableList()
-        val selectedDate = intent.getLongExtra("dateFilter", 0L)
+        selectedDate = intent.getLongExtra("dateFilter", 0L)
         selectedSurfaceList = (intent.getStringArrayExtra("surfaceFilter") ?: emptyArray()).toMutableList()
 
-        if(selectedVenueList != null){
-            for(selected in selectedVenueList)
-                addItem(binding.linearLayoutItemsVenue,selected)
-        }
-        if(selectedCountryList != null){
-            for(selected in selectedCountryList)
-                addItem(binding.linearLayoutItemsCountry,selected)
-        }
+        setDataInSpinners()
+
+        for(selected in selectedVenueList)
+            addItem(binding.linearLayoutItemsVenue,selectedVenueList,selected,spinnerVenue)
+        for(selected in selectedCountryList)
+            addItem(binding.linearLayoutItemsCountry,selectedCountryList,selected,spinnerCountry)
         if (selectedDate != 0L) {
             // Convert the timestamp back to a formatted date string
             val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
@@ -113,12 +112,9 @@ class TournamentFilterActivity : AppCompatActivity() {
             // Set the formatted date to the EditText
             binding.editTextDate.setText(formattedDate)
         }
-        if(selectedSurfaceList != null){
-            for(selected in selectedSurfaceList)
-                addItem(binding.linearLayoutItemsSurface,selected)
-        }
+        for(selected in selectedSurfaceList)
+            addItem(binding.linearLayoutItemsSurface,selectedSurfaceList,selected,spinnerSurface)
 
-        setDataInSpinners()
         binding.editTextDate.setOnClickListener {
             val calendar = Calendar.getInstance()
             val year = calendar.get(Calendar.YEAR)
@@ -152,7 +148,7 @@ class TournamentFilterActivity : AppCompatActivity() {
                 }
                 else if(!selectedVenueList.contains(selected)) {
                     selectedVenueList.add(selected)
-                    addItem(binding.linearLayoutItemsVenue,selected)
+                    addItem(binding.linearLayoutItemsVenue,selectedVenueList,selected,spinnerVenue)
                 }
                 else{
                     Toast.makeText(this@TournamentFilterActivity,"This value is already selected",Toast.LENGTH_SHORT).show()
@@ -175,7 +171,7 @@ class TournamentFilterActivity : AppCompatActivity() {
                 }
                 else if(!selectedCountryList.contains(selected)) {
                     selectedCountryList.add(selected)
-                    addItem(binding.linearLayoutItemsCountry,selected)
+                    addItem(binding.linearLayoutItemsCountry,selectedCountryList,selected,spinnerCountry)
                 }
                 else{
                     Toast.makeText(this@TournamentFilterActivity,"This value is already selected",Toast.LENGTH_SHORT).show()
@@ -197,7 +193,7 @@ class TournamentFilterActivity : AppCompatActivity() {
                 }
                 else if(!selectedSurfaceList.contains(selected)) {
                     selectedSurfaceList.add(selected)
-                    addItem(binding.linearLayoutItemsSurface,selected)
+                    addItem(binding.linearLayoutItemsSurface,selectedSurfaceList,selected,spinnerSurface)
                 }
                 else{
                     Toast.makeText(this@TournamentFilterActivity,"This value is already selected",Toast.LENGTH_SHORT).show()
@@ -205,7 +201,6 @@ class TournamentFilterActivity : AppCompatActivity() {
             }
             override fun onNothingSelected(parent: AdapterView<*>) { }
         }
-
 
         binding.buttonSubmit.setOnClickListener {
             val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
@@ -265,7 +260,7 @@ class TournamentFilterActivity : AppCompatActivity() {
         spinnerSurface.adapter = adapterSurface
     }
 
-    private fun addItem(linearLayout: LinearLayout,value: String){
+    private fun addItem(linearLayout: LinearLayout,list: MutableList<String>,value: String,spinner: Spinner){
         // Inflate the CardView layout
         val inflater = LayoutInflater.from(this)
         val itemView = inflater.inflate(R.layout.item_selected_value, linearLayout, false)
@@ -278,7 +273,12 @@ class TournamentFilterActivity : AppCompatActivity() {
         val deleteButton = itemView.findViewById<ImageView>(R.id.imageViewDelete)
         deleteButton.setOnClickListener {
             linearLayout.removeView(itemView)
-            selectedVenueList.remove(value)
+            list.remove(value)
+            if(list.size==0){
+                spinner.setSelection(0)
+                list.clear()
+                linearLayout.removeAllViews()
+            }
         }
 
         // Add the CardView to the LinearLayout
