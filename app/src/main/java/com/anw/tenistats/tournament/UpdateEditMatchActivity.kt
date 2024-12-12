@@ -25,6 +25,8 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.anw.tenistats.dialog.PlayNewOrAttachMatchDialog
+import com.anw.tenistats.stats.ViewStatsActivity
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -32,6 +34,7 @@ import com.google.firebase.database.ValueEventListener
 class UpdateEditMatchActivity : AppCompatActivity() {
     private lateinit var binding: ActivityUpdateEditMatchBinding
     private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var user : String
     private lateinit var database: DatabaseReference
     private lateinit var databaseT: DatabaseReference
     private lateinit var navigationDrawerHelper: NavigationDrawerHelper
@@ -114,7 +117,7 @@ class UpdateEditMatchActivity : AppCompatActivity() {
         }
         //endregion
 
-        val user = FirebaseAuth.getInstance().currentUser?.uid.toString()
+        user = FirebaseAuth.getInstance().currentUser?.uid.toString()
 
         tournamentId = intent.getStringExtra("tournament_id").toString()
         matchNumber = intent.getStringExtra("match_number").toString()
@@ -309,31 +312,83 @@ class UpdateEditMatchActivity : AppCompatActivity() {
             intent.putExtra("draw_size", drawSize)
             startActivity(intent)
         }
+
+       findMatchId(tournamentId, matchNumber){matchId ->
+           if(matchId == null){
+               binding.buttonDeleteMatch.visibility = View.GONE
+               binding.buttonAttachMatch.text = "Attach Match"
+                //attach match
+               binding.buttonAttachMatch.setOnClickListener{
+                   val attachMatchDialog = PlayNewOrAttachMatchDialog(this, tournamentId, matchNumber)
+                   attachMatchDialog.show()
+               }
+           }else{
+               binding.buttonDeleteMatch.visibility = View.VISIBLE
+               binding.buttonAttachMatch.text = "Show Match"
+
+               binding.buttonAttachMatch.setOnClickListener {
+                   fetchMatchDate(matchId){dateInMillis->
+                       val intent = Intent(this, ViewStatsActivity::class.java).apply {
+                           putExtra("matchID", matchId)
+                           intent.putExtra("matchDateInMillis",dateInMillis)
+                       }
+                       startActivity(intent)
+                   }
+               }
+               binding.buttonDeleteMatch.setOnClickListener(){
+                   val dbRef = FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
+                       .getReference(user)
+                       .child("Matches")
+                       .child(matchId)
+
+                   // region ---usuwanie id_tournament---
+                   dbRef.child("id_tournament").removeValue()
+                       .addOnSuccessListener {
+                           Log.d("Firebase", "id_tournament został usunięty.")
+                       }
+                       .addOnFailureListener { e ->
+                           Log.e("Firebase", "Błąd podczas usuwania id_tournament: ${e.message}")
+                       }
+                   //endregion
+
+                   // region ---usuwanie match_number---
+                   dbRef.child("match_number").removeValue()
+                       .addOnSuccessListener {
+                           Log.d("Firebase", "matchNumber został usunięty.")
+                       }
+                       .addOnFailureListener { e ->
+                           Log.e("Firebase", "Błąd podczas usuwania matchNumber: ${e.message}")
+                       }
+                   //endregion
+                   finish()
+                   Toast.makeText(this, "Match was deleted", Toast.LENGTH_SHORT).show()
+               }
+           }
+       }
     }
 
-    private fun submitChanges() {
-        databaseT.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                val creator=snapshot.child("creator").getValue(String::class.java)
-                val changes=snapshot.child(matchNumber).child("changes").getValue(Boolean::class.java)
-                val user=FirebaseAuth.getInstance().currentUser?.uid.toString()
-                if(creator==user && changes==true)
-                {
-                    val dialog = ChangesDialog(
-                        context = this@UpdateEditMatchActivity,
-                        tournamentId = tournamentId,
-                        matchNumber = matchNumber
-                    )
-                    dialog.show()
-                }
-            }
+    private fun getIndexOfOption(value: String?): Int {
+        val options = listOf("None", "0", "1", "2", "3", "4", "5", "6","7")
+        return options.indexOf(value)
+    }
+    //ustawienie listy rozwijanej z punktami
+    private fun pointsList() {
+        val options = listOf("None", "0", "1", "2", "3", "4", "5", "6","7")
+        val adapter = ArrayAdapter(
+            this,
+            R.layout.spinner_item_stats_right, // domyślny układ elementu //zmienilam na ten customowy w kolorze bg ~u
+            options // dane do wyświetlenia
+        )
 
-            override fun onCancelled(error: DatabaseError) {
-                Log.e("Firebase", "Error: ${error.message}")
-            }
-        })
+        binding.set1p1ScoreU.adapter = adapter
+        binding.set1p2ScoreU.adapter = adapter
+        binding.set2p1ScoreU.adapter = adapter
+        binding.set2p2ScoreU.adapter = adapter
+        binding.set3p1ScoreU.adapter = adapter
+        binding.set3p2ScoreU.adapter = adapter
     }
 
+    //pobranie wartości z bazy
     private fun loadMatchData() {
         //wczytanie wartości pól z bazy danych
         database.addValueEventListener(object : ValueEventListener {
@@ -398,45 +453,7 @@ class UpdateEditMatchActivity : AppCompatActivity() {
         })
     }
 
-    private fun getIndexOfOption(value: String?): Int {
-        val options = listOf("None", "0", "1", "2", "3", "4", "5", "6","7")
-        return options.indexOf(value)
-    }
-    private fun pointsList() {
-        val options = listOf("None", "0", "1", "2", "3", "4", "5", "6","7")
-        val adapter = ArrayAdapter(
-            this,
-            R.layout.spinner_item_stats_right, // domyślny układ elementu //zmienilam na ten customowy w kolorze bg ~u
-            options // dane do wyświetlenia
-        )
-
-        binding.set1p1ScoreU.adapter = adapter
-        binding.set1p2ScoreU.adapter = adapter
-        binding.set2p1ScoreU.adapter = adapter
-        binding.set2p2ScoreU.adapter = adapter
-        binding.set3p1ScoreU.adapter = adapter
-        binding.set3p2ScoreU.adapter = adapter
-    }
-
-    //ustawienie spinnera do Winnera
-    private fun getIndexOfWinnersOption(value: String?): Int {
-        val winnersOptions = listOf("None",p1.text.toString(),p2.text.toString())
-        when(value){
-            "player1" -> return winnersOptions.indexOf(p1.text.toString())
-            "player2" -> return winnersOptions.indexOf(p2.text.toString())
-            else -> return winnersOptions.indexOf("None")
-        }
-    }
-    private fun winnersList(){
-        val winnersOptions = listOf("None",p1.text.toString(),p2.text.toString())
-        val adapter = ArrayAdapter(
-            this,
-            R.layout.spinner_item_stats_right,
-            winnersOptions
-        )
-        binding.spinnerWinner.adapter = adapter
-    }
-
+    //zapis w bazie
     private fun saveMatchData() {
         // Zbieranie danych z pól
         val player1Value = p1.text?.toString() ?: ""
@@ -615,6 +632,104 @@ class UpdateEditMatchActivity : AppCompatActivity() {
 
         // Informacja o zapisaniu danych
         Log.d("Firebase", "Dane zostały zapisane!")
+    }
+
+    //wysłanie do bazy/zapisanie zmian
+    private fun submitChanges() {
+        databaseT.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val creator=snapshot.child("creator").getValue(String::class.java)
+                val changes=snapshot.child(matchNumber).child("changes").getValue(Boolean::class.java)
+                val user=FirebaseAuth.getInstance().currentUser?.uid.toString()
+                if(creator==user && changes==true)
+                {
+                    val dialog = ChangesDialog(
+                        context = this@UpdateEditMatchActivity,
+                        tournamentId = tournamentId,
+                        matchNumber = matchNumber
+                    )
+                    dialog.show()
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.e("Firebase", "Error: ${error.message}")
+            }
+        })
+    }
+
+    //pobranie macthId
+    private fun findMatchId(
+        tournamentId: String,
+        matchNumber: String,
+        callback: (String?) -> Unit
+    ) {
+        val dbref = FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
+            .getReference(user)
+            .child("Matches")
+        var matchId: String? = null
+
+        val query = dbref.orderByChild("id_tournament").equalTo(tournamentId)
+        query.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (matchSnapshot in snapshot.children) {
+                    val idTournament = matchSnapshot.child("id_tournament").getValue(String::class.java)
+                    val matchNum = matchSnapshot.child("match_number").getValue(String::class.java)
+
+                    if (idTournament == tournamentId && matchNum == matchNumber) {
+                        matchId = matchSnapshot.key // Pobranie klucza (matchId)
+                        break // Zakończenie pętli, jeśli znaleziono
+                    }
+                }
+                // Wywołanie callbacka z wynikiem
+                callback(matchId)
+            }
+            override fun onCancelled(error: DatabaseError) {
+                Log.e("FirebaseError", "Błąd podczas pobierania danych: ${error.message}")
+                callback(null) // W przypadku błędu zwróć null
+            }
+        })
+    }
+    //pobranie daty z matchId
+    private fun fetchMatchDate(matchId: String, callback: (Long?) -> Unit) {
+        FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
+            .getReference(user)
+            .child("Matches")
+            .child(matchId)
+            .child("data").get().addOnSuccessListener { snapshot ->
+            val matchDateInMillis = snapshot.getValue(Long::class.java)
+            if (matchDateInMillis != null) {
+                // Zwracamy wartość date w milisekundach
+                callback(matchDateInMillis)
+            } else {
+                // Jeśli nie udało się pobrać wartości
+                callback(null)
+            }
+        }.addOnFailureListener { error ->
+            Log.e("FirebaseError", "Błąd podczas pobierania daty: ${error.message}")
+            callback(null) // W przypadku błędu, zwróć null
+        }
+    }
+
+
+
+    //ustawienie spinnera do Winnera
+    private fun getIndexOfWinnersOption(value: String?): Int {
+        val winnersOptions = listOf("None",p1.text.toString(),p2.text.toString())
+        when(value){
+            "player1" -> return winnersOptions.indexOf(p1.text.toString())
+            "player2" -> return winnersOptions.indexOf(p2.text.toString())
+            else -> return winnersOptions.indexOf("None")
+        }
+    }
+    private fun winnersList(){
+        val winnersOptions = listOf("None",p1.text.toString(),p2.text.toString())
+        val adapter = ArrayAdapter(
+            this,
+            R.layout.spinner_item_stats_right,
+            winnersOptions
+        )
+        binding.spinnerWinner.adapter = adapter
     }
 
     //walidacja wyniku i wyliczanie winnera z wyniku

@@ -33,305 +33,349 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.108" />
 
-        <LinearLayout
-            android:id="@+id/layout"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/_10sdp"
-            android:orientation="vertical"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/textEditDetails"
-            app:layout_constraintStart_toStartOf="@id/textEditDetails"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textEditDetails"
             app:layout_constraintVertical_bias="0.0">
 
             <LinearLayout
+                android:id="@+id/layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="@dimen/_7sdp">
+                android:orientation="vertical"
+                android:padding="@dimen/_10sdp">
 
-                <TextView
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Player 1"
-                    android:layout_weight="0.25"
-                    android:textSize="@dimen/_16ssp"
-                    android:textColor="@color/general_text_color"
-                    android:layout_marginEnd="@dimen/_10sdp"/>
+                    android:layout_marginBottom="@dimen/_7sdp"
+                    android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/editTextPlayer1U"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/_37sdp"
-                    android:layout_weight="0.7"
-                    android:backgroundTint="@color/general_text_color"
-                    android:completionHintView="@color/general_text_color"
-                    android:hint="Player name"
-                    android:drawableStart="@drawable/icon_person"
-                    android:drawablePadding="@dimen/_3sdp"
-                    android:drawableTint="@color/app_hint_color"
-                    android:textSize="@dimen/_15ssp"
-                    android:textColor="@color/general_text_color"
-                    android:textColorHint="@color/app_hint_color"
-                    android:textDirection="ltr"
-                    android:focusable="true"/>
-            </LinearLayout>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:layout_weight="0.25"
+                        android:text="Player 1"
+                        android:textColor="@color/general_text_color"
+                        android:textSize="@dimen/_16ssp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="@dimen/_7sdp">
+                    <EditText
+                        android:id="@+id/editTextPlayer1U"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_37sdp"
+                        android:layout_weight="0.7"
+                        android:backgroundTint="@color/general_text_color"
+                        android:completionHintView="@color/general_text_color"
+                        android:drawableStart="@drawable/icon_person"
+                        android:drawablePadding="@dimen/_3sdp"
+                        android:drawableTint="@color/app_hint_color"
+                        android:focusable="true"
+                        android:hint="Player name"
+                        android:textColor="@color/general_text_color"
+                        android:textColorHint="@color/app_hint_color"
+                        android:textDirection="ltr"
+                        android:textSize="@dimen/_15ssp" />
+                </LinearLayout>
 
-                <TextView
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.25"
-                    android:text="Player 2"
-                    android:textSize="@dimen/_16ssp"
-                    android:textColor="@color/general_text_color"
-                    android:layout_marginEnd="@dimen/_10sdp" />
+                    android:layout_marginBottom="@dimen/_7sdp"
+                    android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/editTextPlayer2U"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/_37sdp"
-                    android:layout_weight="0.7"
-                    android:backgroundTint="@color/general_text_color"
-                    android:completionHintView="@color/general_text_color"
-                    android:hint="Player name"
-                    android:drawableStart="@drawable/icon_person"
-                    android:drawablePadding="@dimen/_3sdp"
-                    android:drawableTint="@color/app_hint_color"
-                    android:textSize="@dimen/_15ssp"
-                    android:textColor="@color/general_text_color"
-                    android:textColorHint="@color/app_hint_color"/>
-            </LinearLayout>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:layout_weight="0.25"
+                        android:text="Player 2"
+                        android:textColor="@color/general_text_color"
+                        android:textSize="@dimen/_16ssp" />
 
-            <!--przyciski walkover, retired, ScoreUnknown ~u-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:gravity="center">
+                    <EditText
+                        android:id="@+id/editTextPlayer2U"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_37sdp"
+                        android:layout_weight="0.7"
+                        android:backgroundTint="@color/general_text_color"
+                        android:completionHintView="@color/general_text_color"
+                        android:drawableStart="@drawable/icon_person"
+                        android:drawablePadding="@dimen/_3sdp"
+                        android:drawableTint="@color/app_hint_color"
+                        android:hint="Player name"
+                        android:textColor="@color/general_text_color"
+                        android:textColorHint="@color/app_hint_color"
+                        android:textSize="@dimen/_15ssp" />
+                </LinearLayout>
 
-                <Button
-                    android:id="@+id/buttonWalkover"
+                <!--przyciski walkover, retired, ScoreUnknown ~u-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/buttonWalkover"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_7sdp"
+                        android:layout_marginEnd="@dimen/_2sdp"
+                        android:background="@drawable/border_button"
+                        android:backgroundTint="@color/darker_blue"
+                        android:text="Walkover"
+                        android:textColor="@color/general_text_color"
+                        android:textSize="@dimen/_10sdp" />
+
+                    <Button
+                        android:id="@+id/buttonRetired"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_7sdp"
+                        android:layout_marginEnd="@dimen/_2sdp"
+                        android:background="@drawable/border_button"
+                        android:backgroundTint="@color/darker_blue"
+                        android:text="Retired"
+                        android:textColor="@color/general_text_color"
+                        android:textSize="@dimen/_10sdp" />
+
+                    <Button
+                        android:id="@+id/buttonScoreUnknown"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_7sdp"
+                        android:layout_marginEnd="@dimen/_2sdp"
+                        android:background="@drawable/border_button"
+                        android:backgroundTint="@color/darker_blue"
+                        android:text="Score\nUnknown"
+                        android:textColor="@color/general_text_color"
+                        android:textSize="@dimen/_10sdp" />
+
+                </LinearLayout>
+                <!--przyciski walkover, retired, ScoreUnknown ~u-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Score:"
+                        android:textColor="@color/general_text_color"
+                        android:textSize="@dimen/_16ssp" />
+
+                </LinearLayout>
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp">
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_7sdp"
+                            android:layout_marginEnd="@dimen/_2sdp"
+                            android:layout_weight="0.2" />
+
+                        <TextView
+                            android:id="@+id/TextViewPlayer1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_7sdp"
+                            android:layout_marginEnd="@dimen/_2sdp"
+                            android:layout_weight="0.4"
+                            android:text="Player1"
+                            android:textSize="@dimen/_15ssp" />
+
+                        <TextView
+                            android:id="@+id/TextViewPlayer2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_7sdp"
+                            android:layout_marginEnd="@dimen/_2sdp"
+                            android:layout_weight="0.4"
+                            android:text="Player2"
+                            android:textSize="@dimen/_15ssp" />
+                    </TableRow>
+
+                    <TableRow android:gravity="center">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_7sdp"
+                            android:layout_marginEnd="@dimen/_2sdp"
+                            android:layout_weight="0.2"
+                            android:text="set1:"
+                            android:textSize="@dimen/_15ssp" />
+
+                        <Spinner
+                            android:id="@+id/set1p1ScoreU"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/_37sdp"
+                            android:layout_marginStart="@dimen/_7sdp"
+                            android:layout_marginEnd="@dimen/_2sdp"
+                            android:layout_weight="0.4" />
+
+                        <Spinner
+                            android:id="@+id/set1p2ScoreU"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/_37sdp"
+                            android:layout_marginStart="@dimen/_7sdp"
+                            android:layout_marginEnd="@dimen/_2sdp"
+                            android:layout_weight="0.4" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_7sdp"
+                            android:layout_marginEnd="@dimen/_2sdp"
+                            android:layout_weight="0.2"
+                            android:text="set2:"
+                            android:textSize="@dimen/_15ssp" />
+
+                        <Spinner
+                            android:id="@+id/set2p1ScoreU"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/_37sdp"
+                            android:layout_marginStart="@dimen/_7sdp"
+                            android:layout_marginEnd="@dimen/_2sdp"
+                            android:layout_weight="0.4" />
+
+                        <Spinner
+                            android:id="@+id/set2p2ScoreU"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/_37sdp"
+                            android:layout_marginStart="@dimen/_7sdp"
+                            android:layout_marginEnd="@dimen/_2sdp"
+                            android:layout_weight="0.4" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_7sdp"
+                            android:layout_marginEnd="@dimen/_2sdp"
+                            android:layout_weight="0.2"
+                            android:text="set3:"
+                            android:textSize="@dimen/_15ssp" />
+
+                        <Spinner
+                            android:id="@+id/set3p1ScoreU"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/_37sdp"
+                            android:layout_marginStart="@dimen/_7sdp"
+                            android:layout_marginEnd="@dimen/_2sdp"
+                            android:layout_weight="0.4" />
+
+                        <Spinner
+                            android:id="@+id/set3p2ScoreU"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/_37sdp"
+                            android:layout_marginStart="@dimen/_7sdp"
+                            android:layout_marginEnd="@dimen/_2sdp"
+                            android:layout_weight="0.4" />
+                    </TableRow>
+
+                </TableLayout>
+
+                <!--pspinner do wyboru winnera ~u-->
+                <LinearLayout
+                    android:id="@+id/linearLayoutWinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_7sdp"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:layout_weight="0.25"
+                        android:text="Winner"
+                        android:textColor="@color/general_text_color"
+                        android:textSize="@dimen/_16ssp" />
+
+                    <Spinner
+                        android:id="@+id/spinnerWinner"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_37sdp"
+                        android:layout_weight="0.8"
+                        android:backgroundTint="@color/general_text_color"
+                        android:completionHintView="@color/general_text_color"
+                        android:drawableTint="@color/app_hint_color"
+                        android:textColor="@color/general_text_color"
+                        android:textColorHint="@color/app_hint_color"
+                        android:textSize="@dimen/_15ssp" />
+                </LinearLayout>
+                <!--pspinner do wyboru winnera ~u-->
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/border_button"
-                    android:backgroundTint="@color/darker_blue"
-                    android:text="Walkover"
-                    android:textColor="@color/general_text_color"
-                    android:textSize="@dimen/_10sdp"
-                    android:layout_marginStart="@dimen/_7sdp"
-                    android:layout_marginEnd="@dimen/_2sdp" />
-                <Button
-                    android:id="@+id/buttonRetired"
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
+
+                    <Button
+                    android:id="@+id/buttonSubmitEdit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/border_button"
                     android:backgroundTint="@color/darker_blue"
-                    android:text="Retired"
-                    android:textColor="@color/general_text_color"
-                    android:textSize="@dimen/_10sdp"
-                    android:layout_marginStart="@dimen/_7sdp"
-                    android:layout_marginEnd="@dimen/_2sdp" />
-                <Button
-                    android:id="@+id/buttonScoreUnknown"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/border_button"
-                    android:backgroundTint="@color/darker_blue"
-                    android:text="Score\nUnknown"
-                    android:textColor="@color/general_text_color"
-                    android:textSize="@dimen/_10sdp"
-                    android:layout_marginStart="@dimen/_7sdp"
-                    android:layout_marginEnd="@dimen/_2sdp" />
+                    android:text="Submit changes"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_16sdp" />
 
-            </LinearLayout>
-            <!--przyciski walkover, retired, ScoreUnknown ~u-->
+                    <Button
+                        android:id="@+id/buttonAttachMatch"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:backgroundTint="@color/darker_blue"
+                        android:text="Attach match"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_16sdp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="@dimen/_10sdp">
+                    <Button
+                        android:id="@+id/buttonDeleteMatch"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:backgroundTint="@color/darker_blue"
+                        android:text="Delete match"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_16sdp"
+                        android:visibility="gone" />
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Score:"
-                    android:textColor="@color/general_text_color"
-                    android:textSize="@dimen/_16ssp" />
-
+                </LinearLayout>
             </LinearLayout>
 
-            <TableLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp">
+        </ScrollView>
 
-                <TableRow>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_7sdp"
-                        android:layout_marginEnd="@dimen/_2sdp"
-                        android:layout_weight="0.2" />
-                    <TextView
-                        android:id="@+id/TextViewPlayer1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_7sdp"
-                        android:layout_marginEnd="@dimen/_2sdp"
-                        android:layout_weight="0.4"
-                        android:text="Player1"
-                        android:textSize="@dimen/_15ssp"/>
-                    <TextView
-                        android:id="@+id/TextViewPlayer2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_7sdp"
-                        android:layout_marginEnd="@dimen/_2sdp"
-                        android:layout_weight="0.4"
-                        android:text="Player2"
-                        android:textSize="@dimen/_15ssp"/>
-                </TableRow>
 
-                <TableRow
-                    android:gravity="center">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_7sdp"
-                        android:layout_marginEnd="@dimen/_2sdp"
-                        android:layout_weight="0.2"
-                        android:text="set1:"
-                        android:textSize="@dimen/_15ssp"/>
 
-                    <Spinner
-                        android:id="@+id/set1p1ScoreU"
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/_37sdp"
-                        android:layout_marginStart="@dimen/_7sdp"
-                        android:layout_marginEnd="@dimen/_2sdp"
-                        android:layout_weight="0.4"/>
 
-                    <Spinner
-                        android:id="@+id/set1p2ScoreU"
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/_37sdp"
-                        android:layout_marginStart="@dimen/_7sdp"
-                        android:layout_marginEnd="@dimen/_2sdp"
-                        android:layout_weight="0.4"/>
-                </TableRow>
-
-                <TableRow>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_7sdp"
-                        android:layout_marginEnd="@dimen/_2sdp"
-                        android:layout_weight="0.2"
-                        android:text="set2:"
-                        android:textSize="@dimen/_15ssp"/>
-                    <Spinner
-                        android:id="@+id/set2p1ScoreU"
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/_37sdp"
-                        android:layout_marginStart="@dimen/_7sdp"
-                        android:layout_marginEnd="@dimen/_2sdp"
-                        android:layout_weight="0.4"/>
-
-                    <Spinner
-                        android:id="@+id/set2p2ScoreU"
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/_37sdp"
-                        android:layout_marginStart="@dimen/_7sdp"
-                        android:layout_marginEnd="@dimen/_2sdp"
-                        android:layout_weight="0.4"/>
-                </TableRow>
-
-                <TableRow>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_7sdp"
-                        android:layout_marginEnd="@dimen/_2sdp"
-                        android:layout_weight="0.2"
-                        android:text="set3:"
-                        android:textSize="@dimen/_15ssp"/>
-                    <Spinner
-                        android:id="@+id/set3p1ScoreU"
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/_37sdp"
-                        android:layout_marginStart="@dimen/_7sdp"
-                        android:layout_marginEnd="@dimen/_2sdp"
-                        android:layout_weight="0.4"
-                        />
-
-                    <Spinner
-                        android:id="@+id/set3p2ScoreU"
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/_37sdp"
-                        android:layout_marginStart="@dimen/_7sdp"
-                        android:layout_marginEnd="@dimen/_2sdp"
-                        android:layout_weight="0.4"/>
-                </TableRow>
-
-            </TableLayout>
-
-            <!--pspinner do wyboru winnera ~u-->
-            <LinearLayout
-                android:id="@+id/linearLayoutWinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="@dimen/_7sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:visibility="gone">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.25"
-                    android:text="Winner"
-                    android:textSize="@dimen/_16ssp"
-                    android:textColor="@color/general_text_color"
-                    android:layout_marginEnd="@dimen/_10sdp" />
-
-                <Spinner
-                    android:id="@+id/spinnerWinner"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/_37sdp"
-                    android:layout_weight="0.8"
-                    android:backgroundTint="@color/general_text_color"
-                    android:completionHintView="@color/general_text_color"
-                    android:drawableTint="@color/app_hint_color"
-                    android:textSize="@dimen/_15ssp"
-                    android:textColor="@color/general_text_color"
-                    android:textColorHint="@color/app_hint_color"/>
-            </LinearLayout>
-            <!--pspinner do wyboru winnera ~u-->
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/buttonSubmitEdit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/darker_blue"
-            android:text="Submit changes"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_16sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/layout"
-            app:layout_constraintVertical_bias="0.201" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -114,9 +114,6 @@
             android:name=".tournament.TournamentDetailsActivity"
             android:exported="false"/>
         <activity
-            android:name=".tournament.EditMatchActivity"
-            android:exported="false"/>
-        <activity
             android:name=".tournament.TournamentFilterActivity"
             android:exported="false"/>
         <activity

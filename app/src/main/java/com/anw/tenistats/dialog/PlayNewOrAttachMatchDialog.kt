@@ -8,6 +8,7 @@ import android.widget.Button
 import com.anw.tenistats.R
 import com.anw.tenistats.matchplay.StartNewActivity
 import com.anw.tenistats.tournament.AddRoundMatchActivity
+import com.anw.tenistats.tournament.UpdateEditMatchActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 
@@ -46,6 +47,7 @@ class PlayNewOrAttachMatchDialog(
                 putExtra("matchNumber", matchNumber)
             }
             context.startActivity(intent)
+            if(context is UpdateEditMatchActivity) context.finish()
             alertDialog.dismiss()
         }
         alertDialog.show()

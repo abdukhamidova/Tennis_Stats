@@ -214,7 +214,7 @@ class EditMatchActivity: AppCompatActivity() {
                 }
             }
 
-            binding.textViewAttachMatch.setOnClickListener(){
+            binding.buttonAttachMatch.setOnClickListener(){
                 val attachMatchDialog = PlayNewOrAttachMatchDialog(this, tournamentId, matchNumber)
                 attachMatchDialog.show()
             }

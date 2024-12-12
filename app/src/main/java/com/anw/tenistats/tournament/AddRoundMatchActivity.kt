@@ -49,7 +49,7 @@ class AddRoundMatchActivity : AppCompatActivity(), MatchAdapter.OnItemClickListe
             insets
         }
         firebaseAuth = FirebaseAuth.getInstance()
-        //------------ MENU
+        //region ---MENU---
         drawerLayout = findViewById(R.id.drawer_layout)
         val menu = findViewById<ImageButton>(R.id.buttonMenu)
         val navigationView = findViewById<NavigationView>(R.id.navigationViewMenu)
@@ -69,7 +69,7 @@ class AddRoundMatchActivity : AppCompatActivity(), MatchAdapter.OnItemClickListe
         else {
             findViewById<TextView>(R.id.textViewUserEmail).text = resources.getString(R.string.user_email)
         }
-        //------------ MENU
+        //endregion
 
         // Pobierz dane z Intentu
         val tournamentId = intent.getStringExtra("tournamentId")
@@ -112,8 +112,19 @@ class AddRoundMatchActivity : AppCompatActivity(), MatchAdapter.OnItemClickListe
                     matchArrayList.clear()
 
                     for (matchSnapshot in snapshot.children.reversed()) {
+                        // Pobieramy mecz do obiektu MatchViewClass
                         val match = matchSnapshot.getValue(MatchViewClass::class.java)
                         if (match != null) {
+                            // Sprawdzamy, czy mecz nie ma podwęzłów "id_tournament" i "match_number"
+                            val hasIdTournament = matchSnapshot.hasChild("id_tournament")
+                            val hasMatchNumber = matchSnapshot.hasChild("match_number")
+
+                            // Jeśli mecz ma te podwęzły, pomijamy go
+                            if (hasIdTournament || hasMatchNumber) {
+                                continue
+                            }
+
+                            // Jeśli mecz nie ma tych podwęzłów, dodajemy go do listy
                             binding.textViewNotFound.visibility = View.INVISIBLE
                             matchArrayList.add(match)
                         } else {

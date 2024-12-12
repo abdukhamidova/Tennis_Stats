@@ -52,7 +52,7 @@ class ViewMatchesActivity : AppCompatActivity(), MatchAdapter.OnItemClickListene
 
         firebaseAuth = FirebaseAuth.getInstance()
 
-        //------------ MENU
+        //region ---MENU---
         drawerLayout = findViewById(R.id.drawer_layout)
         val menu = findViewById<ImageButton>(R.id.buttonMenu)
         val navigationView = findViewById<NavigationView>(R.id.navigationViewMenu)
@@ -72,7 +72,7 @@ class ViewMatchesActivity : AppCompatActivity(), MatchAdapter.OnItemClickListene
         else {
             findViewById<TextView>(R.id.textViewUserEmail).text = resources.getString(R.string.user_email)
         }
-        //------------ MENU
+        //endregion
 
         matchRecyclerView = binding.matchList
         matchRecyclerView.layoutManager = LinearLayoutManager(this)
@@ -84,7 +84,7 @@ class ViewMatchesActivity : AppCompatActivity(), MatchAdapter.OnItemClickListene
         adapter = MatchAdapter(matchArrayList, this, "", "")
         adapter.setOnItemClickListener(this)
         matchRecyclerView.adapter = adapter
-// Podpięcie adaptera do RecyclerView
+        // Podpięcie adaptera do RecyclerView
         getMatchData()
 
         matchRecyclerView.isEnabled = true

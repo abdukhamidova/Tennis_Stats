@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.anw.tenistats.stats.MatchViewClass
 import com.anw.tenistats.R
+import com.anw.tenistats.dialog.DecisionAttachMatchDialog
 import com.anw.tenistats.dialog.ResumeOrStatsDialog
 import com.anw.tenistats.matchplay.getGoldenDrawable
 import com.anw.tenistats.stats.ViewMatchesActivity
@@ -123,11 +124,11 @@ class MatchAdapter(
                     dateInMillis
                 )
             }else if(contextType is AddRoundMatchActivity){
-                //otwórz dialog_decision_attach_match, wyślij context (?)
-                /*
-               val attachMatchDialog = PlayNewOrAttachMatchDialog(this, tournamentId, matchNumber)
-                attachMatchDialog.show()
-                 */
+
+               val attachMatchDialog = DecisionAttachMatchDialog(contextType, tournamentId, matchNumber)
+                attachMatchDialog.show(dateInMillis)
+                //stary kod który usuniemy dopiero po II sprincie
+              /*
                 val user = FirebaseAuth.getInstance().currentUser?.uid
                 val dbref = FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
                     .getReference(user.toString())
@@ -164,7 +165,7 @@ class MatchAdapter(
                     }
                 })
 
-                contextType.finish()
+                contextType.finish()*/
             }
         }
     }
