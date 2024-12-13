@@ -53,6 +53,7 @@ class TournamentRoundAdapter(
                     vsPlayers1.textViewItem1P1Set3.visibility = View.GONE
                     vsPlayers1.textViewItem1P2Set3.visibility = View.GONE
                 }
+                vsPlayers1.notificationIcon.visibility = if (round.match1.changes && creator == FirebaseAuth.getInstance().currentUser?.uid.toString()) View.VISIBLE else View.GONE
 
                 // Set laurel icons for Match 1
                 if (round.match1.winner.isNotEmpty()) {
@@ -72,6 +73,10 @@ class TournamentRoundAdapter(
                 // Similar logic for Match 2
                 if (round.match1 != round.match2) {
                     vsPlayers2.root.visibility = View.VISIBLE
+                    viewTopLine.visibility = View.VISIBLE
+                    viewVerticalLine.visibility = View.VISIBLE
+                    viewBottomLine.visibility = View.VISIBLE
+                    viewLittleLine.visibility = View.VISIBLE
                     vsPlayers2.textViewItem1Player1.text = round.match2.player1
                     vsPlayers2.textViewItem1Player2.text = round.match2.player2
                     vsPlayers2.textViewItem1P1Set1.text = round.match2.set1p1
@@ -106,8 +111,12 @@ class TournamentRoundAdapter(
                     }
                 } else {
                     vsPlayers2.root.visibility = View.GONE
+                    viewTopLine.visibility = View.GONE
+                    viewVerticalLine.visibility = View.GONE
+                    viewBottomLine.visibility = View.GONE
+                    viewLittleLine.visibility = View.GONE
                 }
-
+                vsPlayers2.notificationIcon.visibility = if (round.match2.changes && creator == FirebaseAuth.getInstance().currentUser?.uid.toString()) View.VISIBLE else View.GONE
                 // Add click listeners for matches
                 root.findViewById<View>(R.id.vsPlayers1).setOnClickListener {
                     onMatchClick(round.match1)
