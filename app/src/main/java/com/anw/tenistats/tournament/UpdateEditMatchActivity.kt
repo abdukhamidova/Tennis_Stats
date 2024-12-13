@@ -24,8 +24,11 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.material3.AlertDialog
 import androidx.core.content.ContextCompat
+import com.anw.tenistats.dialog.AlertEditMatchDialog
 import com.anw.tenistats.dialog.PlayNewOrAttachMatchDialog
+import com.anw.tenistats.stats.ViewHistoryActivity
 import com.anw.tenistats.stats.ViewStatsActivity
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -306,11 +309,24 @@ class UpdateEditMatchActivity : AppCompatActivity() {
                 return@setOnClickListener // Zatrzymujemy dalsze przetwarzanie
             }
             saveMatchData()
-            val intent = Intent(this, GenerateDrawActivity::class.java)
-            intent.putExtra("tournament_id", tournamentId)
-            intent.putExtra("match_number", matchNumber)
-            intent.putExtra("draw_size", drawSize)
-            startActivity(intent)
+
+            if(isCreator
+                || (originalPlayer1Value.isNullOrEmpty() && originalPlayer2Value.isNullOrEmpty())
+                || (originalSet1p1Value.equals("None") && originalSet1p2Value.equals("None") &&
+                    originalSet2p1Value.equals("None") && originalSet2p2Value.equals("None") &&
+                    originalSet3p1Value.equals("None") && originalSet3p2Value.equals("None"))){
+                val intent = Intent(this, GenerateDrawActivity::class.java)
+                intent.putExtra("tournament_id", tournamentId)
+                intent.putExtra("match_number", matchNumber)
+                intent.putExtra("draw_size", drawSize)
+                startActivity(intent)
+            }
+            else {
+                val dialog = AlertEditMatchDialog(
+                    context = this@UpdateEditMatchActivity
+                )
+                dialog.show(tournamentId,matchNumber,drawSize)
+            }
         }
 
        findMatchId(tournamentId, matchNumber){matchId ->
@@ -328,9 +344,9 @@ class UpdateEditMatchActivity : AppCompatActivity() {
 
                binding.buttonAttachMatch.setOnClickListener {
                    fetchMatchDate(matchId){dateInMillis->
-                       val intent = Intent(this, ViewStatsActivity::class.java).apply {
-                           putExtra("matchID", matchId)
-                           intent.putExtra("matchDateInMillis",dateInMillis)
+                       val intent = Intent(this, ViewHistoryActivity::class.java).apply {
+                           //putExtra("matchID", matchId)
+                           putExtra("matchDateInMillis",dateInMillis)
                        }
                        startActivity(intent)
                    }
@@ -646,7 +662,8 @@ class UpdateEditMatchActivity : AppCompatActivity() {
                     val dialog = ChangesDialog(
                         context = this@UpdateEditMatchActivity,
                         tournamentId = tournamentId,
-                        matchNumber = matchNumber
+                        matchNumber = matchNumber,
+                        drawSize = drawSize
                     )
                     dialog.show()
                 }
@@ -710,8 +727,6 @@ class UpdateEditMatchActivity : AppCompatActivity() {
             callback(null) // W przypadku błędu, zwróć null
         }
     }
-
-
 
     //ustawienie spinnera do Winnera
     private fun getIndexOfWinnersOption(value: String?): Int {
@@ -778,7 +793,11 @@ class UpdateEditMatchActivity : AppCompatActivity() {
             return "OK"
         }
 
-        if(s1p1 == "None" || s1p2 == "None") return "Values of 1st set can not be empty"
+        if(s1p1 == "None" && s1p2 == "None" && s2p1 == "None" && s2p2 == "None" && s3p1 == "None" && s3p2 == "None")
+            return "OK"
+
+        if(s1p1 == "None" || s1p2 == "None")
+            return "Values of 1st set can not be empty"
         if(s1p1.toInt() > s1p2.toInt()) {
             if ((s1p1.toInt() == 6 && s1p1.toInt() - s1p2.toInt() > 1) || (s1p1.toInt() == 7 && (s1p2.toInt() == 6 || s1p2.toInt() == 5)))
                 set1Winner = "player1"

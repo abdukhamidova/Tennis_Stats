@@ -47,7 +47,7 @@
             android:layout_marginTop="@dimen/_7sdp"
             android:backgroundTint="@color/dialog_textTitle_color"
             android:textColor="@color/dialog_text_color"
-            android:text="Short Summary"
+            android:text="@string/short_summary"
             android:textSize="@dimen/_15ssp" />
         <Button
             android:id="@+id/buttonViewStatsRoS"

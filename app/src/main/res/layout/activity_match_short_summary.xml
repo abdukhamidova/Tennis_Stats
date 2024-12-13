@@ -23,7 +23,7 @@
         android:id="@+id/textViewMatchSummary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Match Summary"
+        android:text="@string/match_summary"
         android:textColor="@color/general_text_color"
         android:textSize="@dimen/_30ssp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -184,7 +184,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Additional note"
+                android:text="@string/additional_note"
                 android:textColor="@color/general_text_color"
                 android:textSize="@dimen/_16ssp" />
 
@@ -194,7 +194,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="end"
                 android:paddingEnd="@dimen/_5sdp"
-                android:text="Save"
+                android:text="@string/save"
                 android:textColor="@color/accent_text_color"
                 android:textSize="@dimen/_17ssp" />
         </LinearLayout>
@@ -206,7 +206,7 @@
             android:layout_height="wrap_content"
             android:autofillHints="text"
             android:gravity="top"
-            android:hint="Enter your additional notes"
+            android:hint="@string/enter_your_additional_notes"
             android:imeOptions="actionDone"
             android:inputType="textMultiLine"
             android:lines="15"

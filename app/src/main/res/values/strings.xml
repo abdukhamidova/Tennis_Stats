@@ -88,7 +88,7 @@
     <string name="ranking">Ranking:</string>
     <string name="strength">Strength:</string>
     <string name="weakness">Weakness:</string>
-    <string name="submit">SUBMIT</string>
+    <string name="submit">Submit</string>
     <string name="decision">WHAT DO YOU WANT TO DO</string>
     <string name="resume_match">Resume Match</string>
     <string name="first_serve">1st Serve</string>
@@ -166,6 +166,22 @@
     <string name="add_from_matches">Add from matches</string>
     <string name="attach_match_sure">Would you like to attach this match?</string>
     <string name="remove_player">Remove Player from tournament</string>
-
+    <string name="short_summary">Short Summary</string>
+    <string name="change_details">CHANGE DETAILS</string>
+    <string name="player_name">Player name</string>
+    <string name="score">Score:</string>
+    <string name="reject">Reject</string>
+    <string name="match_summary">Match Summary</string>
+    <string name="additional_note">Additional note</string>
+    <string name="save">Save</string>
+    <string name="enter_your_additional_notes">Enter your additional notes</string>
+    <string name="edit_details">EDIT DETAILS</string>
+    <string name="walkover">Walkover</string>
+    <string name="retired">Retired</string>
+    <string name="score_unknown">Score\nUnknown</string>
+    <string name="submit_changes">Submit changes</string>
+    <string name="attach_match">Attach match</string>
+    <string name="alert">Your changes might need owner\'s permission to change</string>
+    <string name="ok">OK</string>
 
 </resources>

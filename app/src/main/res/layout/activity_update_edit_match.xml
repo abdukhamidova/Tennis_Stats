@@ -23,7 +23,7 @@
             android:id="@+id/textEditDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="EDIT DETAILS"
+            android:text="@string/edit_details"
             android:textColor="@color/general_text_color"
             android:textSize="@dimen/_30ssp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -62,7 +62,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/_10sdp"
                         android:layout_weight="0.25"
-                        android:text="Player 1"
+                        android:text="@string/player_1"
                         android:textColor="@color/general_text_color"
                         android:textSize="@dimen/_16ssp" />
 
@@ -77,7 +77,7 @@
                         android:drawablePadding="@dimen/_3sdp"
                         android:drawableTint="@color/app_hint_color"
                         android:focusable="true"
-                        android:hint="Player name"
+                        android:hint="@string/player_name"
                         android:textColor="@color/general_text_color"
                         android:textColorHint="@color/app_hint_color"
                         android:textDirection="ltr"
@@ -95,7 +95,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/_10sdp"
                         android:layout_weight="0.25"
-                        android:text="Player 2"
+                        android:text="@string/player_2"
                         android:textColor="@color/general_text_color"
                         android:textSize="@dimen/_16ssp" />
 
@@ -109,7 +109,7 @@
                         android:drawableStart="@drawable/icon_person"
                         android:drawablePadding="@dimen/_3sdp"
                         android:drawableTint="@color/app_hint_color"
-                        android:hint="Player name"
+                        android:hint="@string/player_name"
                         android:textColor="@color/general_text_color"
                         android:textColorHint="@color/app_hint_color"
                         android:textSize="@dimen/_15ssp" />
@@ -131,7 +131,7 @@
                         android:layout_marginEnd="@dimen/_2sdp"
                         android:background="@drawable/border_button"
                         android:backgroundTint="@color/darker_blue"
-                        android:text="Walkover"
+                        android:text="@string/walkover"
                         android:textColor="@color/general_text_color"
                         android:textSize="@dimen/_10sdp" />
 
@@ -143,7 +143,7 @@
                         android:layout_marginEnd="@dimen/_2sdp"
                         android:background="@drawable/border_button"
                         android:backgroundTint="@color/darker_blue"
-                        android:text="Retired"
+                        android:text="@string/retired"
                         android:textColor="@color/general_text_color"
                         android:textSize="@dimen/_10sdp" />
 
@@ -155,7 +155,7 @@
                         android:layout_marginEnd="@dimen/_2sdp"
                         android:background="@drawable/border_button"
                         android:backgroundTint="@color/darker_blue"
-                        android:text="Score\nUnknown"
+                        android:text="@string/score_unknown"
                         android:textColor="@color/general_text_color"
                         android:textSize="@dimen/_10sdp" />
 
@@ -172,7 +172,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Score:"
+                        android:text="@string/score"
                         android:textColor="@color/general_text_color"
                         android:textSize="@dimen/_16ssp" />
 
@@ -199,7 +199,7 @@
                             android:layout_marginStart="@dimen/_7sdp"
                             android:layout_marginEnd="@dimen/_2sdp"
                             android:layout_weight="0.4"
-                            android:text="Player1"
+                            android:text="@string/player_1"
                             android:textSize="@dimen/_15ssp" />
 
                         <TextView
@@ -209,7 +209,7 @@
                             android:layout_marginStart="@dimen/_7sdp"
                             android:layout_marginEnd="@dimen/_2sdp"
                             android:layout_weight="0.4"
-                            android:text="Player2"
+                            android:text="@string/player_2"
                             android:textSize="@dimen/_15ssp" />
                     </TableRow>
 
@@ -221,7 +221,7 @@
                             android:layout_marginStart="@dimen/_7sdp"
                             android:layout_marginEnd="@dimen/_2sdp"
                             android:layout_weight="0.2"
-                            android:text="set1:"
+                            android:text="@string/set_1"
                             android:textSize="@dimen/_15ssp" />
 
                         <Spinner
@@ -249,7 +249,7 @@
                             android:layout_marginStart="@dimen/_7sdp"
                             android:layout_marginEnd="@dimen/_2sdp"
                             android:layout_weight="0.2"
-                            android:text="set2:"
+                            android:text="@string/set_2"
                             android:textSize="@dimen/_15ssp" />
 
                         <Spinner
@@ -277,7 +277,7 @@
                             android:layout_marginStart="@dimen/_7sdp"
                             android:layout_marginEnd="@dimen/_2sdp"
                             android:layout_weight="0.2"
-                            android:text="set3:"
+                            android:text="@string/set_3"
                             android:textSize="@dimen/_15ssp" />
 
                         <Spinner
@@ -299,7 +299,7 @@
 
                 </TableLayout>
 
-                <!--pspinner do wyboru winnera ~u-->
+                <!--spinner do wyboru winnera ~u-->
                 <LinearLayout
                     android:id="@+id/linearLayoutWinner"
                     android:layout_width="match_parent"
@@ -314,7 +314,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/_10sdp"
                         android:layout_weight="0.25"
-                        android:text="Winner"
+                        android:text="@string/winner"
                         android:textColor="@color/general_text_color"
                         android:textSize="@dimen/_16ssp" />
 
@@ -330,7 +330,6 @@
                         android:textColorHint="@color/app_hint_color"
                         android:textSize="@dimen/_15ssp" />
                 </LinearLayout>
-                <!--pspinner do wyboru winnera ~u-->
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -343,7 +342,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/darker_blue"
-                    android:text="Submit changes"
+                    android:text="@string/submit_changes"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_16sdp" />
 
@@ -353,7 +352,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_10sdp"
                         android:backgroundTint="@color/darker_blue"
-                        android:text="Attach match"
+                        android:text="@string/attach_match"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_16sdp" />
 
@@ -363,7 +362,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_10sdp"
                         android:backgroundTint="@color/darker_blue"
-                        android:text="Delete match"
+                        android:text="@string/delete_match"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_16sdp"
                         android:visibility="gone" />
@@ -372,12 +371,6 @@
             </LinearLayout>
 
         </ScrollView>
-
-
-
-
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.navigation.NavigationView

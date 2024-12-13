@@ -14,7 +14,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-class ChangesDialog(context: Context, private val tournamentId: String, private val matchNumber: String) : Dialog(context) {
+class ChangesDialog(context: Context, private val tournamentId: String, private val matchNumber: String, private val drawSize: String) : Dialog(context) {
 
     private lateinit var database: DatabaseReference
     private lateinit var firebaseAuth: FirebaseAuth
@@ -46,6 +46,7 @@ class ChangesDialog(context: Context, private val tournamentId: String, private 
             val intent = Intent(context, ChangeEditMatchActivity::class.java)
             intent.putExtra("tournament_id", tournamentId)
             intent.putExtra("match_number", matchNumber)
+            intent.putExtra("draw_size", drawSize)
             context.startActivity(intent)
             dismiss()
         }

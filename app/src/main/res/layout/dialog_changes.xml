@@ -44,8 +44,8 @@
             android:layout_height="@dimen/_36sdp"
             android:layout_marginEnd="@dimen/_7sdp"
             android:background="@drawable/border_button"
-            android:text="@string/cancel"
             android:textColor="@color/dialog_btnCancel"
+            android:text="@string/cancel"
             android:textSize="@dimen/_14ssp"
             tools:ignore="TouchTargetSizeCheck" />
 

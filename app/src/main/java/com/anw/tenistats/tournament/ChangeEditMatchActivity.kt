@@ -127,7 +127,7 @@ class ChangeEditMatchActivity : AppCompatActivity() {
 
                 // Wypełnianie spinnerów
                 val playerAdapter1 = ArrayAdapter<String>(this@ChangeEditMatchActivity, android.R.layout.simple_spinner_item).apply {
-                    setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                    setDropDownViewResource(R.layout.spinner_item_stats_right)
                 }
 
                 // Player 1
@@ -140,12 +140,13 @@ class ChangeEditMatchActivity : AppCompatActivity() {
                 p1.adapter = playerAdapter1
                 if (playerAdapter1.count >1) {
                     p1.setBackgroundColor(getColor(R.color.app_statsViewButton))
+                    playerAdapter1.setDropDownViewResource(R.layout.spinner_item_stats_left)
                 }
 
 
                 // Player 2
                 val playerAdapter2 = ArrayAdapter<String>(this@ChangeEditMatchActivity, android.R.layout.simple_spinner_item).apply {
-                    setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                    setDropDownViewResource(R.layout.spinner_item_stats_right)
                 }
                 if (player2Edit != null) {
                     playerAdapter2.add(player2Edit)
@@ -156,6 +157,7 @@ class ChangeEditMatchActivity : AppCompatActivity() {
                 p2.adapter = playerAdapter2
                 if (playerAdapter2.count > 1) {
                     p2.setBackgroundColor(getColor(R.color.app_statsViewButton))
+                    playerAdapter2.setDropDownViewResource(R.layout.spinner_item_stats_left)
                 }
 
                 // Set 1
@@ -166,7 +168,7 @@ class ChangeEditMatchActivity : AppCompatActivity() {
 
                 // Wypełnianie spinnerów dla setów
                 val setAdapter11 = ArrayAdapter<String>(this@ChangeEditMatchActivity, android.R.layout.simple_spinner_item).apply {
-                    setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                    setDropDownViewResource(R.layout.spinner_item_stats_right)
                 }
 
                 // Set 1 Player 1
@@ -179,11 +181,12 @@ class ChangeEditMatchActivity : AppCompatActivity() {
                 Set1p1.adapter = setAdapter11
                 if (setAdapter11.count > 1 ) {
                     Set1p1.setBackgroundColor(getColor(R.color.app_statsViewButton))
+                    setAdapter11.setDropDownViewResource(R.layout.spinner_item_stats_left)
                 }
 
                 // Set 1 Player 2
                 val setAdapter12 = ArrayAdapter<String>(this@ChangeEditMatchActivity, android.R.layout.simple_spinner_item).apply {
-                    setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                    setDropDownViewResource(R.layout.spinner_item_stats_right)
                 }
                 if (set1p2Edit != null) {
                     setAdapter12.add(set1p2Edit)
@@ -194,6 +197,7 @@ class ChangeEditMatchActivity : AppCompatActivity() {
                 Set1p2.adapter = setAdapter12
                 if (setAdapter12.count > 1) {
                     Set1p2.setBackgroundColor(getColor(R.color.app_statsViewButton))
+                    setAdapter12.setDropDownViewResource(R.layout.spinner_item_stats_left)
                 }
 
                 // Set 2
@@ -205,7 +209,7 @@ class ChangeEditMatchActivity : AppCompatActivity() {
 
                 // Set 2 Player 1
                 val setAdapter21 = ArrayAdapter<String>(this@ChangeEditMatchActivity, android.R.layout.simple_spinner_item).apply {
-                    setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                    setDropDownViewResource(R.layout.spinner_item_stats_right)
                 }
                 if (set2p1Edit != null) {
                     setAdapter21.add(set2p1Edit)
@@ -216,11 +220,12 @@ class ChangeEditMatchActivity : AppCompatActivity() {
                 Set2p1.adapter = setAdapter21
                 if (setAdapter21.count > 1) {
                     Set2p1.setBackgroundColor(getColor(R.color.app_statsViewButton))
+                    setAdapter21.setDropDownViewResource(R.layout.spinner_item_stats_left)
                 }
 
                 // Set 2 Player 2
                 val setAdapter22 = ArrayAdapter<String>(this@ChangeEditMatchActivity, android.R.layout.simple_spinner_item).apply {
-                    setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                    setDropDownViewResource(R.layout.spinner_item_stats_right)
                 }
                 if (set2p2Edit != null) {
                     setAdapter22.add(set2p2Edit)
@@ -231,6 +236,7 @@ class ChangeEditMatchActivity : AppCompatActivity() {
                 Set2p2.adapter = setAdapter22
                 if (setAdapter22.count >1 ) {
                     Set2p2.setBackgroundColor(getColor(R.color.app_statsViewButton))
+                    setAdapter22.setDropDownViewResource(R.layout.spinner_item_stats_left)
                 }
                 // Set 3
                 val set3p1 = dataSnapshot.child("set3p1").getValue(String::class.java)
@@ -240,7 +246,7 @@ class ChangeEditMatchActivity : AppCompatActivity() {
 
                 // Set 3 Player 1
                 val setAdapter31 = ArrayAdapter<String>(this@ChangeEditMatchActivity, android.R.layout.simple_spinner_item).apply {
-                    setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                    setDropDownViewResource(R.layout.spinner_item_stats_right)
                 }
                 if(set3p1!=null && set3p2!=null) {
                     if (set3p1Edit != null) {
@@ -252,6 +258,7 @@ class ChangeEditMatchActivity : AppCompatActivity() {
                     Set3p1.adapter = setAdapter31
                     if (setAdapter31.count > 1) {
                         Set3p1.setBackgroundColor(getColor(R.color.app_statsViewButton))
+                        setAdapter31.setDropDownViewResource(R.layout.spinner_item_stats_left)
                     }
 
                     // Set 3 Player 2
@@ -259,7 +266,7 @@ class ChangeEditMatchActivity : AppCompatActivity() {
                         this@ChangeEditMatchActivity,
                         android.R.layout.simple_spinner_item
                     ).apply {
-                        setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                        setDropDownViewResource(R.layout.spinner_item_stats_right)
                     }
                     setAdapter32.clear()
                     if (set3p2Edit != null) {
@@ -271,6 +278,7 @@ class ChangeEditMatchActivity : AppCompatActivity() {
                     Set3p2.adapter = setAdapter32
                     if (setAdapter32.count > 1) {
                         Set3p2.setBackgroundColor(getColor(R.color.app_statsViewButton))
+                        setAdapter32.setDropDownViewResource(R.layout.spinner_item_stats_left)
                     }
                 }
                 else
@@ -306,9 +314,8 @@ class ChangeEditMatchActivity : AppCompatActivity() {
                     database.child("set3p2Edit").removeValue()
 
                     // Przejście do EditMatchActivity
-                    val intent = Intent(this@ChangeEditMatchActivity, EditMatchActivity::class.java)
+                    val intent = Intent(this@ChangeEditMatchActivity, GenerateDrawActivity::class.java)
                     intent.putExtra("tournament_id", tournamentId)
-                    intent.putExtra("match_number", matchNumber)
                     intent.putExtra("draw_size", drawSize)
                     startActivity(intent)
                 }
@@ -391,16 +398,15 @@ class ChangeEditMatchActivity : AppCompatActivity() {
             database.child("set3p1Edit").removeValue()
             database.child("set3p2Edit").removeValue()
 
-            val intent = Intent(this, EditMatchActivity::class.java)
+            val intent = Intent(this@ChangeEditMatchActivity, GenerateDrawActivity::class.java)
             intent.putExtra("tournament_id", tournamentId)
-            intent.putExtra("match_number", matchNumber)
             intent.putExtra("draw_size", drawSize)
             startActivity(intent)
         }
 
         cancelButton = binding.btnCancel
         cancelButton.setOnClickListener {
-            val intent = Intent(this, EditMatchActivity::class.java)
+            val intent = Intent(this@ChangeEditMatchActivity, UpdateEditMatchActivity::class.java)
             intent.putExtra("tournament_id", tournamentId)
             intent.putExtra("match_number", matchNumber)
             intent.putExtra("draw_size", drawSize)
