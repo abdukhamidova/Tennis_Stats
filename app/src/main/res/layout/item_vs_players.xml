@@ -42,6 +42,15 @@
 
             <TableRow>
                 <TextView
+                    android:id="@+id/textViewWin1Match"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_weight="0"
+                    android:layout_marginEnd="@dimen/_3sdp"
+                    android:gravity="center"
+                    android:visibility="visible"
+                    app:drawableStartCompat="@drawable/icon_laurel3" />
+                <TextView
                     android:id="@+id/textViewItem1Player1"
                     android:layout_height="wrap_content"
                     android:layout_width="0dp"
@@ -72,6 +81,15 @@
             </TableRow>
             <TableRow
                 android:layout_marginTop="@dimen/_3sdp">
+                <TextView
+                    android:id="@+id/textViewWin2Match"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_weight="0"
+                    android:layout_marginEnd="@dimen/_3sdp"
+                    android:gravity="center"
+                    android:visibility="visible"
+                    app:drawableStartCompat="@drawable/icon_laurel3" />
                 <TextView
                     android:id="@+id/textViewItem1Player2"
                     android:layout_height="wrap_content"

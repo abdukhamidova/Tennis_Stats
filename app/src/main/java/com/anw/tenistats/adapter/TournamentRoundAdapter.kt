@@ -11,10 +11,11 @@ import com.anw.tenistats.databinding.ItemRoundBinding
 import com.anw.tenistats.tournament.Round
 import com.anw.tenistats.tournament.TournamentMatchDataClass
 import com.google.firebase.auth.FirebaseAuth
-
+import androidx.core.graphics.drawable.DrawableCompat
+import androidx.core.content.ContextCompat
 class TournamentRoundAdapter(
     private var rounds: List<Round>,
-    private var creator :String,
+    private var creator: String,
     private val onMatchClick: (TournamentMatchDataClass) -> Unit
 ) : RecyclerView.Adapter<TournamentRoundAdapter.RoundViewHolder>() {
 
@@ -22,6 +23,18 @@ class TournamentRoundAdapter(
         RecyclerView.ViewHolder(binding.root) {
         fun bind(round: Round) {
             with(binding) {
+                // Reset the visibility and drawable states for Match 1
+                vsPlayers1.textViewWin1Match.visibility = View.INVISIBLE
+                vsPlayers1.textViewWin1Match.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
+                vsPlayers1.textViewWin2Match.visibility = View.INVISIBLE
+                vsPlayers1.textViewWin2Match.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
+
+                // Reset the visibility and drawable states for Match 2
+                vsPlayers2.textViewWin1Match.visibility = View.INVISIBLE
+                vsPlayers2.textViewWin1Match.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
+                vsPlayers2.textViewWin2Match.visibility = View.INVISIBLE
+                vsPlayers2.textViewWin2Match.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
+
                 // Bind Match 1
                 vsPlayers1.textViewItem1Player1.text = round.match1.player1
                 vsPlayers1.textViewItem1Player2.text = round.match1.player2
@@ -32,25 +45,33 @@ class TournamentRoundAdapter(
                 vsPlayers1.textViewItem1P1Set3.text = round.match1.set3p1
                 vsPlayers1.textViewItem1P2Set3.text = round.match1.set3p2
 
+                // Ensure set3 visibility
                 if (round.match1.set3p1.isNotEmpty() && round.match1.set3p2.isNotEmpty()) {
                     vsPlayers1.textViewItem1P1Set3.visibility = View.VISIBLE
                     vsPlayers1.textViewItem1P2Set3.visibility = View.VISIBLE
-                    vsPlayers1.textViewItem1P1Set3.text = round.match1.set3p1
-                    vsPlayers1.textViewItem1P2Set3.text = round.match1.set3p2
                 } else {
                     vsPlayers1.textViewItem1P1Set3.visibility = View.GONE
                     vsPlayers1.textViewItem1P2Set3.visibility = View.GONE
                 }
-                vsPlayers1.notificationIcon.visibility = if (round.match1.changes && creator== FirebaseAuth.getInstance().currentUser?.uid.toString()) View.VISIBLE else View.GONE
 
+                // Set laurel icons for Match 1
+                if (round.match1.winner.isNotEmpty()) {
+                    val drawable = ContextCompat.getDrawable(itemView.context, R.drawable.icon_laurel3)
+                    val tintedDrawable = DrawableCompat.wrap(drawable!!)
+                    DrawableCompat.setTint(tintedDrawable, ContextCompat.getColor(itemView.context, R.color.gold))
 
-                // If it's the final round, hide match 2
+                    if (round.match1.winner == "player1") {
+                        vsPlayers1.textViewWin1Match.setCompoundDrawablesWithIntrinsicBounds(tintedDrawable, null, null, null)
+                        vsPlayers1.textViewWin1Match.visibility = View.VISIBLE
+                    } else if (round.match1.winner == "player2") {
+                        vsPlayers1.textViewWin2Match.setCompoundDrawablesWithIntrinsicBounds(tintedDrawable, null, null, null)
+                        vsPlayers1.textViewWin2Match.visibility = View.VISIBLE
+                    }
+                }
+
+                // Similar logic for Match 2
                 if (round.match1 != round.match2) {
                     vsPlayers2.root.visibility = View.VISIBLE
-                    viewTopLine.visibility = View.VISIBLE
-                    viewVerticalLine.visibility = View.VISIBLE
-                    viewBottomLine.visibility = View.VISIBLE
-                    viewLittleLine.visibility = View.VISIBLE
                     vsPlayers2.textViewItem1Player1.text = round.match2.player1
                     vsPlayers2.textViewItem1Player2.text = round.match2.player2
                     vsPlayers2.textViewItem1P1Set1.text = round.match2.set1p1
@@ -60,36 +81,43 @@ class TournamentRoundAdapter(
                     vsPlayers2.textViewItem1P1Set3.text = round.match2.set3p1
                     vsPlayers2.textViewItem1P2Set3.text = round.match2.set3p2
 
+                    // Ensure set3 visibility
                     if (round.match2.set3p1.isNotEmpty() && round.match2.set3p2.isNotEmpty()) {
                         vsPlayers2.textViewItem1P1Set3.visibility = View.VISIBLE
                         vsPlayers2.textViewItem1P2Set3.visibility = View.VISIBLE
-                        vsPlayers2.textViewItem1P1Set3.text = round.match2.set3p1
-                        vsPlayers2.textViewItem1P2Set3.text = round.match2.set3p2
                     } else {
                         vsPlayers2.textViewItem1P1Set3.visibility = View.GONE
                         vsPlayers2.textViewItem1P2Set3.visibility = View.GONE
                     }
+
+                    // Set laurel icons for Match 2
+                    if (round.match2.winner.isNotEmpty()) {
+                        val drawable = ContextCompat.getDrawable(itemView.context, R.drawable.icon_laurel3)
+                        val tintedDrawable = DrawableCompat.wrap(drawable!!)
+                        DrawableCompat.setTint(tintedDrawable, ContextCompat.getColor(itemView.context, R.color.gold))
+
+                        if (round.match2.winner == "player1") {
+                            vsPlayers2.textViewWin1Match.setCompoundDrawablesWithIntrinsicBounds(tintedDrawable, null, null, null)
+                            vsPlayers2.textViewWin1Match.visibility = View.VISIBLE
+                        } else if (round.match2.winner == "player2") {
+                            vsPlayers2.textViewWin2Match.setCompoundDrawablesWithIntrinsicBounds(tintedDrawable, null, null, null)
+                            vsPlayers2.textViewWin2Match.visibility = View.VISIBLE
+                        }
+                    }
                 } else {
                     vsPlayers2.root.visibility = View.GONE
-                    viewTopLine.visibility = View.GONE
-                    viewVerticalLine.visibility = View.GONE
-                    viewBottomLine.visibility = View.GONE
-                    viewLittleLine.visibility = View.GONE
                 }
-                vsPlayers2.notificationIcon.visibility = if (round.match2.changes && creator== FirebaseAuth.getInstance().currentUser?.uid.toString()) View.VISIBLE else View.GONE
 
-
-                // Add listeners for Match 1
+                // Add click listeners for matches
                 root.findViewById<View>(R.id.vsPlayers1).setOnClickListener {
                     onMatchClick(round.match1)
                 }
-
-                // Add listeners for Match 2 (if visible)
                 root.findViewById<View>(R.id.vsPlayers2).setOnClickListener {
                     onMatchClick(round.match2)
                 }
             }
         }
+
     }
 
 
