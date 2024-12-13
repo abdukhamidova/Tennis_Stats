@@ -38,8 +38,12 @@ class ActivityMatchShortSummary : AppCompatActivity() {
     private lateinit var drawerLayout: DrawerLayout
     private var userId = ""
     private lateinit var database: DatabaseReference
-
+    private lateinit var databaseT: DatabaseReference
     private lateinit var pl1: String
+    private lateinit var  id_tournament: String
+    private lateinit var match_number: String
+    private lateinit var  tournament_name: String
+    private lateinit var  drawSize: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,6 +79,8 @@ class ActivityMatchShortSummary : AppCompatActivity() {
         }
         //MENU
 
+
+
         //pola w tabeli wyniku
         val player1 = binding.textviewPlayer1Stats
         val player2 = binding.textviewPlayer2Stats
@@ -98,6 +104,7 @@ class ActivityMatchShortSummary : AppCompatActivity() {
         binding.textviewDateVM.text = formattedDate
 
         userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
+
         // Wywołaj funkcję, aby znaleźć MatchID na podstawie daty
         getMatchIdByDate(userId, matchDateInMillis) { matchId ->
             if (matchId != null) {
@@ -105,6 +112,7 @@ class ActivityMatchShortSummary : AppCompatActivity() {
                 database = FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
                     .getReference(userId).child("Matches").child(matchId)
                 // Ustaw wynik w tabeli
+                printTournament()
                 setscore(player1, player2, serve1, serve2, set1p1, set2p1, set3p1, set1p2, set2p2, set3p2, pkt1, pkt2)
 
                 binding.textViewSave.setOnClickListener {
@@ -128,6 +136,106 @@ class ActivityMatchShortSummary : AppCompatActivity() {
             }
         }
     }
+
+    private fun printTournament() {
+        if (!this::database.isInitialized) {
+            Log.e("printTournament", "Database reference is not initialized")
+            return
+        }
+
+        database.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    val idTournament = snapshot.child("id_tournament").getValue(String::class.java)
+                    val matchNumber = snapshot.child("match_number").getValue(String::class.java)
+
+                    if (!idTournament.isNullOrEmpty()) {
+                        setupTournamentLayout()
+
+                        databaseT = FirebaseDatabase.getInstance(
+                            "https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/"
+                        ).getReference("Tournaments").child(idTournament)
+
+                        databaseT.addListenerForSingleValueEvent(object : ValueEventListener {
+                            override fun onDataChange(snapshot: DataSnapshot) {
+                                updateTournamentInfo(snapshot, matchNumber)
+                            }
+
+                            override fun onCancelled(error: DatabaseError) {
+                                Log.e("printTournament", "Error fetching tournament data: ${error.message}")
+                            }
+                        })
+                    } else {
+                        Log.w("printTournament", "id_tournament is null or empty")
+                    }
+                } else {
+                    Log.w("printTournament", "Snapshot does not exist")
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.e("printTournament", "Database error: ${error.message}")
+            }
+        })
+    }
+    private fun setupTournamentLayout() {
+        binding.linearLayoutTournament.visibility = View.VISIBLE
+        binding.linearLayoutRound.visibility = View.VISIBLE
+    }
+
+    private fun updateTournamentInfo(snapshot: DataSnapshot, matchNumber: String?) {
+        // Logowanie nazwy turnieju
+        val tournamentName = snapshot.child("name").getValue(String::class.java) ?: "Brak nazwy"
+        Log.d("TournamentInfo", "Tournament Name: $tournamentName")
+
+        // Logowanie rozmiaru drabinki
+        val drawSize = snapshot.child("drawSize").getValue(String::class.java)?.toIntOrNull() ?: 0
+        Log.d("TournamentInfo", "Draw Size: $drawSize")
+
+        if (drawSize > 0 && !matchNumber.isNullOrEmpty()) {
+            // Logowanie numeru meczu
+            val matchNumberInt = matchNumber.toIntOrNull() ?: 0
+            Log.d("TournamentInfo", "Match Number: $matchNumberInt")
+
+            // Logowanie obliczonej rundy
+            val roundNumber = calculateRound(drawSize, matchNumberInt)
+            Log.d("TournamentInfo", "Round Number: $roundNumber")
+
+            // Ustawianie tekstów w UI
+            binding.textViewTournament.text = tournamentName
+            if(roundNumber!=1)
+                binding.textViewRound.text = "1/$roundNumber"
+            else
+                binding.textViewRound.text = "final"
+        } else {
+            Log.d("TournamentInfo", "Invalid data: drawSize <= 0 or matchNumber is null or empty")
+
+            binding.textViewTournament.text = "Nieprawidłowe dane"
+            binding.textViewRound.text = "-"
+        }
+    }
+
+    private fun calculateRound(drawSize: Int, matchNumber: Int): Int {
+        var round = drawSize / 2  // Początkowy rozmiar rundy
+        var size = drawSize
+        var currentMatch = matchNumber
+
+        // Zmniejszamy rozmiar rundy i przypisujemy odpowiednią rundę do matchNumber
+        while (size > 1) {
+            size /= 2  // Zmniejszamy rozmiar drabinki
+            // Sprawdzamy, w której połowie jest matchNumber
+            if (currentMatch >= size) {
+                return round
+            }
+            else
+                round /= 2  // Jeśli jest w drugiej połowie, zmniejszamy rundę
+        }
+        return round
+    }
+
+
+
+
 
     private fun setscore(player1: TextView, player2: TextView, serve1: TextView, serve2: TextView,
                          set1p1: TextView, set2p1: TextView, set3p1: TextView,
