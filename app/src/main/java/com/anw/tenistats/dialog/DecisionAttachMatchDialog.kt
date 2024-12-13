@@ -6,6 +6,7 @@ import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.widget.Button
+import android.widget.Toast
 import com.anw.tenistats.R
 import com.anw.tenistats.stats.ViewStatsActivity
 import com.anw.tenistats.tournament.AddRoundMatchActivity
@@ -59,7 +60,6 @@ class DecisionAttachMatchDialog (
                                 dbref.child(it).child("id_tournament").setValue(tournamentID)
                                 dbref.child(it).child("match_number").setValue(matchNumber)
                             }
-
                             Log.d("Firebase", "Mecz zaktualizowany z tournamentId i matchNumber.")
                         }
                         if (!matchFound) {
@@ -76,6 +76,8 @@ class DecisionAttachMatchDialog (
                     putExtra("matchNumber", matchNumber)
                 }
                 context.startActivity(intent)*/
+                Toast.makeText(context, "Match was attached.", Toast.LENGTH_SHORT).show()
+
                 alertDialog.dismiss()
                 if(context is AddRoundMatchActivity) context.finish()
             }

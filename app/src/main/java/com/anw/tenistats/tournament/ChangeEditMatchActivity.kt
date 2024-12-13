@@ -49,12 +49,15 @@ class ChangeEditMatchActivity : AppCompatActivity() {
     private lateinit var Set2p2 : Spinner
     private lateinit var Set3p1 : Spinner
     private lateinit var Set3p2 : Spinner
+    private lateinit var Winner : Spinner
     private lateinit var pN1 : TextView
     private lateinit var pN2 : TextView
 
     private lateinit var submitButton : Button
     private lateinit var cancelButton : Button
     private lateinit var rejectButton : Button
+
+    private var winnerCalculate = true
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -113,6 +116,7 @@ class ChangeEditMatchActivity : AppCompatActivity() {
         Set2p2 = binding.set2p2Score
         Set3p1 = binding.set3p1Score
         Set3p2 = binding.set3p2Score
+        Winner = binding.spinnerWinner
 
         /*pN1 = binding.TextViewPlayer1
         pN2 = binding.TextViewPlayer2*/
@@ -214,7 +218,8 @@ class ChangeEditMatchActivity : AppCompatActivity() {
                 if (set2p1Edit != null) {
                     setAdapter21.add(set2p1Edit)
                     setAdapter21.add(set2p1!!)
-                } else {
+                }
+                else {
                     if(set2p1 == null)
                         setAdapter21.add("None")
                     else
@@ -233,7 +238,8 @@ class ChangeEditMatchActivity : AppCompatActivity() {
                 if (set2p2Edit != null) {
                     setAdapter22.add(set2p2Edit)
                     setAdapter22.add(set2p2!!)
-                } else {
+                }
+                else {
                     if(set2p2 == null)
                         setAdapter22.add("None")
                     else
@@ -287,10 +293,33 @@ class ChangeEditMatchActivity : AppCompatActivity() {
                         setAdapter32.setDropDownViewResource(R.layout.spinner_item_stats_left)
                     }
                 }
-                else
-                {
+                else {
                     Set3p1.isEnabled = false
                     Set3p2.isEnabled = false
+                }
+///tu cos mieszam - potem usunac
+                // Winner
+                val winner = dataSnapshot.child("winner").getValue(String::class.java)
+                val winnerEdit = dataSnapshot.child("winnerEdit").getValue(String::class.java)
+
+                // Wypełnianie spinnerów dla setów
+                val winnerAdapter = ArrayAdapter<String>(this@ChangeEditMatchActivity, android.R.layout.simple_spinner_item).apply {
+                    setDropDownViewResource(R.layout.spinner_item_stats_right)
+                }
+
+                // Set 1 Player 1
+                if (winnerEdit != null) {
+                    winnerAdapter.add(winnerEdit)
+                    winnerAdapter.add(winner!!)
+                    winnerCalculate = false
+                } else {
+                    winnerAdapter.add(winner!!)
+                    winnerCalculate = true
+                }
+                Winner.adapter = winnerAdapter
+                if (winnerAdapter.count > 1 ) {
+                    Winner.setBackgroundColor(getColor(R.color.app_statsViewButton))
+                    winnerAdapter.setDropDownViewResource(R.layout.spinner_item_stats_left)
                 }
             }
 
@@ -318,6 +347,7 @@ class ChangeEditMatchActivity : AppCompatActivity() {
                     database.child("set2p2Edit").removeValue()
                     database.child("set3p1Edit").removeValue()
                     database.child("set3p2Edit").removeValue()
+                    database.child("winnerEdit").removeValue()
 
                     // Przejście do EditMatchActivity
                     val intent = Intent(this@ChangeEditMatchActivity, GenerateDrawActivity::class.java)
@@ -333,7 +363,6 @@ class ChangeEditMatchActivity : AppCompatActivity() {
             })
         }
 
-
         submitButton = binding.btnSubmit
         submitButton.setOnClickListener {
             val selectedPlayer1 = p1.selectedItem.toString()
@@ -342,6 +371,7 @@ class ChangeEditMatchActivity : AppCompatActivity() {
             val selectedSet1p2 = Set1p2.selectedItem.toString()
             val selectedSet2p1 = Set2p1.selectedItem.toString()
             val selectedSet2p2 = Set2p2.selectedItem.toString()
+            val selectedWinner = Winner.selectedItem.toString()
 
             val selectedSet3p1 = if (Set3p1.isEnabled) Set3p1.selectedItem.toString() else null
             val selectedSet3p2 = if (Set3p2.isEnabled) Set3p2.selectedItem.toString() else null
@@ -359,15 +389,19 @@ class ChangeEditMatchActivity : AppCompatActivity() {
                 database.child("set3p2").setValue(selectedSet3p2)
             }
 
-            // Obliczanie zwycięzcy
-            var winner = calculateWinner()
-            if(winner==selectedPlayer1)
-                winner="player1"
-            else if (winner==selectedPlayer2)
-                winner="player2"
-            if (winner != null) {
-                database.child("winner").setValue(winner)
+            if(winnerCalculate){
+                // Obliczanie zwycięzcy
+                var winner = calculateWinner()
+                if(winner==selectedPlayer1)
+                    winner="player1"
+                else if (winner==selectedPlayer2)
+                    winner="player2"
+                if (winner != null) {
+                    database.child("winner").setValue(winner)
+                }
             }
+            else
+                database.child("winner").setValue(selectedWinner)
 
             // Reszta logiki
             database.child("changes").setValue(false)
@@ -398,7 +432,6 @@ class ChangeEditMatchActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-
         cancelButton = binding.btnCancel
         cancelButton.setOnClickListener {
             val intent = Intent(this@ChangeEditMatchActivity, UpdateEditMatchActivity::class.java)
@@ -408,6 +441,7 @@ class ChangeEditMatchActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+
     private fun calculateWinner(): String? {
         // Pobierz wyniki setów
         val set1p1 = Set1p1.selectedItem.toString().toIntOrNull() ?: 0
@@ -431,6 +465,4 @@ class ChangeEditMatchActivity : AppCompatActivity() {
             else -> null // Remis lub brak rozstrzygnięcia
         }
     }
-
-
 }

@@ -230,6 +230,31 @@
 
             </TableLayout>
 
+            <!--spinner do wyboru winnera ~u-->
+            <LinearLayout
+                android:id="@+id/linearLayoutWinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_7sdp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_weight="0.25"
+                    android:text="@string/winner"
+                    android:textColor="@color/general_text_color"
+                    android:textSize="@dimen/_16ssp" />
+
+                <Spinner
+                    android:id="@+id/spinnerWinner"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_37sdp"
+                    android:layout_weight="0.8"
+                    android:textSize="@dimen/_15ssp" />
+            </LinearLayout>
 
         </LinearLayout>
         <!-- Button Section-->
