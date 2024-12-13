@@ -526,7 +526,8 @@ class UpdateEditMatchActivity : AppCompatActivity() {
                 }
             }
         }
-        if (set1p1Value != originalSet1p1Value && set1p1Value != "None") {
+
+        if (set1p1Value != originalSet1p1Value) {
             if(firstUpdate["set1p1"] == true){
                 database.child("set1p1").setValue(set1p1Value)
                 firstUpdate["set1p1"]=false
@@ -543,7 +544,7 @@ class UpdateEditMatchActivity : AppCompatActivity() {
                 }
             }
         }
-        if (set1p2Value != originalSet1p2Value && set1p2Value != "None") {
+        if (set1p2Value != originalSet1p2Value) {
             if(firstUpdate["set1p2"] == true){
                 database.child("set1p2").setValue(set1p2Value)
                 firstUpdate["set1p2"]=false
@@ -560,7 +561,7 @@ class UpdateEditMatchActivity : AppCompatActivity() {
                 }
             }
         }
-        if (set2p1Value != originalSet2p1Value && set2p1Value != "None") {
+        if (set2p1Value != originalSet2p1Value) {
             if(firstUpdate["set2p1"] == true){
                 database.child("set2p1").setValue(set2p1Value)
                 firstUpdate["set2p1"]=false
@@ -577,7 +578,7 @@ class UpdateEditMatchActivity : AppCompatActivity() {
                 }
             }
         }
-        if (set2p2Value != originalSet2p2Value && set2p2Value != "None") {
+        if (set2p2Value != originalSet2p2Value) {
             if(firstUpdate["set2p2"] == true){
                 database.child("set2p2").setValue(set2p2Value)
                 firstUpdate["set2p2"]=false
@@ -594,7 +595,7 @@ class UpdateEditMatchActivity : AppCompatActivity() {
                 }
             }
         }
-        if (set3p1Value != originalSet3p1Value && set3p1Value != "None") {
+        if (set3p1Value != originalSet3p1Value) {
             if(firstUpdate["set3p1"] == true){
                 database.child("set3p1").setValue(set3p1Value)
                 firstUpdate["set3p1"]=false
@@ -611,7 +612,7 @@ class UpdateEditMatchActivity : AppCompatActivity() {
                 }
             }
         }
-        if (set3p2Value != originalSet3p2Value && set3p2Value != "None") {
+        if (set3p2Value != originalSet3p2Value) {
             if(firstUpdate["set3p2"] == true){
                 database.child("set3p2").setValue(set3p2Value)
                 firstUpdate["set3p2"]=false

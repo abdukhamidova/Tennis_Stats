@@ -215,7 +215,10 @@ class ChangeEditMatchActivity : AppCompatActivity() {
                     setAdapter21.add(set2p1Edit)
                     setAdapter21.add(set2p1!!)
                 } else {
-                    setAdapter21.add(set2p1!!)
+                    if(set2p1 == null)
+                        setAdapter21.add("None")
+                    else
+                        setAdapter21.add(set2p1!!)
                 }
                 Set2p1.adapter = setAdapter21
                 if (setAdapter21.count > 1) {
@@ -231,7 +234,10 @@ class ChangeEditMatchActivity : AppCompatActivity() {
                     setAdapter22.add(set2p2Edit)
                     setAdapter22.add(set2p2!!)
                 } else {
-                    setAdapter22.add(set2p2!!)
+                    if(set2p2 == null)
+                        setAdapter22.add("None")
+                    else
+                        setAdapter22.add(set2p2!!)
                 }
                 Set2p2.adapter = setAdapter22
                 if (setAdapter22.count >1 ) {
