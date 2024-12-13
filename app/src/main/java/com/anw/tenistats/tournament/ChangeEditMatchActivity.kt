@@ -337,29 +337,10 @@ class ChangeEditMatchActivity : AppCompatActivity() {
             val selectedSet2p1 = Set2p1.selectedItem.toString()
             val selectedSet2p2 = Set2p2.selectedItem.toString()
 
-            // Sprawdzanie, czy set 3 jest rozgrywany
             val selectedSet3p1 = if (Set3p1.isEnabled) Set3p1.selectedItem.toString() else null
             val selectedSet3p2 = if (Set3p2.isEnabled) Set3p2.selectedItem.toString() else null
 
-            database.addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    val winner = dataSnapshot.child("winner").getValue(String::class.java)
-                    val player1 = dataSnapshot.child("player1").getValue(String::class.java)
-                    val player2 = dataSnapshot.child("player2").getValue(String::class.java)
-                    if (player1 == winner && player1 != selectedPlayer1) {
-                        database.child("winner").setValue(selectedPlayer1)
-                    }
-                    if (player2 == winner && player2 != selectedPlayer2) {
-                        database.child("winner").setValue(selectedPlayer2)
-                    }
-                }
-
-                override fun onCancelled(databaseError: DatabaseError) {
-                    Log.w("EditMatchActivity", "loadWinner:onCancelled", databaseError.toException())
-                }
-            })
-
-            // Zapis danych w bazie danych
+            // Zapis wyników w bazie danych
             database.child("player1").setValue(selectedPlayer1)
             database.child("player2").setValue(selectedPlayer2)
             database.child("set1p1").setValue(selectedSet1p1)
@@ -367,16 +348,23 @@ class ChangeEditMatchActivity : AppCompatActivity() {
             database.child("set2p1").setValue(selectedSet2p1)
             database.child("set2p2").setValue(selectedSet2p2)
 
-            // Zapis danych dla setu 3 tylko, jeśli są dostępne
             if (selectedSet3p1 != null && selectedSet3p2 != null) {
                 database.child("set3p1").setValue(selectedSet3p1)
                 database.child("set3p2").setValue(selectedSet3p2)
             }
 
-            // Zmiana wartości "changed" na false
-            database.child("changes").setValue(false)
+            // Obliczanie zwycięzcy
+            var winner = calculateWinner()
+            if(winner==selectedPlayer1)
+                winner="player1"
+            else if (winner==selectedPlayer2)
+                winner="player2"
+            if (winner != null) {
+                database.child("winner").setValue(winner)
+            }
 
-            // Zmniejszenie wartości węzła "changes"
+            // Reszta logiki
+            database.child("changes").setValue(false)
             databaseT.child("changes").addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     val changes = dataSnapshot.getValue(Int::class.java) ?: 0
@@ -388,7 +376,6 @@ class ChangeEditMatchActivity : AppCompatActivity() {
                 }
             })
 
-            // Usuwanie wartości edytowanych z bazy
             database.child("player1Edit").removeValue()
             database.child("player2Edit").removeValue()
             database.child("set1p1Edit").removeValue()
@@ -397,12 +384,14 @@ class ChangeEditMatchActivity : AppCompatActivity() {
             database.child("set2p2Edit").removeValue()
             database.child("set3p1Edit").removeValue()
             database.child("set3p2Edit").removeValue()
+            database.child("winnerEdit").removeValue()
 
             val intent = Intent(this@ChangeEditMatchActivity, GenerateDrawActivity::class.java)
             intent.putExtra("tournament_id", tournamentId)
             intent.putExtra("draw_size", drawSize)
             startActivity(intent)
         }
+
 
         cancelButton = binding.btnCancel
         cancelButton.setOnClickListener {
@@ -413,5 +402,29 @@ class ChangeEditMatchActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+    private fun calculateWinner(): String? {
+        // Pobierz wyniki setów
+        val set1p1 = Set1p1.selectedItem.toString().toIntOrNull() ?: 0
+        val set1p2 = Set1p2.selectedItem.toString().toIntOrNull() ?: 0
+        val set2p1 = Set2p1.selectedItem.toString().toIntOrNull() ?: 0
+        val set2p2 = Set2p2.selectedItem.toString().toIntOrNull() ?: 0
+        val set3p1 = if (Set3p1.isEnabled) Set3p1.selectedItem.toString().toIntOrNull() ?: 0 else 0
+        val set3p2 = if (Set3p2.isEnabled) Set3p2.selectedItem.toString().toIntOrNull() ?: 0 else 0
+
+        // Liczba wygranych setów przez każdego gracza
+        var player1Wins = 0
+        var player2Wins = 0
+
+        if (set1p1 > set1p2) player1Wins++ else if (set1p2 > set1p1) player2Wins++
+        if (set2p1 > set2p2) player1Wins++ else if (set2p2 > set2p1) player2Wins++
+        if (Set3p1.isEnabled && set3p1 > set3p2) player1Wins++ else if (set3p2 > set3p1) player2Wins++
+
+        return when {
+            player1Wins > player2Wins -> p1.selectedItem.toString() // Gracz 1 wygrywa
+            player2Wins > player1Wins -> p2.selectedItem.toString() // Gracz 2 wygrywa
+            else -> null // Remis lub brak rozstrzygnięcia
+        }
+    }
+
 
 }
