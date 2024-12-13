@@ -230,43 +230,58 @@
 
             </TableLayout>
 
-            <!-- Button Section-->
-            <LinearLayout
-                android:layout_width="match_parent"
+
+        </LinearLayout>
+        <!-- Button Section-->
+        <LinearLayout
+            android:id="@+id/linearLayoutButtonHorizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/layout"
+            app:layout_constraintStart_toStartOf="@id/layout"
+            app:layout_constraintTop_toBottomOf="@id/layout"
+            app:layout_constraintVertical_bias="0.0">
+
+            <Button
+                android:id="@+id/btnCancel"
+                android:layout_width="@dimen/_90sdp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:orientation="horizontal"
-                android:layout_marginTop="@dimen/_40sdp">
+                android:layout_marginEnd="@dimen/_14sdp"
+                android:background="@drawable/border_button"
+                android:text="@string/cancel"
+                android:textColor="@color/dialog_btnCancel"
+                android:textSize="@dimen/_14ssp" />
 
-                <Button
-                    android:id="@+id/btnCancel"
-                    android:layout_width="@dimen/_90sdp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/border_button"
-                    android:textColor="@color/dialog_btnCancel"
-                    android:text="@string/cancel"
-                    android:textSize="@dimen/_14ssp"
-                    android:layout_gravity="center"
-                    android:layout_marginEnd="@dimen/_14sdp"/>
-                <Button
-                    android:id="@+id/btnSubmit"
-                    android:layout_width="@dimen/_90sdp"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/darker_blue"
-                    android:text="@string/submit"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_14ssp"
-                    android:layout_marginEnd="@dimen/_14sdp"/>
-                <Button
-                    android:id="@+id/btnReject"
-                    android:layout_width="@dimen/_90sdp"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/darker_blue"
-                    android:text="@string/reject"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_14ssp" />
-            </LinearLayout>
+            <Button
+                android:id="@+id/btnReject"
+                android:layout_width="@dimen/_90sdp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/darker_blue"
+                android:text="@string/reject"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14ssp" />
+
         </LinearLayout>
+
+        <Button
+            android:id="@+id/btnSubmit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:backgroundTint="@color/darker_blue"
+            android:text="@string/submit"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14ssp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/linearLayoutButtonHorizontal"
+            app:layout_constraintStart_toStartOf="@id/linearLayoutButtonHorizontal"
+            app:layout_constraintTop_toBottomOf="@id/linearLayoutButtonHorizontal"
+            app:layout_constraintVertical_bias="0.0" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.navigation.NavigationView
