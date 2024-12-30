@@ -37,6 +37,8 @@
     <color name="clay_court_color">#a9765d</color>
     <color name="grass_court_color">#088d46</color>
     <color name="carpet_court_color">#993300</color>
+    <color name="tournament_day">#c7b833</color>
+    <color name="today">#75bbf4</color>
     <!--<color name="general_text_color">@color/white</color>-->
     <color name="app_item_color">@color/darker_blue</color>
     <color name="app_menu_buttons">@color/white</color>

@@ -183,5 +183,6 @@
     <string name="attach_match">Attach match</string>
     <string name="alert">Your changes might need owner\'s permission to change</string>
     <string name="ok">OK</string>
+    <string name="add_event">Add Event</string>
 
 </resources>

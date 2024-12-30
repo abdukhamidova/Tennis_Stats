@@ -314,52 +314,18 @@ class GenerateDrawActivity : AppCompatActivity() {
         adapter.notifyDataSetChanged()
     }
     private fun handleMatchWinner(match1: TournamentMatchDataClass, match2: TournamentMatchDataClass) {
-        database.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                // Obsługa match1
-                if (match1.winner.isNotEmpty()) {
-                    val match1Snapshot = snapshot.child(match1.number.toString())
-                    if (match1Snapshot.exists()) {
-                        val player1 = match1Snapshot.child("player1").getValue(String::class.java) ?: ""
-                        val player2 = match1Snapshot.child("player2").getValue(String::class.java) ?: ""
+        // Check if match1 has a winner, and if so, update the winner in the next round
+        if (match1.winner.isNotEmpty()) {
+            val nextRoundMatchIndex = getNextMatchIndex(match1.number)
+            updateWinnerInNextRound(nextRoundMatchIndex, match1.winner, "player1") // Winner of match1 goes to player1
+        }
 
-                        val nextRoundMatchIndex = getNextMatchIndex(match1.number)
-                        if (match1.winner == "player1" && player1.isNotEmpty()) {
-                            updateWinnerInNextRound(nextRoundMatchIndex, player1, "player1")
-                        } else if (match1.winner == "player2" && player2.isNotEmpty()) {
-                            updateWinnerInNextRound(nextRoundMatchIndex, player2, "player1")
-                        }
-                    } else {
-                        Log.e("HandleMatchWinner", "No data found for match1 number: ${match1.number}")
-                    }
-                }
-
-                // Obsługa match2
-                if (match2.winner.isNotEmpty()) {
-                    val match2Snapshot = snapshot.child(match2.number.toString())
-                    if (match2Snapshot.exists()) {
-                        val player1 = match2Snapshot.child("player1").getValue(String::class.java) ?: ""
-                        val player2 = match2Snapshot.child("player2").getValue(String::class.java) ?: ""
-
-                        val nextRoundMatchIndex = getNextMatchIndex(match2.number)
-                        if (match2.winner == "player1" && player1.isNotEmpty()) {
-                            updateWinnerInNextRound(nextRoundMatchIndex, player1, "player2")
-                        } else if (match2.winner == "player2" && player2.isNotEmpty()) {
-                            updateWinnerInNextRound(nextRoundMatchIndex, player2, "player2")
-                        }
-                    } else {
-                        Log.e("HandleMatchWinner", "No data found for match2 number: ${match2.number}")
-                    }
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                Log.e("HandleMatchWinner", "Database error: ${error.message}")
-            }
-        })
+        // Check if match2 has a winner, and if so, update the winner in the next round
+        if (match2.winner.isNotEmpty()) {
+            val nextRoundMatchIndex = getNextMatchIndex(match2.number)
+            updateWinnerInNextRound(nextRoundMatchIndex, match2.winner, "player2") // Winner of match2 goes to player2
+        }
     }
-
-
 
     private fun getNextMatchIndex(currentMatchNumber: String): Int {
         return currentMatchNumber.toInt() / 2

@@ -15,6 +15,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.anw.tenistats.CalendarActivity
 import com.anw.tenistats.R
 import com.anw.tenistats.adapter.TournamentAdapter
 import com.anw.tenistats.databinding.ActivityViewTournamentsBinding
@@ -66,7 +67,10 @@ class ViewTournamentsActivity : AppCompatActivity(), TournamentAdapter.OnItemCli
         navigationDrawerHelper = NavigationDrawerHelper(this)
         navigationDrawerHelper.setupNavigationDrawer(drawerLayout, navigationView, firebaseAuth)
         val backButton = findViewById<ImageButton>(R.id.buttonUndo)
-        backButton.visibility = View.GONE
+        backButton.setImageResource(R.drawable.icon_calendar)
+        backButton.setOnClickListener {
+            startActivity(Intent(this, CalendarActivity::class.java))
+        }
 
         val userEmail = FirebaseAuth.getInstance().currentUser?.email.toString()
         if (userEmail.isNotEmpty()) {

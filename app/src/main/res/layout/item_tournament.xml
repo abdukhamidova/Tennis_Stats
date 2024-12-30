@@ -77,7 +77,7 @@
             </LinearLayout>
         </LinearLayout>
 
-        <!-- Icon in the top-right corner -->
+        <!-- Icon in the bottom-right corner -->
         <ImageView
             android:id="@+id/ImageViewCourt"
             android:layout_width="wrap_content"
