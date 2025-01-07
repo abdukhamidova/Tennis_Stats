@@ -11,6 +11,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.anw.tenistats.databinding.ActivityCalendarBinding
+import com.anw.tenistats.dialog.EditTeamNameDialog
+import com.anw.tenistats.dialog.TournamentListDialog
 import com.anw.tenistats.mainpage.NavigationDrawerHelper
 import com.anw.tenistats.tournament.TournamentDataClass
 import com.applandeo.materialcalendarview.CalendarDay
@@ -83,9 +85,21 @@ class CalendarActivity : AppCompatActivity() {
         calendarView.setOnCalendarDayClickListener(object: OnCalendarDayClickListener{
             override fun onClick(selectedDay: CalendarDay) {
                 val day = String.format("%02d",selectedDay.calendar.get(Calendar.DAY_OF_MONTH))
-                val month = String.format("%02d",selectedDay.calendar.get(Calendar.MONTH))
+                val month = String.format("%02d",selectedDay.calendar.get(Calendar.MONTH)+1)
                 val year = selectedDay.calendar.get(Calendar.YEAR)
                 //TODO: dialog z turniejami/eventami odbywajacymi sie tego dnia według {events.containsKey("$day-$month-$year"} lub "Nothing to show" gdy puste + przyciski "Add event" i "Cancel"
+                val millis = selectedDay.calendar.timeInMillis
+                if(events.containsKey("$day-$month-$year"))
+                {
+                    val tournamentList=events["$day-$month-$year"]
+                    val tournamentListDialog = TournamentListDialog(this@CalendarActivity,tournamentList,millis)
+                    tournamentListDialog.show()
+                }
+                else
+                {
+                    val tournamentListDialog = TournamentListDialog(this@CalendarActivity,null,millis)
+                    tournamentListDialog.show()
+                }
             }
         })
     }

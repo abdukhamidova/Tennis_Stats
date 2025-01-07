@@ -47,7 +47,7 @@
             android:textColor="@color/dialog_btnCancel" />
 
         <Button
-            android:id="@+id/buttonAddPTT"
+            android:id="@+id/buttonAddTournamentCalendar"
             android:layout_width="@dimen/_99sdp"
             android:layout_height="@dimen/_36sdp"
             android:layout_toEndOf="@+id/buttonCancel"

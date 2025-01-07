@@ -33,6 +33,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Date
 import java.util.Locale
 
 class AddTournamentActivity : AppCompatActivity() {
@@ -41,6 +42,7 @@ class AddTournamentActivity : AppCompatActivity() {
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var navigationDrawerHelper: NavigationDrawerHelper
     private lateinit var drawerLayout: DrawerLayout
+    private var calendarDate : Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -110,22 +112,43 @@ class AddTournamentActivity : AppCompatActivity() {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {}
             override fun onNothingSelected(parent: AdapterView<*>) {}
         }
+        calendarDate = intent.getLongExtra("startDate", 0)
+
+// Sprawdzenie, czy wartość została przekazana i ustawienie daty
+        if (calendarDate != 0L) {
+            val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+            val formattedDate = dateFormat.format(Date(calendarDate))
+            binding.editTextStartDate.setText(formattedDate)
+        }
+
+// Obsługa kliknięcia i możliwości edycji daty
         binding.editTextStartDate.setOnClickListener {
             val calendar = Calendar.getInstance()
+
+            // Jeśli data była ustawiona wcześniej, wykorzystaj ją jako startową
+            if (calendarDate != 0L) {
+                calendar.timeInMillis = calendarDate
+            }
+
             val year = calendar.get(Calendar.YEAR)
             val month = calendar.get(Calendar.MONTH)
             val day = calendar.get(Calendar.DAY_OF_MONTH)
 
             val datePickerDialog = DatePickerDialog(
                 this,
-                DatePickerDialog.OnDateSetListener { view: DatePicker?, year: Int, monthOfYear: Int, dayOfMonth: Int ->
+                { _: DatePicker, year: Int, monthOfYear: Int, dayOfMonth: Int ->
                     val selectedDate = "$dayOfMonth/${monthOfYear + 1}/$year"
                     binding.editTextStartDate.setText(selectedDate)
+                    // Aktualizacja wartości milisekund przy edycji daty
+                    val updatedCalendar = Calendar.getInstance()
+                    updatedCalendar.set(year, monthOfYear, dayOfMonth)
+                    calendarDate = updatedCalendar.timeInMillis
                 },
                 year, month, day
             )
             datePickerDialog.show()
         }
+
         binding.editTextEndDate.setOnClickListener {
             val calendar = Calendar.getInstance()
             val year = calendar.get(Calendar.YEAR)
