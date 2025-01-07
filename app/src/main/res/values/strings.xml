@@ -184,5 +184,6 @@
     <string name="alert">Your changes might need owner\'s permission to change</string>
     <string name="ok">OK</string>
     <string name="add_event">Add Event</string>
+    <string name="list_of_tournaments">List Of Tournaments</string>
 
 </resources>
