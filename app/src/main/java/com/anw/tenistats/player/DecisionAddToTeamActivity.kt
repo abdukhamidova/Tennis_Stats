@@ -27,7 +27,6 @@ class DecisionAddToTeamActivity(private val context: Context) {
         btnNo.setOnClickListener {
             alertDialog.dismiss()
 
-
             val intent = Intent(context, ViewPlayerActivity::class.java)
             context.startActivity(intent)
         }

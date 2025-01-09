@@ -72,8 +72,8 @@ class AddRoundMatchActivity : AppCompatActivity(), MatchAdapter.OnItemClickListe
         //endregion
 
         // Pobierz dane z Intentu
-        val tournamentId = intent.getStringExtra("tournamentId")
-        val matchNumber = intent.getStringExtra("matchNumber")
+        var tournamentId = intent.getStringExtra("tournamentId")
+        var matchNumber = intent.getStringExtra("matchNumber")
 
         firebaseAuth = FirebaseAuth.getInstance()
 
@@ -87,7 +87,7 @@ class AddRoundMatchActivity : AppCompatActivity(), MatchAdapter.OnItemClickListe
         adapter.setOnItemClickListener(this)
         matchRecyclerView.adapter = adapter
 
-        getMatchData()
+        getMatchData(tournamentId)
 
         val searchEditText = binding.searchEditText
         searchEditText.addTextChangedListener(object : TextWatcher {
@@ -99,46 +99,73 @@ class AddRoundMatchActivity : AppCompatActivity(), MatchAdapter.OnItemClickListe
         })
     }
 
-    private fun getMatchData() {
+    private fun getMatchData(tournamentId: String?) {
         val user = firebaseAuth.currentUser?.uid
         dbref = FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
             .getReference(user.toString())
             .child("Matches")
 
-        dbref.addValueEventListener(object : ValueEventListener {
-            @SuppressLint("NotifyDataSetChanged")
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()) {
-                    matchArrayList.clear()
+        //filt meczow
+        getTournamentStartDate(tournamentId){tournamentStartDate ->
+            dbref.addValueEventListener(object : ValueEventListener {
+                @SuppressLint("NotifyDataSetChanged")
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.exists()) {
+                        matchArrayList.clear()
 
-                    for (matchSnapshot in snapshot.children.reversed()) {
-                        // Pobieramy mecz do obiektu MatchViewClass
-                        val match = matchSnapshot.getValue(MatchViewClass::class.java)
-                        if (match != null) {
-                            // Sprawdzamy, czy mecz nie ma podwęzłów "id_tournament" i "match_number"
-                            val hasIdTournament = matchSnapshot.hasChild("id_tournament")
-                            val hasMatchNumber = matchSnapshot.hasChild("match_number")
+                        for (matchSnapshot in snapshot.children.reversed()) {
+                            // Pobieramy mecz do obiektu MatchViewClass
+                            val match = matchSnapshot.getValue(MatchViewClass::class.java)
+                            if (match != null) {
 
-                            // Jeśli mecz ma te podwęzły, pomijamy go
-                            if (hasIdTournament || hasMatchNumber) {
-                                continue
+                                // Sprawdzamy, czy mecz nie ma podwęzłów "id_tournament" i "match_number"
+                                val hasIdTournament = matchSnapshot.hasChild("id_tournament")
+                                val hasMatchNumber = matchSnapshot.hasChild("match_number")
+                                val matchDate = matchSnapshot.child("data").getValue(Long::class.java) ?: 0L
+
+                                // Jeśli mecz ma te podwęzły lub data meczu jest wcześniejsza niż data turnieju, pomijamy go
+                                if ((hasIdTournament || hasMatchNumber) || (matchDate < tournamentStartDate ?: Long.MAX_VALUE)) {
+                                    continue
+                                }
+
+                                // Jeśli mecz nie ma tych podwęzłów, dodajemy go do listy
+                                binding.textViewNotFound.visibility = View.INVISIBLE
+                                matchArrayList.add(match)
+                            } else {
+                                binding.textViewNotFound.visibility = View.VISIBLE
                             }
-
-                            // Jeśli mecz nie ma tych podwęzłów, dodajemy go do listy
-                            binding.textViewNotFound.visibility = View.INVISIBLE
-                            matchArrayList.add(match)
-                        } else {
-                            binding.textViewNotFound.visibility = View.VISIBLE
                         }
-                    }
 
-                    adapter.notifyDataSetChanged()
+                        adapter.notifyDataSetChanged()
+                    }
                 }
+
+                override fun onCancelled(error: DatabaseError) {}
+            })
+        }
+
+    }
+
+    fun getTournamentStartDate(tournamentId: String?, callback: (Long?) -> Unit) {
+        val database = FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/").reference.child("Tournaments")
+
+        database.orderByChild("id").equalTo(tournamentId).addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (tournamentSnapshot in snapshot.children) {
+                    val startDate = tournamentSnapshot.child("startDate").getValue(Long::class.java)
+                    callback(startDate)
+                    return
+                }
+                callback(null) // Gdy turniej o podanym ID nie zostanie znaleziony
             }
 
-            override fun onCancelled(error: DatabaseError) {}
+            override fun onCancelled(error: DatabaseError) {
+                println("Database error: ${'$'}error.message")
+                callback(null)
+            }
         })
     }
+
 
     override fun onItemClick(matchView: MatchViewClass) {
         // Zmień zachowanie tutaj
