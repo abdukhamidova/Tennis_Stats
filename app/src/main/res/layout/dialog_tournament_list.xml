@@ -19,7 +19,7 @@
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="200dp"
         android:layout_weight="1"
         android:layout_marginTop="@dimen/_3sdp"
         android:layout_marginBottom="@dimen/_2sdp">
@@ -33,27 +33,27 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_15sdp"
-        android:layout_marginBottom="@dimen/_11sdp"
-        android:layout_gravity="center_horizontal">
-        <Button
-            android:id="@+id/buttonCancel"
-            android:layout_width="@dimen/_99sdp"
-            android:layout_height="@dimen/_36sdp"
-            android:layout_marginEnd="@dimen/_7sdp"
-            android:background="@drawable/border_button"
-            android:text="@string/cancel"
-            android:textSize="@dimen/_14ssp"
-            android:textColor="@color/dialog_btnCancel" />
-
+        android:layout_marginVertical="@dimen/_11sdp"
+        android:layout_marginHorizontal="@dimen/_5sdp"
+        android:layout_gravity="center_horizontal"
+        android:padding="@dimen/_10sdp">
         <Button
             android:id="@+id/buttonAddTournamentCalendar"
-            android:layout_width="@dimen/_99sdp"
-            android:layout_height="@dimen/_36sdp"
-            android:layout_toEndOf="@+id/buttonCancel"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="wrap_content"
             android:backgroundTint="@color/dialog_textTitle_color"
-            android:text="@string/add_tournament"
+            android:text="@string/add_event"
             android:textColor="@color/dialog_text_color"
-            android:textSize="@dimen/_14ssp" />
+            android:textSize="@dimen/_14ssp"  />
+        <Button
+            android:id="@+id/buttonCancel"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_below="@id/buttonAddTournamentCalendar"
+            android:background="@drawable/border_button"
+            android:text="@string/cancel"
+            android:textColor="@color/dialog_btnCancel"
+            android:textSize="@dimen/_14ssp"  />
     </RelativeLayout>
 </LinearLayout>
