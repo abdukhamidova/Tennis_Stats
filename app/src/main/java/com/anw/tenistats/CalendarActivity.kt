@@ -1,6 +1,7 @@
 package com.anw.tenistats
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
@@ -14,7 +15,9 @@ import com.anw.tenistats.databinding.ActivityCalendarBinding
 import com.anw.tenistats.dialog.EditTeamNameDialog
 import com.anw.tenistats.dialog.TournamentListDialog
 import com.anw.tenistats.mainpage.NavigationDrawerHelper
+import com.anw.tenistats.tournament.AddTournamentActivity
 import com.anw.tenistats.tournament.TournamentDataClass
+import com.anw.tenistats.tournament.TournamentFilterActivity
 import com.applandeo.materialcalendarview.CalendarDay
 import com.applandeo.materialcalendarview.CalendarView
 import com.applandeo.materialcalendarview.listeners.OnCalendarDayClickListener
@@ -79,6 +82,11 @@ class CalendarActivity : AppCompatActivity() {
         calendars.clear()
 
         getTournamentData()
+
+        binding.buttonAddEvent.setOnClickListener{
+            val intent = Intent(this@CalendarActivity, AddTournamentActivity::class.java)
+            startActivity(intent)
+        }
 
         //UWAGA! trzeba uwazac, bo miesiace sobie liczy od 0 baran)
 

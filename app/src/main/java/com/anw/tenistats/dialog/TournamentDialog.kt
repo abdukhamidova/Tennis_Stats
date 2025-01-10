@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.core.content.ContextCompat.startActivity
 import com.anw.tenistats.R
 import com.anw.tenistats.tournament.AddPlayersToTournamentActivity
@@ -43,6 +44,9 @@ class TournamentDialog(private val context: Context, private val openedFromStart
                 val btnShowDetails : Button = dialogView.findViewById(R.id.buttonShowDetails)
                 val btnCancel : Button = dialogView.findViewById(R.id.buttonCancel)
                 val btnDelete : ImageView = dialogView.findViewById(R.id.buttonDelete)
+
+                val tournamentName = dialogView.findViewById<TextView>(R.id.textTournamentName)
+                tournamentName.text = dataSnapshot.child("name").value.toString()
 
                 if(dataSnapshot.child("creator").value != user.toString()){
                     btnDelete.visibility = View.GONE

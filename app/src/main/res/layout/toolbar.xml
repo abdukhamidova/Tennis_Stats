@@ -30,6 +30,18 @@
                 android:visibility="visible"
                 app:tint="@color/app_menu_buttons"/>
 
+            <TextView
+                android:id="@+id/header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_toEndOf="@id/buttonMenu"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_20ssp" />
+
             <ImageButton
                 android:id="@+id/buttonUndo"
                 android:layout_width="@dimen/_36sdp"

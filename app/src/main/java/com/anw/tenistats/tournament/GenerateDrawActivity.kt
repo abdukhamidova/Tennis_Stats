@@ -70,6 +70,8 @@ class GenerateDrawActivity : AppCompatActivity() {
         navigationDrawerHelper.setupNavigationDrawer(drawerLayout, navigationView, firebaseAuth)
         val backButton = findViewById<ImageButton>(R.id.buttonUndo)
         backButton.visibility = View.GONE
+        val tournamentName = findViewById<TextView>(R.id.header)
+        tournamentName.visibility = View.VISIBLE
 
         val userEmail = FirebaseAuth.getInstance().currentUser?.email.toString()
         if (userEmail.isNotEmpty()) {
@@ -86,6 +88,17 @@ class GenerateDrawActivity : AppCompatActivity() {
         drawRecyclerView = binding.roundList
         drawRecyclerView.layoutManager = LinearLayoutManager(this)
         drawRecyclerView.setHasFixedSize(true)
+
+        FirebaseDatabase.getInstance(
+            "https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/"
+        ).getReference("Tournaments").child(tournamentId).child("name").addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                tournamentName.text = dataSnapshot.getValue(String::class.java).toString()
+            }
+            override fun onCancelled(databaseError: DatabaseError) {
+
+            }
+        })
 
         if(drawSize == "null" || drawSize == "None" || drawSize.isNullOrEmpty()){
             binding.relativeLayoutRound.visibility = View.GONE
