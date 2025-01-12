@@ -11,13 +11,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import com.anw.tenistats.databinding.ActivityCalendarBinding
-import com.anw.tenistats.dialog.EditTeamNameDialog
+import com.anw.tenistats.databinding.ActivityCalendarTournamentBinding
 import com.anw.tenistats.dialog.TournamentListDialog
 import com.anw.tenistats.mainpage.NavigationDrawerHelper
 import com.anw.tenistats.tournament.AddTournamentActivity
 import com.anw.tenistats.tournament.TournamentDataClass
-import com.anw.tenistats.tournament.TournamentFilterActivity
 import com.applandeo.materialcalendarview.CalendarDay
 import com.applandeo.materialcalendarview.CalendarView
 import com.applandeo.materialcalendarview.listeners.OnCalendarDayClickListener
@@ -33,8 +31,8 @@ import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
-class CalendarActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityCalendarBinding
+class CalendarTournamentActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityCalendarTournamentBinding
     private lateinit var calendarView: CalendarView
     private var events: MutableMap<String,ArrayList<TournamentDataClass>> = mutableMapOf()
     private lateinit var firebaseAuth: FirebaseAuth
@@ -46,7 +44,7 @@ class CalendarActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        binding = ActivityCalendarBinding.inflate(layoutInflater)
+        binding = ActivityCalendarTournamentBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -84,7 +82,7 @@ class CalendarActivity : AppCompatActivity() {
         getTournamentData()
 
         binding.buttonAddEvent.setOnClickListener{
-            val intent = Intent(this@CalendarActivity, AddTournamentActivity::class.java)
+            val intent = Intent(this@CalendarTournamentActivity, AddTournamentActivity::class.java)
             startActivity(intent)
         }
 
@@ -100,12 +98,12 @@ class CalendarActivity : AppCompatActivity() {
                 if(events.containsKey("$day-$month-$year"))
                 {
                     val tournamentList=events["$day-$month-$year"]
-                    val tournamentListDialog = TournamentListDialog(this@CalendarActivity,tournamentList,millis)
+                    val tournamentListDialog = TournamentListDialog(this@CalendarTournamentActivity,tournamentList,millis)
                     tournamentListDialog.show()
                 }
                 else
                 {
-                    val tournamentListDialog = TournamentListDialog(this@CalendarActivity,null,millis)
+                    val tournamentListDialog = TournamentListDialog(this@CalendarTournamentActivity,null,millis)
                     tournamentListDialog.show()
                 }
             }

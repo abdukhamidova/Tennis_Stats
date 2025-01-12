@@ -132,7 +132,10 @@
             android:name=".tournament.ChangeEditMatchActivity"
             android:exported="false"/>
         <activity
-            android:name=".CalendarActivity"
+            android:name=".CalendarTournamentActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".CalendarCoachActivity"
             android:exported="false"/>
         <meta-data
             android:name="preloaded_fonts"

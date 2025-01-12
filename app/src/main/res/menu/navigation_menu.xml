@@ -37,6 +37,10 @@
             android:id="@+id/nav_viewTournaments"
             android:title="View Tournaments"
             android:icon="@drawable/icon_trophy" />
+        <item
+            android:id="@+id/nav_viewCalendar"
+            android:title="View Calendar"
+            android:icon="@drawable/icon_calendar" />
 
 
     </group>

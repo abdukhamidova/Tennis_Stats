@@ -4,6 +4,8 @@ import android.content.Intent
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
+import com.anw.tenistats.CalendarCoachActivity
+import com.anw.tenistats.CalendarTournamentActivity
 import com.anw.tenistats.matchplay.StartPointActivity
 import com.anw.tenistats.stats.Head2HeadActivity
 import com.anw.tenistats.R
@@ -38,6 +40,7 @@ class NavigationDrawerHelper(private val activity: AppCompatActivity) {
             R.id.nav_viewTeam -> Intent(activity,ViewTeamActivity::class.java)
             R.id.nav_return -> Intent(activity, StartPointActivity::class.java)
             R.id.nav_viewTournaments -> Intent(activity, ViewTournamentsActivity::class.java)
+            R.id.nav_viewCalendar -> Intent(activity, CalendarCoachActivity::class.java)
             R.id.buttonLogOut -> {
                 auth.signOut()
                 activity.finish()
@@ -60,6 +63,7 @@ class NavigationDrawerHelper(private val activity: AppCompatActivity) {
             R.id.nav_h2h -> Intent(activity, Head2HeadActivity::class.java)
             R.id.nav_viewTeam -> Intent(activity,ViewTeamActivity::class.java)
             R.id.nav_viewTournaments -> Intent(activity, ViewTournamentsActivity::class.java)
+            R.id.nav_viewCalendar -> Intent(activity, CalendarCoachActivity::class.java)
             R.id.buttonLogOut -> {
                 auth.signOut()
                 drawerLayout.closeDrawers()
