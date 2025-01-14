@@ -1,5 +1,9 @@
 package com.anw.tenistats.stats
 
+import android.os.Parcel
+import android.os.Parcelable
+import java.util.ArrayList
+
 //import java.sql.Date
 
 /*data class Uzytkownik(
@@ -36,13 +40,59 @@ data class Player(
     var weakness: String? = null,
     var active: Boolean? = null,
     var note: String? = null,
-    val team: List<String> = emptyList(),
+    val team: ArrayList<String>? = ArrayList(),
     var isFavorite: Boolean = false
-)
+): Parcelable
 
 {
     //constructor() : this(null, null, null, null, null, null, null, null, null)
     //constructor() : this(null, null, null, null, null, null, null, null, null, null,null,null,false)
+    constructor(parcel: Parcel) : this(
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readValue(Int::class.java.classLoader) as? Int,
+        parcel.readString(),
+        parcel.readValue(Long::class.java.classLoader) as? Long,
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readValue(Boolean::class.java.classLoader) as? Boolean,
+        parcel.readString(),
+        parcel.createStringArrayList(),
+        parcel.readByte() != 0.toByte()
+    ) {
+    }
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(firstName)
+        parcel.writeString(lastName)
+        parcel.writeString(player)
+        parcel.writeValue(duplicate)
+        parcel.writeString(nationality)
+        parcel.writeValue(dateOfBirth)
+        parcel.writeString(handedness)
+        parcel.writeString(strength)
+        parcel.writeString(weakness)
+        parcel.writeValue(active)
+        parcel.writeString(note)
+        parcel.writeStringList(team)
+        parcel.writeByte(if (isFavorite) 1 else 0)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<Player> {
+        override fun createFromParcel(parcel: Parcel): Player {
+            return Player(parcel)
+        }
+
+        override fun newArray(size: Int): Array<Player?> {
+            return arrayOfNulls(size)
+        }
+    }
 }
 
 /*data class Set(

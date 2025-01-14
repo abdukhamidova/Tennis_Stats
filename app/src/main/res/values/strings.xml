@@ -48,6 +48,7 @@
     <string name="confirm">CONFIRM</string>
     <string name="cancel">Cancel</string>
     <string name="add">Add</string>
+    <string name="select">Select</string>
     <string name="title_activity_view_show_more">ViewShowMoreActivity</string>
     <string name="title_activity_view_player">ViewPlayerActivity</string>
     <string name="player1_item">Player 1:</string>
@@ -129,7 +130,7 @@
     <string name="error_empty_name">Error  - empty name</string>
     <string name="deleteTeam">Do you want to delete group?</string>
     <string name="deletePlayerFromTeam">Do you want to delete player from group?</string>
-    <string name="choose_player">Choose player</string>
+    <string name="choose_player">Choose players</string>
     <string name="enter_team">Enter new group</string>
     <string name="change">Change</string>
     <string name="enter_team_name">Enter team name</string>
@@ -185,5 +186,6 @@
     <string name="ok">OK</string>
     <string name="add_event">Add Event</string>
     <string name="list_of_tournaments">List Of Tournaments</string>
+
 
 </resources>
