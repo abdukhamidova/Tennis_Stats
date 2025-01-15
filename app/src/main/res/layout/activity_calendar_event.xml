@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        tools:context=".CalendarEventActivity"
+        tools:ignore="HardcodedText"
+        tools:openDrawer="start">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/app_bg_color"
+            tools:ignore="HardCodedText">
+
+            <include
+                android:id="@+id/toolbar"
+                layout="@layout/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/textViewHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:textColor="@color/general_text_color"
+                android:textSize="@dimen/_30ssp"
+                android:text="Add Event"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/toolbar"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <ScrollView
+                android:id="@+id/scrollViewContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginBottom="@dimen/_3sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/textViewHeader"
+                app:layout_constraintStart_toStartOf="@id/textViewHeader"
+                app:layout_constraintTop_toBottomOf="@id/textViewHeader"
+                app:layout_constraintVertical_bias="0.0">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp">
+
+                    <LinearLayout
+                        android:id="@+id/linearLayoutForm"
+                        android:layout_width="@dimen/_265sdp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Participants:"
+                            android:textColor="@color/general_text_color"
+                            android:textSize="@dimen/_13ssp" />
+
+                        <TextView
+                            android:id="@+id/textViewParticipantsList"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="ParticipantsList"
+                            android:layout_marginBottom="@dimen/_10sdp"
+                            android:textColor="@color/app_hint_color"
+                            android:textSize="@dimen/_13ssp"
+                            />
+
+                        <LinearLayout
+                            android:id="@+id/linearLayoutName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/_7sdp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Title:"
+                                android:textColor="@color/general_text_color"
+                                android:textSize="@dimen/_13ssp" />
+
+                            <EditText
+                                android:id="@+id/editTextName"
+                                android:layout_width="@dimen/_210sdp"
+                                android:layout_height="@dimen/_37sdp"
+                                android:autofillHints="name"
+                                android:backgroundTint="@color/general_text_color"
+                                android:completionHintView="@color/general_text_color"
+                                android:drawableStart="@drawable/icon_pen30"
+                                android:drawablePadding="@dimen/_3sdp"
+                                android:drawableTint="@color/app_hint_color"
+                                android:hint="Enter title"
+                                android:inputType="text"
+                                android:textColor="@color/general_text_color"
+                                android:textColorHint="@color/app_hint_color"
+                                android:textSize="@dimen/_12ssp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linearLayoutDateFrom"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/_7sdp">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/date"
+                                android:textColor="@color/general_text_color"
+                                android:textSize="@dimen/_12ssp" />
+
+                            <EditText
+                                android:id="@+id/editTextStartDate"
+                                android:layout_width="@dimen/_210sdp"
+                                android:layout_height="@dimen/_37sdp"
+                                android:autofillHints="date of birthday"
+                                android:backgroundTint="@color/general_text_color"
+                                android:completionHintView="@color/general_text_color"
+                                android:drawableStart="@drawable/icon_calendar"
+                                android:drawablePadding="@dimen/_3sdp"
+                                android:drawableTint="@color/app_hint_color"
+                                android:focusable="false"
+                                android:hint="@string/select_start_date"
+                                android:inputType="date"
+                                android:textColor="@color/general_text_color"
+                                android:textColorHint="@color/app_hint_color"
+                                android:textSize="@dimen/_12ssp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linearLayoutBDay"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/_7sdp">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textColor="@color/general_text_color"
+                                android:textSize="@dimen/_12ssp" />
+
+                            <EditText
+                                android:id="@+id/editTextEndDate"
+                                android:layout_width="@dimen/_210sdp"
+                                android:layout_height="@dimen/_37sdp"
+                                android:autofillHints="date of birthday"
+                                android:backgroundTint="@color/general_text_color"
+                                android:completionHintView="@color/general_text_color"
+                                android:drawableStart="@drawable/icon_calendar"
+                                android:drawablePadding="@dimen/_3sdp"
+                                android:drawableTint="@color/app_hint_color"
+                                android:focusable="false"
+                                android:hint="@string/select_end_date"
+                                android:inputType="date"
+                                android:textColor="@color/general_text_color"
+                                android:textColorHint="@color/app_hint_color"
+                                android:textSize="@dimen/_12ssp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                android:text="Additional note:"
+                                android:textColor="@color/general_text_color"
+                                android:textSize="@dimen/_13sdp" />
+
+                            <EditText
+                                android:id="@+id/editTextNote"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="top"
+                                android:hint="Enter your additional notes"
+                                android:inputType="textMultiLine"
+                                android:lines="10"
+                                android:overScrollMode="always"
+                                android:scrollbars="vertical"
+                                android:scrollHorizontally="false"
+                                android:textColorHint="@color/app_hint_color" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </ScrollView>
+
+            <Button
+                android:id="@+id/buttonSubmit"
+                android:layout_width="@dimen/_230sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_30sdp"
+                android:backgroundTint="@color/darker_blue"
+                android:text="@string/submit"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_16ssp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/scrollViewContainer"
+                app:layout_constraintStart_toStartOf="@+id/scrollViewContainer"
+                app:layout_constraintTop_toBottomOf="@+id/scrollViewContainer"
+                app:layout_constraintVertical_bias="0.182" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/navigationViewMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="@color/app_bg_color"
+            android:theme="@style/NavigationViewTheme"
+            app:headerLayout="@layout/navigation_header"
+            app:itemHorizontalPadding="@dimen/_23sdp"
+            app:itemIconPadding="@dimen/_15sdp"
+            app:menu="@menu/navigation_menu" />
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
