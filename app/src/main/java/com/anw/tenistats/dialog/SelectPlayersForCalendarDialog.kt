@@ -22,14 +22,16 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
 class SelectPlayersForCalendarDialog(
-    context: Context
+    context: Context,
+    private var selectedPlayers: ArrayList<Player>,
+    private var isCoachChecked: Boolean
 ) : Dialog(context) {
 
     private lateinit var database: DatabaseReference
     private lateinit var firebaseAuth: FirebaseAuth
-    private var isCoachChecked: Boolean = true
+    //private var isCoachChecked: Boolean = true
     private var selectedCount: Int = 0
-    private val selectedPlayers: ArrayList<Player> = ArrayList()
+    //private val selectedPlayers: ArrayList<Player> = ArrayList()
 
     @SuppressLint("InflateParams")
     override fun onCreate(savedInstanceState: Bundle?) {
