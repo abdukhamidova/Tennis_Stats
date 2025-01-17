@@ -1,6 +1,7 @@
 package com.anw.tenistats
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.TextView
@@ -70,11 +71,13 @@ class CalendarCoachActivity : AppCompatActivity() {
         navigationDrawerHelper = NavigationDrawerHelper(this)
         navigationDrawerHelper.setupNavigationDrawer(drawerLayout, navigationView, firebaseAuth)
         val backButton = findViewById<ImageButton>(R.id.buttonUndo)
+        //---- filtrowanie
         backButton.setImageResource(R.drawable.icon_filter30)
         backButton.setOnClickListener {
             val playerListDialog = SelectPlayersForCalendarDialog(this@CalendarCoachActivity,selectedPlayers,isCoachChecked)
             playerListDialog.show()
         }
+        //----
         val userEmail = FirebaseAuth.getInstance().currentUser?.email.toString()
         if(userEmail.isNotEmpty()) {
             headerView.findViewById<TextView>(R.id.textViewUserEmail).text = userEmail
@@ -96,7 +99,12 @@ class CalendarCoachActivity : AppCompatActivity() {
         getTournamentsData()
 
         binding.buttonAddEvent.setOnClickListener{
-            //TODO
+            //val intent = Intent(this, CalendarEventActivity::class.java)
+            val intent = Intent(this, CalendarEventActivity::class.java).apply {
+                putExtra("selectedPlayers", selectedPlayers)
+                putExtra("isCoachChecked", isCoachChecked)
+            }
+            startActivity(intent)
         }
 
         calendarView.setOnCalendarDayClickListener(object: OnCalendarDayClickListener {
