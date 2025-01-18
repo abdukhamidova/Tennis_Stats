@@ -2,6 +2,7 @@ package com.anw.tenistats
 
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.view.View
 import android.widget.DatePicker
 import android.widget.ImageButton
 import android.widget.TextView
@@ -15,10 +16,15 @@ import com.anw.tenistats.databinding.ActivityCalendarEventBinding
 import com.anw.tenistats.mainpage.NavigationDrawerHelper
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import java.text.SimpleDateFormat
+import java.util.ArrayList
 import java.util.Calendar
+import java.util.Date
 import java.util.Locale
 
 class CalendarEventActivity : AppCompatActivity() {
@@ -51,7 +57,7 @@ class CalendarEventActivity : AppCompatActivity() {
         }
         navigationDrawerHelper = NavigationDrawerHelper(this)
         navigationDrawerHelper.setupNavigationDrawer(drawerLayout, navigationView, firebaseAuth)
-        val backButton = findViewById<ImageButton>(R.id.buttonUndo)
+        findViewById<ImageButton>(R.id.buttonUndo).visibility = View.GONE
         /*//---- filtrowanie
         backButton.setImageResource(R.drawable.icon_filter30)
         backButton.setOnClickListener {
@@ -68,18 +74,27 @@ class CalendarEventActivity : AppCompatActivity() {
         }
         //endregion
 
-        //region---Powiedzmy ze tutaj przyjmie jakies intenty, np. liste uczestinkow
-        //Zakladajac, ze przyjmowanie intentu bedzie wygladac wlasnie tak:
-        // Odbieranie danych z Intent
-        val selectedPlayers = intent.getStringArrayListExtra("selectedPlayers") ?: arrayListOf()
-        val isCoachChecked = intent.getBooleanExtra("isCoachChecked", false)
-        //endregion---
-        binding.textViewParticipantsList.text = selectedPlayers.joinToString(", ")
-
         val userId = FirebaseAuth.getInstance().currentUser?.uid.toString()
         database =
             FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/").getReference(userId).child("Events")
 
+        //region---Powiedzmy ze tutaj przyjmie jakies intenty, np. liste uczestinkow
+        // Odbieranie danych z Intent
+        val selectedPlayers = intent.getStringArrayListExtra("selectedPlayers") ?: arrayListOf()
+        val isCoachChecked = intent.getBooleanExtra("isCoachChecked", false)
+
+        //przystosowac nazwe intentu !!!!!
+        val eventId = intent.getStringExtra("eventId")
+        //endregion---
+        binding.textViewParticipantsList.text = selectedPlayers.joinToString(", ")
+
+
+        //niewiadomo czy setEventData wgl dziala
+        if (!eventId.isNullOrEmpty()) {
+            setEventData(eventId, database)
+        } else {
+            println("No eventId was passed through the intent.")
+        }
         //region Data
         binding.editTextStartDate.setOnClickListener {
             val calendar = Calendar.getInstance()
@@ -139,28 +154,31 @@ class CalendarEventActivity : AppCompatActivity() {
                 return@setOnClickListener // Zatrzymujemy dalsze przetwarzanie
             }
 
-
             val name = binding.editTextName.text.toString()
-            val startDate = binding.editTextStartDate.text.toString()
-            val endDate = binding.editTextEndDate.text.toString()
             val note = binding.editTextNote.text.toString()
-
+            val millisecondsStart = changeDateToLongFormat(binding.editTextStartDate.text.toString())
+            val millisecondsEnd = changeDateToLongFormat(binding.editTextEndDate.text.toString())
             // Wywołanie funkcji do dodania eventu do bazy
-            addEventToDataBase(selectedPlayers, name, startDate, endDate, note)
-
+            addEventToDataBase(selectedPlayers, name, millisecondsStart, millisecondsEnd, note)
+            finish()
         }
 
     }
     // Funkcja do dodawania eventu do bazy danych
-    fun addEventToDataBase(selectedPlayers: ArrayList<String>, name: String, startDate: String, endDate: String, note: String) {
-
+    fun addEventToDataBase(
+        selectedPlayers: ArrayList<String>,
+        name: String,
+        milisecondsStart: Long?,
+        milisecondsEnd: Long?,
+        note: String
+    ) {
         val eventId = database.push().key // Generowanie unikalnego ID dla wydarzenia
 
         // Przekształcenie danych w mapę
         val eventData = hashMapOf<String, Any>(
             "name" to name,
-            "startDate" to startDate,
-            "endDate" to endDate,
+            "startDate" to (milisecondsStart ?: 0L),  // Jeśli milisecondsStart jest null, użyj 0L
+            "endDate" to (milisecondsEnd ?: 0L),      // Jeśli milisecondsEnd jest null, użyj 0L
             "note" to note,
             "players" to selectedPlayers
         )
@@ -178,4 +196,46 @@ class CalendarEventActivity : AppCompatActivity() {
         }
     }
 
+    fun changeDateToLongFormat(date: String): Long? {
+        var resultDate: Long? = 0
+        if (date.isNotEmpty()) {
+            val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+            resultDate = dateFormat.parse(date)?.time ?: 0 // Sparsowanie daty
+        }
+        return resultDate
+    }
+
+    fun changeLongToDateFormat(timestamp: Long?): String {
+        return if (timestamp != null && timestamp > 0) {
+            val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+            dateFormat.format(Date(timestamp))
+        } else {
+            ""
+        }
+    }
+
+    fun setEventData(eventId: String, database: DatabaseReference) {
+        database.child(eventId).addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    // Get values from the snapshot and assign them to binding fields
+                    val name = snapshot.child("name").getValue(String::class.java) ?: ""
+                    val startDateMillis = snapshot.child("startDate").getValue(Long::class.java) ?: 0L
+                    val endDateMillis = snapshot.child("endDate").getValue(Long::class.java) ?: 0L
+                    val note = snapshot.child("note").getValue(String::class.java) ?: ""
+
+                    // Assign values to binding
+                    binding.editTextName.setText(name)
+                    binding.editTextStartDate.setText(changeLongToDateFormat(startDateMillis))
+                    binding.editTextEndDate.setText(changeLongToDateFormat(endDateMillis))
+                    binding.editTextNote.setText(note)
+                } else {
+                    println("Event not found.")
+                }
+            }
+            override fun onCancelled(error: DatabaseError) {
+                println("Database error: ${error.message}")
+            }
+        })
+    }
 }

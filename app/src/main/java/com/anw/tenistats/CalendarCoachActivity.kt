@@ -87,6 +87,7 @@ class CalendarCoachActivity : AppCompatActivity() {
         }
         //endregion
 
+        //INTENTY
         selectedPlayers = intent.getParcelableArrayListExtra<Player>("selectedPlayers") ?: ArrayList()
         isCoachChecked = intent.getBooleanExtra("isCoachChecked", true)
 
