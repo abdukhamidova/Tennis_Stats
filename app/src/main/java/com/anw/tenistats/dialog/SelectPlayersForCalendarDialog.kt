@@ -23,7 +23,7 @@ import com.google.firebase.database.ValueEventListener
 
 class SelectPlayersForCalendarDialog(
     context: Context,
-    private var selectedPlayers: ArrayList<Player>,
+    private var selectedPlayers: ArrayList<String>,
     private var isCoachChecked: Boolean
 ) : Dialog(context) {
 
@@ -95,13 +95,13 @@ class SelectPlayersForCalendarDialog(
                     val active = playerSnapshot.child("active").getValue(Boolean::class.java)
 
                     if (playerName != null && active == true) {
-                        val player = Player(playerName)
+                        //val player = Player(playerName)
                         val checkBox = CheckBox(context).apply {
                             text = playerName
                             setOnCheckedChangeListener { buttonView, isChecked ->
                                 if (isChecked) {
                                     if (selectedCount < 4) {
-                                        selectedPlayers.add(player)
+                                        selectedPlayers.add(playerName)
                                         selectedCount++
                                         counter.text = "$selectedCount/4"
                                     } else {
@@ -109,7 +109,7 @@ class SelectPlayersForCalendarDialog(
                                         buttonView.isChecked = false
                                     }
                                 } else {
-                                    selectedPlayers.remove(player)
+                                    selectedPlayers.remove(playerName)
                                     selectedCount--
                                     counter.text = "$selectedCount/4"
                                 }

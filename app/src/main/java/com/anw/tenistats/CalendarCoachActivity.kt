@@ -39,7 +39,7 @@ class CalendarCoachActivity : AppCompatActivity() {
     private lateinit var navigationDrawerHelper: NavigationDrawerHelper
     private lateinit var drawerLayout: DrawerLayout
     private var isCoachChecked: Boolean = true
-    private var selectedPlayers: ArrayList<Player> = ArrayList()
+    private var selectedPlayers: ArrayList<String> = ArrayList()
     private val calendars: ArrayList<CalendarDay> = ArrayList()
     private lateinit var calendarView: CalendarView
     private var events: MutableMap<String,MutableMap<String,EventDataClass>> = mutableMapOf() //mapa eventów: klucz - dzień, wartość - mapa: klucz - id (zawodnika lub trenera), wartosc - event
@@ -88,7 +88,7 @@ class CalendarCoachActivity : AppCompatActivity() {
         //endregion
 
         //INTENTY
-        selectedPlayers = intent.getParcelableArrayListExtra<Player>("selectedPlayers") ?: ArrayList()
+        selectedPlayers = intent.getStringArrayListExtra("selectedPlayers") ?: ArrayList()
         isCoachChecked = intent.getBooleanExtra("isCoachChecked", true)
 
         //TO DO
@@ -96,7 +96,7 @@ class CalendarCoachActivity : AppCompatActivity() {
         calendarView = binding.calendar
         calendars.clear()
 
-        //TODO: getEventsData() ~u
+        getEventsData()
         getTournamentsData()
 
         binding.buttonAddEvent.setOnClickListener{
@@ -120,7 +120,7 @@ class CalendarCoachActivity : AppCompatActivity() {
 
     private fun getEventsData() {
         database =
-            FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Events")
+            FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/").getReference(userId).child("Events")
 
         database.addValueEventListener(object : ValueEventListener {
             @SuppressLint("NotifyDataSetChanged")
@@ -131,14 +131,14 @@ class CalendarCoachActivity : AppCompatActivity() {
                         if(event != null){
                             event?.id = eventSnapshot.key.toString()
                             for(player in selectedPlayers){
-                                val id = player.firstName
-                                if(event.participants.contains(id)){
+                                val id = player
+                                if(event.players.contains(id)){
                                     setEvent(event,id,false)
                                     setPlayersIcon()
                                 }
                             }
                             if(isCoachChecked){
-                                if(event.participants.contains(userId)){
+                                if(event.players.contains(userId)){
                                     setEvent(event,userId,true)
                                     setPlayersIcon()
                                 }
@@ -161,29 +161,10 @@ class CalendarCoachActivity : AppCompatActivity() {
 
         if (startDate == null || endDate == null) return
 
-        // Add the start date with a star icon
-        val calendarStart = calendar.clone() as Calendar
-        calendarStart.time = startDate
-        val startDay = CalendarDay(calendarStart)
-        if(isCoachId) //trener uczestniczy w evencie
-        {
-            startDay.labelColor = R.color.tournament_day
-        }
-        calendars.add(startDay)
-
         // Loop through all days from startDate to endDate
         val calendarToLoop = calendar.clone() as Calendar
         calendarToLoop.time = startDate
-        calendarToLoop.add(Calendar.DAY_OF_MONTH, 1)
         while (calendarToLoop.time.before(endDate) || calendarToLoop.time == endDate) {
-            val dayCalendar = calendarToLoop.clone() as Calendar
-
-            val day = CalendarDay(dayCalendar)
-            if(isCoachChecked) {
-                day.labelColor = R.color.tournament_day
-            }
-            calendars.add(day)
-
             val dayKey = dateFormat.format(calendarToLoop.time)
             if (events.containsKey(dayKey)) {
                 events[dayKey]?.put(id.toString(),event)
@@ -196,7 +177,6 @@ class CalendarCoachActivity : AppCompatActivity() {
             // Move to the next day
             calendarToLoop.add(Calendar.DAY_OF_MONTH, 1)
         }
-        //calendarView.setCalendarDays(calendars)
     }
 
     private fun getTournamentsData() {
@@ -212,7 +192,7 @@ class CalendarCoachActivity : AppCompatActivity() {
                         if(tournament != null){
                             tournament?.id = tournamentSnapshot.key.toString()
                             for(player in selectedPlayers){
-                                val id = player.firstName
+                                val id = player
                                 check(id, tournament?.id) { result ->
                                     if (result) {
                                         setTournament(tournament, id)
@@ -278,63 +258,40 @@ class CalendarCoachActivity : AppCompatActivity() {
         }
     }
 
-    private fun setPlayersIcon(){
+    private fun setPlayersIcon() {
         val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
-        for ((day, personsMap) in events) {
-            // Exclude a specific ID and count the remaining persons
-            val count = personsMap.filterKeys { it != userId }.size
 
-            // Add the start date with a star icon
-            calendar.time = dateFormat.parse(day)!!
-            val eventDay = CalendarDay(calendar)
-            // Add an icon to the calendar for the day based on the count
-            when(count) {
-                1 -> {
-                    eventDay.imageResource = R.drawable.ic_dots1
-                    calendars.add(eventDay)
+        // Helper function to process events and tournaments
+        fun processEvents(map: Map<String, Map<String, Any>>, labelColor: Int? = null) {
+            for ((day, personsMap) in map) {
+                val count = personsMap.filterKeys { it != userId }.size
+                val calendarToLoop = calendar.clone() as Calendar
+                calendarToLoop.time = dateFormat.parse(day)!!
+                val calendarDay = CalendarDay(calendarToLoop)
+                calendars.remove(calendarDay)
+
+                when (count) {
+                    1 -> calendarDay.imageResource = R.drawable.ic_dots1
+                    2 -> calendarDay.imageResource = R.drawable.ic_dots2
+                    3 -> calendarDay.imageResource = R.drawable.ic_dots3
+                    4 -> calendarDay.imageResource = R.drawable.ic_dots4
                 }
-                2 -> {
-                    eventDay.imageResource = R.drawable.ic_dots2
-                    calendars.add(eventDay)
+
+                if (labelColor != null && personsMap.containsKey(userId)) {
+                    calendarDay.labelColor = labelColor
                 }
-                3 -> {
-                    eventDay.imageResource = R.drawable.ic_dots3
-                    calendars.add(eventDay)
-                }
-                4 -> {
-                    eventDay.imageResource = R.drawable.ic_dots4
-                    calendars.add(eventDay)
-                }
+
+                calendars.add(calendarDay)
             }
         }
-        for ((day, personsMap) in tournaments) {
-            // Exclude a specific ID and count the remaining persons
-            val count = personsMap.filterKeys { it != userId }.size
-            // Add the start date with a star icon
-            val calendarToLoop = calendar.clone() as Calendar
-            calendarToLoop.time = dateFormat.parse(day)!!
-            val tournamentDay = CalendarDay(calendarToLoop)
-            calendars.remove(tournamentDay)
-            // Add an icon to the calendar for the day based on the count
-            when(count) {
-                1 -> {
-                    tournamentDay.imageResource = R.drawable.ic_dots1
-                    calendars.add(tournamentDay)
-                }
-                2 -> {
-                    tournamentDay.imageResource = R.drawable.ic_dots2
-                    calendars.add(tournamentDay)
-                }
-                3 -> {
-                    tournamentDay.imageResource = R.drawable.ic_dots3
-                    calendars.add(tournamentDay)
-                }
-                4 -> {
-                    tournamentDay.imageResource = R.drawable.ic_dots4
-                    calendars.add(tournamentDay)
-                }
-            }
-            calendarView.setCalendarDays(calendars)
-        }
+
+        // Process events
+        processEvents(events, R.color.tournament_day)
+
+        // Process tournaments
+        processEvents(tournaments)
+
+        // Update calendar view
+        calendarView.setCalendarDays(calendars)
     }
 }
