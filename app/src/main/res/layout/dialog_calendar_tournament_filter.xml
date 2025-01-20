@@ -1,0 +1,68 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/dialog_bg_color">
+
+    <TextView
+        android:id="@+id/textFilter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_7sdp"
+        android:layout_gravity="center"
+        android:text="@string/choose_filter"
+        android:textColor="@color/dialog_textTitle_color"
+        android:textSize="@dimen/_23ssp"
+        android:textAlignment="center"/>
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_14sdp"
+        android:layout_marginTop="@dimen/_7sdp">
+        <RadioButton
+            android:id="@+id/buttonMyTournaments"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/only_my_tournaments"
+            android:textColor="@color/dialog_textTitle_color"
+            android:layout_marginBottom="@dimen/_5ssp"
+            android:checked="true"/>
+
+        <RadioButton
+            android:id="@+id/buttonAllTournaments"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/all_tournaments"
+            android:textColor="@color/dialog_textTitle_color"/>
+    </RadioGroup>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/_11sdp"
+        android:layout_marginHorizontal="@dimen/_5sdp"
+        android:layout_gravity="center_horizontal"
+        android:padding="@dimen/_10sdp">
+        <Button
+            android:id="@+id/buttonSubmit"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/dialog_textTitle_color"
+            android:text="@string/submit"
+            android:textColor="@color/dialog_text_color"
+            android:textSize="@dimen/_14ssp"  />
+        <Button
+            android:id="@+id/buttonCancel"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_below="@id/buttonSubmit"
+            android:background="@drawable/border_button"
+            android:text="@string/cancel"
+            android:textColor="@color/dialog_btnCancel"
+            android:textSize="@dimen/_14ssp"  />
+    </RelativeLayout>
+
+</LinearLayout>

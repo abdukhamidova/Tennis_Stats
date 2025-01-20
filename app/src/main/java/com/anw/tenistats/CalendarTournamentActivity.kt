@@ -12,6 +12,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.anw.tenistats.databinding.ActivityCalendarTournamentBinding
+import com.anw.tenistats.dialog.CalendarTournamentFilterDialog
+import com.anw.tenistats.dialog.SelectPlayersForCalendarDialog
 import com.anw.tenistats.dialog.TournamentListDialog
 import com.anw.tenistats.mainpage.NavigationDrawerHelper
 import com.anw.tenistats.tournament.AddTournamentActivity
@@ -40,6 +42,8 @@ class CalendarTournamentActivity : AppCompatActivity() {
     private lateinit var navigationDrawerHelper: NavigationDrawerHelper
     private lateinit var drawerLayout: DrawerLayout
     private val calendars: ArrayList<CalendarDay> = ArrayList()
+    private var isOnlyMyTournamentsFilter: Boolean = true
+    private lateinit var userId: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,6 +58,8 @@ class CalendarTournamentActivity : AppCompatActivity() {
         }
 
         firebaseAuth = FirebaseAuth.getInstance()
+        isOnlyMyTournamentsFilter = intent.getBooleanExtra("isOnlyMyTournamentsFilter",true)
+
         //region ---MENU---
         drawerLayout = findViewById(R.id.drawer_layout)
         val menu = findViewById<ImageButton>(R.id.buttonMenu)
@@ -64,8 +70,13 @@ class CalendarTournamentActivity : AppCompatActivity() {
         }
         navigationDrawerHelper = NavigationDrawerHelper(this)
         navigationDrawerHelper.setupNavigationDrawer(drawerLayout, navigationView, firebaseAuth)
-        val backButton = findViewById<ImageButton>(R.id.buttonUndo)
-        backButton.visibility = View.GONE
+        val filterButton = findViewById<ImageButton>(R.id.buttonUndo)
+        filterButton.setImageResource(R.drawable.icon_filter30)
+        filterButton.visibility = View.VISIBLE
+        filterButton.setOnClickListener {
+            val playerListDialog = CalendarTournamentFilterDialog(this@CalendarTournamentActivity,isOnlyMyTournamentsFilter)
+            playerListDialog.show()
+        }
 
         val userEmail = FirebaseAuth.getInstance().currentUser?.email.toString()
         if(userEmail.isNotEmpty()) {
@@ -79,6 +90,7 @@ class CalendarTournamentActivity : AppCompatActivity() {
         calendarView = binding.calendar
         calendars.clear()
 
+        userId = FirebaseAuth.getInstance().currentUser?.uid.toString()
         getTournamentData()
 
         binding.buttonAddEvent.setOnClickListener{
@@ -120,6 +132,8 @@ class CalendarTournamentActivity : AppCompatActivity() {
                     for (tournamentSnapshot in snapshot.children) {
                         val tournament = tournamentSnapshot.getValue(TournamentDataClass::class.java)
                         if(tournament != null){
+                            if(isOnlyMyTournamentsFilter && tournament?.creator != userId)
+                                continue
                             tournament?.id = tournamentSnapshot.key.toString()
                             setEvent(tournament)
                         }
