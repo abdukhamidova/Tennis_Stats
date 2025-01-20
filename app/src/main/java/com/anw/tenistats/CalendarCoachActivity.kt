@@ -7,7 +7,6 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.graphics.toColor
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -15,7 +14,6 @@ import com.anw.tenistats.databinding.ActivityCalendarCoachBinding
 import com.anw.tenistats.dialog.SelectPlayersForCalendarDialog
 import com.anw.tenistats.mainpage.NavigationDrawerHelper
 import com.anw.tenistats.player.PlayerView
-import com.anw.tenistats.stats.Player
 import com.anw.tenistats.tournament.TournamentDataClass
 import com.applandeo.materialcalendarview.CalendarDay
 import com.applandeo.materialcalendarview.CalendarView
@@ -128,18 +126,19 @@ class CalendarCoachActivity : AppCompatActivity() {
                 if (snapshot.exists()) {
                     for (eventSnapshot in snapshot.children) {
                         val event = eventSnapshot.getValue(EventDataClass::class.java)
+                        val eventBool = eventSnapshot.child("isCoachChecked").getValue(Boolean::class.java) ?: false
                         if(event != null){
                             event?.id = eventSnapshot.key.toString()
                             for(player in selectedPlayers){
                                 val id = player
                                 if(event.players.contains(id)){
-                                    setEvent(event,id,false)
+                                    setEvent(event,id)
                                     setPlayersIcon()
                                 }
                             }
                             if(isCoachChecked){
-                                if(event.players.contains(userId)){
-                                    setEvent(event,userId,true)
+                                if(eventBool){
+                                    setEvent(event,userId)
                                     setPlayersIcon()
                                 }
                             }
@@ -154,7 +153,7 @@ class CalendarCoachActivity : AppCompatActivity() {
         })
     }
 
-    private fun setEvent(event: EventDataClass, id: String?, isCoachId: Boolean) {
+    private fun setEvent(event: EventDataClass, id: String?) {
         val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
         val startDate = event.startDate?.let { Date(it) }
         val endDate = event.endDate?.let { Date(it) }

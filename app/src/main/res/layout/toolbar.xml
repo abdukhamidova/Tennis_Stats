@@ -87,6 +87,23 @@
                 android:visibility="invisible"
                 android:backgroundTint="@color/transparent"
                 app:tint="@color/app_menu_buttons"/>
+
+
+            <ImageButton
+                android:id="@+id/buttonCalendar"
+                android:layout_width="@dimen/_36sdp"
+                android:layout_height="@dimen/_36sdp"
+                android:layout_marginEnd="0dp"
+                android:layout_toStartOf="@id/buttonStar"
+                android:layout_centerVertical="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:focusableInTouchMode="false"
+                android:padding="@dimen/_1sdp"
+                android:src="@drawable/icon_calendar"
+                android:visibility="invisible"
+                android:backgroundTint="@color/transparent"
+                app:tint="@color/app_menu_buttons" />
         </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
 </LinearLayout>

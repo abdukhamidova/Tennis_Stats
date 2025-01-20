@@ -24,10 +24,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import com.anw.tenistats.CalendarCoachActivity
 import com.anw.tenistats.R
 import com.anw.tenistats.data.CountryRepository
 import com.anw.tenistats.mainpage.NavigationDrawerHelper
-import com.anw.tenistats.matchplay.ServeActivity
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -91,6 +91,19 @@ class PlayerDetailsActivity : AppCompatActivity() {
         navigationDrawerHelper.setupNavigationDrawer(drawerLayout, navigationView, firebaseAuth)
         val backButton = findViewById<ImageButton>(R.id.buttonUndo)
         backButton.setImageResource(R.drawable.icon_delete_30)
+        val calendarButton = findViewById<ImageButton>(R.id.buttonCalendar)
+        calendarButton.setImageResource(R.drawable.icon_calendar)
+        calendarButton.visibility = View.VISIBLE
+        calendarButton.setOnClickListener {
+            val selectedPlayers: ArrayList<String> = ArrayList()
+            val player = intent.getStringExtra("playerId").toString()
+            selectedPlayers.add(player)
+            val intent = Intent(this, CalendarCoachActivity::class.java).apply {
+                putExtra("selectedPlayers", selectedPlayers)
+                putExtra("isCoachChecked", false)
+            }
+            startActivity(intent)
+        }
 
 
         val userEmail = firebaseAuth.currentUser?.email.toString()

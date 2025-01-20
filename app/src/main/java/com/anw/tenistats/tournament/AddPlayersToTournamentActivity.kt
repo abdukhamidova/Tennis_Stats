@@ -6,10 +6,8 @@ import android.text.TextWatcher
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageButton
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -20,11 +18,8 @@ import com.anw.tenistats.R
 import com.anw.tenistats.databinding.ActivityAddPlayersToTournamentBinding
 import com.anw.tenistats.dialog.AddPlayerToTournamentDialog
 import com.anw.tenistats.mainpage.NavigationDrawerHelper
-import com.anw.tenistats.player.AddPlayerActivity
 import com.anw.tenistats.player.PlayerDetailsActivity
 import com.anw.tenistats.player.PlayerView
-import com.anw.tenistats.tournament.RemovePlayerFromTournamentDialogActivity
-import com.anw.tenistats.tournament.TournamentPlayerAdapter
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
