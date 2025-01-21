@@ -82,16 +82,18 @@ class CalendarEventActivity : AppCompatActivity() {
         // Odbieranie danych z Intent
         val selectedPlayers = intent.getStringArrayListExtra("selectedPlayers") ?: arrayListOf()
         val isCoachChecked = intent.getBooleanExtra("isCoachChecked", false)
+        val setStartDate = intent.getLongExtra("startDate", 0)
 
         //przystosowac nazwe intentu !!!!!
         val eventId = intent.getStringExtra("eventId")
         //endregion---
-        binding.textViewParticipantsList.text = selectedPlayers.joinToString(", ")
+
+        binding.textViewParticipantsList.text = getParticipantsList(selectedPlayers, isCoachChecked)
 
 
         //niewiadomo czy setEventData wgl dziala
         if (!eventId.isNullOrEmpty()) {
-            setEventData(eventId, database)
+            setEventData(eventId, database, setStartDate)
         } else {
             println("No eventId was passed through the intent.")
         }
@@ -99,10 +101,10 @@ class CalendarEventActivity : AppCompatActivity() {
         binding.editTextStartDate.setOnClickListener {
             val calendar = Calendar.getInstance()
 
-            /*// Jeśli data była ustawiona wcześniej, wykorzystaj ją jako startową
-            if (calendarDate != 0L) {
-                calendar.timeInMillis = calendarDate
-            }*/
+            // Jeśli data była ustawiona wcześniej, wykorzystaj ją jako startową
+            if (setStartDate != 0L) {
+                calendar.timeInMillis = setStartDate
+            }
 
             val year = calendar.get(Calendar.YEAR)
             val month = calendar.get(Calendar.MONTH)
@@ -159,7 +161,7 @@ class CalendarEventActivity : AppCompatActivity() {
             val millisecondsStart = changeDateToLongFormat(binding.editTextStartDate.text.toString())
             val millisecondsEnd = changeDateToLongFormat(binding.editTextEndDate.text.toString())
             // Wywołanie funkcji do dodania eventu do bazy
-            addEventToDataBase(selectedPlayers, name, millisecondsStart, millisecondsEnd, note)
+            addEventToDataBase(selectedPlayers, name, millisecondsStart, millisecondsEnd, note, isCoachChecked)
             finish()
         }
 
@@ -170,7 +172,8 @@ class CalendarEventActivity : AppCompatActivity() {
         name: String,
         milisecondsStart: Long?,
         milisecondsEnd: Long?,
-        note: String
+        note: String,
+        isCoachChecked: Boolean
     ) {
         val eventId = database.push().key // Generowanie unikalnego ID dla wydarzenia
 
@@ -180,7 +183,8 @@ class CalendarEventActivity : AppCompatActivity() {
             "startDate" to (milisecondsStart ?: 0L),  // Jeśli milisecondsStart jest null, użyj 0L
             "endDate" to (milisecondsEnd ?: 0L),      // Jeśli milisecondsEnd jest null, użyj 0L
             "note" to note,
-            "players" to selectedPlayers
+            "players" to selectedPlayers,
+            "isCoachChecked" to isCoachChecked
         )
 
         // Zapisanie danych w Firebase pod wygenerowanym ID
@@ -214,7 +218,7 @@ class CalendarEventActivity : AppCompatActivity() {
         }
     }
 
-    fun setEventData(eventId: String, database: DatabaseReference) {
+    fun setEventData(eventId: String, database: DatabaseReference, setStartDate: Long) {
         database.child(eventId).addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
@@ -226,7 +230,9 @@ class CalendarEventActivity : AppCompatActivity() {
 
                     // Assign values to binding
                     binding.editTextName.setText(name)
-                    binding.editTextStartDate.setText(changeLongToDateFormat(startDateMillis))
+                    if(setStartDate != 0L)
+                        binding.editTextStartDate.setText(changeLongToDateFormat(setStartDate))
+                    else binding.editTextStartDate.setText(changeLongToDateFormat(startDateMillis))
                     binding.editTextEndDate.setText(changeLongToDateFormat(endDateMillis))
                     binding.editTextNote.setText(note)
                 } else {
@@ -237,5 +243,10 @@ class CalendarEventActivity : AppCompatActivity() {
                 println("Database error: ${error.message}")
             }
         })
+    }
+
+    fun getParticipantsList(selectedPlayers: ArrayList<String>, isCoachChecked: Boolean): String{
+        if(isCoachChecked) return "ME, " + selectedPlayers.joinToString(", ")
+        else return selectedPlayers.joinToString(", ")
     }
 }
