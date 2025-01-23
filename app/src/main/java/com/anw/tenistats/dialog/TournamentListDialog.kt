@@ -8,10 +8,8 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.anw.tenistats.R
-import com.anw.tenistats.player.ViewTeamActivity
 import com.anw.tenistats.tournament.AddTournamentActivity
 import com.anw.tenistats.tournament.TournamentDataClass
-import com.anw.tenistats.tournament.TournamentDetailsActivity
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -28,6 +26,9 @@ class TournamentListDialog(private val context: Context, private val tournamentL
         val buttonCancel: Button = dialogView.findViewById(R.id.buttonCancel)
         val buttonAddTournament: Button = dialogView.findViewById(R.id.buttonAddTournamentCalendar)
         val playersContainer: LinearLayout = dialogView.findViewById(R.id.playersContainer)
+        val textDate: TextView = dialogView.findViewById(R.id.textViewDate)
+
+        textDate.text=formatDate(clicedDate)
 
         // Jeśli lista jest pusta lub null, wyświetl komunikat
         if (tournamentList.isNullOrEmpty()) {
@@ -83,5 +84,9 @@ class TournamentListDialog(private val context: Context, private val tournamentL
         }
 
         alertDialog.show()
+    }
+    fun formatDate(milliseconds: Long): String {
+        val sdf = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
+        return sdf.format(Date(milliseconds))
     }
 }

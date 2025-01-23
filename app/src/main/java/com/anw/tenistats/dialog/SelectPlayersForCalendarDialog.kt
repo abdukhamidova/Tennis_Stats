@@ -13,7 +13,6 @@ import android.widget.TextView
 import android.widget.Toast
 import com.anw.tenistats.CalendarCoachActivity
 import com.anw.tenistats.R
-import com.anw.tenistats.stats.Player
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -23,21 +22,22 @@ import com.google.firebase.database.ValueEventListener
 
 class SelectPlayersForCalendarDialog(
     context: Context,
-    private var selectedPlayers: ArrayList<String>,
-    private var isCoachChecked: Boolean
+    var selectedPlayers: ArrayList<String>,
+    var isCoachChecked: Boolean
 ) : Dialog(context) {
 
     private lateinit var database: DatabaseReference
     private lateinit var firebaseAuth: FirebaseAuth
-    //private var isCoachChecked: Boolean = true
     private var selectedCount: Int = 0
-    //private val selectedPlayers: ArrayList<Player> = ArrayList()
 
     @SuppressLint("InflateParams")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         setContentView(R.layout.dialog_select_players_for_calendar)
+
+        // Ustaw liczbę zaznaczonych zawodników na podstawie `selectedPlayers`
+        selectedCount = selectedPlayers.size
 
         firebaseAuth = FirebaseAuth.getInstance()
         val user = firebaseAuth.currentUser?.uid
@@ -48,17 +48,17 @@ class SelectPlayersForCalendarDialog(
         val buttonAdd = findViewById<Button>(R.id.buttonSelect)
         val counter = findViewById<TextView>(R.id.textViewCounter)
 
-        // Add "Coach" checkbox
+        // Dodaj "Coach" checkbox
         val coachCheckBox = CheckBox(context).apply {
             text = "Coach"
-            isChecked = true
+            isChecked = isCoachChecked // Odtwórz stan "Coach"
             setOnCheckedChangeListener { _, isChecked ->
                 isCoachChecked = isChecked
             }
         }
         playersContainer.addView(coachCheckBox)
 
-        // Fetch players and populate the list
+        // Pobierz zawodników z bazy danych i wyświetl ich w liście
         fetchAndDisplayPlayers(playersContainer, counter)
 
         buttonCancel.setOnClickListener {
@@ -66,8 +66,9 @@ class SelectPlayersForCalendarDialog(
         }
 
         buttonAdd.setOnClickListener {
+            // Przekaż aktualnie zaznaczonych zawodników do CalendarCoachActivity
             val intent = Intent(context, CalendarCoachActivity::class.java).apply {
-                putExtra("selectedPlayers", selectedPlayers)
+                putExtra("selectedPlayers", ArrayList(selectedPlayers)) // Kopia listy
                 putExtra("isCoachChecked", isCoachChecked)
             }
             context.startActivity(intent)
@@ -80,10 +81,10 @@ class SelectPlayersForCalendarDialog(
             override fun onDataChange(snapshot: DataSnapshot) {
                 playersContainer.removeAllViews()
 
-                // Add "Coach" checkbox at the top
+                // Dodaj "Coach" checkbox
                 val coachCheckBox = CheckBox(context).apply {
                     text = "Coach"
-                    isChecked = true
+                    isChecked = isCoachChecked // Odtwórz stan "Coach"
                     setOnCheckedChangeListener { _, isChecked ->
                         isCoachChecked = isChecked
                     }
@@ -95,9 +96,10 @@ class SelectPlayersForCalendarDialog(
                     val active = playerSnapshot.child("active").getValue(Boolean::class.java)
 
                     if (playerName != null && active == true) {
-                        //val player = Player(playerName)
+                        val isCheckedInitially = selectedPlayers.contains(playerName) // Sprawdź, czy zawodnik był wcześniej zaznaczony
                         val checkBox = CheckBox(context).apply {
                             text = playerName
+                            isChecked = isCheckedInitially
                             setOnCheckedChangeListener { buttonView, isChecked ->
                                 if (isChecked) {
                                     if (selectedCount < 4) {
@@ -118,7 +120,7 @@ class SelectPlayersForCalendarDialog(
                         playersContainer.addView(checkBox)
                     }
                 }
-                // Update counter text initially
+                // Zaktualizuj licznik po załadowaniu listy
                 counter.text = "$selectedCount/4"
             }
 

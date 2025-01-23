@@ -7,15 +7,18 @@ import android.widget.Button
 import android.widget.Toast
 import com.anw.tenistats.R
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class DeleteTournamentDialog(private val context: Context) {
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var database: DatabaseReference
     private lateinit var alertDialog: AlertDialog
 
-    fun show(tournamentId:String?) {
+    fun show(tournamentId: String?) {
         val dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_delete_tournament, null)
         alertDialog = AlertDialog.Builder(context)
             .setView(dialogView)
@@ -33,7 +36,7 @@ class DeleteTournamentDialog(private val context: Context) {
             database = FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
                 .getReference("Tournaments").child(tournamentId!!)
 
-            // Implement the delete functionality here
+            // Remove the tournament entry
             database.removeValue()
                 .addOnSuccessListener {
                     Toast.makeText(
@@ -42,7 +45,9 @@ class DeleteTournamentDialog(private val context: Context) {
                         Toast.LENGTH_SHORT
                     ).show()
                     alertDialog.dismiss()
-                    // Optionally, you can notify the user here
+
+                    // Call to remove tournament from all players
+                    removeTournamentFromPlayers(tournamentId)
                 }
                 .addOnFailureListener {
                     Toast.makeText(
@@ -54,5 +59,48 @@ class DeleteTournamentDialog(private val context: Context) {
         }
 
         alertDialog.show()
+    }
+
+    private fun removeTournamentFromPlayers(tournamentId: String) {
+        firebaseAuth = FirebaseAuth.getInstance()
+        val user = firebaseAuth.currentUser?.uid
+        val playersRef = FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
+            .getReference(user.toString()).child("Players")
+
+        playersRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (playerSnapshot in snapshot.children) {
+                    val tournamentsRef = playerSnapshot.child("tournaments").ref
+                    val tournamentsList = playerSnapshot.child("tournaments").children
+                    for (tournament in tournamentsList) {
+                        if (tournament.key == tournamentId) {
+                            tournamentsRef.child(tournamentId).removeValue()
+                                .addOnSuccessListener {
+                                    Toast.makeText(
+                                        context,
+                                        "Removed tournament from player: ${playerSnapshot.key}",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                                .addOnFailureListener {
+                                    Toast.makeText(
+                                        context,
+                                        "Failed to remove tournament from player: ${playerSnapshot.key}",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                        }
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(
+                    context,
+                    "Failed to fetch players: ${error.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        })
     }
 }

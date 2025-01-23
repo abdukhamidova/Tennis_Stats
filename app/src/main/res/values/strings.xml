@@ -186,6 +186,7 @@
     <string name="ok">OK</string>
     <string name="add_event">Add Event</string>
     <string name="list_of_tournaments">List Of Tournaments</string>
+    <string name="list_of_events">List Of Events</string>
     <string name="choose_filter">Choose Filter</string>
     <string name="only_my_tournaments">Only my tournaments</string>
     <string name="all_tournaments">All tournaments</string>

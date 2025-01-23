@@ -9,7 +9,6 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat.startActivity
 import com.anw.tenistats.R
 import com.anw.tenistats.tournament.AddPlayersToTournamentActivity
 import com.anw.tenistats.tournament.GenerateDrawActivity
@@ -21,7 +20,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-class TournamentDialog(private val context: Context, private val openedFromStartPoint: Boolean = false) {
+class TournamentDialog(private val context: Context) {
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var database: DatabaseReference
     private lateinit var alertDialog: AlertDialog

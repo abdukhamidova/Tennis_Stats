@@ -185,6 +185,7 @@ class CalendarEventActivity : AppCompatActivity() {
             "note" to note,
             "players" to selectedPlayers,
             "isCoachChecked" to isCoachChecked
+
         )
 
         // Zapisanie danych w Firebase pod wygenerowanym ID

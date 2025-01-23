@@ -330,13 +330,15 @@ class GenerateDrawActivity : AppCompatActivity() {
         // Check if match1 has a winner, and if so, update the winner in the next round
         if (match1.winner.isNotEmpty()) {
             val nextRoundMatchIndex = getNextMatchIndex(match1.number)
-            updateWinnerInNextRound(nextRoundMatchIndex, match1.winner, "player1") // Winner of match1 goes to player1
+            val winner = if (match1.winner == match1.player1) match1.player1 else match1.player2
+            updateWinnerInNextRound(nextRoundMatchIndex, winner, "player1") // Winner of match1 goes to player1
         }
 
         // Check if match2 has a winner, and if so, update the winner in the next round
         if (match2.winner.isNotEmpty()) {
             val nextRoundMatchIndex = getNextMatchIndex(match2.number)
-            updateWinnerInNextRound(nextRoundMatchIndex, match2.winner, "player2") // Winner of match2 goes to player2
+            val winner = if (match2.winner == match2.player1) match2.player1 else match2.player2
+            updateWinnerInNextRound(nextRoundMatchIndex, winner, "player2") // Winner of match2 goes to player2
         }
     }
 

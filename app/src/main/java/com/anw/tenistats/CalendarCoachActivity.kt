@@ -11,6 +11,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.anw.tenistats.databinding.ActivityCalendarCoachBinding
+import com.anw.tenistats.dialog.CalendarDayDialog
 import com.anw.tenistats.dialog.SelectPlayersForCalendarDialog
 import com.anw.tenistats.mainpage.NavigationDrawerHelper
 import com.anw.tenistats.player.PlayerView
@@ -72,7 +73,17 @@ class CalendarCoachActivity : AppCompatActivity() {
         //---- filtrowanie
         backButton.setImageResource(R.drawable.icon_filter30)
         backButton.setOnClickListener {
-            val playerListDialog = SelectPlayersForCalendarDialog(this@CalendarCoachActivity,selectedPlayers,isCoachChecked)
+            val playerListDialog = SelectPlayersForCalendarDialog(
+                this@CalendarCoachActivity,
+                ArrayList(selectedPlayers),
+                isCoachChecked
+            )
+            playerListDialog.setOnDismissListener {
+                selectedPlayers = playerListDialog.selectedPlayers
+                isCoachChecked = playerListDialog.isCoachChecked
+                //refreshCalendarView()
+            }
+
             playerListDialog.show()
         }
         //----
@@ -112,6 +123,12 @@ class CalendarCoachActivity : AppCompatActivity() {
                 val month = String.format("%02d",selectedDay.calendar.get(Calendar.MONTH)+1)
                 val year = selectedDay.calendar.get(Calendar.YEAR)
                 //TODO
+                val millis = selectedDay.calendar.timeInMillis
+                var occupied=false
+                if(events.containsKey("$day-$month-$year")||tournaments.containsKey("$day-$month-$year"))
+                    occupied=true
+                val dayListDialog = CalendarDayDialog(this@CalendarCoachActivity,selectedPlayers,isCoachChecked,millis,occupied)
+                dayListDialog.show()
             }
         })
     }
