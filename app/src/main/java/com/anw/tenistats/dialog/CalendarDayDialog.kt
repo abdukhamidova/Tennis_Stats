@@ -84,6 +84,7 @@ class CalendarDayDialog(
 
             Log.d("EventClick", "Opening event with date: $clickedDate")
             context.startActivity(intent)
+
         }
 
         alertDialog.show()
@@ -243,6 +244,9 @@ class CalendarDayDialog(
             eventView.setOnClickListener {
                 val intent = Intent(context, CalendarEventActivity::class.java)
                 intent.putExtra("eventId", event.id)
+                intent.putExtra("startDate", clickedDate)
+                intent.putExtra("selectedPlayers", selectedPlayers)
+                intent.putExtra("isCoachChecked", isCoachChecked)
 
                 Log.d("EventClick", "Opening event with ID: ${event.id}")
 

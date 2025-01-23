@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="@dimen/_10sdp"
     android:background="@color/dialog_bg_color">
@@ -15,7 +16,9 @@
         android:text="@string/list_of_events"
         android:textColor="@color/dialog_textTitle_color"
         android:textSize="@dimen/_23ssp"
-        android:textAlignment="center" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <!-- Nowe pole na datę -->
     <TextView
@@ -24,17 +27,23 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_5sdp"
         android:layout_gravity="center"
-    android:textColor="@color/app_hint_color"
-    android:textSize="@dimen/_12ssp"
-    android:textAlignment="center" />
+        android:textColor="@color/app_hint_color"
+        android:textSize="@dimen/_12ssp"
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@id/textViewTitle"
+        app:layout_constraintStart_toStartOf="@id/textViewTitle"
+        app:layout_constraintEnd_toEndOf="@id/textViewTitle"/>
 
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="@dimen/_300sdp"
         android:layout_weight="1"
-        android:layout_marginTop="@dimen/_3sdp"
-        android:layout_marginBottom="@dimen/_2sdp">
+        android:layout_marginTop="@dimen/_2sdp"
+        android:layout_marginBottom="@dimen/_2sdp"
+        app:layout_constraintTop_toBottomOf="@id/textViewDate"
+        app:layout_constraintEnd_toEndOf="@id/textViewDate"
+        app:layout_constraintStart_toStartOf="@id/textViewDate">
         <LinearLayout
             android:id="@+id/participantsContainer"
             android:layout_width="match_parent"
@@ -42,30 +51,33 @@
             android:orientation="vertical" />
     </ScrollView>
 
-    <RelativeLayout
+    <LinearLayout
+        android:id="@+id/relativeLayoutButtons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="@dimen/_11sdp"
-        android:layout_marginHorizontal="@dimen/_5sdp"
-        android:layout_gravity="center_horizontal"
-        android:padding="@dimen/_10sdp">
+        android:padding="@dimen/_5sdp"
+        app:layout_constraintTop_toBottomOf="@id/scrollView2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/scrollView2"
+        app:layout_constraintStart_toStartOf="@id/scrollView2">
+
+        <Button
+            android:id="@+id/buttonCancel"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:background="@drawable/border_button"
+            android:text="@string/cancel"
+            android:textColor="@color/dialog_btnCancel"
+            android:textSize="@dimen/_10ssp"  />
+
         <Button
             android:id="@+id/buttonAddEventCalendarDay"
-            android:layout_width="@dimen/_150sdp"
+            android:layout_width="@dimen/_100sdp"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/dialog_textTitle_color"
             android:text="@string/add_event"
             android:textColor="@color/dialog_text_color"
-            android:textSize="@dimen/_14ssp"  />
-        <Button
-            android:id="@+id/buttonCancel"
-            android:layout_width="@dimen/_150sdp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_below="@id/buttonAddEventCalendarDay"
-            android:background="@drawable/border_button"
-            android:text="@string/cancel"
-            android:textColor="@color/dialog_btnCancel"
-            android:textSize="@dimen/_14ssp"  />
-    </RelativeLayout>
-</LinearLayout>
+            android:textSize="@dimen/_10ssp"  />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,6 +2,7 @@ package com.anw.tenistats
 
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.DatePicker
 import android.widget.ImageButton
@@ -13,6 +14,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.anw.tenistats.databinding.ActivityCalendarEventBinding
+import com.anw.tenistats.dialog.DeleteEventDialog
+import com.anw.tenistats.dialog.DeleteMatchDialog
 import com.anw.tenistats.mainpage.NavigationDrawerHelper
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
@@ -57,7 +60,7 @@ class CalendarEventActivity : AppCompatActivity() {
         }
         navigationDrawerHelper = NavigationDrawerHelper(this)
         navigationDrawerHelper.setupNavigationDrawer(drawerLayout, navigationView, firebaseAuth)
-        findViewById<ImageButton>(R.id.buttonUndo).visibility = View.GONE
+
         /*//---- filtrowanie
         backButton.setImageResource(R.drawable.icon_filter30)
         backButton.setOnClickListener {
@@ -76,25 +79,33 @@ class CalendarEventActivity : AppCompatActivity() {
 
         val userId = FirebaseAuth.getInstance().currentUser?.uid.toString()
         database =
-            FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/").getReference(userId).child("Events")
+            FirebaseDatabase.getInstance("https://tennis-stats-ededc-default-rtdb.europe-west1.firebasedatabase.app/")
+                .getReference(userId).child("Events")
 
         //region---Powiedzmy ze tutaj przyjmie jakies intenty, np. liste uczestinkow
         // Odbieranie danych z Intent
         val selectedPlayers = intent.getStringArrayListExtra("selectedPlayers") ?: arrayListOf()
         val isCoachChecked = intent.getBooleanExtra("isCoachChecked", false)
         val setStartDate = intent.getLongExtra("startDate", 0)
-
-        //przystosowac nazwe intentu !!!!!
         val eventId = intent.getStringExtra("eventId")
         //endregion---
+        val buttonDelete = findViewById<ImageButton>(R.id.buttonUndo)
+        buttonDelete.setImageResource(R.drawable.icon_delete_30)
 
+        if(setStartDate != 0L)
+            binding.editTextStartDate.setText(changeLongToDateFormat(setStartDate))
+        //if(selectedPlayers.isEmpty())
         binding.textViewParticipantsList.text = getParticipantsList(selectedPlayers, isCoachChecked)
 
-
-        //niewiadomo czy setEventData wgl dziala
         if (!eventId.isNullOrEmpty()) {
             setEventData(eventId, database, setStartDate)
+
+            buttonDelete.setOnClickListener{
+                val deleteMatchDialog = DeleteEventDialog(this)
+                deleteMatchDialog.show(eventId.toString())
+            }
         } else {
+            buttonDelete.visibility = View.GONE
             println("No eventId was passed through the intent.")
         }
         //region Data
@@ -113,12 +124,16 @@ class CalendarEventActivity : AppCompatActivity() {
             val datePickerDialog = DatePickerDialog(
                 this,
                 { _: DatePicker, year: Int, monthOfYear: Int, dayOfMonth: Int ->
-                    val selectedDate = "$dayOfMonth/${monthOfYear + 1}/$year"
-                    binding.editTextStartDate.setText(selectedDate)
-                    // Aktualizacja wartości milisekund przy edycji daty
+                    // Aktualizacja kalendarza wybraną datą
                     val updatedCalendar = Calendar.getInstance()
                     updatedCalendar.set(year, monthOfYear, dayOfMonth)
-                    //calendarDate = updatedCalendar.timeInMillis
+
+                    // Formatowanie daty na "dd/MM/yyyy"
+                    val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                    val formattedDate = dateFormat.format(updatedCalendar.time)
+
+                    // Wyświetlenie sformatowanej daty w polu tekstowym
+                    binding.editTextStartDate.setText(formattedDate)
                 },
                 year, month, day
             )
@@ -127,15 +142,28 @@ class CalendarEventActivity : AppCompatActivity() {
 
         binding.editTextEndDate.setOnClickListener {
             val calendar = Calendar.getInstance()
+
+            if (setStartDate != 0L) {
+                calendar.timeInMillis = setStartDate
+            }
+
             val year = calendar.get(Calendar.YEAR)
             val month = calendar.get(Calendar.MONTH)
             val day = calendar.get(Calendar.DAY_OF_MONTH)
 
             val datePickerDialog = DatePickerDialog(
                 this,
-                DatePickerDialog.OnDateSetListener { view: DatePicker?, year: Int, monthOfYear: Int, dayOfMonth: Int ->
-                    val selectedDate = "$dayOfMonth/${monthOfYear + 1}/$year"
-                    binding.editTextEndDate.setText(selectedDate)
+                { _: DatePicker, year: Int, monthOfYear: Int, dayOfMonth: Int ->
+                    // Aktualizacja kalendarza wybraną datą
+                    val updatedCalendar = Calendar.getInstance()
+                    updatedCalendar.set(year, monthOfYear, dayOfMonth)
+
+                    // Formatowanie daty na "dd/MM/yyyy"
+                    val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                    val formattedDate = dateFormat.format(updatedCalendar.time)
+
+                    // Wyświetlenie sformatowanej daty w polu tekstowym
+                    binding.editTextEndDate.setText(formattedDate)
                 },
                 year, month, day
             )
@@ -166,6 +194,7 @@ class CalendarEventActivity : AppCompatActivity() {
         }
 
     }
+
     // Funkcja do dodawania eventu do bazy danych
     fun addEventToDataBase(
         selectedPlayers: ArrayList<String>,
@@ -198,6 +227,8 @@ class CalendarEventActivity : AppCompatActivity() {
                         Toast.makeText(this, "Error adding event", Toast.LENGTH_SHORT).show()
                     }
                 }
+        }else{
+            Toast.makeText(this, "Error with eventId", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -220,6 +251,7 @@ class CalendarEventActivity : AppCompatActivity() {
     }
 
     fun setEventData(eventId: String, database: DatabaseReference, setStartDate: Long) {
+
         database.child(eventId).addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
@@ -231,9 +263,10 @@ class CalendarEventActivity : AppCompatActivity() {
 
                     // Assign values to binding
                     binding.editTextName.setText(name)
-                    if(setStartDate != 0L)
+                    /*if(setStartDate != 0L)
                         binding.editTextStartDate.setText(changeLongToDateFormat(setStartDate))
-                    else binding.editTextStartDate.setText(changeLongToDateFormat(startDateMillis))
+                    else */
+                    binding.editTextStartDate.setText(changeLongToDateFormat(startDateMillis))
                     binding.editTextEndDate.setText(changeLongToDateFormat(endDateMillis))
                     binding.editTextNote.setText(note)
                 } else {
@@ -246,8 +279,11 @@ class CalendarEventActivity : AppCompatActivity() {
         })
     }
 
-    fun getParticipantsList(selectedPlayers: ArrayList<String>, isCoachChecked: Boolean): String{
-        if(isCoachChecked) return "ME, " + selectedPlayers.joinToString(", ")
-        else return selectedPlayers.joinToString(", ")
+    fun getParticipantsList(selectedPlayers: ArrayList<String>, isCoachChecked: Boolean): String {
+        return if (isCoachChecked) {
+            "ME" + (if (selectedPlayers.isNotEmpty()) ", " else "") + selectedPlayers.joinToString(", ")
+        } else {
+            selectedPlayers.joinToString(", ")
+        }
     }
 }

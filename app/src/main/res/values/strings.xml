@@ -190,6 +190,7 @@
     <string name="choose_filter">Choose Filter</string>
     <string name="only_my_tournaments">Only my tournaments</string>
     <string name="all_tournaments">All tournaments</string>
+    <string name="eventDelete">Do you want to delete this event?</string>
 
 
 </resources>
