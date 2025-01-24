@@ -85,7 +85,7 @@ class CalendarDayDialog(
 
             Log.d("EventClick", "Opening event with date: $clickedDate")
             context.startActivity(intent)
-
+            alertDialog.dismiss()
         }
 
         alertDialog.show()
