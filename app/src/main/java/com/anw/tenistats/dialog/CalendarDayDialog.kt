@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -93,10 +94,16 @@ class CalendarDayDialog(
     private fun fetchAndDisplayDataForPlayer(player: String, container: LinearLayout, isCoach: Boolean) {
         val playerView = LayoutInflater.from(context).inflate(R.layout.item_player_day, container, false)
         val textViewPlayerName: TextView = playerView.findViewById(R.id.textViewPlayerName)
+        val detailsContainer: LinearLayout = playerView.findViewById(R.id.detailsContainer)
         val eventsContainer: LinearLayout = playerView.findViewById(R.id.eventsContainer)
         val tournamentsContainer: LinearLayout = playerView.findViewById(R.id.tournamentsContainer)
 
         textViewPlayerName.text = if (isCoach) "ME" else player
+
+        // Kliknięcie rozwijające/zwijające
+        textViewPlayerName.setOnClickListener {
+            detailsContainer.visibility = if (detailsContainer.visibility == View.VISIBLE) View.GONE else View.VISIBLE
+        }
 
         var hasEventsOrTournaments = false
 
@@ -106,7 +113,6 @@ class CalendarDayDialog(
                     hasEventsOrTournaments = true
                     displayEvents(eventsContainer, eventList)
                 }
-                // Sprawdź, czy dodać widok zawodnika
                 if (hasEventsOrTournaments) container.addView(playerView)
             }
         } else {
@@ -121,12 +127,12 @@ class CalendarDayDialog(
                         hasEventsOrTournaments = true
                         displayTournaments(tournamentsContainer, tournamentList)
                     }
-                    // Sprawdź, czy dodać widok zawodnika po pobraniu wydarzeń i turniejów
                     if (hasEventsOrTournaments) container.addView(playerView)
                 }
             }
         }
     }
+
 
     private fun fetchEventsForCoach(callback: (List<EventDataClass>) -> Unit) {
         val eventsRef = database.child("Events")
